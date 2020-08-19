@@ -128,4 +128,12 @@
         <shortDescription>NotAllowedDelayForFutureRun</shortDescription>
         <value>Delay option available only for a schedulable handler run</value>
     </labels>
+    <labels>
+        <fullName>CannotSetTriggerContext</fullName>
+        <categories>TriggerHelperLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>CannotSetTriggerContext</shortDescription>
+        <value>You cannot set trigger context instance yourself. It will be set during runtime</value>
+    </labels>
 </CustomLabels>
