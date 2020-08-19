@@ -1,0 +1,17 @@
+@RestResource(urlMapping='%path%/*')
+global with sharing class %className% {
+
+    @HttpGet
+    global static void get() {
+        RestRequest request = RestContext.request;
+        RestResponse response = RestContext.response;
+        System.debug('Hello world!');
+    }
+
+    @HttpPost
+    global static void post() {
+        RestRequest request = RestContext.request;
+        RestResponse response = RestContext.response;
+        System.debug('Hello world!');
+    }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Notify_On_Error__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Notify the user about errors through their email address?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Notify the user about errors through their email address?</inlineHelpText>
+    <label>Notify On Error</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
