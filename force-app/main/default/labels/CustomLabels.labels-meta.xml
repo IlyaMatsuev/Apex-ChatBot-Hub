@@ -73,12 +73,36 @@
         <value>Resetting web hooks for your bot failed</value>
     </labels>
     <labels>
+        <fullName>ClassGrantAccessError</fullName>
+        <categories>BotHelperLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>ClassGrantAccessError</shortDescription>
+        <value>Error during granting access for the Apex Class "{0}": {1}</value>
+    </labels>
+    <labels>
         <fullName>NoWebHookResolversError</fullName>
         <categories>BotHelperLibrary</categories>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>NoWebHookResolversError</shortDescription>
         <value>There are no web hook resolvers for the specified system: %%%</value>
+    </labels>
+    <labels>
+        <fullName>NoBotRequestDelegatorsError</fullName>
+        <categories>BotHelperLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NoBotRequestDelegatorsError</shortDescription>
+        <value>There are no bot request delegators for the specified system: %%%</value>
+    </labels>
+    <labels>
+        <fullName>NoBotRegistrationError</fullName>
+        <categories>BotHelperLibrary</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>NoBotRegistrationError</shortDescription>
+        <value>There are no existing bot registrations</value>
     </labels>
     <labels>
         <fullName>InstanceCannotBeNull</fullName>

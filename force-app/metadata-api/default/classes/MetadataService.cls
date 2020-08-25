@@ -351,6 +351,142 @@ public class MetadataService {
         private String[] apex_schema_type_info = new String[]{SOAP_M_URI,'true','false'};
         private String[] field_order_type_info = new String[]{'user_x'};
     }
+    public class SiteWebAddress {
+        public String certificate;
+        public String domainName;
+        public Boolean primary;
+        private String[] certificate_type_info = new String[]{'certificate',SOAP_M_URI,null,'0','1','false'};
+        private String[] domainName_type_info = new String[]{'domainName',SOAP_M_URI,null,'1','1','false'};
+        private String[] primary_type_info = new String[]{'primary',SOAP_M_URI,null,'1','1','false'};
+        private String[] apex_schema_type_info = new String[]{SOAP_M_URI,'true','false'};
+        private String[] field_order_type_info = new String[]{'certificate','domainName','primary'};
+    }
+    public class SiteRedirectMapping {
+        public String action;
+        public Boolean isActive;
+        public String source;
+        public String target;
+        private String[] action_type_info = new String[]{'action',SOAP_M_URI,null,'1','1','false'};
+        private String[] isActive_type_info = new String[]{'isActive',SOAP_M_URI,null,'0','1','false'};
+        private String[] source_type_info = new String[]{'source',SOAP_M_URI,null,'1','1','false'};
+        private String[] target_type_info = new String[]{'target',SOAP_M_URI,null,'1','1','false'};
+        private String[] apex_schema_type_info = new String[]{SOAP_M_URI,'true','false'};
+        private String[] field_order_type_info = new String[]{'action','isActive','source','target'};
+    }
+    public class ReadCustomSiteResult implements IReadResult {
+        public MetadataService.CustomSite[] records;
+        public MetadataService.Metadata[] getRecords() { return records; }
+        private String[] records_type_info = new String[]{'records',SOAP_M_URI,null,'0','-1','false'};
+        private String[] apex_schema_type_info = new String[]{SOAP_M_URI,'true','false'};
+        private String[] field_order_type_info = new String[]{'records'};
+    }
+    public class readCustomSiteResponse_element implements IReadResponseElement {
+        public MetadataService.ReadCustomSiteResult result;
+        public IReadResult getResult() { return result; }
+        private String[] result_type_info = new String[]{'result',SOAP_M_URI,null,'1','1','false'};
+        private String[] apex_schema_type_info = new String[]{SOAP_M_URI,'true','false'};
+        private String[] field_order_type_info = new String[]{'result'};
+    }
+    public class CustomSite extends Metadata {
+        public String type = 'CustomSite';
+        public String fullName;
+        private String[] fullName_type_info = new String[]{'fullName',SOAP_M_URI,null,'0','1','false'};
+        public Boolean active;
+        public Boolean allowHomePage;
+        public Boolean allowStandardAnswersPages;
+        public Boolean allowStandardIdeasPages;
+        public Boolean allowStandardLookups;
+        public Boolean allowStandardPortalPages;
+        public Boolean allowStandardSearch;
+        public String analyticsTrackingCode;
+        public String authorizationRequiredPage;
+        public String bandwidthExceededPage;
+        public Boolean browserXssProtection;
+        public String changePasswordPage;
+        public String chatterAnswersForgotPasswordConfirmPage;
+        public String chatterAnswersForgotPasswordPage;
+        public String chatterAnswersHelpPage;
+        public String chatterAnswersLoginPage;
+        public String chatterAnswersRegistrationPage;
+        public String clickjackProtectionLevel;
+        public Boolean contentSniffingProtection;
+        public Boolean cspUpgradeInsecureRequests;
+        public MetadataService.SiteWebAddress[] customWebAddresses;
+        public String description;
+        public String favoriteIcon;
+        public String fileNotFoundPage;
+        public String forgotPasswordPage;
+        public String genericErrorPage;
+        public String guestProfile;
+        public String inMaintenancePage;
+        public String inactiveIndexPage;
+        public String indexPage;
+        public String masterLabel;
+        public String myProfilePage;
+        public String portal;
+        public Boolean referrerPolicyOriginWhenCrossOrigin;
+        public Boolean requireHttps;
+        public Boolean requireInsecurePortalAccess;
+        public String robotsTxtPage;
+        public String rootComponent;
+        public String selfRegPage;
+        public String serverIsDown;
+        public String siteAdmin;
+        public MetadataService.SiteRedirectMapping[] siteRedirectMappings;
+        public String siteTemplate;
+        public String siteType;
+        public String subdomain;
+        public String urlPathPrefix;
+        private String[] active_type_info = new String[]{'active',SOAP_M_URI,null,'1','1','false'};
+        private String[] allowHomePage_type_info = new String[]{'allowHomePage',SOAP_M_URI,null,'1','1','false'};
+        private String[] allowStandardAnswersPages_type_info = new String[]{'allowStandardAnswersPages',SOAP_M_URI,null,'0','1','false'};
+        private String[] allowStandardIdeasPages_type_info = new String[]{'allowStandardIdeasPages',SOAP_M_URI,null,'1','1','false'};
+        private String[] allowStandardLookups_type_info = new String[]{'allowStandardLookups',SOAP_M_URI,null,'1','1','false'};
+        private String[] allowStandardPortalPages_type_info = new String[]{'allowStandardPortalPages',SOAP_M_URI,null,'1','1','false'};
+        private String[] allowStandardSearch_type_info = new String[]{'allowStandardSearch',SOAP_M_URI,null,'1','1','false'};
+        private String[] analyticsTrackingCode_type_info = new String[]{'analyticsTrackingCode',SOAP_M_URI,null,'0','1','false'};
+        private String[] authorizationRequiredPage_type_info = new String[]{'authorizationRequiredPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] bandwidthExceededPage_type_info = new String[]{'bandwidthExceededPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] browserXssProtection_type_info = new String[]{'browserXssProtection',SOAP_M_URI,null,'1','1','false'};
+        private String[] changePasswordPage_type_info = new String[]{'changePasswordPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] chatterAnswersForgotPasswordConfirmPage_type_info = new String[]{'chatterAnswersForgotPasswordConfirmPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] chatterAnswersForgotPasswordPage_type_info = new String[]{'chatterAnswersForgotPasswordPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] chatterAnswersHelpPage_type_info = new String[]{'chatterAnswersHelpPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] chatterAnswersLoginPage_type_info = new String[]{'chatterAnswersLoginPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] chatterAnswersRegistrationPage_type_info = new String[]{'chatterAnswersRegistrationPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] clickjackProtectionLevel_type_info = new String[]{'clickjackProtectionLevel',SOAP_M_URI,null,'1','1','false'};
+        private String[] contentSniffingProtection_type_info = new String[]{'contentSniffingProtection',SOAP_M_URI,null,'1','1','false'};
+        private String[] cspUpgradeInsecureRequests_type_info = new String[]{'cspUpgradeInsecureRequests',SOAP_M_URI,null,'1','1','false'};
+        private String[] customWebAddresses_type_info = new String[]{'customWebAddresses',SOAP_M_URI,null,'0','-1','false'};
+        private String[] description_type_info = new String[]{'description',SOAP_M_URI,null,'0','1','false'};
+        private String[] favoriteIcon_type_info = new String[]{'favoriteIcon',SOAP_M_URI,null,'0','1','false'};
+        private String[] fileNotFoundPage_type_info = new String[]{'fileNotFoundPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] forgotPasswordPage_type_info = new String[]{'forgotPasswordPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] genericErrorPage_type_info = new String[]{'genericErrorPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] guestProfile_type_info = new String[]{'guestProfile',SOAP_M_URI,null,'0','1','false'};
+        private String[] inMaintenancePage_type_info = new String[]{'inMaintenancePage',SOAP_M_URI,null,'0','1','false'};
+        private String[] inactiveIndexPage_type_info = new String[]{'inactiveIndexPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] indexPage_type_info = new String[]{'indexPage',SOAP_M_URI,null,'1','1','false'};
+        private String[] masterLabel_type_info = new String[]{'masterLabel',SOAP_M_URI,null,'1','1','false'};
+        private String[] myProfilePage_type_info = new String[]{'myProfilePage',SOAP_M_URI,null,'0','1','false'};
+        private String[] portal_type_info = new String[]{'portal',SOAP_M_URI,null,'0','1','false'};
+        private String[] referrerPolicyOriginWhenCrossOrigin_type_info = new String[]{'referrerPolicyOriginWhenCrossOrigin',SOAP_M_URI,null,'1','1','false'};
+        private String[] requireHttps_type_info = new String[]{'requireHttps',SOAP_M_URI,null,'1','1','false'};
+        private String[] requireInsecurePortalAccess_type_info = new String[]{'requireInsecurePortalAccess',SOAP_M_URI,null,'1','1','false'};
+        private String[] robotsTxtPage_type_info = new String[]{'robotsTxtPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] rootComponent_type_info = new String[]{'rootComponent',SOAP_M_URI,null,'0','1','false'};
+        private String[] selfRegPage_type_info = new String[]{'selfRegPage',SOAP_M_URI,null,'0','1','false'};
+        private String[] serverIsDown_type_info = new String[]{'serverIsDown',SOAP_M_URI,null,'0','1','false'};
+        private String[] siteAdmin_type_info = new String[]{'siteAdmin',SOAP_M_URI,null,'0','1','false'};
+        private String[] siteRedirectMappings_type_info = new String[]{'siteRedirectMappings',SOAP_M_URI,null,'0','-1','false'};
+        private String[] siteTemplate_type_info = new String[]{'siteTemplate',SOAP_M_URI,null,'0','1','false'};
+        private String[] siteType_type_info = new String[]{'siteType',SOAP_M_URI,null,'1','1','false'};
+        private String[] subdomain_type_info = new String[]{'subdomain',SOAP_M_URI,null,'0','1','false'};
+        private String[] urlPathPrefix_type_info = new String[]{'urlPathPrefix',SOAP_M_URI,null,'0','1','false'};
+        private String[] apex_schema_type_info = new String[]{SOAP_M_URI,'true','false'};
+        private String[] type_att_info = new String[]{'xsi:type'};
+        private String[] field_order_type_info = new String[]{'fullName', 'active','allowHomePage','allowStandardAnswersPages','allowStandardIdeasPages','allowStandardLookups','allowStandardPortalPages','allowStandardSearch','analyticsTrackingCode','authorizationRequiredPage','bandwidthExceededPage','browserXssProtection','changePasswordPage','chatterAnswersForgotPasswordConfirmPage','chatterAnswersForgotPasswordPage','chatterAnswersHelpPage','chatterAnswersLoginPage','chatterAnswersRegistrationPage','clickjackProtectionLevel','contentSniffingProtection','cspUpgradeInsecureRequests','customWebAddresses','description','favoriteIcon','fileNotFoundPage','forgotPasswordPage','genericErrorPage','guestProfile','inMaintenancePage','inactiveIndexPage','indexPage','masterLabel','myProfilePage','portal','referrerPolicyOriginWhenCrossOrigin','requireHttps','requireInsecurePortalAccess','robotsTxtPage','rootComponent','selfRegPage','serverIsDown','siteAdmin','siteRedirectMappings','siteTemplate','siteType','subdomain','urlPathPrefix'};
+    }
     public class PermissionSetUserPermission {
         public Boolean enabled;
         public String name;

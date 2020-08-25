@@ -12,6 +12,7 @@ public with sharing class MetadataProvider {
 
 
     public static MetadataService.MetadataPort createService() {
+        MetadataService.MetadataPort service = new MetadataService.MetadataPort();
         service.SessionHeader = new MetadataService.SessionHeader_element();
         service.SessionHeader.sessionId = UserInfo.getSessionId();
         service.AllOrNoneHeader = new MetadataService.AllOrNoneHeader_element();
@@ -30,5 +31,9 @@ public with sharing class MetadataProvider {
 
     public static MetadataService.SaveResult updateMetadata(MetadataService.Metadata targetMetadata) {
         return service.updateMetadata(new MetadataService.Metadata[] {targetMetadata}).get(0);
+    }
+
+    public static MetadataService.SaveResult renameMetadata(String type, String oldName, String newName) {
+        return service.renameMetadata(type, oldName, newName);
     }
 }

@@ -20,12 +20,33 @@ public with sharing class CalloutHelper {
     public static final String URL_ENCODED_TYPE = 'application/x-www-form-urlencoded';
 
 
+    public static Site botHostSite {
+        get {
+            if (botHostSite == null) {
+                botHostSite = [SELECT Id FROM Site WHERE Name = :WebHookRegistrationHelper.FORCE_SITE_NAME LIMIT 1];
+            }
+            return botHostSite;
+        }
+        private set;
+    }
+
+    public static SiteDetail botHostSiteDetails {
+        get {
+            if (botHostSiteDetails == null) {
+                botHostSiteDetails = [SELECT SecureUrl FROM SiteDetail WHERE DurableId = :botHostSite.Id];
+            }
+            return botHostSiteDetails;
+        }
+        private set;
+    }
+
+
     public static String getOrgUrl() {
         return Url.getSalesforceBaseUrl().toExternalForm();
     }
 
     public static String getRESTUrlStart() {
-        return getOrgUrl() + '/services/apexrest';
+        return botHostSiteDetails.SecureUrl + '/services/apexrest';
     }
 
     public static String getToolingAPIUrl() {

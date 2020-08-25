@@ -22,6 +22,8 @@ public with sharing class WebHookRegistrationHelper {
         private set;
     }
 
+    public static final String FORCE_SITE_NAME = 'Test1';
+    public static final String FORCE_SITE_PROFILE_NAME = FORCE_SITE_NAME + ' Profile';
     public static final String WEB_HOOK_CLASS_PREFIX = 'BotRegistration_';
     public static final String WEB_HOOK_CLASS_TEMPLATE_NAME = 'WebHookServiceTemplate';
 
@@ -44,13 +46,16 @@ public with sharing class WebHookRegistrationHelper {
                 toolingAPIHeaders,
                 JSON.serialize(restHandlerParams)
         );
+        System.debug(JSON.serializePretty(generateClassCallout));
         if (generateClassCallout.isSuccess() && botSettings != null) {
+            giveRESTClassAccess(className);
             WebHookResolver resolver = WebHookResolver.getResolver(registration.System__c);
             Callout setWebHookCallout = resolver.setWebHook(registration, botSettings);
             if (!setWebHookCallout.isSuccess()) {
                 throw new BotRegistrationException(Label.SetWebHookCalloutError, setWebHookCallout);
             }
         } else {
+            // TODO: delete newly created registration
             throw new BotRegistrationException(Label.WebHookClassCreateError, generateClassCallout);
         }
     }
@@ -63,7 +68,7 @@ public with sharing class WebHookRegistrationHelper {
     public static void removeWebHookHandler(Bot_Registration__c registration) {
         Bot_Setting__mdt botSettings = getBotSettings(registration.System__c);
         String className = generateClassName(registration);
-        List<ApexClass> classes = [SELECT Id FROM ApexClass WHERE Name = :className];
+        List<ApexClass> classes = [SELECT Id FROM ApexClass WHERE Name = :className LIMIT 1];
         if (!classes.isEmpty()) {
             Id classId = classes.get(0).Id;
             Callout deleteClassCallout = new Callout(
@@ -84,16 +89,6 @@ public with sharing class WebHookRegistrationHelper {
     }
 
 
-    private static String generateClassName(Bot_Registration__c registration) {
-        return WEB_HOOK_CLASS_PREFIX + registration.Name;
-    }
-
-    private static String generateClassBody(Bot_Registration__c registration, String className) {
-        return webHookClassTemplate
-                .replace('%className%', className)
-                .replace('%path%', registration.WebHook_Path__c);
-    }
-
     private static Bot_Setting__mdt getBotSettings(String systemName) {
         List<Bot_Setting__mdt> settingsList = [
                 SELECT DeveloperName, API_Url__c
@@ -105,5 +100,28 @@ public with sharing class WebHookRegistrationHelper {
             settings = settingsList.get(0);
         }
         return settings;
+    }
+
+    private static String generateClassName(Bot_Registration__c registration) {
+        return WEB_HOOK_CLASS_PREFIX + registration.Name;
+    }
+
+    private static String generateClassBody(Bot_Registration__c registration, String className) {
+        return webHookClassTemplate
+                .replace('%className%', className)
+                .replace('%path%', registration.WebHook_Path__c);
+    }
+
+    private static void giveRESTClassAccess(String className) {
+        MetadataService.Profile siteProfile = new MetadataService.Profile();
+        siteProfile.fullName = FORCE_SITE_PROFILE_NAME;
+        MetadataService.ProfileApexClassAccess classAccess = new MetadataService.ProfileApexClassAccess();
+        classAccess.apexClass = className;
+        classAccess.enabled = true;
+        siteProfile.classAccesses = new MetadataService.ProfileApexClassAccess[] {classAccess};
+        MetadataService.SaveResult updateResult = MetadataProvider.updateMetadata(siteProfile);
+        if (!updateResult.success) {
+            throw new BotRegistrationException(Label.ClassGrantAccessError.replace('{0}', className).replace('{1}', updateResult.errors.get(0).message));
+        }
     }
 }
