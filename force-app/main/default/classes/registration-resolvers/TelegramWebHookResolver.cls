@@ -5,6 +5,7 @@
 public with sharing class TelegramWebHookResolver extends WebHookResolver {
 
     public override Callout setWebHook(Bot_Registration__c registration, Bot_Setting__mdt settings) {
+        // TODO: call method from TelegramBotService
         String params = CalloutHelper.buildUrlParams(new Map<String, String>{
                 'url' => CalloutHelper.getRESTUrlStart() + registration.WebHook_Path__c + CalloutHelper.SLASH + registration.Hashed_Token__c
         });

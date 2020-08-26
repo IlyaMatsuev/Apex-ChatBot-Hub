@@ -2,17 +2,17 @@
  * Created by Ilya Matsuev on 7/25/2020.
  */
 
-public with sharing class Callout {
+global with sharing class Callout {
 
-    public String endpoint {get; private set;}
-    public String method {get; private set;}
-    public String requestBody {get; private set;}
-    public Map<String, String> requestHeaders {get; private set;}
+    global String endpoint {get; private set;}
+    global String method {get; private set;}
+    global String requestBody {get; private set;}
+    global Map<String, String> requestHeaders {get; private set;}
 
-    public Integer statusCode {get; private set;}
-    public String statusMessage {get; private set;}
-    public String responseBody {get; private set;}
-    public Map<String, String> responseHeaders {get; private set;}
+    global Integer statusCode {get; private set;}
+    global String statusMessage {get; private set;}
+    global String responseBody {get; private set;}
+    global Map<String, String> responseHeaders {get; private set;}
 
     public Callout(String endpoint, String method, Map<String, String> requestHeaders, String requestBody) {
         this.endpoint = endpoint;
@@ -65,7 +65,7 @@ public with sharing class Callout {
         }
     }
 
-    public Boolean isSuccess() {
+    global Boolean isSuccess() {
         return Math.floor(statusCode / 100) == 2;
     }
 }

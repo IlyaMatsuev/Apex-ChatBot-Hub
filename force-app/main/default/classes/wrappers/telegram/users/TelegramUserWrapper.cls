@@ -2,7 +2,7 @@
  * Created by Ilya Matsuev on 8/25/2020.
  */
 
-public with sharing class TelegramUserWrapper {
+global with sharing class TelegramUserWrapper {
 
     public Integer id {get;set;}
     public Boolean is_bot {get;set;}

@@ -2,7 +2,7 @@
  * Created by Ilya Matsuev on 8/24/2020.
  */
 
-public with sharing class TelegramUpdateWrapper {
+global with sharing class TelegramUpdateWrapper {
 
     public Integer update_id {get;set;}
     public TelegramMessageWrapper message {get;set;}

@@ -2,11 +2,11 @@
  * Created by Ilya Matsuev on 8/24/2020.
  */
 
-public with sharing class TelegramMessageWrapper {
+global with sharing class TelegramMessageWrapper {
 
     public Integer message_id {get;set;}
-    public TelegramUserWrapper from_user {get;set;}
-    public Integer message_date {get;set;}
+    public TelegramUserWrapper v_from {get;set;}
+    public Integer v_date {get;set;}
     public TelegramChatWrapper chat {get;set;}
     public TelegramUserWrapper forward_from {get;set;}
     public TelegramChatWrapper forward_from_chat {get;set;}

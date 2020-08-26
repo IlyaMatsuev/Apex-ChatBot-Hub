@@ -34,7 +34,7 @@ public with sharing class WebHookRegistrationHelper {
 
 
     public static void registerWebHookHandler(Bot_Registration__c registration) {
-        Bot_Setting__mdt botSettings = getBotSettings(registration.System__c);
+        Bot_Setting__mdt botSettings = BotSettingsService.getBotSettings(registration.System__c);
         Map<String, String> restHandlerParams = new Map<String, String>();
         String className = generateClassName(registration);
         String classBody = generateClassBody(registration, className);
@@ -46,7 +46,6 @@ public with sharing class WebHookRegistrationHelper {
                 toolingAPIHeaders,
                 JSON.serialize(restHandlerParams)
         );
-        System.debug(JSON.serializePretty(generateClassCallout));
         if (generateClassCallout.isSuccess() && botSettings != null) {
             giveRESTClassAccess(className);
             WebHookResolver resolver = WebHookResolver.getResolver(registration.System__c);
@@ -55,7 +54,6 @@ public with sharing class WebHookRegistrationHelper {
                 throw new BotRegistrationException(Label.SetWebHookCalloutError, setWebHookCallout);
             }
         } else {
-            // TODO: delete newly created registration
             throw new BotRegistrationException(Label.WebHookClassCreateError, generateClassCallout);
         }
     }
@@ -66,7 +64,7 @@ public with sharing class WebHookRegistrationHelper {
     }
 
     public static void removeWebHookHandler(Bot_Registration__c registration) {
-        Bot_Setting__mdt botSettings = getBotSettings(registration.System__c);
+        Bot_Setting__mdt botSettings = BotSettingsService.getBotSettings(registration.System__c);
         String className = generateClassName(registration);
         List<ApexClass> classes = [SELECT Id FROM ApexClass WHERE Name = :className LIMIT 1];
         if (!classes.isEmpty()) {
@@ -88,19 +86,6 @@ public with sharing class WebHookRegistrationHelper {
         }
     }
 
-
-    private static Bot_Setting__mdt getBotSettings(String systemName) {
-        List<Bot_Setting__mdt> settingsList = [
-                SELECT DeveloperName, API_Url__c
-                FROM Bot_Setting__mdt
-                WHERE DeveloperName = :systemName
-        ];
-        Bot_Setting__mdt settings = null;
-        if (!settingsList.isEmpty()) {
-            settings = settingsList.get(0);
-        }
-        return settings;
-    }
 
     private static String generateClassName(Bot_Registration__c registration) {
         return WEB_HOOK_CLASS_PREFIX + registration.Name;

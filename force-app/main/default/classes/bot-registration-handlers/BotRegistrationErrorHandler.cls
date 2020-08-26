@@ -21,8 +21,9 @@ public with sharing class BotRegistrationErrorHandler implements ITriggerErrorHa
             NotificationHelper.sendEmail(ERROR_EMAIL_SUBJECT, emailMessage, UserInfo.getUserEmail());
         }
 
+        // If it's a sync trigger call then it's not necessary to delete registrations - the transaction will cancel itself
         if (context.isAsyncRun) {
-            throw error;
+            deleteRecentlyCreatedRegistrations(context.newList);
         } else {
             getActualRegistration(context).addError(error);
         }
@@ -41,5 +42,11 @@ public with sharing class BotRegistrationErrorHandler implements ITriggerErrorHa
             registration = (Bot_Registration__c) context.oldList.get(0);
         }
         return registration;
+    }
+
+    private static void deleteRecentlyCreatedRegistrations(List<Bot_Registration__c> registrations) {
+        if (!registrations.isEmpty()) {
+            delete registrations;
+        }
     }
 }
