@@ -2,23 +2,13 @@
  * Created by Ilya Matsuev on 8/25/2020.
  */
 
-global with sharing class TelegramBotService {
+global with sharing class TelegramBotService extends BotService {
 
     private static final Map<String, String> TELEGRAM_BOT_REQUEST_HEADERS = new Map<String, String>{
             CalloutHelper.CONTENT_TYPE_HEADER => CalloutHelper.JSON_CONTENT_TYPE
     };
 
     public TelegramUpdateWrapper updateWrapper { get; private set; }
-    public Bot_Registration__c registration { get; private set; }
-    public Bot_Setting__mdt botSettings {
-        get {
-            if (botSettings == null) {
-                botSettings = BotSettingsService.getBotSettings(TelegramBotService.class.getName().substringBefore('BotService'));
-            }
-            return botSettings;
-        }
-        private set;
-    }
     public Integer currentChatId {
         get {
             return updateWrapper == null ? 0 : updateWrapper.message.chat.id;
@@ -26,17 +16,37 @@ global with sharing class TelegramBotService {
     }
 
     global TelegramBotService(Bot_Registration__c registration) {
-        this.registration = registration;
+        super(registration);
     }
 
     public TelegramBotService(TelegramUpdateWrapper updateWrapper, Bot_Registration__c registration) {
+        super(registration);
         this.updateWrapper = updateWrapper;
-        this.registration = registration;
     }
 
 
     global Callout getMe() {
         return new Callout(getEndpoint('getMe'), CalloutHelper.METHOD_GET);
+    }
+
+    global Callout getWebHookInfo() {
+        return new Callout(getEndpoint('getWebhookInfo'), CalloutHelper.METHOD_GET);
+    }
+
+    global Callout setWebHook(String url) {
+        return new Callout(
+                getEndpoint('setWebhook'),
+                CalloutHelper.METHOD_POST,
+                TELEGRAM_BOT_REQUEST_HEADERS,
+                JSON.serialize(new Map<String, String> {'url' => url})
+        );
+    }
+
+    global Callout deleteWebHook() {
+        return new Callout(
+                getEndpoint('deleteWebhook'),
+                CalloutHelper.METHOD_POST
+        );
     }
 
     global Callout sendMessage(String text) {
@@ -123,6 +133,12 @@ global with sharing class TelegramBotService {
         });
     }
 
+
+    protected override String getEndpoint(String method) {
+        return this.botSettings.API_Url__c + registration.Token__c + CalloutHelper.SLASH + method;
+    }
+
+
     private Callout sendMessage(Map<String, Object> params) {
         return new Callout(
                 getEndpoint('sendMessage'),
@@ -130,14 +146,5 @@ global with sharing class TelegramBotService {
                 TELEGRAM_BOT_REQUEST_HEADERS,
                 JSON.serialize(params)
         );
-    }
-
-
-    private String getEndpoint(String method) {
-        return this.botSettings.API_Url__c + registration.Token__c + CalloutHelper.SLASH + method;
-    }
-
-    private String getEndpoint(String method, Map<String, String> params) {
-        return this.botSettings.API_Url__c + registration.Token__c + CalloutHelper.SLASH + method + CalloutHelper.buildUrlParams(params);
     }
 }

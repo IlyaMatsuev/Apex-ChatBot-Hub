@@ -7,7 +7,7 @@ public abstract with sharing class BotRequestDelegator {
     public static final Integer LISTENERS_LIMIT = 20;
 
 
-    public abstract void delegate(RestRequest request, Bot_Registration__c registration);
+    public abstract String delegate(RestRequest request, Bot_Registration__c registration);
 
 
     protected List<IBotMessageListener> getListeners(String registrationName, String listenerInterfaceName) {

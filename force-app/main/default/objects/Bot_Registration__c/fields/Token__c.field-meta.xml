@@ -5,7 +5,7 @@
     <externalId>false</externalId>
     <inlineHelpText>Token uses to identify the bot</inlineHelpText>
     <label>Token</label>
-    <length>80</length>
+    <length>100</length>
     <maskChar>asterisk</maskChar>
     <maskType>all</maskType>
     <required>false</required>

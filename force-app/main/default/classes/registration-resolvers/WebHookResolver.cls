@@ -4,8 +4,8 @@
 
 public abstract with sharing class WebHookResolver {
 
-    public abstract Callout setWebHook(Bot_Registration__c registration, Bot_Setting__mdt settings);
-    public abstract Callout resetWebHook(Bot_Registration__c registration, Bot_Setting__mdt settings);
+    public abstract Callout setWebHook(Bot_Registration__c registration);
+    public abstract Callout resetWebHook(Bot_Registration__c registration);
 
     public static WebHookResolver getResolver(String botSystemName) {
         Type resolverType = Type.forName(botSystemName + WebHookResolver.class.getName());

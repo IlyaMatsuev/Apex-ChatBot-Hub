@@ -7,10 +7,19 @@ public with sharing class CalloutHelper {
     public static final String SLASH = '/';
     public static final String SPACE = ' ';
 
+    public static final String ARGS_START = '?';
+    public static final String ARGS_AND = '&';
+    public static final String ARGS_EQUAL = '=';
+
     public static final String METHOD_GET = 'GET';
     public static final String METHOD_POST = 'POST';
     public static final String METHOD_PUT = 'PUT';
     public static final String METHOD_DELETE = 'DELETE';
+
+    public static final String OK_RESPONSE = 'OK';
+
+    public static final String TRUE_FLAG = '1';
+    public static final String FALSE_FLAG = '0';
 
     public static final String CONTENT_TYPE_HEADER = 'Content-Type';
     public static final String AUTHORIZATION_HEADER = 'Authorization';
@@ -58,10 +67,14 @@ public with sharing class CalloutHelper {
     }
 
     public static String buildUrlParams(Map<String, String> params) {
+        return ARGS_START + buildUrlEncodedParams(params);
+    }
+
+    public static String buildUrlEncodedParams(Map<String, String> params) {
         List<String> paramPairs = new List<String>();
         for (String paramName: params.keySet()) {
-            paramPairs.add(paramName + '=' + params.get(paramName));
+            paramPairs.add(paramName + ARGS_EQUAL + params.get(paramName));
         }
-        return '?' + String.join(paramPairs, '&');
+        return String.join(paramPairs, ARGS_AND);
     }
 }

@@ -10,24 +10,14 @@ public with sharing class TelegramBotRequestDelegator extends BotRequestDelegato
     };
 
 
-    public override void delegate(RestRequest request, Bot_Registration__c registration) {
+    public override String delegate(RestRequest request, Bot_Registration__c registration) {
         String jsonMessage = new JSONReplacer(request.requestBody.toString()).replace(JSON_FIELDS_REPLACE_MAP);
         TelegramUpdateWrapper updateWrapper = (TelegramUpdateWrapper) JSON.deserialize(jsonMessage, TelegramUpdateWrapper.class);
-        List<ITelegramBotMessageListener> listeners = castListeners(getListeners(registration.Name, ITelegramBotMessageListener.class.getName()));
-        // TODO: implement abstract logic for the service classes
         TelegramBotService service = new TelegramBotService(updateWrapper, registration);
-        for (ITelegramBotMessageListener listener: listeners) {
-            // TODO: try to run in separate transactions
-            listener.onMessage(service);
+        List<IBotMessageListener> listeners = getListeners(registration.Name, ITelegramBotMessageListener.class.getName());
+        for (IBotMessageListener listener: listeners) {
+            ((ITelegramBotMessageListener) listener).onMessage(service);
         }
-    }
-
-
-    private List<ITelegramBotMessageListener> castListeners(List<IBotMessageListener> abstractListeners) {
-        List<ITelegramBotMessageListener> listeners = new List<ITelegramBotMessageListener>();
-        for (IBotMessageListener abstractListener: abstractListeners) {
-            listeners.add((ITelegramBotMessageListener) abstractListener);
-        }
-        return listeners;
+        return CalloutHelper.OK_RESPONSE;
     }
 }

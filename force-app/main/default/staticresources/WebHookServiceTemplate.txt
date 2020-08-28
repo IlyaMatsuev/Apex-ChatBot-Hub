@@ -2,12 +2,12 @@
 global with sharing class %className% {
 
     @HttpPost
-    global static Integer post() {
+    global static void post() {
         RestRequest request = RestContext.request;
+        RestResponse response = RestContext.response;
         Bot_Registration__c registration = getRegistrationByToken(request.requestURI.substringAfterLast(CalloutHelper.SLASH));
         BotRequestDelegator delegator = BotRequestDelegator.getDelegator(registration.System__c);
-        delegator.delegate(request, registration);
-        return 200;
+        response.responseBody = Blob.valueOf(delegator.delegate(request, registration));
     }
 
     private static Bot_Registration__c getRegistrationByToken(String hashedToken) {

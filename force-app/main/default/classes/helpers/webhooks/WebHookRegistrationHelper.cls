@@ -49,7 +49,7 @@ public with sharing class WebHookRegistrationHelper {
         if (generateClassCallout.isSuccess() && botSettings != null) {
             giveRESTClassAccess(className);
             WebHookResolver resolver = WebHookResolver.getResolver(registration.System__c);
-            Callout setWebHookCallout = resolver.setWebHook(registration, botSettings);
+            Callout setWebHookCallout = resolver.setWebHook(registration);
             if (!setWebHookCallout.isSuccess()) {
                 throw new BotRegistrationException(Label.SetWebHookCalloutError, setWebHookCallout);
             }
@@ -76,7 +76,7 @@ public with sharing class WebHookRegistrationHelper {
             );
             if (deleteClassCallout.isSuccess() && botSettings != null) {
                 WebHookResolver resolver = WebHookResolver.getResolver(registration.System__c);
-                Callout resetWebHookCallout = resolver.resetWebHook(registration, botSettings);
+                Callout resetWebHookCallout = resolver.resetWebHook(registration);
                 if (!resetWebHookCallout.isSuccess()) {
                     throw new BotRegistrationException(Label.ResetWebHookCalloutError, resetWebHookCallout);
                 }
