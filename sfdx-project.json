@@ -1,11 +1,15 @@
 {
-  "packageDirectories": [
-    {
-      "path": "force-app",
-      "default": true
-    }
-  ],
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "48.0"
+    "packageDirectories": [
+        {
+            "path": "./src",
+            "package": "apex-bot-lib",
+            "versionName": "Version 1.0",
+            "versionNumber": "1.0.0.0",
+            "default": true
+        }
+    ],
+    "name": "apex-bot-lib",
+    "namespace": "",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "52.0"
 }

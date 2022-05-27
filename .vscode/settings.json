@@ -1,0 +1,10 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "files.exclude": {
+        ".sfdx/": true,
+        "**/node_modules/": true,
+        "**/package-lock.json": true
+    }
+}
