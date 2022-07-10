@@ -18,6 +18,15 @@ Project notes.
 
 ## Installation
 
+### Dependencies
+
+This project uses a few other libraries as dependencies:
+
+1. Apex Trigger Framework, [github.com/IlyaMatsuev/Apex-Trigger-Framework](https://github.com/IlyaMatsuev/Apex-Trigger-Framework)
+2. Apex Rest API Client, [github.com/jongpie/ApexCallouts](https://github.com/jongpie/ApexCallouts)
+
+So, they have to be installed first.
+
 ### From Unmanaged Package
 
 You can just install the package by the link on a [sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=<package-id>) or [dev org](https://login.salesforce.com/packaging/installPackage.apexp?p0=<package-id>).

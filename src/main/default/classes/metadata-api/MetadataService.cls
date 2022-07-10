@@ -1,7 +1,3 @@
-/**
- * Created by Ilya Matsuev on 8/21/2020.
- */
-
 public class MetadataService {
     public static String SOAP_M_URI = 'http://soap.sforce.com/2006/04/metadata';
 

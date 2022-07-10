@@ -1,8 +1,4 @@
-/**
- * Created by Ilya Matsuev on 8/22/2020.
- */
-
-public with sharing class MetadataProvider {
+public class MetadataProvider {
     public static final MetadataService.MetadataPort service { get; private set; }
 
     static {
