@@ -1,8 +1,4 @@
-/**
- * Created by Ilya Matsuev on 7/25/2020.
- */
-
-global with sharing class Callout {
+global class Callout {
     global String endpoint { get; private set; }
     global String method { get; private set; }
     global String requestBody { get; private set; }

@@ -1,8 +1,4 @@
-/**
- * Created by Ilya Matsuev on 8/25/2020.
- */
-
-global with sharing class TelegramBotService extends BotService {
+global class TelegramBotService extends BotService {
     private static final Map<String, String> TELEGRAM_BOT_REQUEST_HEADERS = new Map<String, String>{
         CalloutHelper.CONTENT_TYPE_HEADER => CalloutHelper.JSON_CONTENT_TYPE
     };
@@ -14,11 +10,11 @@ global with sharing class TelegramBotService extends BotService {
         }
     }
 
-    global TelegramBotService(Bot_Registration__c registration) {
+    global TelegramBotService(Bot__c registration) {
         super(registration);
     }
 
-    public TelegramBotService(TelegramUpdateWrapper updateWrapper, Bot_Registration__c registration) {
+    public TelegramBotService(TelegramUpdateWrapper updateWrapper, Bot__c registration) {
         super(registration);
         this.updateWrapper = updateWrapper;
     }
@@ -174,7 +170,7 @@ global with sharing class TelegramBotService extends BotService {
     }
 
     protected override String getEndpoint(String method) {
-        return this.botSettings.API_Url__c + registration.Token__c + CalloutHelper.SLASH + method;
+        return this.botSettings.ApiUrl__c + registration.Token__c + CalloutHelper.SLASH + method;
     }
 
     private Callout sendMessage(Map<String, Object> params) {

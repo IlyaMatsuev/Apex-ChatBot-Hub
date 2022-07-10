@@ -7,7 +7,7 @@
     <label>Telegram</label>
     <protected>false</protected>
     <values>
-        <field>API_Url__c</field>
+        <field>ApiUrl__c</field>
         <value xsi:type="xsd:string">https://api.telegram.org/bot</value>
     </values>
 </CustomMetadata>

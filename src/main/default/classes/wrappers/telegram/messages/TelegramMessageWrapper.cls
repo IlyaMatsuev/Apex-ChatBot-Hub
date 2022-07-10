@@ -1,8 +1,4 @@
-/**
- * Created by Ilya Matsuev on 8/24/2020.
- */
-
-global with sharing class TelegramMessageWrapper {
+global class TelegramMessageWrapper {
     public Integer message_id { get; set; }
     public TelegramUserWrapper v_from { get; set; }
     public Integer v_date { get; set; }

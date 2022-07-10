@@ -1,8 +1,4 @@
-/**
- * Created by Ilya Matsuev on 8/24/2020.
- */
-
-global with sharing class TelegramUpdateWrapper {
+global class TelegramUpdateWrapper {
     public Integer update_id { get; set; }
     public TelegramMessageWrapper message { get; set; }
     public TelegramMessageWrapper edited_message { get; set; }

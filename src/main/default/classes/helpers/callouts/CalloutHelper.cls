@@ -1,8 +1,4 @@
-/**
- * Created by Ilya Matsuev on 7/25/2020.
- */
-
-public with sharing class CalloutHelper {
+public class CalloutHelper {
     public static final String SLASH = '/';
     public static final String SPACE = ' ';
 

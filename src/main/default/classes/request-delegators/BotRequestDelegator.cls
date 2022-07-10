@@ -1,11 +1,7 @@
-/**
- * Created by Ilya Matsuev on 8/24/2020.
- */
-
-public abstract with sharing class BotRequestDelegator {
+public abstract class BotRequestDelegator {
     public static final Integer LISTENERS_LIMIT = 20;
 
-    public abstract String delegate(RestRequest request, Bot_Registration__c registration);
+    public abstract String delegate(RestRequest request, Bot__c registration);
 
     protected List<IBotMessageListener> getListeners(String registrationName, String listenerInterfaceName) {
         List<ApexClass> matches = (List<ApexClass>) [

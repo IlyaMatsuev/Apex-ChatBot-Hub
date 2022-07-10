@@ -1,8 +1,4 @@
-/**
- * Created by Ilya Matsuev on 8/25/2020.
- */
-
-global with sharing class TelegramUserWrapper {
+global class TelegramUserWrapper {
     public Integer id { get; set; }
     public Boolean is_bot { get; set; }
     public String first_name { get; set; }

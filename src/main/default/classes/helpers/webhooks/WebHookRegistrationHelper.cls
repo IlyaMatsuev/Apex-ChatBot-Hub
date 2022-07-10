@@ -1,8 +1,4 @@
-/**
- * Created by Ilya Matsuev on 7/25/2020.
- */
-
-public with sharing class WebHookRegistrationHelper {
+public class WebHookRegistrationHelper {
     public static String webHookClassTemplate {
         get {
             if (webHookClassTemplate == null) {
@@ -33,8 +29,8 @@ public with sharing class WebHookRegistrationHelper {
         CalloutHelper.CONTENT_TYPE_HEADER => CalloutHelper.JSON_CONTENT_TYPE
     };
 
-    public static void registerWebHookHandler(Bot_Registration__c registration) {
-        Bot_Setting__mdt botSettings = BotSettingsService.getBotSettings(registration.System__c);
+    public static void registerWebHookHandler(Bot__c registration) {
+        BotSetting__mdt botSettings = BotSettingsService.getBotSettings(registration.Type__c);
         Map<String, String> restHandlerParams = new Map<String, String>();
         String className = generateClassName(registration);
         String classBody = generateClassBody(registration, className);
@@ -48,7 +44,7 @@ public with sharing class WebHookRegistrationHelper {
         );
         if (generateClassCallout.isSuccess() && botSettings != null) {
             giveRESTClassAccess(className);
-            WebHookResolver resolver = WebHookResolver.getResolver(registration.System__c);
+            WebHookResolver resolver = WebHookResolver.getResolver(registration.Type__c);
             Callout setWebHookCallout = resolver.setWebHook(registration);
             if (!setWebHookCallout.isSuccess()) {
                 throw new BotRegistrationException(Label.SetWebHookCalloutError, setWebHookCallout);
@@ -58,13 +54,13 @@ public with sharing class WebHookRegistrationHelper {
         }
     }
 
-    public static void updateWebHookHandler(Bot_Registration__c oldRegistration, Bot_Registration__c registration) {
+    public static void updateWebHookHandler(Bot__c oldRegistration, Bot__c registration) {
         removeWebHookHandler(oldRegistration);
         registerWebHookHandler(registration);
     }
 
-    public static void removeWebHookHandler(Bot_Registration__c registration) {
-        Bot_Setting__mdt botSettings = BotSettingsService.getBotSettings(registration.System__c);
+    public static void removeWebHookHandler(Bot__c registration) {
+        BotSetting__mdt botSettings = BotSettingsService.getBotSettings(registration.Type__c);
         String className = generateClassName(registration);
         List<ApexClass> classes = [SELECT Id FROM ApexClass WHERE Name = :className LIMIT 1];
         if (!classes.isEmpty()) {
@@ -77,7 +73,7 @@ public with sharing class WebHookRegistrationHelper {
                 toolingAPIHeaders
             );
             if (deleteClassCallout.isSuccess() && botSettings != null) {
-                WebHookResolver resolver = WebHookResolver.getResolver(registration.System__c);
+                WebHookResolver resolver = WebHookResolver.getResolver(registration.Type__c);
                 Callout resetWebHookCallout = resolver.resetWebHook(registration);
                 if (!resetWebHookCallout.isSuccess()) {
                     throw new BotRegistrationException(Label.ResetWebHookCalloutError, resetWebHookCallout);
@@ -88,12 +84,12 @@ public with sharing class WebHookRegistrationHelper {
         }
     }
 
-    private static String generateClassName(Bot_Registration__c registration) {
+    private static String generateClassName(Bot__c registration) {
         return WEB_HOOK_CLASS_PREFIX + registration.Name;
     }
 
-    private static String generateClassBody(Bot_Registration__c registration, String className) {
-        return webHookClassTemplate.replace('%className%', className).replace('%path%', registration.WebHook_Path__c);
+    private static String generateClassBody(Bot__c registration, String className) {
+        return webHookClassTemplate.replace('%className%', className).replace('%path%', registration.WebHookUrl__c);
     }
 
     private static void giveRESTClassAccess(String className) {

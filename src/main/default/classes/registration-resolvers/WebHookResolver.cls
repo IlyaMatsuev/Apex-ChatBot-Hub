@@ -1,10 +1,6 @@
-/**
- * Created by Ilya Matsuev on 8/16/2020.
- */
-
-public abstract with sharing class WebHookResolver {
-    public abstract Callout setWebHook(Bot_Registration__c registration);
-    public abstract Callout resetWebHook(Bot_Registration__c registration);
+public abstract class WebHookResolver {
+    public abstract Callout setWebHook(Bot__c registration);
+    public abstract Callout resetWebHook(Bot__c registration);
 
     public static WebHookResolver getResolver(String botSystemName) {
         Type resolverType = Type.forName(botSystemName + WebHookResolver.class.getName());

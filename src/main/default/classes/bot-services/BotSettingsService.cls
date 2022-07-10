@@ -1,18 +1,14 @@
-/**
- * Created by Ilya Matsuev on 8/26/2020.
- */
+public class BotSettingsService {
+    private static final Map<String, BotSetting__mdt> settingsBySystemNames = new Map<String, BotSetting__mdt>();
 
-public with sharing class BotSettingsService {
-    private static final Map<String, Bot_Setting__mdt> settingsBySystemNames = new Map<String, Bot_Setting__mdt>();
-
-    public static Bot_Setting__mdt getBotSettings(String systemName) {
-        Bot_Setting__mdt settings = null;
+    public static BotSetting__mdt getBotSettings(String systemName) {
+        BotSetting__mdt settings = null;
         if (settingsBySystemNames.containsKey(systemName)) {
             settings = settingsBySystemNames.get(systemName);
         } else {
-            List<Bot_Setting__mdt> settingsList = [
-                SELECT DeveloperName, API_Url__c
-                FROM Bot_Setting__mdt
+            List<BotSetting__mdt> settingsList = [
+                SELECT DeveloperName, ApiUrl__c
+                FROM BotSetting__mdt
                 WHERE DeveloperName = :systemName
             ];
             if (!settingsList.isEmpty()) {

@@ -1,16 +1,12 @@
-/**
- * Created by Ilya Matsuev on 8/28/2020.
- */
-
-public with sharing abstract class BotService {
-    public Bot_Registration__c registration { get; protected set; }
-    public Bot_Setting__mdt botSettings {
+public abstract class BotService {
+    public Bot__c registration { get; protected set; }
+    public BotSetting__mdt botSettings {
         get {
-            return BotSettingsService.getBotSettings(registration.System__c);
+            return BotSettingsService.getBotSettings(registration.Type__c);
         }
     }
 
-    public BotService(Bot_Registration__c registration) {
+    public BotService(Bot__c registration) {
         this.registration = registration.clone(true, false, false, false);
     }
 

@@ -1,8 +1,4 @@
-/**
- * Created by Ilya Matsuev on 8/25/2020.
- */
-
-public with sharing class JSONReplacer {
+public class JSONReplacer {
     public static final String DOUBLE_QUOTES = '"';
 
     private String json { get; set; }
