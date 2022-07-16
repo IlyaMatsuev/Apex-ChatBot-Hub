@@ -23,7 +23,8 @@ Project notes.
 This project uses a few other libraries as dependencies:
 
 1. Apex Trigger Framework, [github.com/IlyaMatsuev/Apex-Trigger-Framework](https://github.com/IlyaMatsuev/Apex-Trigger-Framework)
-2. Apex Rest API Client, [github.com/jongpie/ApexCallouts](https://github.com/jongpie/ApexCallouts)
+2. Apex HTTP Client, [github.com/rahulmalhotra/HTTPCalloutFramework](https://github.com/rahulmalhotra/HTTPCalloutFramework)
+3. Metadata Service
 
 So, they have to be installed first.
 

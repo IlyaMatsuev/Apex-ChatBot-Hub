@@ -8,7 +8,7 @@
     <length>100</length>
     <maskChar>asterisk</maskChar>
     <maskType>all</maskType>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>EncryptedText</type>
 </CustomField>

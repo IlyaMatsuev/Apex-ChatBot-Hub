@@ -9,15 +9,18 @@ public class BotErrorHandler implements Triggers.IErrorHandler {
         }
 
         // If it's async execution then delete the created bots. Attach an error for sync execution
-        if (context.isAsync) {
-            Database.delete(context.newList?.isEmpty() == false ? context.newList : context.oldList);
+        if (context.props.isAsync) {
+            Database.delete(context.props.newList?.isEmpty() == false ? context.props.newList : context.props.oldList);
         } else {
             bot.addError(error);
         }
     }
 
     private Bot__c getRecord(Triggers.Context context) {
-        return (Bot__c) (context.isInsert || context.isUndelete ? context.newList : context.oldList).get(0);
+        return (Bot__c) (context.props.isInsert || context.props.isUndelete
+                ? context.props.newList
+                : context.props.oldList)
+            .get(0);
     }
 
     private void notify(String subject, String body) {
