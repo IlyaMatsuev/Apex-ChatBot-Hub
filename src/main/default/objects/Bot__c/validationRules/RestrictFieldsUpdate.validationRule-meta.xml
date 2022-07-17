@@ -2,14 +2,13 @@
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>RestrictFieldsUpdate</fullName>
     <active>true</active>
-    <description>Prevents the user from updating such fields as Token__c, Type__c and WebHookUrl__c</description>
+    <description>Prevents the user from updating such fields as Token__c and Type__c</description>
     <errorConditionFormula>NOT(ISNEW())
 &amp;&amp; (
   ISCHANGED(Token__c)
   || ISCHANGED(TokenHash__c)
   || ISCHANGED(Type__c)
-  || ISCHANGED(WebHookUrl__c)
 )</errorConditionFormula>
     <errorMessage
-    >It&apos;s forbidden to update such fields as Token, Type, and WebHook Url. Delete and create a new Bot record</errorMessage>
+    >It&apos;s forbidden to update such fields as Token and Type. Delete and create a new Bot record instead</errorMessage>
 </ValidationRule>

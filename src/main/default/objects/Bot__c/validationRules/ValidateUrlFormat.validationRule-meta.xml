@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ValidateUrlFormat</fullName>
-    <active>true</active>
-    <description>Checks if the WebHook URL format is correct</description>
-    <errorConditionFormula>NOT(REGEX(WebHookUrl__c, &apos;^\\/[\\/\\w+]+\\w$&apos;))</errorConditionFormula>
-    <errorDisplayField>WebHookUrl__c</errorDisplayField>
-    <errorMessage>The Url format is not correct. It should start from slash and finish without it</errorMessage>
-</ValidationRule>

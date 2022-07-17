@@ -1,11 +1,27 @@
-public class BotWebHookHandler implements Triggers.IHandler {
+public class BotWebhookHandler implements Triggers.IHandler {
+    private final BotServiceFactory factory;
+
+    public BotWebhookHandler() {
+        this(new BotServiceFactory());
+    }
+
+    @TestVisible
+    private BotWebhookHandler(BotServiceFactory factory) {
+        this.factory = factory;
+    }
+
     public void handle(Triggers.Context context) {
-        switch on context.props.operation {
-            when AFTER_INSERT, AFTER_UNDELETE {
-                // Add WebHook
+        if (context.props.isBefore) {
+            return;
+        }
+
+        for (Bot__c bot : ((List<Bot__c>) (context.props.isDelete ? context.props.oldList : context.props.newList))) {
+            BotService service = factory.create(bot);
+            if (context.props.isInsert || context.props.isUndelete) {
+                service.setWebhook();
             }
-            when AFTER_DELETE {
-                // Remove WebHook
+            if (context.props.isDelete) {
+                service.unsetWebhook();
             }
         }
     }

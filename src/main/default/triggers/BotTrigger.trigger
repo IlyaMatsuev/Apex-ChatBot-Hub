@@ -1,5 +1,5 @@
 trigger BotTrigger on Bot__c(before insert, after insert, before update, after update, after delete, after undelete) {
-    Triggers.IHandler webHookHandler = new BotWebHookHandler();
+    Triggers.IHandler webHookHandler = new BotWebhookHandler();
     Triggers.dispatcher
         .bind(TriggerOperation.BEFORE_INSERT, new BotPopulateTokenHashHandler())
         .bindAsync(TriggerOperation.AFTER_INSERT, webHookHandler)
