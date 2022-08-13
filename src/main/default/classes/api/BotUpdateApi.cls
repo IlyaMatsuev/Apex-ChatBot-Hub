@@ -19,8 +19,7 @@ global class BotUpdateApi {
             String botId = typeAndId.get(1);
             String tokenHash = request.headers.get(SECRET_HEADER_NAME_MAPPING.get(botType));
 
-            // TODO: Publish an event to run code under Automated User
-            new BotUpdateDispatcher().dispatch(getBot(botId, botType, tokenHash));
+            EventBus.publish(createUpdateEvent(getBot(botId, botType, tokenHash), String.valueOf(request.requestBody)));
 
             response.responseBody = Blob.valueOf(HttpConstants.RESPONSE_OK);
         } catch (Exception error) {
@@ -42,6 +41,10 @@ global class BotUpdateApi {
             throw new BotUpdateApiException('There is no bot with the provided type and id');
         }
         return bots.get(0);
+    }
+
+    private static BotUpdateEvent__e createUpdateEvent(Bot__c bot, String payload) {
+        return new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = payload);
     }
 
     private class BotUpdateApiException extends Exception {
