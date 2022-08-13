@@ -19,8 +19,8 @@ global class BotUpdateApi {
             String botId = typeAndId.get(1);
             String tokenHash = request.headers.get(SECRET_HEADER_NAME_MAPPING.get(botType));
 
-            Bot__c bot = getBot(botId, botType, tokenHash);
-            // TODO: Find all listeners and execute them
+            new BotUpdateDispatcher().dispatch(getBot(botId, botType, tokenHash));
+
             response.responseBody = Blob.valueOf(HttpConstants.RESPONSE_OK);
         } catch (Exception error) {
             String message = 'Failed receiving an update: ' + error.getMessage();
@@ -31,14 +31,14 @@ global class BotUpdateApi {
     }
 
     public static String getBaseUrl() {
-        return Url.getSalesforceBaseUrl().toExternalForm() + '/services/apexrest/BotUpdateApi/bots/';
+        return Url.getSalesforceBaseUrl().toExternalForm() + '/services/apexrest/BotUpdateApi/bots';
     }
 
     private static Bot__c getBot(String botId, BotType type, String tokenHash) {
         List<Bot__c> bots = [
-            SELECT Name, Type__c, Token__c, TokenHash__c, NotifyOnError__c
+            SELECT Name, Type__c, Token__c, TokenHash__c, NotifyOnError__c, Handler__c
             FROM Bot__c
-            WHERE Type__c = :type.name() AND Id = :botId AND TokenHash__c = :tokenHash
+            WHERE Id = :botId AND Type__c = :type.name() AND TokenHash__c = :tokenHash
             LIMIT 1
         ];
         if (bots.isEmpty()) {

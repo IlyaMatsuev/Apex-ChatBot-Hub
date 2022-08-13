@@ -3,6 +3,7 @@
     <fullName>All</fullName>
     <columns>NAME</columns>
     <columns>Type__c</columns>
+    <columns>Handler__c</columns>
     <columns>NotifyOnError__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
