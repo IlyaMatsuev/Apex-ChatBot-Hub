@@ -23,6 +23,7 @@ public class BotErrorHandler implements Triggers.IErrorHandler {
             .get(0);
     }
 
+    // TODO: Figure out why sending email doesn't work
     private void notify(String subject, String body) {
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
         mail.setSubject(subject);

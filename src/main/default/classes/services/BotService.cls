@@ -29,7 +29,6 @@ public abstract class BotService {
         return response;
     }
 
-    // TODO: Think about using a certificate
     protected virtual HttpRequest prepareRequest(String botMethod, Map<String, Object> body) {
         HttpRequest request = new HttpRequest();
         request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + botMethod);
