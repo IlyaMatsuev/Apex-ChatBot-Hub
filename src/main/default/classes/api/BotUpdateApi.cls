@@ -1,4 +1,4 @@
-@RestResource(urlMapping='/bots/*/*')
+@RestResource(urlMapping='/bots/*')
 global class BotUpdateApi {
     private static final Map<BotType, String> SECRET_HEADER_NAME_MAPPING = new Map<BotType, String>{
         BotType.Telegram => 'X-Telegram-Bot-Api-Secret-Token'
@@ -19,6 +19,7 @@ global class BotUpdateApi {
             String botId = typeAndId.get(1);
             String tokenHash = request.headers.get(SECRET_HEADER_NAME_MAPPING.get(botType));
 
+            // TODO: Publish an event to run code under Automated User
             new BotUpdateDispatcher().dispatch(getBot(botId, botType, tokenHash));
 
             response.responseBody = Blob.valueOf(HttpConstants.RESPONSE_OK);
@@ -28,10 +29,6 @@ global class BotUpdateApi {
             response.statusCode = 400;
             response.responseBody = Blob.valueOf(HttpConstants.RESPONSE_ERROR);
         }
-    }
-
-    public static String getBaseUrl() {
-        return Url.getSalesforceBaseUrl().toExternalForm() + '/services/apexrest/BotUpdateApi/bots';
     }
 
     private static Bot__c getBot(String botId, BotType type, String tokenHash) {

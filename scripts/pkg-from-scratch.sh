@@ -40,7 +40,12 @@ info "Installing dependencies..."
 sfdx force:package:install -p 04t5Y000001wNArQAM -w 10 -b 10 -u "$scratch_alias"
 
 info "Deploying to ${scratch_alias}..."
-sfdx force:source:deploy -u "$scratch_alias" -p ./src || { exit 1; }
+# SObjects, Apex and permissions
+sfdx force:source:deploy -u "$scratch_alias" -p ./src/main/default/objects,./src/main/default/layouts,./src/main/default/tabs,./src/main/default/classes,./src/main/default/triggers,./src/main/default/permissionsets,./src/main/telegram || { exit 1; }
+# Public site
+sfdx force:source:deploy -u "$scratch_alias" -p ./src/main/default/pages,./src/main/default/sites || { exit 1; }
+# Public site profile
+sfdx force:source:deploy -u "$scratch_alias" -p ./src/main/default/profiles || { exit 1; }
 
 info "Assigning permissions..."
 sfdx force:user:permset:assign -n BotAdmin -u "$scratch_alias"
