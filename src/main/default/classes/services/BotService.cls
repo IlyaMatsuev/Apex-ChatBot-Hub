@@ -14,6 +14,9 @@ public virtual class BotService {
     }
 
     public virtual void sendMessage(String message) {
+        // TODO: Need to insert the new message but it can be done only after the handler execution
+        // 1. An option would be to publish a platform event with the PublishImmidiately setting and upsert the records in event handler
+        // 2. Another option is to create something like getSentMessages() method and then insert them with other records in BotUpdateHandler
         throw new BotServiceException('Not implemented: sendMessage()');
     }
 

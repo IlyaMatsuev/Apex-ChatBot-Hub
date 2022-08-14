@@ -6,28 +6,11 @@ public class BotUpdateModel {
     public final UserModel user;
     public final ChatModel chat;
     public final MessageModel message;
-    public final DateTime sentAt;
 
     private BotUpdateModel(TelegramBotUpdateWrapper telegramUpdateWrapper) {
-        // TODO: Think about a proper way to convert wrappers to models
-        if (telegramUpdateWrapper.message == null) {
-            return;
-        }
-        this.user = new UserModel(
-            telegramUpdateWrapper.message.m_from.id,
-            telegramUpdateWrapper.message.m_from.first_name,
-            telegramUpdateWrapper.message.m_from.last_name,
-            telegramUpdateWrapper.message.m_from.username
-        );
-        this.chat = new ChatModel(
-            telegramUpdateWrapper.message.chat.id,
-            telegramUpdateWrapper.message.chat.title,
-            telegramUpdateWrapper.message.chat.first_name,
-            telegramUpdateWrapper.message.chat.last_name,
-            telegramUpdateWrapper.message.chat.username
-        );
-        this.message = new MessageModel(telegramUpdateWrapper.message.message_id, telegramUpdateWrapper.message.text);
-        this.sentAt = DateTime.newInstance(telegramUpdateWrapper.message.m_date);
+        this.user = new UserModel(telegramUpdateWrapper.message.m_from);
+        this.chat = new ChatModel(telegramUpdateWrapper.message.chat);
+        this.message = new MessageModel(telegramUpdateWrapper.message);
     }
 
     public static BotUpdateModel fromPayload(String jsonUpdate, BotType type) {
@@ -55,11 +38,11 @@ public class BotUpdateModel {
         public final String lastName;
         public final String username;
 
-        private UserModel(Long id, String firstName, String lastName, String username) {
-            this.id = id;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.username = username;
+        private UserModel(TelegramBotUserWrapper user) {
+            this.id = user.id;
+            this.firstName = user.first_name;
+            this.lastName = user.last_name;
+            this.username = user.username;
         }
     }
 
@@ -70,22 +53,24 @@ public class BotUpdateModel {
         public final String lastName;
         public final String username;
 
-        private ChatModel(Long id, String title, String firstName, String lastName, String username) {
-            this.id = id;
-            this.title = title;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.username = username;
+        private ChatModel(TelegramBotChatWrapper chat) {
+            this.id = chat.id;
+            this.title = chat.title;
+            this.firstName = chat.first_name;
+            this.lastName = chat.last_name;
+            this.username = chat.username;
         }
     }
 
     public class MessageModel {
         public final Long id;
         public final String text;
+        public final DateTime sentAt;
 
-        private MessageModel(Long id, String text) {
-            this.id = id;
-            this.text = text;
+        private MessageModel(TelegramBotMessageWrapper message) {
+            this.id = message.message_id;
+            this.text = message.text;
+            this.sentAt = DateTime.newInstance(message.m_date);
         }
     }
 }
