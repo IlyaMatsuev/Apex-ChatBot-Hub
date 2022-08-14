@@ -4,8 +4,6 @@
     <excludeButtons>ChangeRecordType</excludeButtons>
     <excludeButtons>Clone</excludeButtons>
     <excludeButtons>PrintableView</excludeButtons>
-    <excludeButtons>RecordShareHierarchy</excludeButtons>
-    <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <layoutSections>
         <customLabel>false</customLabel>
@@ -19,17 +17,13 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Type__c</field>
+                <field>ExternalId__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Token__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>Handler__c</field>
+                <field>Bot__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -65,16 +59,11 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>ExternalId__c</fields>
-        <fields>CREATED_DATE</fields>
-        <relatedList>Chat__c.Bot__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>Chat__c</fields>
+        <fields>Bot__c</fields>
+        <fields>User__c</fields>
         <fields>Text__c</fields>
         <fields>SendDate__c</fields>
-        <relatedList>ChatMessage__c.Bot__c</relatedList>
+        <relatedList>ChatMessage__c.Chat__c</relatedList>
         <sortField>SendDate__c</sortField>
         <sortOrder>Desc</sortOrder>
     </relatedLists>
@@ -84,7 +73,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h540000089gVW</masterLabel>
+        <masterLabel>00h540000089iqW</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

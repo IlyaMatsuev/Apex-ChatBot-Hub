@@ -12,6 +12,9 @@
     <label>Bots</label>
     <navType>Standard</navType>
     <tabs>Bot__c</tabs>
+    <tabs>Chat__c</tabs>
+    <tabs>ChatUser__c</tabs>
+    <tabs>ChatMessage__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Bots_UtilityBar</utilityBar>
 </CustomApplication>

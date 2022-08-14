@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Chat__c</fullName>
+    <description>Chat where the message is coming from</description>
+    <externalId>false</externalId>
+    <label>Chat</label>
+    <referenceTo>Chat__c</referenceTo>
+    <relationshipLabel>Messages</relationshipLabel>
+    <relationshipName>Messages</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

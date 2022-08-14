@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SendDate__c</fullName>
+    <defaultValue>NOW()</defaultValue>
+    <description>Date and time when the message has been sent in the chat</description>
+    <externalId>false</externalId>
+    <label>Send Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

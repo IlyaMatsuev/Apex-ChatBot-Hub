@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>User__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>A chat user who sent the message. Can be null if the message was sent by a bot</description>
+    <externalId>false</externalId>
+    <label>User</label>
+    <referenceTo>ChatUser__c</referenceTo>
+    <relationshipLabel>Messages</relationshipLabel>
+    <relationshipName>Messages</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
