@@ -16,7 +16,7 @@ public class BotWebhookHandler implements Triggers.IHandler {
         }
 
         for (Bot__c bot : getBots(context.props)) {
-            BotService service = serviceFactory.create(bot);
+            WebhookBotService service = serviceFactory.createWebhookService(bot);
             if (context.props.isInsert || context.props.isUndelete) {
                 service.setWebhook();
             }

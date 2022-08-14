@@ -1,9 +1,17 @@
 public virtual class BotServiceFactory {
-    public BotService create(Bot__c bot) {
+    public virtual BotService createBotService(Bot__c bot, BotUpdateModel updateModel) {
         BotType type = BotType.valueOf(bot.Type__c);
         if (type == BotType.Telegram) {
-            return new TelegramBotService(bot);
+            return new TelegramBotService(bot, updateModel);
         }
         throw new IllegalArgumentException('No service instance for the provided type: ' + type);
+    }
+
+    public virtual WebhookBotService createWebhookService(Bot__c bot) {
+        BotType type = BotType.valueOf(bot.Type__c);
+        if (type == BotType.Telegram) {
+            return new TelegramWebhookBotService(bot);
+        }
+        throw new IllegalArgumentException('No webhook service instance for the provided type: ' + type);
     }
 }

@@ -1,4 +1,5 @@
 public enum TelegramBotMethod {
     SetWebhook,
-    DeleteWebhook
+    DeleteWebhook,
+    SendMessage
 }

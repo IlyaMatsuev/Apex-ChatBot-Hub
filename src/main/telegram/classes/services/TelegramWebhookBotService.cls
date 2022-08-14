@@ -1,5 +1,5 @@
-public class TelegramBotService extends BotService {
-    public TelegramBotService(Bot__c bot) {
+public class TelegramWebhookBotService extends WebhookBotService {
+    public TelegramWebhookBotService(Bot__c bot) {
         super(bot);
     }
 

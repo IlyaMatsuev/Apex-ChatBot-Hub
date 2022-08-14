@@ -1,14 +1,21 @@
-public abstract class BotService {
+public virtual class BotService {
     protected final Bot__c bot;
+    protected final BotUpdateModel updateModel;
     protected final BotSetting__mdt settings;
 
     protected BotService(Bot__c bot) {
+        this(bot, null);
+    }
+
+    protected BotService(Bot__c bot, BotUpdateModel updateModel) {
         this.bot = bot;
+        this.updateModel = updateModel;
         this.settings = getSettings();
     }
 
-    public abstract void setWebhook();
-    public abstract void unsetWebhook();
+    public virtual void sendMessage(String message) {
+        throw new BotServiceException('Not implemented: sendMessage()');
+    }
 
     protected HttpResponse call(String botMethod, Map<String, Object> body) {
         return call(botMethod, body, true);
@@ -51,5 +58,8 @@ public abstract class BotService {
             throw new SObjectException('No setting exists for the ' + serviceName + ' BotService class');
         }
         return settings.get(0);
+    }
+
+    public class BotServiceException extends Exception {
     }
 }

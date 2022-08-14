@@ -19,7 +19,7 @@ global class BotUpdateApi {
             String botId = typeAndId.get(1);
             String tokenHash = request.headers.get(SECRET_HEADER_NAME_MAPPING.get(botType));
 
-            EventBus.publish(createUpdateEvent(getBot(botId, botType, tokenHash), String.valueOf(request.requestBody)));
+            EventBus.publish(createUpdateEvent(getBot(botId, botType, tokenHash), request.requestBody.toString()));
 
             response.responseBody = Blob.valueOf(HttpConstants.RESPONSE_OK);
         } catch (Exception error) {
