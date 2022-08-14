@@ -32,7 +32,7 @@ global class BotUpdateApi {
 
     private static Bot__c getBot(String botId, BotType type, String tokenHash) {
         List<Bot__c> bots = [
-            SELECT Name, Type__c, Token__c, TokenHash__c, NotifyOnError__c, Handler__c
+            SELECT Name, Type__c, Token__c, TokenHash__c, Handler__c
             FROM Bot__c
             WHERE Id = :botId AND Type__c = :type.name() AND TokenHash__c = :tokenHash
             LIMIT 1

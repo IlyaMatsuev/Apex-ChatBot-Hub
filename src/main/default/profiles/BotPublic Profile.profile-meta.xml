@@ -6,11 +6,6 @@
     </classAccesses>
     <custom>true</custom>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Bot__c.NotifyOnError__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>true</editable>
         <field>BotUpdateEvent__e.Bot__c</field>
         <readable>true</readable>
