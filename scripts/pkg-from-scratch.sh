@@ -41,7 +41,7 @@ sfdx force:package:install -p 04t5Y000001wNArQAM -w 10 -b 10 -u "$scratch_alias"
 
 info "Deploying to ${scratch_alias}..."
 # SObjects, App, Apex and permissions
-sfdx force:source:deploy -u "$scratch_alias" -p ./src/main/default/objects,./src/main/default/layouts,./src/main/default/flexipages,./src/main/default/tabs,./src/main/default/applications,./src/main/default/classes,./src/main/default/triggers,./src/main/default/permissionsets,./src/main/telegram || { exit 1; }
+sfdx force:source:deploy -u "$scratch_alias" -p ./src/main/default/objects,./src/main/default/layouts,./src/main/default/flexipages,./src/main/default/tabs,./src/main/default/applications,./src/main/default/classes,./src/main/default/triggers,./src/main/default/permissionsets,./src/main/telegram,./src/test || { exit 1; }
 # Public site
 sfdx force:source:deploy -u "$scratch_alias" -p ./src/main/default/pages,./src/main/default/sites || { exit 1; }
 # Public site profile

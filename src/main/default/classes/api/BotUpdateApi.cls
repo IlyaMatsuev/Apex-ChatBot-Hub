@@ -24,7 +24,7 @@ global class BotUpdateApi {
             response.responseBody = Blob.valueOf(HttpConstants.RESPONSE_OK);
         } catch (Exception error) {
             String message = 'Failed receiving an update: ' + error.getMessage();
-            System.debug(LoggingLevel.WARN, message + '\n' + error.getStackTraceString());
+            System.debug(LoggingLevel.ERROR, message + '\n' + error.getStackTraceString());
             response.statusCode = 400;
             response.responseBody = Blob.valueOf(HttpConstants.RESPONSE_ERROR);
         }

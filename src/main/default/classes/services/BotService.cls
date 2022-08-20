@@ -4,7 +4,7 @@ global abstract class BotService {
 
     protected BotService(Bot__c bot) {
         this.bot = bot;
-        this.settings = getSettings();
+        this.settings = BotSettingsProvider.getSettings(BotType.valueOf(bot.Type__c));
     }
 
     /**
@@ -53,21 +53,6 @@ global abstract class BotService {
         request.setHeader(HttpConstants.HEADER_NAME_CONTENT_TYPE, HttpConstants.HEADER_VALUE_CONTENT_TYPE_JSON);
         request.setBody(JSON.serialize(body));
         return request;
-    }
-
-    private BotSetting__mdt getSettings() {
-        String serviceName = String.valueOf(this).split(':').get(0);
-        String settingsName = serviceName.substringBefore(BotService.class.getName());
-        List<BotSetting__mdt> settings = [
-            SELECT DeveloperName, ApiUrl__c
-            FROM BotSetting__mdt
-            WHERE DeveloperName = :settingsName
-            LIMIT 1
-        ];
-        if (settings.isEmpty()) {
-            throw new SObjectException('No setting exists for the ' + serviceName + ' BotService class');
-        }
-        return settings.get(0);
     }
 
     public class BotServiceException extends Exception {
