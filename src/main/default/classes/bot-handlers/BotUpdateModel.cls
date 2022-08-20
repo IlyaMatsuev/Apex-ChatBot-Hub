@@ -1,11 +1,11 @@
-public class BotUpdateModel {
+global class BotUpdateModel {
     private static final Map<BotType, Map<String, String>> UPDATE_PAYLOAD_FIELDS_REPLACEMENTS = new Map<BotType, Map<String, String>>{
         BotType.Telegram => new Map<String, String>{ 'from' => 'm_from', 'date' => 'm_date' }
     };
 
-    public final UserModel user;
-    public final ChatModel chat;
-    public final MessageModel message;
+    global final UserModel user;
+    global final ChatModel chat;
+    global final MessageModel message;
 
     private BotUpdateModel(TelegramBotUpdateWrapper telegramUpdateWrapper) {
         this.user = new UserModel(telegramUpdateWrapper.message.m_from);
@@ -32,11 +32,11 @@ public class BotUpdateModel {
         return JSON.deserialize(jsonUpdate, handlerType);
     }
 
-    public class UserModel {
-        public final Long id;
-        public final String firstName;
-        public final String lastName;
-        public final String username;
+    global class UserModel {
+        global final Long id;
+        global final String firstName;
+        global final String lastName;
+        global final String username;
 
         private UserModel(TelegramBotUserWrapper user) {
             this.id = user.id;
@@ -46,12 +46,12 @@ public class BotUpdateModel {
         }
     }
 
-    public class ChatModel {
-        public final Long id;
-        public final String title;
-        public final String firstName;
-        public final String lastName;
-        public final String username;
+    global class ChatModel {
+        global final Long id;
+        global final String title;
+        global final String firstName;
+        global final String lastName;
+        global final String username;
 
         private ChatModel(TelegramBotChatWrapper chat) {
             this.id = chat.id;
@@ -62,10 +62,10 @@ public class BotUpdateModel {
         }
     }
 
-    public class MessageModel {
-        public final Long id;
-        public final String text;
-        public final DateTime sentAt;
+    global class MessageModel {
+        global final Long id;
+        global final String text;
+        global final DateTime sentAt;
 
         private MessageModel(TelegramBotMessageWrapper message) {
             this.id = message.message_id;

@@ -1,3 +1,3 @@
-public interface IBotHandler {
+global interface IBotHandler {
     void handle(BotContext context);
 }

@@ -1,4 +1,4 @@
-public virtual class BotService {
+global virtual class BotService {
     protected final Bot__c bot;
     protected final BotUpdateModel updateModel;
     protected final BotSetting__mdt settings;
@@ -13,11 +13,27 @@ public virtual class BotService {
         this.settings = getSettings();
     }
 
-    public virtual void sendMessage(String message) {
+    /**
+     * Send message back to the person that sent the message
+     * @param message Message to send
+     */
+    global virtual void sendMessage(String message) {
         // TODO: Need to insert the new message but it can be done only after the handler execution
         // 1. An option would be to publish a platform event with the PublishImmidiately setting and upsert the records in event handler
         // 2. Another option is to create something like getSentMessages() method and then insert them with other records in BotUpdateHandler
         throw new BotServiceException('Not implemented: sendMessage()');
+    }
+
+    global void save(SObject record) {
+        save(record);
+    }
+
+    /**
+     * Upsert records. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
+     * @param records list of records to be upserted
+     */
+    global virtual void save(List<SObject> records) {
+        // TODO: Publish immediate event to upsert the records
     }
 
     protected HttpResponse call(String botMethod, Map<String, Object> body) {
