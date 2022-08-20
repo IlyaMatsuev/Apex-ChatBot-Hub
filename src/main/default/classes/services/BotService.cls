@@ -1,4 +1,4 @@
-global virtual class BotService {
+global abstract class BotService {
     protected final Bot__c bot;
     protected final BotUpdateModel updateModel;
     protected final BotSetting__mdt settings;
@@ -24,16 +24,30 @@ global virtual class BotService {
         throw new BotServiceException('Not implemented: sendMessage()');
     }
 
+    /**
+     * Upsert a record. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
+     * @param record SObject record to be upserted
+     */
     global void save(SObject record) {
-        save(record);
+        save(new List<SObject>{ record });
     }
 
     /**
      * Upsert records. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
-     * @param records list of records to be upserted
+     * @param records List of records to be upserted
      */
     global virtual void save(List<SObject> records) {
-        // TODO: Publish immediate event to upsert the records
+        save(records, null);
+    }
+
+    /**
+     * Upsert records by the provided external id field.
+     * This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
+     * @param records List of records to be upserted
+     * @param externalId Field name of the external id for the provided objects
+     */
+    global virtual void save(List<SObject> records, String externalId) {
+        Eventbus.publish(new BotUpsertDataEvent__e(Data__c = JSON.serialize(records), ExternalIdField__c = externalId));
     }
 
     protected HttpResponse call(String botMethod, Map<String, Object> body) {

@@ -14,26 +14,22 @@ public class BotUpdateHandler implements Triggers.IHandler {
         BotUpdateEvent__e event = (BotUpdateEvent__e) context.props.newList.get(0);
         Bot__c bot = (Bot__c) JSON.deserialize(event.Bot__c, Bot__c.class);
         BotUpdateModel updateModel = BotUpdateModel.fromPayload(event.Payload__c, BotType.valueOf(bot.Type__c));
+        BotService service = serviceFactory.createBotService(bot, updateModel);
 
-        getBotHandler(bot.Handler__c).handle(createBotContext(bot, updateModel));
+        service.save(getChatDetails(bot, updateModel), 'ExternalId__c');
 
-        updateChatDetails(bot, updateModel);
+        getBotHandler(bot.Handler__c).handle(new BotContext(bot, updateModel, service));
     }
 
-    private void updateChatDetails(Bot__c bot, BotUpdateModel updateModel) {
+    private List<SObject> getChatDetails(Bot__c bot, BotUpdateModel updateModel) {
         Chat__c chat = getChat(bot, updateModel.chat);
         ChatUser__c user = getChatUser(updateModel.user);
-        Database.upsert(chat, Chat__c.ExternalId__c);
-        Database.upsert(user, ChatUser__c.ExternalId__c);
-        Database.insert(getChatMessage(chat, user, updateModel.message));
+        ChatMessage__c message = getChatMessage(chat.ExternalId__c, user.ExternalId__c, updateModel.message);
+        return new List<SObject>{ chat, user, message };
     }
 
     private IBotHandler getBotHandler(String handlerType) {
         return (IBotHandler) Type.forName(handlerType).newInstance();
-    }
-
-    private BotContext createBotContext(Bot__c bot, BotUpdateModel updateModel) {
-        return new BotContext(bot, updateModel, serviceFactory.createBotService(bot, updateModel));
     }
 
     private Chat__c getChat(Bot__c bot, BotUpdateModel.ChatModel chat) {
@@ -60,10 +56,10 @@ public class BotUpdateHandler implements Triggers.IHandler {
         );
     }
 
-    private ChatMessage__c getChatMessage(Chat__c chat, ChatUser__c user, BotUpdateModel.MessageModel message) {
+    private ChatMessage__c getChatMessage(String chatId, String userId, BotUpdateModel.MessageModel message) {
         return new ChatMessage__c(
-            Chat__c = chat.Id,
-            User__c = user.Id,
+            Chat__r = new Chat__c(ExternalId__c = chatId),
+            User__r = new ChatUser__c(ExternalId__c = userId),
             Text__c = message.text,
             ExternalId__c = String.valueOf(message.id)
         );
