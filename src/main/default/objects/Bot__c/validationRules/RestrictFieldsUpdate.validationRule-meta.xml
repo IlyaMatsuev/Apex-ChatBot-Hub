@@ -9,6 +9,5 @@
   || ISCHANGED(TokenHash__c)
   || ISCHANGED(Type__c)
 )</errorConditionFormula>
-    <errorMessage
-    >It&apos;s forbidden to update such fields as Token and Type. Delete and create a new Bot record instead</errorMessage>
+    <errorMessage>It&apos;s forbidden to update such fields as Token and Type. Delete and create a new Bot record instead</errorMessage>
 </ValidationRule>
