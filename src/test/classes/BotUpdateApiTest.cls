@@ -6,13 +6,16 @@ public class BotUpdateApiTest {
 
     @TestSetup
     private static void init() {
+        Test.setMock(
+            HttpCalloutMock.class,
+            new BotWebhookCalloutMock(BotType.valueOf(BOT_TYPE), TelegramBotMethod.SetWebhook.name())
+        );
         BotType type = BotType.valueOf(BOT_TYPE);
         insert new Bot__c(Type__c = BOT_TYPE, Token__c = type.name(), Handler__c = BOT_HANDLER);
         BotSettingsProvider.settings.put(
             type,
             new BotSetting__mdt(DeveloperName = type.name(), ApiUrl__c = 'https://bot-api.org/bot')
         );
-        Test.setMock(HttpCalloutMock.class, new WebhookCalloutMock(BotType.valueOf(BOT_TYPE)));
     }
 
     @IsTest

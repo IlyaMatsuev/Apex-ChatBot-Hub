@@ -1,9 +1,15 @@
 @IsTest
-public class WebhookCalloutMock implements HttpCalloutMock {
+public class BotWebhookCalloutMock implements HttpCalloutMock {
     private final BotType type;
+    private final String botMethod;
 
-    public WebhookCalloutMock(BotType type) {
+    public BotWebhookCalloutMock(BotType type) {
+        this(type, null);
+    }
+
+    public BotWebhookCalloutMock(BotType type, String botMethod) {
         this.type = type;
+        this.botMethod = botMethod;
     }
 
     public HttpResponse respond(HttpRequest request) {
@@ -24,6 +30,9 @@ public class WebhookCalloutMock implements HttpCalloutMock {
         response.setStatusCode(HttpConstants.STATUS_CODE_SUCCESS);
         response.setHeader(HttpConstants.HEADER_NAME_CONTENT_TYPE, HttpConstants.HEADER_VALUE_CONTENT_TYPE_JSON);
         TelegramBotMethod method = TelegramBotMethod.valueOf(request.getEndpoint().substringAfterLast('/'));
+        if (String.isNotBlank(botMethod)) {
+            System.assertEquals(botMethod, method.name());
+        }
         switch on method {
             when SetWebhook {
                 String webhookUrl = (String) requestBody.get('url');
