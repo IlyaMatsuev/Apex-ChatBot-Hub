@@ -1,16 +1,14 @@
 global class TelegramBotService extends BotService {
-    public TelegramBotService(Bot__c bot, BotUpdateModel updateModel) {
-        super(bot, updateModel);
+    public TelegramBotService(Bot__c bot) {
+        super(bot);
     }
 
-    global override void sendMessage(String message) {
-        if (updateModel?.chat?.id == null) {
-            throw new BotServiceException('Not possible to send a message: no chat id provided');
-        }
-        Map<String, Object> messagePayload = new Map<String, Object>{
-            'chat_id' => updateModel.chat.id,
-            'text' => message
-        };
-        call(TelegramBotMethod.SendMessage.name(), messagePayload);
+    protected override String sendMessage(String chatId, String message) {
+        Map<String, Object> messagePayload = new Map<String, Object>{ 'chat_id' => chatId, 'text' => message };
+        TelegramBotMessageWrapper messageResponse = (TelegramBotMessageWrapper) JSON.deserialize(
+            call(TelegramBotMethod.SendMessage.name(), messagePayload).getBody(),
+            TelegramBotMessageWrapper.class
+        );
+        return String.valueOf(messageResponse.message_id);
     }
 }

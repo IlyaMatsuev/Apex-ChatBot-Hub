@@ -14,11 +14,10 @@ public class BotUpdateHandler implements Triggers.IHandler {
         BotUpdateEvent__e event = (BotUpdateEvent__e) context.props.newList.get(0);
         Bot__c bot = (Bot__c) JSON.deserialize(event.Bot__c, Bot__c.class);
         BotUpdateModel updateModel = BotUpdateModel.fromPayload(event.Payload__c, BotType.valueOf(bot.Type__c));
-        BotService service = serviceFactory.createBotService(bot, updateModel);
 
-        service.save(getChatDetails(bot, updateModel), 'ExternalId__c');
+        BotUtils.saveAsync(getChatDetails(bot, updateModel), 'ExternalId__c');
 
-        getBotHandler(bot.Handler__c).handle(new BotContext(bot, updateModel, service));
+        getBotHandler(bot.Handler__c).handle(new BotContext(bot, updateModel, serviceFactory));
     }
 
     private List<SObject> getChatDetails(Bot__c bot, BotUpdateModel updateModel) {

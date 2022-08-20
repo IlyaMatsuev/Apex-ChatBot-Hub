@@ -1,8 +1,8 @@
-public virtual class BotServiceFactory {
-    public virtual BotService createBotService(Bot__c bot, BotUpdateModel updateModel) {
+global virtual class BotServiceFactory {
+    global virtual BotService createBotService(Bot__c bot) {
         BotType type = BotType.valueOf(bot.Type__c);
         if (type == BotType.Telegram) {
-            return new TelegramBotService(bot, updateModel);
+            return new TelegramBotService(bot);
         }
         throw new IllegalArgumentException('No service instance for the provided type: ' + type);
     }

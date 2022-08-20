@@ -4,7 +4,7 @@ public class TelegramWebhookBotService extends WebhookBotService {
     }
 
     public override void setWebhook() {
-        String webhookUrl = BotPublicSiteUtils.getApiUrl() + bot.Type__c + '/' + bot.Id;
+        String webhookUrl = BotUtils.getApiUrl() + bot.Type__c + '/' + bot.Id;
         Map<String, Object> payload = new Map<String, Object>{
             'url' => webhookUrl,
             // TODO: Handle other updates

@@ -1,4 +1,4 @@
-public class BotPublicSiteUtils {
+public class BotUtils {
     private static final String BOT_PUBLIC_SITE_NAME = 'BotPublic';
 
     private static Site botSite {
@@ -22,10 +22,16 @@ public class BotPublicSiteUtils {
         private set;
     }
 
-    private BotPublicSiteUtils() {
+    private BotUtils() {
     }
 
     public static String getApiUrl() {
         return botSiteDetails.SecureUrl + 'services/apexrest/bots/';
+    }
+
+    public static void saveAsync(List<SObject> records, String externalIdField) {
+        Eventbus.publish(
+            new BotUpsertDataEvent__e(Data__c = JSON.serialize(records), ExternalIdField__c = externalIdField)
+        );
     }
 }
