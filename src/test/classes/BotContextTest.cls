@@ -1,8 +1,6 @@
 @IsTest(IsParallel=true)
 private class BotContextTest {
     private static final BotType BOT_TYPE = BotType.Telegram;
-    private static final String BOT_TOKEN = '74712731t723gjhbbfkwnkqwguqg17g2717283';
-    private static final String BOT_HANDLER = 'BotHandlerMock';
 
     @TestSetup
     private static void init() {
@@ -11,7 +9,11 @@ private class BotContextTest {
             BOT_TYPE,
             new BotSetting__mdt(DeveloperName = BOT_TYPE.name(), ApiUrl__c = 'https://bot-api.org/bot')
         );
-        insert new Bot__c(Type__c = BOT_TYPE.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
+        insert new Bot__c(
+            Type__c = BOT_TYPE.name(),
+            Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
+            Handler__c = 'BotHandlerMock'
+        );
     }
 
     @IsTest
