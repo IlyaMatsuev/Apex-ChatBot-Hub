@@ -1,8 +1,8 @@
 @IsTest(IsParallel=true)
-public class BotTriggerTest {
+private class BotTriggerTest {
     private static final String BOT_TYPE = BotType.Telegram.name();
     private static final String BOT_TOKEN = '74712731t723gjhbbfkwnkqwguqg17g2717283';
-    private static final String BOT_HANDLER = 'BotTriggerTest.TestBotHandler';
+    private static final String BOT_HANDLER = 'BotHandlerMock';
 
     @TestSetup
     private static void init() {
@@ -61,10 +61,5 @@ public class BotTriggerTest {
 
         delete bot;
         Test.stopTest();
-    }
-
-    public class TestBotHandler implements IBotHandler {
-        public void handle(BotContext context) {
-        }
     }
 }
