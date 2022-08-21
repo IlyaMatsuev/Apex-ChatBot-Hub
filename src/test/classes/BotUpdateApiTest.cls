@@ -15,7 +15,7 @@ private class BotUpdateApiTest {
             type,
             new BotSetting__mdt(DeveloperName = type.name(), ApiUrl__c = 'https://bot-api.org/bot')
         );
-        insert new Bot__c(Type__c = BOT_TYPE, Token__c = type.name(), Handler__c = BOT_HANDLER);
+        insert new Bot__c(Type__c = type.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
     }
 
     @IsTest

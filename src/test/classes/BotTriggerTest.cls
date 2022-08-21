@@ -21,7 +21,7 @@ private class BotTriggerTest {
         );
 
         Test.startTest();
-        insert new Bot__c(Type__c = BOT_TYPE, Token__c = BOT_TYPE, Handler__c = BOT_HANDLER);
+        insert new Bot__c(Type__c = BOT_TYPE, Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
         Test.stopTest();
 
         List<Bot__c> newBots = [SELECT Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
@@ -39,7 +39,7 @@ private class BotTriggerTest {
         Exception error;
         Test.startTest();
         try {
-            insert new Bot__c(Type__c = BOT_TYPE, Token__c = BOT_TYPE, Handler__c = 'BotTriggerTest.FakeBotHandler');
+            insert new Bot__c(Type__c = BOT_TYPE, Token__c = BOT_TOKEN, Handler__c = 'BotTriggerTest.FakeBotHandler');
         } catch (Exception ex) {
             error = ex;
         }
@@ -56,7 +56,7 @@ private class BotTriggerTest {
         Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BotType.valueOf(BOT_TYPE)));
 
         Test.startTest();
-        Bot__c bot = new Bot__c(Type__c = BOT_TYPE, Token__c = BOT_TYPE, Handler__c = BOT_HANDLER);
+        Bot__c bot = new Bot__c(Type__c = BOT_TYPE, Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
         insert bot;
 
         delete bot;
