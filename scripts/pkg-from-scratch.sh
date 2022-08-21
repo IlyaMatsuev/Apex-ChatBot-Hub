@@ -57,4 +57,4 @@ sfdx force:source:deploy -u "$scratch_alias" -p ./src/main/default/profiles || {
 info "Assigning permissions..."
 sfdx force:user:permset:assign -n BotAdmin -u "$scratch_alias"
 
-info "${green}Deployment has been finished.\\nOpen the org with 'sfdx force:org:open -u ${scratch_alias}'${reset}"
+info "Deployment has been finished.\\nOpen the org with 'sfdx force:org:open -u ${scratch_alias}'"
