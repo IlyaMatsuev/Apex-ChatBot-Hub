@@ -80,5 +80,4 @@
     <tabs>ChatUser__c</tabs>
     <tabs>ChatMessage__c</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>Bots_UtilityBar</utilityBar>
 </CustomApplication>
