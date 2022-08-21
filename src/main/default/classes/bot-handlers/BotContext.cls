@@ -21,7 +21,7 @@ global class BotContext {
     }
 
     /**
-     * Upsert a record. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
+     * Upsert a record asynchronously. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
      * @param record SObject record to be upserted
      */
     global void save(SObject record) {
@@ -29,7 +29,7 @@ global class BotContext {
     }
 
     /**
-     * Upsert records. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
+     * Upsert records asynchronously. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
      * @param records List of records to be upserted
      */
     global void save(List<SObject> records) {
@@ -37,7 +37,7 @@ global class BotContext {
     }
 
     /**
-     * Upsert records by the provided external id field.
+     * Upsert records asynchronously by the provided external id field.
      * This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
      * @param records List of records to be upserted
      * @param externalField Field name of the external id for the provided objects
