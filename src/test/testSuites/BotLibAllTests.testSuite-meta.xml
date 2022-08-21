@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ApexTestSuite xmlns="http://soap.sforce.com/2006/04/metadata">
     <testClassName>BotContextTest</testClassName>
-    <testClassName>BotUpdateApiTest</testClassName>
+    <testClassName>BotServiceTest</testClassName>
     <testClassName>BotTriggerTest</testClassName>
+    <testClassName>BotUpdateApiTest</testClassName>
     <testClassName>BotUpdateEventTriggerTest</testClassName>
     <testClassName>BotUpsertDataEventTriggerTest</testClassName>
 </ApexTestSuite>
