@@ -1,4 +1,4 @@
-global class TelegramBotService extends BotService {
+public class TelegramBotService extends BotService {
     public TelegramBotService(Bot__c bot) {
         super(bot);
     }

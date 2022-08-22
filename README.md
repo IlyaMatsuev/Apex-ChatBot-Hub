@@ -46,6 +46,8 @@ Wait a minute after that and refresh the list view to make sure the bot record i
 
 If the bot record is still there then... That's it! The bot should be ready to work.
 
+You can also check out the [demos folder](docs/demos/) to see how to do that visually.
+
 ## Installation
 
 Unfortunately, it's not possible to install this library as a Salesforce package because of the complicated deployment steps.
