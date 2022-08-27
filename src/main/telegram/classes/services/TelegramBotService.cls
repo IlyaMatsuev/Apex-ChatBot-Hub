@@ -5,10 +5,14 @@ public class TelegramBotService extends BotService {
 
     protected override String sendMessage(String chatId, String message) {
         Map<String, Object> messagePayload = new Map<String, Object>{ 'chat_id' => chatId, 'text' => message };
-        TelegramBotMessageWrapper messageResponse = (TelegramBotMessageWrapper) JSON.deserialize(
-            call(TelegramBotMethod.SendMessage.name(), messagePayload).getBody(),
-            TelegramBotMessageWrapper.class
+        HttpResponse response = call(TelegramBotMethod.SendMessage.name(), messagePayload);
+        System.debug('response plain: ' + response.getBody());
+        ValueMap responseBody = ValueMap.fromJson(response.getBody());
+        TelegramBotMessage responseMessagePayload = (TelegramBotMessage) responseBody.getValueMap(
+            'result',
+            TelegramBotMessage.class
         );
-        return String.valueOf(messageResponse.message_id);
+        System.debug('message payload: ' + JSON.serializePretty(responseMessagePayload));
+        return String.valueOf(responseMessagePayload.getId());
     }
 }
