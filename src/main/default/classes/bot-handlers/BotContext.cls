@@ -40,10 +40,10 @@ global class BotContext {
      * Upsert records asynchronously by the provided external id field.
      * This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
      * @param records List of records to be upserted
-     * @param externalField Field name of the external id for the provided objects
+     * @param externalIdField Field name of the external id for the provided objects
      */
-    global void save(List<SObject> records, String externalFieldId) {
-        BotUtils.saveAsync(records, externalFieldId);
+    global void save(List<SObject> records, String externalIdField) {
+        BotUtils.saveAsync(records, externalIdField);
     }
 
     global class Reply {
@@ -55,7 +55,7 @@ global class BotContext {
             this.service = service;
         }
 
-        public void send(String message) {
+        global void send(String message) {
             service.send(String.valueOf(received.chat.id), message);
         }
     }
