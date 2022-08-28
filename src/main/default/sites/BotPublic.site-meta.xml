@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomSite xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowHomePage>false</allowHomePage>
+    <allowStandardAnswersPages>false</allowStandardAnswersPages>
+    <allowStandardIdeasPages>false</allowStandardIdeasPages>
+    <allowStandardLookups>false</allowStandardLookups>
+    <allowStandardPortalPages>true</allowStandardPortalPages>
+    <allowStandardSearch>false</allowStandardSearch>
+    <authorizationRequiredPage>EmptyPage</authorizationRequiredPage>
+    <bandwidthExceededPage>EmptyPage</bandwidthExceededPage>
+    <browserXssProtection>true</browserXssProtection>
+    <clickjackProtectionLevel>SameOriginOnly</clickjackProtectionLevel>
+    <contentSniffingProtection>true</contentSniffingProtection>
+    <enableAuraRequests>true</enableAuraRequests>
+    <fileNotFoundPage>EmptyPage</fileNotFoundPage>
+    <genericErrorPage>EmptyPage</genericErrorPage>
+    <inMaintenancePage>EmptyPage</inMaintenancePage>
+    <indexPage>EmptyPage</indexPage>
+    <masterLabel>BotPublic</masterLabel>
+    <description>This site is meant to be public in order to access the BotUpdateApi class</description>
+    <referrerPolicyOriginWhenCrossOrigin>true</referrerPolicyOriginWhenCrossOrigin>
+    <siteType>Visualforce</siteType>
+    <subdomain>bot-public1</subdomain>
+</CustomSite>

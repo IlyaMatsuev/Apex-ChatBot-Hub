@@ -1,20 +1,11 @@
 {
     "orgName": "Bot Lib Scratch",
-    "adminEmail": "ilya.matsuev.personal@gmail.com",
     "edition": "Developer",
     "hasSampleData": false,
     "features": [],
     "settings": {
         "lightningExperienceSettings": {
             "enableS1DesktopEnabled": true
-        },
-        "securitySettings": {
-            "passwordPolicies": {
-                "enableSetPasswordInApi": true
-            }
-        },
-        "mobileSettings": {
-            "enableS1EncryptedStoragePref2": false
         }
     }
 }

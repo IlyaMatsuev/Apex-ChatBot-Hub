@@ -2,6 +2,7 @@
 **/.idea/
 
 # SFDX
+.sf/
 .sfdx/
 
 # Dependencies
