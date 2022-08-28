@@ -10,7 +10,13 @@ public virtual class ValueMap {
     }
 
     public static ValueMap fromJson(String jsonValues) {
-        return new ValueMap((Map<String, Object>) JSON.deserializeUntyped(jsonValues));
+        return fromJson(jsonValues, ValueMap.class);
+    }
+
+    public static ValueMap fromJson(String jsonValues, Type valueMapType) {
+        ValueMap values = (ValueMap) valueMapType.newInstance();
+        values.values.putAll((Map<String, Object>) JSON.deserializeUntyped(jsonValues));
+        return values;
     }
 
     public String toJson() {
@@ -48,10 +54,6 @@ public virtual class ValueMap {
         return (DateTime) value;
     }
 
-    public ValueMap getValueMap(String key) {
-        return getValueMap(key, ValueMap.class);
-    }
-
     public ValueMap getValueMap(String key, Type valueMapType) {
         Object value = get(key);
         if (value instanceof ValueMap) {
@@ -67,8 +69,9 @@ public virtual class ValueMap {
         return values.get(key);
     }
 
-    public void set(String key, Object value) {
+    public ValueMap set(String key, Object value) {
         values.put(key, value);
+        return this;
     }
 
     private Map<String, Object> escapeExtraValuesProperty(Map<String, Object> values) {

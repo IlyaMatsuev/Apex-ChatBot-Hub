@@ -9,9 +9,7 @@ public class BotUpsertDataHandler implements Triggers.IHandler {
         // There is no other way to correctly upsert records by external id. This is NECESSARY to have DML inside the loop
         for (String externalIdFieldFullName : dataByExternalId.keySet()) {
             List<SObject> data = dataByExternalId.get(externalIdFieldFullName);
-            System.debug('data: ' + JSON.serializePretty(data));
             if (String.isBlank(externalIdFieldFullName)) {
-                System.debug('no external id');
                 Database.upsert(data);
             } else {
                 SObjectField externalIdField = SOBJECT_FIELDS_BY_TYPE.get(data.get(0).getSObjectType())

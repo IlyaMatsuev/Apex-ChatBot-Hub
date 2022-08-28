@@ -42,16 +42,23 @@ public class BotWebhookCalloutMock implements HttpCalloutMock {
                 System.assertEquals(1, allowedUpdates.size());
                 System.assertEquals('message', (String) allowedUpdates.get(0));
                 System.assert(requestBody.containsKey('secret_token'));
-                response.setBody('TRUE');
+                response.setBody('True');
             }
             when DeleteWebhook {
                 System.assert((Boolean) requestBody.get('drop_pending_updates'));
-                response.setBody('TRUE');
+                response.setBody('True');
             }
             when SendMessage {
                 System.assert(requestBody.containsKey('chat_id'));
                 System.assert(requestBody.containsKey('text'));
-                response.setBody(JSON.serialize(new Map<String, Object>{ 'message_id' => generateExternalId() }));
+                response.setBody(
+                    JSON.serialize(
+                        new Map<String, Object>{
+                            'status' => 'ok',
+                            'result' => new Map<String, Object>{ 'message_id' => generateExternalId() }
+                        }
+                    )
+                );
             }
             when else {
                 throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
@@ -60,9 +67,9 @@ public class BotWebhookCalloutMock implements HttpCalloutMock {
         return response;
     }
 
-    private String generateExternalId() {
+    private Long generateExternalId() {
         Long min = 1000000L;
         Long max = 1000000000L;
-        return String.valueOf(Math.round(Math.random() * (max - min) + min));
+        return (Long) Math.round(Math.random() * (max - min) + min);
     }
 }

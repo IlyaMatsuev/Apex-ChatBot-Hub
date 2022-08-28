@@ -58,6 +58,7 @@ private class BotContextTest {
                 'title' => null,
                 'username' => 'ilya.matsuev'
             },
+            'id' => 12312311L,
             'message' => new Map<String, Object>{
                 'id' => 223123123L,
                 'sentAt' => DateTime.newInstance(2022, 1, 1),

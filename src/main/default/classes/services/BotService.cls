@@ -27,11 +27,11 @@ global abstract class BotService {
         throw new BotServiceException('Not implemented: sendMessage(String chatId, String message)');
     }
 
-    protected HttpResponse call(String botMethod, Map<String, Object> body) {
+    protected HttpResponse call(String botMethod, ValueMap body) {
         return call(botMethod, body, true);
     }
 
-    protected HttpResponse call(String botMethod, Map<String, Object> body, Boolean throwOnFail) {
+    protected HttpResponse call(String botMethod, ValueMap body, Boolean throwOnFail) {
         HttpResponse response = new Http().send(prepareRequest(botMethod, body));
         if (throwOnFail && response.getStatusCode() != HttpConstants.STATUS_CODE_SUCCESS) {
             throw new CalloutException(
@@ -46,12 +46,12 @@ global abstract class BotService {
         return response;
     }
 
-    protected virtual HttpRequest prepareRequest(String botMethod, Map<String, Object> body) {
+    protected virtual HttpRequest prepareRequest(String botMethod, ValueMap body) {
         HttpRequest request = new HttpRequest();
         request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + botMethod);
         request.setMethod(HttpConstants.METHOD_POST);
         request.setHeader(HttpConstants.HEADER_NAME_CONTENT_TYPE, HttpConstants.HEADER_VALUE_CONTENT_TYPE_JSON);
-        request.setBody(JSON.serialize(body));
+        request.setBody(body.toJson());
         return request;
     }
 

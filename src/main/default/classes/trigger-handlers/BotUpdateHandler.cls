@@ -1,4 +1,3 @@
-// This event handler suppose to handle only one event at time
 public class BotUpdateHandler implements Triggers.IHandler {
     private final BotServiceFactory serviceFactory;
 
@@ -11,13 +10,25 @@ public class BotUpdateHandler implements Triggers.IHandler {
     }
 
     public void handle(Triggers.Context context) {
-        BotUpdateEvent__e event = (BotUpdateEvent__e) context.props.newList.get(0);
-        Bot__c bot = (Bot__c) JSON.deserialize(event.Bot__c, Bot__c.class);
-        BotUpdateModel updateModel = BotUpdateModel.fromPayload(event.Payload__c, BotType.valueOf(bot.Type__c));
+        // The loop is needed when a user sends several messages at the same time
+        List<SObject> chatsDetails = new List<SObject>();
+        List<BotContext> botContexts = new List<BotContext>();
+        for (BotUpdateEvent__e event : (List<BotUpdateEvent__e>) context.props.newList) {
+            Bot__c bot = (Bot__c) JSON.deserialize(event.Bot__c, Bot__c.class);
+            BotUpdateModel updateModel = BotUpdateModel.fromPayload(event.Payload__c, BotType.valueOf(bot.Type__c));
+            for (SObject chatDetailEntry : getChatDetails(bot, updateModel)) {
+                if (!chatsDetails.contains(chatDetailEntry)) {
+                    chatsDetails.add(chatDetailEntry);
+                }
+            }
+            botContexts.add(new BotContext(bot, updateModel, serviceFactory));
+        }
 
-        BotUtils.saveAsync(getChatDetails(bot, updateModel), 'ExternalId__c');
+        BotUtils.saveAsync(chatsDetails, 'ExternalId__c');
 
-        getBotHandler(bot.Handler__c).handle(new BotContext(bot, updateModel, serviceFactory));
+        for (BotContext botContext : botContexts) {
+            getBotHandler(botContext.bot.Handler__c).handle(botContext);
+        }
     }
 
     private List<SObject> getChatDetails(Bot__c bot, BotUpdateModel updateModel) {
@@ -36,18 +47,18 @@ public class BotUpdateHandler implements Triggers.IHandler {
         if (String.isNotBlank(chat.title)) {
             chatName = chat.title;
         } else if (String.isNotBlank(chat.firstName) || String.isNotBlank(chat.lastName)) {
-            chatName = getValueOrEmptyString(chat.firstName) + getValueOrEmptyString(chat.lastName);
+            chatName = getValueOrEmptyString(chat.firstName) + ' ' + getValueOrEmptyString(chat.lastName);
         }
-        return new Chat__c(Name = chatName, Bot__c = bot.Id, ExternalId__c = String.valueOf(chat.id));
+        return new Chat__c(Name = chatName.trim(), Bot__c = bot.Id, ExternalId__c = String.valueOf(chat.id));
     }
 
     private ChatUser__c getChatUser(BotUpdateModel.UserModel user) {
         String userName = user.username;
         if (String.isNotBlank(user.firstName) || String.isNotBlank(user.lastName)) {
-            userName = getValueOrEmptyString(user.firstName) + getValueOrEmptyString(user.lastName);
+            userName = getValueOrEmptyString(user.firstName) + ' ' + getValueOrEmptyString(user.lastName);
         }
         return new ChatUser__c(
-            Name = userName,
+            Name = userName.trim(),
             FirstName__c = user.firstName,
             LastName__c = user.lastName,
             Username__c = user.username,

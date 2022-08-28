@@ -3,11 +3,13 @@ global class BotUpdateModel {
         BotType.Telegram => TelegramBotUpdate.class
     };
 
+    global final Long id;
     global final UserModel user;
     global final ChatModel chat;
     global final MessageModel message;
 
     private BotUpdateModel(IBotUpdateEntity updateEntity) {
+        this.id = updateEntity.getId();
         this.user = new UserModel(updateEntity.getSender());
         this.chat = new ChatModel(updateEntity.getChat());
         this.message = new MessageModel(updateEntity.getMessage());
@@ -18,7 +20,7 @@ global class BotUpdateModel {
             throw new IllegalArgumentException('There is no constructor for the provided bot type: ' + type);
         }
         return new BotUpdateModel(
-            (IBotUpdateEntity) JSON.deserialize(payload, UPDATE_ENTITY_TYPES_BY_BOT_TYPES.get(type))
+            (IBotUpdateEntity) ValueMap.fromJson(payload, UPDATE_ENTITY_TYPES_BY_BOT_TYPES.get(type))
         );
     }
 
