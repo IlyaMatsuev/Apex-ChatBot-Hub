@@ -12,6 +12,7 @@ Here specified only global Apex types that are supposed to be used by a user as 
 -   [BotUpdateModel.UserModel](#botupdatemodelusermodel)
 -   [BotUpdateModel.ChatModel](#botupdatemodelchatmodel)
 -   [BotUpdateModel.MessageModel](#botupdatemodelmessagemodel)
+-   [BotUpdateModel.Command](#botupdatemodelcommand)
 
 ### Interfaces
 
@@ -124,6 +125,22 @@ Contains information about the received message.
 `String text` - Message text.
 
 `DateTime sentAt` - Date and time when the message has been sent.
+
+#### Properties
+
+`Command command { get; }` - Returns the `Command` instance if the message is a command (starts with "/")
+
+### BotUpdateModel.Command
+
+Contains information about the command received with message.
+
+#### Fields
+
+`String name` - Name of the command.
+
+`List<String> params` - Parameters split by space provided with the command.
+
+---
 
 ### IBotHandler
 

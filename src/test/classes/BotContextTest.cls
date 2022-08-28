@@ -60,9 +60,13 @@ private class BotContextTest {
             },
             'id' => 12312311L,
             'message' => new Map<String, Object>{
+                'command' => new Map<String, Object>{
+                    'name' => 'start',
+                    'params' => new List<String>{ 'hello', 'world!' }
+                },
                 'id' => 223123123L,
                 'sentAt' => DateTime.newInstance(2022, 1, 1),
-                'text' => 'Hello world!'
+                'text' => '/start hello   world!'
             },
             'user' => new Map<String, Object>{
                 'firstName' => null,
@@ -106,7 +110,7 @@ private class BotContextTest {
                     'username' => 'ilya.matsuev',
                     'description' => null
                 },
-                'text' => 'Hello world!'
+                'text' => '/start hello   world!'
             }
         };
         return JSON.serialize(payload);

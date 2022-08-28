@@ -59,10 +59,30 @@ global class BotUpdateModel {
         global final String text;
         global final DateTime sentAt;
 
+        global final Command command {
+            get {
+                if (command == null && text.startsWith('/')) {
+                    command = new Command(text);
+                }
+                return command;
+            }
+            private set;
+        }
+
         private MessageModel(IBotMessageEntity message) {
             this.id = message.getId();
             this.text = message.getText();
             this.sentAt = message.getSendDate();
+        }
+    }
+
+    global class Command {
+        global final String name;
+        global final List<String> params;
+
+        private Command(String text) {
+            this.name = text.substringBefore(' ').substringAfter('/');
+            this.params = text.substringAfter(' ').normalizeSpace().split(' ');
         }
     }
 }
