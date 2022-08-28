@@ -60,6 +60,14 @@ However, you can run this schell script to create a new scratch org with the pac
 
 Or if you want to install the package to the existing org or sandbox:
 
+1. You have to set up the subdomain for your org:
+
+```
+Setup -> Type "Sites" in the left search box -> Sites -> Choose a name for your subdomain and register it
+```
+
+2. Then you can run this script:
+
 ```sh
 ./scripts/pkg-deploy.sh <org-username>
 ```

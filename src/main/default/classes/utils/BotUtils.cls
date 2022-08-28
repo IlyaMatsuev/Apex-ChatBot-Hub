@@ -26,7 +26,11 @@ public class BotUtils {
     }
 
     public static String getApiUrl() {
-        return botSiteDetails.SecureUrl + 'services/apexrest/bots/';
+        String siteUrl = botSiteDetails.SecureUrl;
+        if (!siteUrl.endsWith('/')) {
+            siteUrl += '/';
+        }
+        return siteUrl + 'services/apexrest/bots/';
     }
 
     public static void saveAsync(List<SObject> records, String externalIdField) {
