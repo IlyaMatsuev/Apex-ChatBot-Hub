@@ -5,6 +5,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
         this(new BotServiceFactory());
     }
 
+    @TestVisible
     private BotUpdateHandler(BotServiceFactory serviceFactory) {
         this.serviceFactory = serviceFactory;
     }
@@ -49,7 +50,11 @@ public class BotUpdateHandler implements Triggers.IHandler {
         } else if (String.isNotBlank(chat.firstName) || String.isNotBlank(chat.lastName)) {
             chatName = getValueOrEmptyString(chat.firstName) + ' ' + getValueOrEmptyString(chat.lastName);
         }
-        return new Chat__c(Name = chatName.trim(), Bot__c = bot.Id, ExternalId__c = String.valueOf(chat.id));
+        return new Chat__c(
+            Name = chatName.trim(),
+            Bot__c = bot.Id,
+            ExternalId__c = BotUtils.generateChatId(bot.TokenHash__c, String.valueOf(chat.id))
+        );
     }
 
     private ChatUser__c getChatUser(BotUpdateModel.UserModel user) {

@@ -38,4 +38,11 @@ public class BotUtils {
             new BotUpsertDataEvent__e(Data__c = JSON.serialize(records), ExternalIdField__c = externalIdField)
         );
     }
+
+    public static String generateChatId(String botTokenHash, String chatExternalId) {
+        if (chatExternalId.contains(':')) {
+            return chatExternalId;
+        }
+        return chatExternalId + ':' + botTokenHash.substring(0, 20);
+    }
 }

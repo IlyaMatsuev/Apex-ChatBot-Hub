@@ -9,14 +9,14 @@ global abstract class BotService {
 
     /**
      * Send message to the chat
-     * @param chatId External id of the chat
+     * @param chatId External id of the chat. Can be either source chat messenger id or the formed one that is stored in Chat__c.ExternalId__c
      * @param message Message to send
      */
     global void send(String chatId, String message) {
-        String messageId = sendMessage(chatId, message);
+        String messageId = sendMessage(chatId.substringBefore(':'), message);
         ChatMessage__c messageRecord = new ChatMessage__c(
             Text__c = message,
-            Chat__r = new Chat__c(ExternalId__c = chatId),
+            Chat__r = new Chat__c(ExternalId__c = BotUtils.generateChatId(bot.TokenHash__c, chatId)),
             Bot__c = bot.id,
             ExternalId__c = messageId
         );

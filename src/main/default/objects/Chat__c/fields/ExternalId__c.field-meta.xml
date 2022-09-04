@@ -2,10 +2,10 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>ExternalId__c</fullName>
     <caseSensitive>false</caseSensitive>
-    <description>Chat id that is shared by a messenger</description>
+    <description>Chat id that is shared by a messenger concatenated with the first 20 bot token hash characters</description>
     <externalId>true</externalId>
     <label>External Id</label>
-    <length>20</length>
+    <length>40</length>
     <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>

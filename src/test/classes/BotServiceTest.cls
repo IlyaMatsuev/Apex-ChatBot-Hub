@@ -18,8 +18,12 @@ public class BotServiceTest {
 
     @IsTest
     private static void send_telegramSendMessage_shouldSendAndCreateMessageRecord() {
-        Bot__c bot = [SELECT Type__c, Handler__c, Token__c FROM Bot__c LIMIT 1];
-        Chat__c chat = new Chat__c(Name = 'Test', Bot__c = bot.Id, ExternalId__c = '3214');
+        Bot__c bot = [SELECT Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
+        Chat__c chat = new Chat__c(
+            Name = 'Test',
+            Bot__c = bot.Id,
+            ExternalId__c = '3214:' + bot.TokenHash__c.substring(0, 20)
+        );
         insert chat;
         BotService service = new TelegramBotService(bot);
         Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SendMessage.name()));
