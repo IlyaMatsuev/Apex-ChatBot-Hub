@@ -40,7 +40,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
         Chat__c chat = getChat(bot, updateModel.chat);
         ChatUser__c user = getChatUser(updateModel.user);
         ChatMessage__c message = getChatMessage(chat.ExternalId__c, user.ExternalId__c, updateModel.message);
-        return new List<SObject>{ chat, user, message };
+        return new List<SObject> { chat, user, message };
     }
 
     private IBotHandler getBotHandler(String handlerType) {
