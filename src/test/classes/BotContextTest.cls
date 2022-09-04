@@ -80,7 +80,7 @@ private class BotContextTest {
     }
 
     private static BotContext createBotContext() {
-        Bot__c bot = [SELECT Type__c, Handler__c FROM Bot__c LIMIT 1];
+        Bot__c bot = [SELECT Type__c, Handler__c, TokenHash__c FROM Bot__c LIMIT 1];
         return new BotContext(
             bot,
             BotUpdateModel.fromPayload(createTelegramUpdateJson(), BOT_TYPE),

@@ -45,7 +45,7 @@ private class BotUpdateEventTriggerTest {
                 'text' => 'Hello world!'
             }
         };
-        Bot__c bot = [SELECT Type__c, Handler__c FROM Bot__c LIMIT 1];
+        Bot__c bot = [SELECT Type__c, Handler__c, TokenHash__c FROM Bot__c LIMIT 1];
         Test.startTest();
         Eventbus.publish(new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = JSON.serialize(payload)));
         Test.getEventBus().deliver();
@@ -63,14 +63,14 @@ private class BotUpdateEventTriggerTest {
         System.assertEquals(1, chats.size());
         System.assertEquals('matsuev', chats.get(0).Name);
         System.assertEquals(bot.Id, chats.get(0).Bot__c);
-        System.assertEquals('876541222', chats.get(0).ExternalId__c);
+        System.assertEquals('876541222:' + bot.TokenHash__c.substring(0, 20), chats.get(0).ExternalId__c);
         // User
         System.assertEquals(1, users.size());
         System.assertEquals('matsuev', users.get(0).Name);
         System.assertEquals(null, users.get(0).FirstName__c);
         System.assertEquals('matsuev', users.get(0).LastName__c);
         System.assertEquals('ilya.matsuev', users.get(0).Username__c);
-        System.assertEquals('876541222', chats.get(0).ExternalId__c);
+        System.assertEquals('876541222', users.get(0).ExternalId__c);
         // Message
         System.assertEquals(1, messages.size());
         System.assertEquals('Hello world!', messages.get(0).Text__c);
