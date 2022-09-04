@@ -8,6 +8,8 @@ public class BotErrorHandler implements Triggers.IErrorHandler {
         } else {
             getRecord(context).addError(error);
         }
+
+        BotErrorLogger.log(error);
     }
 
     private Bot__c getRecord(Triggers.Context context) {

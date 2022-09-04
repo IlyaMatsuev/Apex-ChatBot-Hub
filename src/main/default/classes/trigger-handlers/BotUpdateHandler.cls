@@ -28,7 +28,11 @@ public class BotUpdateHandler implements Triggers.IHandler {
         BotUtils.saveAsync(chatsDetails, 'ExternalId__c');
 
         for (BotContext botContext : botContexts) {
-            getBotHandler(botContext.bot.Handler__c).handle(botContext);
+            try {
+                getBotHandler(botContext.bot.Handler__c).handle(botContext);
+            } catch (Exception error) {
+                BotErrorLogger.log(error);
+            }
         }
     }
 
