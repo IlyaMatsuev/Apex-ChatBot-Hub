@@ -27,11 +27,13 @@ then
 	error "Specify the org alias or username as the first parameter"
 fi
 
-info "Please login to the org"
-sfdx force:auth:web:login -a "$org_alias" || { exit 1; }
-
 info "Installing dependencies..."
-sfdx force:package:install -p 04t5Y000001wNArQAM -w 10 -b 10 -u "$org_alias"
+sfdx force:package:install -p 04t5Y000001wNArQAM -w 10 -b 10 -u "$org_alias" \
+    || (\
+        info "Please login to the org" \
+        && sfdx force:auth:web:login -a "$org_alias" \
+        && sfdx force:package:install -p 04t5Y000001wNArQAM -w 10 -b 10 -u "$org_alias" \
+    ) || { exit 1; }
 
 info "Deploying to ${org_alias}..."
 # SObjects, App, Apex and permissions
