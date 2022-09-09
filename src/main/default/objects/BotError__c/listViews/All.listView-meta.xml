@@ -2,6 +2,7 @@
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
     <columns>NAME</columns>
+    <columns>Bot__c</columns>
     <columns>Message__c</columns>
     <columns>ExceptionType__c</columns>
     <columns>StackTrace__c</columns>

@@ -31,7 +31,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
             try {
                 getBotHandler(botContext.bot.Handler__c).handle(botContext);
             } catch (Exception error) {
-                BotErrorLogger.log(error);
+                BotErrorLogger.log(botContext.bot.Id, error);
             }
         }
     }

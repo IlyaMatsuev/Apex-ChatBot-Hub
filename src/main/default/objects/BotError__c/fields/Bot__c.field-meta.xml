@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Bot__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>A bot that produced the error</description>
+    <externalId>false</externalId>
+    <label>Bot</label>
+    <referenceTo>Bot__c</referenceTo>
+    <relationshipLabel>Errors</relationshipLabel>
+    <relationshipName>Errors</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

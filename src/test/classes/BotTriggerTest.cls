@@ -40,12 +40,15 @@ private class BotTriggerTest {
         } catch (Exception ex) {
             error = ex;
         }
+        Test.getEventBus().deliver();
         Test.stopTest();
 
         System.assert(error != null);
         System.assert(
             error.getMessage().contains('Bot handler does not exist or does not implement the IBotHandler interface')
         );
+        List<BotError__c> errors = [SELECT Id FROM BotError__c];
+        System.assertEquals(1, errors.size());
     }
 
     @IsTest

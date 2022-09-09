@@ -11,6 +11,16 @@
     <description>Contains permissions for all necessary components of the Apex Bot Lib</description>
     <fieldPermissions>
         <editable>true</editable>
+        <field>BotError__c.Bot__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>BotError__c.StackTrace__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Bot__c.TokenHash__c</field>
         <readable>true</readable>
     </fieldPermissions>
