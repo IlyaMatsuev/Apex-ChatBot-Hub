@@ -27,8 +27,8 @@ private class BotUpdateApiTest {
         BotUpdateApi.post();
 
         RestResponse response = RestContext.response;
-        System.assertEquals(HttpConstants.RESPONSE_OK, response.responseBody.toString());
-        System.assertEquals(HttpConstants.STATUS_CODE_SUCCESS, response.statusCode);
+        System.assertEquals('OK', response.responseBody.toString());
+        System.assertEquals(200, response.statusCode);
     }
 
     @IsTest
@@ -39,8 +39,8 @@ private class BotUpdateApiTest {
         BotUpdateApi.post();
 
         RestResponse response = RestContext.response;
-        System.assertEquals(HttpConstants.RESPONSE_ERROR, response.responseBody.toString());
-        System.assertEquals(HttpConstants.STATUS_CODE_BAD_REQUEST, response.statusCode);
+        System.assertEquals('ERROR', response.responseBody.toString());
+        System.assertEquals(400, response.statusCode);
     }
 
     @IsTest
@@ -51,21 +51,21 @@ private class BotUpdateApiTest {
         BotUpdateApi.post();
 
         RestResponse response = RestContext.response;
-        System.assertEquals(HttpConstants.RESPONSE_ERROR, response.responseBody.toString());
-        System.assertEquals(HttpConstants.STATUS_CODE_BAD_REQUEST, response.statusCode);
+        System.assertEquals('ERROR', response.responseBody.toString());
+        System.assertEquals(400, response.statusCode);
     }
 
     private static void prepareRestContext(String url, String secret) {
         RestRequest request = new RestRequest();
-        request.httpMethod = HttpConstants.METHOD_POST;
+        request.httpMethod = 'POST';
         request.requestURI = 'services/apexrest/bots' + url;
         // We expect to receive the correct body from Messengers APIs therefore don't care about the content here
         request.requestBody = Blob.valueOf('{}');
-        request.addHeader(HttpConstants.HEADER_NAME_CONTENT_TYPE, HttpConstants.HEADER_VALUE_CONTENT_TYPE_JSON);
+        request.addHeader('Content-Type', 'application/json');
         request.addHeader('X-Telegram-Bot-Api-Secret-Token', secret);
 
         RestResponse response = new RestResponse();
-        response.statusCode = HttpConstants.STATUS_CODE_SUCCESS;
+        response.statusCode = 200;
 
         RestContext.request = request;
         RestContext.response = response;

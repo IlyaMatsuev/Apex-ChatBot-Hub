@@ -1,5 +1,7 @@
 @RestResource(urlMapping='/bots/*')
 global class BotUpdateApi {
+    private static final String RESPONSE_OK = 'OK';
+    private static final String RESPONSE_ERROR = 'ERROR';
     private static final Map<BotType, String> SECRET_HEADER_NAME_MAPPING = new Map<BotType, String>{
         BotType.Telegram => 'X-Telegram-Bot-Api-Secret-Token'
     };
@@ -8,7 +10,7 @@ global class BotUpdateApi {
     global static void post() {
         RestRequest request = RestContext.request;
         RestResponse response = RestContext.response;
-        response.addHeader(HttpConstants.HEADER_NAME_CONTENT_TYPE, HttpConstants.HEADER_VALUE_CONTENT_TYPE_JSON);
+        response.addHeader('Content-Type', 'application/json');
 
         try {
             List<String> typeAndId = request.requestURI.substringAfter('bots/').split('/');
@@ -21,12 +23,12 @@ global class BotUpdateApi {
 
             EventBus.publish(createUpdateEvent(getBot(botId, botType, tokenHash), request.requestBody.toString()));
 
-            response.responseBody = Blob.valueOf(HttpConstants.RESPONSE_OK);
+            response.responseBody = Blob.valueOf(RESPONSE_OK);
         } catch (Exception error) {
             String message = 'Failed receiving an update: ' + error.getMessage();
             System.debug(LoggingLevel.ERROR, message + '\n' + error.getStackTraceString());
             response.statusCode = 400;
-            response.responseBody = Blob.valueOf(HttpConstants.RESPONSE_ERROR);
+            response.responseBody = Blob.valueOf(RESPONSE_ERROR);
         }
     }
 

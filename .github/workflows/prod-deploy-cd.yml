@@ -1,0 +1,37 @@
+name: Prod Deploy CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Install Salesforce CLI'
+        run: |
+          wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
+          mkdir ~/sfdx
+          tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1
+          echo "$HOME/sfdx/bin" >> $GITHUB_PATH
+          ~/sfdx/bin/sfdx version
+
+      - name: 'Checkout source code'
+        uses: actions/checkout@v2
+
+      - name: 'Populate auth file with DEVHUB_SFDX_URL secret'
+        shell: bash
+        run: |
+          echo ${{ secrets.DEVHUB_SFDX_URL }} > ./DEVHUB_SFDX_URL.txt
+          secretFileSize=$(wc -c "./DEVHUB_SFDX_URL.txt" | awk '{print $1}')
+          if [ $secretFileSize == 1 ]; then
+            echo "Missing DEVHUB_SFDX_URL secret. Is this workflow running on a fork?";
+            exit 1;
+          fi
+
+      - name: 'Authenticate Dev Hub'
+        run: sfdx auth:sfdxurl:store -f ./DEVHUB_SFDX_URL.txt -a devhub -d
+
+      - name: 'Deploy Package'
+        run: sh ./scripts/pkg-deploy.sh devhub

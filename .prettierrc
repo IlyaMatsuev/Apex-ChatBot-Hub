@@ -12,6 +12,12 @@
                 "printWidth": 220,
                 "bracketSameLine": true
             }
+        },
+        {
+            "files": "*.yml",
+            "options": {
+                "tabWidth": 2
+            }
         }
     ]
 }
