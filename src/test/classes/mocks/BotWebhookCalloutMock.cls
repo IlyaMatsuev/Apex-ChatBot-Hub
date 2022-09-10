@@ -14,7 +14,7 @@ public class BotWebhookCalloutMock implements HttpCalloutMock {
 
     public HttpResponse respond(HttpRequest request) {
         System.assertEquals('POST', request.getMethod());
-        System.assertEquals('Content-Type', request.getHeader('application/json'));
+        System.assertEquals('application/json', request.getHeader('Content-Type'));
         if (type == BotType.Telegram) {
             return handleTelegramRequest(request);
         }
