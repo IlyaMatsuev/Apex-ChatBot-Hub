@@ -50,9 +50,9 @@ public class BotWebhookCalloutMock implements HttpCalloutMock {
                 System.assert(requestBody.containsKey('text'));
                 response.setBody(
                     JSON.serialize(
-                        new Map<String, Object>{
+                        new Map<String, Object> {
                             'status' => 'ok',
-                            'result' => new Map<String, Object>{ 'message_id' => generateExternalId() }
+                            'result' => new Map<String, Object> { 'message_id' => generateExternalId() }
                         }
                     )
                 );
