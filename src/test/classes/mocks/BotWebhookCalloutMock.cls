@@ -13,11 +13,8 @@ public class BotWebhookCalloutMock implements HttpCalloutMock {
     }
 
     public HttpResponse respond(HttpRequest request) {
-        System.assertEquals(HttpConstants.METHOD_POST, request.getMethod());
-        System.assertEquals(
-            HttpConstants.HEADER_VALUE_CONTENT_TYPE_JSON,
-            request.getHeader(HttpConstants.HEADER_NAME_CONTENT_TYPE)
-        );
+        System.assertEquals('POST', request.getMethod());
+        System.assertEquals('application/json', request.getHeader('Content-Type'));
         if (type == BotType.Telegram) {
             return handleTelegramRequest(request);
         }
@@ -27,8 +24,8 @@ public class BotWebhookCalloutMock implements HttpCalloutMock {
     private HttpResponse handleTelegramRequest(HttpRequest request) {
         Map<String, Object> requestBody = (Map<String, Object>) JSON.deserializeUntyped(request.getBody());
         HttpResponse response = new HttpResponse();
-        response.setStatusCode(HttpConstants.STATUS_CODE_SUCCESS);
-        response.setHeader(HttpConstants.HEADER_NAME_CONTENT_TYPE, HttpConstants.HEADER_VALUE_CONTENT_TYPE_JSON);
+        response.setStatusCode(200);
+        response.setHeader('Content-Type', 'application/json');
         TelegramBotMethod method = TelegramBotMethod.valueOf(request.getEndpoint().substringAfterLast('/'));
         if (String.isNotBlank(botMethod)) {
             System.assertEquals(botMethod, method.name());

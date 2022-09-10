@@ -33,7 +33,7 @@ global abstract class BotService {
 
     protected HttpResponse call(String botMethod, ValueMap body, Boolean throwOnFail) {
         HttpResponse response = new Http().send(prepareRequest(botMethod, body));
-        if (throwOnFail && response.getStatusCode() != HttpConstants.STATUS_CODE_SUCCESS) {
+        if (throwOnFail && response.getStatusCode() != 200) {
             throw new CalloutException(
                 'A call failed for the bot "' +
                 bot.Name +
@@ -49,8 +49,8 @@ global abstract class BotService {
     protected virtual HttpRequest prepareRequest(String botMethod, ValueMap body) {
         HttpRequest request = new HttpRequest();
         request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + botMethod);
-        request.setMethod(HttpConstants.METHOD_POST);
-        request.setHeader(HttpConstants.HEADER_NAME_CONTENT_TYPE, HttpConstants.HEADER_VALUE_CONTENT_TYPE_JSON);
+        request.setMethod('POST');
+        request.setHeader('Content-Type', 'application/json');
         request.setBody(body.toJson());
         return request;
     }
