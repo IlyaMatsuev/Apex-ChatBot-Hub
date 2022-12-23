@@ -1,8 +1,8 @@
-@RestResource(urlMapping='/bots/*')
+@RestResource(urlMapping = '/bots/*')
 global class BotUpdateApi {
     private static final String RESPONSE_OK = 'OK';
     private static final String RESPONSE_ERROR = 'ERROR';
-    private static final Map<BotType, String> SECRET_HEADER_NAME_MAPPING = new Map<BotType, String>{
+    private static final Map<BotType, String> SECRET_HEADER_NAME_MAPPING = new Map<BotType, String> {
         BotType.Telegram => 'X-Telegram-Bot-Api-Secret-Token'
     };
 
@@ -49,6 +49,5 @@ global class BotUpdateApi {
         return new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = payload);
     }
 
-    private class BotUpdateApiException extends Exception {
-    }
+    private class BotUpdateApiException extends Exception {}
 }

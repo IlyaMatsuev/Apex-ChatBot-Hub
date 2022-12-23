@@ -1,4 +1,4 @@
-@IsTest(IsParallel=true)
+@IsTest(IsParallel = true)
 private class BotContextTest {
     private static final BotType BOT_TYPE = BotType.Telegram;
 
@@ -50,8 +50,8 @@ private class BotContextTest {
     private static void received_telegramUpdateModelWithMessage_containsAllFields() {
         BotContext context = createBotContext();
 
-        Map<String, Object> expectedPayload = new Map<String, Object>{
-            'chat' => new Map<String, Object>{
+        Map<String, Object> expectedPayload = new Map<String, Object> {
+            'chat' => new Map<String, Object> {
                 'firstName' => null,
                 'id' => 876541222L,
                 'lastName' => 'matsuev',
@@ -59,16 +59,16 @@ private class BotContextTest {
                 'username' => 'ilya.matsuev'
             },
             'id' => 12312311L,
-            'message' => new Map<String, Object>{
-                'command' => new Map<String, Object>{
+            'message' => new Map<String, Object> {
+                'command' => new Map<String, Object> {
                     'name' => 'start',
-                    'params' => new List<String>{ 'hello', 'world!' }
+                    'params' => new List<String> { 'hello', 'world!' }
                 },
                 'id' => 223123123L,
                 'sentAt' => DateTime.newInstance(2022, 1, 1),
                 'text' => '/start hello   world!'
             },
-            'user' => new Map<String, Object>{
+            'user' => new Map<String, Object> {
                 'firstName' => null,
                 'id' => 876541222L,
                 'lastName' => 'matsuev',
@@ -89,11 +89,11 @@ private class BotContextTest {
     }
 
     private static String createTelegramUpdateJson() {
-        Map<String, Object> payload = new Map<String, Object>{
+        Map<String, Object> payload = new Map<String, Object> {
             'update_id' => 12312311L,
-            'message' => new Map<String, Object>{
+            'message' => new Map<String, Object> {
                 'message_id' => 223123123L,
-                'from' => new Map<String, Object>{
+                'from' => new Map<String, Object> {
                     'id' => 876541222L,
                     'is_bot' => false,
                     'first_name' => null,
@@ -101,7 +101,7 @@ private class BotContextTest {
                     'username' => 'ilya.matsuev'
                 },
                 'date' => DateTime.newInstance(2022, 1, 1).getTime(),
-                'chat' => new Map<String, Object>{
+                'chat' => new Map<String, Object> {
                     'id' => 876541222L,
                     'type' => 'private',
                     'title' => null,

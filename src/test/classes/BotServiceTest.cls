@@ -1,4 +1,4 @@
-@IsTest(IsParallel=true)
+@IsTest(IsParallel = true)
 public class BotServiceTest {
     private static final BotType BOT_TYPE = BotType.Telegram;
 

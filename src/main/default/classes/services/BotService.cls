@@ -20,7 +20,7 @@ global abstract class BotService {
             Bot__c = bot.id,
             ExternalId__c = messageId
         );
-        BotUtils.saveAsync(new List<SObject>{ messageRecord }, 'ExternalId__c');
+        BotUtils.saveAsync(new List<SObject> { messageRecord }, 'ExternalId__c');
     }
 
     protected virtual String sendMessage(String chatId, String message) {
@@ -55,6 +55,5 @@ global abstract class BotService {
         return request;
     }
 
-    public class BotServiceException extends Exception {
-    }
+    public class BotServiceException extends Exception {}
 }

@@ -2,8 +2,7 @@ public class BotSettingsProvider {
     @TestVisible
     private static final Map<BotType, BotSetting__mdt> settings = new Map<BotType, BotSetting__mdt>();
 
-    private BotSettingsProvider() {
-    }
+    private BotSettingsProvider() {}
 
     public static BotSetting__mdt getSettings(BotType type) {
         if (!settings.containsKey(type)) {

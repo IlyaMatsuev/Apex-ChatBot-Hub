@@ -1,5 +1,5 @@
 global class BotUpdateModel {
-    private static final Map<BotType, Type> UPDATE_ENTITY_TYPES_BY_BOT_TYPES = new Map<BotType, Type>{
+    private static final Map<BotType, Type> UPDATE_ENTITY_TYPES_BY_BOT_TYPES = new Map<BotType, Type> {
         BotType.Telegram => TelegramBotUpdate.class
     };
 

@@ -1,4 +1,4 @@
-@IsTest(IsParallel=true)
+@IsTest(IsParallel = true)
 private class BotUpdateEventTriggerTest {
     private static final String BOT_TYPE = BotType.Telegram.name();
 
@@ -86,11 +86,11 @@ private class BotUpdateEventTriggerTest {
     }
 
     private static Map<String, Object> prepareTelegramPayload() {
-        return new Map<String, Object>{
+        return new Map<String, Object> {
             'update_id' => 12312311L,
-            'message' => new Map<String, Object>{
+            'message' => new Map<String, Object> {
                 'message_id' => 223123123L,
-                'from' => new Map<String, Object>{
+                'from' => new Map<String, Object> {
                     'id' => 876541222L,
                     'is_bot' => false,
                     'first_name' => null,
@@ -98,7 +98,7 @@ private class BotUpdateEventTriggerTest {
                     'username' => 'ilya.matsuev'
                 },
                 'date' => DateTime.now().getTime(),
-                'chat' => new Map<String, Object>{
+                'chat' => new Map<String, Object> {
                     'id' => 876541222L,
                     'type' => 'private',
                     'title' => null,

@@ -22,8 +22,7 @@ public class BotUtils {
         private set;
     }
 
-    private BotUtils() {
-    }
+    private BotUtils() {}
 
     public static String getApiUrl() {
         String siteUrl = botSiteDetails.SecureUrl;

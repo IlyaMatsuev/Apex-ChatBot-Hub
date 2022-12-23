@@ -7,7 +7,7 @@ public class TelegramWebhookBotService extends WebhookBotService {
         String webhookUrl = BotUtils.getApiUrl() + bot.Type__c + '/' + bot.Id;
         ValueMap payload = new ValueMap()
             .set('url', webhookUrl)
-            .set('allowed_updates', new List<String>{ 'message' })
+            .set('allowed_updates', new List<String> { 'message' })
             .set('secret_token', bot.TokenHash__c);
         call(TelegramBotMethod.SetWebhook.name(), payload);
     }
