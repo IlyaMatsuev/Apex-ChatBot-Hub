@@ -33,6 +33,10 @@ public virtual class ValueMap {
         return pretty ? JSON.serializePretty(output) : JSON.serialize(output);
     }
 
+    public override String toString() {
+        return toJson();
+    }
+
     public String getString(String key) {
         return (String) get(key);
     }
