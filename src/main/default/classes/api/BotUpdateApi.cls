@@ -15,7 +15,7 @@ global class BotUpdateApi {
         try {
             List<String> typeAndId = request.requestURI.substringAfter('bots/').split('/');
             if (typeAndId.size() != 2) {
-                throw new BotUpdateApiException('Invalid URL format; The correct format: /bots/<bot_type>/<bot_id>');
+                throw new BotUpdateApiException('Invalid URL format; The correct format is: /bots/<bot_type>/<bot_id>');
             }
             BotType botType = BotType.valueOf(typeAndId.get(0));
             String botId = typeAndId.get(1);

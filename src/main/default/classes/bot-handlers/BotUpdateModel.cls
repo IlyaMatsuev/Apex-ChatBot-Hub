@@ -17,7 +17,7 @@ global class BotUpdateModel {
 
     public static BotUpdateModel fromPayload(String payload, BotType type) {
         if (!UPDATE_ENTITY_TYPES_BY_BOT_TYPES.containsKey(type)) {
-            throw new IllegalArgumentException('There is no constructor for the provided bot type: ' + type);
+            throw new IllegalArgumentException('There is no mapping for the provided bot type: ' + type);
         }
         return new BotUpdateModel(
             (IBotUpdateEntity) ValueMap.fromJson(payload, UPDATE_ENTITY_TYPES_BY_BOT_TYPES.get(type))
