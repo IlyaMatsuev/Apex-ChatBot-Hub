@@ -3,7 +3,7 @@ global class BotUpdateModel {
         BotType.Telegram => TelegramBotUpdate.class
     };
 
-    global final Long id;
+    global final String id;
     global final UserModel user;
     global final ChatModel chat;
     global final MessageModel message;
@@ -25,7 +25,7 @@ global class BotUpdateModel {
     }
 
     global class UserModel {
-        global final Long id;
+        global final String id;
         global final String firstName;
         global final String lastName;
         global final String username;
@@ -39,7 +39,7 @@ global class BotUpdateModel {
     }
 
     global class ChatModel {
-        global final Long id;
+        global final String id;
         global final String title;
         global final String firstName;
         global final String lastName;
@@ -55,7 +55,7 @@ global class BotUpdateModel {
     }
 
     global class MessageModel {
-        global final Long id;
+        global final String id;
         global final String text;
         global final DateTime sentAt;
 

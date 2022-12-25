@@ -1,3 +1,3 @@
 public interface IBotEntity {
-    Long getId();
+    String getId();
 }

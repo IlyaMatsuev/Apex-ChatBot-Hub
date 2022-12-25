@@ -38,7 +38,7 @@ public virtual class ValueMap {
     }
 
     public String getString(String key) {
-        return (String) get(key);
+        return String.valueOf(get(key));
     }
 
     public Integer getInteger(String key) {

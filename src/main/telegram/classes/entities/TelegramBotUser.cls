@@ -1,6 +1,6 @@
 public class TelegramBotUser extends ValueMap implements IBotUserEntity {
-    public Long getId() {
-        return getLong('id');
+    public String getId() {
+        return getString('id');
     }
 
     public String getFirstName() {

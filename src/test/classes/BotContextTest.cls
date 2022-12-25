@@ -53,24 +53,24 @@ private class BotContextTest {
         Map<String, Object> expectedPayload = new Map<String, Object> {
             'chat' => new Map<String, Object> {
                 'firstName' => null,
-                'id' => 876541222L,
+                'id' => '876541222',
                 'lastName' => 'matsuev',
                 'title' => null,
                 'username' => 'ilya.matsuev'
             },
-            'id' => 12312311L,
+            'id' => '12312311',
             'message' => new Map<String, Object> {
                 'command' => new Map<String, Object> {
                     'name' => 'start',
                     'params' => new List<String> { 'hello', 'world!' }
                 },
-                'id' => 223123123L,
+                'id' => '223123123',
                 'sentAt' => DateTime.newInstance(2022, 1, 1),
                 'text' => '/start hello   world!'
             },
             'user' => new Map<String, Object> {
                 'firstName' => null,
-                'id' => 876541222L,
+                'id' => '876541222',
                 'lastName' => 'matsuev',
                 'username' => 'ilya.matsuev'
             }
