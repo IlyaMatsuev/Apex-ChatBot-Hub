@@ -20,11 +20,14 @@ global abstract class BotService {
             Bot__c = bot.id,
             ExternalId__c = messageId
         );
-        BotUtils.saveAsync(new List<SObject>{ messageRecord }, 'ExternalId__c');
+        BotUtils.saveAsync(new List<SObject> { messageRecord }, 'ExternalId__c');
     }
 
     protected virtual String sendMessage(String chatId, String message) {
-        throw new BotServiceException('Not implemented: sendMessage(String chatId, String message)');
+        throw new BotServiceException(
+            'Not implemented: sendMessage(String chatId, String message)',
+            new ValueMap().set('chatId', chatId).set('message', message)
+        );
     }
 
     protected HttpResponse call(String botMethod, ValueMap body) {
@@ -34,13 +37,24 @@ global abstract class BotService {
     protected HttpResponse call(String botMethod, ValueMap body, Boolean throwOnFail) {
         HttpResponse response = new Http().send(prepareRequest(botMethod, body));
         if (throwOnFail && response.getStatusCode() != 200) {
-            throw new CalloutException(
+            throw new BotServiceException(
                 'A call failed for the bot "' +
                 bot.Name +
                 '" and method "' +
                 botMethod +
-                '";\n' +
-                response.getBody()
+                '": ' +
+                response.getStatus(),
+                new ValueMap()
+                    .set(
+                        'request',
+                        new ValueMap().set('body', body.getValues()).set('botMethod', botMethod).set('botId', bot.Id)
+                    )
+                    .set(
+                        'response',
+                        new ValueMap()
+                            .set('body', ValueMap.fromJson(response.getBody()))
+                            .set('statusCode', response.getStatusCode())
+                    )
             );
         }
         return response;
@@ -56,5 +70,11 @@ global abstract class BotService {
     }
 
     public class BotServiceException extends Exception {
+        public final ValueMap payload;
+
+        public BotServiceException(String message, ValueMap payload) {
+            this(message);
+            this.payload = payload;
+        }
     }
 }

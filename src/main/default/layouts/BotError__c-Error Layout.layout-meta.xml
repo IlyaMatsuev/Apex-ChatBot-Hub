@@ -18,11 +18,15 @@
                 <field>Message__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>ExceptionType__c</field>
+                <behavior>Edit</behavior>
+                <field>Payload__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>ExceptionType__c</field>
+            </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>StackTrace__c</field>

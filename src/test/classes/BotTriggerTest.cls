@@ -1,4 +1,4 @@
-@IsTest(IsParallel=true)
+@IsTest(IsParallel = true)
 private class BotTriggerTest {
     private static final BotType BOT_TYPE = BotType.Telegram;
     private static final String BOT_TOKEN = '74712731t723gjhbbfkwnkqwguqg17g2717283';

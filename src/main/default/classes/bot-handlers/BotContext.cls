@@ -25,7 +25,7 @@ global class BotContext {
      * @param record SObject record to be upserted
      */
     global void save(SObject record) {
-        save(new List<SObject>{ record });
+        save(new List<SObject> { record });
     }
 
     /**

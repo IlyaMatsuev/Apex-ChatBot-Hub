@@ -1,6 +1,6 @@
 public class TelegramBotChat extends ValueMap implements IBotChatEntity {
-    public Long getId() {
-        return getLong('id');
+    public String getId() {
+        return getString('id');
     }
 
     public String getTitle() {

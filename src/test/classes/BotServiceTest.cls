@@ -1,4 +1,4 @@
-@IsTest(IsParallel=true)
+@IsTest(IsParallel = true)
 public class BotServiceTest {
     private static final BotType BOT_TYPE = BotType.Telegram;
 
@@ -18,7 +18,7 @@ public class BotServiceTest {
 
     @IsTest
     private static void send_telegramSendMessage_shouldSendAndCreateMessageRecord() {
-        Bot__c bot = [SELECT Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
+        Bot__c bot = getBot();
         Chat__c chat = new Chat__c(
             Name = 'Test',
             Bot__c = bot.Id,
@@ -40,5 +40,69 @@ public class BotServiceTest {
         System.assertEquals('Hello world!', messages.get(0).Text__c);
         System.assert(String.isBlank(messages.get(0).User__c));
         System.assert(String.isNotBlank(messages.get(0).ExternalId__c));
+    }
+
+    @IsTest
+    private static void send_telegramSendMessageWithFailResponse_shouldThrowException() {
+        Bot__c bot = getBot();
+        Chat__c chat = new Chat__c(
+            Name = 'Test',
+            Bot__c = bot.Id,
+            ExternalId__c = '3214:' + bot.TokenHash__c.substring(0, 20)
+        );
+        insert chat;
+        BotService service = new TelegramBotService(bot);
+        Test.setMock(
+            HttpCalloutMock.class,
+            new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SendMessage.name())
+                .overrideResponse(400, 'Server is temporary down')
+        );
+
+        Test.startTest();
+        Exception error;
+        try {
+            service.send(chat.ExternalId__c, 'Hello world!');
+        } catch (Exception ex) {
+            error = ex;
+        }
+        Test.stopTest();
+
+        System.assert(error != null);
+        System.assert(error instanceof BotService.BotServiceException);
+        BotService.BotServiceException serviceError = (BotService.BotServiceException) error;
+        System.assert(serviceError.payload.has('request'));
+        System.assertEquals(bot.Id, serviceError.payload.getValueMap('request').getString('botId'));
+        System.assertEquals(
+            TelegramBotMethod.SendMessage.name(),
+            serviceError.payload.getValueMap('request').getString('botMethod')
+        );
+        System.assert(serviceError.payload.has('response'));
+        System.assertEquals(400, serviceError.payload.getValueMap('response').getInteger('statusCode'));
+    }
+
+    @IsTest
+    private static void send_withoutSendMessageImplementation_shouldThrowException() {
+        Exception error;
+        try {
+            new NoImplementationBotService(getBot()).send('fake-id', 'Hello world!');
+        } catch (Exception ex) {
+            error = ex;
+        }
+
+        System.assert(error != null);
+        System.assert(error instanceof BotService.BotServiceException);
+        BotService.BotServiceException serviceError = (BotService.BotServiceException) error;
+        System.assertEquals('fake-id', serviceError.payload.getString('chatId'));
+        System.assertEquals('Hello world!', serviceError.payload.getString('message'));
+    }
+
+    private static Bot__c getBot() {
+        return [SELECT Name, Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
+    }
+
+    private class NoImplementationBotService extends BotService {
+        private NoImplementationBotService(Bot__c bot) {
+            super(bot);
+        }
     }
 }

@@ -21,6 +21,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>BotError__c.Payload__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Bot__c.TokenHash__c</field>
         <readable>true</readable>
     </fieldPermissions>

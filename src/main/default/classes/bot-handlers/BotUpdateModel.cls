@@ -1,9 +1,9 @@
 global class BotUpdateModel {
-    private static final Map<BotType, Type> UPDATE_ENTITY_TYPES_BY_BOT_TYPES = new Map<BotType, Type>{
+    private static final Map<BotType, Type> UPDATE_ENTITY_TYPES_BY_BOT_TYPES = new Map<BotType, Type> {
         BotType.Telegram => TelegramBotUpdate.class
     };
 
-    global final Long id;
+    global final String id;
     global final UserModel user;
     global final ChatModel chat;
     global final MessageModel message;
@@ -17,7 +17,7 @@ global class BotUpdateModel {
 
     public static BotUpdateModel fromPayload(String payload, BotType type) {
         if (!UPDATE_ENTITY_TYPES_BY_BOT_TYPES.containsKey(type)) {
-            throw new IllegalArgumentException('There is no constructor for the provided bot type: ' + type);
+            throw new IllegalArgumentException('There is no mapping for the provided bot type: ' + type);
         }
         return new BotUpdateModel(
             (IBotUpdateEntity) ValueMap.fromJson(payload, UPDATE_ENTITY_TYPES_BY_BOT_TYPES.get(type))
@@ -25,7 +25,7 @@ global class BotUpdateModel {
     }
 
     global class UserModel {
-        global final Long id;
+        global final String id;
         global final String firstName;
         global final String lastName;
         global final String username;
@@ -39,7 +39,7 @@ global class BotUpdateModel {
     }
 
     global class ChatModel {
-        global final Long id;
+        global final String id;
         global final String title;
         global final String firstName;
         global final String lastName;
@@ -55,7 +55,7 @@ global class BotUpdateModel {
     }
 
     global class MessageModel {
-        global final Long id;
+        global final String id;
         global final String text;
         global final DateTime sentAt;
 

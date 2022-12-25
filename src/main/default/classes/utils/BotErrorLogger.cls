@@ -14,6 +14,9 @@ public class BotErrorLogger implements Triggers.IErrorHandler {
             ExceptionType__c = error.getTypeName(),
             StackTrace__c = error.getStackTraceString()
         );
-        BotUtils.saveAsync(new List<SObject>{ botError }, null);
+        if (error instanceof BotService.BotServiceException) {
+            botError.Payload__c = ((BotService.BotServiceException) error).payload.toJson(true);
+        }
+        BotUtils.saveAsync(new List<SObject> { botError }, null);
     }
 }

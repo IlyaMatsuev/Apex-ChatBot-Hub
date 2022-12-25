@@ -1,4 +1,4 @@
-@IsTest(IsParallel=true)
+@IsTest(IsParallel = true)
 private class BotUpdateApiTest {
     private static final String BOT_TYPE = BotType.Telegram.name();
 
@@ -72,7 +72,6 @@ private class BotUpdateApiTest {
     }
 
     public class TestBotHandler implements IBotHandler {
-        public void handle(BotContext context) {
-        }
+        public void handle(BotContext context) {}
     }
 }

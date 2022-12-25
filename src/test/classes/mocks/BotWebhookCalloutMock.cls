@@ -3,6 +3,9 @@ public class BotWebhookCalloutMock implements HttpCalloutMock {
     private final BotType type;
     private final String botMethod;
 
+    private Integer statusCode;
+    private Object responseBody;
+
     public BotWebhookCalloutMock(BotType type) {
         this(type, null);
     }
@@ -49,19 +52,32 @@ public class BotWebhookCalloutMock implements HttpCalloutMock {
                 System.assert(requestBody.containsKey('chat_id'));
                 System.assert(requestBody.containsKey('text'));
                 response.setBody(
-                    JSON.serialize(
-                        new Map<String, Object>{
-                            'status' => 'ok',
-                            'result' => new Map<String, Object>{ 'message_id' => generateExternalId() }
-                        }
-                    )
+                    new ValueMap()
+                        .set('status', 'ok')
+                        .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
+                        .toJson()
                 );
             }
             when else {
                 throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
             }
         }
+
+        // Apply overrides
+        if (this.statusCode != null) {
+            response.setStatusCode(this.statusCode);
+        }
+        if (this.responseBody != null) {
+            response.setBody(String.valueOf(this.responseBody));
+        }
+
         return response;
+    }
+
+    public HttpCalloutMock overrideResponse(Integer statusCode, Object responseBody) {
+        this.statusCode = statusCode;
+        this.responseBody = responseBody;
+        return this;
     }
 
     private Long generateExternalId() {

@@ -1,6 +1,6 @@
 public class TelegramBotMessage extends ValueMap implements IBotMessageEntity {
-    public Long getId() {
-        return getLong('message_id');
+    public String getId() {
+        return getString('message_id');
     }
 
     public String getText() {

@@ -1,4 +1,4 @@
-@IsTest(IsParallel=true)
+@IsTest(IsParallel = true)
 private class BotUpsertDataEventTriggerTest {
     private static final String BOT_TYPE = BotType.Telegram.name();
 
@@ -24,7 +24,7 @@ private class BotUpsertDataEventTriggerTest {
         Bot__c bot = [SELECT Id FROM Bot__c LIMIT 1];
         insert new Chat__c(Name = 'Chat1', Bot__c = bot.id, ExternalId__c = '1234');
 
-        List<SObject> records = new List<SObject>{
+        List<SObject> records = new List<SObject> {
             new Chat__c(Name = 'Chat11', Bot__c = bot.id, ExternalId__c = '1235'),
             new Chat__c(Name = 'Chat2', Bot__c = bot.id, ExternalId__c = '4321'),
             new ChatUser__c(Name = 'Test1', Username__c = 'username1', ExternalId__c = '1234'),
@@ -60,7 +60,7 @@ private class BotUpsertDataEventTriggerTest {
         Bot__c bot = [SELECT Id FROM Bot__c LIMIT 1];
         insert new Chat__c(Name = 'Chat1', Bot__c = bot.id, ExternalId__c = '1234');
 
-        List<SObject> records = new List<SObject>{
+        List<SObject> records = new List<SObject> {
             new Chat__c(Name = 'Chat11', Bot__c = bot.id, ExternalId__c = '1234'),
             new Chat__c(Name = 'Chat2', Bot__c = bot.id, ExternalId__c = '4321'),
             new ChatUser__c(Name = 'Test1', Username__c = 'username1', ExternalId__c = '1234'),

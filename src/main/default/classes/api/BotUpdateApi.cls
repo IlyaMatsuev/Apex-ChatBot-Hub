@@ -1,8 +1,8 @@
-@RestResource(urlMapping='/bots/*')
+@RestResource(urlMapping = '/bots/*')
 global class BotUpdateApi {
     private static final String RESPONSE_OK = 'OK';
     private static final String RESPONSE_ERROR = 'ERROR';
-    private static final Map<BotType, String> SECRET_HEADER_NAME_MAPPING = new Map<BotType, String>{
+    private static final Map<BotType, String> SECRET_HEADER_NAME_MAPPING = new Map<BotType, String> {
         BotType.Telegram => 'X-Telegram-Bot-Api-Secret-Token'
     };
 
@@ -15,7 +15,7 @@ global class BotUpdateApi {
         try {
             List<String> typeAndId = request.requestURI.substringAfter('bots/').split('/');
             if (typeAndId.size() != 2) {
-                throw new BotUpdateApiException('Invalid URL format; The correct format: /bots/<bot_type>/<bot_id>');
+                throw new BotUpdateApiException('Invalid URL format; The correct format is: /bots/<bot_type>/<bot_id>');
             }
             BotType botType = BotType.valueOf(typeAndId.get(0));
             String botId = typeAndId.get(1);
@@ -49,6 +49,5 @@ global class BotUpdateApi {
         return new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = payload);
     }
 
-    private class BotUpdateApiException extends Exception {
-    }
+    private class BotUpdateApiException extends Exception {}
 }
