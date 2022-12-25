@@ -63,6 +63,10 @@ public virtual class ValueMap {
         return (DateTime) value;
     }
 
+    public ValueMap getValueMap(String key) {
+        return getValueMap(key, ValueMap.class);
+    }
+
     public ValueMap getValueMap(String key, Type valueMapType) {
         Object value = get(key);
         if (value instanceof ValueMap) {
@@ -85,6 +89,10 @@ public virtual class ValueMap {
     public ValueMap set(String key, Object value) {
         values.put(key, value);
         return this;
+    }
+
+    public Boolean has(String key) {
+        return values.containsKey(key);
     }
 
     private Map<String, Object> escapeExtraValuesProperty(Map<String, Object> values) {

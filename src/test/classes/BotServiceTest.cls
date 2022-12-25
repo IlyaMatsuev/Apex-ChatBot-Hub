@@ -66,6 +66,18 @@ public class BotServiceTest {
             error = ex;
         }
         Test.stopTest();
+
+        System.assert(error != null);
+        System.assert(error instanceof BotService.BotServiceException);
+        BotService.BotServiceException serviceError = (BotService.BotServiceException) error;
+        System.assert(serviceError.payload.has('request'));
+        System.assertEquals(bot.Id, serviceError.payload.getValueMap('request').getString('botId'));
+        System.assertEquals(
+            TelegramBotMethod.SendMessage.name(),
+            serviceError.payload.getValueMap('request').getString('botMethod')
+        );
+        System.assert(serviceError.payload.has('response'));
+        System.assertEquals(400, serviceError.payload.getValueMap('response').getInteger('statusCode'));
     }
 
     @IsTest
@@ -79,10 +91,13 @@ public class BotServiceTest {
 
         System.assert(error != null);
         System.assert(error instanceof BotService.BotServiceException);
+        BotService.BotServiceException serviceError = (BotService.BotServiceException) error;
+        System.assertEquals('fake-id', serviceError.payload.getString('chatId'));
+        System.assertEquals('Hello world!', serviceError.payload.getString('message'));
     }
 
     private static Bot__c getBot() {
-        return [SELECT Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
+        return [SELECT Name, Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
     }
 
     private class NoImplementationBotService extends BotService {
