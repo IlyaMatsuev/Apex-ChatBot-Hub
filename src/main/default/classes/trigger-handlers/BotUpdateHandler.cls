@@ -43,8 +43,8 @@ public class BotUpdateHandler implements Triggers.IHandler {
         return new List<SObject> { chat, user, message };
     }
 
-    private IBotHandler getBotHandler(String handlerType) {
-        return (IBotHandler) Type.forName(handlerType).newInstance();
+    private IBotHandler getBotHandler(String type) {
+        return (IBotHandler) BotUtils.createInstance(type);
     }
 
     private Chat__c getChat(Bot__c bot, BotUpdateModel.ChatModel chat) {

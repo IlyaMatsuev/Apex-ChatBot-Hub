@@ -1,8 +1,4 @@
 global class BotUpdateModel {
-    private static final Map<BotType, Type> UPDATE_ENTITY_TYPES_BY_BOT_TYPES = new Map<BotType, Type> {
-        BotType.Telegram => TelegramBotUpdate.class
-    };
-
     global final String id;
     global final UserModel user;
     global final ChatModel chat;
@@ -15,12 +11,12 @@ global class BotUpdateModel {
         this.message = new MessageModel(updateEntity.getMessage());
     }
 
-    public static BotUpdateModel fromPayload(String payload, BotType type) {
-        if (!UPDATE_ENTITY_TYPES_BY_BOT_TYPES.containsKey(type)) {
-            throw new IllegalArgumentException('There is no mapping for the provided bot type: ' + type);
-        }
+    public static BotUpdateModel fromPayload(String payload, BotType botType) {
         return new BotUpdateModel(
-            (IBotUpdateEntity) ValueMap.fromJson(payload, UPDATE_ENTITY_TYPES_BY_BOT_TYPES.get(type))
+            (IBotUpdateEntity) ValueMap.fromJson(
+                payload,
+                Type.forName(BotSettingsProvider.get(botType).BotUpdateEntity__c)
+            )
         );
     }
 

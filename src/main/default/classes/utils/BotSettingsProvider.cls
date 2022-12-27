@@ -4,10 +4,16 @@ public class BotSettingsProvider {
 
     private BotSettingsProvider() {}
 
-    public static BotSetting__mdt getSettings(BotType type) {
+    public static BotSetting__mdt get(BotType type) {
         if (!settings.containsKey(type)) {
             List<BotSetting__mdt> settingsList = [
-                SELECT DeveloperName, ApiUrl__c
+                SELECT
+                    DeveloperName,
+                    ApiUrl__c,
+                    BotService__c,
+                    WebhookBotService__c,
+                    BotUpdateResolver__c,
+                    BotUpdateEntity__c
                 FROM BotSetting__mdt
                 WHERE DeveloperName = :type.name()
                 LIMIT 1

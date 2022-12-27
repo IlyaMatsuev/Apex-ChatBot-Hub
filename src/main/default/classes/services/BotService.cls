@@ -1,8 +1,17 @@
 global abstract class BotService {
     protected final Bot__c bot;
-    protected final BotSetting__mdt settings {
-        get { return BotSettingsProvider.getSettings(BotType.valueOf(bot.Type__c)); }
+
+    protected BotType type {
+        get {
+            if (type == null) {
+                type = BotType.valueOf(bot.Type__c);
+            }
+            return type;
+        }
+        private set;
     }
+
+    public BotSetting__mdt settings { get { return BotSettingsProvider.get(type); } }
 
     protected BotService(Bot__c bot) {
         this.bot = bot;

@@ -44,4 +44,12 @@ public class BotUtils {
         }
         return chatExternalId + ':' + botTokenHash.substring(0, 20);
     }
+
+    public static Object createInstance(String typeName) {
+        return createInstance(typeName, new Map<String, Object>());
+    }
+
+    public static Object createInstance(String typeName, Map<String, Object> params) {
+        return JSON.deserialize(JSON.serialize(params), Type.forName(typeName));
+    }
 }

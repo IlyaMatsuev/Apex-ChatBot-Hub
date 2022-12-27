@@ -3,12 +3,6 @@ global class BotUpdateApi {
     private static final String RESPONSE_OK = 'OK';
     private static final String RESPONSE_ERROR = 'ERROR';
 
-    // TODO: Maybe move resolvers to custom metadata?
-    private static final Map<BotType, IBotUpdateResolver> RESOLVERS = new Map<BotType, IBotUpdateResolver> {
-        BotType.Telegram => new TelegramBotUpdateResolver(),
-        BotType.Viber => new ViberBotUpdateResolver()
-    };
-
     @HttpPost
     global static void post() {
         RestRequest request = RestContext.request;
@@ -18,7 +12,7 @@ global class BotUpdateApi {
         try {
             UriParams params = new UriParams(request.requestURI.substringAfter('bots/'));
 
-            Bot__c bot = RESOLVERS.get(params.type).resolve(params.botId, request.headers);
+            Bot__c bot = getBotResolver(params.type).resolve(params.botId, request.headers);
             if (bot == null) {
                 throw new BotUpdateApiException(
                     'There is no bot with the provided type and id',
@@ -38,6 +32,10 @@ global class BotUpdateApi {
             response.statusCode = 400;
             response.responseBody = Blob.valueOf(RESPONSE_ERROR);
         }
+    }
+
+    private static IBotUpdateResolver getBotResolver(BotType type) {
+        return (IBotUpdateResolver) BotUtils.createInstance(BotSettingsProvider.get(type).BotUpdateResolver__c);
     }
 
     public class BotUpdateApiException extends BotCustomException {

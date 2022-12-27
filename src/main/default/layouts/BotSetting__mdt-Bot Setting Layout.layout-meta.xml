@@ -30,6 +30,10 @@
                 <behavior>Required</behavior>
                 <field>WebhookBotService__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>BotUpdateEntity__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
