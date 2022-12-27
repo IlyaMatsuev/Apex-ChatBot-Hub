@@ -1,10 +1,11 @@
 global abstract class BotService {
     protected final Bot__c bot;
-    protected final BotSetting__mdt settings;
+    protected final BotSetting__mdt settings {
+        get { return BotSettingsProvider.getSettings(BotType.valueOf(bot.Type__c)); }
+    }
 
     protected BotService(Bot__c bot) {
         this.bot = bot;
-        this.settings = BotSettingsProvider.getSettings(BotType.valueOf(bot.Type__c));
     }
 
     /**
@@ -69,12 +70,9 @@ global abstract class BotService {
         return request;
     }
 
-    public class BotServiceException extends Exception {
-        public final ValueMap payload;
-
+    public class BotServiceException extends BotCustomException {
         public BotServiceException(String message, ValueMap payload) {
-            this(message);
-            this.payload = payload;
+            super(message, payload);
         }
     }
 }

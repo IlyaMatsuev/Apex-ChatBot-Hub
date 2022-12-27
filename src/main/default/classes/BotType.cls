@@ -1,3 +1,4 @@
 global enum BotType {
-    Telegram
+    Telegram,
+    Viber
 }
