@@ -1,11 +1,12 @@
 global class BotUpdateModel {
-    global final String id;
     global final UserModel user;
     global final ChatModel chat;
     global final MessageModel message;
+    global final String eventType;
 
-    private BotUpdateModel(IBotUpdateEntity updateEntity) {
-        this.id = updateEntity.getId();
+    private BotUpdateModel(IBotWebhookEventEntity webhookEvent) {
+        IBotUpdateEntity updateEntity = webhookEvent.getUpdate();
+        this.eventType = webhookEvent.getType();
         this.user = new UserModel(updateEntity.getSender());
         this.chat = new ChatModel(updateEntity.getChat());
         this.message = new MessageModel(updateEntity.getMessage());
@@ -13,9 +14,9 @@ global class BotUpdateModel {
 
     public static BotUpdateModel fromPayload(String payload, BotType botType) {
         return new BotUpdateModel(
-            (IBotUpdateEntity) ValueMap.fromJson(
+            (IBotWebhookEventEntity) ValueMap.fromJson(
                 payload,
-                Type.forName(BotSettingsProvider.get(botType).BotUpdateEntity__c)
+                Type.forName(BotSettingsProvider.get(botType).BotWebhookEventEntity__c)
             )
         );
     }
