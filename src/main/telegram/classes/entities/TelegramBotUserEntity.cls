@@ -1,10 +1,6 @@
-public class TelegramBotChat extends ValueMap implements IBotChatEntity {
+public class TelegramBotUserEntity extends ValueMap implements IBotUserEntity {
     public String getId() {
         return getString('id');
-    }
-
-    public String getTitle() {
-        return getString('title');
     }
 
     public String getFirstName() {

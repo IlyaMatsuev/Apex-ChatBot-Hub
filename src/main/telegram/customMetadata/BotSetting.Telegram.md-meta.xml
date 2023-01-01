@@ -11,8 +11,8 @@
         <value xsi:type="xsd:string">TelegramBotService</value>
     </values>
     <values>
-        <field>BotWebhookEventEntity__c</field>
-        <value xsi:type="xsd:string">TelegramBotWebhookEvent</value>
+        <field>BotUpdateEventEntity__c</field>
+        <value xsi:type="xsd:string">TelegramBotUpdateEventEntity</value>
     </values>
     <values>
         <field>BotUpdateResolver__c</field>

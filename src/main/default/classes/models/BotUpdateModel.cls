@@ -1,24 +1,38 @@
 global class BotUpdateModel {
-    global final UserModel user;
+    global final String eventType;
     global final ChatModel chat;
     global final MessageModel message;
-    global final String eventType;
 
-    private BotUpdateModel(IBotWebhookEventEntity webhookEvent) {
-        IBotUpdateEntity updateEntity = webhookEvent.getUpdate();
-        this.eventType = webhookEvent.getType();
-        this.user = new UserModel(updateEntity.getSender());
-        this.chat = new ChatModel(updateEntity.getChat());
-        this.message = new MessageModel(updateEntity.getMessage());
+    private BotUpdateModel(String eventType, ChatModel chat, MessageModel message) {
+        this.eventType = eventType;
+        this.chat = chat;
+        this.message = message;
     }
 
     public static BotUpdateModel fromPayload(String payload, BotType botType) {
-        return new BotUpdateModel(
-            (IBotWebhookEventEntity) ValueMap.fromJson(
-                payload,
-                Type.forName(BotSettingsProvider.get(botType).BotWebhookEventEntity__c)
-            )
+        IBotUpdateEventEntity updateEntity = (IBotUpdateEventEntity) ValueMap.fromJson(
+            payload,
+            Type.forName(BotSettingsProvider.get(botType).BotUpdateEventEntity__c)
         );
+        String updateType = updateEntity.getType();
+        return new BotUpdateModel(
+            updateType,
+            new ChatModel(updateEntity.getChat()),
+            new MessageModel(updateEntity.getMessage())
+        );
+    }
+
+    global class ChatModel {
+        global final String id;
+        global final String title;
+        global String isDM { get { return id == sender?.id; } }
+        global final UserModel sender;
+
+        private ChatModel(IBotChatEntity chat) {
+            this.id = chat.getId();
+            this.title = chat.getTitle();
+            this.sender = new UserModel(chat.getSender());
+        }
     }
 
     global class UserModel {
@@ -32,22 +46,6 @@ global class BotUpdateModel {
             this.firstName = user.getFirstName();
             this.lastName = user.getLastName();
             this.username = user.getUsername();
-        }
-    }
-
-    global class ChatModel {
-        global final String id;
-        global final String title;
-        global final String firstName;
-        global final String lastName;
-        global final String username;
-
-        private ChatModel(IBotChatEntity chat) {
-            this.id = chat.getId();
-            this.title = chat.getTitle();
-            this.firstName = chat.getFirstName();
-            this.lastName = chat.getLastName();
-            this.username = chat.getUsername();
         }
     }
 

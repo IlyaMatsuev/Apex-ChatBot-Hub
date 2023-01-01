@@ -15,14 +15,13 @@ public class BotUpdateHandler implements Triggers.IHandler {
         List<SObject> chatsDetails = new List<SObject>();
         List<BotContext> botContexts = new List<BotContext>();
         for (BotUpdateEvent__e event : (List<BotUpdateEvent__e>) context.props.newList) {
-            Bot__c bot = (Bot__c) JSON.deserialize(event.Bot__c, Bot__c.class);
-            BotUpdateModel updateModel = BotUpdateModel.fromPayload(event.Payload__c, BotType.valueOf(bot.Type__c));
-            for (SObject chatDetailEntry : getChatDetails(bot, updateModel)) {
+            BotContext botContext = createBotContext(updateEvent);
+            for (SObject chatDetailEntry : getChatDetails(botContext)) {
                 if (!chatsDetails.contains(chatDetailEntry)) {
                     chatsDetails.add(chatDetailEntry);
                 }
             }
-            botContexts.add(new BotContext(bot, updateModel, serviceFactory));
+            botContexts.add(botContext);
         }
 
         BotUtils.saveAsync(chatsDetails, 'ExternalId__c');
@@ -30,6 +29,19 @@ public class BotUpdateHandler implements Triggers.IHandler {
         for (BotContext botContext : botContexts) {
             handleUpdateEvent(botContext);
         }
+    }
+
+    private BotContext createBotContext(BotUpdateEvent__e updateEvent) {
+        Bot__c bot = (Bot__c) JSON.deserialize(updateEvent.Bot__c, Bot__c.class);
+        BotUpdateModel updateModel = BotUpdateModel.fromPayload(updateEvent.Payload__c, BotType.valueOf(bot.Type__c));
+        return new BotContext(bot, updateModel, serviceFactory);
+    }
+
+    private List<SObject> getChatDetails(BotContext context) {
+        Chat__c chat = getChat(context.bot, context.received.chat);
+        ChatUser__c user = getChatUser(context.received.chat.sender);
+        ChatMessage__c message = getChatMessage(chat.ExternalId__c, user.ExternalId__c, context.received.message);
+        return new List<SObject> { chat, user, message };
     }
 
     private void handleUpdateEvent(BotContext context) {
@@ -40,26 +52,13 @@ public class BotUpdateHandler implements Triggers.IHandler {
         }
     }
 
-    private List<SObject> getChatDetails(Bot__c bot, BotUpdateModel updateModel) {
-        Chat__c chat = getChat(bot, updateModel.chat);
-        ChatUser__c user = getChatUser(updateModel.user);
-        ChatMessage__c message = getChatMessage(chat.ExternalId__c, user.ExternalId__c, updateModel.message);
-        return new List<SObject> { chat, user, message };
-    }
-
     private IBotHandler getBotHandler(String type) {
         return (IBotHandler) BotUtils.createInstance(type);
     }
 
     private Chat__c getChat(Bot__c bot, BotUpdateModel.ChatModel chat) {
-        String chatName = chat.username;
-        if (String.isNotBlank(chat.title)) {
-            chatName = chat.title;
-        } else if (String.isNotBlank(chat.firstName) || String.isNotBlank(chat.lastName)) {
-            chatName = getValueOrEmptyString(chat.firstName) + ' ' + getValueOrEmptyString(chat.lastName);
-        }
         return new Chat__c(
-            Name = chatName.trim(),
+            Name = chat.title,
             Bot__c = bot.Id,
             ExternalId__c = BotUtils.generateChatId(bot.TokenHash__c, String.valueOf(chat.id))
         );

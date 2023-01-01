@@ -11,8 +11,8 @@
         <value xsi:type="xsd:string">ViberBotService</value>
     </values>
     <values>
-        <field>BotWebhookEventEntity__c</field>
-        <value xsi:type="xsd:string">ViberBotWebhookEvent</value>
+        <field>BotUpdateEventEntity__c</field>
+        <value xsi:type="xsd:string">ViberBotUpdateEventEntity</value>
     </values>
     <values>
         <field>BotUpdateResolver__c</field>

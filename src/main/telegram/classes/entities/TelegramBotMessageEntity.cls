@@ -1,4 +1,4 @@
-public class TelegramBotMessage extends ValueMap implements IBotMessageEntity {
+public class TelegramBotMessageEntity extends ValueMap implements IBotMessageEntity {
     public String getId() {
         return getString('message_id');
     }

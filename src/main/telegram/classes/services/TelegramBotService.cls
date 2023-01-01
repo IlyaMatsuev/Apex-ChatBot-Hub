@@ -7,6 +7,6 @@ public class TelegramBotService extends BotService {
         ValueMap messagePayload = new ValueMap().set('chat_id', chatId).set('text', message);
         HttpResponse response = call(TelegramBotMethod.SendMessage.name(), messagePayload);
         ValueMap responseBody = ValueMap.fromJson(response.getBody());
-        return ((TelegramBotMessage) responseBody.getValueMap('result', TelegramBotMessage.class)).getId();
+        return ((TelegramBotMessageEntity) responseBody.getValueMap('result', TelegramBotMessageEntity.class)).getId();
     }
 }

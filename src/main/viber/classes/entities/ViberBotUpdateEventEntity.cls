@@ -1,4 +1,8 @@
-public class ViberBotWebhookEvent extends ValueMap implements IBotWebhookEventEntity {
+public class ViberBotUpdateEventEntity extends ValueMap implements IBotUpdateEventEntity {
+    public String getId() {
+        return null;
+    }
+
     public String getType() {
         // TODO: Check what is provided in the payload and decide on the event type. Available events:
         // - message
@@ -11,8 +15,11 @@ public class ViberBotWebhookEvent extends ValueMap implements IBotWebhookEventEn
         return 'message';
     }
 
-    public IBotUpdateEntity getUpdate() {
-        // TODO: Get update entity from the payload
+    public IBotMessageEntity getMessage() {
+        return null;
+    }
+
+    public IBotChatEntity getChat() {
         return null;
     }
 }
