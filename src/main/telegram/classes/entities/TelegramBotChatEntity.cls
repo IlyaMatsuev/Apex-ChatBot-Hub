@@ -4,12 +4,21 @@ public class TelegramBotChatEntity extends ValueMap implements IBotChatEntity {
     }
 
     public String getTitle() {
-        // TODO: If no title - firstName + lastName - or username
-        return getString('title');
+        if (has('title')) {
+            return getString('title');
+        } else if (has('first_name') || has('last_name')) {
+            String firstName = getValueOrEmptyString(getString('first_name'));
+            String lastName = getValueOrEmptyString(getString('last_name'));
+            return (firstName + ' ' + lastName).trim();
+        }
+        return getString('username');
     }
 
     public IBotUserEntity getSender() {
-        // TODO: Return user entity
-        return null;
+        return (IBotUserEntity) getValueMap('user');
+    }
+
+    private String getValueOrEmptyString(String value) {
+        return String.isBlank(value) ? '' : value;
     }
 }

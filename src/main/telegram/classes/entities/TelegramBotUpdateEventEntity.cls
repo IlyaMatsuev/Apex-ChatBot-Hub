@@ -23,17 +23,15 @@ public class TelegramBotUpdateEventEntity extends ValueMap implements IBotUpdate
     }
 
     public IBotMessageEntity getMessage() {
-        return (IBotMessageEntity) getValueMap('message', TelegramBotMessageEntity.class);
+        return (IBotMessageEntity) getValueMap(getType(), TelegramBotMessageEntity.class);
     }
-
-    // TODO: Move to IBotChatEntity
-    // Public IBotUserEntity getSender() {
-    // TelegramBotMessageEntity message = (TelegramBotMessageEntity) getMessage();
-    // Return (IBotUserEntity) message.getValueMap('from', TelegramBotUserEntity.class);
-    // }
 
     public IBotChatEntity getChat() {
         TelegramBotMessageEntity message = (TelegramBotMessageEntity) getMessage();
-        return (IBotChatEntity) message.getValueMap('chat', TelegramBotChatEntity.class);
+        TelegramBotUserEntity user = (TelegramBotUserEntity) message.getValueMap('from', TelegramBotUserEntity.class);
+        TelegramBotChatEntity chat = (TelegramBotChatEntity) message.getValueMap('chat', TelegramBotChatEntity.class);
+        // Set user payload into the chat payload so that it can be accessed from the IBotChatEntity
+        chat.set('user', user);
+        return chat;
     }
 }
