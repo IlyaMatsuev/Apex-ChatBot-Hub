@@ -9,10 +9,10 @@ public class TelegramWebhookBotService extends WebhookBotService {
             .set('url', webhookUrl)
             .set('allowed_updates', new List<String> { 'message' })
             .set('secret_token', bot.TokenHash__c);
-        call(TelegramBotMethod.SetWebhook.name(), payload);
+        call(TelegramBotMethod.SetWebhook, payload);
     }
 
     public override void unsetWebhook() {
-        call(TelegramBotMethod.DeleteWebhook.name(), new ValueMap().set('drop_pending_updates', true));
+        call(TelegramBotMethod.DeleteWebhook, new ValueMap().set('drop_pending_updates', true));
     }
 }

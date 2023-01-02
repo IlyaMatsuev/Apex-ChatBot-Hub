@@ -4,7 +4,7 @@ private class BotContextTest {
 
     @TestSetup
     private static void init() {
-        Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SetWebhook.name()));
+        Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SetWebhook));
         BotSettingsProvider.settings.put(
             BOT_TYPE,
             new BotSetting__mdt(DeveloperName = BOT_TYPE.name(), ApiUrl__c = 'https://bot-api.org/bot')

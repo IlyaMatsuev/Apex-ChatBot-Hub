@@ -1,7 +1,7 @@
 @IsTest
 public class BotWebhookCalloutMock implements HttpCalloutMock {
     private final BotType type;
-    private final String botMethod;
+    private final BotMethod botServiceMethod;
 
     private Integer statusCode;
     private Object responseBody;
@@ -10,9 +10,9 @@ public class BotWebhookCalloutMock implements HttpCalloutMock {
         this(type, null);
     }
 
-    public BotWebhookCalloutMock(BotType type, String botMethod) {
+    public BotWebhookCalloutMock(BotType type, BotMethod botServiceMethod) {
         this.type = type;
-        this.botMethod = botMethod;
+        this.botServiceMethod = botServiceMethod;
     }
 
     public HttpResponse respond(HttpRequest request) {
@@ -29,12 +29,12 @@ public class BotWebhookCalloutMock implements HttpCalloutMock {
         HttpResponse response = new HttpResponse();
         response.setStatusCode(200);
         response.setHeader('Content-Type', 'application/json');
-        TelegramBotMethod method = TelegramBotMethod.valueOf(request.getEndpoint().substringAfterLast('/'));
-        if (String.isNotBlank(botMethod)) {
-            System.assertEquals(botMethod, method.name());
+        BotMethod method = BotMethod.valueOf(request.getEndpoint().substringAfterLast('/'));
+        if (botServiceMethod != null) {
+            System.assertEquals(botServiceMethod, method);
         }
-        switch on method {
-            when SetWebhook {
+        switch on method.name() {
+            when 'setWebhook' {
                 String webhookUrl = (String) requestBody.get('url');
                 List<Object> allowedUpdates = (List<Object>) requestBody.get('allowed_updates');
                 System.assertEquals(BotUtils.getApiUrl() + type, webhookUrl.substringBeforeLast('/'));
@@ -44,11 +44,11 @@ public class BotWebhookCalloutMock implements HttpCalloutMock {
                 System.assert(requestBody.containsKey('secret_token'));
                 response.setBody('True');
             }
-            when DeleteWebhook {
+            when 'deleteWebhook' {
                 System.assert((Boolean) requestBody.get('drop_pending_updates'));
                 response.setBody('True');
             }
-            when SendMessage {
+            when 'sendMessage' {
                 System.assert(requestBody.containsKey('chat_id'));
                 System.assert(requestBody.containsKey('text'));
                 response.setBody(

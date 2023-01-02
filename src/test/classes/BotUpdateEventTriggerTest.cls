@@ -6,7 +6,7 @@ private class BotUpdateEventTriggerTest {
     private static void init() {
         Test.setMock(
             HttpCalloutMock.class,
-            new BotWebhookCalloutMock(BotType.valueOf(BOT_TYPE), TelegramBotMethod.SetWebhook.name())
+            new BotWebhookCalloutMock(BotType.valueOf(BOT_TYPE), TelegramBotMethod.SetWebhook)
         );
         BotSettingsProvider.settings.put(
             BotType.valueOf(BOT_TYPE),

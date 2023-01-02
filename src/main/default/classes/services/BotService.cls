@@ -40,24 +40,27 @@ global abstract class BotService {
         );
     }
 
-    protected HttpResponse call(String botMethod, ValueMap body) {
-        return call(botMethod, body, true);
+    protected HttpResponse call(BotMethod method, ValueMap body) {
+        return call(method, body, true);
     }
 
-    protected HttpResponse call(String botMethod, ValueMap body, Boolean throwOnFail) {
-        HttpResponse response = new Http().send(prepareRequest(botMethod, body));
+    protected HttpResponse call(BotMethod method, ValueMap body, Boolean throwOnFail) {
+        HttpResponse response = new Http().send(prepareRequest(method, body));
         if (throwOnFail && response.getStatusCode() != 200) {
             throw new BotServiceException(
                 'A call failed for the bot "' +
                 bot.Name +
                 '" and method "' +
-                botMethod +
+                method +
                 '": ' +
                 response.getStatus(),
                 new ValueMap()
                     .set(
                         'request',
-                        new ValueMap().set('body', body.getValues()).set('botMethod', botMethod).set('botId', bot.Id)
+                        new ValueMap()
+                            .set('body', body.getValues())
+                            .set('botMethod', method.name())
+                            .set('botId', bot.Id)
                     )
                     .set(
                         'response',
@@ -70,9 +73,9 @@ global abstract class BotService {
         return response;
     }
 
-    protected virtual HttpRequest prepareRequest(String botMethod, ValueMap body) {
+    protected virtual HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = new HttpRequest();
-        request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + botMethod);
+        request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + method);
         request.setMethod('POST');
         request.setHeader('Content-Type', 'application/json');
         request.setBody(body.toJson());

@@ -14,7 +14,7 @@ private class BotTriggerTest {
 
     @IsTest
     private static void insert_withCorrectData_shouldCreateBotAndSetWebhook() {
-        Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SetWebhook.name()));
+        Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SetWebhook));
 
         Test.startTest();
         insert new Bot__c(Type__c = BOT_TYPE.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
@@ -27,7 +27,7 @@ private class BotTriggerTest {
 
     @IsTest
     private static void insert_withInvalidHandler_shouldThrowException() {
-        Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SetWebhook.name()));
+        Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SetWebhook));
 
         Exception error;
         Test.startTest();

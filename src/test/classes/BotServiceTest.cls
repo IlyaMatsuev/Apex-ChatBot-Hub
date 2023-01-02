@@ -4,7 +4,7 @@ public class BotServiceTest {
 
     @TestSetup
     private static void init() {
-        Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SetWebhook.name()));
+        Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SetWebhook));
         BotSettingsProvider.settings.put(
             BOT_TYPE,
             new BotSetting__mdt(DeveloperName = BOT_TYPE.name(), ApiUrl__c = 'https://bot-api.org/bot')
@@ -26,7 +26,7 @@ public class BotServiceTest {
         );
         insert chat;
         BotService service = new TelegramBotService(bot);
-        Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SendMessage.name()));
+        Test.setMock(HttpCalloutMock.class, new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SendMessage));
 
         Test.startTest();
         service.send(chat.ExternalId__c, 'Hello world!');
@@ -54,7 +54,7 @@ public class BotServiceTest {
         BotService service = new TelegramBotService(bot);
         Test.setMock(
             HttpCalloutMock.class,
-            new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SendMessage.name())
+            new BotWebhookCalloutMock(BOT_TYPE, TelegramBotMethod.SendMessage)
                 .overrideResponse(400, 'Server is temporary down')
         );
 
