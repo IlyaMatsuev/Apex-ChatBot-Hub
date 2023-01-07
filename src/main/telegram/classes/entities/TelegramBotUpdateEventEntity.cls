@@ -1,29 +1,22 @@
 public class TelegramBotUpdateEventEntity extends ValueMap implements IBotUpdateEventEntity {
+    private static final String ID_FIELD_NAME = 'update_id';
+
     public String getId() {
-        return getString('update_id');
+        return getString(ID_FIELD_NAME);
     }
 
-    public String getType() {
-        // TODO: Check what is provided in the payload and decide on the event type. Available events:
-        // - message
-        // - edited_message
-        // - channel_post
-        // - edited_channel_post
-        // - inline_query
-        // - chosen_inline_result
-        // - callback_query
-        // - shipping_query
-        // - pre_checkout_query
-        // - poll
-        // - poll_answer
-        // - my_chat_member
-        // - chat_member
-        // - chat_join_request
-        return 'message';
+    public BotUpdateEventType getType() {
+        // Telegram Webhook update payload contains only "update_id" and one optional object that represents event type
+        for (String key : getValues().keySet()) {
+            if (key != ID_FIELD_NAME) {
+                return BotUpdateEventType.valueOf(key);
+            }
+        }
+        throw new NoSuchElementException('There is no event type in the webhook provided');
     }
 
     public IBotMessageEntity getMessage() {
-        return (IBotMessageEntity) getValueMap(getType(), TelegramBotMessageEntity.class);
+        return (IBotMessageEntity) getValueMap(getType().name(), TelegramBotMessageEntity.class);
     }
 
     public IBotChatEntity getChat() {
