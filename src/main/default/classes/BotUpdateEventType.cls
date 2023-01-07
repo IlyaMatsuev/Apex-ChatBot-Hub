@@ -1,4 +1,4 @@
-public class BotUpdateEventType extends BotEnumType {
+public virtual class BotUpdateEventType extends BotEnumType {
     protected BotUpdateEventType(String value) {
         super(value, BotUpdateEventType.class);
     }
