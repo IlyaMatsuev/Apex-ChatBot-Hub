@@ -15,7 +15,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
         List<SObject> chatsDetails = new List<SObject>();
         List<BotContext> botContexts = new List<BotContext>();
         for (BotUpdateEvent__e event : (List<BotUpdateEvent__e>) context.props.newList) {
-            BotContext botContext = createBotContext(updateEvent);
+            BotContext botContext = createBotContext(event);
             for (SObject chatDetailEntry : getChatDetails(botContext)) {
                 if (!chatsDetails.contains(chatDetailEntry)) {
                     chatsDetails.add(chatDetailEntry);

@@ -24,7 +24,7 @@ global class BotUpdateModel {
     global class ChatModel {
         global final String id;
         global final String title;
-        global String isDM { get { return id == sender?.id; } }
+        global Boolean isDM { get { return id == sender?.id; } }
         global final UserModel sender;
 
         private ChatModel(IBotChatEntity chat) {
