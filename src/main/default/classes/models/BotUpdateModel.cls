@@ -1,9 +1,9 @@
 global class BotUpdateModel {
-    global final String eventType;
+    global final BotUpdateEventType eventType;
     global final ChatModel chat;
     global final MessageModel message;
 
-    private BotUpdateModel(String eventType, ChatModel chat, MessageModel message) {
+    private BotUpdateModel(BotUpdateEventType eventType, ChatModel chat, MessageModel message) {
         this.eventType = eventType;
         this.chat = chat;
         this.message = message;
@@ -14,9 +14,8 @@ global class BotUpdateModel {
             payload,
             Type.forName(BotSettingsProvider.get(botType).BotUpdateEventEntity__c)
         );
-        String updateType = updateEntity.getType();
         return new BotUpdateModel(
-            updateType,
+            updateEntity.getType(),
             new ChatModel(updateEntity.getChat()),
             new MessageModel(updateEntity.getMessage())
         );
