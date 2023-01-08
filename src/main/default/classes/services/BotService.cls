@@ -11,7 +11,7 @@ global abstract class BotService {
         private set;
     }
 
-    public BotSetting__mdt settings { get { return BotSettingsProvider.get(type); } }
+    protected BotSetting__mdt settings { get { return BotSettingsProvider.get(type); } }
 
     protected BotService(Bot__c bot) {
         this.bot = bot;

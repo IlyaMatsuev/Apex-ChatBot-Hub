@@ -4,7 +4,7 @@ public class ViberBotUpdateEventEntity extends ValueMap implements IBotUpdateEve
     }
 
     public BotUpdateEventType getType() {
-        return BotUpdateEventType.valueOf(getString('event'));
+        return ViberBotUpdateEventType.valueOf(getString('event'));
     }
 
     public IBotMessageEntity getMessage() {

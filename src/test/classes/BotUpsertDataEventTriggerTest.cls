@@ -1,19 +1,11 @@
 @IsTest(IsParallel = true)
 private class BotUpsertDataEventTriggerTest {
-    private static final String BOT_TYPE = BotType.Telegram.name();
-
     @TestSetup
     private static void init() {
-        Test.setMock(
-            HttpCalloutMock.class,
-            new BotWebhookCalloutMock(BotType.valueOf(BOT_TYPE), TelegramBotMethod.SetWebhook)
-        );
-        BotSettingsProvider.settings.put(
-            BotType.valueOf(BOT_TYPE),
-            new BotSetting__mdt(DeveloperName = BOT_TYPE, ApiUrl__c = 'https://bot-api.org/bot')
-        );
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        BotSettingsProvider.mock();
         insert new Bot__c(
-            Type__c = BOT_TYPE,
+            Type__c = BotType.Telegram.name(),
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
             Handler__c = 'BotHandlerMock'
         );

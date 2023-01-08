@@ -4,6 +4,10 @@ public class TelegramBotMethod extends BotMethod {
     public static final TelegramBotMethod SendMessage = new TelegramBotMethod('sendMessage');
 
     private TelegramBotMethod(String value) {
-        super(value);
+        super(value, TelegramBotMethod.class);
+    }
+
+    public static TelegramBotMethod valueOf(String value) {
+        return (TelegramBotMethod) BotEnumType.valueOf(value, TelegramBotMethod.class);
     }
 }

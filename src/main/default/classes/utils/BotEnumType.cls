@@ -1,25 +1,19 @@
 public abstract class BotEnumType implements Comparable {
-    private static transient Map<String, BotEnumType> chachedEnumValues = new Map<String, BotEnumType>();
-    private transient Type type;
-    private String value;
+    private static final transient Map<Type, Map<String, BotEnumType>> cachedEnumValues = new Map<Type, Map<String, BotEnumType>>();
+    private final transient Type type;
+    private final String value;
 
     protected BotEnumType(String value, Type type) {
         this.value = value;
         this.type = type;
-        chachedEnumValues.put(
-            value != null ? String.valueOf(type) + '.' + value.toLowerCase().replaceAll(' ', '') : null,
-            this
-        );
+        cacheEnumValue();
     }
 
     public static BotEnumType valueOf(String value, Type enumType) {
-        String lookupKey = value != null
-            ? String.valueOf(enumType) + '.' + value.toLowerCase().replaceAll(' ', '')
-            : null;
-        if (!chachedEnumValues.containsKey(lookupKey)) {
+        if (!cachedEnumValues.containsKey(enumType) || !cachedEnumValues.get(enumType).containsKey(value)) {
             throw new NoSuchElementException('No such value "' + value + '" in enum ' + String.valueOf(enumType));
         }
-        return chachedEnumValues.get(lookupKey);
+        return cachedEnumValues.get(enumType).get(value);
     }
 
     public String name() {
@@ -49,5 +43,12 @@ public abstract class BotEnumType implements Comparable {
 
     public Integer hashCode() {
         return this.value != null ? this.value.hashCode() : 0;
+    }
+
+    private void cacheEnumValue() {
+        if (!cachedEnumValues.containsKey(type)) {
+            cachedEnumValues.put(type, new Map<String, BotEnumType>());
+        }
+        cachedEnumValues.get(type).put(value, this);
     }
 }

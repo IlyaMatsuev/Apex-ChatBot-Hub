@@ -8,6 +8,7 @@ public class BotErrorLogger implements Triggers.IErrorHandler {
     }
 
     public static void log(Id botId, Exception error) {
+        System.debug(LoggingLevel.ERROR, error.getMessage() + '\n' + error.getStackTraceString());
         BotError__c botError = new BotError__c(
             Bot__c = botId,
             Message__c = error.getMessage(),

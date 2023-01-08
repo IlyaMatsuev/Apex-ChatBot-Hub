@@ -95,6 +95,10 @@ public virtual class ValueMap {
         return values.containsKey(key);
     }
 
+    public Boolean hasValue(String key) {
+        return values.get(key) != null;
+    }
+
     private Map<String, Object> escapeExtraValuesProperty(Map<String, Object> values) {
         Map<String, Object> output = new Map<String, Object>();
         for (String key : values.keySet()) {

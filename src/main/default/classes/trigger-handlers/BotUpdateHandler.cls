@@ -44,6 +44,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
         return new List<SObject> { chat, user, message };
     }
 
+    // TODO: Handle only for appropriate event types
     private void handleUpdateEvent(BotContext context) {
         try {
             getBotHandler(context.bot.Handler__c).handle(context);
@@ -83,6 +84,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
             Chat__r = new Chat__c(ExternalId__c = chatId),
             User__r = new ChatUser__c(ExternalId__c = userId),
             Text__c = message.text,
+            SendDate__c = message.sentAt,
             ExternalId__c = String.valueOf(message.id)
         );
     }

@@ -4,9 +4,9 @@ public class TelegramBotChatEntity extends ValueMap implements IBotChatEntity {
     }
 
     public String getTitle() {
-        if (has('title')) {
+        if (hasValue('title')) {
             return getString('title');
-        } else if (has('first_name') || has('last_name')) {
+        } else if (hasValue('first_name') || hasValue('last_name')) {
             String firstName = getValueOrEmptyString(getString('first_name'));
             String lastName = getValueOrEmptyString(getString('last_name'));
             return (firstName + ' ' + lastName).trim();

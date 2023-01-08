@@ -1,5 +1,4 @@
 public class BotSettingsProvider {
-    @TestVisible
     private static final Map<BotType, BotSetting__mdt> settings = new Map<BotType, BotSetting__mdt>();
 
     private BotSettingsProvider() {}
@@ -13,7 +12,7 @@ public class BotSettingsProvider {
                     BotService__c,
                     WebhookBotService__c,
                     BotUpdateResolver__c,
-                    BotUpdateEntity__c
+                    BotUpdateEventEntity__c
                 FROM BotSetting__mdt
                 WHERE DeveloperName = :type.name()
                 LIMIT 1
@@ -24,5 +23,31 @@ public class BotSettingsProvider {
             settings.put(type, settingsList.get(0));
         }
         return settings.get(type);
+    }
+
+    @TestVisible
+    private static void mock() {
+        settings.put(
+            BotType.Telegram,
+            new BotSetting__mdt(
+                DeveloperName = BotType.Telegram.name(),
+                ApiUrl__c = 'https://tg.bot-api.org/bot',
+                BotService__c = 'TelegramBotService',
+                BotUpdateEventEntity__c = 'TelegramBotUpdateEventEntity',
+                BotUpdateResolver__c = 'TelegramBotUpdateResolver',
+                WebhookBotService__c = 'TelegramWebhookBotService'
+            )
+        );
+        settings.put(
+            BotType.Viber,
+            new BotSetting__mdt(
+                DeveloperName = BotType.Viber.name(),
+                ApiUrl__c = 'https://vb.bot-api.org/bot',
+                BotService__c = 'ViberBotService',
+                BotUpdateEventEntity__c = 'ViberBotUpdateEventEntity',
+                BotUpdateResolver__c = 'ViberBotUpdateResolver',
+                WebhookBotService__c = 'ViberWebhookBotService'
+            )
+        );
     }
 }

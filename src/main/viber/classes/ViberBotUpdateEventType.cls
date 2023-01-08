@@ -5,6 +5,10 @@ public class ViberBotUpdateEventType extends BotUpdateEventType {
     public static final ViberBotUpdateEventType Message = new ViberBotUpdateEventType('message');
 
     private ViberBotUpdateEventType(String value) {
-        super(value);
+        super(value, ViberBotUpdateEventType.class);
+    }
+
+    public static ViberBotUpdateEventType valueOf(String value) {
+        return (ViberBotUpdateEventType) BotEnumType.valueOf(value, ViberBotUpdateEventType.class);
     }
 }
