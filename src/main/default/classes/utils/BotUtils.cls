@@ -33,9 +33,11 @@ public class BotUtils {
     }
 
     public static void saveAsync(List<SObject> records, String externalIdField) {
-        Eventbus.publish(
-            new BotUpsertDataEvent__e(Data__c = JSON.serialize(records), ExternalIdField__c = externalIdField)
-        );
+        if (!records.isEmpty()) {
+            Eventbus.publish(
+                new BotUpsertDataEvent__e(Data__c = JSON.serialize(records), ExternalIdField__c = externalIdField)
+            );
+        }
     }
 
     public static String generateChatId(String botTokenHash, String chatExternalId) {

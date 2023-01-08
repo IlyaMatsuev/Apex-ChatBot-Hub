@@ -1,5 +1,6 @@
 global class BotContext {
     global final Bot__c bot;
+    global final BotType type;
     global final BotUpdateModel received;
     global final Reply reply;
 
@@ -7,6 +8,7 @@ global class BotContext {
 
     public BotContext(Bot__c bot, BotUpdateModel received, BotServiceFactory factory) {
         this.bot = bot;
+        this.type = BotType.valueOf(bot.Type__c);
         this.received = received;
         this.factory = factory;
         this.reply = new Reply(received, factory.createBotService(bot));

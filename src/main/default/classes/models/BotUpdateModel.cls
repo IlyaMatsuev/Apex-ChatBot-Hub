@@ -3,22 +3,10 @@ global class BotUpdateModel {
     global final ChatModel chat;
     global final MessageModel message;
 
-    private BotUpdateModel(BotUpdateEventType eventType, ChatModel chat, MessageModel message) {
-        this.eventType = eventType;
-        this.chat = chat;
-        this.message = message;
-    }
-
-    public static BotUpdateModel fromPayload(String payload, BotType botType) {
-        IBotUpdateEventEntity updateEntity = (IBotUpdateEventEntity) ValueMap.fromJson(
-            payload,
-            Type.forName(BotSettingsProvider.get(botType).BotUpdateEventEntity__c)
-        );
-        return new BotUpdateModel(
-            updateEntity.getType(),
-            new ChatModel(updateEntity.getChat()),
-            new MessageModel(updateEntity.getMessage())
-        );
+    public BotUpdateModel(IBotUpdateEventEntity updateEntity) {
+        this.eventType = updateEntity.getType();
+        this.chat = new ChatModel(updateEntity.getChat());
+        this.message = new MessageModel(updateEntity.getMessage());
     }
 
     global class ChatModel {
