@@ -130,15 +130,24 @@ private class BotContextTest {
         System.assertEquals(expectedPayload.toJson(), JSON.serialize(context.received));
     }
 
-    private static BotContext createBotContext(BotType type, ValueMap payload) {
+    private static BotContext createBotContext(BotType botType, ValueMap payload) {
         insert new Bot__c(
-            Name = type.name(),
-            Type__c = type.name(),
+            Name = botType.name(),
+            Type__c = botType.name(),
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
             Handler__c = 'BotHandlerMock'
         );
-        Bot__c bot = [SELECT Name, Type__c, Handler__c, TokenHash__c FROM Bot__c WHERE Type__c = :type.name() LIMIT 1];
-        return new BotContext(bot, BotUpdateModel.fromPayload(payload.toJson(), type), new BotServiceFactoryMock());
+        Bot__c bot = [
+            SELECT Name, Type__c, Handler__c, TokenHash__c
+            FROM Bot__c
+            WHERE Type__c = :botType.name()
+            LIMIT 1
+        ];
+        IBotUpdateEventEntity updateEventEntity = (IBotUpdateEventEntity) ValueMap.fromJson(
+            payload.toJson(),
+            Type.forName(BotSettingsProvider.get(botType).BotUpdateEventEntity__c)
+        );
+        return new BotContext(bot, new BotUpdateModel(updateEventEntity), new BotServiceFactoryMock());
     }
 
     private static ValueMap createTelegramPayload() {
