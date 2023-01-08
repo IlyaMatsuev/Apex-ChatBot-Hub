@@ -1,3 +1,3 @@
 public interface IBotUpdateResolver {
-    Bot__c resolve(String botId, Map<String, String> headers);
+    Bot__c resolve(BotUpdateApi.UriParams params, Map<String, String> headers);
 }

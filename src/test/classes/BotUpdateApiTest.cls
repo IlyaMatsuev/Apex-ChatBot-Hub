@@ -63,7 +63,7 @@ private class BotUpdateApiTest {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
 
         Bot__c bot = prepareBot(BotType.Viber);
-        prepareRestContext('/' + BotType.Viber + '/' + bot.Id);
+        prepareRestContext('/' + BotType.Viber + '/' + bot.Id + '?token=' + bot.TokenHash__c);
 
         BotUpdateApi.post();
 
