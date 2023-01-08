@@ -55,6 +55,9 @@ public virtual class ValueMap {
 
     public DateTime getDateTime(String key) {
         Object value = get(key);
+        if (value instanceof Integer) {
+            value = Long.valueOf(String.valueOf(value) + '000');
+        }
         if (value instanceof Long) {
             DateTime dateTimeValue = DateTime.newInstance((Long) value);
             values.put(key, dateTimeValue);

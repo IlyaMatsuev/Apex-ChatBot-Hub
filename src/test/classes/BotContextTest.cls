@@ -165,7 +165,7 @@ private class BotContextTest {
                             .set('last_name', 'matsuev')
                             .set('username', 'ilyamatsuev')
                     )
-                    .set('date', DateTime.newInstance(2022, 1, 1).getTime())
+                    .set('date', 1641024000)
                     .set(
                         'chat',
                         new ValueMap()
