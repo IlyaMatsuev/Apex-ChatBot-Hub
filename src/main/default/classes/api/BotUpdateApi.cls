@@ -1,8 +1,14 @@
+/**
+ * @description API for receiving webhooks for the bot updates. This class `MUST NOT` be edited
+ */
 @RestResource(urlMapping = '/bots/*')
 global class BotUpdateApi {
     private static final String RESPONSE_OK = 'OK';
     private static final String RESPONSE_ERROR = 'ERROR';
 
+    /**
+     * @description The `POST` method to be called by the bots' APIs on a new event
+     */
     @HttpPost
     global static void post() {
         RestRequest request = RestContext.request;

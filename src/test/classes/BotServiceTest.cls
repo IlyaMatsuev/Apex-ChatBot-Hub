@@ -1,5 +1,5 @@
 @IsTest(IsParallel = true)
-public class BotServiceTest {
+private class BotServiceTest {
     @TestSetup
     private static void init() {
         BotSettingsProvider.mock();

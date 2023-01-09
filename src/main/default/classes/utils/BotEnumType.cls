@@ -1,4 +1,7 @@
-public abstract class BotEnumType implements Comparable {
+/**
+ * @description Custom enum type that provides more flexibility comparing to the native Apex enums
+ */
+global abstract class BotEnumType implements Comparable {
     private static final transient Map<Type, Map<String, BotEnumType>> cachedEnumValues = new Map<Type, Map<String, BotEnumType>>();
     private final transient Type type;
     private final String value;
@@ -16,15 +19,28 @@ public abstract class BotEnumType implements Comparable {
         return cachedEnumValues.get(enumType).get(value);
     }
 
-    public String name() {
+    /**
+     * @description Returns the string representation of the enum. Works the same way as the native Apex enums
+     * @return The string value the enum was initialized with
+     */
+    global String name() {
         return value;
     }
 
-    public override String toString() {
+    /**
+     * @description Returns the string representation of the enum. Works the same way as the native Apex enums
+     * @return The String value the enum was initialized with
+     */
+    global override String toString() {
         return value;
     }
 
-    public virtual Boolean equals(Object other) {
+    /**
+     * @description Checks if the passed object equals to the enum value
+     * @param other Any object this enum instance is compared with
+     * @return `true` if the passed object equals to the current instance by a reference or a String value
+     */
+    global virtual Boolean equals(Object other) {
         if (this === other) {
             return true;
         }
@@ -37,11 +53,20 @@ public abstract class BotEnumType implements Comparable {
         return this.value == other || this.value == String.valueOf(other);
     }
 
-    public Integer compareTo(Object compareTo) {
+    /**
+     * @description Compares the passed object with the current instance as strings
+     * @param compareTo Any object this enum instance is compared with
+     * @return The same result as the native `String.compareTo()` method, checking enum string values
+     */
+    global Integer compareTo(Object compareTo) {
         return String.valueOf(this.value).compareTo(String.valueOf(compareTo));
     }
 
-    public Integer hashCode() {
+    /**
+     * @description Generates a hashcode based on the string value this enum is initialized with
+     * @return The enum's string value hashcode or `0` if the value is `null`
+     */
+    global Integer hashCode() {
         return this.value != null ? this.value.hashCode() : 0;
     }
 
