@@ -1,3 +1,6 @@
+/**
+ * @description TODO
+ */
 global class BotContext {
     global final Bot__c bot;
     global final BotType type;

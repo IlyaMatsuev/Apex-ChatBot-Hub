@@ -1,3 +1,6 @@
+/**
+ * @description TODO
+ */
 global abstract class BotService {
     protected final Bot__c bot;
 

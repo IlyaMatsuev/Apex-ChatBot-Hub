@@ -1,3 +1,6 @@
+/**
+ * @description TODO
+ */
 global class BotUpdateModel {
     global final BotUpdateEventType eventType;
     global final ChatModel chat;
