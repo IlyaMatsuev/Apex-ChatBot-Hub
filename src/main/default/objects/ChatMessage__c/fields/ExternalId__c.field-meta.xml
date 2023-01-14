@@ -5,7 +5,7 @@
     <description>Message id that is shared by a messenger</description>
     <externalId>true</externalId>
     <label>External Id</label>
-    <length>20</length>
+    <length>40</length>
     <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>

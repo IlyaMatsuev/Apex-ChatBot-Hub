@@ -1,16 +1,29 @@
+/**
+ * @description The base class that contains features common for all bots
+ */
 global abstract class BotService {
     protected final Bot__c bot;
-    protected final BotSetting__mdt settings;
+
+    protected BotType type {
+        get {
+            if (type == null) {
+                type = BotType.valueOf(bot.Type__c);
+            }
+            return type;
+        }
+        private set;
+    }
+
+    protected BotSetting__mdt settings { get { return BotSettingsProvider.get(type); } }
 
     protected BotService(Bot__c bot) {
         this.bot = bot;
-        this.settings = BotSettingsProvider.getSettings(BotType.valueOf(bot.Type__c));
     }
 
     /**
-     * Send message to the chat
-     * @param chatId External id of the chat. Can be either source chat messenger id or the formed one that is stored in Chat__c.ExternalId__c
-     * @param message Message to send
+     * Send a text message to the chat
+     * @param chatId External id of the chat. Can be either source chat messenger id or the formed one that is stored in `Chat__c.ExternalId__c`
+     * @param message The text message to send
      */
     global void send(String chatId, String message) {
         String messageId = sendMessage(chatId.substringBefore(':'), message);
@@ -30,24 +43,28 @@ global abstract class BotService {
         );
     }
 
-    protected HttpResponse call(String botMethod, ValueMap body) {
-        return call(botMethod, body, true);
+    protected HttpResponse call(BotMethod method, ValueMap body) {
+        return call(method, body, true);
     }
 
-    protected HttpResponse call(String botMethod, ValueMap body, Boolean throwOnFail) {
-        HttpResponse response = new Http().send(prepareRequest(botMethod, body));
+    protected HttpResponse call(BotMethod method, ValueMap body, Boolean throwOnFail) {
+        HttpResponse response = new Http().send(prepareRequest(method, body));
+        // TODO: This doesn't work for Viber - they always send 200 respones
         if (throwOnFail && response.getStatusCode() != 200) {
             throw new BotServiceException(
                 'A call failed for the bot "' +
                 bot.Name +
                 '" and method "' +
-                botMethod +
+                method +
                 '": ' +
                 response.getStatus(),
                 new ValueMap()
                     .set(
                         'request',
-                        new ValueMap().set('body', body.getValues()).set('botMethod', botMethod).set('botId', bot.Id)
+                        new ValueMap()
+                            .set('body', body.getValues())
+                            .set('botMethod', method.name())
+                            .set('botId', bot.Id)
                     )
                     .set(
                         'response',
@@ -60,21 +77,18 @@ global abstract class BotService {
         return response;
     }
 
-    protected virtual HttpRequest prepareRequest(String botMethod, ValueMap body) {
+    protected virtual HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = new HttpRequest();
-        request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + botMethod);
+        request.setEndpoint(settings.ApiUrl__c + '/' + method);
         request.setMethod('POST');
         request.setHeader('Content-Type', 'application/json');
         request.setBody(body.toJson());
         return request;
     }
 
-    public class BotServiceException extends Exception {
-        public final ValueMap payload;
-
+    public class BotServiceException extends BotCustomException {
         public BotServiceException(String message, ValueMap payload) {
-            this(message);
-            this.payload = payload;
+            super(message, payload);
         }
     }
 }

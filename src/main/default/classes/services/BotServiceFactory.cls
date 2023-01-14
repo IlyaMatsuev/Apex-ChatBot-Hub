@@ -1,17 +1,23 @@
+/**
+ * @description Factory for creating bot services
+ */
 global virtual class BotServiceFactory {
+    /**
+     * @description Creates an instance of the `BotService` for the passed `Bot__c` record. For example a bot with the type `Telegram` should be related to `TelegramBotService`
+     * @param bot The `Bot__c` record to create service instance for
+     * @return The instance of `BotService`
+     */
     global virtual BotService createBotService(Bot__c bot) {
         BotType type = BotType.valueOf(bot.Type__c);
-        if (type == BotType.Telegram) {
-            return new TelegramBotService(bot);
-        }
-        throw new IllegalArgumentException('No service instance for the provided type: ' + type);
+        return (BotService) createService(BotSettingsProvider.get(type).BotService__c, bot);
     }
 
     public virtual WebhookBotService createWebhookService(Bot__c bot) {
         BotType type = BotType.valueOf(bot.Type__c);
-        if (type == BotType.Telegram) {
-            return new TelegramWebhookBotService(bot);
-        }
-        throw new IllegalArgumentException('No webhook service instance for the provided type: ' + type);
+        return (WebhookBotService) createService(BotSettingsProvider.get(type).WebhookBotService__c, bot);
+    }
+
+    private Object createService(String typeName, Bot__c bot) {
+        return BotUtils.createInstance(typeName, new Map<String, Object> { 'bot' => bot });
     }
 }

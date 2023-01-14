@@ -55,6 +55,9 @@ public virtual class ValueMap {
 
     public DateTime getDateTime(String key) {
         Object value = get(key);
+        if (value instanceof Integer) {
+            value = Long.valueOf(String.valueOf(value) + '000');
+        }
         if (value instanceof Long) {
             DateTime dateTimeValue = DateTime.newInstance((Long) value);
             values.put(key, dateTimeValue);
@@ -93,6 +96,10 @@ public virtual class ValueMap {
 
     public Boolean has(String key) {
         return values.containsKey(key);
+    }
+
+    public Boolean hasValue(String key) {
+        return values.get(key) != null;
     }
 
     private Map<String, Object> escapeExtraValuesProperty(Map<String, Object> values) {

@@ -8,14 +8,15 @@ public class BotErrorLogger implements Triggers.IErrorHandler {
     }
 
     public static void log(Id botId, Exception error) {
+        System.debug(LoggingLevel.ERROR, error.getMessage() + '\n' + error.getStackTraceString());
         BotError__c botError = new BotError__c(
             Bot__c = botId,
             Message__c = error.getMessage(),
             ExceptionType__c = error.getTypeName(),
             StackTrace__c = error.getStackTraceString()
         );
-        if (error instanceof BotService.BotServiceException) {
-            botError.Payload__c = ((BotService.BotServiceException) error).payload.toJson(true);
+        if (error instanceof BotCustomException) {
+            botError.Payload__c = ((BotCustomException) error).payload.toJson(true);
         }
         BotUtils.saveAsync(new List<SObject> { botError }, null);
     }

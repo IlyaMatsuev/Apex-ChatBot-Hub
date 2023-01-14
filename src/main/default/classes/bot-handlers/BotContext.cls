@@ -1,12 +1,29 @@
+/**
+ * @description Represents the context with all necessary variables and entities for properly handling the incoming updates for bot webhooks
+ */
 global class BotContext {
+    /**
+     * @description The `Bot__c` record associated with the current webhook update
+     */
     global final Bot__c bot;
+    /**
+     * @description The type of the bot associated with the incoming update
+     */
+    global final BotType type;
+    /**
+     * @description The model instance containing all incoming related to the incoming update (new message, edited message, etc.)
+     */
     global final BotUpdateModel received;
+    /**
+     * @description The object with the most common methods for quick reply to the incoming updates
+     */
     global final Reply reply;
 
     private final BotServiceFactory factory;
 
     public BotContext(Bot__c bot, BotUpdateModel received, BotServiceFactory factory) {
         this.bot = bot;
+        this.type = BotType.valueOf(bot.Type__c);
         this.received = received;
         this.factory = factory;
         this.reply = new Reply(received, factory.createBotService(bot));
@@ -46,6 +63,9 @@ global class BotContext {
         BotUtils.saveAsync(records, externalIdField);
     }
 
+    /**
+     * @description The inner class with the most common methods for quick reply to the incoming updates
+     */
     global class Reply {
         private final BotService service;
         private final BotUpdateModel received;
@@ -55,6 +75,10 @@ global class BotContext {
             this.service = service;
         }
 
+        /**
+         * @description Sends a text message as a response to the incoming update
+         * @param message The text message to be sent to the user who sent the update
+         */
         global void send(String message) {
             service.send(String.valueOf(received.chat.id), message);
         }
