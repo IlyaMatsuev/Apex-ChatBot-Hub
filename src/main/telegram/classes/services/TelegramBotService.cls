@@ -1,4 +1,7 @@
-public class TelegramBotService extends BotService {
+/**
+ * @description The concrete service for the `Telegram` messanger bots. Extends `BotService` but also contains features related to `Telegram` only
+ */
+global class TelegramBotService extends BotService {
     public TelegramBotService(Bot__c bot) {
         super(bot);
     }

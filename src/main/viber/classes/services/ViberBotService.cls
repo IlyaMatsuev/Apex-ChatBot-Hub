@@ -1,4 +1,7 @@
-public class ViberBotService extends BotService {
+/**
+ * @description The concrete service for the `Viber` messanger bots. Extends `BotService` but also contains features related to `Viber` only
+ */
+global class ViberBotService extends BotService {
     public ViberBotService(Bot__c bot) {
         super(bot);
     }

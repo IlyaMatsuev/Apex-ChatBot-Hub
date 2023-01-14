@@ -1,5 +1,5 @@
 /**
- * @description TODO
+ * @description The abstract class that contains features common for all bots
  */
 global abstract class BotService {
     protected final Bot__c bot;
@@ -21,9 +21,9 @@ global abstract class BotService {
     }
 
     /**
-     * Send message to the chat
-     * @param chatId External id of the chat. Can be either source chat messenger id or the formed one that is stored in Chat__c.ExternalId__c
-     * @param message Message to send
+     * Send a text message to the chat
+     * @param chatId External id of the chat. Can be either source chat messenger id or the formed one that is stored in `Chat__c.ExternalId__c`
+     * @param message The text message to send
      */
     global void send(String chatId, String message) {
         String messageId = sendMessage(chatId.substringBefore(':'), message);
