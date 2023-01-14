@@ -1,5 +1,6 @@
 public class BotUtils {
     private static final String BOT_PUBLIC_SITE_NAME = 'BotPublic';
+    private static final Integer CHAT_EXTERNAL_ID_LENGTH = 40;
 
     private static Site botSite {
         get {
@@ -33,15 +34,25 @@ public class BotUtils {
     }
 
     public static void saveAsync(List<SObject> records, String externalIdField) {
-        Eventbus.publish(
-            new BotUpsertDataEvent__e(Data__c = JSON.serialize(records), ExternalIdField__c = externalIdField)
-        );
+        if (!records.isEmpty()) {
+            Eventbus.publish(
+                new BotUpsertDataEvent__e(Data__c = JSON.serialize(records), ExternalIdField__c = externalIdField)
+            );
+        }
     }
 
     public static String generateChatId(String botTokenHash, String chatExternalId) {
         if (chatExternalId.contains(':')) {
             return chatExternalId;
         }
-        return chatExternalId + ':' + botTokenHash.substring(0, 20);
+        return (chatExternalId + ':').rightPad(CHAT_EXTERNAL_ID_LENGTH, botTokenHash);
+    }
+
+    public static Object createInstance(String typeName) {
+        return createInstance(typeName, new Map<String, Object>());
+    }
+
+    public static Object createInstance(String typeName, Map<String, Object> params) {
+        return JSON.deserialize(JSON.serialize(params), Type.forName(typeName));
     }
 }

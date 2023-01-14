@@ -10,7 +10,7 @@ All classes available for use can be found [here](types). There is also a short 
 
 ## Custom Metadata Types
 
-_There is no need to configure anything for this package to work_. However, there is one custom metadata type that can be updated.
+_There is no need to configure anything for this package to work_. However, there is one custom metadata type that can be updated (**do that only if you know what you're doing**).
 
 ### BotSetting\_\_mdt
 
@@ -18,3 +18,8 @@ Contains settings specific for each messenger.
 
 -   `DeveloperName` - Bot type, e.g. `Telegram` or `Viber`
 -   `ApiUrl__c` - Bot API endpoint. For example, for `Telegram` it is https://api.telegram.org/bot
+-   `BotService__c` - The bot service implementation for particular messanger.
+-   `WebhookBotService__c` - The bot service implementation for particular messanger that handles webhooks set and unset.
+-   `BotUpdateResolver__c` - The implementation for particular messanger to resolve the `Bot__c` record on the new webhook update.
+-   `BotUpdateEventEntity__c` - The entity class which implements a single interface which allows to receive data from webhook updates in the same format for every messanger.
+-   `EventTypesToIgnore__c` - Webhook event types to be ignored by the webhook handler for a particular messanger.

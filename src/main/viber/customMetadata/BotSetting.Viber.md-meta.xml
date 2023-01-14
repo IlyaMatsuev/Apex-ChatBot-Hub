@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Viber</label>
+    <protected>false</protected>
+    <values>
+        <field>ApiUrl__c</field>
+        <value xsi:type="xsd:string">https://chatapi.viber.com/pa/</value>
+    </values>
+    <values>
+        <field>BotService__c</field>
+        <value xsi:type="xsd:string">ViberBotService</value>
+    </values>
+    <values>
+        <field>BotUpdateEventEntity__c</field>
+        <value xsi:type="xsd:string">ViberBotUpdateEventEntity</value>
+    </values>
+    <values>
+        <field>BotUpdateResolver__c</field>
+        <value xsi:type="xsd:string">ViberBotUpdateResolver</value>
+    </values>
+    <values>
+        <field>EventTypesToIgnore__c</field>
+        <value xsi:type="xsd:string">webhook;delivered;seen;failed;subscribed;unsubscribed;conversation_started</value>
+    </values>
+    <values>
+        <field>WebhookBotService__c</field>
+        <value xsi:type="xsd:string">ViberWebhookBotService</value>
+    </values>
+</CustomMetadata>
