@@ -1,5 +1,4 @@
-// TODO: Remove IBotEntity extension since it's useless
-public interface IBotUpdateEventEntity extends IBotEntity {
+public interface IBotUpdateEventEntity {
     BotUpdateEventType getType();
     IBotMessageEntity getMessage();
     IBotChatEntity getChat();

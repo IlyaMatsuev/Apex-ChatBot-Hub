@@ -1,10 +1,6 @@
 public class TelegramBotUpdateEventEntity extends ValueMap implements IBotUpdateEventEntity {
     private static final String ID_FIELD_NAME = 'update_id';
 
-    public String getId() {
-        return getString(ID_FIELD_NAME);
-    }
-
     public BotUpdateEventType getType() {
         // Telegram Webhook update payload contains only "update_id" and one optional object that represents event type
         for (String key : getValues().keySet()) {

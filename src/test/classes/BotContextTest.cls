@@ -69,7 +69,7 @@ private class BotContextTest {
                         new ValueMap().set('name', 'start').set('params', new List<String> { 'hello', 'world!' })
                     )
                     .set('id', '223123123')
-                    .set('sentAt', DateTime.newInstance(2022, 1, 1))
+                    .set('sentAt', DateTime.newInstanceGmt(2022, 1, 1, 8, 0, 0))
                     .set('text', '/start hello   world!')
             );
 
