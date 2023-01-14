@@ -1,5 +1,5 @@
 /**
- * @description The abstract class that contains features common for all bots
+ * @description The base class that contains features common for all bots
  */
 global abstract class BotService {
     protected final Bot__c bot;
