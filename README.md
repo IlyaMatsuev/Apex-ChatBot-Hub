@@ -1,7 +1,7 @@
 # Apex Bot Lib
 
-[![Scratch org CI](https://github.com/IlyaMatsuev/Apex-Bot-Lib/actions/workflows/scratch-org-ci.yml/badge.svg)](https://github.com/IlyaMatsuev/Apex-Bot-Lib/actions/workflows/scratch-org-ci.yml)
-[![codecov](https://codecov.io/gh/IlyaMatsuev/Apex-Bot-Lib/branch/main/graph/badge.svg?token=BFDV73QRJW)](https://codecov.io/gh/IlyaMatsuev/Apex-Bot-Lib)
+[![Scratch org CI](https://github.com/IlyaMatsuev/Apex-ChatBot-Hub/actions/workflows/scratch-org-ci.yml/badge.svg)](https://github.com/IlyaMatsuev/Apex-ChatBot-Hub/actions/workflows/scratch-org-ci.yml)
+[![codecov](https://codecov.io/gh/IlyaMatsuev/Apex-ChatBot-Hub/branch/main/graph/badge.svg?token=BFDV73QRJW)](https://codecov.io/gh/IlyaMatsuev/Apex-ChatBot-Hub)
 
 The Salesforce Apex package for quick configuration and managing chatbots (Telegram, Viber, etc.) and their data. You can configure a Salesforce organization as a server for your chatbot and add your Apex implementation to reply to users. This package also stores chats' information (users, messages) that interact with your bot.
 
@@ -36,7 +36,7 @@ public class TestTelegramMessageHandler implements IBotHandler {
 }
 ```
 
-Next, you can go to the `Bots` application (which should be installed with the package) and click the `Bots` tab. There you can click `New` and fill in all required details:
+Next, you can go to the `Bot Hub` application (which should be installed with the package) and click the `Bots` tab. There you can click `New` and fill in all required details:
 
 -   Name: Any name you want for your bot to be displayed in Salesforce
 -   Type: Bot messenger type (e.g. `Telegram` or `Viber`).
