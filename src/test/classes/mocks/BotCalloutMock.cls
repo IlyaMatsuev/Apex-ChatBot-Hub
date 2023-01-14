@@ -72,9 +72,7 @@ public class BotCalloutMock implements HttpCalloutMock {
                 if (webhookUrl == '') {
                     return new ValueMap().set('status', 0).set('status_message', 'ok').toJson();
                 }
-                System.assertEquals(BotUtils.getApiUrl() + type, webhookUrl.substringBeforeLast('/'));
-                System.assert(webhookUrl.substringAfter('?').startsWith('token='));
-                System.assert(webhookUrl.substringAfterLast('/').substringBefore('?') instanceof Id);
+                System.assert(Pattern.matches('Viber/\\w{15,18}/\\w+', webhookUrl.substringAfter('bots/')));
                 System.assert(request.has('event_types'));
                 System.assert(request.getBoolean('send_name'));
                 System.assert(request.getBoolean('send_photo'));

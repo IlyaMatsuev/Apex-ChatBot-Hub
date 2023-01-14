@@ -31,7 +31,7 @@ private class BotUpdateEventTriggerTest {
         System.assertEquals(1, chats.size());
         System.assertEquals('matsuev', chats.get(0).Name);
         System.assertEquals(bot.Id, chats.get(0).Bot__c);
-        System.assertEquals('876541222:' + bot.TokenHash__c.substring(0, 20), chats.get(0).ExternalId__c);
+        System.assertEquals('876541222:'.rightPad(40, bot.TokenHash__c), chats.get(0).ExternalId__c);
         // User
         System.assertEquals(1, users.size());
         System.assertEquals('matsuev', users.get(0).Name);
@@ -105,7 +105,7 @@ private class BotUpdateEventTriggerTest {
         System.assertEquals(1, chats.size());
         System.assertEquals('John McClane', chats.get(0).Name);
         System.assertEquals(bot.Id, chats.get(0).Bot__c);
-        System.assertEquals('01234567890A=:' + bot.TokenHash__c.substring(0, 20), chats.get(0).ExternalId__c);
+        System.assertEquals('01234567890A=:'.rightPad(40, bot.TokenHash__c), chats.get(0).ExternalId__c);
         // User
         System.assertEquals(1, users.size());
         System.assertEquals('John McClane', users.get(0).Name);

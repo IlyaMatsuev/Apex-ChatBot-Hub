@@ -63,7 +63,7 @@ private class BotUpdateApiTest {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
 
         Bot__c bot = prepareBot(BotType.Viber);
-        prepareRestContext('/' + BotType.Viber + '/' + bot.Id + '?token=' + bot.TokenHash__c);
+        prepareRestContext('/' + BotType.Viber + '/' + bot.Id + '/' + bot.TokenHash__c);
 
         BotUpdateApi.post();
 
@@ -99,7 +99,7 @@ private class BotUpdateApiTest {
     private static void prepareRestContext(String url) {
         RestRequest request = new RestRequest();
         request.httpMethod = 'POST';
-        request.requestURI = 'services/apexrest/bots' + url;
+        request.requestURI = '/bots' + url;
         // We expect to receive the correct body from Messengers APIs therefore don't care about the content here
         request.requestBody = Blob.valueOf('{}');
         request.addHeader('Content-Type', 'application/json');
