@@ -1,30 +1,22 @@
 @IsTest(IsParallel = true)
 private class BotUpdateEventTriggerTest {
-    private static final String BOT_TYPE = BotType.Telegram.name();
-
     @TestSetup
     private static void init() {
-        Test.setMock(
-            HttpCalloutMock.class,
-            new BotWebhookCalloutMock(BotType.valueOf(BOT_TYPE), TelegramBotMethod.SetWebhook.name())
-        );
-        BotSettingsProvider.settings.put(
-            BotType.valueOf(BOT_TYPE),
-            new BotSetting__mdt(DeveloperName = BOT_TYPE, ApiUrl__c = 'https://bot-api.org/bot')
-        );
-        insert new Bot__c(
-            Type__c = BOT_TYPE,
-            Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
-            Handler__c = 'BotHandlerMock'
-        );
+        BotSettingsProvider.mock();
     }
+
+    /**
+     * Telegram tests
+     */
 
     @IsTest
     private static void handle_telegramBotMessage_shouldHandleMessageAndInsertChatDetails() {
-        Bot__c bot = [SELECT Type__c, Handler__c, TokenHash__c FROM Bot__c LIMIT 1];
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+
+        Bot__c bot = createBot(BotType.Telegram);
         Test.startTest();
         Eventbus.publish(
-            new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = JSON.serialize(prepareTelegramPayload()))
+            new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = createTelegramPayload().toJson())
         );
         Test.getEventBus().deliver();
         Test.stopTest();
@@ -39,13 +31,13 @@ private class BotUpdateEventTriggerTest {
         System.assertEquals(1, chats.size());
         System.assertEquals('matsuev', chats.get(0).Name);
         System.assertEquals(bot.Id, chats.get(0).Bot__c);
-        System.assertEquals('876541222:' + bot.TokenHash__c.substring(0, 20), chats.get(0).ExternalId__c);
+        System.assertEquals('876541222:'.rightPad(40, bot.TokenHash__c), chats.get(0).ExternalId__c);
         // User
         System.assertEquals(1, users.size());
         System.assertEquals('matsuev', users.get(0).Name);
         System.assertEquals(null, users.get(0).FirstName__c);
         System.assertEquals('matsuev', users.get(0).LastName__c);
-        System.assertEquals('ilya.matsuev', users.get(0).Username__c);
+        System.assertEquals('ilyamatsuev', users.get(0).Username__c);
         System.assertEquals('876541222', users.get(0).ExternalId__c);
         // Message
         System.assertEquals(1, messages.size());
@@ -54,30 +46,29 @@ private class BotUpdateEventTriggerTest {
         System.assertEquals(chats.get(0).Id, messages.get(0).Chat__c);
         System.assertEquals(null, messages.get(0).Bot__c);
         System.assertEquals('223123123', messages.get(0).ExternalId__c);
-        System.assertEquals(Date.today(), messages.get(0).SendDate__c.date());
+        System.assertEquals(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
 
         List<BotContext> contexts = BotHandlerMock.executedContexts;
         System.assertEquals(1, contexts.size());
     }
 
     @IsTest
-    private static void handle_updateWithUnexpectedException_shouldThrowExceptionAndLogError() {
-        Bot__c bot = [SELECT Type__c, Handler__c, TokenHash__c FROM Bot__c LIMIT 1];
+    private static void handle_telegramUpdateWithUnexpectedException_shouldThrowExceptionAndLogError() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+
+        Bot__c bot = createBot(BotType.Telegram);
         BotHandlerMock.throwError = true;
         Test.startTest();
         Eventbus.publish(
-            new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = JSON.serialize(prepareTelegramPayload()))
+            new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = createTelegramPayload().toJson())
         );
         Test.getEventBus().deliver();
         Test.stopTest();
 
         List<BotError__c> errors = [SELECT Id FROM BotError__c];
-        List<Chat__c> chats = [SELECT Name, Bot__c, ExternalId__c FROM Chat__c];
-        List<ChatUser__c> users = [SELECT Name, FirstName__c, LastName__c, Username__c, ExternalId__c FROM ChatUser__c];
-        List<ChatMessage__c> messages = [
-            SELECT Name, Text__c, User__c, Bot__c, Chat__c, ExternalId__c, SendDate__c
-            FROM ChatMessage__c
-        ];
+        List<Chat__c> chats = [SELECT Id FROM Chat__c];
+        List<ChatUser__c> users = [SELECT Id FROM ChatUser__c];
+        List<ChatMessage__c> messages = [SELECT Id FROM ChatMessage__c];
 
         System.assertEquals(1, errors.size());
         System.assertEquals(1, chats.size());
@@ -85,30 +76,178 @@ private class BotUpdateEventTriggerTest {
         System.assertEquals(1, messages.size());
     }
 
-    private static Map<String, Object> prepareTelegramPayload() {
-        return new Map<String, Object> {
-            'update_id' => 12312311L,
-            'message' => new Map<String, Object> {
-                'message_id' => 223123123L,
-                'from' => new Map<String, Object> {
-                    'id' => 876541222L,
-                    'is_bot' => false,
-                    'first_name' => null,
-                    'last_name' => 'matsuev',
-                    'username' => 'ilya.matsuev'
-                },
-                'date' => DateTime.now().getTime(),
-                'chat' => new Map<String, Object> {
-                    'id' => 876541222L,
-                    'type' => 'private',
-                    'title' => null,
-                    'first_name' => null,
-                    'last_name' => 'matsuev',
-                    'username' => 'ilya.matsuev',
-                    'description' => null
-                },
-                'text' => 'Hello world!'
-            }
-        };
+    /**
+     * Viber tests
+     */
+
+    @IsTest
+    private static void handle_viberBotMessage_shouldHandleMessageAndInsertChatDetails() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+
+        Bot__c bot = createBot(BotType.Viber);
+        Test.startTest();
+        Eventbus.publish(
+            new BotUpdateEvent__e(
+                Bot__c = JSON.serialize(bot),
+                Payload__c = createViberPayload(ViberBotUpdateEventType.Message).toJson()
+            )
+        );
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<Chat__c> chats = [SELECT Name, Bot__c, ExternalId__c FROM Chat__c];
+        List<ChatUser__c> users = [SELECT Name, FirstName__c, LastName__c, Username__c, ExternalId__c FROM ChatUser__c];
+        List<ChatMessage__c> messages = [
+            SELECT Name, Text__c, User__c, Bot__c, Chat__c, ExternalId__c, SendDate__c
+            FROM ChatMessage__c
+        ];
+        // Chat
+        System.assertEquals(1, chats.size());
+        System.assertEquals('John McClane', chats.get(0).Name);
+        System.assertEquals(bot.Id, chats.get(0).Bot__c);
+        System.assertEquals('01234567890A=:'.rightPad(40, bot.TokenHash__c), chats.get(0).ExternalId__c);
+        // User
+        System.assertEquals(1, users.size());
+        System.assertEquals('John McClane', users.get(0).Name);
+        System.assertEquals('John', users.get(0).FirstName__c);
+        System.assertEquals('McClane', users.get(0).LastName__c);
+        System.assertEquals('01234567890A=', users.get(0).Username__c);
+        System.assertEquals('01234567890A=', users.get(0).ExternalId__c);
+        // Message
+        System.assertEquals(1, messages.size());
+        System.assertEquals('Hello world!', messages.get(0).Text__c);
+        System.assertEquals(users.get(0).Id, messages.get(0).User__c);
+        System.assertEquals(chats.get(0).Id, messages.get(0).Chat__c);
+        System.assertEquals(null, messages.get(0).Bot__c);
+        System.assertEquals('4912661846655238145', messages.get(0).ExternalId__c);
+        System.assertEquals(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
+
+        List<BotContext> contexts = BotHandlerMock.executedContexts;
+        System.assertEquals(1, contexts.size());
+    }
+
+    @IsTest
+    private static void handle_viberUpdateWithUnexpectedException_shouldThrowExceptionAndLogError() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+
+        Bot__c bot = createBot(BotType.Viber);
+        BotHandlerMock.throwError = true;
+        Test.startTest();
+        Eventbus.publish(
+            new BotUpdateEvent__e(
+                Bot__c = JSON.serialize(bot),
+                Payload__c = createViberPayload(ViberBotUpdateEventType.Message).toJson()
+            )
+        );
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<BotError__c> errors = [SELECT Id FROM BotError__c];
+        List<Chat__c> chats = [SELECT Id FROM Chat__c];
+        List<ChatUser__c> users = [SELECT Id FROM ChatUser__c];
+        List<ChatMessage__c> messages = [SELECT Id FROM ChatMessage__c];
+
+        System.assertEquals(1, errors.size());
+        System.assertEquals(1, chats.size());
+        System.assertEquals(1, users.size());
+        System.assertEquals(1, messages.size());
+    }
+
+    @IsTest
+    private static void handle_viberWebhookUrlCallback_shouldIgnore() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+
+        Bot__c bot = createBot(BotType.Viber);
+        Test.startTest();
+        Eventbus.publish(
+            new BotUpdateEvent__e(
+                Bot__c = JSON.serialize(bot),
+                Payload__c = createViberPayload(ViberBotUpdateEventType.WebhookCallback).toJson()
+            )
+        );
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<BotError__c> errors = [SELECT Id FROM BotError__c];
+        List<Chat__c> chats = [SELECT Id FROM Chat__c];
+        List<ChatUser__c> users = [SELECT Id FROM ChatUser__c];
+        List<ChatMessage__c> messages = [SELECT Id FROM ChatMessage__c];
+
+        System.assert(errors.isEmpty());
+        System.assert(chats.isEmpty());
+        System.assert(users.isEmpty());
+        System.assert(messages.isEmpty());
+        System.assert(BotHandlerMock.executedContexts.isEmpty());
+    }
+
+    private static Bot__c createBot(BotType type) {
+        insert new Bot__c(
+            Name = type.name(),
+            Type__c = type.name(),
+            Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
+            Handler__c = 'BotHandlerMock'
+        );
+        return [SELECT Name, Type__c, Handler__c, TokenHash__c FROM Bot__c WHERE Type__c = :type.name() LIMIT 1];
+    }
+
+    private static ValueMap createTelegramPayload() {
+        return new ValueMap()
+            .set('update_id', 12312311L)
+            .set(
+                'message',
+                new ValueMap()
+                    .set('message_id', 223123123L)
+                    .set(
+                        'from',
+                        new ValueMap()
+                            .set('id', 876541222L)
+                            .set('first_name', null)
+                            .set('last_name', 'matsuev')
+                            .set('username', 'ilyamatsuev')
+                    )
+                    .set('date', DateTime.newInstance(2022, 1, 1).getTime())
+                    .set(
+                        'chat',
+                        new ValueMap()
+                            .set('id', 876541222L)
+                            .set('type', 'private')
+                            .set('title', null)
+                            .set('first_name', null)
+                            .set('last_name', 'matsuev')
+                            .set('username', 'ilyamatsuev')
+                            .set('description', null)
+                    )
+                    .set('text', 'Hello world!')
+            );
+    }
+
+    private static ValueMap createViberPayload(ViberBotUpdateEventType eventType) {
+        ValueMap payload = new ValueMap()
+            .set('event', eventType.name())
+            .set('timestamp', DateTime.newInstance(2022, 1, 1).getTime())
+            .set('message_token', 4912661846655238145L);
+
+        if (eventType == ViberBotUpdateEventType.Message) {
+            payload
+                .set(
+                    'sender',
+                    new ValueMap()
+                        .set('id', '01234567890A=')
+                        .set('name', 'John McClane')
+                        .set('avatar', 'http://avatar.example.com')
+                        .set('country', 'UK')
+                        .set('language', 'en')
+                        .set('api_version', 1)
+                )
+                .set(
+                    'message',
+                    new ValueMap()
+                        .set('type', 'text')
+                        .set('text', 'Hello world!')
+                        .set('media', 'https://example.com')
+                        .set('location', new ValueMap().set('lat', 50.76891).set('lon', 6.11499))
+                );
+        }
+        return payload;
     }
 }

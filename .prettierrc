@@ -18,12 +18,12 @@
         {
             "files": "*.xml",
             "options": {
-                "printWidth": 220,
+                "printWidth": 240,
                 "bracketSameLine": true
             }
         },
         {
-            "files": "*.yml",
+            "files": ["*.yml", "*.yaml"],
             "options": {
                 "tabWidth": 2
             }

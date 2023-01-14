@@ -10,7 +10,7 @@ public class BotErrorHandler implements Triggers.IErrorHandler {
             }
         }
         if (!botsToDelete.isEmpty()) {
-            Database.delete(botsToDelete);
+            Database.delete(botsToDelete, false);
         }
         BotErrorLogger.log(error);
     }

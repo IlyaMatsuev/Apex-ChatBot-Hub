@@ -39,7 +39,7 @@ info "Deploying to ${org_alias}..."
 # SObjects, App, Apex and permissions
 sfdx force:source:deploy -u "$org_alias" -p "./src/main/default/objects,./src/main/default/layouts,\
     ./src/main/default/flexipages,./src/main/default/tabs,./src/main/default/applications,./src/main/default/classes,\
-    ./src/main/default/triggers,./src/main/default/permissionsets,./src/main/telegram,./src/test" \
+    ./src/main/default/triggers,./src/main/default/permissionsets,./src/main/telegram,./src/main/viber,./src/test" \
     || { exit 1; }
 # Public site
 sfdx force:source:deploy -u "$org_alias" -p ./src/main/default/pages,./src/main/default/sites || { exit 1; }

@@ -10,5 +10,9 @@
             <fullName>Telegram</fullName>
             <default>false</default>
         </values>
+        <values>
+            <fullName>Viber</fullName>
+            <default>false</default>
+        </values>
     </picklistValues>
 </RecordType>

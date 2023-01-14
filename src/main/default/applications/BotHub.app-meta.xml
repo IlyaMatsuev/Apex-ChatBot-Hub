@@ -86,12 +86,12 @@
         <headerColor>#0070D2</headerColor>
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
     </brand>
-    <description>Contains Bot-Lib-related components</description>
+    <description>Contains ChatBot-Hub-related components</description>
     <formFactors>Small</formFactors>
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
-    <label>Bots</label>
+    <label>Bot Hub</label>
     <navType>Standard</navType>
     <tabs>Bot__c</tabs>
     <tabs>Chat__c</tabs>

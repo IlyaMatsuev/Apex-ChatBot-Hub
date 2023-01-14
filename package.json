@@ -1,11 +1,11 @@
 {
-    "name": "apex-bot-lib",
+    "name": "apex-chatbot-hub",
     "private": true,
-    "version": "1.0.0",
-    "description": "Salesforce Apex package for quick configuration and managing of the chat bots (Telegram, Viber, WhatsApp, etc.)",
+    "version": "2.0.0",
+    "description": "Salesforce Apex package for quick configuration and managing of the chat bots (e.g. Telegram, Viber)",
     "scripts": {
-        "prettier": "prettier --write \"**/*.{cls,js,json,md,trigger,xml,yaml,yml}\"",
-        "prettier:verify": "prettier --list-different \"**/*.{cls,js,json,md,trigger,xml,yaml,yml}\""
+        "prettier": "prettier --write",
+        "prettier:verify": "prettier --list-different"
     },
     "devDependencies": {
         "@ilyamatsuev/prettier-plugin-apex": "^2.0.3",
@@ -20,7 +20,7 @@
         }
     },
     "lint-staged": {
-        "**/*.{cls,js,json,md,trigger,xml,yaml,yml}": [
+        "**/*.{cls,html,js,css,json,md,trigger,xml,yaml,yml}": [
             "prettier --write"
         ]
     }
