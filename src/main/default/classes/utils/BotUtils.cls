@@ -1,5 +1,6 @@
 public class BotUtils {
     private static final String BOT_PUBLIC_SITE_NAME = 'BotPublic';
+    private static final Integer CHAT_EXTERNAL_ID_LENGTH = 40;
 
     private static Site botSite {
         get {
@@ -44,7 +45,7 @@ public class BotUtils {
         if (chatExternalId.contains(':')) {
             return chatExternalId;
         }
-        return chatExternalId + ':' + botTokenHash.substring(0, 20);
+        return (chatExternalId + ':').rightPad(CHAT_EXTERNAL_ID_LENGTH, botTokenHash);
     }
 
     public static Object createInstance(String typeName) {

@@ -14,4 +14,10 @@ public class TelegramWebhookBotService extends WebhookBotService {
     public override void unsetWebhook() {
         call(TelegramBotMethod.DeleteWebhook, new ValueMap().set('drop_pending_updates', true));
     }
+
+    protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
+        HttpRequest request = super.prepareRequest(method, body);
+        request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + method);
+        return request;
+    }
 }

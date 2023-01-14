@@ -16,4 +16,10 @@ global class ViberBotService extends BotService {
         HttpResponse response = call(ViberBotMethod.SendMessage, messagePayload);
         return ValueMap.fromJson(response.getBody()).getString('message_token');
     }
+
+    protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
+        HttpRequest request = super.prepareRequest(method, body);
+        request.setHeader('X-Viber-Auth-Token', bot.Token__c);
+        return request;
+    }
 }

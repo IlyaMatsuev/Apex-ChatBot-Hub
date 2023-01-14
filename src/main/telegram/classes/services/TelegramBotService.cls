@@ -12,4 +12,10 @@ global class TelegramBotService extends BotService {
         ValueMap responseBody = ValueMap.fromJson(response.getBody());
         return ((TelegramBotMessageEntity) responseBody.getValueMap('result', TelegramBotMessageEntity.class)).getId();
     }
+
+    protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
+        HttpRequest request = super.prepareRequest(method, body);
+        request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + method);
+        return request;
+    }
 }

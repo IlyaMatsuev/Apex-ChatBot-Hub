@@ -16,13 +16,13 @@ global class BotUpdateApi {
         response.addHeader('Content-Type', 'application/json');
 
         try {
-            UriParams params = new UriParams(request.requestURI.substringAfter('bots/'));
+            UriParams params = new UriParams(request.requestURI);
 
             Bot__c bot = getBotResolver(params.type).resolve(params, request.headers);
             if (bot == null) {
                 throw new BotUpdateApiException(
                     'There is no bot with the provided type and id',
-                    new ValueMap().set('botId', params.botId).set('botType', params.type)
+                    new ValueMap().set('params', params).set('uri', request.requestURI)
                 );
             }
 
@@ -53,20 +53,20 @@ global class BotUpdateApi {
     public class UriParams {
         public final Id botId;
         public final BotType type;
-        public final Map<String, String> queryParams;
+        public final String token;
 
         public UriParams(String uri) {
             Matcher paramsMatcher = compilePattern().matcher(uri);
             if (!paramsMatcher.matches()) {
                 throw new BotUpdateApiException(
-                    'Invalid URL format or the URI parameters are incorrect. The correct format is: /bots/<botType>/<botId>',
+                    'Invalid URL format or the URI parameters are incorrect. The correct format is: /bots/<botType>/<botId>/<?token>',
                     new ValueMap().set('uri', uri)
                 );
             }
 
             this.type = BotType.valueOf(paramsMatcher.group(1));
             this.botId = (Id) paramsMatcher.group(2);
-            this.queryParams = parseQueryParams(uri);
+            this.token = paramsMatcher.group(4);
         }
 
         private Pattern compilePattern() {
@@ -75,20 +75,10 @@ global class BotUpdateApi {
                 botTypes.add(type.name());
             }
             return Pattern.compile(
-                '(?<botType>' +
+                '/bots/(?<botType>' +
                 String.join(botTypes, '|') +
-                ')\\/(?<botId>[A-Za-z\\d]{15,18})(\\?([A-Za-z]+=[A-Za-z\\d]*&?)*)?'
+                ')/(?<botId>[A-Za-z\\d]{15,18})(/(?<token>\\w+))?'
             );
-        }
-
-        private Map<String, String> parseQueryParams(String uri) {
-            Map<String, String> params = new Map<String, String>();
-            for (String parts : uri.substringAfter('?').split('&')) {
-                if (String.isNotBlank(parts)) {
-                    params.put(parts.substringBefore('='), parts.substringAfter('='));
-                }
-            }
-            return params;
         }
     }
 }

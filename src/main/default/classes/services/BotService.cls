@@ -49,6 +49,7 @@ global abstract class BotService {
 
     protected HttpResponse call(BotMethod method, ValueMap body, Boolean throwOnFail) {
         HttpResponse response = new Http().send(prepareRequest(method, body));
+        // TODO: This doesn't work for Viber - they always send 200 respones
         if (throwOnFail && response.getStatusCode() != 200) {
             throw new BotServiceException(
                 'A call failed for the bot "' +
@@ -78,7 +79,7 @@ global abstract class BotService {
 
     protected virtual HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = new HttpRequest();
-        request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + method);
+        request.setEndpoint(settings.ApiUrl__c + '/' + method);
         request.setMethod('POST');
         request.setHeader('Content-Type', 'application/json');
         request.setBody(body.toJson());

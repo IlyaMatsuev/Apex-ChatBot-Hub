@@ -12,6 +12,14 @@ global class ViberBotUpdateEventType extends BotUpdateEventType {
      * @descpirtion The `Viber` message event. Received when a user sends a message to the bot
      */
     global static final ViberBotUpdateEventType Message = new ViberBotUpdateEventType('message');
+    /**
+     * @descpirtion The `Viber` message event. Received when a message sent by the bot is delivered
+     */
+    global static final ViberBotUpdateEventType Delivered = new ViberBotUpdateEventType('delivered');
+    /**
+     * @descpirtion The `Viber` message event. Received when a message sent by the bot is seen by the user
+     */
+    global static final ViberBotUpdateEventType Seen = new ViberBotUpdateEventType('seen');
 
     private ViberBotUpdateEventType(String value) {
         super(value, ViberBotUpdateEventType.class);
