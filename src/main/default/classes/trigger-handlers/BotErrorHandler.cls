@@ -12,7 +12,9 @@ public class BotErrorHandler implements Triggers.IErrorHandler {
         if (!botsToDelete.isEmpty()) {
             Database.delete(botsToDelete, false);
         }
-        BotErrorLogger.log(error);
+        if (!(error instanceof BotValidationException)) {
+            BotErrorLogger.log(error);
+        }
     }
 
     private List<Bot__c> getRecords(Triggers.Context context) {

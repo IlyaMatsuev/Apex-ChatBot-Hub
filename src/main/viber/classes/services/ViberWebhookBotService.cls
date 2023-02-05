@@ -28,4 +28,8 @@ public class ViberWebhookBotService extends WebhookBotService {
         request.setHeader('X-Viber-Auth-Token', bot.Token__c);
         return request;
     }
+
+    protected override Boolean isSuccessResponse(HttpResponse response, ValueMap payload) {
+        return super.isSuccessResponse(response, payload) && payload.getInteger('status') == 0;
+    }
 }
