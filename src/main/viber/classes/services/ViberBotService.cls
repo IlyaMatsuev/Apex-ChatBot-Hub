@@ -13,13 +13,16 @@ global class ViberBotService extends BotService {
             .set('text', message)
             .set('sender', new ValueMap().set('name', bot.Name));
 
-        HttpResponse response = call(ViberBotMethod.SendMessage, messagePayload);
-        return ValueMap.fromJson(response.getBody()).getString('message_token');
+        return call(ViberBotMethod.SendMessage, messagePayload).getString('message_token');
     }
 
     protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = super.prepareRequest(method, body);
         request.setHeader('X-Viber-Auth-Token', bot.Token__c);
         return request;
+    }
+
+    protected override Boolean isSuccessResponse(HttpResponse response, ValueMap payload) {
+        return super.isSuccessResponse(response, payload) && payload.getInteger('status') == 0;
     }
 }

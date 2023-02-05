@@ -43,14 +43,15 @@ global abstract class BotService {
         );
     }
 
-    protected HttpResponse call(BotMethod method, ValueMap body) {
+    protected ValueMap call(BotMethod method, ValueMap body) {
         return call(method, body, true);
     }
 
-    protected HttpResponse call(BotMethod method, ValueMap body, Boolean throwOnFail) {
+    protected ValueMap call(BotMethod method, ValueMap body, Boolean throwOnFail) {
         HttpResponse response = new Http().send(prepareRequest(method, body));
-        // TODO: This doesn't work for Viber - they always send 200 respones
-        if (throwOnFail && response.getStatusCode() != 200) {
+        ValueMap responsePayload = ValueMap.fromJson(response.getBody());
+
+        if (throwOnFail && !isSuccessResponse(response, responsePayload)) {
             throw new BotServiceException(
                 'A call failed for the bot "' +
                 bot.Name +
@@ -68,13 +69,11 @@ global abstract class BotService {
                     )
                     .set(
                         'response',
-                        new ValueMap()
-                            .set('body', ValueMap.fromJson(response.getBody()))
-                            .set('statusCode', response.getStatusCode())
+                        new ValueMap().set('body', responsePayload).set('statusCode', response.getStatusCode())
                     )
             );
         }
-        return response;
+        return responsePayload;
     }
 
     protected virtual HttpRequest prepareRequest(BotMethod method, ValueMap body) {
@@ -84,6 +83,10 @@ global abstract class BotService {
         request.setHeader('Content-Type', 'application/json');
         request.setBody(body.toJson());
         return request;
+    }
+
+    protected virtual Boolean isSuccessResponse(HttpResponse response, ValueMap payload) {
+        return response.getStatusCode() == 200;
     }
 
     public class BotServiceException extends BotCustomException {
