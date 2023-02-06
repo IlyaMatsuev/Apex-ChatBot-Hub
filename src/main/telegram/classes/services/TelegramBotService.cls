@@ -6,15 +6,37 @@ global class TelegramBotService extends BotService {
         super(bot);
     }
 
-    protected override String sendMessage(String chatId, String message) {
-        ValueMap messagePayload = new ValueMap().set('chat_id', chatId).set('text', message);
-        ValueMap response = call(TelegramBotMethod.SendMessage, messagePayload);
-        return ((TelegramBotMessageEntity) response.getValueMap('result', TelegramBotMessageEntity.class)).getId();
+    protected override String sendMessage(String chatId, BotMessageOptions options) {
+        ValueMap payload = new ValueMap().set('chat_id', chatId).set('text', options.text);
+        return sendMessage(TelegramBotMethod.SendMessage, payload);
+    }
+
+    protected override String sendImage(String chatId, BotMessageOptions options) {
+        ValueMap payload = new ValueMap()
+            .set('chat_id', chatId)
+            .set('caption', options.text)
+            .set('photo', options.mediaUrl);
+
+        return sendMessage(TelegramBotMethod.SendPhoto, payload);
+    }
+
+    protected override String sendVideo(String chatId, BotMessageOptions options) {
+        ValueMap payload = new ValueMap()
+            .set('chat_id', chatId)
+            .set('caption', options.text)
+            .set('video', options.mediaUrl);
+
+        return sendMessage(TelegramBotMethod.SendVideo, payload);
     }
 
     protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = super.prepareRequest(method, body);
         request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + method);
         return request;
+    }
+
+    private String sendMessage(TelegramBotMethod method, ValueMap payload) {
+        ValueMap response = call(method, payload);
+        return ((TelegramBotMessageEntity) response.getValueMap('result', TelegramBotMessageEntity.class)).getId();
     }
 }

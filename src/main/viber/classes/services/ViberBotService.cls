@@ -6,14 +6,41 @@ global class ViberBotService extends BotService {
         super(bot);
     }
 
-    protected override String sendMessage(String chatId, String message) {
-        ValueMap messagePayload = new ValueMap()
+    protected override String sendMessage(String chatId, BotMessageOptions options) {
+        ValueMap payload = new ValueMap()
             .set('receiver', chatId)
+            .set('sender', new ValueMap().set('name', bot.Name))
             .set('type', 'text')
-            .set('text', message)
-            .set('sender', new ValueMap().set('name', bot.Name));
+            .set('text', options.text);
 
-        return call(ViberBotMethod.SendMessage, messagePayload).getString('message_token');
+        return call(ViberBotMethod.SendMessage, payload).getString('message_token');
+    }
+
+    protected override String sendImage(String chatId, BotMessageOptions options) {
+        ValueMap payload = new ValueMap()
+            .set('receiver', chatId)
+            .set('sender', new ValueMap().set('name', bot.Name))
+            .set('type', 'picture')
+            .set('text', options.text)
+            .set('media', options.mediaUrl);
+
+        return call(ViberBotMethod.SendMessage, payload).getString('message_token');
+    }
+
+    protected override String sendVideo(String chatId, BotMessageOptions options) {
+        // Viber doesn't support captions for video messages, so send text separately
+        if (String.isNotBlank(options.text?.trim())) {
+            sendMessage(chatId, options.text);
+        }
+
+        ValueMap payload = new ValueMap()
+            .set('receiver', chatId)
+            .set('sender', new ValueMap().set('name', bot.Name))
+            .set('type', 'video')
+            .set('media', options.mediaUrl)
+            .set('size', options.params.get('size'));
+
+        return call(ViberBotMethod.SendMessage, payload).getString('message_token');
     }
 
     protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
