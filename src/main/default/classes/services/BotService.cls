@@ -53,12 +53,7 @@ global abstract class BotService {
 
         if (throwOnFail && !isSuccessResponse(response, responsePayload)) {
             throw new BotServiceException(
-                'A call failed for the bot "' +
-                bot.Name +
-                '" and method "' +
-                method +
-                '": ' +
-                response.getStatus(),
+                'A call failed for the bot "' + bot.Name + '" and method "' + method + '": ' + response.getStatus(),
                 new ValueMap()
                     .set(
                         'request',

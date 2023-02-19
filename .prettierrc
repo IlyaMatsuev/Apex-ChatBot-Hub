@@ -8,12 +8,12 @@
     "apexInsertFinalNewline": true,
     "apexFormatAnnotations": true,
     "apexFormatStandardTypes": true,
-    "apexFormatInlineComments": true,
-    "apexAnnotationsArgsSpacing": true,
+    "apexFormatInlineComments": "spaced",
     "apexEmptyBlockBracketLine": true,
     "apexExpandOneLineProperties": false,
     "apexExplicitAccessModifier": true,
     "apexSortModifiers": true,
+    "apexForceCurly": true,
     "overrides": [
         {
             "files": "*.xml",
@@ -26,12 +26,6 @@
             "files": ["*.yml", "*.yaml"],
             "options": {
                 "tabWidth": 2
-            }
-        },
-        {
-            "files": "*.trigger",
-            "options": {
-                "apexExplicitAccessModifier": false
             }
         }
     ]

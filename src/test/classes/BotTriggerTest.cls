@@ -1,4 +1,4 @@
-@IsTest(IsParallel = true)
+@IsTest(isParallel = true)
 private class BotTriggerTest {
     private static final String BOT_TOKEN = '74712731t723gjhbbfkwnkqwguqg17g2717283';
     private static final String BOT_HANDLER = 'BotHandlerMock';

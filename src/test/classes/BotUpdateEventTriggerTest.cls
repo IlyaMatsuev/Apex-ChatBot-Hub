@@ -1,4 +1,4 @@
-@IsTest(IsParallel = true)
+@IsTest(isParallel = true)
 private class BotUpdateEventTriggerTest {
     @TestSetup
     private static void init() {

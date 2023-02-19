@@ -75,9 +75,7 @@ global class BotUpdateApi {
                 botTypes.add(type.name());
             }
             return Pattern.compile(
-                '/bots/(?<botType>' +
-                String.join(botTypes, '|') +
-                ')/(?<botId>[A-Za-z\\d]{15,18})(/(?<token>\\w+))?'
+                '/bots/(?<botType>' + String.join(botTypes, '|') + ')/(?<botId>[A-Za-z\\d]{15,18})(/(?<token>\\w+))?'
             );
         }
     }

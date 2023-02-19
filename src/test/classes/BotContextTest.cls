@@ -1,4 +1,4 @@
-@IsTest(IsParallel = true)
+@IsTest(isParallel = true)
 private class BotContextTest {
     @TestSetup
     private static void init() {
