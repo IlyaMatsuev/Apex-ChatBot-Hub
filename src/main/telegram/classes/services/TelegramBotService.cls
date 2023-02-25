@@ -6,25 +6,25 @@ global class TelegramBotService extends BotService {
         super(bot);
     }
 
-    protected override String sendMessage(String chatId, BotMessageOptions options) {
-        ValueMap payload = new ValueMap().set('chat_id', chatId).set('text', options.text);
+    protected override String sendMessage(String chatId, BotService.MessageParams params) {
+        ValueMap payload = new ValueMap().set('chat_id', chatId).set('text', params.text);
         return sendMessage(TelegramBotMethod.SendMessage, payload);
     }
 
-    protected override String sendImage(String chatId, BotMessageOptions options) {
+    protected override String sendImage(String chatId, BotService.MessageParams params) {
         ValueMap payload = new ValueMap()
             .set('chat_id', chatId)
-            .set('caption', options.text)
-            .set('photo', options.mediaUrl);
+            .set('caption', params.text, true)
+            .set('photo', params.mediaUrl);
 
         return sendMessage(TelegramBotMethod.SendPhoto, payload);
     }
 
-    protected override String sendVideo(String chatId, BotMessageOptions options) {
+    protected override String sendVideo(String chatId, BotService.MessageParams params) {
         ValueMap payload = new ValueMap()
             .set('chat_id', chatId)
-            .set('caption', options.text)
-            .set('video', options.mediaUrl);
+            .set('caption', params.text, true)
+            .set('video', params.mediaUrl);
 
         return sendMessage(TelegramBotMethod.SendVideo, payload);
     }

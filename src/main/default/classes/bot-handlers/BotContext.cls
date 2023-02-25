@@ -70,6 +70,8 @@ global class BotContext {
         private final BotService service;
         private final BotUpdateModel received;
 
+        private String chatId { get { return received.chat.id; } }
+
         private Reply(BotUpdateModel received, BotService service) {
             this.received = received;
             this.service = service;
@@ -79,8 +81,42 @@ global class BotContext {
          * @description Sends a text message as a response to the incoming update
          * @param message The text message to be sent to the user who sent the update
          */
-        global void send(String message) {
-            service.send(String.valueOf(received.chat.id), message);
+        global void sendMessage(String message) {
+            service.sendMessage(chatId, message);
+        }
+
+        /**
+         * @description Sends an image message as a response to the incoming update
+         * @param imageUrl The image URL
+         */
+        global void sendImage(String imageUrl) {
+            service.sendImage(chatId, imageUrl);
+        }
+
+        /**
+         * @description Sends an image message with a caption as a response to the incoming update
+         * @param imageUrl The image URL
+         * @param caption The text to be attached with an image
+         */
+        global void sendImage(String imageUrl, String caption) {
+            service.sendImage(chatId, imageUrl, caption);
+        }
+
+        /**
+         * @description Sends a video message as a response to the incoming update
+         * @param videoUrl The image URL
+         */
+        global void sendVideo(String videoUrl) {
+            service.sendVideo(chatId, videoUrl);
+        }
+
+        /**
+         * @description Sends an image message with a caption as a response to the incoming update
+         * @param videoUrl The image URL
+         * @param caption The text to be attached with the video
+         */
+        global void sendVideo(String videoUrl, String caption) {
+            service.sendVideo(chatId, videoUrl, caption);
         }
     }
 }

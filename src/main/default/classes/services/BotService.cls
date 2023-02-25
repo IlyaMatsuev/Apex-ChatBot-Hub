@@ -26,28 +26,45 @@ global abstract class BotService {
      * @param text The message text to send
      */
     global void sendMessage(String chatId, String text) {
-        send(chatId, BotMessageOptions.asText(text));
+        send(chatId, new MessageParams(BotMessageType.Text, text));
     }
 
     /**
      * @description Sends an image to the chat
      * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
-     * @param caption The text to attach to the image. Optional
-     * @param imageUrl The image url
+     * @param imageUrl The image URL
      */
-    global void sendImage(String chatId, String caption, String imageUrl) {
-        send(chatId, BotMessageOptions.asImage(caption, imageUrl));
+    global void sendImage(String chatId, String imageUrl) {
+        sendImage(chatId, imageUrl, null);
+    }
+
+    /**
+     * @description Sends an image with a caption to the chat
+     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
+     * @param imageUrl The image URL
+     * @param caption The text to attach to the image
+     */
+    global void sendImage(String chatId, String imageUrl, String caption) {
+        send(chatId, new MessageParams(BotMessageType.Image, caption, imageUrl));
     }
 
     /**
      * @description Sends a video to the chat
      * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
-     * @param caption The text to attach to the video. Viber doesn't support it Optional
-     * @param videoUrl The video url
+     * @param videoUrl The video URL
      */
-    global void sendVideo(String chatId, String caption, String videoUrl) {
-        // TODO: Don't know how to provide video size and duration
-        send(chatId, BotMessageOptions.asVideo(caption, videoUrl, null, null));
+    global void sendVideo(String chatId, String videoUrl) {
+        sendVideo(chatId, videoUrl, null);
+    }
+
+    /**
+     * @description Sends a video with a caption to the chat
+     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
+     * @param videoUrl The video URL
+     * @param caption The text to attach to the video
+     */
+    global void sendVideo(String chatId, String videoUrl, String caption) {
+        send(chatId, new MessageParams(BotMessageType.Video, caption, videoUrl));
     }
 
     protected ValueMap call(BotMethod method, ValueMap body) {
@@ -91,48 +108,48 @@ global abstract class BotService {
         return response.getStatusCode() == 200;
     }
 
-    protected virtual String sendMessage(String chatId, BotMessageOptions options) {
+    protected virtual String sendMessage(String chatId, MessageParams params) {
         throw new BotServiceException(
-            'Not implemented: sendMessage(String chatId, BotMessageOptions options)',
-            new ValueMap().set('chatId', chatId).set('options', options)
+            'Not implemented: sendMessage(String chatId, MessageParams params)',
+            new ValueMap().set('chatId', chatId).set('params', params)
         );
     }
 
-    protected virtual String sendImage(String chatId, BotMessageOptions options) {
+    protected virtual String sendImage(String chatId, MessageParams params) {
         throw new BotServiceException(
-            'Not implemented: sendImage(String chatId, BotMessageOptions options)',
-            new ValueMap().set('chatId', chatId).set('options', options)
+            'Not implemented: sendImage(String chatId, MessageParams params)',
+            new ValueMap().set('chatId', chatId).set('params', params)
         );
     }
 
-    protected virtual String sendVideo(String chatId, BotMessageOptions options) {
+    protected virtual String sendVideo(String chatId, MessageParams params) {
         throw new BotServiceException(
-            'Not implemented: sendVideo(String chatId, BotMessageOptions options)',
-            new ValueMap().set('chatId', chatId).set('options', options)
+            'Not implemented: sendVideo(String chatId, MessageParams params)',
+            new ValueMap().set('chatId', chatId).set('params', params)
         );
     }
 
-    private void send(String chatId, BotMessageOptions options) {
+    private void send(String chatId, MessageParams params) {
         String normalizedChatId = chatId.substringBefore(':');
         String messageId;
-        if (options.type == BotMessageType.Text) {
-            messageId = sendMessage(normalizedChatId, options);
-        } else if (options.type == BotMessageType.Image) {
-            messageId = sendImage(normalizedChatId, options);
-        } else if (options.type == BotMessageType.Video) {
-            messageId = sendVideo(normalizedChatId, options);
+        if (params.type == BotMessageType.Text) {
+            messageId = sendMessage(normalizedChatId, params);
+        } else if (params.type == BotMessageType.Image) {
+            messageId = sendImage(normalizedChatId, params);
+        } else if (params.type == BotMessageType.Video) {
+            messageId = sendVideo(normalizedChatId, params);
         } else {
             throw new BotService.BotServiceException(
-                'The requested message type is not supported yet: ' + options.type?.name(),
-                new ValueMap().set('chatId', chatId).set('options', options)
+                'The requested message type is not supported yet: ' + params.type?.name(),
+                new ValueMap().set('chatId', chatId).set('params', params)
             );
         }
 
         ChatMessage__c messageRecord = new ChatMessage__c(
-            Type__c = options.type.name(),
-            Text__c = options.text,
-            MediaUrl__c = options.mediaUrl,
-            Parameters__c = options.params.toJson(true),
+            Type__c = params.type.name(),
+            Text__c = params.text,
+            MediaUrl__c = params.mediaUrl,
+            Parameters__c = params.additionalInfo.toJson(true),
             Chat__r = new Chat__c(ExternalId__c = BotUtils.generateChatId(bot.TokenHash__c, chatId)),
             Bot__c = bot.id,
             ExternalId__c = messageId
@@ -143,6 +160,24 @@ global abstract class BotService {
     public class BotServiceException extends BotCustomException {
         public BotServiceException(String message, ValueMap payload) {
             super(message, payload);
+        }
+    }
+
+    public class MessageParams extends ValueMap {
+        public final BotMessageType type;
+        public final String text;
+        public final String mediaUrl;
+        public final ValueMap additionalInfo;
+
+        private MessageParams(BotMessageType type, String text) {
+            this(type, text, null);
+        }
+
+        private MessageParams(BotMessageType type, String text, String mediaUrl) {
+            this.type = type;
+            this.text = text;
+            this.mediaUrl = mediaUrl;
+            this.additionalInfo = new ValueMap();
         }
     }
 }
