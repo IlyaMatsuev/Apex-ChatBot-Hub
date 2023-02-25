@@ -128,9 +128,11 @@ global abstract class BotService {
             );
         }
 
-        // TODO: Create new fields for the message: Type__c, MediaUrl__c, Params__c
         ChatMessage__c messageRecord = new ChatMessage__c(
+            Type__c = options.type.name(),
             Text__c = options.text,
+            MediaUrl__c = options.mediaUrl,
+            Parameters__c = options.params.toJson(true),
             Chat__r = new Chat__c(ExternalId__c = BotUtils.generateChatId(bot.TokenHash__c, chatId)),
             Bot__c = bot.id,
             ExternalId__c = messageId

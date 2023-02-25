@@ -71,9 +71,12 @@
         </platformActionListItems>
     </platformActionList>
     <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
         <fields>NAME</fields>
         <fields>Bot__c</fields>
         <fields>User__c</fields>
+        <fields>Type__c</fields>
         <fields>Text__c</fields>
         <fields>SendDate__c</fields>
         <relatedList>ChatMessage__c.Chat__c</relatedList>
@@ -86,7 +89,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h540000089iqW</masterLabel>
+        <masterLabel>00h2v00000qRLS9</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
