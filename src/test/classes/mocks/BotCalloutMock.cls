@@ -85,6 +85,15 @@ public class BotCalloutMock implements HttpCalloutMock {
                     .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
                     .toJson();
             }
+            when 'sendContact' {
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('first_name'));
+                System.assert(request.hasValue('phone_number'));
+                return new ValueMap()
+                    .set('status', 'ok')
+                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
+                    .toJson();
+            }
         }
         throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
     }
@@ -124,6 +133,11 @@ public class BotCalloutMock implements HttpCalloutMock {
                     System.assert(request.hasValue('size'));
                     System.assert(request.hasValue('file_name'));
                     System.assert(request.getString('media').endsWith(request.getString('file_name')));
+                } else if (messageType == 'contact') {
+                    System.assert(request.hasValue('contact'));
+                    ValueMap contact = request.getValueMap('contact');
+                    System.assert(String.isNotBlank(contact.getString('name')));
+                    System.assert(String.isNotBlank(contact.getString('phone_number')));
                 } else {
                     throw new IllegalArgumentException(
                         'The provided viber message type is not correct: ' + messageType

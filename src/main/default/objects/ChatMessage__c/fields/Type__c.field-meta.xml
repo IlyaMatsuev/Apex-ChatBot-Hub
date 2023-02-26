@@ -31,6 +31,11 @@
                 <default>false</default>
                 <label>File</label>
             </value>
+            <value>
+                <fullName>Contact</fullName>
+                <default>false</default>
+                <label>Contact</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

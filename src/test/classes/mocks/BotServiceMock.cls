@@ -22,6 +22,10 @@ public class BotServiceMock extends BotService {
         return saveMessage(chatId, params);
     }
 
+    protected override String sendContact(String chatId, BotService.MessageParams params) {
+        return saveMessage(chatId, params);
+    }
+
     private String saveMessage(String chatId, BotService.MessageParams params) {
         outboundMessages.put(chatId, params);
         return chatId;

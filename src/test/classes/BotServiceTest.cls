@@ -76,6 +76,29 @@ private class BotServiceTest {
         System.assertEquals('/fake-file.pdf', params.getString('mediaUrl'));
     }
 
+    @IsTest
+    private static void sendContact_withoutImplementation_shouldThrowException() {
+        Exception error;
+        try {
+            new NoImplementationBotService(prepareBot(BotType.Telegram))
+                .sendContact('fake-id', 'John Wick', '3168998280');
+        } catch (Exception ex) {
+            error = ex;
+        }
+
+        System.assert(error != null);
+        System.assert(error instanceof BotService.BotServiceException);
+        BotService.BotServiceException serviceError = (BotService.BotServiceException) error;
+        System.assertEquals('fake-id', serviceError.payload.getString('chatId'));
+        ValueMap params = ValueMap.fromJson(JSON.serialize(serviceError.payload.get('params')));
+        System.assert(params.getString('text') == null);
+        System.assert(params.getString('mediaUrl') == null);
+
+        ValueMap additionalInfo = params.getValueMap('additionalInfo').getValueMap('values');
+        System.assertEquals('John Wick', additionalInfo.getString('name'));
+        System.assertEquals('3168998280', additionalInfo.getString('phone'));
+    }
+
     /**
      * Telegram tests
      */
@@ -246,6 +269,42 @@ private class BotServiceTest {
         System.assert(String.isNotBlank(messages.get(0).ExternalId__c));
     }
 
+    @IsTest
+    private static void sendContact_telegram_shouldSendAndCreateMessageRecord() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+
+        Bot__c bot = prepareBot(BotType.Telegram);
+        Chat__c chat = new Chat__c(
+            Name = 'Test',
+            Bot__c = bot.Id,
+            ExternalId__c = '3214:' + bot.TokenHash__c.substring(0, 20)
+        );
+        insert chat;
+        BotService service = new TelegramBotService(bot);
+
+        Test.startTest();
+        service.sendContact(chat.ExternalId__c, 'John Wick', '3168998280');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<ChatMessage__c> messages = [
+            SELECT Bot__c, User__c, Chat__c, Text__c, Type__c, MediaUrl__c, Parameters__c, ExternalId__c
+            FROM ChatMessage__c
+        ];
+        System.assertEquals(1, messages.size());
+        System.assertEquals(bot.Id, messages.get(0).Bot__c);
+        System.assertEquals(chat.Id, messages.get(0).Chat__c);
+        System.assertEquals(BotMessageType.Contact.name(), messages.get(0).Type__c);
+        System.assert(String.isBlank(messages.get(0).MediaUrl__c));
+        System.assert(String.isBlank(messages.get(0).Text__c));
+        System.assert(String.isBlank(messages.get(0).User__c));
+        System.assert(String.isNotBlank(messages.get(0).ExternalId__c));
+
+        ValueMap additionalInfo = ValueMap.fromJson(messages.get(0).Parameters__c);
+        System.assertEquals('John Wick', additionalInfo.getString('name'));
+        System.assertEquals('3168998280', additionalInfo.getString('phone'));
+    }
+
     /**
      * Viber tests
      */
@@ -414,6 +473,42 @@ private class BotServiceTest {
         System.assert(String.isBlank(messages.get(0).Text__c));
         System.assert(String.isBlank(messages.get(0).User__c));
         System.assert(String.isNotBlank(messages.get(0).ExternalId__c));
+    }
+
+    @IsTest
+    private static void sendContact_viber_shouldSendAndCreateMessageRecord() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+
+        Bot__c bot = prepareBot(BotType.Viber);
+        Chat__c chat = new Chat__c(
+            Name = 'Test',
+            Bot__c = bot.Id,
+            ExternalId__c = '3214:' + bot.TokenHash__c.substring(0, 20)
+        );
+        insert chat;
+        BotService service = new ViberBotService(bot);
+
+        Test.startTest();
+        service.sendContact(chat.ExternalId__c, 'John Wick', '3168998280');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<ChatMessage__c> messages = [
+            SELECT Bot__c, User__c, Chat__c, Text__c, Type__c, MediaUrl__c, Parameters__c, ExternalId__c
+            FROM ChatMessage__c
+        ];
+        System.assertEquals(1, messages.size());
+        System.assertEquals(bot.Id, messages.get(0).Bot__c);
+        System.assertEquals(chat.Id, messages.get(0).Chat__c);
+        System.assertEquals(BotMessageType.Contact.name(), messages.get(0).Type__c);
+        System.assert(String.isBlank(messages.get(0).MediaUrl__c));
+        System.assert(String.isBlank(messages.get(0).Text__c));
+        System.assert(String.isBlank(messages.get(0).User__c));
+        System.assert(String.isNotBlank(messages.get(0).ExternalId__c));
+
+        ValueMap additionalInfo = ValueMap.fromJson(messages.get(0).Parameters__c);
+        System.assertEquals('John Wick', additionalInfo.getString('name'));
+        System.assertEquals('3168998280', additionalInfo.getString('phone'));
     }
 
     private static Bot__c prepareBot(BotType type) {

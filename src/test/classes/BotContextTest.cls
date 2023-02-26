@@ -82,6 +82,22 @@ private class BotContextTest {
     }
 
     @IsTest
+    private static void sendContact_telegramReplyWithContact_shouldSendImage() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+
+        context.reply.sendContact('John Wick', '3168998280');
+
+        System.assertEquals(1, BotServiceMock.outboundMessages.size());
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Contact, messageParams.type);
+        System.assert(messageParams.text == null);
+        System.assert(messageParams.mediaUrl == null);
+        System.assertEquals('John Wick', messageParams.additionalInfo.get('name'));
+        System.assertEquals('3168998280', messageParams.additionalInfo.get('phone'));
+    }
+
+    @IsTest
     private static void received_telegramUpdateModelWithMessage_containsAllFields() {
         BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
 

@@ -86,6 +86,18 @@ global abstract class BotService {
         send(chatId, new MessageParams(BotMessageType.File, caption, fileUrl));
     }
 
+    /**
+     * @description Sends a contact reference to the chat
+     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
+     * @param name The contact first name or full name (via spaces)
+     * @param phone The contact phone number
+     */
+    global void sendContact(String chatId, String name, String phone) {
+        MessageParams params = new MessageParams(BotMessageType.Contact);
+        params.additionalInfo.set('name', name).set('phone', phone);
+        send(chatId, params);
+    }
+
     protected ValueMap call(BotMethod method, ValueMap body) {
         return call(method, body, true);
     }
@@ -155,6 +167,13 @@ global abstract class BotService {
         );
     }
 
+    protected virtual String sendContact(String chatId, MessageParams params) {
+        throw new BotServiceException(
+            'Not implemented: sendContact(String chatId, MessageParams params)',
+            new ValueMap().set('chatId', chatId).set('params', params)
+        );
+    }
+
     private void send(String chatId, MessageParams params) {
         String normalizedChatId = chatId.substringBefore(':');
         String messageId;
@@ -166,6 +185,8 @@ global abstract class BotService {
             messageId = sendVideo(normalizedChatId, params);
         } else if (params.type == BotMessageType.File) {
             messageId = sendFile(normalizedChatId, params);
+        } else if (params.type == BotMessageType.Contact) {
+            messageId = sendContact(normalizedChatId, params);
         } else {
             throw new BotService.BotServiceException(
                 'The requested message type is not supported yet: ' + params.type?.name(),
@@ -196,6 +217,10 @@ global abstract class BotService {
         public final String text;
         public final String mediaUrl;
         public final ValueMap additionalInfo;
+
+        private MessageParams(BotMessageType type) {
+            this(type, null);
+        }
 
         private MessageParams(BotMessageType type, String text) {
             this(type, text, null);

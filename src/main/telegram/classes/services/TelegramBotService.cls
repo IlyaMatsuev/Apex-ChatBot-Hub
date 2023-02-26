@@ -38,6 +38,20 @@ global class TelegramBotService extends BotService {
         return sendMessage(TelegramBotMethod.SendDocument, payload);
     }
 
+    protected override String sendContact(String chatId, BotService.MessageParams params) {
+        String name = params.additionalInfo.getString('name').trim();
+        String firstName = name.substringBefore(' ');
+        String lastName = name.contains(' ') ? name.substringAfter(' ') : null;
+
+        ValueMap payload = new ValueMap()
+            .set('chat_id', chatId)
+            .set('first_name', firstName)
+            .set('last_name', lastName, true)
+            .set('phone_number', params.additionalInfo.getString('phone'));
+
+        return sendMessage(TelegramBotMethod.SendContact, payload);
+    }
+
     protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = super.prepareRequest(method, body);
         request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + method);

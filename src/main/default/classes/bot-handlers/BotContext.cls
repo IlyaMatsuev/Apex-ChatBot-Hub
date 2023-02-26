@@ -135,5 +135,14 @@ global class BotContext {
         global void sendFile(String fileUrl, String caption) {
             service.sendFile(chatId, fileUrl, caption);
         }
+
+        /**
+         * @description Sends a contact reference as a response to the incoming update
+         * @param name The contact first name or full name (via spaces)
+         * @param phone The contact phone number
+         */
+        global void sendContact(String name, String phone) {
+            service.sendContact(chatId, name, phone);
+        }
     }
 }

@@ -9,20 +9,12 @@ global class ViberBotService extends BotService {
     }
 
     protected override String sendMessage(String chatId, BotService.MessageParams params) {
-        ValueMap payload = new ValueMap()
-            .set('receiver', chatId)
-            .set('sender', new ValueMap().set('name', bot.Name))
-            .set('type', 'text')
-            .set('text', params.text);
-
+        ValueMap payload = prepareMessagePayload(chatId, 'text').set('text', params.text);
         return call(ViberBotMethod.SendMessage, payload).getString('message_token');
     }
 
     protected override String sendImage(String chatId, BotService.MessageParams params) {
-        ValueMap payload = new ValueMap()
-            .set('receiver', chatId)
-            .set('sender', new ValueMap().set('name', bot.Name))
-            .set('type', 'picture')
+        ValueMap payload = prepareMessagePayload(chatId, 'picture')
             .set('text', params.text, true)
             .set('media', params.mediaUrl);
 
@@ -30,10 +22,7 @@ global class ViberBotService extends BotService {
     }
 
     protected override String sendVideo(String chatId, BotService.MessageParams params) {
-        ValueMap payload = new ValueMap()
-            .set('receiver', chatId)
-            .set('sender', new ValueMap().set('name', bot.Name))
-            .set('type', 'video')
+        ValueMap payload = prepareMessagePayload(chatId, 'video')
             .set('media', params.mediaUrl)
             .set('size', DEFAULT_FILE_MESSAGE_SIZE);
 
@@ -48,10 +37,7 @@ global class ViberBotService extends BotService {
     }
 
     protected override String sendFile(String chatId, BotService.MessageParams params) {
-        ValueMap payload = new ValueMap()
-            .set('receiver', chatId)
-            .set('sender', new ValueMap().set('name', bot.Name))
-            .set('type', 'file')
+        ValueMap payload = prepareMessagePayload(chatId, 'file')
             .set('media', params.mediaUrl)
             // Capturing the file name from the url: "https://example.com/static/file.pdf"
             .set('file_name', params.mediaUrl.substringAfterLast('/'))
@@ -67,6 +53,18 @@ global class ViberBotService extends BotService {
         return fileMessageId;
     }
 
+    protected override String sendContact(String chatId, BotService.MessageParams params) {
+        ValueMap payload = prepareMessagePayload(chatId, 'contact')
+            .set(
+                'contact',
+                new ValueMap()
+                    .set('name', params.additionalInfo.getString('name'))
+                    .set('phone_number', params.additionalInfo.getString('phone'))
+            );
+
+        return call(ViberBotMethod.SendMessage, payload).getString('message_token');
+    }
+
     protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = super.prepareRequest(method, body);
         request.setHeader('X-Viber-Auth-Token', bot.Token__c);
@@ -75,5 +73,12 @@ global class ViberBotService extends BotService {
 
     protected override Boolean isSuccessResponse(HttpResponse response, ValueMap payload) {
         return super.isSuccessResponse(response, payload) && payload.getInteger('status') == 0;
+    }
+
+    private ValueMap prepareMessagePayload(String chatId, String type) {
+        return new ValueMap()
+            .set('receiver', chatId)
+            .set('sender', new ValueMap().set('name', bot.Name))
+            .set('type', type);
     }
 }
