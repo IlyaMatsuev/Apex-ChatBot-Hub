@@ -144,5 +144,14 @@ global class BotContext {
         global void sendContact(String name, String phone) {
             service.sendContact(chatId, name, phone);
         }
+
+        /**
+         * @description Sends a location as a response to the incoming update. Latitude and longitude values are not validated
+         * @param latitude The location latitude
+         * @param longitude The location longitude
+         */
+        global void sendLocation(Decimal latitude, Decimal longitude) {
+            service.sendLocation(chatId, latitude, longitude);
+        }
     }
 }

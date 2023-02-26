@@ -52,6 +52,15 @@ global class TelegramBotService extends BotService {
         return sendMessage(TelegramBotMethod.SendContact, payload);
     }
 
+    protected override String sendLocation(String chatId, BotService.MessageParams params) {
+        ValueMap payload = new ValueMap()
+            .set('chat_id', chatId)
+            .set('latitude', params.additionalInfo.getDecimal('lat'))
+            .set('longitude', params.additionalInfo.getDecimal('lon'));
+
+        return sendMessage(TelegramBotMethod.SendLocation, payload);
+    }
+
     protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = super.prepareRequest(method, body);
         request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + method);

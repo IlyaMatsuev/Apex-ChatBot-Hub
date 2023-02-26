@@ -1,4 +1,4 @@
-// TODO: Implement: Location and Sticker methods in general BotService
+// TODO: Implement: Sticker message type in general BotService
 // TODO: Implement for Telegram: sendMediaGroup, sendAudio, sendAnimation, sendVoice, sendVideoNote, sendVenue, sendPoll, sendDice, sendChatAction
 // TODO: Implement for Viber: sendUrl
 /**

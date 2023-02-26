@@ -36,6 +36,11 @@
                 <default>false</default>
                 <label>Contact</label>
             </value>
+            <value>
+                <fullName>Location</fullName>
+                <default>false</default>
+                <label>Location</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

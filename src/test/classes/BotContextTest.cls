@@ -68,7 +68,7 @@ private class BotContextTest {
     }
 
     @IsTest
-    private static void sendFile_telegramReplyWithFileNoCaption_shouldSendImage() {
+    private static void sendFile_telegramReplyWithFileNoCaption_shouldSendFile() {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
         BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
 
@@ -82,7 +82,7 @@ private class BotContextTest {
     }
 
     @IsTest
-    private static void sendContact_telegramReplyWithContact_shouldSendImage() {
+    private static void sendContact_telegramReplyWithContact_shouldSendContact() {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
         BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
 
@@ -190,6 +190,24 @@ private class BotContextTest {
         System.assertEquals(BotMessageType.File, messageParams.type);
         System.assertEquals('caption', messageParams.text);
         System.assertEquals('https://example.com/file.pdf', messageParams.mediaUrl);
+    }
+
+    @IsTest
+    private static void sendLocation_viberReplyWithLocation_shouldSendLocation() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+        BotContext context = createBotContext(BotType.Viber, createviberPayload());
+        Decimal lat = 37.7898;
+        Decimal lon = -122.3942;
+
+        context.reply.sendLocation(lat, lon);
+
+        System.assertEquals(1, BotServiceMock.outboundMessages.size());
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Location, messageParams.type);
+        System.assert(messageParams.text == null);
+        System.assert(messageParams.mediaUrl == null);
+        System.assertEquals(String.valueOf(lat), messageParams.additionalInfo.getString('lat'));
+        System.assertEquals(String.valueOf(lon), messageParams.additionalInfo.getString('lon'));
     }
 
     @IsTest

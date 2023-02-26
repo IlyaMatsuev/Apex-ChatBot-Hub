@@ -1,3 +1,4 @@
+// TODO: Optimize tests, remove duplicated code
 @IsTest(isParallel = true)
 private class BotServiceTest {
     @TestSetup
@@ -97,6 +98,30 @@ private class BotServiceTest {
         ValueMap additionalInfo = params.getValueMap('additionalInfo').getValueMap('values');
         System.assertEquals('John Wick', additionalInfo.getString('name'));
         System.assertEquals('3168998280', additionalInfo.getString('phone'));
+    }
+
+    @IsTest
+    private static void sendLocation_withoutImplementation_shouldThrowException() {
+        Decimal lat = 38.9228;
+        Decimal lon = 96.1232;
+        Exception error;
+        try {
+            new NoImplementationBotService(prepareBot(BotType.Telegram)).sendLocation('fake-id', lat, lon);
+        } catch (Exception ex) {
+            error = ex;
+        }
+
+        System.assert(error != null);
+        System.assert(error instanceof BotService.BotServiceException);
+        BotService.BotServiceException serviceError = (BotService.BotServiceException) error;
+        System.assertEquals('fake-id', serviceError.payload.getString('chatId'));
+        ValueMap params = ValueMap.fromJson(JSON.serialize(serviceError.payload.get('params')));
+        System.assert(params.getString('text') == null);
+        System.assert(params.getString('mediaUrl') == null);
+
+        ValueMap additionalInfo = params.getValueMap('additionalInfo').getValueMap('values');
+        System.assertEquals(String.valueOf(lat), additionalInfo.getString('lat'));
+        System.assertEquals(String.valueOf(lon), additionalInfo.getString('lon'));
     }
 
     /**
@@ -305,6 +330,44 @@ private class BotServiceTest {
         System.assertEquals('3168998280', additionalInfo.getString('phone'));
     }
 
+    @IsTest
+    private static void sendLocation_telegram_shouldSendAndCreateMessageRecord() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+
+        Decimal lat = 38.9228;
+        Decimal lon = 96.1232;
+        Bot__c bot = prepareBot(BotType.Telegram);
+        Chat__c chat = new Chat__c(
+            Name = 'Test',
+            Bot__c = bot.Id,
+            ExternalId__c = '3214:' + bot.TokenHash__c.substring(0, 20)
+        );
+        insert chat;
+        BotService service = new TelegramBotService(bot);
+
+        Test.startTest();
+        service.sendLocation(chat.ExternalId__c, lat, lon);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<ChatMessage__c> messages = [
+            SELECT Bot__c, User__c, Chat__c, Text__c, Type__c, MediaUrl__c, Parameters__c, ExternalId__c
+            FROM ChatMessage__c
+        ];
+        System.assertEquals(1, messages.size());
+        System.assertEquals(bot.Id, messages.get(0).Bot__c);
+        System.assertEquals(chat.Id, messages.get(0).Chat__c);
+        System.assertEquals(BotMessageType.Location.name(), messages.get(0).Type__c);
+        System.assert(String.isBlank(messages.get(0).MediaUrl__c));
+        System.assert(String.isBlank(messages.get(0).Text__c));
+        System.assert(String.isBlank(messages.get(0).User__c));
+        System.assert(String.isNotBlank(messages.get(0).ExternalId__c));
+
+        ValueMap additionalInfo = ValueMap.fromJson(messages.get(0).Parameters__c);
+        System.assertEquals(String.valueOf(lat), additionalInfo.getString('lat'));
+        System.assertEquals(String.valueOf(lon), additionalInfo.getString('lon'));
+    }
+
     /**
      * Viber tests
      */
@@ -509,6 +572,44 @@ private class BotServiceTest {
         ValueMap additionalInfo = ValueMap.fromJson(messages.get(0).Parameters__c);
         System.assertEquals('John Wick', additionalInfo.getString('name'));
         System.assertEquals('3168998280', additionalInfo.getString('phone'));
+    }
+
+    @IsTest
+    private static void sendLocation_viber_shouldSendAndCreateMessageRecord() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+
+        Decimal lat = 55.7439;
+        Decimal lon = -10.1442;
+        Bot__c bot = prepareBot(BotType.Viber);
+        Chat__c chat = new Chat__c(
+            Name = 'Test',
+            Bot__c = bot.Id,
+            ExternalId__c = '3214:' + bot.TokenHash__c.substring(0, 20)
+        );
+        insert chat;
+        BotService service = new ViberBotService(bot);
+
+        Test.startTest();
+        service.sendLocation(chat.ExternalId__c, lat, lon);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<ChatMessage__c> messages = [
+            SELECT Bot__c, User__c, Chat__c, Text__c, Type__c, MediaUrl__c, Parameters__c, ExternalId__c
+            FROM ChatMessage__c
+        ];
+        System.assertEquals(1, messages.size());
+        System.assertEquals(bot.Id, messages.get(0).Bot__c);
+        System.assertEquals(chat.Id, messages.get(0).Chat__c);
+        System.assertEquals(BotMessageType.Location.name(), messages.get(0).Type__c);
+        System.assert(String.isBlank(messages.get(0).MediaUrl__c));
+        System.assert(String.isBlank(messages.get(0).Text__c));
+        System.assert(String.isBlank(messages.get(0).User__c));
+        System.assert(String.isNotBlank(messages.get(0).ExternalId__c));
+
+        ValueMap additionalInfo = ValueMap.fromJson(messages.get(0).Parameters__c);
+        System.assertEquals(String.valueOf(lat), additionalInfo.getString('lat'));
+        System.assertEquals(String.valueOf(lon), additionalInfo.getString('lon'));
     }
 
     private static Bot__c prepareBot(BotType type) {

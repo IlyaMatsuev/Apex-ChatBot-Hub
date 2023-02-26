@@ -65,6 +65,18 @@ global class ViberBotService extends BotService {
         return call(ViberBotMethod.SendMessage, payload).getString('message_token');
     }
 
+    protected override String sendLocation(String chatId, BotService.MessageParams params) {
+        ValueMap payload = prepareMessagePayload(chatId, 'location')
+            .set(
+                'location',
+                new ValueMap()
+                    .set('lat', params.additionalInfo.getString('lat'))
+                    .set('lon', params.additionalInfo.getString('lon'))
+            );
+
+        return call(ViberBotMethod.SendMessage, payload).getString('message_token');
+    }
+
     protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = super.prepareRequest(method, body);
         request.setHeader('X-Viber-Auth-Token', bot.Token__c);

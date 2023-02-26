@@ -1,3 +1,4 @@
+// TODO: Remove duplicated code
 @IsTest
 public class BotCalloutMock implements HttpCalloutMock {
     private final BotType type;
@@ -94,6 +95,15 @@ public class BotCalloutMock implements HttpCalloutMock {
                     .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
                     .toJson();
             }
+            when 'sendLocation' {
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('latitude'));
+                System.assert(request.hasValue('longitude'));
+                return new ValueMap()
+                    .set('status', 'ok')
+                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
+                    .toJson();
+            }
         }
         throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
     }
@@ -138,6 +148,11 @@ public class BotCalloutMock implements HttpCalloutMock {
                     ValueMap contact = request.getValueMap('contact');
                     System.assert(String.isNotBlank(contact.getString('name')));
                     System.assert(String.isNotBlank(contact.getString('phone_number')));
+                } else if (messageType == 'location') {
+                    System.assert(request.hasValue('location'));
+                    ValueMap location = request.getValueMap('location');
+                    System.assert(String.isNotBlank(location.getString('lat')));
+                    System.assert(String.isNotBlank(location.getString('lon')));
                 } else {
                     throw new IllegalArgumentException(
                         'The provided viber message type is not correct: ' + messageType

@@ -98,6 +98,22 @@ global abstract class BotService {
         send(chatId, params);
     }
 
+    /**
+     * @description Sends a location to the chat. Latitude and longitude values are not validated
+     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
+     * @param latitude The location latitude
+     * @param longitude The location longitude
+     */
+    global void sendLocation(String chatId, Decimal latitude, Decimal longitude) {
+        MessageParams params = new MessageParams(BotMessageType.Location);
+        params.additionalInfo.set('lat', latitude).set('lon', longitude);
+        send(chatId, params);
+    }
+
+    /**
+     * Callout handling logic
+     */
+
     protected ValueMap call(BotMethod method, ValueMap body) {
         return call(method, body, true);
     }
@@ -139,6 +155,10 @@ global abstract class BotService {
         return response.getStatusCode() == 200;
     }
 
+    /**
+     * Messaging logic
+     */
+
     protected virtual String sendMessage(String chatId, MessageParams params) {
         throw new BotServiceException(
             'Not implemented: sendMessage(String chatId, MessageParams params)',
@@ -174,6 +194,13 @@ global abstract class BotService {
         );
     }
 
+    protected virtual String sendLocation(String chatId, MessageParams params) {
+        throw new BotServiceException(
+            'Not implemented: sendLocation(String chatId, MessageParams params)',
+            new ValueMap().set('chatId', chatId).set('params', params)
+        );
+    }
+
     private void send(String chatId, MessageParams params) {
         String normalizedChatId = chatId.substringBefore(':');
         String messageId;
@@ -187,6 +214,8 @@ global abstract class BotService {
             messageId = sendFile(normalizedChatId, params);
         } else if (params.type == BotMessageType.Contact) {
             messageId = sendContact(normalizedChatId, params);
+        } else if (params.type == BotMessageType.Location) {
+            messageId = sendLocation(normalizedChatId, params);
         } else {
             throw new BotService.BotServiceException(
                 'The requested message type is not supported yet: ' + params.type?.name(),
