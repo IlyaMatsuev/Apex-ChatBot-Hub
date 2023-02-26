@@ -1,7 +1,7 @@
 /**
  * @description The base class that contains features common for all bots
  */
-global abstract class BotService {
+global abstract class BotService implements IBotService {
     protected final Bot__c bot;
 
     protected BotCalloutService calloutService {

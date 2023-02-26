@@ -1,3 +1,4 @@
+// TODO: Add ApexDoc
 /**
  * @description The concrete service for the `Telegram` messanger bots. Extends `BotService` but also contains features related to `Telegram` only
  */
@@ -7,63 +8,89 @@ global class TelegramBotService extends BotService {
         super(bot);
     }
 
-    protected override String sendMessage(String chatId, BotService.MessageParams params) {
-        ValueMap payload = new ValueMap().set('chat_id', chatId).set('text', params.text);
-        return sendMessage(TelegramBotMethod.SendMessage, payload);
+    global SenderService send(String chatId) {
+        return new SenderService(chatId, calloutService);
     }
 
-    protected override String sendImage(String chatId, BotService.MessageParams params) {
-        ValueMap payload = new ValueMap()
-            .set('chat_id', chatId)
-            .set('caption', params.text, true)
-            .set('photo', params.mediaUrl);
+    private class SenderService implements IBotSenderService {
+        private final String chatId;
+        private final BotCalloutService calloutService;
 
-        return sendMessage(TelegramBotMethod.SendPhoto, payload);
-    }
+        public SenderService(String chatId, BotCalloutService calloutService) {
+            this.chatId = chatId;
+            this.calloutService = calloutService;
+        }
 
-    protected override String sendVideo(String chatId, BotService.MessageParams params) {
-        ValueMap payload = new ValueMap()
-            .set('chat_id', chatId)
-            .set('caption', params.text, true)
-            .set('video', params.mediaUrl);
+        global void text(String text) {
+            ValueMap payload = new ValueMap().set('chat_id', chatId).set('text', text);
+            send(TelegramBotMethod.SendMessage, payload);
+        }
 
-        return sendMessage(TelegramBotMethod.SendVideo, payload);
-    }
+        global void image(String imageUrl) {
+            image(imageUrl, null);
+        }
 
-    protected override String sendFile(String chatId, BotService.MessageParams params) {
-        ValueMap payload = new ValueMap()
-            .set('chat_id', chatId)
-            .set('caption', params.text, true)
-            .set('document', params.mediaUrl);
+        global void image(String imageUrl, String caption) {
+            ValueMap payload = new ValueMap()
+                .set('chat_id', chatId)
+                .set('caption', caption, true)
+                .set('photo', imageUrl);
 
-        return sendMessage(TelegramBotMethod.SendDocument, payload);
-    }
+            send(TelegramBotMethod.SendPhoto, payload);
+        }
 
-    protected override String sendContact(String chatId, BotService.MessageParams params) {
-        String name = params.additionalInfo.getString('name').trim();
-        String firstName = name.substringBefore(' ');
-        String lastName = name.contains(' ') ? name.substringAfter(' ') : null;
+        global void video(String videoUrl) {
+            video(videoUrl, null);
+        }
 
-        ValueMap payload = new ValueMap()
-            .set('chat_id', chatId)
-            .set('first_name', firstName)
-            .set('last_name', lastName, true)
-            .set('phone_number', params.additionalInfo.getString('phone'));
+        global void video(String videoUrl, String caption) {
+            ValueMap payload = new ValueMap()
+                .set('chat_id', chatId)
+                .set('caption', caption, true)
+                .set('video', videoUrl);
 
-        return sendMessage(TelegramBotMethod.SendContact, payload);
-    }
+            send(TelegramBotMethod.SendVideo, payload);
+        }
 
-    protected override String sendLocation(String chatId, BotService.MessageParams params) {
-        ValueMap payload = new ValueMap()
-            .set('chat_id', chatId)
-            .set('latitude', params.additionalInfo.getDecimal('lat'))
-            .set('longitude', params.additionalInfo.getDecimal('lon'));
+        global void file(String fileUrl) {
+            file(fileUrl);
+        }
 
-        return sendMessage(TelegramBotMethod.SendLocation, payload);
-    }
+        global void file(String fileUrl, String caption) {
+            ValueMap payload = new ValueMap()
+                .set('chat_id', chatId)
+                .set('caption', caption, true)
+                .set('document', fileUrl);
 
-    private String sendMessage(TelegramBotMethod method, ValueMap payload) {
-        ValueMap response = calloutService.call(method, payload);
-        return ((TelegramBotMessageEntity) response.getValueMap('result', TelegramBotMessageEntity.class)).getId();
+            send(TelegramBotMethod.SendDocument, payload);
+        }
+
+        global void contact(String name, String phone) {
+            String firstName = name.substringBefore(' ');
+            String lastName = name.contains(' ') ? name.substringAfter(' ') : null;
+
+            ValueMap payload = new ValueMap()
+                .set('chat_id', chatId)
+                .set('first_name', firstName)
+                .set('last_name', lastName, true)
+                .set('phone_number', phone);
+
+            send(TelegramBotMethod.SendContact, payload);
+        }
+
+        global void location(Decimal latitude, Decimal longitude) {
+            ValueMap payload = new ValueMap()
+                .set('chat_id', chatId)
+                .set('latitude', latitude)
+                .set('longitude', longitude);
+
+            send(TelegramBotMethod.SendLocation, payload);
+        }
+
+        // TODO: Need to save the message in DB as I previously did
+        private String send(TelegramBotMethod method, ValueMap payload) {
+            ValueMap response = calloutService.call(method, payload);
+            return ((TelegramBotMessageEntity) response.getValueMap('result', TelegramBotMessageEntity.class)).getId();
+        }
     }
 }
