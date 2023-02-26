@@ -58,6 +58,24 @@ private class BotServiceTest {
         System.assertEquals('/fake-video.mp4', params.getString('mediaUrl'));
     }
 
+    @IsTest
+    private static void sendFile_withoutImplementation_shouldThrowException() {
+        Exception error;
+        try {
+            new NoImplementationBotService(prepareBot(BotType.Telegram)).sendFile('fake-id', '/fake-file.pdf');
+        } catch (Exception ex) {
+            error = ex;
+        }
+
+        System.assert(error != null);
+        System.assert(error instanceof BotService.BotServiceException);
+        BotService.BotServiceException serviceError = (BotService.BotServiceException) error;
+        System.assertEquals('fake-id', serviceError.payload.getString('chatId'));
+        ValueMap params = ValueMap.fromJson(JSON.serialize(serviceError.payload.get('params')));
+        System.assert(params.getString('text') == null);
+        System.assertEquals('/fake-file.pdf', params.getString('mediaUrl'));
+    }
+
     /**
      * Telegram tests
      */
@@ -196,6 +214,38 @@ private class BotServiceTest {
         System.assert(String.isNotBlank(messages.get(0).ExternalId__c));
     }
 
+    @IsTest
+    private static void sendFile_telegram_shouldSendAndCreateMessageRecord() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+
+        Bot__c bot = prepareBot(BotType.Telegram);
+        Chat__c chat = new Chat__c(
+            Name = 'Test',
+            Bot__c = bot.Id,
+            ExternalId__c = '3214:' + bot.TokenHash__c.substring(0, 20)
+        );
+        insert chat;
+        BotService service = new TelegramBotService(bot);
+
+        Test.startTest();
+        service.sendFile(chat.ExternalId__c, 'https://example.com/file.pdf');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<ChatMessage__c> messages = [
+            SELECT Bot__c, User__c, Chat__c, Text__c, Type__c, MediaUrl__c, ExternalId__c
+            FROM ChatMessage__c
+        ];
+        System.assertEquals(1, messages.size());
+        System.assertEquals(bot.Id, messages.get(0).Bot__c);
+        System.assertEquals(chat.Id, messages.get(0).Chat__c);
+        System.assertEquals(BotMessageType.File.name(), messages.get(0).Type__c);
+        System.assertEquals('https://example.com/file.pdf', messages.get(0).MediaUrl__c);
+        System.assert(String.isBlank(messages.get(0).Text__c));
+        System.assert(String.isBlank(messages.get(0).User__c));
+        System.assert(String.isNotBlank(messages.get(0).ExternalId__c));
+    }
+
     /**
      * Viber tests
      */
@@ -329,6 +379,38 @@ private class BotServiceTest {
         System.assertEquals(chat.Id, messages.get(0).Chat__c);
         System.assertEquals(BotMessageType.Video.name(), messages.get(0).Type__c);
         System.assertEquals('https://example.com/video.mp4', messages.get(0).MediaUrl__c);
+        System.assert(String.isBlank(messages.get(0).Text__c));
+        System.assert(String.isBlank(messages.get(0).User__c));
+        System.assert(String.isNotBlank(messages.get(0).ExternalId__c));
+    }
+
+    @IsTest
+    private static void sendFile_viber_shouldSendAndCreateMessageRecord() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+
+        Bot__c bot = prepareBot(BotType.Viber);
+        Chat__c chat = new Chat__c(
+            Name = 'Test',
+            Bot__c = bot.Id,
+            ExternalId__c = '3214:' + bot.TokenHash__c.substring(0, 20)
+        );
+        insert chat;
+        BotService service = new ViberBotService(bot);
+
+        Test.startTest();
+        service.sendFile(chat.ExternalId__c, 'https://example.com/file.pdf');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<ChatMessage__c> messages = [
+            SELECT Bot__c, User__c, Chat__c, Text__c, Type__c, MediaUrl__c, ExternalId__c
+            FROM ChatMessage__c
+        ];
+        System.assertEquals(1, messages.size());
+        System.assertEquals(bot.Id, messages.get(0).Bot__c);
+        System.assertEquals(chat.Id, messages.get(0).Chat__c);
+        System.assertEquals(BotMessageType.File.name(), messages.get(0).Type__c);
+        System.assertEquals('https://example.com/file.pdf', messages.get(0).MediaUrl__c);
         System.assert(String.isBlank(messages.get(0).Text__c));
         System.assert(String.isBlank(messages.get(0).User__c));
         System.assert(String.isNotBlank(messages.get(0).ExternalId__c));

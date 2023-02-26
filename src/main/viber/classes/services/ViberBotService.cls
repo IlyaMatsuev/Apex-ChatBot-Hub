@@ -2,7 +2,7 @@
  * @description The concrete service for the `Viber` messanger bots. Extends `BotService` but also contains features related to `Viber` only
  */
 global class ViberBotService extends BotService {
-    private static final Integer DEFAULT_VIDEO_MESSAGE_SIZE = 10000;
+    private static final Integer DEFAULT_FILE_MESSAGE_SIZE = 10000;
 
     public ViberBotService(Bot__c bot) {
         super(bot);
@@ -35,7 +35,7 @@ global class ViberBotService extends BotService {
             .set('sender', new ValueMap().set('name', bot.Name))
             .set('type', 'video')
             .set('media', params.mediaUrl)
-            .set('size', DEFAULT_VIDEO_MESSAGE_SIZE);
+            .set('size', DEFAULT_FILE_MESSAGE_SIZE);
 
         String videoMessageId = call(ViberBotMethod.SendMessage, payload).getString('message_token');
 
@@ -45,6 +45,26 @@ global class ViberBotService extends BotService {
         }
 
         return videoMessageId;
+    }
+
+    protected override String sendFile(String chatId, BotService.MessageParams params) {
+        ValueMap payload = new ValueMap()
+            .set('receiver', chatId)
+            .set('sender', new ValueMap().set('name', bot.Name))
+            .set('type', 'file')
+            .set('media', params.mediaUrl)
+            // Capturing the file name from the url: "https://example.com/static/file.pdf"
+            .set('file_name', params.mediaUrl.substringAfterLast('/'))
+            .set('size', DEFAULT_FILE_MESSAGE_SIZE);
+
+        String fileMessageId = call(ViberBotMethod.SendMessage, payload).getString('message_token');
+
+        // Viber doesn't support captions for file messages, so send caption text separately
+        if (String.isNotBlank(params.text?.trim())) {
+            sendMessage(chatId, params.text);
+        }
+
+        return fileMessageId;
     }
 
     protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {

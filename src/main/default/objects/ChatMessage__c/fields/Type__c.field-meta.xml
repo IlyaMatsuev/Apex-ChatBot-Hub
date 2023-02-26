@@ -26,6 +26,11 @@
                 <default>false</default>
                 <label>Video</label>
             </value>
+            <value>
+                <fullName>File</fullName>
+                <default>false</default>
+                <label>File</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

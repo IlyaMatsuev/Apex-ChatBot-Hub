@@ -29,6 +29,15 @@ global class TelegramBotService extends BotService {
         return sendMessage(TelegramBotMethod.SendVideo, payload);
     }
 
+    protected override String sendFile(String chatId, BotService.MessageParams params) {
+        ValueMap payload = new ValueMap()
+            .set('chat_id', chatId)
+            .set('caption', params.text, true)
+            .set('document', params.mediaUrl);
+
+        return sendMessage(TelegramBotMethod.SendDocument, payload);
+    }
+
     protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = super.prepareRequest(method, body);
         request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + method);

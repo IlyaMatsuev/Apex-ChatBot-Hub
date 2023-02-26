@@ -67,6 +67,25 @@ global abstract class BotService {
         send(chatId, new MessageParams(BotMessageType.Video, caption, videoUrl));
     }
 
+    /**
+     * @description Sends a file to the chat
+     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
+     * @param fileUrl The file URL. Should include file name with extension in the end
+     */
+    global void sendFile(String chatId, String fileUrl) {
+        sendFile(chatId, fileUrl, null);
+    }
+
+    /**
+     * @description Sends a file to the chat
+     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
+     * @param fileUrl The file URL. Should include file name with extension in the end
+     * @param caption The text to attach to the file
+     */
+    global void sendFile(String chatId, String fileUrl, String caption) {
+        send(chatId, new MessageParams(BotMessageType.File, caption, fileUrl));
+    }
+
     protected ValueMap call(BotMethod method, ValueMap body) {
         return call(method, body, true);
     }
@@ -129,6 +148,13 @@ global abstract class BotService {
         );
     }
 
+    protected virtual String sendFile(String chatId, MessageParams params) {
+        throw new BotServiceException(
+            'Not implemented: sendFile(String chatId, MessageParams params)',
+            new ValueMap().set('chatId', chatId).set('params', params)
+        );
+    }
+
     private void send(String chatId, MessageParams params) {
         String normalizedChatId = chatId.substringBefore(':');
         String messageId;
@@ -138,6 +164,8 @@ global abstract class BotService {
             messageId = sendImage(normalizedChatId, params);
         } else if (params.type == BotMessageType.Video) {
             messageId = sendVideo(normalizedChatId, params);
+        } else if (params.type == BotMessageType.File) {
+            messageId = sendFile(normalizedChatId, params);
         } else {
             throw new BotService.BotServiceException(
                 'The requested message type is not supported yet: ' + params.type?.name(),

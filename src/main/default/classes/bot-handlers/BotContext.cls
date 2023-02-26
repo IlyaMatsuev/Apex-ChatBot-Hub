@@ -90,7 +90,7 @@ global class BotContext {
          * @param imageUrl The image URL
          */
         global void sendImage(String imageUrl) {
-            service.sendImage(chatId, imageUrl);
+            sendImage(imageUrl, null);
         }
 
         /**
@@ -107,7 +107,7 @@ global class BotContext {
          * @param videoUrl The image URL
          */
         global void sendVideo(String videoUrl) {
-            service.sendVideo(chatId, videoUrl);
+            sendVideo(videoUrl, null);
         }
 
         /**
@@ -117,6 +117,23 @@ global class BotContext {
          */
         global void sendVideo(String videoUrl, String caption) {
             service.sendVideo(chatId, videoUrl, caption);
+        }
+
+        /**
+         * @description Sends a file message as a response to the incoming update
+         * @param fileUrl The file URL. Should include file name with extension in the end
+         */
+        global void sendFile(String fileUrl) {
+            sendFile(fileUrl, null);
+        }
+
+        /**
+         * @description Sends an file message with a caption as a response to the incoming update
+         * @param fileUrl The file URL. Should include file name with extension in the end
+         * @param caption The text to be attached with the file
+         */
+        global void sendFile(String fileUrl, String caption) {
+            service.sendFile(chatId, fileUrl, caption);
         }
     }
 }
