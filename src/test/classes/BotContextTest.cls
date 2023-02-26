@@ -327,7 +327,7 @@ private class BotContextTest {
             return new BotServiceMock(bot);
         }
 
-        public override WebhookBotService createWebhookService(Bot__c bot) {
+        public override BotWebhookService createWebhookService(Bot__c bot) {
             return null;
         }
     }

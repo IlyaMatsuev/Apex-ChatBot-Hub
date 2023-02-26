@@ -23,11 +23,11 @@
         <value xsi:type="xsd:string">ViberBotUpdateResolver</value>
     </values>
     <values>
-        <field>EventTypesToIgnore__c</field>
-        <value xsi:type="xsd:string">webhook;delivered;seen;failed;subscribed;unsubscribed;conversation_started</value>
+        <field>BotWebhookService__c</field>
+        <value xsi:type="xsd:string">ViberBotWebhookService</value>
     </values>
     <values>
-        <field>WebhookBotService__c</field>
-        <value xsi:type="xsd:string">ViberWebhookBotService</value>
+        <field>EventTypesToIgnore__c</field>
+        <value xsi:type="xsd:string">webhook;delivered;seen;failed;subscribed;unsubscribed;conversation_started</value>
     </values>
 </CustomMetadata>

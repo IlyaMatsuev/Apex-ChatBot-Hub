@@ -1,6 +1,6 @@
-public class ViberWebhookBotService extends WebhookBotService {
+public class ViberBotWebhookService extends BotWebhookService {
     @TestVisible
-    private ViberWebhookBotService(Bot__c bot) {
+    private ViberBotWebhookService(Bot__c bot) {
         super(bot);
     }
 

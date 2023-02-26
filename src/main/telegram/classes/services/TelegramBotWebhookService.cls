@@ -1,7 +1,6 @@
-// TODO: Rename to TelegramBotWebhookService
-public class TelegramWebhookBotService extends WebhookBotService {
+public class TelegramBotWebhookService extends BotWebhookService {
     @TestVisible
-    private TelegramWebhookBotService(Bot__c bot) {
+    private TelegramBotWebhookService(Bot__c bot) {
         super(bot);
     }
 

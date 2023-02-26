@@ -1,5 +1,4 @@
-// TODO: Rename to BotWebhookService
-public abstract class WebhookBotService {
+public abstract class BotWebhookService {
     private static final String BOT_PUBLIC_SITE_NAME = 'BotPublic';
 
     protected final Bot__c bot;
@@ -37,7 +36,7 @@ public abstract class WebhookBotService {
         private set;
     }
 
-    protected WebhookBotService(Bot__c bot) {
+    protected BotWebhookService(Bot__c bot) {
         this.bot = bot;
     }
 
