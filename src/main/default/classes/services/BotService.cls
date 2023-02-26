@@ -163,7 +163,7 @@ global abstract class BotService {
         }
     }
 
-    public class MessageParams extends ValueMap {
+    public class MessageParams {
         public final BotMessageType type;
         public final String text;
         public final String mediaUrl;

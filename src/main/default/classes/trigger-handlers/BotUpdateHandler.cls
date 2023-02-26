@@ -32,7 +32,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
                 Type.forName(settings.BotUpdateEventEntity__c)
             );
 
-            if (!shouldIgnoreEvent(settings, updateEventEntity)) {
+            if (shouldHandleEvent(settings, updateEventEntity)) {
                 botContexts.add(new BotContext(bot, new BotUpdateModel(updateEventEntity), serviceFactory));
             }
         }
@@ -60,11 +60,9 @@ public class BotUpdateHandler implements Triggers.IHandler {
         }
     }
 
-    private Boolean shouldIgnoreEvent(BotSetting__mdt settings, IBotUpdateEventEntity updateEventEntity) {
-        if (String.isBlank(settings.EventTypesToIgnore__c)) {
-            return false;
-        }
-        return settings.EventTypesToIgnore__c.split(';').contains(updateEventEntity.getType().name());
+    private Boolean shouldHandleEvent(BotSetting__mdt settings, IBotUpdateEventEntity updateEventEntity) {
+        List<String> ignoreEventTypes = settings.EventTypesToIgnore__c?.split(';');
+        return ignoreEventTypes == null || !ignoreEventTypes.contains(updateEventEntity.getType().name());
     }
 
     private List<SObject> getChatDetails(BotContext context) {

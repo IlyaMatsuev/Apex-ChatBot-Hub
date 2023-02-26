@@ -27,17 +27,72 @@ private class BotContextTest {
      */
 
     @IsTest
-    private static void send_telegramReplyWithMessage_shouldSendMessage() {
+    private static void sendMessage_telegramReplyWithMessage_shouldSendMessage() {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
         BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
 
-        context.reply.send('test message');
+        context.reply.sendMessage('test message');
 
         System.assertEquals(1, BotServiceMock.outboundMessages.size());
-        System.assertEquals(
-            'test message',
-            BotServiceMock.outboundMessages.get(String.valueOf(context.received.chat.id))
-        );
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Text, messageParams.type);
+        System.assertEquals('test message', messageParams.text);
+    }
+
+    @IsTest
+    private static void sendImage_telegramReplyWithImageNoCaption_shouldSendImage() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+
+        context.reply.sendImage('https://example.com/image.jpeg');
+
+        System.assertEquals(1, BotServiceMock.outboundMessages.size());
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Image, messageParams.type);
+        System.assert(messageParams.text == null);
+        System.assertEquals('https://example.com/image.jpeg', messageParams.mediaUrl);
+    }
+
+    @IsTest
+    private static void sendImage_telegramReplyWithImageAndCaption_shouldSendImage() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+
+        context.reply.sendImage('https://example.com/image.jpeg', 'some caption');
+
+        System.assertEquals(1, BotServiceMock.outboundMessages.size());
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Image, messageParams.type);
+        System.assertEquals('some caption', messageParams.text);
+        System.assertEquals('https://example.com/image.jpeg', messageParams.mediaUrl);
+    }
+
+    @IsTest
+    private static void sendVideo_telegramReplyWithVideoNoCaption_shouldSendImage() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+
+        context.reply.sendVideo('https://example.com/image.mp4');
+
+        System.assertEquals(1, BotServiceMock.outboundMessages.size());
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Video, messageParams.type);
+        System.assert(messageParams.text == null);
+        System.assertEquals('https://example.com/image.mp4', messageParams.mediaUrl);
+    }
+
+    @IsTest
+    private static void sendVideo_telegramReplyWithVideoAndCaption_shouldSendImage() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+
+        context.reply.sendVideo('https://example.com/image.mp4', 'some caption');
+
+        System.assertEquals(1, BotServiceMock.outboundMessages.size());
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Video, messageParams.type);
+        System.assertEquals('some caption', messageParams.text);
+        System.assertEquals('https://example.com/image.mp4', messageParams.mediaUrl);
     }
 
     @IsTest
@@ -81,17 +136,72 @@ private class BotContextTest {
      */
 
     @IsTest
-    private static void send_viberReplyWithMessage_shouldSendMessage() {
+    private static void sendMessage_viberReplyWithMessage_shouldSendMessage() {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
         BotContext context = createBotContext(BotType.Viber, createViberPayload());
 
-        context.reply.send('test message');
+        context.reply.sendMessage('test message');
 
         System.assertEquals(1, BotServiceMock.outboundMessages.size());
-        System.assertEquals(
-            'test message',
-            BotServiceMock.outboundMessages.get(String.valueOf(context.received.chat.id))
-        );
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Text, messageParams.type);
+        System.assertEquals('test message', messageParams.text);
+    }
+
+    @IsTest
+    private static void sendImage_viberReplyWithImageNoCaption_shouldSendImage() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+        BotContext context = createBotContext(BotType.Viber, createviberPayload());
+
+        context.reply.sendImage('https://example.com/image.jpeg');
+
+        System.assertEquals(1, BotServiceMock.outboundMessages.size());
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Image, messageParams.type);
+        System.assert(messageParams.text == null);
+        System.assertEquals('https://example.com/image.jpeg', messageParams.mediaUrl);
+    }
+
+    @IsTest
+    private static void sendImage_viberReplyWithImageAndCaption_shouldSendImage() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+        BotContext context = createBotContext(BotType.Viber, createviberPayload());
+
+        context.reply.sendImage('https://example.com/image.jpeg', 'some caption');
+
+        System.assertEquals(1, BotServiceMock.outboundMessages.size());
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Image, messageParams.type);
+        System.assertEquals('some caption', messageParams.text);
+        System.assertEquals('https://example.com/image.jpeg', messageParams.mediaUrl);
+    }
+
+    @IsTest
+    private static void sendVideo_viberReplyWithVideoNoCaption_shouldSendImage() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+        BotContext context = createBotContext(BotType.Viber, createviberPayload());
+
+        context.reply.sendVideo('https://example.com/image.mp4');
+
+        System.assertEquals(1, BotServiceMock.outboundMessages.size());
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Video, messageParams.type);
+        System.assert(messageParams.text == null);
+        System.assertEquals('https://example.com/image.mp4', messageParams.mediaUrl);
+    }
+
+    @IsTest
+    private static void sendVideo_viberReplyWithVideoAndCaption_shouldSendImage() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+        BotContext context = createBotContext(BotType.Viber, createviberPayload());
+
+        context.reply.sendVideo('https://example.com/image.mp4', 'some caption');
+
+        System.assertEquals(1, BotServiceMock.outboundMessages.size());
+        BotService.MessageParams messageParams = BotServiceMock.outboundMessages.get(context.received.chat.id);
+        System.assertEquals(BotMessageType.Video, messageParams.type);
+        System.assertEquals('some caption', messageParams.text);
+        System.assertEquals('https://example.com/image.mp4', messageParams.mediaUrl);
     }
 
     @IsTest

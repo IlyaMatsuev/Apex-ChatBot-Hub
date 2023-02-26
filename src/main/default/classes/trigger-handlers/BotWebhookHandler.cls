@@ -11,10 +11,6 @@ public class BotWebhookHandler implements Triggers.IHandler {
     }
 
     public void handle(Triggers.Context context) {
-        if (context.props.isBefore) {
-            return;
-        }
-
         for (Bot__c bot : getBots(context.props)) {
             WebhookBotService service = serviceFactory.createWebhookService(bot);
             if (context.props.isInsert || context.props.isUndelete) {

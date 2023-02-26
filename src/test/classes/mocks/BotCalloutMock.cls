@@ -45,8 +45,8 @@ public class BotCalloutMock implements HttpCalloutMock {
                 String webhookUrl = request.getString('url');
                 System.assertEquals(BotUtils.getApiUrl() + type, webhookUrl.substringBeforeLast('/'));
                 System.assert(webhookUrl.substringAfterLast('/') instanceof Id);
-                System.assert(request.has('allowed_updates'));
-                System.assert(request.has('secret_token'));
+                System.assert(request.hasValue('allowed_updates'));
+                System.assert(request.hasValue('secret_token'));
                 return 'True';
             }
             when 'deleteWebhook' {
@@ -54,8 +54,24 @@ public class BotCalloutMock implements HttpCalloutMock {
                 return 'True';
             }
             when 'sendMessage' {
-                System.assert(request.has('chat_id'));
-                System.assert(request.has('text'));
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('text'));
+                return new ValueMap()
+                    .set('status', 'ok')
+                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
+                    .toJson();
+            }
+            when 'sendPhoto' {
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('photo'));
+                return new ValueMap()
+                    .set('status', 'ok')
+                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
+                    .toJson();
+            }
+            when 'sendVideo' {
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('video'));
                 return new ValueMap()
                     .set('status', 'ok')
                     .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
@@ -73,7 +89,7 @@ public class BotCalloutMock implements HttpCalloutMock {
                     return new ValueMap().set('status', 0).set('status_message', 'ok').toJson();
                 }
                 System.assert(Pattern.matches('Viber/\\w{15,18}/\\w+', webhookUrl.substringAfter('bots/')));
-                System.assert(request.has('event_types'));
+                System.assert(request.hasValue('event_types'));
                 System.assert(request.getBoolean('send_name'));
                 System.assert(request.getBoolean('send_photo'));
                 return new ValueMap()
@@ -83,10 +99,23 @@ public class BotCalloutMock implements HttpCalloutMock {
                     .toJson();
             }
             when 'send_message' {
-                System.assert(request.has('receiver'));
-                System.assert(request.has('type'));
-                System.assert(request.has('text'));
-                System.assert(request.has('sender'));
+                System.debug('request: ' + request.toJson(true));
+                System.assert(request.hasValue('receiver'));
+                System.assert(request.hasValue('type'));
+                System.assert(request.hasValue('sender'));
+                String messageType = request.getString('type');
+                if (messageType == 'text') {
+                    System.assert(request.hasValue('text'));
+                } else if (messageType == 'picture') {
+                    System.assert(request.hasValue('media'));
+                } else if (messageType == 'video') {
+                    System.assert(request.hasValue('media'));
+                    System.assert(request.hasValue('size'));
+                } else {
+                    throw new IllegalArgumentException(
+                        'The provided viber message type is not correct: ' + messageType
+                    );
+                }
                 return new ValueMap()
                     .set('status', 0)
                     .set('status_message', 'ok')
