@@ -1,5 +1,6 @@
 public class ViberWebhookBotService extends WebhookBotService {
-    public ViberWebhookBotService(Bot__c bot) {
+    @TestVisible
+    private ViberWebhookBotService(Bot__c bot) {
         super(bot);
     }
 
@@ -16,20 +17,10 @@ public class ViberWebhookBotService extends WebhookBotService {
                     ViberBotUpdateEventType.Seen.name()
                 }
             );
-        call(ViberBotMethod.SetWebhook, payload);
+        calloutService.call(ViberBotMethod.SetWebhook, payload);
     }
 
     public override void unsetWebhook() {
-        call(ViberBotMethod.SetWebhook, new ValueMap().set('url', ''));
-    }
-
-    protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
-        HttpRequest request = super.prepareRequest(method, body);
-        request.setHeader('X-Viber-Auth-Token', bot.Token__c);
-        return request;
-    }
-
-    protected override Boolean isSuccessResponse(HttpResponse response, ValueMap payload) {
-        return super.isSuccessResponse(response, payload) && payload.getInteger('status') == 0;
+        calloutService.call(ViberBotMethod.SetWebhook, new ValueMap().set('url', ''));
     }
 }

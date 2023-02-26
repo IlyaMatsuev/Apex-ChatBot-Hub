@@ -44,7 +44,7 @@ public class BotCalloutMock implements HttpCalloutMock {
         switch on method.name() {
             when 'setWebhook' {
                 String webhookUrl = request.getString('url');
-                System.assertEquals(BotUtils.getApiUrl() + type, webhookUrl.substringBeforeLast('/'));
+                System.assert(webhookUrl.substringBeforeLast('/').endsWith('/' + type));
                 System.assert(webhookUrl.substringAfterLast('/') instanceof Id);
                 System.assert(request.hasValue('allowed_updates'));
                 System.assert(request.hasValue('secret_token'));

@@ -7,6 +7,10 @@
         <value xsi:type="xsd:string">https://chatapi.viber.com/pa/</value>
     </values>
     <values>
+        <field>BotCalloutService__c</field>
+        <value xsi:type="xsd:string">ViberBotCalloutService</value>
+    </values>
+    <values>
         <field>BotService__c</field>
         <value xsi:type="xsd:string">ViberBotService</value>
     </values>

@@ -4,13 +4,14 @@
 global class ViberBotService extends BotService {
     private static final Integer DEFAULT_FILE_MESSAGE_SIZE = 10000;
 
-    public ViberBotService(Bot__c bot) {
+    @TestVisible
+    private ViberBotService(Bot__c bot) {
         super(bot);
     }
 
     protected override String sendMessage(String chatId, BotService.MessageParams params) {
         ValueMap payload = prepareMessagePayload(chatId, 'text').set('text', params.text);
-        return call(ViberBotMethod.SendMessage, payload).getString('message_token');
+        return calloutService.call(ViberBotMethod.SendMessage, payload).getString('message_token');
     }
 
     protected override String sendImage(String chatId, BotService.MessageParams params) {
@@ -18,7 +19,7 @@ global class ViberBotService extends BotService {
             .set('text', params.text, true)
             .set('media', params.mediaUrl);
 
-        return call(ViberBotMethod.SendMessage, payload).getString('message_token');
+        return calloutService.call(ViberBotMethod.SendMessage, payload).getString('message_token');
     }
 
     protected override String sendVideo(String chatId, BotService.MessageParams params) {
@@ -26,7 +27,7 @@ global class ViberBotService extends BotService {
             .set('media', params.mediaUrl)
             .set('size', DEFAULT_FILE_MESSAGE_SIZE);
 
-        String videoMessageId = call(ViberBotMethod.SendMessage, payload).getString('message_token');
+        String videoMessageId = calloutService.call(ViberBotMethod.SendMessage, payload).getString('message_token');
 
         // Viber doesn't support captions for video messages, so send caption text separately
         if (String.isNotBlank(params.text?.trim())) {
@@ -43,7 +44,7 @@ global class ViberBotService extends BotService {
             .set('file_name', params.mediaUrl.substringAfterLast('/'))
             .set('size', DEFAULT_FILE_MESSAGE_SIZE);
 
-        String fileMessageId = call(ViberBotMethod.SendMessage, payload).getString('message_token');
+        String fileMessageId = calloutService.call(ViberBotMethod.SendMessage, payload).getString('message_token');
 
         // Viber doesn't support captions for file messages, so send caption text separately
         if (String.isNotBlank(params.text?.trim())) {
@@ -62,7 +63,7 @@ global class ViberBotService extends BotService {
                     .set('phone_number', params.additionalInfo.getString('phone'))
             );
 
-        return call(ViberBotMethod.SendMessage, payload).getString('message_token');
+        return calloutService.call(ViberBotMethod.SendMessage, payload).getString('message_token');
     }
 
     protected override String sendLocation(String chatId, BotService.MessageParams params) {
@@ -74,17 +75,7 @@ global class ViberBotService extends BotService {
                     .set('lon', params.additionalInfo.getString('lon'))
             );
 
-        return call(ViberBotMethod.SendMessage, payload).getString('message_token');
-    }
-
-    protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
-        HttpRequest request = super.prepareRequest(method, body);
-        request.setHeader('X-Viber-Auth-Token', bot.Token__c);
-        return request;
-    }
-
-    protected override Boolean isSuccessResponse(HttpResponse response, ValueMap payload) {
-        return super.isSuccessResponse(response, payload) && payload.getInteger('status') == 0;
+        return calloutService.call(ViberBotMethod.SendMessage, payload).getString('message_token');
     }
 
     private ValueMap prepareMessagePayload(String chatId, String type) {

@@ -11,6 +11,7 @@ public class BotSettingsProvider {
                     ApiUrl__c,
                     BotService__c,
                     WebhookBotService__c,
+                    BotCalloutService__c,
                     BotUpdateResolver__c,
                     BotUpdateEventEntity__c,
                     EventTypesToIgnore__c
@@ -36,7 +37,8 @@ public class BotSettingsProvider {
                 BotService__c = 'TelegramBotService',
                 BotUpdateEventEntity__c = 'TelegramBotUpdateEventEntity',
                 BotUpdateResolver__c = 'TelegramBotUpdateResolver',
-                WebhookBotService__c = 'TelegramWebhookBotService'
+                WebhookBotService__c = 'TelegramWebhookBotService',
+                BotCalloutService__c = 'BotCalloutService'
             )
         );
         settings.put(
@@ -48,7 +50,8 @@ public class BotSettingsProvider {
                 BotUpdateEventEntity__c = 'ViberBotUpdateEventEntity',
                 BotUpdateResolver__c = 'ViberBotUpdateResolver',
                 WebhookBotService__c = 'ViberWebhookBotService',
-                EventTypesToIgnore__c = 'webhook'
+                EventTypesToIgnore__c = 'webhook',
+                BotCalloutService__c = 'ViberBotCalloutService'
             )
         );
     }

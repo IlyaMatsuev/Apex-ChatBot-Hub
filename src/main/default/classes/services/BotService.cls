@@ -4,6 +4,16 @@
 global abstract class BotService {
     protected final Bot__c bot;
 
+    protected BotCalloutService calloutService {
+        get {
+            if (calloutService == null) {
+                calloutService = new BotServiceFactory().createCalloutService(bot);
+            }
+            return calloutService;
+        }
+        private set;
+    }
+
     protected BotType type {
         get {
             if (type == null) {
@@ -108,51 +118,6 @@ global abstract class BotService {
         MessageParams params = new MessageParams(BotMessageType.Location);
         params.additionalInfo.set('lat', latitude).set('lon', longitude);
         send(chatId, params);
-    }
-
-    /**
-     * Callout handling logic
-     */
-
-    protected ValueMap call(BotMethod method, ValueMap body) {
-        return call(method, body, true);
-    }
-
-    protected ValueMap call(BotMethod method, ValueMap body, Boolean throwOnFail) {
-        HttpResponse response = new Http().send(prepareRequest(method, body));
-        ValueMap responsePayload = ValueMap.fromJson(response.getBody());
-
-        if (throwOnFail && !isSuccessResponse(response, responsePayload)) {
-            throw new BotServiceException(
-                'A call failed for the bot "' + bot.Name + '" and method "' + method + '": ' + response.getStatus(),
-                new ValueMap()
-                    .set(
-                        'request',
-                        new ValueMap()
-                            .set('body', body.getValues())
-                            .set('botMethod', method.name())
-                            .set('botId', bot.Id)
-                    )
-                    .set(
-                        'response',
-                        new ValueMap().set('body', responsePayload).set('statusCode', response.getStatusCode())
-                    )
-            );
-        }
-        return responsePayload;
-    }
-
-    protected virtual HttpRequest prepareRequest(BotMethod method, ValueMap body) {
-        HttpRequest request = new HttpRequest();
-        request.setEndpoint(settings.ApiUrl__c + '/' + method);
-        request.setMethod('POST');
-        request.setHeader('Content-Type', 'application/json');
-        request.setBody(body.toJson());
-        return request;
-    }
-
-    protected virtual Boolean isSuccessResponse(HttpResponse response, ValueMap payload) {
-        return response.getStatusCode() == 200;
     }
 
     /**

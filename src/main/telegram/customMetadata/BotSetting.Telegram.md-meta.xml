@@ -7,6 +7,10 @@
         <value xsi:type="xsd:string">https://api.telegram.org/bot</value>
     </values>
     <values>
+        <field>BotCalloutService__c</field>
+        <value xsi:type="xsd:string">BotCalloutService</value>
+    </values>
+    <values>
         <field>BotService__c</field>
         <value xsi:type="xsd:string">TelegramBotService</value>
     </values>

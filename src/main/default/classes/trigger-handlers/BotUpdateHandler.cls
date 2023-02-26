@@ -90,7 +90,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
             FirstName__c = user.firstName,
             LastName__c = user.lastName,
             Username__c = user.username,
-            ExternalId__c = String.valueOf(user.id)
+            ExternalId__c = user.id
         );
     }
 
@@ -100,7 +100,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
             User__r = new ChatUser__c(ExternalId__c = userId),
             Text__c = message.text,
             SendDate__c = message.sentAt,
-            ExternalId__c = String.valueOf(message.id)
+            ExternalId__c = message.id
         );
     }
 

@@ -9,15 +9,25 @@ global virtual class BotServiceFactory {
      */
     global virtual BotService createBotService(Bot__c bot) {
         BotType type = BotType.valueOf(bot.Type__c);
-        return (BotService) createService(BotSettingsProvider.get(type).BotService__c, bot);
+        return (BotService) BotUtils.createInstance(
+            BotSettingsProvider.get(type).BotService__c,
+            new Map<String, Object> { 'bot' => bot }
+        );
     }
 
     public virtual WebhookBotService createWebhookService(Bot__c bot) {
         BotType type = BotType.valueOf(bot.Type__c);
-        return (WebhookBotService) createService(BotSettingsProvider.get(type).WebhookBotService__c, bot);
+        return (WebhookBotService) BotUtils.createInstance(
+            BotSettingsProvider.get(type).WebhookBotService__c,
+            new Map<String, Object> { 'bot' => bot }
+        );
     }
 
-    private Object createService(String typeName, Bot__c bot) {
-        return BotUtils.createInstance(typeName, new Map<String, Object> { 'bot' => bot });
+    public virtual BotCalloutService createCalloutService(Bot__c bot) {
+        BotType type = BotType.valueOf(bot.Type__c);
+        return (BotCalloutService) BotUtils.createInstance(
+            BotSettingsProvider.get(type).BotCalloutService__c,
+            new Map<String, Object> { 'bot' => bot }
+        );
     }
 }

@@ -2,7 +2,8 @@
  * @description The concrete service for the `Telegram` messanger bots. Extends `BotService` but also contains features related to `Telegram` only
  */
 global class TelegramBotService extends BotService {
-    public TelegramBotService(Bot__c bot) {
+    @TestVisible
+    private TelegramBotService(Bot__c bot) {
         super(bot);
     }
 
@@ -61,14 +62,8 @@ global class TelegramBotService extends BotService {
         return sendMessage(TelegramBotMethod.SendLocation, payload);
     }
 
-    protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
-        HttpRequest request = super.prepareRequest(method, body);
-        request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + method);
-        return request;
-    }
-
     private String sendMessage(TelegramBotMethod method, ValueMap payload) {
-        ValueMap response = call(method, payload);
+        ValueMap response = calloutService.call(method, payload);
         return ((TelegramBotMessageEntity) response.getValueMap('result', TelegramBotMessageEntity.class)).getId();
     }
 }
