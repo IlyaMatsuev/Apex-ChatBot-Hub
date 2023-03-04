@@ -4,6 +4,19 @@
 global abstract class BotService implements IBotService {
     protected final Bot__c bot;
 
+    /**
+     * @description The type of the bot this service operates with
+     */
+    global BotType type {
+        get {
+            if (type == null) {
+                type = BotType.valueOf(bot.Type__c);
+            }
+            return type;
+        }
+        private set;
+    }
+
     protected BotCalloutService calloutService {
         get {
             if (calloutService == null) {
@@ -14,217 +27,36 @@ global abstract class BotService implements IBotService {
         private set;
     }
 
-    protected BotType type {
-        get {
-            if (type == null) {
-                type = BotType.valueOf(bot.Type__c);
-            }
-            return type;
-        }
-        private set;
-    }
-
     protected BotSetting__mdt settings { get { return BotSettingsProvider.get(type); } }
 
     protected BotService(Bot__c bot) {
         this.bot = bot;
     }
 
-    /**
-     * @description Sends a text message to the chat
-     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
-     * @param text The message text to send
-     */
-    global void sendMessage(String chatId, String text) {
-        send(chatId, new MessageParams(BotMessageType.Text, text));
-    }
+    public class SaveSentMessageCallback implements IBotCallback {
+        private final String chatId;
+        private final Bot__c bot;
 
-    /**
-     * @description Sends an image to the chat
-     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
-     * @param imageUrl The image URL
-     */
-    global void sendImage(String chatId, String imageUrl) {
-        sendImage(chatId, imageUrl, null);
-    }
+        public SaveSentMessageCallback(String chatId, Bot__c bot) {
+            this.chatId = chatId;
+            this.bot = bot;
+        }
 
-    /**
-     * @description Sends an image with a caption to the chat
-     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
-     * @param imageUrl The image URL
-     * @param caption The text to attach to the image
-     */
-    global void sendImage(String chatId, String imageUrl, String caption) {
-        send(chatId, new MessageParams(BotMessageType.Image, caption, imageUrl));
-    }
-
-    /**
-     * @description Sends a video to the chat
-     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
-     * @param videoUrl The video URL
-     */
-    global void sendVideo(String chatId, String videoUrl) {
-        sendVideo(chatId, videoUrl, null);
-    }
-
-    /**
-     * @description Sends a video with a caption to the chat
-     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
-     * @param videoUrl The video URL
-     * @param caption The text to attach to the video
-     */
-    global void sendVideo(String chatId, String videoUrl, String caption) {
-        send(chatId, new MessageParams(BotMessageType.Video, caption, videoUrl));
-    }
-
-    /**
-     * @description Sends a file to the chat
-     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
-     * @param fileUrl The file URL. Should include file name with extension in the end
-     */
-    global void sendFile(String chatId, String fileUrl) {
-        sendFile(chatId, fileUrl, null);
-    }
-
-    /**
-     * @description Sends a file to the chat
-     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
-     * @param fileUrl The file URL. Should include file name with extension in the end
-     * @param caption The text to attach to the file
-     */
-    global void sendFile(String chatId, String fileUrl, String caption) {
-        send(chatId, new MessageParams(BotMessageType.File, caption, fileUrl));
-    }
-
-    /**
-     * @description Sends a contact reference to the chat
-     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
-     * @param name The contact first name or full name (via spaces)
-     * @param phone The contact phone number
-     */
-    global void sendContact(String chatId, String name, String phone) {
-        MessageParams params = new MessageParams(BotMessageType.Contact);
-        params.additionalInfo.set('name', name).set('phone', phone);
-        send(chatId, params);
-    }
-
-    /**
-     * @description Sends a location to the chat. Latitude and longitude values are not validated
-     * @param chatId External id of the chat. Can be either source chat messenger id or the generated one that is stored in `Chat__c.ExternalId__c`
-     * @param latitude The location latitude
-     * @param longitude The location longitude
-     */
-    global void sendLocation(String chatId, Decimal latitude, Decimal longitude) {
-        MessageParams params = new MessageParams(BotMessageType.Location);
-        params.additionalInfo.set('lat', latitude).set('lon', longitude);
-        send(chatId, params);
-    }
-
-    /**
-     * Messaging logic
-     */
-
-    protected virtual String sendMessage(String chatId, MessageParams params) {
-        throw new BotServiceException(
-            'Not implemented: sendMessage(String chatId, MessageParams params)',
-            new ValueMap().set('chatId', chatId).set('params', params)
-        );
-    }
-
-    protected virtual String sendImage(String chatId, MessageParams params) {
-        throw new BotServiceException(
-            'Not implemented: sendImage(String chatId, MessageParams params)',
-            new ValueMap().set('chatId', chatId).set('params', params)
-        );
-    }
-
-    protected virtual String sendVideo(String chatId, MessageParams params) {
-        throw new BotServiceException(
-            'Not implemented: sendVideo(String chatId, MessageParams params)',
-            new ValueMap().set('chatId', chatId).set('params', params)
-        );
-    }
-
-    protected virtual String sendFile(String chatId, MessageParams params) {
-        throw new BotServiceException(
-            'Not implemented: sendFile(String chatId, MessageParams params)',
-            new ValueMap().set('chatId', chatId).set('params', params)
-        );
-    }
-
-    protected virtual String sendContact(String chatId, MessageParams params) {
-        throw new BotServiceException(
-            'Not implemented: sendContact(String chatId, MessageParams params)',
-            new ValueMap().set('chatId', chatId).set('params', params)
-        );
-    }
-
-    protected virtual String sendLocation(String chatId, MessageParams params) {
-        throw new BotServiceException(
-            'Not implemented: sendLocation(String chatId, MessageParams params)',
-            new ValueMap().set('chatId', chatId).set('params', params)
-        );
-    }
-
-    private void send(String chatId, MessageParams params) {
-        String normalizedChatId = chatId.substringBefore(':');
-        String messageId;
-        if (params.type == BotMessageType.Text) {
-            messageId = sendMessage(normalizedChatId, params);
-        } else if (params.type == BotMessageType.Image) {
-            messageId = sendImage(normalizedChatId, params);
-        } else if (params.type == BotMessageType.Video) {
-            messageId = sendVideo(normalizedChatId, params);
-        } else if (params.type == BotMessageType.File) {
-            messageId = sendFile(normalizedChatId, params);
-        } else if (params.type == BotMessageType.Contact) {
-            messageId = sendContact(normalizedChatId, params);
-        } else if (params.type == BotMessageType.Location) {
-            messageId = sendLocation(normalizedChatId, params);
-        } else {
-            throw new BotService.BotServiceException(
-                'The requested message type is not supported yet: ' + params.type?.name(),
-                new ValueMap().set('chatId', chatId).set('params', params)
+        public void execute(ValueMap params) {
+            ValueMap parameters = new ValueMap();
+            if (params.has('parameters')) {
+                parameters = params.getValueMap('parameters');
+            }
+            ChatMessage__c messageRecord = new ChatMessage__c(
+                Type__c = params.getString('type'),
+                Text__c = params.getString('text'),
+                MediaUrl__c = params.getString('mediaUrl'),
+                Parameters__c = parameters.toJson(true),
+                Chat__r = new Chat__c(ExternalId__c = BotUtils.generateChatId(bot.TokenHash__c, chatId)),
+                Bot__c = bot.Id,
+                ExternalId__c = params.getString('messageId')
             );
-        }
-
-        ChatMessage__c messageRecord = new ChatMessage__c(
-            Type__c = params.type.name(),
-            Text__c = params.text,
-            MediaUrl__c = params.mediaUrl,
-            Parameters__c = params.additionalInfo.toJson(true),
-            Chat__r = new Chat__c(ExternalId__c = BotUtils.generateChatId(bot.TokenHash__c, chatId)),
-            Bot__c = bot.id,
-            ExternalId__c = messageId
-        );
-        BotUtils.saveAsync(new List<SObject> { messageRecord }, 'ExternalId__c');
-    }
-
-    public class BotServiceException extends BotCustomException {
-        public BotServiceException(String message, ValueMap payload) {
-            super(message, payload);
-        }
-    }
-
-    public class MessageParams {
-        public final BotMessageType type;
-        public final String text;
-        public final String mediaUrl;
-        public final ValueMap additionalInfo;
-
-        private MessageParams(BotMessageType type) {
-            this(type, null);
-        }
-
-        private MessageParams(BotMessageType type, String text) {
-            this(type, text, null);
-        }
-
-        private MessageParams(BotMessageType type, String text, String mediaUrl) {
-            this.type = type;
-            this.text = text;
-            this.mediaUrl = mediaUrl;
-            this.additionalInfo = new ValueMap();
+            BotUtils.saveAsync(new List<SObject> { messageRecord }, 'ExternalId__c');
         }
     }
 }
