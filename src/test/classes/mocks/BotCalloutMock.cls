@@ -1,4 +1,3 @@
-// TODO: Remove duplicated code
 @IsTest
 public class BotCalloutMock implements HttpCalloutMock {
     private final BotType type;
@@ -57,60 +56,39 @@ public class BotCalloutMock implements HttpCalloutMock {
             when 'sendMessage' {
                 System.assert(request.hasValue('chat_id'));
                 System.assert(request.hasValue('text'));
-                return new ValueMap()
-                    .set('status', 'ok')
-                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
-                    .toJson();
+                return getSuccessTelegramResponse();
             }
             when 'sendPhoto' {
                 System.assert(request.hasValue('chat_id'));
                 System.assert(request.hasValue('photo'));
-                return new ValueMap()
-                    .set('status', 'ok')
-                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
-                    .toJson();
+                return getSuccessTelegramResponse();
             }
             when 'sendVideo' {
                 System.assert(request.hasValue('chat_id'));
                 System.assert(request.hasValue('video'));
-                return new ValueMap()
-                    .set('status', 'ok')
-                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
-                    .toJson();
+                return getSuccessTelegramResponse();
             }
             when 'sendDocument' {
                 System.assert(request.hasValue('chat_id'));
                 System.assert(request.hasValue('document'));
-                return new ValueMap()
-                    .set('status', 'ok')
-                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
-                    .toJson();
+                return getSuccessTelegramResponse();
             }
             when 'sendContact' {
                 System.assert(request.hasValue('chat_id'));
                 System.assert(request.hasValue('first_name'));
                 System.assert(request.hasValue('phone_number'));
-                return new ValueMap()
-                    .set('status', 'ok')
-                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
-                    .toJson();
+                return getSuccessTelegramResponse();
             }
             when 'sendLocation' {
                 System.assert(request.hasValue('chat_id'));
                 System.assert(request.hasValue('latitude'));
                 System.assert(request.hasValue('longitude'));
-                return new ValueMap()
-                    .set('status', 'ok')
-                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
-                    .toJson();
+                return getSuccessTelegramResponse();
             }
             when 'sendSticker' {
                 System.assert(request.hasValue('chat_id'));
                 System.assert(request.hasValue('sticker'));
-                return new ValueMap()
-                    .set('status', 'ok')
-                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
-                    .toJson();
+                return getSuccessTelegramResponse();
             }
         }
         throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
@@ -186,6 +164,13 @@ public class BotCalloutMock implements HttpCalloutMock {
         this.statusCode = statusCode;
         this.responseBody = responseBody;
         return this;
+    }
+
+    private String getSuccessTelegramResponse() {
+        return new ValueMap()
+            .set('status', 'ok')
+            .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
+            .toJson();
     }
 
     private Long generateExternalId() {
