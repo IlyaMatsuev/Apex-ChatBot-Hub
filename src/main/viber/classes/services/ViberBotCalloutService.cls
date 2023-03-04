@@ -1,7 +1,6 @@
 public class ViberBotCalloutService extends BotCalloutService {
-    public ViberBotCalloutService(Bot__c bot) {
-        super(bot);
-    }
+
+    private ViberBotCalloutService() {}
 
     protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = super.prepareRequest(method, body);

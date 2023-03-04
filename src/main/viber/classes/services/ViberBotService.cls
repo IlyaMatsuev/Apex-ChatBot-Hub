@@ -2,10 +2,8 @@
  * @description The concrete service for the `Viber` messanger bots. Extends `BotService` but also contains features related to `Viber` only
  */
 global class ViberBotService extends BotService {
-    @TestVisible
-    private ViberBotService(Bot__c bot) {
-        super(bot);
-    }
+
+    private ViberBotService() {}
 
     /**
      * @description Creates an instance of the `Viber` sender service

@@ -2,10 +2,8 @@
  * @description The concrete service for the `Telegram` messanger bots. Extends `BotService` but also contains features related to `Telegram` only
  */
 global class TelegramBotService extends BotService {
-    @TestVisible
-    private TelegramBotService(Bot__c bot) {
-        super(bot);
-    }
+
+    private TelegramBotService() {}
 
     /**
      * @description Creates an instance of the `Telegram` sender service

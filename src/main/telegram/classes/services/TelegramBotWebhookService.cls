@@ -1,8 +1,6 @@
 public class TelegramBotWebhookService extends BotWebhookService {
-    @TestVisible
-    private TelegramBotWebhookService(Bot__c bot) {
-        super(bot);
-    }
+
+    private TelegramBotWebhookService() {}
 
     public override void setWebhook() {
         ValueMap payload = new ValueMap()

@@ -13,9 +13,7 @@ public virtual class BotCalloutService {
 
     protected BotSetting__mdt settings { get { return BotSettingsProvider.get(type); } }
 
-    public BotCalloutService(Bot__c bot) {
-        this.bot = bot;
-    }
+    protected BotCalloutService() {}
 
     public ValueMap call(BotMethod method, ValueMap body) {
         return call(method, body, true);

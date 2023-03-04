@@ -1,8 +1,6 @@
 public class ViberBotWebhookService extends BotWebhookService {
-    @TestVisible
-    private ViberBotWebhookService(Bot__c bot) {
-        super(bot);
-    }
+
+    private ViberBotWebhookService() {}
 
     public override void setWebhook() {
         ValueMap payload = new ValueMap()

@@ -18,11 +18,6 @@ global class BotContext {
     global final IBotService service;
 
     /**
-     * @description The type of the bot associated with the incoming update
-     */
-    global BotType type { get { return ((BotService) service).type; } }
-
-    /**
      * @description The object with the most common methods for quick reply to the incoming updates
      */
     global IBotSenderService reply {

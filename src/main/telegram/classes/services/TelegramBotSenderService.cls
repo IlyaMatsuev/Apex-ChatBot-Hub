@@ -73,7 +73,7 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param fileUrl The file URL. Should include file name with extension in the end
      */
     global void file(String fileUrl) {
-        file(fileUrl);
+        file(fileUrl, null);
     }
 
     /**
@@ -133,7 +133,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void sticker(String stickerIdOrUrl) {
         String stickerId = stickerIdOrUrl;
         String stickerUrl;
-        if (stickerIdOrUrl.startsWith('http')) {
+        if (BotUtils.isUrl(stickerIdOrUrl)) {
             stickerId = null;
             stickerUrl = stickerIdOrUrl;
         }

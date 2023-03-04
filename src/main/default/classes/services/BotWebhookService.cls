@@ -36,10 +36,6 @@ public abstract class BotWebhookService {
         private set;
     }
 
-    protected BotWebhookService(Bot__c bot) {
-        this.bot = bot;
-    }
-
     public abstract void setWebhook();
     public abstract void unsetWebhook();
 

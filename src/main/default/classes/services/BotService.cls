@@ -4,19 +4,6 @@
 global abstract class BotService implements IBotService {
     protected final Bot__c bot;
 
-    /**
-     * @description The type of the bot this service operates with
-     */
-    global BotType type {
-        get {
-            if (type == null) {
-                type = BotType.valueOf(bot.Type__c);
-            }
-            return type;
-        }
-        private set;
-    }
-
     protected BotCalloutService calloutService {
         get {
             if (calloutService == null) {
@@ -25,12 +12,6 @@ global abstract class BotService implements IBotService {
             return calloutService;
         }
         private set;
-    }
-
-    protected BotSetting__mdt settings { get { return BotSettingsProvider.get(type); } }
-
-    protected BotService(Bot__c bot) {
-        this.bot = bot;
     }
 
     public class SaveSentMessageCallback implements IBotCallback {
