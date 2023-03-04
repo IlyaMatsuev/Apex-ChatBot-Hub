@@ -7,6 +7,7 @@ public class TelegramBotMethod extends BotMethod {
     public static final TelegramBotMethod SendDocument = new TelegramBotMethod('sendDocument');
     public static final TelegramBotMethod SendContact = new TelegramBotMethod('sendContact');
     public static final TelegramBotMethod SendLocation = new TelegramBotMethod('sendLocation');
+    public static final TelegramBotMethod SendSticker = new TelegramBotMethod('sendSticker');
 
     private TelegramBotMethod(String value) {
         super(value, TelegramBotMethod.class);

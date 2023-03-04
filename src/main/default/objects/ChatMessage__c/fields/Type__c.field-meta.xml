@@ -41,6 +41,16 @@
                 <default>false</default>
                 <label>Location</label>
             </value>
+            <value>
+                <fullName>Sticker</fullName>
+                <default>false</default>
+                <label>Sticker</label>
+            </value>
+            <value>
+                <fullName>Url</fullName>
+                <default>false</default>
+                <label>Url</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

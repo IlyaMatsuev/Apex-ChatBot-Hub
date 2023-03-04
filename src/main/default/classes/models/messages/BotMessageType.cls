@@ -1,6 +1,3 @@
-// TODO: Implement: Sticker message type in general BotService
-// TODO: Implement for Telegram: sendMediaGroup, sendAudio, sendAnimation, sendVoice, sendVideoNote, sendVenue, sendPoll, sendDice, sendChatAction
-// TODO: Implement for Viber: sendUrl
 /**
  * @description The enum with all available message types for sending and receiving messages
  */
@@ -39,6 +36,11 @@ global class BotMessageType extends BotEnumType {
      * @description The chat sticker message
      */
     global static final BotMessageType Sticker = new BotMessageType('Sticker');
+
+    /**
+     * @description The chat URL message
+     */
+    global static final BotMessageType Url = new BotMessageType('Url');
 
     public BotMessageType(String value) {
         super(value, BotMessageType.class);

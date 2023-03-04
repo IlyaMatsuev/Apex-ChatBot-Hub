@@ -26,6 +26,11 @@ global class ViberBotSenderService implements IBotSenderService {
      * @param text The message text to send
      */
     global void text(String text) {
+        if (BotUtils.isUrl(text)) {
+            url(text);
+            return;
+        }
+
         send(
             ViberBotMethod.SendMessage,
             prepareMessagePayload('text').set('text', text),
@@ -137,6 +142,32 @@ global class ViberBotSenderService implements IBotSenderService {
             new ValueMap()
                 .set('type', BotMessageType.Location.name())
                 .set('parameters', new ValueMap().set('lat', latitude).set('lon', longitude))
+        );
+    }
+
+    /**
+     * @description Sends a sticker
+     * @param stickerId The unique identifier of the sticker
+     */
+    global void sticker(Integer stickerId) {
+        send(
+            ViberBotMethod.SendMessage,
+            prepareMessagePayload('sticker').set('sticker_id', stickerId),
+            new ValueMap()
+                .set('type', BotMessageType.Sticker.name())
+                .set('parameters', new ValueMap().set('stickerId', String.valueOf(stickerId)))
+        );
+    }
+
+    /**
+     * @description Sends a URL
+     * @param link The URL link
+     */
+    global void url(String link) {
+        send(
+            ViberBotMethod.SendMessage,
+            prepareMessagePayload('url').set('media', link),
+            new ValueMap().set('type', BotMessageType.Url.name()).set('mediaUrl', link)
         );
     }
 

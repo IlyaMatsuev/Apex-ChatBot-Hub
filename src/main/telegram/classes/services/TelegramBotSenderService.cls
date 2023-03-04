@@ -17,11 +17,13 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param text The message text to send
      */
     global void text(String text) {
-        send(
-            TelegramBotMethod.SendMessage,
-            new ValueMap().set('chat_id', chatId).set('text', text),
-            new ValueMap().set('type', BotMessageType.Text.name()).set('text', text)
-        );
+        ValueMap callbackParams = new ValueMap();
+        if (BotUtils.isUrl(text)) {
+            callbackParams.set('type', BotMessageType.Url.name()).set('mediaUrl', text);
+        } else {
+            callbackParams.set('type', BotMessageType.Text.name()).set('text', text);
+        }
+        send(TelegramBotMethod.SendMessage, new ValueMap().set('chat_id', chatId).set('text', text), callbackParams);
     }
 
     /**
@@ -123,6 +125,29 @@ global class TelegramBotSenderService implements IBotSenderService {
                 .set('parameters', new ValueMap().set('lat', latitude).set('lon', longitude))
         );
     }
+
+    /**
+     * @description Sends a sticker
+     * @param stickerIdOrUrl The unique identifier of the sticker or the URL to `.WEBP` file
+     */
+    global void sticker(String stickerIdOrUrl) {
+        String stickerId = stickerIdOrUrl;
+        String stickerUrl;
+        if (stickerIdOrUrl.startsWith('http')) {
+            stickerId = null;
+            stickerUrl = stickerIdOrUrl;
+        }
+        send(
+            TelegramBotMethod.SendSticker,
+            new ValueMap().set('chat_id', chatId).set('sticker', stickerIdOrUrl),
+            new ValueMap()
+                .set('type', BotMessageType.Sticker.name())
+                .set('mediaUrl', stickerUrl, true)
+                .set('parameters', new ValueMap().set('stickerId', stickerId, true))
+        );
+    }
+
+    // TODO: Implement: sendMediaGroup, sendAudio, sendAnimation, sendVoice, sendVideoNote, sendVenue, sendPoll, sendDice, sendChatAction
 
     private void send(TelegramBotMethod method, ValueMap payload, ValueMap callbackParams) {
         ValueMap response = calloutService.call(method, payload);

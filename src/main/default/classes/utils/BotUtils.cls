@@ -1,4 +1,5 @@
 public class BotUtils {
+    private static final String URL_REGEX = '^(((https?:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_#]*)#?(?:[.\\!\\/\\w]*))?)$';
     private static final Integer CHAT_EXTERNAL_ID_LENGTH = 40;
 
     private BotUtils() {}
@@ -9,6 +10,10 @@ public class BotUtils {
                 new BotUpsertDataEvent__e(Data__c = JSON.serialize(records), ExternalIdField__c = externalIdField)
             );
         }
+    }
+
+    public static Boolean isUrl(String text) {
+        return Pattern.matches(URL_REGEX, text);
     }
 
     public static String generateChatId(String botTokenHash, String chatExternalId) {
