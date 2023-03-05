@@ -2,11 +2,11 @@
 
 ## Demos
 
-Please check out the [demos folder](demos) to see how to use the package and what is available in it.
+Please check out the [demos folder](/demos/README.md) to see how to use the package and what is available in it.
 
 ## Type Definitions
 
-All classes available for use can be found [here](types). There is also a short description of their purpose and class members.
+All classes available for use can be found [here](/types/README.md). There is also a short description of their purpose and class members.
 
 ## Custom Metadata Types
 

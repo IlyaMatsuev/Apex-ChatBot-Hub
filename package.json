@@ -5,7 +5,10 @@
     "description": "Salesforce Apex package for quick configuration and managing of the chat bots (e.g. Telegram, Viber)",
     "scripts": {
         "prettier": "prettier --write",
-        "prettier:verify": "prettier --list-different"
+        "prettier:verify": "prettier --list-different",
+        "docs:types:clean": "shx rm -r ./docs/types",
+        "docs:types:generate": "apexdocs-generate -s ./src/main -t ./docs/types -p global -g docsify --defaultGroupName Classes",
+        "docs:types:fix": "replace-in-files --string '(/Classes/' --replacement '(/types/Classes/' ./docs/types && replace-in-files --string '(/Interfaces/' --replacement '(/types/Interfaces/' ./docs/types && replace-in-files --string '(/Enums/' --replacement '(/types/Enums/' ./docs/types"
     },
     "devDependencies": {
         "@cparra/apexdocs": "^2.13.1",
@@ -14,7 +17,9 @@
         "docsify-cli": "^4.4.4",
         "husky": "^4.2.1",
         "lint-staged": "^10.0.7",
-        "prettier": "^2.8.1"
+        "prettier": "^2.8.1",
+        "replace-in-files-cli": "^2.0.0",
+        "shx": "^0.3.4"
     },
     "husky": {
         "hooks": {
@@ -22,6 +27,11 @@
         }
     },
     "lint-staged": {
+        "src/main/*.cls": [
+            "docs:types:clean",
+            "docs:types:generate",
+            "docs:types:fix"
+        ],
         "**/*.{cls,html,js,css,json,md,trigger,xml,yaml,yml}": [
             "prettier --write"
         ]
