@@ -1,5 +1,5 @@
 /**
- * @description The interface that is required to implement for creating new `Bot__c` records
+ * @description The interface that is required to implement to handle chat bot updates
  * @group Interfaces
  */
 global interface IBotHandler {

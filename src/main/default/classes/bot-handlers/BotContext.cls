@@ -3,9 +3,9 @@
  */
 global class BotContext {
     /**
-     * @description The `Bot__c` record associated with the current webhook update
+     * @description The <<BotModel>> instance associated with the current webhook update
      */
-    global final Bot__c bot;
+    global final BotModel bot;
 
     /**
      * @description The model instance containing all incoming related to the incoming update (new message, edited message, etc.)
@@ -32,7 +32,7 @@ global class BotContext {
 
     private final BotServiceFactory factory;
 
-    public BotContext(Bot__c bot, BotUpdateModel received, BotServiceFactory factory) {
+    public BotContext(BotModel bot, BotUpdateModel received, BotServiceFactory factory) {
         this.bot = bot;
         this.received = received;
         this.factory = factory;
@@ -41,10 +41,10 @@ global class BotContext {
 
     /**
      * Create BotService not related to the current context
-     * @param bot SObject record of the bot you need to create service for
+     * @param bot The <<BotModel>> instance related to the bot you need to create service for
      */
-    global IBotService getService(Bot__c bot) {
-        if (this.bot.Id == bot?.Id) {
+    global IBotService getService(BotModel bot) {
+        if (this.bot == bot) {
             return service;
         }
         return factory.createBotService(bot);

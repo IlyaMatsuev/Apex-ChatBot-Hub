@@ -1,9 +1,9 @@
 public abstract class BotWebhookService {
     private static final String BOT_PUBLIC_SITE_NAME = 'BotPublic';
 
-    protected final Bot__c bot;
+    protected final BotModel bot;
 
-    protected String webhookUrl { get { return getApiUrl() + bot.Type__c + '/' + bot.Id; } }
+    protected String webhookUrl { get { return getApiUrl() + bot.type + '/' + bot.id; } }
 
     protected BotCalloutService calloutService {
         get {

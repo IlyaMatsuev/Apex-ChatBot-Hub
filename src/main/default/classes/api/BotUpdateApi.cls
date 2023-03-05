@@ -19,7 +19,7 @@ global class BotUpdateApi {
         try {
             UriParams params = new UriParams(request.requestURI);
 
-            Bot__c bot = getBotResolver(params.type).resolve(params, request.headers);
+            BotModel bot = getBotResolver(params.type).resolve(params, request.headers);
             if (bot == null) {
                 throw new BotUpdateApiException(
                     'There is no bot with the provided type and id',
@@ -27,9 +27,7 @@ global class BotUpdateApi {
                 );
             }
 
-            EventBus.publish(
-                new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = request.requestBody.toString())
-            );
+            EventBus.publish(new BotUpdateEvent__e(Bot__c = bot.toJson(), Payload__c = request.requestBody.toString()));
 
             response.responseBody = Blob.valueOf(RESPONSE_OK);
         } catch (Exception error) {

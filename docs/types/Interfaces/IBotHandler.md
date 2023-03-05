@@ -4,7 +4,7 @@
 
 `STATUS: ACTIVE`
 
-The interface that is required to implement for creating new `Bot__c` records
+The interface that is required to implement to handle chat bot updates
 
 **Group** Interfaces
 

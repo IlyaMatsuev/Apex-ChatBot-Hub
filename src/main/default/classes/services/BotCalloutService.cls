@@ -1,17 +1,7 @@
 public virtual class BotCalloutService {
-    protected final Bot__c bot;
+    protected final BotModel bot;
 
-    protected BotType type {
-        get {
-            if (type == null) {
-                type = BotType.valueOf(bot.Type__c);
-            }
-            return type;
-        }
-        private set;
-    }
-
-    protected BotSetting__mdt settings { get { return BotSettingsProvider.get(type); } }
+    protected BotSetting__mdt settings { get { return BotSettingsProvider.get(bot.type); } }
 
     protected BotCalloutService() {}
 
@@ -25,14 +15,14 @@ public virtual class BotCalloutService {
 
         if (throwOnFail && !isSuccessResponse(response, responsePayload)) {
             throw new BotCalloutException(
-                'A call failed for the bot "' + bot.Name + '" and method "' + method + '": ' + response.getStatus(),
+                'A call failed for the bot "' + bot.name + '" and method "' + method + '": ' + response.getStatus(),
                 new ValueMap()
                     .set(
                         'request',
                         new ValueMap()
                             .set('body', body.getValues())
                             .set('botMethod', method.name())
-                            .set('botId', bot.Id)
+                            .set('botId', bot.id)
                     )
                     .set(
                         'response',
@@ -45,7 +35,7 @@ public virtual class BotCalloutService {
 
     protected virtual HttpRequest prepareRequest(BotMethod method, ValueMap body) {
         HttpRequest request = new HttpRequest();
-        request.setEndpoint(settings.ApiUrl__c + bot.Token__c + '/' + method);
+        request.setEndpoint(settings.ApiUrl__c + bot.token + '/' + method);
         request.setMethod('POST');
         request.setHeader('Content-Type', 'application/json');
         request.setBody(body.toJson());

@@ -13,11 +13,9 @@ private class BotUpdateEventTriggerTest {
     private static void handle_telegramBotMessage_shouldHandleMessageAndInsertChatDetails() {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
 
-        Bot__c bot = createBot(BotType.Telegram);
+        BotModel bot = createBot(BotType.Telegram);
         Test.startTest();
-        Eventbus.publish(
-            new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = createTelegramPayload().toJson())
-        );
+        Eventbus.publish(new BotUpdateEvent__e(Bot__c = bot.toJson(), Payload__c = createTelegramPayload().toJson()));
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -30,8 +28,8 @@ private class BotUpdateEventTriggerTest {
         // Chat
         System.assertEquals(1, chats.size());
         System.assertEquals('matsuev', chats.get(0).Name);
-        System.assertEquals(bot.Id, chats.get(0).Bot__c);
-        System.assertEquals('876541222:'.rightPad(40, bot.TokenHash__c), chats.get(0).ExternalId__c);
+        System.assertEquals(bot.id, chats.get(0).Bot__c);
+        System.assertEquals('876541222:'.rightPad(40, bot.tokenHash), chats.get(0).ExternalId__c);
         // User
         System.assertEquals(1, users.size());
         System.assertEquals('matsuev', users.get(0).Name);
@@ -56,12 +54,10 @@ private class BotUpdateEventTriggerTest {
     private static void handle_telegramUpdateWithUnexpectedException_shouldThrowExceptionAndLogError() {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
 
-        Bot__c bot = createBot(BotType.Telegram);
+        BotModel bot = createBot(BotType.Telegram);
         BotHandlerMock.throwError = true;
         Test.startTest();
-        Eventbus.publish(
-            new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = createTelegramPayload().toJson())
-        );
+        Eventbus.publish(new BotUpdateEvent__e(Bot__c = bot.toJson(), Payload__c = createTelegramPayload().toJson()));
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -80,11 +76,11 @@ private class BotUpdateEventTriggerTest {
     private static void handle_telegramNotSupportedUpdateType_shouldIgnoreUpdate() {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
 
-        Bot__c bot = createBot(BotType.Telegram);
+        BotModel bot = createBot(BotType.Telegram);
         Test.startTest();
         Eventbus.publish(
             new BotUpdateEvent__e(
-                Bot__c = JSON.serialize(bot),
+                Bot__c = bot.toJson(),
                 Payload__c = createTelegramPayload(TelegramBotUpdateEventType.EditedMessage).toJson()
             )
         );
@@ -112,11 +108,11 @@ private class BotUpdateEventTriggerTest {
     private static void handle_viberBotMessage_shouldHandleMessageAndInsertChatDetails() {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
 
-        Bot__c bot = createBot(BotType.Viber);
+        BotModel bot = createBot(BotType.Viber);
         Test.startTest();
         Eventbus.publish(
             new BotUpdateEvent__e(
-                Bot__c = JSON.serialize(bot),
+                Bot__c = bot.toJson(),
                 Payload__c = createViberPayload(ViberBotUpdateEventType.Message).toJson()
             )
         );
@@ -132,8 +128,8 @@ private class BotUpdateEventTriggerTest {
         // Chat
         System.assertEquals(1, chats.size());
         System.assertEquals('John McClane', chats.get(0).Name);
-        System.assertEquals(bot.Id, chats.get(0).Bot__c);
-        System.assertEquals('01234567890A=:'.rightPad(40, bot.TokenHash__c), chats.get(0).ExternalId__c);
+        System.assertEquals(bot.id, chats.get(0).Bot__c);
+        System.assertEquals('01234567890A=:'.rightPad(40, bot.tokenHash), chats.get(0).ExternalId__c);
         // User
         System.assertEquals(1, users.size());
         System.assertEquals('John McClane', users.get(0).Name);
@@ -158,12 +154,12 @@ private class BotUpdateEventTriggerTest {
     private static void handle_viberUpdateWithUnexpectedException_shouldThrowExceptionAndLogError() {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
 
-        Bot__c bot = createBot(BotType.Viber);
+        BotModel bot = createBot(BotType.Viber);
         BotHandlerMock.throwError = true;
         Test.startTest();
         Eventbus.publish(
             new BotUpdateEvent__e(
-                Bot__c = JSON.serialize(bot),
+                Bot__c = bot.toJson(),
                 Payload__c = createViberPayload(ViberBotUpdateEventType.Message).toJson()
             )
         );
@@ -185,11 +181,11 @@ private class BotUpdateEventTriggerTest {
     private static void handle_viberWebhookUrlCallback_shouldIgnore() {
         Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
 
-        Bot__c bot = createBot(BotType.Viber);
+        BotModel bot = createBot(BotType.Viber);
         Test.startTest();
         Eventbus.publish(
             new BotUpdateEvent__e(
-                Bot__c = JSON.serialize(bot),
+                Bot__c = bot.toJson(),
                 Payload__c = createViberPayload(ViberBotUpdateEventType.WebhookCallback).toJson()
             )
         );
@@ -208,14 +204,16 @@ private class BotUpdateEventTriggerTest {
         System.assert(BotHandlerMock.executedContexts.isEmpty());
     }
 
-    private static Bot__c createBot(BotType type) {
+    private static BotModel createBot(BotType type) {
         insert new Bot__c(
             Name = type.name(),
             Type__c = type.name(),
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
             Handler__c = 'BotHandlerMock'
         );
-        return [SELECT Name, Type__c, Handler__c, TokenHash__c FROM Bot__c WHERE Type__c = :type.name() LIMIT 1];
+        return new BotModel(
+            [SELECT Name, Type__c, Handler__c, TokenHash__c FROM Bot__c WHERE Type__c = :type.name() LIMIT 1]
+        );
     }
 
     private static ValueMap createTelegramPayload() {

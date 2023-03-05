@@ -6,6 +6,10 @@
 
 Represents the context with all necessary variables and entities for properly handling the incoming updates for bot webhooks
 
+### [BotModel](/types/Classes/BotModel.md)
+
+The `Bot__c` sObject model
+
 ### [BotService](/types/Classes/BotService.md)
 
 The base class that contains features common for all bots
@@ -60,7 +64,7 @@ Custom enum class that contains all available event types for `Viber` bots. Docs
 
 ### [IBotHandler](/types/Interfaces/IBotHandler.md)
 
-The interface that is required to implement for creating new `Bot__c` records
+The interface that is required to implement to handle chat bot updates
 
 ### [IBotSenderService](/types/Interfaces/IBotSenderService.md)
 

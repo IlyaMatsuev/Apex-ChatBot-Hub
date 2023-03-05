@@ -24,8 +24,8 @@ public class BotUpdateHandler implements Triggers.IHandler {
         // The loop is needed when a user sends several messages at the same time
         List<BotContext> botContexts = new List<BotContext>();
         for (BotUpdateEvent__e event : events) {
-            Bot__c bot = (Bot__c) JSON.deserialize(event.Bot__c, Bot__c.class);
-            BotSetting__mdt settings = BotSettingsProvider.get(BotType.valueOf(bot.Type__c));
+            BotModel bot = BotModel.fromJson(event.Bot__c);
+            BotSetting__mdt settings = BotSettingsProvider.get(bot.type);
 
             IBotUpdateEventEntity updateEventEntity = (IBotUpdateEventEntity) ValueMap.fromJson(
                 event.Payload__c,
@@ -53,10 +53,9 @@ public class BotUpdateHandler implements Triggers.IHandler {
 
     private void handleUpdateEvent(BotContext context) {
         try {
-            IBotHandler botHandler = (IBotHandler) BotUtils.createInstance(context.bot.Handler__c);
-            botHandler.handle(context);
+            context.bot.handler.handle(context);
         } catch (Exception error) {
-            BotErrorLogger.log(context.bot.Id, error);
+            BotErrorLogger.log(context.bot.id, error);
         }
     }
 
@@ -72,11 +71,11 @@ public class BotUpdateHandler implements Triggers.IHandler {
         return new List<SObject> { chat, user, message };
     }
 
-    private Chat__c getChat(Bot__c bot, BotUpdateModel.ChatModel chat) {
+    private Chat__c getChat(BotModel bot, BotUpdateModel.ChatModel chat) {
         return new Chat__c(
             Name = chat.title,
-            Bot__c = bot.Id,
-            ExternalId__c = BotUtils.generateChatId(bot.TokenHash__c, String.valueOf(chat.id))
+            Bot__c = bot.id,
+            ExternalId__c = BotUtils.generateChatId(bot.tokenHash, chat.id)
         );
     }
 

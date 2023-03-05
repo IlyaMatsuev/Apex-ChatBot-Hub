@@ -2,7 +2,7 @@
 
 ## Demos
 
-Please check out the [demos folder](/demos) to see how to use the package and what is available in it.
+Please check out the [demos page](/demos) to see how to use the package and what is available in it.
 
 ## Type Definitions
 

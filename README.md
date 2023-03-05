@@ -31,7 +31,7 @@ public class TestTelegramMessageHandler implements IBotHandler {
         String receivedMessage = context.received.message.text;
         System.debug('Received: ' + receivedMessage);
         // Reply to the same user sending a message back
-        context.reply.send(receivedMessage);
+        context.reply.text(receivedMessage);
     }
 }
 ```
@@ -47,7 +47,7 @@ Create a bot, wait a few seconds after that and refresh the list view to make su
 
 If the bot record is still there then... That's it! The bot should be ready to work.
 
-You can also check out the [demos folder](docs/demos/) to see how to do that visually.
+You can also check out the [demos page](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/demos) to see how to do that visually.
 
 ## Installation
 
@@ -81,7 +81,7 @@ sh <path to the shell script>
 
 ## Documentation
 
-For more detailed information about the content of the repository and the package, please visit the [docs folder](docs).
+For more detailed information about the content of the repository and the package, please visit the [documentation page](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/).
 
 ## Questions
 

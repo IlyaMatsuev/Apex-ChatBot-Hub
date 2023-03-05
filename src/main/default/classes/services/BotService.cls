@@ -2,7 +2,7 @@
  * @description The base class that contains features common for all bots
  */
 global abstract class BotService implements IBotService {
-    protected final Bot__c bot;
+    protected final BotModel bot;
 
     protected BotCalloutService calloutService {
         get {
@@ -16,9 +16,9 @@ global abstract class BotService implements IBotService {
 
     public class SaveSentMessageCallback implements IBotCallback {
         private final String chatId;
-        private final Bot__c bot;
+        private final BotModel bot;
 
-        public SaveSentMessageCallback(String chatId, Bot__c bot) {
+        public SaveSentMessageCallback(String chatId, BotModel bot) {
             this.chatId = chatId;
             this.bot = bot;
         }
@@ -33,8 +33,8 @@ global abstract class BotService implements IBotService {
                 Text__c = params.getString('text'),
                 MediaUrl__c = params.getString('mediaUrl'),
                 Parameters__c = parameters.toJson(true),
-                Chat__r = new Chat__c(ExternalId__c = BotUtils.generateChatId(bot.TokenHash__c, chatId)),
-                Bot__c = bot.Id,
+                Chat__r = new Chat__c(ExternalId__c = BotUtils.generateChatId(bot.tokenHash, chatId)),
+                Bot__c = bot.id,
                 ExternalId__c = params.getString('messageId')
             );
             BotUtils.saveAsync(new List<SObject> { messageRecord }, 'ExternalId__c');

@@ -6,7 +6,7 @@ public class TelegramBotWebhookService extends BotWebhookService {
         ValueMap payload = new ValueMap()
             .set('url', webhookUrl)
             .set('allowed_updates', new List<String> { TelegramBotUpdateEventType.Message.name() })
-            .set('secret_token', bot.TokenHash__c);
+            .set('secret_token', bot.tokenHash);
         calloutService.call(TelegramBotMethod.SetWebhook, payload);
     }
 
