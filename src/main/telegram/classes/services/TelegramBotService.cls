@@ -1,5 +1,6 @@
 /**
- * @description The concrete service for the `Telegram` messanger bots. Extends `BotService` but also contains features related to `Telegram` only
+ * @description The concrete service for the `Telegram` messanger bots. Extends <<BotService>> but also contains features related to `Telegram` only
+ * @group Telegram
  */
 global class TelegramBotService extends BotService {
 
@@ -7,8 +8,8 @@ global class TelegramBotService extends BotService {
 
     /**
      * @description Creates an instance of the `Telegram` sender service
-     * @param chatId The id of the chat where something has to be sent
-     * @return The `Telegram` implementation of the `IBotSenderService`
+     * @param chatId The id of the chat where the information has to be sent
+     * @return The `Telegram` implementation of the <<IBotSenderService>>
      */
     global TelegramBotSenderService send(String chatId) {
         return new TelegramBotSenderService(

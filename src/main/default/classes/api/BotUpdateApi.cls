@@ -1,5 +1,6 @@
 /**
  * @description API for receiving webhooks for the bot updates. This class `MUST NOT` be edited
+ * @ignore
  */
 @RestResource(urlMapping = '/bots/*')
 global class BotUpdateApi {

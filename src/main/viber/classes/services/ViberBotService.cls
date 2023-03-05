@@ -1,5 +1,6 @@
 /**
- * @description The concrete service for the `Viber` messanger bots. Extends `BotService` but also contains features related to `Viber` only
+ * @description The concrete service for the `Viber` messanger bots. Extends <<BotService>> but also contains features related to `Viber` only
+ * @group Viber
  */
 global class ViberBotService extends BotService {
 
@@ -7,8 +8,8 @@ global class ViberBotService extends BotService {
 
     /**
      * @description Creates an instance of the `Viber` sender service
-     * @param chatId The id of the chat where something has to be sent
-     * @return The `Viber` implementation of the `IBotSenderService`
+     * @param chatId The id of the chat where the information has to be sent
+     * @return The `Viber` implementation of the <<IBotSenderService>>
      */
     global ViberBotSenderService send(String chatId) {
         return new ViberBotSenderService(

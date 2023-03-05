@@ -1,5 +1,6 @@
 /**
  * @description Custom enum type that provides more flexibility comparing to the native Apex enums
+ * @ignore
  */
 global abstract class BotEnumType implements Comparable {
     private static final transient Map<Type, Map<String, BotEnumType>> cachedEnumValues = new Map<Type, Map<String, BotEnumType>>();

@@ -1,5 +1,6 @@
 /**
  * @description The interface that is required to implement for creating new `Bot__c` records
+ * @group Common.Interfaces
  */
 global interface IBotHandler {
     /**

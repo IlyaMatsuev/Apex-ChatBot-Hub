@@ -8,6 +8,7 @@
         "prettier:verify": "prettier --list-different"
     },
     "devDependencies": {
+        "@cparra/apexdocs": "^2.13.1",
         "@ilyamatsuev/prettier-plugin-apex": "^2.2.0",
         "@prettier/plugin-xml": "^0.12.0",
         "husky": "^4.2.1",

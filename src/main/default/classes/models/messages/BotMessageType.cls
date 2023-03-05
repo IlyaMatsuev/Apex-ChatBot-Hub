@@ -1,5 +1,6 @@
 /**
  * @description The enum with all available message types for sending and receiving messages
+ * @group Common.Enums
  */
 global class BotMessageType extends BotEnumType {
     /**
