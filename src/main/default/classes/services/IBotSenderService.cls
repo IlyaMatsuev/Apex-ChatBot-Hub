@@ -1,5 +1,6 @@
 /**
  * @description The interface with all common methods for sending messages to the bot users
+ * @group Interfaces
  */
 global interface IBotSenderService {
     /**

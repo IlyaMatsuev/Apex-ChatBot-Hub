@@ -1,5 +1,6 @@
 /**
  * @description Custom enum that contains all available bot types for the package. The same values are presented in the `Bot__c.Type__c` picklist
+ * @group Enums
  */
 global class BotType extends BotEnumType {
     /**
@@ -16,9 +17,9 @@ global class BotType extends BotEnumType {
     }
 
     /**
-     * @description Attempts to convert a string value to the `BotType` enum
+     * @description Attempts to convert a string value to the <<BotType>> enum
      * @param value The string value to be converted
-     * @return The instance of the `BotType` enum
+     * @return The instance of the <<BotType>> enum
      * @throws NoSuchElementException If the string value cannot be converted to the enum
      */
     global static BotType valueOf(String value) {
@@ -27,7 +28,7 @@ global class BotType extends BotEnumType {
 
     /**
      * @description Returns the list of all possible bot types
-     * @return The list of `BotType` enum instances
+     * @return The list of <<BotType>> enum instances
      */
     global static List<BotType> values() {
         return new List<BotType> { Telegram, Viber };

@@ -2,11 +2,11 @@
 
 ## Demos
 
-Please check out the [demos folder](demos) to see how to use the package and what is available in it.
+Please check out the [demos folder](/demos) to see how to use the package and what is available in it.
 
 ## Type Definitions
 
-All classes available for use can be found [here](types). There is also a short description of their purpose and class members.
+All classes available for use can be found [here](/types). There is also a short description of their purpose and class members.
 
 ## Custom Metadata Types
 
@@ -19,7 +19,7 @@ Contains settings specific for each messenger.
 -   `DeveloperName` - Bot type, e.g. `Telegram` or `Viber`
 -   `ApiUrl__c` - Bot API endpoint. For example, for `Telegram` it is https://api.telegram.org/bot
 -   `BotService__c` - The bot service implementation for particular messanger.
--   `WebhookBotService__c` - The bot service implementation for particular messanger that handles webhooks set and unset.
+-   `BotWebhookService__c` - The bot service implementation for particular messanger that handles webhooks set and unset.
 -   `BotUpdateResolver__c` - The implementation for particular messanger to resolve the `Bot__c` record on the new webhook update.
 -   `BotUpdateEventEntity__c` - The entity class which implements a single interface which allows to receive data from webhook updates in the same format for every messanger.
 -   `EventTypesToIgnore__c` - Webhook event types to be ignored by the webhook handler for a particular messanger.

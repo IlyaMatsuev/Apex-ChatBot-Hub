@@ -3,7 +3,7 @@
  */
 global class BotUpdateModel {
     /**
-     * @description The type of the incoming event. Event types are different for every bot (e.g. `TelegramBotUpdateEventType` or `ViberBotUpdateEventType`)
+     * @description The type of the incoming event. Event types are different for every bot (e.g. <<TelegramBotUpdateEventType>> or <<ViberBotUpdateEventType>>)
      */
     global final BotUpdateEventType eventType;
     /**

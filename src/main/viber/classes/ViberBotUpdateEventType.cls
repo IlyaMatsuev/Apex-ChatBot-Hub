@@ -1,7 +1,6 @@
 /**
- * @description Custom enum class that contains all available event types for `Viber` bots
- * Possible values: `webhook`, `delivered`, `seen`, `failed`, `subscribed`, `unsubscribed`, `conversation_started`, `message`
- * Docs: https://developers.viber.com/docs/api/rest-bot-api/#setting-a-webhook
+ * @description Custom enum class that contains all available event types for `Viber` bots. Docs: https://developers.viber.com/docs/api/rest-bot-api/#setting-a-webhook.
+ * @group Enums
  */
 global class ViberBotUpdateEventType extends BotUpdateEventType {
     /**
