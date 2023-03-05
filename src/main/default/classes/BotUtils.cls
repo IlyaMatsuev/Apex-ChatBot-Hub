@@ -1,6 +1,6 @@
 public class BotUtils {
     private static final String URL_REGEX = '^(((https?:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_#]*)#?(?:[.\\!\\/\\w]*))?)$';
-    private static final Integer CHAT_EXTERNAL_ID_LENGTH = 40;
+    private static final Integer EXTERNAL_ID_LENGTH = 40;
 
     private BotUtils() {}
 
@@ -16,11 +16,11 @@ public class BotUtils {
         return Pattern.matches(URL_REGEX, text);
     }
 
-    public static String generateChatId(String botTokenHash, String chatExternalId) {
-        if (chatExternalId.contains(':')) {
-            return chatExternalId;
+    public static String generateExternalId(String botTokenHash, String sourceExternalId) {
+        if (sourceExternalId.contains(':')) {
+            return sourceExternalId;
         }
-        return (chatExternalId + ':').rightPad(CHAT_EXTERNAL_ID_LENGTH, botTokenHash);
+        return (sourceExternalId + ':').rightPad(EXTERNAL_ID_LENGTH, botTokenHash);
     }
 
     public static Object createInstance(String typeName) {

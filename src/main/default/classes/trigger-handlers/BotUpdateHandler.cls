@@ -75,7 +75,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
         return new Chat__c(
             Name = chat.title,
             Bot__c = bot.id,
-            ExternalId__c = BotUtils.generateChatId(bot.tokenHash, chat.id)
+            ExternalId__c = BotUtils.generateExternalId(bot.tokenHash, chat.id)
         );
     }
 

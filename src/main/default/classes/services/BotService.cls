@@ -33,7 +33,7 @@ global abstract class BotService implements IBotService {
                 Text__c = params.getString('text'),
                 MediaUrl__c = params.getString('mediaUrl'),
                 Parameters__c = parameters.toJson(true),
-                Chat__r = new Chat__c(ExternalId__c = BotUtils.generateChatId(bot.tokenHash, chatId)),
+                Chat__r = new Chat__c(ExternalId__c = BotUtils.generateExternalId(bot.tokenHash, chatId)),
                 Bot__c = bot.id,
                 ExternalId__c = params.getString('messageId')
             );
