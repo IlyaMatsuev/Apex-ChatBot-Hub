@@ -13,7 +13,7 @@ global class ViberBotService extends BotService {
     global ViberBotSenderService send(String chatId) {
         return new ViberBotSenderService(
             chatId,
-            bot.Name,
+            bot.name,
             calloutService,
             new BotService.SaveSentMessageCallback(chatId, bot)
         );

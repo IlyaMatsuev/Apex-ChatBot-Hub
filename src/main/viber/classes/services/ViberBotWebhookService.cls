@@ -4,7 +4,7 @@ public class ViberBotWebhookService extends BotWebhookService {
 
     public override void setWebhook() {
         ValueMap payload = new ValueMap()
-            .set('url', webhookUrl + '/' + bot.TokenHash__c)
+            .set('url', webhookUrl + '/' + bot.tokenHash)
             .set('send_name', true)
             .set('send_photo', true)
             .set(

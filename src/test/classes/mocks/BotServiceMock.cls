@@ -2,7 +2,7 @@
 public class BotServiceMock extends BotService {
     public static final Map<String, ValueMap> outboundMessages = new Map<String, ValueMap>();
 
-    public BotServiceMock(Bot__c bot) {
+    public BotServiceMock(BotModel bot) {
         this.bot = bot;
     }
 

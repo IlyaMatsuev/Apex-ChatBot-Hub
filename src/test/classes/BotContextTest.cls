@@ -17,7 +17,7 @@ private class BotContextTest {
             Handler__c = 'BotHandlerMock'
         );
         insert differentBot;
-        IBotService newService = context.getService(differentBot);
+        IBotService newService = context.getService(new BotModel(differentBot));
         Test.stopTest();
 
         System.assert(newService != context.service);
@@ -150,7 +150,7 @@ private class BotContextTest {
             payload.toJson(),
             Type.forName(BotSettingsProvider.get(botType).BotUpdateEventEntity__c)
         );
-        return new BotContext(bot, new BotUpdateModel(updateEventEntity), new BotServiceFactoryMock());
+        return new BotContext(new BotModel(bot), new BotUpdateModel(updateEventEntity), new BotServiceFactoryMock());
     }
 
     private static ValueMap createTelegramPayload() {
@@ -210,11 +210,11 @@ private class BotContextTest {
     }
 
     private class BotServiceFactoryMock extends BotServiceFactory {
-        public override IBotService createBotService(Bot__c bot) {
+        public override IBotService createBotService(BotModel bot) {
             return new BotServiceMock(bot);
         }
 
-        public override BotWebhookService createWebhookService(Bot__c bot) {
+        public override BotWebhookService createWebhookService(BotModel bot) {
             return null;
         }
     }

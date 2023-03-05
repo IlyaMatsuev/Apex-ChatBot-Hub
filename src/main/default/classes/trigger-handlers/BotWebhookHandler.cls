@@ -11,7 +11,7 @@ public class BotWebhookHandler implements Triggers.IHandler {
     }
 
     public void handle(Triggers.Context context) {
-        for (Bot__c bot : getBots(context.props)) {
+        for (BotModel bot : getBots(context.props)) {
             BotWebhookService service = serviceFactory.createWebhookService(bot);
             if (context.props.isInsert || context.props.isUndelete) {
                 service.setWebhook();
@@ -22,7 +22,11 @@ public class BotWebhookHandler implements Triggers.IHandler {
         }
     }
 
-    private List<Bot__c> getBots(Triggers.Props props) {
-        return (List<Bot__c>) (props.isDelete ? props.oldList : props.newList);
+    private List<BotModel> getBots(Triggers.Props props) {
+        List<BotModel> bots = new List<BotModel>();
+        for (Bot__c bot : (List<Bot__c>) (props.isDelete ? props.oldList : props.newList)) {
+            bots.add(new BotModel(bot));
+        }
+        return bots;
     }
 }

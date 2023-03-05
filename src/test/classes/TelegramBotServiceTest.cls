@@ -166,7 +166,7 @@ private class TelegramBotServiceTest {
     }
 
     private class SenderFixture {
-        public Bot__c bot;
+        public BotModel bot;
         public Chat__c chat;
 
         private SenderFixture() {
@@ -185,7 +185,7 @@ private class TelegramBotServiceTest {
             ];
             System.assertEquals(1, messages.size());
             ChatMessage__c message = messages.get(0);
-            System.assertEquals(bot.Id, message.Bot__c);
+            System.assertEquals(bot.id, message.Bot__c);
             System.assertEquals(chat.Id, message.Chat__c);
             System.assert(String.isNotBlank(message.ExternalId__c));
             System.assert(String.isBlank(message.User__c));
@@ -204,7 +204,7 @@ private class TelegramBotServiceTest {
             System.assert(customException.payload.has('request'));
 
             ValueMap requestPayload = customException.payload.getValueMap('request');
-            System.assertEquals(bot.Id, requestPayload.getString('botId'));
+            System.assertEquals(bot.id, requestPayload.getString('botId'));
             System.assertEquals(method.name(), requestPayload.getString('botMethod'));
 
             System.assert(customException.payload.has('response'));
@@ -218,31 +218,33 @@ private class TelegramBotServiceTest {
         return mock;
     }
 
-    private static Bot__c createBot() {
+    private static BotModel createBot() {
         insert new Bot__c(
             Name = 'TestBot',
             Type__c = BOT_TYPE.name(),
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
             Handler__c = 'BotHandlerMock'
         );
-        return [
-            SELECT Name, Type__c, Handler__c, Token__c, TokenHash__c
-            FROM Bot__c
-            LIMIT 1
-        ];
+        return new BotModel(
+            [
+                SELECT Name, Type__c, Handler__c, Token__c, TokenHash__c
+                FROM Bot__c
+                LIMIT 1
+            ]
+        );
     }
 
-    private static Chat__c createChat(Bot__c bot) {
+    private static Chat__c createChat(BotModel bot) {
         Chat__c chat = new Chat__c(
             Name = 'TestChat',
-            Bot__c = bot.Id,
-            ExternalId__c = '3214:' + bot.TokenHash__c.substring(0, 20)
+            Bot__c = bot.id,
+            ExternalId__c = '3214:' + bot.tokenHash.substring(0, 20)
         );
         insert chat;
         return chat;
     }
 
-    private static TelegramBotService createService(Bot__c bot) {
+    private static TelegramBotService createService(BotModel bot) {
         return (TelegramBotService) new BotServiceFactory().createBotService(bot);
     }
 }
