@@ -41,7 +41,7 @@ global class BotContext {
 
     /**
      * Create BotService not related to the current context
-     * @param bot SObject record of the bot you need to create service for
+     * @param bot The <<BotModel>> instance related to the bot you need to create service for
      */
     global IBotService getService(BotModel bot) {
         if (this.bot == bot) {

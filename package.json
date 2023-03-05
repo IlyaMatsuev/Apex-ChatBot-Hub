@@ -6,7 +6,7 @@
     "scripts": {
         "prettier": "prettier --write",
         "prettier:verify": "prettier --list-different",
-        "docs:types:refresh": "npm run docs:types:clean && npm run docs:types:generate && npm run docs:types:fix",
+        "docs:types:refresh": "npm run docs:types:clean && npm run docs:types:generate && npm run docs:types:fix && npm run prettier ./docs/types",
         "docs:types:clean": "shx rm -r ./docs/types",
         "docs:types:generate": "apexdocs-generate -s ./src/main -t ./docs/types -p global -g docsify --defaultGroupName Classes",
         "docs:types:fix": "npm run docs:types:fix:title && npm run docs:types:fix:links:classes && npm run docs:types:fix:links:interfaces && npm run docs:types:fix:links:enums",

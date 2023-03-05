@@ -8,9 +8,9 @@ Represents the context with all necessary variables and entities for properly ha
 
 ## Fields
 
-### `bot` → `Bot__c`
+### `bot` → `BotModel`
 
-The `Bot__c` record associated with the current webhook update
+The [BotModel](/types/Classes/BotModel.md) instance associated with the current webhook update
 
 ### `received` → `BotUpdateModel`
 
@@ -32,15 +32,15 @@ The object with the most common methods for quick reply to the incoming updates
 
 ## Methods
 
-### `getService(Bot__c bot)`
+### `getService(BotModel bot)`
 
 Create BotService not related to the current context
 
 #### Parameters
 
-| Param | Description                                              |
-| ----- | -------------------------------------------------------- |
-| `bot` | SObject record of the bot you need to create service for |
+| Param | Description                                                                                           |
+| ----- | ----------------------------------------------------------------------------------------------------- |
+| `bot` | The [BotModel](/types/Classes/BotModel.md) instance related to the bot you need to create service for |
 
 ### `save(SObject record)`
 

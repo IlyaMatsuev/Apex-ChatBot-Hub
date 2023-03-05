@@ -8,15 +8,15 @@ Factory for creating bot services
 
 ## Methods
 
-### `createBotService(Bot__c bot)`
+### `createBotService(BotModel bot)`
 
-Creates an instance of the [IBotService](/types/Interfaces/IBotService.md) implementation for the passed `Bot__c` record. For example a bot with the type `Telegram` should be related to [TelegramBotService](/types/Classes/TelegramBotService.md)
+Creates an instance of the [IBotService](/types/Interfaces/IBotService.md) implementation for the passed [BotModel](/types/Classes/BotModel.md) instance. For example a bot with the type `Telegram` should be related to [TelegramBotService](/types/Classes/TelegramBotService.md)
 
 #### Parameters
 
-| Param | Description                                        |
-| ----- | -------------------------------------------------- |
-| `bot` | The `Bot__c` record to create service instance for |
+| Param | Description                                                               |
+| ----- | ------------------------------------------------------------------------- |
+| `bot` | The [BotModel](/types/Classes/BotModel.md) instance to create service for |
 
 #### Return
 
