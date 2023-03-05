@@ -1,5 +1,9 @@
 # Documentation
 
+## Changelog
+
+Check out the [changelog](/changelog) to see the latest changes in the project.
+
 ## Demos
 
 Please check out the [demos page](/demos) to see how to use the package and what is available in it.

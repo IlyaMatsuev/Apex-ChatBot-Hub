@@ -83,6 +83,8 @@ sh <path to the shell script>
 
 For more detailed information about the content of the repository and the package, please visit the [documentation page](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/).
 
+Changelog is also located [here](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/changelog).
+
 ## Questions
 
 If you have any questions you can start a discussion.  
