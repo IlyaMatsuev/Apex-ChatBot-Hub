@@ -38,7 +38,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>WebhookBotService__c</field>
+                <field>BotWebhookService__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>

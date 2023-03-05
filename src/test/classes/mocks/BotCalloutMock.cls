@@ -43,10 +43,10 @@ public class BotCalloutMock implements HttpCalloutMock {
         switch on method.name() {
             when 'setWebhook' {
                 String webhookUrl = request.getString('url');
-                System.assertEquals(BotUtils.getApiUrl() + type, webhookUrl.substringBeforeLast('/'));
+                System.assert(webhookUrl.substringBeforeLast('/').endsWith('/' + type));
                 System.assert(webhookUrl.substringAfterLast('/') instanceof Id);
-                System.assert(request.has('allowed_updates'));
-                System.assert(request.has('secret_token'));
+                System.assert(request.hasValue('allowed_updates'));
+                System.assert(request.hasValue('secret_token'));
                 return 'True';
             }
             when 'deleteWebhook' {
@@ -54,12 +54,41 @@ public class BotCalloutMock implements HttpCalloutMock {
                 return 'True';
             }
             when 'sendMessage' {
-                System.assert(request.has('chat_id'));
-                System.assert(request.has('text'));
-                return new ValueMap()
-                    .set('status', 'ok')
-                    .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
-                    .toJson();
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('text'));
+                return getSuccessTelegramResponse();
+            }
+            when 'sendPhoto' {
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('photo'));
+                return getSuccessTelegramResponse();
+            }
+            when 'sendVideo' {
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('video'));
+                return getSuccessTelegramResponse();
+            }
+            when 'sendDocument' {
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('document'));
+                return getSuccessTelegramResponse();
+            }
+            when 'sendContact' {
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('first_name'));
+                System.assert(request.hasValue('phone_number'));
+                return getSuccessTelegramResponse();
+            }
+            when 'sendLocation' {
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('latitude'));
+                System.assert(request.hasValue('longitude'));
+                return getSuccessTelegramResponse();
+            }
+            when 'sendSticker' {
+                System.assert(request.hasValue('chat_id'));
+                System.assert(request.hasValue('sticker'));
+                return getSuccessTelegramResponse();
             }
         }
         throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
@@ -73,7 +102,7 @@ public class BotCalloutMock implements HttpCalloutMock {
                     return new ValueMap().set('status', 0).set('status_message', 'ok').toJson();
                 }
                 System.assert(Pattern.matches('Viber/\\w{15,18}/\\w+', webhookUrl.substringAfter('bots/')));
-                System.assert(request.has('event_types'));
+                System.assert(request.hasValue('event_types'));
                 System.assert(request.getBoolean('send_name'));
                 System.assert(request.getBoolean('send_photo'));
                 return new ValueMap()
@@ -83,10 +112,42 @@ public class BotCalloutMock implements HttpCalloutMock {
                     .toJson();
             }
             when 'send_message' {
-                System.assert(request.has('receiver'));
-                System.assert(request.has('type'));
-                System.assert(request.has('text'));
-                System.assert(request.has('sender'));
+                System.debug('request: ' + request.toJson(true));
+                System.assert(request.hasValue('receiver'));
+                System.assert(request.hasValue('type'));
+                System.assert(request.hasValue('sender'));
+                String messageType = request.getString('type');
+                if (messageType == 'text') {
+                    System.assert(request.hasValue('text'));
+                } else if (messageType == 'picture') {
+                    System.assert(request.hasValue('media'));
+                } else if (messageType == 'video') {
+                    System.assert(request.hasValue('media'));
+                    System.assert(request.hasValue('size'));
+                } else if (messageType == 'file') {
+                    System.assert(request.hasValue('media'));
+                    System.assert(request.hasValue('size'));
+                    System.assert(request.hasValue('file_name'));
+                    System.assert(request.getString('media').endsWith(request.getString('file_name')));
+                } else if (messageType == 'contact') {
+                    System.assert(request.hasValue('contact'));
+                    ValueMap contact = request.getValueMap('contact');
+                    System.assert(String.isNotBlank(contact.getString('name')));
+                    System.assert(String.isNotBlank(contact.getString('phone_number')));
+                } else if (messageType == 'location') {
+                    System.assert(request.hasValue('location'));
+                    ValueMap location = request.getValueMap('location');
+                    System.assert(String.isNotBlank(location.getString('lat')));
+                    System.assert(String.isNotBlank(location.getString('lon')));
+                } else if (messageType == 'sticker') {
+                    System.assert(request.hasValue('sticker_id'));
+                } else if (messageType == 'url') {
+                    System.assert(request.hasValue('media'));
+                } else {
+                    throw new IllegalArgumentException(
+                        'The provided viber message type is not correct: ' + messageType
+                    );
+                }
                 return new ValueMap()
                     .set('status', 0)
                     .set('status_message', 'ok')
@@ -103,6 +164,13 @@ public class BotCalloutMock implements HttpCalloutMock {
         this.statusCode = statusCode;
         this.responseBody = responseBody;
         return this;
+    }
+
+    private String getSuccessTelegramResponse() {
+        return new ValueMap()
+            .set('status', 'ok')
+            .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
+            .toJson();
     }
 
     private Long generateExternalId() {

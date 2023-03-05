@@ -3,6 +3,7 @@
     <fullName>All</fullName>
     <columns>NAME</columns>
     <columns>ExternalId__c</columns>
+    <columns>Type__c</columns>
     <columns>Text__c</columns>
     <columns>Chat__c</columns>
     <columns>Bot__c</columns>

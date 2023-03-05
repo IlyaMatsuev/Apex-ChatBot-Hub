@@ -2,27 +2,20 @@
  * @description The concrete service for the `Viber` messanger bots. Extends `BotService` but also contains features related to `Viber` only
  */
 global class ViberBotService extends BotService {
-    public ViberBotService(Bot__c bot) {
-        super(bot);
-    }
 
-    protected override String sendMessage(String chatId, String message) {
-        ValueMap messagePayload = new ValueMap()
-            .set('receiver', chatId)
-            .set('type', 'text')
-            .set('text', message)
-            .set('sender', new ValueMap().set('name', bot.Name));
+    private ViberBotService() {}
 
-        return call(ViberBotMethod.SendMessage, messagePayload).getString('message_token');
-    }
-
-    protected override HttpRequest prepareRequest(BotMethod method, ValueMap body) {
-        HttpRequest request = super.prepareRequest(method, body);
-        request.setHeader('X-Viber-Auth-Token', bot.Token__c);
-        return request;
-    }
-
-    protected override Boolean isSuccessResponse(HttpResponse response, ValueMap payload) {
-        return super.isSuccessResponse(response, payload) && payload.getInteger('status') == 0;
+    /**
+     * @description Creates an instance of the `Viber` sender service
+     * @param chatId The id of the chat where something has to be sent
+     * @return The `Viber` implementation of the `IBotSenderService`
+     */
+    global ViberBotSenderService send(String chatId) {
+        return new ViberBotSenderService(
+            chatId,
+            bot.Name,
+            calloutService,
+            new BotService.SaveSentMessageCallback(chatId, bot)
+        );
     }
 }

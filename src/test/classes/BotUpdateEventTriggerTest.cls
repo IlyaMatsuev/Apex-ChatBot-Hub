@@ -76,6 +76,34 @@ private class BotUpdateEventTriggerTest {
         System.assertEquals(1, messages.size());
     }
 
+    @IsTest
+    private static void handle_telegramNotSupportedUpdateType_shouldIgnoreUpdate() {
+        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+
+        Bot__c bot = createBot(BotType.Telegram);
+        Test.startTest();
+        Eventbus.publish(
+            new BotUpdateEvent__e(
+                Bot__c = JSON.serialize(bot),
+                Payload__c = createTelegramPayload(TelegramBotUpdateEventType.EditedMessage).toJson()
+            )
+        );
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<Chat__c> chats = [SELECT Name, Bot__c, ExternalId__c FROM Chat__c];
+        List<ChatUser__c> users = [SELECT Name, FirstName__c, LastName__c, Username__c, ExternalId__c FROM ChatUser__c];
+        List<ChatMessage__c> messages = [
+            SELECT Name, Text__c, User__c, Bot__c, Chat__c, ExternalId__c, SendDate__c
+            FROM ChatMessage__c
+        ];
+
+        System.assert(chats.isEmpty());
+        System.assert(users.isEmpty());
+        System.assert(messages.isEmpty());
+        System.assert(BotHandlerMock.executedContexts.isEmpty());
+    }
+
     /**
      * Viber tests
      */
@@ -191,10 +219,14 @@ private class BotUpdateEventTriggerTest {
     }
 
     private static ValueMap createTelegramPayload() {
+        return createTelegramPayload(TelegramBotUpdateEventType.Message);
+    }
+
+    private static ValueMap createTelegramPayload(TelegramBotUpdateEventType eventType) {
         return new ValueMap()
             .set('update_id', 12312311L)
             .set(
-                'message',
+                eventType.name(),
                 new ValueMap()
                     .set('message_id', 223123123L)
                     .set(

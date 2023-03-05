@@ -3,21 +3,31 @@
  */
 global virtual class BotServiceFactory {
     /**
-     * @description Creates an instance of the `BotService` for the passed `Bot__c` record. For example a bot with the type `Telegram` should be related to `TelegramBotService`
+     * @description Creates an instance of the `IBotService` implementation for the passed `Bot__c` record. For example a bot with the type `Telegram` should be related to `TelegramBotService`
      * @param bot The `Bot__c` record to create service instance for
-     * @return The instance of `BotService`
+     * @return The instance of `IBotService`
      */
-    global virtual BotService createBotService(Bot__c bot) {
+    global virtual IBotService createBotService(Bot__c bot) {
         BotType type = BotType.valueOf(bot.Type__c);
-        return (BotService) createService(BotSettingsProvider.get(type).BotService__c, bot);
+        return (IBotService) BotUtils.createInstance(
+            BotSettingsProvider.get(type).BotService__c,
+            new Map<String, Object> { 'bot' => bot }
+        );
     }
 
-    public virtual WebhookBotService createWebhookService(Bot__c bot) {
+    public virtual BotWebhookService createWebhookService(Bot__c bot) {
         BotType type = BotType.valueOf(bot.Type__c);
-        return (WebhookBotService) createService(BotSettingsProvider.get(type).WebhookBotService__c, bot);
+        return (BotWebhookService) BotUtils.createInstance(
+            BotSettingsProvider.get(type).BotWebhookService__c,
+            new Map<String, Object> { 'bot' => bot }
+        );
     }
 
-    private Object createService(String typeName, Bot__c bot) {
-        return BotUtils.createInstance(typeName, new Map<String, Object> { 'bot' => bot });
+    public virtual BotCalloutService createCalloutService(Bot__c bot) {
+        BotType type = BotType.valueOf(bot.Type__c);
+        return (BotCalloutService) BotUtils.createInstance(
+            BotSettingsProvider.get(type).BotCalloutService__c,
+            new Map<String, Object> { 'bot' => bot }
+        );
     }
 }

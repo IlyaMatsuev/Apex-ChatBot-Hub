@@ -6,9 +6,34 @@ private class BotContextTest {
     }
 
     @IsTest
-    private static void getService_shouldCreateService() {
+    private static void getService_forDifferentBot_shouldCreateNewService() {
         BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
-        System.assert(context.getService(context.bot) != null);
+
+        Test.startTest();
+        Bot__c differentBot = new Bot__c(
+            Name = 'Test',
+            Type__c = BotType.Viber.name(),
+            Token__c = '74712731t723gjhbbfkwnkqwguqg17g23323423werw',
+            Handler__c = 'BotHandlerMock'
+        );
+        insert differentBot;
+        IBotService newService = context.getService(differentBot);
+        Test.stopTest();
+
+        System.assert(newService != context.service);
+        System.assert(newService instanceof BotServiceMock);
+    }
+
+    @IsTest
+    private static void getService_sameBot_shouldCreateNewService() {
+        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+
+        Test.startTest();
+        IBotService newService = context.getService(context.bot);
+        Test.stopTest();
+
+        System.assert(newService == context.service);
+        System.assert(newService instanceof BotServiceMock);
     }
 
     @IsTest
@@ -22,23 +47,15 @@ private class BotContextTest {
         System.assertEquals(1, [SELECT Id FROM ChatUser__c].size());
     }
 
+    @IsTest
+    private static void reply_houldReturnSender() {
+        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+        System.assert(context.reply instanceof BotServiceMock.SenderService);
+    }
+
     /**
      * Telegram tests
      */
-
-    @IsTest
-    private static void send_telegramReplyWithMessage_shouldSendMessage() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
-        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
-
-        context.reply.send('test message');
-
-        System.assertEquals(1, BotServiceMock.outboundMessages.size());
-        System.assertEquals(
-            'test message',
-            BotServiceMock.outboundMessages.get(String.valueOf(context.received.chat.id))
-        );
-    }
 
     @IsTest
     private static void received_telegramUpdateModelWithMessage_containsAllFields() {
@@ -79,20 +96,6 @@ private class BotContextTest {
     /**
      * Viber tests
      */
-
-    @IsTest
-    private static void send_viberReplyWithMessage_shouldSendMessage() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
-        BotContext context = createBotContext(BotType.Viber, createViberPayload());
-
-        context.reply.send('test message');
-
-        System.assertEquals(1, BotServiceMock.outboundMessages.size());
-        System.assertEquals(
-            'test message',
-            BotServiceMock.outboundMessages.get(String.valueOf(context.received.chat.id))
-        );
-    }
 
     @IsTest
     private static void received_viberUpdateModelWithMessage_containsAllFields() {
@@ -207,11 +210,11 @@ private class BotContextTest {
     }
 
     private class BotServiceFactoryMock extends BotServiceFactory {
-        public override BotService createBotService(Bot__c bot) {
+        public override IBotService createBotService(Bot__c bot) {
             return new BotServiceMock(bot);
         }
 
-        public override WebhookBotService createWebhookService(Bot__c bot) {
+        public override BotWebhookService createWebhookService(Bot__c bot) {
             return null;
         }
     }

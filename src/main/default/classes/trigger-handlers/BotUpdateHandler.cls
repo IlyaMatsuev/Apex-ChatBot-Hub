@@ -32,7 +32,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
                 Type.forName(settings.BotUpdateEventEntity__c)
             );
 
-            if (!shouldIgnoreEvent(settings, updateEventEntity)) {
+            if (shouldHandleEvent(settings, updateEventEntity)) {
                 botContexts.add(new BotContext(bot, new BotUpdateModel(updateEventEntity), serviceFactory));
             }
         }
@@ -60,11 +60,9 @@ public class BotUpdateHandler implements Triggers.IHandler {
         }
     }
 
-    private Boolean shouldIgnoreEvent(BotSetting__mdt settings, IBotUpdateEventEntity updateEventEntity) {
-        if (String.isBlank(settings.EventTypesToIgnore__c)) {
-            return false;
-        }
-        return settings.EventTypesToIgnore__c.split(';').contains(updateEventEntity.getType().name());
+    private Boolean shouldHandleEvent(BotSetting__mdt settings, IBotUpdateEventEntity updateEventEntity) {
+        List<String> ignoreEventTypes = settings.EventTypesToIgnore__c?.split(';');
+        return ignoreEventTypes == null || !ignoreEventTypes.contains(updateEventEntity.getType().name());
     }
 
     private List<SObject> getChatDetails(BotContext context) {
@@ -92,7 +90,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
             FirstName__c = user.firstName,
             LastName__c = user.lastName,
             Username__c = user.username,
-            ExternalId__c = String.valueOf(user.id)
+            ExternalId__c = user.id
         );
     }
 
@@ -102,7 +100,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
             User__r = new ChatUser__c(ExternalId__c = userId),
             Text__c = message.text,
             SendDate__c = message.sentAt,
-            ExternalId__c = String.valueOf(message.id)
+            ExternalId__c = message.id
         );
     }
 

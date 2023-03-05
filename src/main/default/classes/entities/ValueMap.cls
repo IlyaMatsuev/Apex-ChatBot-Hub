@@ -53,6 +53,10 @@ public virtual class ValueMap {
         return (Long) get(key);
     }
 
+    public Decimal getDecimal(String key) {
+        return (Decimal) get(key);
+    }
+
     public DateTime getDateTime(String key) {
         Object value = get(key);
         if (value instanceof Integer) {
@@ -90,7 +94,13 @@ public virtual class ValueMap {
     }
 
     public ValueMap set(String key, Object value) {
-        values.put(key, value);
+        return set(key, value, false);
+    }
+
+    public ValueMap set(String key, Object value, Boolean skipNull) {
+        if (!skipNull || value != null) {
+            values.put(key, value);
+        }
         return this;
     }
 

@@ -6,34 +6,47 @@ global class BotContext {
      * @description The `Bot__c` record associated with the current webhook update
      */
     global final Bot__c bot;
-    /**
-     * @description The type of the bot associated with the incoming update
-     */
-    global final BotType type;
+
     /**
      * @description The model instance containing all incoming related to the incoming update (new message, edited message, etc.)
      */
     global final BotUpdateModel received;
+
+    /**
+     * @description The generic bot service instance with the methods common for all bots
+     */
+    global final IBotService service;
+
     /**
      * @description The object with the most common methods for quick reply to the incoming updates
      */
-    global final Reply reply;
+    global IBotSenderService reply {
+        get {
+            if (reply == null) {
+                reply = service.send(received.chat.id);
+            }
+            return reply;
+        }
+        private set;
+    }
 
     private final BotServiceFactory factory;
 
     public BotContext(Bot__c bot, BotUpdateModel received, BotServiceFactory factory) {
         this.bot = bot;
-        this.type = BotType.valueOf(bot.Type__c);
         this.received = received;
         this.factory = factory;
-        this.reply = new Reply(received, factory.createBotService(bot));
+        this.service = factory.createBotService(bot);
     }
 
     /**
      * Create BotService not related to the current context
      * @param bot SObject record of the bot you need to create service for
      */
-    global BotService getService(Bot__c bot) {
+    global IBotService getService(Bot__c bot) {
+        if (this.bot.Id == bot?.Id) {
+            return service;
+        }
         return factory.createBotService(bot);
     }
 
@@ -61,26 +74,5 @@ global class BotContext {
      */
     global void save(List<SObject> records, String externalIdField) {
         BotUtils.saveAsync(records, externalIdField);
-    }
-
-    /**
-     * @description The inner class with the most common methods for quick reply to the incoming updates
-     */
-    global class Reply {
-        private final BotService service;
-        private final BotUpdateModel received;
-
-        private Reply(BotUpdateModel received, BotService service) {
-            this.received = received;
-            this.service = service;
-        }
-
-        /**
-         * @description Sends a text message as a response to the incoming update
-         * @param message The text message to be sent to the user who sent the update
-         */
-        global void send(String message) {
-            service.send(String.valueOf(received.chat.id), message);
-        }
     }
 }
