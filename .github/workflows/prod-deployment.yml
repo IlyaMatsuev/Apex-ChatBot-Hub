@@ -35,3 +35,15 @@ jobs:
 
       - name: 'Deploy Package'
         run: sh ./scripts/pkg-deploy.sh devhub
+
+      - name: 'Run Apex Tests'
+        run: sfdx force:apex:test:run -c -r human -d ./coverage/apex -w 20 -u devhub
+
+      - name: 'Upload Test Coverage'
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/apex/test-result-codecoverage.json
+          fail_ci_if_error: false
+          flags: Apex,unittests
+          verbose: true
