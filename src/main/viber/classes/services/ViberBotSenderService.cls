@@ -1,6 +1,5 @@
 /**
  * @description Service class that provides access to all `Viber` `send` methods
- * @group Viber
  */
 global class ViberBotSenderService implements IBotSenderService {
     private static final Integer DEFAULT_FILE_MESSAGE_SIZE = 10000;

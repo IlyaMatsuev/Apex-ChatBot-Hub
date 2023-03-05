@@ -1,6 +1,6 @@
 /**
  * @description The BotService interface containing all main methods for every bot service
- * @group Common.Interfaces
+ * @group Interfaces
  */
 global interface IBotService {
     /**

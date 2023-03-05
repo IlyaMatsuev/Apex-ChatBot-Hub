@@ -1,6 +1,5 @@
 /**
  * @description Service class that provides access to all `Telegram` `send` methods
- * @group Telegram
  */
 global class TelegramBotSenderService implements IBotSenderService {
     private final String chatId;

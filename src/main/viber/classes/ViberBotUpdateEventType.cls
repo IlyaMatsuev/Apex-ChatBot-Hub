@@ -1,6 +1,6 @@
 /**
  * @description Custom enum class that contains all available event types for `Viber` bots. Docs: https://developers.viber.com/docs/api/rest-bot-api/#setting-a-webhook.
- * @group Viber
+ * @group Enums
  */
 global class ViberBotUpdateEventType extends BotUpdateEventType {
     /**

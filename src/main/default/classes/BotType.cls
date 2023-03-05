@@ -1,6 +1,6 @@
 /**
  * @description Custom enum that contains all available bot types for the package. The same values are presented in the `Bot__c.Type__c` picklist
- * @group Common.Enums
+ * @group Enums
  */
 global class BotType extends BotEnumType {
     /**

@@ -1,6 +1,5 @@
 /**
  * @description The concrete service for the `Telegram` messanger bots. Extends <<BotService>> but also contains features related to `Telegram` only
- * @group Telegram
  */
 global class TelegramBotService extends BotService {
 

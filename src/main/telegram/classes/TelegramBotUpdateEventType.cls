@@ -1,6 +1,6 @@
 /**
  * @description Custom enum class that contains all available event types for `Telegram` bots. Docs: https://core.telegram.org/bots/api#update.
- * @group Telegram
+ * @group Enums
  */
 global class TelegramBotUpdateEventType extends BotUpdateEventType {
     /**
