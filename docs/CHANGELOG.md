@@ -22,6 +22,10 @@ The documentation now nicely hosted on the GitHub pages using docsify: https://i
 
 Also, checkout the page with all Apex Classes definitions: https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types
 
+### Readonly permission set
+
+For users, who only need to work with the data captured by bots, there's now a `Bot Readonly User` permission set.
+
 ## What's Changed
 
 ### Support sending different message types
