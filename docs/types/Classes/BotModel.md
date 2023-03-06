@@ -1,9 +1,5 @@
 # BotModel
 
-`APIVERSION: 56`
-
-`STATUS: ACTIVE`
-
 The `Bot__c` sObject model
 
 ## Constructors

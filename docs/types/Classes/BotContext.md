@@ -1,9 +1,5 @@
 # BotContext
 
-`APIVERSION: 55`
-
-`STATUS: ACTIVE`
-
 Represents the context with all necessary variables and entities for properly handling the incoming updates for bot webhooks
 
 ## Fields

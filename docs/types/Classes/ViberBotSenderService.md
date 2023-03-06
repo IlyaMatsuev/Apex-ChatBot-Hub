@@ -1,9 +1,5 @@
 # ViberBotSenderService
 
-`APIVERSION: 56`
-
-`STATUS: ACTIVE`
-
 Service class that provides access to all `Viber` `send` methods
 
 **Implemented types**

@@ -1,9 +1,5 @@
 # BotUpdateModel
 
-`APIVERSION: 55`
-
-`STATUS: ACTIVE`
-
 Contains all the details about the incoming update: message, chat and user information
 
 ## Fields

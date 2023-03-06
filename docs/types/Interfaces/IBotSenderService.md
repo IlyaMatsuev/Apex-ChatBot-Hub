@@ -1,9 +1,5 @@
 # IBotSenderService
 
-`APIVERSION: 56`
-
-`STATUS: ACTIVE`
-
 The interface with all common methods for sending messages to the bot users
 
 **Group** Interfaces

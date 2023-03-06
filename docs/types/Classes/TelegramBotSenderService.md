@@ -1,9 +1,5 @@
 # TelegramBotSenderService
 
-`APIVERSION: 56`
-
-`STATUS: ACTIVE`
-
 Service class that provides access to all `Telegram` `send` methods
 
 **Implemented types**

@@ -1,9 +1,5 @@
 # IBotService
 
-`APIVERSION: 56`
-
-`STATUS: ACTIVE`
-
 The BotService interface containing all main methods for every bot service
 
 **Group** Interfaces

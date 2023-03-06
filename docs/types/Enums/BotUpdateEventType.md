@@ -1,9 +1,5 @@
 # BotUpdateEventType
 
-`APIVERSION: 55`
-
-`STATUS: ACTIVE`
-
 Custom enum base class that is extended by `Telegram` and `Viber` enums which contain all available event types
 
 **Inheritance**

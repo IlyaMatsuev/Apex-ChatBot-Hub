@@ -1,9 +1,5 @@
 # BotMessageType
 
-`APIVERSION: 56`
-
-`STATUS: ACTIVE`
-
 The enum with all available message types for sending and receiving messages
 
 **Inheritance**

@@ -1,9 +1,5 @@
 # TelegramBotService
 
-`APIVERSION: 55`
-
-`STATUS: ACTIVE`
-
 The concrete service for the `Telegram` messanger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Telegram` only
 
 **Inheritance**

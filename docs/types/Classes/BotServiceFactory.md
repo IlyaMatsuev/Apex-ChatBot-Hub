@@ -1,9 +1,5 @@
 # BotServiceFactory
 
-`APIVERSION: 55`
-
-`STATUS: ACTIVE`
-
 Factory for creating bot services
 
 ## Methods

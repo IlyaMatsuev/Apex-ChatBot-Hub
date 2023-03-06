@@ -1,9 +1,5 @@
 # ViberBotService
 
-`APIVERSION: 55`
-
-`STATUS: ACTIVE`
-
 The concrete service for the `Viber` messanger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Viber` only
 
 **Inheritance**

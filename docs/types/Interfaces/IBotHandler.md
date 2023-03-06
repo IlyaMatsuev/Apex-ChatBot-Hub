@@ -1,9 +1,5 @@
 # IBotHandler
 
-`APIVERSION: 55`
-
-`STATUS: ACTIVE`
-
 The interface that is required to implement to handle chat bot updates
 
 **Group** Interfaces

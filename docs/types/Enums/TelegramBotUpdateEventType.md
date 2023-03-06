@@ -1,9 +1,5 @@
 # TelegramBotUpdateEventType
 
-`APIVERSION: 55`
-
-`STATUS: ACTIVE`
-
 Custom enum class that contains all available event types for `Telegram` bots. Docs: https://core.telegram.org/bots/api#update.
 
 **Inheritance**
