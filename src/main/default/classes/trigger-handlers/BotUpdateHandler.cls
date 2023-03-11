@@ -99,7 +99,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
             User__r = new ChatUser__c(ExternalId__c = userId),
             Text__c = message.text,
             SendDate__c = message.sentAt,
-            ExternalId__c = BotUtils.generateExternalId(message.id, chatId.substringBefore(':'))
+            ExternalId__c = BotUtils.generateExternalId(message.id, chatId)
         );
     }
 

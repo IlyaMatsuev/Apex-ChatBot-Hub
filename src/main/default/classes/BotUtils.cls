@@ -20,7 +20,12 @@ public class BotUtils {
         if (sourceExternalId.contains(':')) {
             return sourceExternalId;
         }
-        return (sourceExternalId + ':').rightPad(EXTERNAL_ID_LENGTH, salt);
+        String sourceSaltValue = salt.substringBefore(':');
+        String concatenatedExternalId = sourceExternalId + ':' + sourceSaltValue;
+        if (concatenatedExternalId.length() <= EXTERNAL_ID_LENGTH) {
+            return concatenatedExternalId;
+        }
+        return (sourceExternalId + ':').rightPad(EXTERNAL_ID_LENGTH, sourceSaltValue);
     }
 
     public static Object createInstance(String typeName) {
