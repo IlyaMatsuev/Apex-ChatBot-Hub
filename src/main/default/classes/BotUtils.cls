@@ -16,11 +16,11 @@ public class BotUtils {
         return Pattern.matches(URL_REGEX, text);
     }
 
-    public static String generateExternalId(String botTokenHash, String sourceExternalId) {
+    public static String generateExternalId(String sourceExternalId, String salt) {
         if (sourceExternalId.contains(':')) {
             return sourceExternalId;
         }
-        return (sourceExternalId + ':').rightPad(EXTERNAL_ID_LENGTH, botTokenHash);
+        return (sourceExternalId + ':').rightPad(EXTERNAL_ID_LENGTH, salt);
     }
 
     public static Object createInstance(String typeName) {
