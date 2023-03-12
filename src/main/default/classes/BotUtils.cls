@@ -16,11 +16,16 @@ public class BotUtils {
         return Pattern.matches(URL_REGEX, text);
     }
 
-    public static String generateExternalId(String botTokenHash, String sourceExternalId) {
+    public static String generateExternalId(String sourceExternalId, String salt) {
         if (sourceExternalId.contains(':')) {
             return sourceExternalId;
         }
-        return (sourceExternalId + ':').rightPad(EXTERNAL_ID_LENGTH, botTokenHash);
+        String sourceSaltValue = salt.substringBefore(':');
+        String concatenatedExternalId = sourceExternalId + ':' + sourceSaltValue;
+        if (concatenatedExternalId.length() <= EXTERNAL_ID_LENGTH) {
+            return concatenatedExternalId;
+        }
+        return (sourceExternalId + ':').rightPad(EXTERNAL_ID_LENGTH, sourceSaltValue);
     }
 
     public static Object createInstance(String typeName) {

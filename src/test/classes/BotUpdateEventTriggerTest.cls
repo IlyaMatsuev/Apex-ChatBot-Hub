@@ -43,7 +43,7 @@ private class BotUpdateEventTriggerTest {
         System.assertEquals(users.get(0).Id, messages.get(0).User__c);
         System.assertEquals(chats.get(0).Id, messages.get(0).Chat__c);
         System.assertEquals(null, messages.get(0).Bot__c);
-        System.assertEquals('223123123', messages.get(0).ExternalId__c);
+        System.assertEquals('223123123:876541222', messages.get(0).ExternalId__c);
         System.assertEquals(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
 
         List<BotContext> contexts = BotHandlerMock.executedContexts;
@@ -143,7 +143,7 @@ private class BotUpdateEventTriggerTest {
         System.assertEquals(users.get(0).Id, messages.get(0).User__c);
         System.assertEquals(chats.get(0).Id, messages.get(0).Chat__c);
         System.assertEquals(null, messages.get(0).Bot__c);
-        System.assertEquals('4912661846655238145', messages.get(0).ExternalId__c);
+        System.assertEquals('4912661846655238145:01234567890A=', messages.get(0).ExternalId__c);
         System.assertEquals(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
 
         List<BotContext> contexts = BotHandlerMock.executedContexts;

@@ -33,9 +33,9 @@ global abstract class BotService implements IBotService {
                 Text__c = params.getString('text'),
                 MediaUrl__c = params.getString('mediaUrl'),
                 Parameters__c = parameters.toJson(true),
-                Chat__r = new Chat__c(ExternalId__c = BotUtils.generateExternalId(bot.tokenHash, chatId)),
+                Chat__r = new Chat__c(ExternalId__c = BotUtils.generateExternalId(chatId, bot.tokenHash)),
                 Bot__c = bot.id,
-                ExternalId__c = params.getString('messageId')
+                ExternalId__c = BotUtils.generateExternalId(params.getString('messageId'), chatId)
             );
             BotUtils.saveAsync(new List<SObject> { messageRecord }, 'ExternalId__c');
         }

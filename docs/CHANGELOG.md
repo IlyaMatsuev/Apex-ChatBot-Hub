@@ -28,6 +28,10 @@ For users, who only need to work with the data captured by bots, there's now a `
 
 ## What's Changed
 
+### Fix for an issue when Telegram Message Id was not unique
+
+Due to the format the telegram message ids are generated there was a possibility of the duplicated external id. That should be the case anymore.
+
 ### Support sending different message types
 
 It used to be possible to send the text messages only. Now, these message types are supported:
