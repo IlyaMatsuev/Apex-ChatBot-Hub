@@ -1,21 +1,26 @@
+// TODO: Implement methods with all possible optional params
+// TODO: Implement broadcast messages
 /**
  * @description Service class that provides access to all `Viber` `send` methods
  */
 global class ViberBotSenderService implements IBotSenderService {
     private static final Integer DEFAULT_FILE_MESSAGE_SIZE = 10000;
 
-    private final String chatId;
     private final String senderName;
+    private final List<String> chatIds;
     private final BotCalloutService calloutService;
     private final IBotCallback callback;
+    private ViberBotMethod sendMethod {
+        get { return chatIds.size() > 1 ? ViberBotMethod.BroadcastMessage : ViberBotMethod.SendMessage; }
+    }
 
     public ViberBotSenderService(
-        String chatId,
         String senderName,
+        List<String> chatIds,
         BotCalloutService calloutService,
         IBotCallback callback
     ) {
-        this.chatId = chatId;
+        this.chatIds = chatIds;
         this.senderName = senderName;
         this.calloutService = calloutService;
         this.callback = callback;
@@ -32,7 +37,6 @@ global class ViberBotSenderService implements IBotSenderService {
         }
 
         send(
-            ViberBotMethod.SendMessage,
             prepareMessagePayload('text').set('text', text),
             new ValueMap().set('type', BotMessageType.Text.name()).set('text', text)
         );
@@ -53,7 +57,6 @@ global class ViberBotSenderService implements IBotSenderService {
      */
     global void image(String imageUrl, String caption) {
         send(
-            ViberBotMethod.SendMessage,
             prepareMessagePayload('picture').set('text', caption, true).set('media', imageUrl),
             new ValueMap().set('type', BotMessageType.Image.name()).set('text', caption).set('mediaUrl', imageUrl)
         );
@@ -74,7 +77,6 @@ global class ViberBotSenderService implements IBotSenderService {
      */
     global void video(String videoUrl, String caption) {
         send(
-            ViberBotMethod.SendMessage,
             prepareMessagePayload('video')
                 .set('text', caption, true)
                 .set('media', videoUrl)
@@ -98,7 +100,6 @@ global class ViberBotSenderService implements IBotSenderService {
      */
     global void file(String fileUrl, String caption) {
         send(
-            ViberBotMethod.SendMessage,
             prepareMessagePayload('file')
                 .set('media', fileUrl)
                 // Capturing the file name from the url: "https://example.com/static/file.pdf"
@@ -120,7 +121,6 @@ global class ViberBotSenderService implements IBotSenderService {
      */
     global void contact(String name, String phone) {
         send(
-            ViberBotMethod.SendMessage,
             prepareMessagePayload('contact')
                 .set('contact', new ValueMap().set('name', name).set('phone_number', phone)),
             new ValueMap()
@@ -136,7 +136,6 @@ global class ViberBotSenderService implements IBotSenderService {
      */
     global void location(Decimal latitude, Decimal longitude) {
         send(
-            ViberBotMethod.SendMessage,
             prepareMessagePayload('location')
                 .set('location', new ValueMap().set('lat', latitude).set('lon', longitude)),
             new ValueMap()
@@ -151,7 +150,6 @@ global class ViberBotSenderService implements IBotSenderService {
      */
     global void sticker(Integer stickerId) {
         send(
-            ViberBotMethod.SendMessage,
             prepareMessagePayload('sticker').set('sticker_id', stickerId),
             new ValueMap()
                 .set('type', BotMessageType.Sticker.name())
@@ -165,21 +163,24 @@ global class ViberBotSenderService implements IBotSenderService {
      */
     global void url(String link) {
         send(
-            ViberBotMethod.SendMessage,
             prepareMessagePayload('url').set('media', link),
             new ValueMap().set('type', BotMessageType.Url.name()).set('mediaUrl', link)
         );
     }
 
     private ValueMap prepareMessagePayload(String type) {
-        return new ValueMap()
-            .set('receiver', chatId)
-            .set('sender', new ValueMap().set('name', senderName))
-            .set('type', type);
+        ValueMap payload = new ValueMap().set('sender', new ValueMap().set('name', senderName)).set('type', type);
+
+        if (sendMethod == ViberBotMethod.SendMessage) {
+            payload.set('receiver', chatIds.get(0));
+        } else {
+            payload.set('broadcast_list', chatIds);
+        }
+        return payload;
     }
 
-    private void send(ViberBotMethod method, ValueMap payload, ValueMap callbackParams) {
-        String messageId = calloutService.call(method, payload).getString('message_token');
-        callback.execute(callbackParams.set('messageId', messageId));
+    private void send(ValueMap payload, ValueMap callbackParams) {
+        ValueMap response = calloutService.call(sendMethod, payload);
+        callback.execute(callbackParams.set('messageId', response.getString('message_token')));
     }
 }

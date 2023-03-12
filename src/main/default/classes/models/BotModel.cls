@@ -50,20 +50,20 @@ global class BotModel {
     }
 
     /**
-     * @description Converts the JSON string back to the <<BotModel>> instance
-     * @param jsonStr The JSON string with serialized <<BotModel>>
-     * @return The new <<BotModel>> instance
-     */
-    global static BotModel fromJson(String jsonStr) {
-        return (BotModel) JSON.deserialize(jsonStr, BotModel.class);
-    }
-
-    /**
      * @description Checks if the passed object equals to the current instance
      * @param other Any object this instance is compared with
      * @return `true` if the passed object equals to the current instance by a reference or Id value
      */
     global Boolean equals(Object other) {
         return other instanceof BotModel && (this === other || this.id == ((BotModel) other).id);
+    }
+
+    /**
+     * @description Converts the JSON string back to the <<BotModel>> instance
+     * @param jsonStr The JSON string with serialized <<BotModel>>
+     * @return The new <<BotModel>> instance
+     */
+    global static BotModel fromJson(String jsonStr) {
+        return (BotModel) JSON.deserialize(jsonStr, BotModel.class);
     }
 }

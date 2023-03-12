@@ -1,3 +1,4 @@
+// TODO: Implement: sendMediaGroup, sendAudio, sendAnimation, sendVoice, sendVideoNote, sendVenue, sendPoll, sendDice, sendChatAction
 /**
  * @description Service class that provides access to all `Telegram` `send` methods
  */
@@ -146,8 +147,6 @@ global class TelegramBotSenderService implements IBotSenderService {
                 .set('parameters', new ValueMap().set('stickerId', stickerId, true))
         );
     }
-
-    // TODO: Implement: sendMediaGroup, sendAudio, sendAnimation, sendVoice, sendVideoNote, sendVenue, sendPoll, sendDice, sendChatAction
 
     private void send(TelegramBotMethod method, ValueMap payload, ValueMap callbackParams) {
         ValueMap response = calloutService.call(method, payload);

@@ -14,7 +14,7 @@ global class TelegramBotService extends BotService {
         return new TelegramBotSenderService(
             chatId,
             calloutService,
-            new BotService.SaveSentMessageCallback(chatId, bot)
+            new BotService.SaveSentMessageCallback(new List<String> { chatId }, bot)
         );
     }
 }

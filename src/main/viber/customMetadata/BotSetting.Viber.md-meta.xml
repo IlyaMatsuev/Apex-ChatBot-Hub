@@ -4,7 +4,7 @@
     <protected>false</protected>
     <values>
         <field>ApiUrl__c</field>
-        <value xsi:type="xsd:string">https://chatapi.viber.com/pa/</value>
+        <value xsi:type="xsd:string">https://chatapi.viber.com/pa</value>
     </values>
     <values>
         <field>BotCalloutService__c</field>
