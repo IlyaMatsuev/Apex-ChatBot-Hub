@@ -14,7 +14,7 @@ private class BotTriggerTest {
 
     @IsTest
     private static void insert_telegramWithCorrectData_shouldCreateBotAndSetWebhook() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
 
         Test.startTest();
         insert new Bot__c(Type__c = BotType.Telegram.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
@@ -27,7 +27,7 @@ private class BotTriggerTest {
 
     @IsTest
     private static void insert_telegramWithInvalidHandler_shouldThrowException() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
 
         Exception error;
         Test.startTest();
@@ -52,7 +52,7 @@ private class BotTriggerTest {
 
     @IsTest
     private static void delete_telegramWithCorrectData_shouldDeleteAndUnsetWebhook() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
 
         Test.startTest();
         Bot__c bot = new Bot__c(Type__c = BotType.Telegram.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
@@ -68,7 +68,7 @@ private class BotTriggerTest {
 
     @IsTest
     private static void insert_viberWithCorrectData_shouldCreateBotAndSetWebhook() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+        Test.setMock(HttpCalloutMock.class, new ViberBotCalloutMock());
 
         Test.startTest();
         insert new Bot__c(Type__c = BotType.Viber.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
@@ -81,7 +81,7 @@ private class BotTriggerTest {
 
     @IsTest
     private static void insert_viberWithInvalidHandler_shouldThrowException() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+        Test.setMock(HttpCalloutMock.class, new ViberBotCalloutMock());
 
         Exception error;
         Test.startTest();
@@ -106,7 +106,7 @@ private class BotTriggerTest {
 
     @IsTest
     private static void delete_viberWithCorrectData_shouldDeleteAndUnsetWebhook() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+        Test.setMock(HttpCalloutMock.class, new ViberBotCalloutMock());
 
         Test.startTest();
         Bot__c bot = new Bot__c(Type__c = BotType.Viber.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);

@@ -203,7 +203,7 @@ private class ViberBotServiceTest {
     }
 
     private static BotCalloutMock setCalloutMock() {
-        BotCalloutMock mock = new BotCalloutMock(BOT_TYPE);
+        BotCalloutMock mock = new ViberBotCalloutMock();
         Test.setMock(HttpCalloutMock.class, mock);
         return mock;
     }

@@ -213,7 +213,7 @@ private class TelegramBotServiceTest {
     }
 
     private static BotCalloutMock setCalloutMock() {
-        BotCalloutMock mock = new BotCalloutMock(BOT_TYPE);
+        BotCalloutMock mock = new TelegramBotCalloutMock();
         Test.setMock(HttpCalloutMock.class, mock);
         return mock;
     }

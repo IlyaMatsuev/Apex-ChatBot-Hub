@@ -11,7 +11,7 @@ private class BotUpdateEventTriggerTest {
 
     @IsTest
     private static void handle_telegramBotMessage_shouldHandleMessageAndInsertChatDetails() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
 
         BotModel bot = createBot(BotType.Telegram);
         Test.startTest();
@@ -52,7 +52,7 @@ private class BotUpdateEventTriggerTest {
 
     @IsTest
     private static void handle_telegramUpdateWithUnexpectedException_shouldThrowExceptionAndLogError() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
 
         BotModel bot = createBot(BotType.Telegram);
         BotHandlerMock.throwError = true;
@@ -74,7 +74,7 @@ private class BotUpdateEventTriggerTest {
 
     @IsTest
     private static void handle_telegramNotSupportedUpdateType_shouldIgnoreUpdate() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
 
         BotModel bot = createBot(BotType.Telegram);
         Test.startTest();
@@ -106,7 +106,7 @@ private class BotUpdateEventTriggerTest {
 
     @IsTest
     private static void handle_viberBotMessage_shouldHandleMessageAndInsertChatDetails() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+        Test.setMock(HttpCalloutMock.class, new ViberBotCalloutMock());
 
         BotModel bot = createBot(BotType.Viber);
         Test.startTest();
@@ -152,7 +152,7 @@ private class BotUpdateEventTriggerTest {
 
     @IsTest
     private static void handle_viberUpdateWithUnexpectedException_shouldThrowExceptionAndLogError() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+        Test.setMock(HttpCalloutMock.class, new ViberBotCalloutMock());
 
         BotModel bot = createBot(BotType.Viber);
         BotHandlerMock.throwError = true;
@@ -179,7 +179,7 @@ private class BotUpdateEventTriggerTest {
 
     @IsTest
     private static void handle_viberWebhookUrlCallback_shouldIgnore() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Viber));
+        Test.setMock(HttpCalloutMock.class, new ViberBotCalloutMock());
 
         BotModel bot = createBot(BotType.Viber);
         Test.startTest();
