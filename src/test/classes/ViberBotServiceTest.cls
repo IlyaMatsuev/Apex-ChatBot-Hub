@@ -66,6 +66,24 @@ private class ViberBotServiceTest {
     }
 
     @IsTest
+    private static void send_imageWithCaption_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).image('https://example.com/image.jpeg', 'Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Image,
+            'Hello world!',
+            'https://example.com/image.jpeg',
+            new ValueMap()
+        );
+    }
+
+    @IsTest
     private static void send_video_shouldSendAndCreateMessageRecord() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();
@@ -75,7 +93,30 @@ private class ViberBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Video, null, 'https://example.com/video.mp4', new ValueMap());
+        fixture.assertMessageIsCreated(
+            BotMessageType.Video,
+            null,
+            'https://example.com/video.mp4',
+            new ValueMap().set('size', 10000)
+        );
+    }
+
+    @IsTest
+    private static void send_videoWithCaption_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).video('https://example.com/video.mp4', 'Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Video,
+            'Hello world!',
+            'https://example.com/video.mp4',
+            new ValueMap().set('size', 10000)
+        );
     }
 
     @IsTest
@@ -88,7 +129,50 @@ private class ViberBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.File, null, 'https://example.com/file.pdf', new ValueMap());
+        fixture.assertMessageIsCreated(
+            BotMessageType.File,
+            null,
+            'https://example.com/file.pdf',
+            new ValueMap().set('size', 10000).set('fileName', 'file.pdf')
+        );
+    }
+
+    @IsTest
+    private static void send_fileWithEmptyCaption_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).file('https://example.com/file.pdf', '');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.File,
+            null,
+            'https://example.com/file.pdf',
+            new ValueMap().set('size', 10000).set('fileName', 'file.pdf')
+        );
+    }
+
+    @IsTest
+    private static void send_fileWithDifferentFileName_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut()
+            .send(fixture.chat.ExternalId__c)
+            .file('https://example.com/file.pdf', new ViberSendFileOptions(null, 'new-file.pdf', null));
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.File,
+            null,
+            'https://example.com/file.pdf',
+            new ValueMap().set('size', 10000).set('fileName', 'new-file.pdf')
+        );
     }
 
     @IsTest

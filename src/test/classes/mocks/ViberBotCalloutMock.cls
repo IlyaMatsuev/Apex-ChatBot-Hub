@@ -109,7 +109,6 @@ public class ViberBotCalloutMock extends BotCalloutMock {
         Assert.isTrue(request.hasValue('media'));
         Assert.isTrue(request.hasValue('size'));
         Assert.isTrue(request.hasValue('file_name'));
-        Assert.isTrue(request.getString('media').endsWith(request.getString('file_name')));
     }
 
     private void assertContactMessagePayload(ValueMap request) {
