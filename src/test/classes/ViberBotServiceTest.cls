@@ -13,7 +13,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().text('Hello world!');
+        fixture.sut().send(fixture.chat.ExternalId__c).text('Hello world!');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -26,7 +26,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().text('https://example.com/#some-topic');
+        fixture.sut().send(fixture.chat.ExternalId__c).text('https://example.com/#some-topic');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -42,7 +42,7 @@ private class ViberBotServiceTest {
         Test.startTest();
         Exception error;
         try {
-            fixture.sut().text('Hello world!');
+            fixture.sut().send(fixture.chat.ExternalId__c).text('Hello world!');
         } catch (Exception ex) {
             error = ex;
         }
@@ -58,7 +58,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().image('https://example.com/image.jpeg');
+        fixture.sut().send(fixture.chat.ExternalId__c).image('https://example.com/image.jpeg');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -71,7 +71,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().video('https://example.com/video.mp4');
+        fixture.sut().send(fixture.chat.ExternalId__c).video('https://example.com/video.mp4');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -84,7 +84,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().file('https://example.com/file.pdf');
+        fixture.sut().send(fixture.chat.ExternalId__c).file('https://example.com/file.pdf');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -97,7 +97,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().contact('John Wick', '3168998280');
+        fixture.sut().send(fixture.chat.ExternalId__c).contact('John Wick', '3168998280');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -117,7 +117,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().location(lat, lon);
+        fixture.sut().send(fixture.chat.ExternalId__c).location(lat, lon);
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -135,7 +135,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().sticker(12345);
+        fixture.sut().send(fixture.chat.ExternalId__c).sticker(12345);
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -148,11 +148,31 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().url('https://example.com/#some-topic');
+        fixture.sut().send(fixture.chat.ExternalId__c).url('https://example.com/#some-topic');
         Test.getEventBus().deliver();
         Test.stopTest();
 
         fixture.assertMessageIsCreated(BotMessageType.Url, null, 'https://example.com/#some-topic', new ValueMap());
+    }
+
+    @IsTest
+    private static void sendBroadcast_text_shouldSendAndCreateMessageRecords() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        List<String> chatIds = new List<String> {
+            fixture.chat.ExternalId__c,
+            createChat(fixture.bot, 1).ExternalId__c,
+            createChat(fixture.bot, 2).ExternalId__c
+        };
+
+        Test.startTest();
+        fixture.sut().sendBroadcast(chatIds).text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(chatIds.get(0), BotMessageType.Text, 'Hello world!', null, new ValueMap());
+        fixture.assertMessageIsCreated(chatIds.get(1), BotMessageType.Text, 'Hello world!', null, new ValueMap());
+        fixture.assertMessageIsCreated(chatIds.get(2), BotMessageType.Text, 'Hello world!', null, new ValueMap());
     }
 
     private class SenderFixture {
@@ -161,22 +181,33 @@ private class ViberBotServiceTest {
 
         private SenderFixture() {
             this.bot = createBot();
-            this.chat = createChat(bot);
+            this.chat = createChat(bot, 0);
         }
 
-        public ViberBotSenderService sut() {
-            return createService(bot).send(chat.ExternalId__c);
+        public ViberBotService sut() {
+            return createService(bot);
         }
 
         public void assertMessageIsCreated(BotMessageType messageType, String text, String mediaUrl, ValueMap params) {
-            List<ChatMessage__c> messages = [
-                SELECT Bot__c, User__c, Chat__c, ExternalId__c, Text__c, Type__c, MediaUrl__c, Parameters__c
-                FROM ChatMessage__c
-            ];
+            assertMessageIsCreated(null, messageType, text, mediaUrl, params);
+        }
+
+        public void assertMessageIsCreated(
+            String chatId,
+            BotMessageType messageType,
+            String text,
+            String mediaUrl,
+            ValueMap params
+        ) {
+            List<ChatMessage__c> messages = (List<ChatMessage__c>) Database.query(
+                'SELECT Bot__c, User__c, Chat__c, Chat__r.ExternalId__c, ExternalId__c, Text__c, Type__c, MediaUrl__c, Parameters__c ' +
+                    'FROM ChatMessage__c ' +
+                    (chatId == null ? '' : 'WHERE Chat__r.ExternalId__c = \'' + chatId + '\'')
+            );
             Assert.areEqual(1, messages.size());
             ChatMessage__c message = messages.get(0);
             Assert.areEqual(bot.id, message.Bot__c);
-            Assert.areEqual(chat.Id, message.Chat__c);
+            Assert.areEqual(chatId == null ? chat.ExternalId__c : chatId, message.Chat__r.ExternalId__c);
             Assert.isTrue(String.isNotBlank(message.ExternalId__c));
             Assert.isTrue(String.isBlank(message.User__c));
 
@@ -224,11 +255,11 @@ private class ViberBotServiceTest {
         );
     }
 
-    private static Chat__c createChat(BotModel bot) {
+    private static Chat__c createChat(BotModel bot, Integer index) {
         Chat__c chat = new Chat__c(
-            Name = 'TestChat',
+            Name = 'TestChat' + index,
             Bot__c = bot.id,
-            ExternalId__c = '3214:' + bot.tokenHash.substring(0, 20)
+            ExternalId__c = (3214 + index) + ':' + bot.tokenHash.substring(0, 20)
         );
         insert chat;
         return chat;

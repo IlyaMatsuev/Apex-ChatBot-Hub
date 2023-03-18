@@ -12,8 +12,4 @@ public class TelegramBotMethod extends BotMethod {
     private TelegramBotMethod(String value) {
         super(value, TelegramBotMethod.class);
     }
-
-    public static TelegramBotMethod valueOf(String value) {
-        return (TelegramBotMethod) BotEnumType.valueOf(value, TelegramBotMethod.class);
-    }
 }

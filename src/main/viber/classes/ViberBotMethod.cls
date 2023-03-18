@@ -6,8 +6,4 @@ public class ViberBotMethod extends BotMethod {
     private ViberBotMethod(String value) {
         super(value, ViberBotMethod.class);
     }
-
-    public static ViberBotMethod valueOf(String value) {
-        return (ViberBotMethod) BotEnumType.valueOf(value, ViberBotMethod.class);
-    }
 }

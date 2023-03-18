@@ -1,5 +1,3 @@
-// TODO: Implement methods with all possible optional params
-// TODO: Implement broadcast messages
 /**
  * @description Service class that provides access to all `Viber` `send` methods
  */
@@ -42,6 +40,7 @@ global class ViberBotSenderService implements IBotSenderService {
         );
     }
 
+    // TODO: Add overload with options: thumbnail
     /**
      * @description Sends an image
      * @param imageUrl The image URL
@@ -62,6 +61,7 @@ global class ViberBotSenderService implements IBotSenderService {
         );
     }
 
+    // TODO: Add overload with options: size, duration, thumbnail
     /**
      * @description Sends a video
      * @param videoUrl The video URL
@@ -85,6 +85,7 @@ global class ViberBotSenderService implements IBotSenderService {
         );
     }
 
+    // TODO: Add overload with options: size, file_name
     /**
      * @description Sends a file
      * @param fileUrl The file URL. Should include file name with extension in the end
