@@ -21,8 +21,8 @@ private class BotTriggerTest {
         Test.stopTest();
 
         List<Bot__c> newBots = [SELECT Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
-        System.assertEquals(1, newBots.size());
-        System.assert(String.isNotBlank(newBots.get(0).TokenHash__c));
+        Assert.areEqual(1, newBots.size());
+        Assert.isTrue(String.isNotBlank(newBots.get(0).TokenHash__c));
     }
 
     @IsTest
@@ -42,12 +42,12 @@ private class BotTriggerTest {
         }
         Test.stopTest();
 
-        System.assert(error != null);
-        System.assert(
+        Assert.isTrue(error != null);
+        Assert.isTrue(
             error.getMessage().contains('Bot handler does not exist or does not implement the IBotHandler interface')
         );
         List<BotError__c> errors = [SELECT Id FROM BotError__c];
-        System.assertEquals(0, errors.size());
+        Assert.areEqual(0, errors.size());
     }
 
     @IsTest
@@ -75,8 +75,8 @@ private class BotTriggerTest {
         Test.stopTest();
 
         List<Bot__c> newBots = [SELECT Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
-        System.assertEquals(1, newBots.size());
-        System.assert(String.isNotBlank(newBots.get(0).TokenHash__c));
+        Assert.areEqual(1, newBots.size());
+        Assert.isTrue(String.isNotBlank(newBots.get(0).TokenHash__c));
     }
 
     @IsTest
@@ -96,12 +96,12 @@ private class BotTriggerTest {
         }
         Test.stopTest();
 
-        System.assert(error != null);
-        System.assert(
+        Assert.isTrue(error != null);
+        Assert.isTrue(
             error.getMessage().contains('Bot handler does not exist or does not implement the IBotHandler interface')
         );
         List<BotError__c> errors = [SELECT Id FROM BotError__c];
-        System.assertEquals(0, errors.size());
+        Assert.areEqual(0, errors.size());
     }
 
     @IsTest

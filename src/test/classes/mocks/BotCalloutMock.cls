@@ -2,8 +2,8 @@ public abstract class BotCalloutMock implements HttpCalloutMock {
     private ResponseOverrides overrides;
 
     public HttpResponse respond(HttpRequest request) {
-        System.assertEquals('POST', request.getMethod());
-        System.assertEquals('application/json', request.getHeader('Content-Type'));
+        Assert.areEqual('POST', request.getMethod());
+        Assert.areEqual('application/json', request.getHeader('Content-Type'));
 
         HttpResponse response = new HttpResponse();
         response.setStatusCode(200);

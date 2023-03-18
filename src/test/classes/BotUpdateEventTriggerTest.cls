@@ -26,28 +26,28 @@ private class BotUpdateEventTriggerTest {
             FROM ChatMessage__c
         ];
         // Chat
-        System.assertEquals(1, chats.size());
-        System.assertEquals('matsuev', chats.get(0).Name);
-        System.assertEquals(bot.id, chats.get(0).Bot__c);
-        System.assertEquals('876541222:'.rightPad(40, bot.tokenHash), chats.get(0).ExternalId__c);
+        Assert.areEqual(1, chats.size());
+        Assert.areEqual('matsuev', chats.get(0).Name);
+        Assert.areEqual(bot.id, chats.get(0).Bot__c);
+        Assert.areEqual('876541222:'.rightPad(40, bot.tokenHash), chats.get(0).ExternalId__c);
         // User
-        System.assertEquals(1, users.size());
-        System.assertEquals('matsuev', users.get(0).Name);
-        System.assertEquals(null, users.get(0).FirstName__c);
-        System.assertEquals('matsuev', users.get(0).LastName__c);
-        System.assertEquals('ilyamatsuev', users.get(0).Username__c);
-        System.assertEquals('876541222', users.get(0).ExternalId__c);
+        Assert.areEqual(1, users.size());
+        Assert.areEqual('matsuev', users.get(0).Name);
+        Assert.isNull(users.get(0).FirstName__c);
+        Assert.areEqual('matsuev', users.get(0).LastName__c);
+        Assert.areEqual('ilyamatsuev', users.get(0).Username__c);
+        Assert.areEqual('876541222', users.get(0).ExternalId__c);
         // Message
-        System.assertEquals(1, messages.size());
-        System.assertEquals('Hello world!', messages.get(0).Text__c);
-        System.assertEquals(users.get(0).Id, messages.get(0).User__c);
-        System.assertEquals(chats.get(0).Id, messages.get(0).Chat__c);
-        System.assertEquals(null, messages.get(0).Bot__c);
-        System.assertEquals('223123123:876541222', messages.get(0).ExternalId__c);
-        System.assertEquals(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
+        Assert.areEqual(1, messages.size());
+        Assert.areEqual('Hello world!', messages.get(0).Text__c);
+        Assert.areEqual(users.get(0).Id, messages.get(0).User__c);
+        Assert.areEqual(chats.get(0).Id, messages.get(0).Chat__c);
+        Assert.isNull(messages.get(0).Bot__c);
+        Assert.areEqual('223123123:876541222', messages.get(0).ExternalId__c);
+        Assert.areEqual(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
 
         List<BotContext> contexts = BotHandlerMock.executedContexts;
-        System.assertEquals(1, contexts.size());
+        Assert.areEqual(1, contexts.size());
     }
 
     @IsTest
@@ -66,10 +66,10 @@ private class BotUpdateEventTriggerTest {
         List<ChatUser__c> users = [SELECT Id FROM ChatUser__c];
         List<ChatMessage__c> messages = [SELECT Id FROM ChatMessage__c];
 
-        System.assertEquals(1, errors.size());
-        System.assertEquals(1, chats.size());
-        System.assertEquals(1, users.size());
-        System.assertEquals(1, messages.size());
+        Assert.areEqual(1, errors.size());
+        Assert.areEqual(1, chats.size());
+        Assert.areEqual(1, users.size());
+        Assert.areEqual(1, messages.size());
     }
 
     @IsTest
@@ -94,10 +94,10 @@ private class BotUpdateEventTriggerTest {
             FROM ChatMessage__c
         ];
 
-        System.assert(chats.isEmpty());
-        System.assert(users.isEmpty());
-        System.assert(messages.isEmpty());
-        System.assert(BotHandlerMock.executedContexts.isEmpty());
+        Assert.isTrue(chats.isEmpty());
+        Assert.isTrue(users.isEmpty());
+        Assert.isTrue(messages.isEmpty());
+        Assert.isTrue(BotHandlerMock.executedContexts.isEmpty());
     }
 
     /**
@@ -126,28 +126,28 @@ private class BotUpdateEventTriggerTest {
             FROM ChatMessage__c
         ];
         // Chat
-        System.assertEquals(1, chats.size());
-        System.assertEquals('John McClane', chats.get(0).Name);
-        System.assertEquals(bot.id, chats.get(0).Bot__c);
-        System.assertEquals('01234567890A=:'.rightPad(40, bot.tokenHash), chats.get(0).ExternalId__c);
+        Assert.areEqual(1, chats.size());
+        Assert.areEqual('John McClane', chats.get(0).Name);
+        Assert.areEqual(bot.id, chats.get(0).Bot__c);
+        Assert.areEqual('01234567890A=:'.rightPad(40, bot.tokenHash), chats.get(0).ExternalId__c);
         // User
-        System.assertEquals(1, users.size());
-        System.assertEquals('John McClane', users.get(0).Name);
-        System.assertEquals('John', users.get(0).FirstName__c);
-        System.assertEquals('McClane', users.get(0).LastName__c);
-        System.assertEquals('01234567890A=', users.get(0).Username__c);
-        System.assertEquals('01234567890A=', users.get(0).ExternalId__c);
+        Assert.areEqual(1, users.size());
+        Assert.areEqual('John McClane', users.get(0).Name);
+        Assert.areEqual('John', users.get(0).FirstName__c);
+        Assert.areEqual('McClane', users.get(0).LastName__c);
+        Assert.areEqual('01234567890A=', users.get(0).Username__c);
+        Assert.areEqual('01234567890A=', users.get(0).ExternalId__c);
         // Message
-        System.assertEquals(1, messages.size());
-        System.assertEquals('Hello world!', messages.get(0).Text__c);
-        System.assertEquals(users.get(0).Id, messages.get(0).User__c);
-        System.assertEquals(chats.get(0).Id, messages.get(0).Chat__c);
-        System.assertEquals(null, messages.get(0).Bot__c);
-        System.assertEquals('4912661846655238145:01234567890A=', messages.get(0).ExternalId__c);
-        System.assertEquals(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
+        Assert.areEqual(1, messages.size());
+        Assert.areEqual('Hello world!', messages.get(0).Text__c);
+        Assert.areEqual(users.get(0).Id, messages.get(0).User__c);
+        Assert.areEqual(chats.get(0).Id, messages.get(0).Chat__c);
+        Assert.isNull(messages.get(0).Bot__c);
+        Assert.areEqual('4912661846655238145:01234567890A=', messages.get(0).ExternalId__c);
+        Assert.areEqual(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
 
         List<BotContext> contexts = BotHandlerMock.executedContexts;
-        System.assertEquals(1, contexts.size());
+        Assert.areEqual(1, contexts.size());
     }
 
     @IsTest
@@ -171,10 +171,10 @@ private class BotUpdateEventTriggerTest {
         List<ChatUser__c> users = [SELECT Id FROM ChatUser__c];
         List<ChatMessage__c> messages = [SELECT Id FROM ChatMessage__c];
 
-        System.assertEquals(1, errors.size());
-        System.assertEquals(1, chats.size());
-        System.assertEquals(1, users.size());
-        System.assertEquals(1, messages.size());
+        Assert.areEqual(1, errors.size());
+        Assert.areEqual(1, chats.size());
+        Assert.areEqual(1, users.size());
+        Assert.areEqual(1, messages.size());
     }
 
     @IsTest
@@ -197,11 +197,11 @@ private class BotUpdateEventTriggerTest {
         List<ChatUser__c> users = [SELECT Id FROM ChatUser__c];
         List<ChatMessage__c> messages = [SELECT Id FROM ChatMessage__c];
 
-        System.assert(errors.isEmpty());
-        System.assert(chats.isEmpty());
-        System.assert(users.isEmpty());
-        System.assert(messages.isEmpty());
-        System.assert(BotHandlerMock.executedContexts.isEmpty());
+        Assert.isTrue(errors.isEmpty());
+        Assert.isTrue(chats.isEmpty());
+        Assert.isTrue(users.isEmpty());
+        Assert.isTrue(messages.isEmpty());
+        Assert.isTrue(BotHandlerMock.executedContexts.isEmpty());
     }
 
     private static BotModel createBot(BotType type) {

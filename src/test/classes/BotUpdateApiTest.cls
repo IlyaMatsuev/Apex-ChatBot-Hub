@@ -20,8 +20,8 @@ private class BotUpdateApiTest {
         BotUpdateApi.post();
 
         RestResponse response = RestContext.response;
-        System.assertEquals('OK', response.responseBody.toString());
-        System.assertEquals(200, response.statusCode);
+        Assert.areEqual('OK', response.responseBody.toString());
+        Assert.areEqual(200, response.statusCode);
     }
 
     @IsTest
@@ -35,8 +35,8 @@ private class BotUpdateApiTest {
         BotUpdateApi.post();
 
         RestResponse response = RestContext.response;
-        System.assertEquals('ERROR', response.responseBody.toString());
-        System.assertEquals(400, response.statusCode);
+        Assert.areEqual('ERROR', response.responseBody.toString());
+        Assert.areEqual(400, response.statusCode);
     }
 
     @IsTest
@@ -50,8 +50,8 @@ private class BotUpdateApiTest {
         BotUpdateApi.post();
 
         RestResponse response = RestContext.response;
-        System.assertEquals('ERROR', response.responseBody.toString());
-        System.assertEquals(400, response.statusCode);
+        Assert.areEqual('ERROR', response.responseBody.toString());
+        Assert.areEqual(400, response.statusCode);
     }
 
     /**
@@ -68,8 +68,8 @@ private class BotUpdateApiTest {
         BotUpdateApi.post();
 
         RestResponse response = RestContext.response;
-        System.assertEquals('OK', response.responseBody.toString());
-        System.assertEquals(200, response.statusCode);
+        Assert.areEqual('OK', response.responseBody.toString());
+        Assert.areEqual(200, response.statusCode);
     }
 
     @IsTest
@@ -82,8 +82,8 @@ private class BotUpdateApiTest {
         BotUpdateApi.post();
 
         RestResponse response = RestContext.response;
-        System.assertEquals('ERROR', response.responseBody.toString());
-        System.assertEquals(400, response.statusCode);
+        Assert.areEqual('ERROR', response.responseBody.toString());
+        Assert.areEqual(400, response.statusCode);
     }
 
     private static Bot__c prepareBot(BotType type) {

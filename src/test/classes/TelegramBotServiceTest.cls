@@ -183,32 +183,32 @@ private class TelegramBotServiceTest {
                 SELECT Bot__c, User__c, Chat__c, ExternalId__c, Text__c, Type__c, MediaUrl__c, Parameters__c
                 FROM ChatMessage__c
             ];
-            System.assertEquals(1, messages.size());
+            Assert.areEqual(1, messages.size());
             ChatMessage__c message = messages.get(0);
-            System.assertEquals(bot.id, message.Bot__c);
-            System.assertEquals(chat.Id, message.Chat__c);
-            System.assert(String.isNotBlank(message.ExternalId__c));
-            System.assert(String.isBlank(message.User__c));
+            Assert.areEqual(bot.id, message.Bot__c);
+            Assert.areEqual(chat.Id, message.Chat__c);
+            Assert.isTrue(String.isNotBlank(message.ExternalId__c));
+            Assert.isTrue(String.isBlank(message.User__c));
 
-            System.assertEquals(messageType.name(), message.Type__c);
-            System.assertEquals(text, message.Text__c);
-            System.assertEquals(mediaUrl, message.MediaUrl__c);
-            System.assertEquals(params.toJson(true), message.Parameters__c);
+            Assert.areEqual(messageType.name(), message.Type__c);
+            Assert.areEqual(text, message.Text__c);
+            Assert.areEqual(mediaUrl, message.MediaUrl__c);
+            Assert.areEqual(params.toJson(true), message.Parameters__c);
         }
 
         public void assertCalloutException(TelegramBotMethod method, Exception error, Integer statusCode) {
-            System.assert(error != null);
-            System.assert(error instanceof BotCalloutService.BotCalloutException);
+            Assert.isNotNull(error);
+            Assert.isInstanceOfType(error, BotCalloutService.BotCalloutException.class);
 
             BotCustomException customException = (BotCustomException) error;
-            System.assert(customException.payload.has('request'));
+            Assert.isTrue(customException.payload.has('request'));
 
             ValueMap requestPayload = customException.payload.getValueMap('request');
-            System.assertEquals(bot.id, requestPayload.getString('botId'));
-            System.assertEquals(method.name(), requestPayload.getString('botMethod'));
+            Assert.areEqual(bot.id, requestPayload.getString('botId'));
+            Assert.areEqual(method.name(), requestPayload.getString('botMethod'));
 
-            System.assert(customException.payload.has('response'));
-            System.assertEquals(statusCode, customException.payload.getValueMap('response').getInteger('statusCode'));
+            Assert.isTrue(customException.payload.has('response'));
+            Assert.areEqual(statusCode, customException.payload.getValueMap('response').getInteger('statusCode'));
         }
     }
 
