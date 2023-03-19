@@ -2,6 +2,8 @@
  * @description Service class that provides access to all `Viber` `send` methods
  */
 global class ViberBotSenderService implements IBotSenderService {
+    private static final Integer REACH_MEDIA_MESSAGE_API_VERSION = 7;
+
     private final String senderName;
     private final List<String> chatIds;
     private final BotCalloutService calloutService;
@@ -215,6 +217,19 @@ global class ViberBotSenderService implements IBotSenderService {
             prepareMessagePayload('url').set('media', link),
             new ValueMap().set('type', BotMessageType.Url.name()).set('mediaUrl', link)
         );
+    }
+
+    /**
+     * @description Sends a carousel message with the custom layout
+     * @param carousel The instance of the <<ViberCustomMessageKeyboard>> class for customizing message layout
+     */
+    global void carousel(ViberCustomMessageKeyboard carousel) {
+        ValueMap payload = prepareMessagePayload('rich_media')
+            .set('min_api_version', REACH_MEDIA_MESSAGE_API_VERSION)
+            .set('rich_media', carousel.set('Type', 'rich_media'));
+        ValueMap callbackParams = new ValueMap().set('type', BotMessageType.Custom.name()).set('parameters', carousel);
+
+        send(payload, callbackParams);
     }
 
     private ValueMap prepareMessagePayload(String type) {

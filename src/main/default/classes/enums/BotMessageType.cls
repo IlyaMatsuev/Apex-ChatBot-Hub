@@ -43,6 +43,11 @@ global class BotMessageType extends BotEnumType {
      */
     global static final BotMessageType Url = new BotMessageType('Url');
 
+    /**
+     * @description The message with custom layout
+     */
+    global static final BotMessageType Custom = new BotMessageType('Custom');
+
     public BotMessageType(String value) {
         super(value, BotMessageType.class);
     }

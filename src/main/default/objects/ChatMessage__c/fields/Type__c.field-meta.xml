@@ -51,6 +51,11 @@
                 <default>false</default>
                 <label>Url</label>
             </value>
+            <value>
+                <fullName>Custom</fullName>
+                <default>false</default>
+                <label>Custom</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
