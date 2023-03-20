@@ -224,9 +224,11 @@ global class ViberBotSenderService implements IBotSenderService {
      * @param carousel The instance of the <<ViberCustomMessageKeyboard>> class for customizing message layout
      */
     global void carousel(ViberCustomMessageKeyboard carousel) {
+        carousel.setType('rich_media');
+
         ValueMap payload = prepareMessagePayload('rich_media')
             .set('min_api_version', REACH_MEDIA_MESSAGE_API_VERSION)
-            .set('rich_media', carousel.set('Type', 'rich_media'));
+            .set('rich_media', carousel);
         ValueMap callbackParams = new ValueMap().set('type', BotMessageType.Custom.name()).set('parameters', carousel);
 
         send(payload, callbackParams);
