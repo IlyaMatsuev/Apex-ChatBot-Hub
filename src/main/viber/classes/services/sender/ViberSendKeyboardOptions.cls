@@ -1,7 +1,7 @@
 /**
- * @description The wrapper class that represents parameters for sending a custom keyboard to the user via the `Viber` bot service. The source: https://developers.viber.com/docs/tools/keyboards/#general-keyboard-parameters
+ * @description The builder-like class that represents parameters for sending a custom carousel/keyboard to the user via the `Viber` bot service. The source: https://developers.viber.com/docs/tools/keyboards/#general-keyboard-parameters
  */
-global class ViberCustomMessageKeyboard extends ValueMap {
+global class ViberSendKeyboardOptions extends ValueMap {
     /**
      * @description The list of buttons to be shown to the receiver
      */
@@ -10,33 +10,33 @@ global class ViberCustomMessageKeyboard extends ValueMap {
     /**
      * @description Creates an instance of the carousel/keyboard without any buttons, so that they can be added separately
      */
-    global ViberCustomMessageKeyboard() {
+    global ViberSendKeyboardOptions() {
         this(new List<Button>());
     }
 
     /**
      * @description Creates an instance of the carousel/keyboard with the provided buttons
-     * @param buttons The list of <<ViberCustomMessageKeyboard.Button>> instances that represent buttons to be shown to the user
+     * @param buttons The list of <<ViberSendKeyboardOptions.Button>> instances that represent buttons to be shown to the user
      */
-    global ViberCustomMessageKeyboard(List<Button> buttons) {
+    global ViberSendKeyboardOptions(List<Button> buttons) {
         this.buttons = buttons;
     }
 
     /**
      * @description Adds a button to the carousel/keyboard
      * @param button The instance of the <<Button>> class, representing a button to add to the layout
-     * @return The current <<ViberCustomMessageKeyboard>> instance
+     * @return The current <<ViberSendKeyboardOptions>> instance
      */
-    global ViberCustomMessageKeyboard addButton(Button button) {
+    global ViberSendKeyboardOptions addButton(Button button) {
         return addButtons(new List<Button> { button });
     }
 
     /**
      * @description Adds multiple buttons to the carousel/keyboard
      * @param buttons The list of instances of the <<Button>> class, representing buttons to add to the layout
-     * @return The current <<ViberCustomMessageKeyboard>> instance
+     * @return The current <<ViberSendKeyboardOptions>> instance
      */
-    global ViberCustomMessageKeyboard addButtons(Button[] buttons) {
+    global ViberSendKeyboardOptions addButtons(Button[] buttons) {
         this.buttons.addAll(buttons);
         return this;
     }
@@ -45,21 +45,21 @@ global class ViberCustomMessageKeyboard extends ValueMap {
      * @description Sets the size of carousel/keyboard block for grouping buttons on the layout
      * @param groupRows The number of button row groups. Accepts numbers in range: `1..7`. Default is `7` for carousels and `2` for keyboards
      * @param groupColumns The number of button column groups. Accepts numbers in range: `1..6`. Default is `6`
-     * @return The current <<ViberCustomMessageKeyboard>> instance
+     * @return The current <<ViberSendKeyboardOptions>> instance
      */
-    global ViberCustomMessageKeyboard setLayout(Integer groupRows, Integer groupColumns) {
-        set('ButtonsGroupRows', groupRows);
-        set('ButtonsGroupColumns', groupColumns);
+    global ViberSendKeyboardOptions setLayout(Integer groupRows, Integer groupColumns) {
+        set('ButtonsGroupRows', groupRows, true);
+        set('ButtonsGroupColumns', groupColumns, true);
         return this;
     }
 
     /**
      * @description Sets the background color of the carousel/keyboard
      * @param backgroundColor The HEX value of the carousel/keyboard background color
-     * @return The current <<ViberCustomMessageKeyboard>> instance
+     * @return The current <<ViberSendKeyboardOptions>> instance
      */
-    global ViberCustomMessageKeyboard setBackgroundColor(String backgroundColor) {
-        set('BgColor', backgroundColor);
+    global ViberSendKeyboardOptions setBackgroundColor(String backgroundColor) {
+        set('BgColor', backgroundColor, true);
         return this;
     }
 
@@ -68,14 +68,14 @@ global class ViberCustomMessageKeyboard extends ValueMap {
      * @param customDefaultHeight How much percent of free screen space in chat should be taken by keyboard. The final height will not be less than height of the system keyboard. Accepts numbers in range: `40..70`
      * @param heightScale Scales the height of the default square block (which is defined on client side) to the given value in percents. Accepts numbers in range: `20..100`. Default is `100`
      * @param useDefaultHeight When `true` the keyboard will be displayed with the same height as the native keyboard. When `false` short keyboards will be displayed with the minimal possible height. Default is `false`
-     * @return The current <<ViberCustomMessageKeyboard>> instance
+     * @return The current <<ViberSendKeyboardOptions>> instance
      */
-    global ViberCustomMessageKeyboard setHeight(
+    global ViberSendKeyboardOptions setHeight(
         Integer customDefaultHeight,
         Integer heightScale,
         Boolean useDefaultHeight
     ) {
-        set('CustomDefaultHeight', customDefaultHeight);
+        set('CustomDefaultHeight', customDefaultHeight, true);
         set('HeightScale', heightScale, true);
         set('DefaultHeight', useDefaultHeight, true);
         return this;
@@ -84,24 +84,24 @@ global class ViberCustomMessageKeyboard extends ValueMap {
     /**
      * @description Customizes the receiver's keyboard input field
      * @param inputFieldState Possible values: `regular`, `minimized`, `hidden`. Default is `regular`
-     * @return The current <<ViberCustomMessageKeyboard>> instance
+     * @return The current <<ViberSendKeyboardOptions>> instance
      */
-    global ViberCustomMessageKeyboard setInputFieldState(String inputFieldState) {
-        set('InputFieldState', inputFieldState);
+    global ViberSendKeyboardOptions setInputFieldState(String inputFieldState) {
+        set('InputFieldState', inputFieldState, true);
         return this;
     }
 
     /**
      * @description Allows the carousel/keyboard content to be saved by the receiver
-     * @param favoritesMetadata The instance of <<ViberCustomMessageKeyboard.FavoritesMetadata>> describing content to be saved via favorites, if saving is available
-     * @return The current <<ViberCustomMessageKeyboard>> instance
+     * @param favoritesMetadata The instance of <<ViberSendKeyboardOptions.FavoritesMetadata>> describing content to be saved via favorites, if saving is available
+     * @return The current <<ViberSendKeyboardOptions>> instance
      */
-    global ViberCustomMessageKeyboard allowSaveToFavorites(FavoritesMetadata favoritesMetadata) {
+    global ViberSendKeyboardOptions allowSaveToFavorites(FavoritesMetadata favoritesMetadata) {
         set('FavoritesMetadata', favoritesMetadata);
         return this;
     }
 
-    public ViberCustomMessageKeyboard setType(String keyboardType) {
+    public ViberSendKeyboardOptions setType(String keyboardType) {
         set('Type', keyboardType);
         return this;
     }
@@ -110,12 +110,6 @@ global class ViberCustomMessageKeyboard extends ValueMap {
      * @description The wrapper class representing a button in the `Viber` carousel/keyboard. The source: https://developers.viber.com/docs/tools/keyboards/#buttons-parameters
      */
     global class Button extends ValueMap {
-        // TODO: Investigate how to use `Map` parameter with `open-map` action type
-        /**
-         * @description The object describing configurations for the `open-map` action type if `useInternalBrowserForUrl` is set to `true`
-         */
-        global ButtonMap mapConfig { get { return (ButtonMap) get('Map'); } set { set('Map', value); } }
-
         private String actionType { set { set('ActionType', value); } }
         private String actionBody { set { set('ActionBody', value); } }
 
@@ -123,18 +117,18 @@ global class ViberCustomMessageKeyboard extends ValueMap {
          * @description Sets the button layout
          * @param rows The button height. Accepts numbers in range: `1..7` for carousels and `1-2` for keyboards. Default is `1`
          * @param columns The button width. Accepts numbers in range: `1..6`. Default is `6`
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setLayout(Integer rows, Integer columns) {
-            set('Rows', rows);
-            set('Columns', columns);
+            set('Rows', rows, true);
+            set('Columns', columns, true);
             return this;
         }
 
         /**
          * @description Sets the button background color
          * @param backgroundColor The backgroun color of the button (HEX value)
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setBackgroundColor(String backgroundColor) {
             set('BgColor', backgroundColor, true);
@@ -147,7 +141,7 @@ global class ViberCustomMessageKeyboard extends ValueMap {
          * @param mediaScaleType The options for scaling the bounds of the background to the bounds of the view. Possible values: `crop`, `fill`, `fit`
          * @param isGif If the passed media refer to a `.gif` file or not. Default is `false`
          * @param loopGif If the passed media refer to a `.gif` file, decide whether to loop it or play only once. Default is `true`
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setBackgroundMedia(String mediaUrl, String mediaScaleType, Boolean isGif, Boolean loopGif) {
             set('BgMedia', mediaUrl, true);
@@ -158,21 +152,20 @@ global class ViberCustomMessageKeyboard extends ValueMap {
         }
 
         /**
-         * @description Makes the button to behave as an informative button without any action
+         * @description Makes the button to behave as an informative button without the possibility to click it
          * @param buttonText The text to be shown on the button
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button asNoActionButton(String buttonText) {
             this.actionType = 'none';
-            this.actionBody = buttonText;
-            return this;
+            return setText(buttonText);
         }
 
         /**
          * @description Makes the button to behave as a text reply from the receiver, sending a message back to the bot
          * @param replyValue The actual text value to be sent back to bot
          * @param replyText The text message to appear in the chat sent by the receiver
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button asReply(String replyValue, String replyText) {
             this.actionType = 'reply';
@@ -184,7 +177,7 @@ global class ViberCustomMessageKeyboard extends ValueMap {
          * @description Makes the button to behave as an image reply from the receiver, sending a message back to the bot
          * @param replyValue The actual text value to be sent back to bot
          * @param imageUrl The URL of the image to appear in the chat sent by the receiver
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button asReplyWithImage(String replyValue, String imageUrl) {
             this.actionType = 'reply';
@@ -195,7 +188,7 @@ global class ViberCustomMessageKeyboard extends ValueMap {
         /**
          * @description Makes the button to behave as a link to a website, sending the clicked link URL back to the bot
          * @param url The URL of the link. Will be sent back to the bot, appearing in the chat as message from the receiver
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button asOpenUrl(String url) {
             return asOpenUrl(url, null);
@@ -204,8 +197,8 @@ global class ViberCustomMessageKeyboard extends ValueMap {
         /**
          * @description Makes the button to behave as a link to a website, sending the clicked link URL back to the bot
          * @param url The URL of the link. Will be sent back to the bot, appearing in the chat as message from the receiver
-         * @param internalBrowserConfig The instance of <<ViberCustomMessageKeyboard.ButtonInternalBrowser>> class describing configurations for the `Viber` internal browser
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @param internalBrowserConfig The instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>> class describing configurations for the `Viber` internal browser
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button asOpenUrl(String url, ButtonInternalBrowser internalBrowserConfig) {
             return asOpenUrl(url, null, null, internalBrowserConfig);
@@ -215,9 +208,9 @@ global class ViberCustomMessageKeyboard extends ValueMap {
          * @description Makes the button to behave as a link to a website or a media content, sending the clicked link URL back to the bot
          * @param url The URL of the link or media. Will be sent back to the bot, appearing in the chat as message from the receiver
          * @param mediaType The type of the content under the provided link. Possible values: `not-media`, `video`, `gif`, `picture`. Default is `not-media`
-         * @param mediaPlayerConfig The instance of <<ViberCustomMessageKeyboard.ButtonMediaPlayer>> class describing configurations for the `Viber` media player
-         * @param internalBrowserConfig The instance of <<ViberCustomMessageKeyboard.ButtonInternalBrowser>> class describing configurations for the `Viber` internal browser
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @param mediaPlayerConfig The instance of <<ViberSendKeyboardOptions.ButtonMediaPlayer>> class describing configurations for the `Viber` media player
+         * @param internalBrowserConfig The instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>> class describing configurations for the `Viber` internal browser
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button asOpenUrl(
             String url,
@@ -235,29 +228,39 @@ global class ViberCustomMessageKeyboard extends ValueMap {
         }
 
         /**
-         * @description Makes the button to behave as a button to share the receiver's phone number
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @description Makes the button to behave as a link to a location on a map, sending the picked location to the bot
+         * @param latitude The latitude of the location
+         * @param longitude The longitude of the location
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
-        global Button asPhoneSharing() {
-            this.actionType = 'share-phone';
-            this.actionBody = 'Agreed to share the phone number!';
+        global Button asOpenMap(Decimal latitude, Decimal longitude) {
+            this.actionType = 'open-map';
+            set('Map', new ValueMap().set('Latitude', latitude).set('Longitude', longitude));
             return this;
         }
 
         /**
-         * @description Makes the button to behave as a button to share the receiver's location
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @description Makes the button to behave as a button to share the receiver's phone number. Only available for keyboard
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         */
+        global Button asPhoneSharing() {
+            this.actionType = 'share-phone';
+            return this;
+        }
+
+        /**
+         * @description Makes the button to behave as a button to share the receiver's location. Only available for keyboard
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button asLocationSharing() {
             this.actionType = 'location-picker';
-            this.actionBody = 'Agreed to share my location!';
             return this;
         }
 
         /**
          * @description Sets the button text
          * @param text The text to be displayed on the button. Can contain such HTML tags as: `<b>`, `<i>`, `<u>`, `<br>`, `<s>` and `<font size="N" color="#7F00FF">`. Max `250` characters
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setText(String text) {
             set('Text', text, true);
@@ -268,7 +271,7 @@ global class ViberCustomMessageKeyboard extends ValueMap {
          * @description Sets the button text vertical and horizontal alignment
          * @param verticalAlign The vertical alignment of the text. Possible values: `top`, `middle`, `bottom`. Default is `middle`
          * @param horizontalAlign The horizontal alignment of the text. Possible values: `left`, `center`, `right`. Default is `center`
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setTextAlignment(String verticalAlign, String horizontalAlign) {
             set('TextVAlign', verticalAlign, true);
@@ -282,7 +285,7 @@ global class ViberCustomMessageKeyboard extends ValueMap {
          * @param right The top padding
          * @param bottom The top padding
          * @param left The top padding
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setTextPaddings(Integer top, Integer right, Integer bottom, Integer left) {
             set('TextPaddings', new List<Integer> { top, right, bottom, left });
@@ -295,12 +298,12 @@ global class ViberCustomMessageKeyboard extends ValueMap {
          * @param opecity The text opacity. Accepts numbers in range: `0..100`. Default is `100`
          * @param bgGradientColor The background gradient to use under text (HEX value). Works only when text is aligned vertically to `top` or `bottom`
          * @param fitText If set to `true` the size of the text will be decreased to fit (minimum size is `12`). Default is `false`
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setTextStyle(Integer opacity, String size, String bgGradientColor, Boolean fitText) {
             set('TextOpacity', opacity, true);
             set('TextSize', size, true);
-            set('TextBgGradientColor', bgGradientColor);
+            set('TextBgGradientColor', bgGradientColor, true);
             set('TextShouldFit', fitText, true);
             return this;
         }
@@ -308,10 +311,10 @@ global class ViberCustomMessageKeyboard extends ValueMap {
         /**
          * @description Sets the image on top of the button's background
          * @param imageUrl The URL of the image to be placed on top of the button background
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setImage(String imageUrl) {
-            set('Image', imageUrl);
+            set('Image', imageUrl, true);
             return this;
         }
 
@@ -320,16 +323,21 @@ global class ViberCustomMessageKeyboard extends ValueMap {
          * @param borderWidth The width of the borders. Accepts numbers in range: `0..10`. Default is `1`
          * @param cornerRadius The radius of the border corners. Accepts numbers in range: `0..10`. Default is `0`
          * @param borderColor The color of the borders (HEX value)
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setBorders(Integer borderWidth, Integer cornerRadius, String borderColor) {
-            set('Frame', new ButtonFrame(borderWidth, cornerRadius, borderColor));
+            ValueMap frame = new ValueMap()
+                .set('BorderWidth', borderWidth, true)
+                .set('CornerRadius', cornerRadius, true)
+                .set('BorderColor', borderColor, true);
+
+            set('Frame', frame);
             return this;
         }
 
         /**
          * @description Sets the setting to use the internal `Viber` browser for opening button links
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button useInternalBrowser() {
             return useInternalBrowser(true);
@@ -338,7 +346,7 @@ global class ViberCustomMessageKeyboard extends ValueMap {
         /**
          * @description Determines if the internal `Viber` browser should be used for opening button links
          * @param shouldUseInternalBrowser Determines if the internal `Viber` browser should be used for opening button links. Default is `true`
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button useInternalBrowser(Boolean shouldUseInternalBrowser) {
             set('OpenURLType', shouldUseInternalBrowser ? 'internal' : 'external');
@@ -348,7 +356,7 @@ global class ViberCustomMessageKeyboard extends ValueMap {
         /**
          * @description Determines whether the user action is presented in the conversation
          * @param useSilent Determines whether the user action is presented in the conversation. Default is `false`
-         * @return The current <<ViberCustomMessageKeyboard.Button>> instance
+         * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button useSilentMode(Boolean useSilent) {
             set('Silent', useSilent, true);
@@ -391,7 +399,7 @@ global class ViberCustomMessageKeyboard extends ValueMap {
         /**
          * @description Sets the content title
          * @param title The content title
-         * @return The current <<ViberCustomMessageKeyboard.FavoritesMetadata>> instance
+         * @return The current <<ViberSendKeyboardOptions.FavoritesMetadata>> instance
          */
         global FavoritesMetadata setTitle(String title) {
             this.title = title;
@@ -403,7 +411,7 @@ global class ViberCustomMessageKeyboard extends ValueMap {
          * @param thumbnail The accessible thumbnail for the content (PNG, JPEG)
          * @param width The width of the thumbnail image in pixels
          * @param height The height of the thumbnail image in pixels
-         * @return The current <<ViberCustomMessageKeyboard.FavoritesMetadata>> instance
+         * @return The current <<ViberSendKeyboardOptions.FavoritesMetadata>> instance
          */
         global FavoritesMetadata setThumbnail(String thumbnail, Integer width, Integer height) {
             this.thumbnail = thumbnail;
@@ -416,7 +424,7 @@ global class ViberCustomMessageKeyboard extends ValueMap {
          * @description Sets the alternative text and URL for clients with API version not supporting favorites saving
          * @param text The alternative text for the URL
          * @param url The alternative URL
-         * @return The current <<ViberCustomMessageKeyboard.FavoritesMetadata>> instance
+         * @return The current <<ViberSendKeyboardOptions.FavoritesMetadata>> instance
          */
         global FavoritesMetadata setAlternativeContent(String text, String url) {
             this.alternativeText = text;
@@ -427,7 +435,7 @@ global class ViberCustomMessageKeyboard extends ValueMap {
         /**
          * @description Sets the top domain of the content URL
          * @param domain The top domain of the content URL
-         * @return The current <<ViberCustomMessageKeyboard.FavoritesMetadata>> instance
+         * @return The current <<ViberSendKeyboardOptions.FavoritesMetadata>> instance
          */
         global FavoritesMetadata setDomain(String domain) {
             this.domain = domain;
@@ -510,21 +518,6 @@ global class ViberCustomMessageKeyboard extends ValueMap {
             set('Subtitle', subtitle, true);
             set('ThumbnailURL', thumbnail, true);
             set('Loop', shouldLoop, true);
-        }
-    }
-
-    private class ButtonMap extends ValueMap {
-        private ButtonMap(Decimal latitude, Decimal longitude) {
-            set('Latitude', latitude, true);
-            set('Longitude', longitude, true);
-        }
-    }
-
-    private class ButtonFrame extends ValueMap {
-        private ButtonFrame(Integer borderWidth, Integer cornerRadius, String borderColor) {
-            set('BorderWidth', borderWidth, true);
-            set('CornerRadius', cornerRadius, true);
-            set('BorderColor', borderColor, true);
         }
     }
 }
