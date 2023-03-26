@@ -240,6 +240,93 @@ private class ViberBotServiceTest {
     }
 
     @IsTest
+    private static void send_carousel_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        ViberSendKeyboardOptions.ButtonInternalBrowser internalBrowserConfig = new ViberSendKeyboardOptions.ButtonInternalBrowser()
+            .setActionButton('none', null, null)
+            .setTitle('default')
+            .setTitle('Some cool browser page!')
+            .setMode('fullscreen')
+            .withFooter(true);
+
+        ViberSendKeyboardOptions.ButtonMediaPlayer buttonMediaPlayerConfig = new ViberSendKeyboardOptions.ButtonMediaPlayer(
+            'Cool player!',
+            'I\'m telling you!',
+            null,
+            null
+        );
+
+        ViberSendKeyboardOptions.FavoritesMetadata favorites = new ViberSendKeyboardOptions.FavoritesMetadata(
+                'link',
+                'https://example.com/images/1'
+            )
+            .setTitle('Nice picture!')
+            .setDomain('https://example.com')
+            .setThumbnail(null, null, null)
+            .setAlternativeContent(
+                'Unfortunately you can not see it, follow the link',
+                'https://example.com/alternative-url'
+            );
+
+        ViberSendKeyboardOptions carouselOptions = new ViberSendKeyboardOptions()
+            .setLayout(7, 6)
+            .setBackgroundColor('#242240')
+            .setHeight(null, null, true)
+            .setInputFieldState('hidden')
+            .allowSaveToFavorites(favorites)
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asOpenUrl('https://www.google.com')
+                    .setBackgroundColor('#BDCCFF')
+                    .setLayout(7, 6)
+            )
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asOpenUrl('https://www.google.com', 'video', buttonMediaPlayerConfig, internalBrowserConfig)
+                    .setBackgroundColor('#BDCCFF')
+                    .setLayout(7, 6)
+                    .setImage('https://example.com/images/1')
+            )
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asOpenMap(12.22, 120.55)
+                    .setBackgroundMedia('https://example.com/images/2', 'fill', false, false)
+                    .setLayout(7, 6)
+                    .setText('Open Map!')
+            )
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asReply('Value!', 'Some text')
+                    .setLayout(7, 6)
+                    .setTextStyle(null, 'large', null, null)
+                    .setBorders(2, 15, '#2398AB')
+                    .useSilentMode(true)
+            )
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asReplyWithImage('Value!', 'https://example.com/images/3')
+                    .setLayout(7, 6)
+                    .setTextStyle(null, 'large', null, null)
+            )
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asNoActionButton('Some text, no action')
+                    .setTextAlignment('middle', 'left')
+                    .setTextPaddings(0, 10, 0, 10)
+                    .setLayout(7, 6)
+            );
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).carousel(carouselOptions);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(BotMessageType.Custom, null, null, carouselOptions);
+    }
+
+    @IsTest
     private static void sendBroadcast_text_shouldSendAndCreateMessageRecords() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();

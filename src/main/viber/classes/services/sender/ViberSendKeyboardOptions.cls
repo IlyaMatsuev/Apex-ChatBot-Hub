@@ -443,62 +443,65 @@ global class ViberSendKeyboardOptions extends ValueMap {
         }
     }
 
-    // TODO: Make more builder-like methods to make it more convenient
     /**
      * @description The wrapper class representing configurations for the internal browser opening for `open-url` button action type
      */
     global class ButtonInternalBrowser extends ValueMap {
         /**
-         * @description The action button type in the internal's browser navigation bar.
+         * @description Sets properties for the internal browser action button
+         * @param action The action button type in the internal's browser navigation bar.
          * `forward` will open the forward via Viber screen and share current URL or predefined URL;
          * `send` sends the currently opened URL as an URL message, or predefined URL if `actionPredefinedUrl` is not empty;
          * `open-externally` opens external browser with the current URL;
          * `send-to-bot` sends reply data to bot in order to receive message;
          * `none` will not display any button
          * Default is `forward`
+         * @param predefinedMessage The predefined message to be sent if `actionButton` is set to `send` or `forward`
+         * @param replyData The custom reply data if `actionButton` is set to `send-to-bot`
+         * @return The current instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>>
          */
-        global String actionButton { get { return getString('ActionButton'); } set { set('ActionButton', value); } }
-
-        /**
-         * @description The predefined message to be sent if `actionButton` is set to `send` or `forward`
-         */
-        global String actionPredefinedUrl {
-            get { return getString('ActionPredefinedURL'); }
-            set { set('ActionPredefinedURL', value); }
+        global ButtonInternalBrowser setActionButton(String action, String predefinedMessage, String replyData) {
+            set('ActionButton', action, true);
+            set('ActionPredefinedURL', predefinedMessage, true);
+            set('ActionReplyData', replyData, true);
+            return this;
         }
 
         /**
-         * @description The custom reply data if `actionButton` is set to `send-to-bot`
-         */
-        global String actionReplyData {
-            get { return getString('ActionReplyData'); }
-            set { set('ActionReplyData', value); }
-        }
-
-        /**
-         * @description The type of the title to be displayed in the internal browser if `customTitle` is empty:
+         * @description Sets the type of the title or the title itself to be displayed in the internal browser
          * `domain` displays the top level domain
          * `default` displays the content of the page's `<title>` tag
-         * Default is `default`
+         * Any other value for a custom title
+         * @param title The title display type of the title custom value
+         * @return The current instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>>
          */
-        global String titleType { get { return getString('TitleType'); } set { set('TitleType', value); } }
-
-        /**
-         * @description The custom title text for the internal browser. `titleType` is ingored if this value is set. Up to `15` characters
-         */
-        global String customTitle { get { return getString('CustomTitle'); } set { set('CustomTitle', value); } }
+        global ButtonInternalBrowser setTitle(String title) {
+            if (title == 'domain' || title == 'default') {
+                set('TitleType', title);
+            } else {
+                set('CustomTitle', title, true);
+            }
+            return this;
+        }
 
         /**
          * @description Determines how should the internal browser be opened. Possible values: `fullscreen`, `fullscreen-portrait`, `fullscreen-landscape`, `partial-size`. Default is `fullscreen`
+         * @param mode The mode option
+         * @return The current instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>>
          */
-        global String mode { get { return getString('Mode'); } set { set('Mode', value); } }
+        global ButtonInternalBrowser setMode(String mode) {
+            set('Mode', mode, true);
+            return this;
+        }
 
         /**
          * @description Determines if the website footer should be shown in the internal browser
+         * @param showFooter Whether to show the website footer or not
+         * @return The current instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>>
          */
-        global Boolean showFooter {
-            get { return getString('FooterType') == 'default'; }
-            set { set('FooterType', value ? 'default' : 'hidden'); }
+        global ButtonInternalBrowser withFooter(Boolean showFooter) {
+            set('FooterType', showFooter ? 'default' : 'hidden');
+            return this;
         }
     }
 

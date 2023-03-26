@@ -62,6 +62,9 @@ public class ViberBotCalloutMock extends BotCalloutMock {
             when 'url' {
                 assertUrlMessagePayload(request);
             }
+            when 'rich_media' {
+                assertRichMediaMessagePayload(request);
+            }
             when else {
                 throw new IllegalArgumentException('The provided viber message type is not correct: ' + messageType);
             }
@@ -131,5 +134,12 @@ public class ViberBotCalloutMock extends BotCalloutMock {
 
     private void assertUrlMessagePayload(ValueMap request) {
         Assert.isTrue(request.hasValue('media'));
+    }
+
+    private void assertRichMediaMessagePayload(ValueMap request) {
+        Assert.isTrue(request.hasValue('rich_media'));
+        ValueMap richMedia = request.getValueMap('rich_media');
+        Assert.isTrue(richMedia.hasValue('Buttons'));
+        Assert.areEqual(richMedia.getString('Type'), 'rich_media');
     }
 }
