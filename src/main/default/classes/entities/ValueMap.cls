@@ -115,22 +115,24 @@ public virtual class ValueMap {
     private Map<String, Object> escapeExtraValuesProperty(Map<String, Object> values) {
         Map<String, Object> output = new Map<String, Object>();
         for (String key : values.keySet()) {
-            Object value = values.get(key);
-            if (value instanceof ValueMap) {
-                output.put(key, escapeExtraValuesProperty(((ValueMap) value).values));
-            } else if (value instanceof List<Object>) {
-                output.put(key, new List<Object>());
-                for (Object el : (List<Object>) value) {
-                    if (el instanceof ValueMap) {
-                        ((List<Object>) output.get(key)).add(escapeExtraValuesProperty(((ValueMap) el).values));
-                    } else {
-                        ((List<Object>) output.get(key)).add(el);
-                    }
-                }
-            } else {
-                output.put(key, value);
-            }
+            Object val = escapeExtraValueProperty(values.get(key));
+            output.put(key, val);
         }
         return output;
+    }
+
+    private Object escapeExtraValueProperty(Object value) {
+        if (value instanceof ValueMap) {
+            return escapeExtraValuesProperty(((ValueMap) value).values);
+        } else if (value instanceof Map<String, Object>) {
+            return escapeExtraValuesProperty((Map<String, Object>) value);
+        } else if (value instanceof List<Object>) {
+            List<Object> values = new List<Object>();
+            for (Object el : (List<Object>) value) {
+                values.add(escapeExtraValueProperty(el));
+            }
+            return values;
+        }
+        return value;
     }
 }

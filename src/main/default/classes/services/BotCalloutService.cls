@@ -24,11 +24,11 @@ public virtual class BotCalloutService {
                 new ValueMap()
                     .set(
                         'request',
-                        new ValueMap().set('body', body.toJson()).set('botMethod', method.name()).set('botId', bot.id)
+                        new ValueMap().set('body', body).set('botMethod', method.name()).set('botId', bot.id)
                     )
                     .set(
                         'response',
-                        new ValueMap().set('body', responsePayload.toJson()).set('statusCode', response.getStatusCode())
+                        new ValueMap().set('body', responsePayload).set('statusCode', response.getStatusCode())
                     )
             );
         }

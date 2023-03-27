@@ -7,6 +7,8 @@ global class TelegramBotSenderService implements IBotSenderService {
     private final BotCalloutService calloutService;
     private final IBotCallback callback;
 
+    private TelegramSendKeyboardOptions replyKeyboard;
+
     public TelegramBotSenderService(String chatId, BotCalloutService calloutService, IBotCallback callback) {
         this.chatId = chatId;
         this.calloutService = calloutService;
@@ -148,10 +150,46 @@ global class TelegramBotSenderService implements IBotSenderService {
         );
     }
 
+    /**
+     * @description Sets a simple custom keyboard for the message that the receiver will have instead of the standard input keyboard
+     * @param buttons The list of buttons to be shown to the receiver
+     * @return The current instance of `Telegram` sender service
+     */
+    global TelegramBotSenderService withReplyKeyboard(BotReplyKeyboardButton[] buttons) {
+        TelegramSendKeyboardOptions keyboard = new TelegramSendKeyboardOptions();
+        for (Integer i = 0; i < buttons.size(); i++) {
+            BotReplyKeyboardButton button = buttons.get(i);
+            TelegramSendKeyboardOptions.Button keyboardButton = new TelegramSendKeyboardOptions.Button(button.text);
+            if (button.sharesContact) {
+                keyboardButton.asContactRequest();
+            } else if (button.sharesLocation) {
+                keyboardButton.asLocationRequest();
+            }
+            keyboard.addButton(i, keyboardButton);
+        }
+        return withReplyKeyboard(keyboard);
+    }
+
+    /**
+     * @description Sets a simple custom keyboard for the message that the receiver will have instead of the standard input keyboard
+     * @param buttons The list of buttons to be shown to the receiver
+     * @return The current instance of `Telegram` sender service
+     */
+    global TelegramBotSenderService withReplyKeyboard(TelegramSendKeyboardOptions keyboard) {
+        this.replyKeyboard = keyboard;
+        return this;
+    }
+
     private void send(TelegramBotMethod method, ValueMap payload, ValueMap callbackParams) {
+        if (replyKeyboard != null) {
+            payload.set('reply_markup', replyKeyboard);
+        }
+
         ValueMap response = calloutService.call(method, payload);
-        String messageId = ((TelegramBotMessageEntity) response.getValueMap('result', TelegramBotMessageEntity.class))
-            .getId();
-        callback.execute(callbackParams.set('messageId', messageId));
+        TelegramBotMessageEntity message = (TelegramBotMessageEntity) response.getValueMap(
+            'result',
+            TelegramBotMessageEntity.class
+        );
+        callback.execute(callbackParams.set('messageId', message.getId()).set('keyboard', replyKeyboard, true));
     }
 }

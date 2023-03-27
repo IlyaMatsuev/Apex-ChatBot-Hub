@@ -24,7 +24,7 @@ global class ViberSendKeyboardOptions extends ValueMap {
 
     /**
      * @description Adds a button to the carousel/keyboard
-     * @param button The instance of the <<Button>> class, representing a button to add to the layout
+     * @param button The instance of the <<ViberSendKeyboardOptions.Button>> class, representing a button to add to the layout
      * @return The current <<ViberSendKeyboardOptions>> instance
      */
     global ViberSendKeyboardOptions addButton(Button button) {
@@ -33,7 +33,7 @@ global class ViberSendKeyboardOptions extends ValueMap {
 
     /**
      * @description Adds multiple buttons to the carousel/keyboard
-     * @param buttons The list of instances of the <<Button>> class, representing buttons to add to the layout
+     * @param buttons The list of instances of the <<ViberSendKeyboardOptions.Button>> class, representing buttons to add to the layout
      * @return The current <<ViberSendKeyboardOptions>> instance
      */
     global ViberSendKeyboardOptions addButtons(Button[] buttons) {
@@ -241,20 +241,22 @@ global class ViberSendKeyboardOptions extends ValueMap {
 
         /**
          * @description Makes the button to behave as a button to share the receiver's phone number. Only available for keyboard
+         * @param text The button text to be shown to the user
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
-        global Button asPhoneSharing() {
+        global Button asPhoneSharing(String text) {
             this.actionType = 'share-phone';
-            return this;
+            return setText(text);
         }
 
         /**
          * @description Makes the button to behave as a button to share the receiver's location. Only available for keyboard
+         * @param text The button text to be shown to the user
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
-        global Button asLocationSharing() {
+        global Button asLocationSharing(String text) {
             this.actionType = 'location-picker';
-            return this;
+            return setText(text);
         }
 
         /**

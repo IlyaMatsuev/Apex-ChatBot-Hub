@@ -53,6 +53,37 @@ private class ViberBotServiceTest {
     }
 
     @IsTest
+    private static void send_textWithReplyKeyboard_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        List<BotReplyKeyboardButton> replyButtons = new List<BotReplyKeyboardButton> {
+            new BotReplyKeyboardButton('Share my contact ☎️').shareContact(),
+            new BotReplyKeyboardButton('Share my location 📍').shareLocation(),
+            new BotReplyKeyboardButton('I do not wanna share anything 😤')
+        };
+        ViberSendKeyboardOptions expectedKeyboard = new ViberSendKeyboardOptions()
+            .addButton(new ViberSendKeyboardOptions.Button().asPhoneSharing('Share my contact ☎️'))
+            .addButton(new ViberSendKeyboardOptions.Button().asLocationSharing('Share my location 📍'))
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asReply('I do not wanna share anything 😤', 'I do not wanna share anything 😤')
+            )
+            .setType('keyboard');
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).withReplyKeyboard(replyButtons).text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world!',
+            null,
+            new ValueMap().set('keyboard', expectedKeyboard)
+        );
+    }
+
+    @IsTest
     private static void send_image_shouldSendAndCreateMessageRecord() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();

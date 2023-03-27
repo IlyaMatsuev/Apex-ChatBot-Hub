@@ -30,6 +30,9 @@ global abstract class BotService implements IBotService {
                 if (params.has('parameters')) {
                     parameters = params.getValueMap('parameters');
                 }
+                if (params.has('keyboard')) {
+                    parameters.set('keyboard', params.getValueMap('keyboard'));
+                }
                 messages.add(
                     new ChatMessage__c(
                         Type__c = params.getString('type'),

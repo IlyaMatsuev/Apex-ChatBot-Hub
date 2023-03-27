@@ -8,6 +8,8 @@ global class ViberBotSenderService implements IBotSenderService {
     private final List<String> chatIds;
     private final BotCalloutService calloutService;
     private final IBotCallback callback;
+
+    private ViberSendKeyboardOptions replyKeyboard;
     private ViberBotMethod sendMethod {
         get { return chatIds.size() > 1 ? ViberBotMethod.BroadcastMessage : ViberBotMethod.SendMessage; }
     }
@@ -221,7 +223,7 @@ global class ViberBotSenderService implements IBotSenderService {
 
     /**
      * @description Sends a carousel message with the custom layout
-     * @param carousel The instance of the <<ViberSendKeyboardOptions>> class for customizing message layout
+     * @param carousel The instance of the <<ViberSendKeyboardOptions>> class for customizing the carousel layout
      */
     global void carousel(ViberSendKeyboardOptions carousel) {
         ValueMap payload = prepareMessagePayload('rich_media')
@@ -232,6 +234,38 @@ global class ViberBotSenderService implements IBotSenderService {
         send(payload, callbackParams);
     }
 
+    /**
+     * @description Sets a simple custom keyboard for the message that the receiver will have instead of the standard input keyboard
+     * @param buttons The list of buttons to be shown to the receiver
+     * @return The current instance of `Viber` sender service
+     */
+    global ViberBotSenderService withReplyKeyboard(BotReplyKeyboardButton[] buttons) {
+        ViberSendKeyboardOptions keyboard = new ViberSendKeyboardOptions();
+        for (BotReplyKeyboardButton button : buttons) {
+            ViberSendKeyboardOptions.Button keyboardButton = new ViberSendKeyboardOptions.Button();
+            if (button.sharesContact) {
+                keyboardButton.asPhoneSharing(button.text);
+            } else if (button.sharesLocation) {
+                keyboardButton.asLocationSharing(button.text);
+            } else {
+                keyboardButton.asReply(button.text, button.text);
+            }
+            keyboard.addButton(keyboardButton);
+        }
+        return withReplyKeyboard(keyboard);
+    }
+
+    /**
+     * @description Sets a custom keyboard with more options for the message that the receiver will have instead of the standard input keyboard
+     * @param keyboard The instance of the <<ViberSendKeyboardOptions>> class for customizing the keyboard layout
+     * @return The current instance of `Viber` sender service
+     */
+    global ViberBotSenderService withReplyKeyboard(ViberSendKeyboardOptions keyboard) {
+        keyboard.setType('keyboard');
+        this.replyKeyboard = keyboard;
+        return this;
+    }
+
     private ValueMap prepareMessagePayload(String type) {
         ValueMap payload = new ValueMap().set('sender', new ValueMap().set('name', senderName)).set('type', type);
 
@@ -240,11 +274,18 @@ global class ViberBotSenderService implements IBotSenderService {
         } else {
             payload.set('broadcast_list', chatIds);
         }
+
+        if (replyKeyboard != null) {
+            payload.set('keyboard', replyKeyboard);
+        }
+
         return payload;
     }
 
     private void send(ValueMap payload, ValueMap callbackParams) {
         ValueMap response = calloutService.call(sendMethod, payload);
-        callback.execute(callbackParams.set('messageId', response.getString('message_token')));
+        callback.execute(
+            callbackParams.set('messageId', response.getString('message_token')).set('keyboard', replyKeyboard, true)
+        );
     }
 }

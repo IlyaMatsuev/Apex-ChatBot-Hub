@@ -165,6 +165,8 @@ private class TelegramBotServiceTest {
         );
     }
 
+    // TODO: Add tests for withReplyKeyboard method
+
     private class SenderFixture {
         public BotModel bot;
         public Chat__c chat;

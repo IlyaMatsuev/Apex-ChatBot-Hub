@@ -61,4 +61,11 @@ global interface IBotSenderService {
      * @param longitude The location longitude
      */
     void location(Decimal latitude, Decimal longitude);
+
+    /**
+     * @description Sets a custom keyboard for the message that the receiver will have instead of the standard input keyboard
+     * @param buttons The list of buttons to be shown to the receiver
+     * @return The current <<IBotSenderService>> instance
+     */
+    IBotSenderService withReplyKeyboard(BotReplyKeyboardButton[] buttons);
 }
