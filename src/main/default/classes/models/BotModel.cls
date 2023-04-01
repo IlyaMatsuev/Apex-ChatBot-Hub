@@ -42,11 +42,12 @@ global class BotModel {
     }
 
     /**
-     * @description Returns the source `Bot__c` sObject record
-     * @return The `Bot__c` sObject record
+     * @description Checks if the passed object equals to the current instance
+     * @param other Any object this instance is compared with
+     * @return `true` if the passed object equals to the current instance by a reference or Id value
      */
-    global Bot__c toSObject() {
-        return entity;
+    global Boolean equals(Object other) {
+        return other instanceof BotModel && (this === other || this.id == ((BotModel) other).id);
     }
 
     /**
@@ -56,14 +57,5 @@ global class BotModel {
      */
     global static BotModel fromJson(String jsonStr) {
         return (BotModel) JSON.deserialize(jsonStr, BotModel.class);
-    }
-
-    /**
-     * @description Checks if the passed object equals to the current instance
-     * @param other Any object this instance is compared with
-     * @return `true` if the passed object equals to the current instance by a reference or Id value
-     */
-    global Boolean equals(Object other) {
-        return other instanceof BotModel && (this === other || this.id == ((BotModel) other).id);
     }
 }

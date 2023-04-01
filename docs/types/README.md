@@ -10,6 +10,10 @@ Represents the context with all necessary variables and entities for properly ha
 
 The `Bot__c` sObject model
 
+### [BotReplyKeyboardButton](/types/Classes/BotReplyKeyboardButton.md)
+
+The builder-like class for building custom keyboard buttons, used as reply by the user
+
 ### [BotService](/types/Classes/BotService.md)
 
 The base class that contains features common for all bots
@@ -30,6 +34,10 @@ Service class that provides access to all `Telegram` `send` methods
 
 The concrete service for the `Telegram` messanger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Telegram` only
 
+### [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md)
+
+The builder-like class that represents parameters for sending a custom reply keyboard to the user via the `Telegram` bot service. The source: https://core.telegram.org/bots/api#replykeyboardmarkup
+
 ### [ViberBotSenderService](/types/Classes/ViberBotSenderService.md)
 
 Service class that provides access to all `Viber` `send` methods
@@ -37,6 +45,22 @@ Service class that provides access to all `Viber` `send` methods
 ### [ViberBotService](/types/Classes/ViberBotService.md)
 
 The concrete service for the `Viber` messanger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Viber` only
+
+### [ViberSendFileOptions](/types/Classes/ViberSendFileOptions.md)
+
+The wrapper class that represents optional parameters for sending a file via the `Viber` bot service
+
+### [ViberSendImageOptions](/types/Classes/ViberSendImageOptions.md)
+
+The wrapper class that represents optional parameters for sending an image via the `Viber` bot service
+
+### [ViberSendKeyboardOptions](/types/Classes/ViberSendKeyboardOptions.md)
+
+The builder-like class that represents parameters for sending a custom carousel/keyboard to the user via the `Viber` bot service. The source: https://developers.viber.com/docs/tools/keyboards/#general-keyboard-parameters
+
+### [ViberSendVideoOptions](/types/Classes/ViberSendVideoOptions.md)
+
+The wrapper class that represents optional parameters for sending a video via the `Viber` bot service
 
 ## Enums
 

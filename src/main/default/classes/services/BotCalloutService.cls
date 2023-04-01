@@ -15,14 +15,16 @@ public virtual class BotCalloutService {
 
         if (throwOnFail && !isSuccessResponse(response, responsePayload)) {
             throw new BotCalloutException(
-                'A call failed for the bot "' + bot.name + '" and method "' + method + '": ' + response.getStatus(),
+                'A call failed for the bot "' +
+                    bot.name +
+                    '" and method "' +
+                    method +
+                    '" with status: ' +
+                    response.getStatus(),
                 new ValueMap()
                     .set(
                         'request',
-                        new ValueMap()
-                            .set('body', body.getValues())
-                            .set('botMethod', method.name())
-                            .set('botId', bot.id)
+                        new ValueMap().set('body', body).set('botMethod', method.name()).set('botId', bot.id)
                     )
                     .set(
                         'response',

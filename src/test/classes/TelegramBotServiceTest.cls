@@ -13,7 +13,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().text('Hello world!');
+        fixture.sut().send(fixture.chat.ExternalId__c).text('Hello world!');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -26,7 +26,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().text('https://example.com/#some-topic');
+        fixture.sut().send(fixture.chat.ExternalId__c).text('https://example.com/#some-topic');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -42,7 +42,7 @@ private class TelegramBotServiceTest {
         Test.startTest();
         Exception error;
         try {
-            fixture.sut().text('Hello world!');
+            fixture.sut().send(fixture.chat.ExternalId__c).text('Hello world!');
         } catch (Exception ex) {
             error = ex;
         }
@@ -53,12 +53,81 @@ private class TelegramBotServiceTest {
     }
 
     @IsTest
+    private static void send_textWithReplyKeyboard_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        List<BotReplyKeyboardButton> replyButtons = new List<BotReplyKeyboardButton> {
+            new BotReplyKeyboardButton('Share my contact ☎️').shareContact(),
+            new BotReplyKeyboardButton('Share my location 📍').shareLocation(),
+            new BotReplyKeyboardButton('I do not wanna share anything 😤')
+        };
+        TelegramSendKeyboardOptions expectedKeyboard = new TelegramSendKeyboardOptions()
+            .addButton(new TelegramSendKeyboardOptions.Button('Share my contact ☎️').asContactRequest())
+            .addButton(1, new TelegramSendKeyboardOptions.Button('Share my location 📍').asLocationRequest())
+            .addButton(2, new TelegramSendKeyboardOptions.Button('I do not wanna share anything 😤'));
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).withReplyKeyboard(replyButtons).text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world!',
+            null,
+            new ValueMap().set('keyboard', expectedKeyboard)
+        );
+    }
+
+    @IsTest
+    private static void send_textWithTelegramReplyKeyboard_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramSendKeyboardOptions keyboard = new TelegramSendKeyboardOptions()
+            .allowResizeKeyboard()
+            .asPersistent()
+            .asOneTimeKeyboard()
+            .asSelective()
+            .setInputPlaceholder('Select an answer instead of typing...')
+            .addButton(new TelegramSendKeyboardOptions.Button('Share one of my contacts').asUserRequest())
+            .addButton(1, new TelegramSendKeyboardOptions.Button('Share one of my chats').asChatRequest())
+            .addButton(
+                1,
+                new TelegramSendKeyboardOptions.Button('Share one of my special chats')
+                    .asChatRequest(
+                        new TelegramSendKeyboardOptions.ButtonRequestChatConfigs()
+                            .withChannels(true)
+                            .withForums(false)
+                            .withUsername(true)
+                            .withCreated(false)
+                            .withBot(true)
+                            .withUserAdminRights(new List<String> { 'is_anonymous', 'can_manage_chat' })
+                            .withBotAdminRights(new List<String> { 'is_anonymous', 'can_manage_chat' })
+                    )
+            )
+            .addButton(2, new TelegramSendKeyboardOptions.Button('Create a pool').asPollRequest())
+            .addButton(2, new TelegramSendKeyboardOptions.Button('Launch a game!').asWebAppLauncher('some-app-url'));
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).withReplyKeyboard(keyboard).text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world!',
+            null,
+            new ValueMap().set('keyboard', keyboard)
+        );
+    }
+
+    @IsTest
     private static void send_image_shouldSendAndCreateMessageRecord() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().image('https://example.com/image.jpeg');
+        fixture.sut().send(fixture.chat.ExternalId__c).image('https://example.com/image.jpeg');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -71,7 +140,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().video('https://example.com/video.mp4');
+        fixture.sut().send(fixture.chat.ExternalId__c).video('https://example.com/video.mp4');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -84,7 +153,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().file('https://example.com/file.pdf');
+        fixture.sut().send(fixture.chat.ExternalId__c).file('https://example.com/file.pdf');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -97,7 +166,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().contact('John Wick', '3168998280');
+        fixture.sut().send(fixture.chat.ExternalId__c).contact('John Wick', '3168998280');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -117,7 +186,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().location(lat, lon);
+        fixture.sut().send(fixture.chat.ExternalId__c).location(lat, lon);
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -135,7 +204,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().sticker('some-long-sticker-id');
+        fixture.sut().send(fixture.chat.ExternalId__c).sticker('some-long-sticker-id');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -153,7 +222,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().sticker('http://example.com/some-sticker-url');
+        fixture.sut().send(fixture.chat.ExternalId__c).sticker('http://example.com/some-sticker-url');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -174,46 +243,57 @@ private class TelegramBotServiceTest {
             this.chat = createChat(bot);
         }
 
-        public TelegramBotSenderService sut() {
-            return createService(bot).send(chat.ExternalId__c);
+        public TelegramBotService sut() {
+            return createService(bot);
         }
 
         public void assertMessageIsCreated(BotMessageType messageType, String text, String mediaUrl, ValueMap params) {
-            List<ChatMessage__c> messages = [
-                SELECT Bot__c, User__c, Chat__c, ExternalId__c, Text__c, Type__c, MediaUrl__c, Parameters__c
-                FROM ChatMessage__c
-            ];
-            System.assertEquals(1, messages.size());
-            ChatMessage__c message = messages.get(0);
-            System.assertEquals(bot.id, message.Bot__c);
-            System.assertEquals(chat.Id, message.Chat__c);
-            System.assert(String.isNotBlank(message.ExternalId__c));
-            System.assert(String.isBlank(message.User__c));
+            assertMessageIsCreated(null, messageType, text, mediaUrl, params);
+        }
 
-            System.assertEquals(messageType.name(), message.Type__c);
-            System.assertEquals(text, message.Text__c);
-            System.assertEquals(mediaUrl, message.MediaUrl__c);
-            System.assertEquals(params.toJson(true), message.Parameters__c);
+        public void assertMessageIsCreated(
+            String chatId,
+            BotMessageType messageType,
+            String text,
+            String mediaUrl,
+            ValueMap params
+        ) {
+            List<ChatMessage__c> messages = (List<ChatMessage__c>) Database.query(
+                'SELECT Bot__c, User__c, Chat__c, Chat__r.ExternalId__c, ExternalId__c, Text__c, Type__c, MediaUrl__c, Parameters__c ' +
+                    'FROM ChatMessage__c ' +
+                    (chatId == null ? '' : 'WHERE Chat__r.ExternalId__c = \'' + chatId + '\'')
+            );
+            Assert.areEqual(1, messages.size());
+            ChatMessage__c message = messages.get(0);
+            Assert.areEqual(bot.id, message.Bot__c);
+            Assert.areEqual(chatId == null ? chat.ExternalId__c : chatId, message.Chat__r.ExternalId__c);
+            Assert.isTrue(String.isNotBlank(message.ExternalId__c));
+            Assert.isTrue(String.isBlank(message.User__c));
+
+            Assert.areEqual(messageType.name(), message.Type__c);
+            Assert.areEqual(text, message.Text__c);
+            Assert.areEqual(mediaUrl, message.MediaUrl__c);
+            Assert.areEqual(params.toJson(true), message.Parameters__c);
         }
 
         public void assertCalloutException(TelegramBotMethod method, Exception error, Integer statusCode) {
-            System.assert(error != null);
-            System.assert(error instanceof BotCalloutService.BotCalloutException);
+            Assert.isNotNull(error);
+            Assert.isInstanceOfType(error, BotCalloutService.BotCalloutException.class);
 
             BotCustomException customException = (BotCustomException) error;
-            System.assert(customException.payload.has('request'));
+            Assert.isTrue(customException.payload.has('request'));
 
             ValueMap requestPayload = customException.payload.getValueMap('request');
-            System.assertEquals(bot.id, requestPayload.getString('botId'));
-            System.assertEquals(method.name(), requestPayload.getString('botMethod'));
+            Assert.areEqual(bot.id, requestPayload.getString('botId'));
+            Assert.areEqual(method.name(), requestPayload.getString('botMethod'));
 
-            System.assert(customException.payload.has('response'));
-            System.assertEquals(statusCode, customException.payload.getValueMap('response').getInteger('statusCode'));
+            Assert.isTrue(customException.payload.has('response'));
+            Assert.areEqual(statusCode, customException.payload.getValueMap('response').getInteger('statusCode'));
         }
     }
 
     private static BotCalloutMock setCalloutMock() {
-        BotCalloutMock mock = new BotCalloutMock(BOT_TYPE);
+        BotCalloutMock mock = new TelegramBotCalloutMock();
         Test.setMock(HttpCalloutMock.class, mock);
         return mock;
     }

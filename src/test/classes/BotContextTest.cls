@@ -20,8 +20,8 @@ private class BotContextTest {
         IBotService newService = context.getService(new BotModel(differentBot));
         Test.stopTest();
 
-        System.assert(newService != context.service);
-        System.assert(newService instanceof BotServiceMock);
+        Assert.isTrue(newService != context.service);
+        Assert.isTrue(newService instanceof BotServiceMock);
     }
 
     @IsTest
@@ -32,8 +32,8 @@ private class BotContextTest {
         IBotService newService = context.getService(context.bot);
         Test.stopTest();
 
-        System.assert(newService == context.service);
-        System.assert(newService instanceof BotServiceMock);
+        Assert.isTrue(newService == context.service);
+        Assert.isTrue(newService instanceof BotServiceMock);
     }
 
     @IsTest
@@ -44,13 +44,13 @@ private class BotContextTest {
         context.save(new ChatUser__c(Name = 'Test', Username__c = 'test.name', ExternalId__c = '1234'));
         Test.stopTest();
 
-        System.assertEquals(1, [SELECT Id FROM ChatUser__c].size());
+        Assert.areEqual(1, [SELECT Id FROM ChatUser__c].size());
     }
 
     @IsTest
     private static void reply_houldReturnSender() {
         BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
-        System.assert(context.reply instanceof BotServiceMock.SenderService);
+        Assert.isInstanceOfType(context.reply, BotServiceMock.SenderService.class);
     }
 
     /**
@@ -90,7 +90,7 @@ private class BotContextTest {
                     .set('text', '/start hello   world!')
             );
 
-        System.assertEquals(expectedPayload.toJson(), JSON.serialize(context.received));
+        Assert.areEqual(expectedPayload.toJson(), JSON.serialize(context.received));
     }
 
     /**
@@ -130,7 +130,7 @@ private class BotContextTest {
                     .set('text', '/start hello   world!')
             );
 
-        System.assertEquals(expectedPayload.toJson(), JSON.serialize(context.received));
+        Assert.areEqual(expectedPayload.toJson(), JSON.serialize(context.received));
     }
 
     private static BotContext createBotContext(BotType botType, ValueMap payload) {

@@ -6,23 +6,18 @@
     "scripts": {
         "prettier": "prettier --write",
         "prettier:verify": "prettier --list-different",
-        "docs:types:refresh": "npm run docs:types:clean && npm run docs:types:generate && npm run docs:types:fix && npm run prettier ./docs/types",
+        "docs:types:refresh": "npm run docs:types:clean && npm run docs:types:generate && npm run prettier ./docs/types",
         "docs:types:clean": "shx rm -r ./docs/types",
-        "docs:types:generate": "apexdocs-generate -s ./src/main -t ./docs/types -p global -g docsify --defaultGroupName Classes --title 'Type Definitions'",
-        "docs:types:fix": "npm run docs:types:fix:links:classes && npm run docs:types:fix:links:interfaces && npm run docs:types:fix:links:enums",
-        "docs:types:fix:links:classes": "replace-in-files --string '(/Classes/' --replacement '(/types/Classes/' ./docs/types",
-        "docs:types:fix:links:interfaces": "replace-in-files --string '(/Interfaces/' --replacement '(/types/Interfaces/' ./docs/types",
-        "docs:types:fix:links:enums": "replace-in-files --string '(/Enums/' --replacement '(/types/Enums/' ./docs/types"
+        "docs:types:generate": "apexdocs-generate -s ./src/main -t ./docs/types --documentationRootDir '/types' -p global -g docsify --defaultGroupName Classes --title 'Type Definitions'"
     },
     "devDependencies": {
-        "@cparra/apexdocs": "^2.14.0",
+        "@cparra/apexdocs": "^2.15.0",
         "@ilyamatsuev/prettier-plugin-apex": "^2.2.0",
         "@prettier/plugin-xml": "^0.12.0",
         "docsify-cli": "^4.4.4",
         "husky": "^4.2.1",
         "lint-staged": "^10.0.7",
         "prettier": "^2.8.1",
-        "replace-in-files-cli": "^2.0.0",
         "shx": "^0.3.4"
     },
     "husky": {

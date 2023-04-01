@@ -15,29 +15,37 @@ global abstract class BotService implements IBotService {
     }
 
     public class SaveSentMessageCallback implements IBotCallback {
-        private final String chatId;
+        private final List<String> chatIds;
         private final BotModel bot;
 
-        public SaveSentMessageCallback(String chatId, BotModel bot) {
-            this.chatId = chatId;
+        public SaveSentMessageCallback(List<String> chatIds, BotModel bot) {
+            this.chatIds = chatIds;
             this.bot = bot;
         }
 
         public void execute(ValueMap params) {
-            ValueMap parameters = new ValueMap();
-            if (params.has('parameters')) {
-                parameters = params.getValueMap('parameters');
+            List<ChatMessage__c> messages = new List<ChatMessage__c>();
+            for (String chatId : chatIds) {
+                ValueMap parameters = new ValueMap();
+                if (params.has('parameters')) {
+                    parameters = params.getValueMap('parameters');
+                }
+                if (params.has('keyboard')) {
+                    parameters.set('keyboard', params.getValueMap('keyboard'));
+                }
+                messages.add(
+                    new ChatMessage__c(
+                        Type__c = params.getString('type'),
+                        Text__c = params.getString('text'),
+                        MediaUrl__c = params.getString('mediaUrl'),
+                        Parameters__c = parameters.toJson(true),
+                        Chat__r = new Chat__c(ExternalId__c = BotUtils.generateExternalId(chatId, bot.tokenHash)),
+                        Bot__c = bot.id,
+                        ExternalId__c = BotUtils.generateExternalId(params.getString('messageId'), chatId)
+                    )
+                );
             }
-            ChatMessage__c messageRecord = new ChatMessage__c(
-                Type__c = params.getString('type'),
-                Text__c = params.getString('text'),
-                MediaUrl__c = params.getString('mediaUrl'),
-                Parameters__c = parameters.toJson(true),
-                Chat__r = new Chat__c(ExternalId__c = BotUtils.generateExternalId(chatId, bot.tokenHash)),
-                Bot__c = bot.id,
-                ExternalId__c = BotUtils.generateExternalId(params.getString('messageId'), chatId)
-            );
-            BotUtils.saveAsync(new List<SObject> { messageRecord }, 'ExternalId__c');
+            BotUtils.saveAsync(messages, 'ExternalId__c');
         }
     }
 }

@@ -2,7 +2,7 @@
 private class BotUpsertDataEventTriggerTest {
     @TestSetup
     private static void init() {
-        Test.setMock(HttpCalloutMock.class, new BotCalloutMock(BotType.Telegram));
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
         BotSettingsProvider.mock();
         insert new Bot__c(
             Type__c = BotType.Telegram.name(),
@@ -42,9 +42,9 @@ private class BotUpsertDataEventTriggerTest {
         List<Chat__c> chats = [SELECT Id FROM Chat__c];
         List<ChatUser__c> users = [SELECT Id FROM ChatUser__c];
         List<ChatMessage__c> messages = [SELECT Id FROM ChatMessage__c];
-        System.assertEquals(3, chats.size());
-        System.assertEquals(1, users.size());
-        System.assertEquals(2, messages.size());
+        Assert.areEqual(3, chats.size());
+        Assert.areEqual(1, users.size());
+        Assert.areEqual(2, messages.size());
     }
 
     @IsTest
@@ -80,8 +80,8 @@ private class BotUpsertDataEventTriggerTest {
         List<Chat__c> chats = [SELECT Id FROM Chat__c];
         List<ChatUser__c> users = [SELECT Id FROM ChatUser__c];
         List<ChatMessage__c> messages = [SELECT Id FROM ChatMessage__c];
-        System.assertEquals(2, chats.size());
-        System.assertEquals(1, users.size());
-        System.assertEquals(2, messages.size());
+        Assert.areEqual(2, chats.size());
+        Assert.areEqual(1, users.size());
+        Assert.areEqual(2, messages.size());
     }
 }

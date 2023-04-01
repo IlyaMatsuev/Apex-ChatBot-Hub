@@ -2,7 +2,7 @@
  * @description Custom enum type that provides more flexibility comparing to the native Apex enums
  * @ignore
  */
-global abstract class BotEnumType implements Comparable {
+global abstract class BotEnumType {
     private static final transient Map<Type, Map<String, BotEnumType>> cachedEnumValues = new Map<Type, Map<String, BotEnumType>>();
     private final transient Type type;
     private final String value;
@@ -52,15 +52,6 @@ global abstract class BotEnumType implements Comparable {
             return this.value == (String) other;
         }
         return this.value == other || this.value == String.valueOf(other);
-    }
-
-    /**
-     * @description Compares the passed object with the current instance as strings
-     * @param compareTo Any object this enum instance is compared with
-     * @return The same result as the native `String.compareTo()` method, checking enum string values
-     */
-    global Integer compareTo(Object compareTo) {
-        return String.valueOf(this.value).compareTo(String.valueOf(compareTo));
     }
 
     /**

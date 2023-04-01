@@ -13,7 +13,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().text('Hello world!');
+        fixture.sut().send(fixture.chat.ExternalId__c).text('Hello world!');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -26,7 +26,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().text('https://example.com/#some-topic');
+        fixture.sut().send(fixture.chat.ExternalId__c).text('https://example.com/#some-topic');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -42,7 +42,7 @@ private class ViberBotServiceTest {
         Test.startTest();
         Exception error;
         try {
-            fixture.sut().text('Hello world!');
+            fixture.sut().send(fixture.chat.ExternalId__c).text('Hello world!');
         } catch (Exception ex) {
             error = ex;
         }
@@ -53,16 +53,65 @@ private class ViberBotServiceTest {
     }
 
     @IsTest
+    private static void send_textWithReplyKeyboard_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        List<BotReplyKeyboardButton> replyButtons = new List<BotReplyKeyboardButton> {
+            new BotReplyKeyboardButton('Share my contact ☎️').shareContact(),
+            new BotReplyKeyboardButton('Share my location 📍').shareLocation(),
+            new BotReplyKeyboardButton('I do not wanna share anything 😤')
+        };
+        ViberSendKeyboardOptions expectedKeyboard = new ViberSendKeyboardOptions()
+            .addButton(new ViberSendKeyboardOptions.Button().asPhoneSharing('Share my contact ☎️'))
+            .addButton(new ViberSendKeyboardOptions.Button().asLocationSharing('Share my location 📍'))
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asReply('I do not wanna share anything 😤', 'I do not wanna share anything 😤')
+            )
+            .setType('keyboard');
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).withReplyKeyboard(replyButtons).text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world!',
+            null,
+            new ValueMap().set('keyboard', expectedKeyboard)
+        );
+    }
+
+    @IsTest
     private static void send_image_shouldSendAndCreateMessageRecord() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().image('https://example.com/image.jpeg');
+        fixture.sut().send(fixture.chat.ExternalId__c).image('https://example.com/image.jpeg');
         Test.getEventBus().deliver();
         Test.stopTest();
 
         fixture.assertMessageIsCreated(BotMessageType.Image, null, 'https://example.com/image.jpeg', new ValueMap());
+    }
+
+    @IsTest
+    private static void send_imageWithCaption_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).image('https://example.com/image.jpeg', 'Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Image,
+            'Hello world!',
+            'https://example.com/image.jpeg',
+            new ValueMap()
+        );
     }
 
     @IsTest
@@ -71,11 +120,34 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().video('https://example.com/video.mp4');
+        fixture.sut().send(fixture.chat.ExternalId__c).video('https://example.com/video.mp4');
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Video, null, 'https://example.com/video.mp4', new ValueMap());
+        fixture.assertMessageIsCreated(
+            BotMessageType.Video,
+            null,
+            'https://example.com/video.mp4',
+            new ValueMap().set('size', 10000)
+        );
+    }
+
+    @IsTest
+    private static void send_videoWithCaption_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).video('https://example.com/video.mp4', 'Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Video,
+            'Hello world!',
+            'https://example.com/video.mp4',
+            new ValueMap().set('size', 10000)
+        );
     }
 
     @IsTest
@@ -84,11 +156,54 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().file('https://example.com/file.pdf');
+        fixture.sut().send(fixture.chat.ExternalId__c).file('https://example.com/file.pdf');
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.File, null, 'https://example.com/file.pdf', new ValueMap());
+        fixture.assertMessageIsCreated(
+            BotMessageType.File,
+            null,
+            'https://example.com/file.pdf',
+            new ValueMap().set('size', 10000).set('fileName', 'file.pdf')
+        );
+    }
+
+    @IsTest
+    private static void send_fileWithEmptyCaption_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).file('https://example.com/file.pdf', '');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.File,
+            null,
+            'https://example.com/file.pdf',
+            new ValueMap().set('size', 10000).set('fileName', 'file.pdf')
+        );
+    }
+
+    @IsTest
+    private static void send_fileWithDifferentFileName_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut()
+            .send(fixture.chat.ExternalId__c)
+            .file('https://example.com/file.pdf', new ViberSendFileOptions(null, 'new-file.pdf', null));
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.File,
+            null,
+            'https://example.com/file.pdf',
+            new ValueMap().set('size', 10000).set('fileName', 'new-file.pdf')
+        );
     }
 
     @IsTest
@@ -97,7 +212,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().contact('John Wick', '3168998280');
+        fixture.sut().send(fixture.chat.ExternalId__c).contact('John Wick', '3168998280');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -117,7 +232,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().location(lat, lon);
+        fixture.sut().send(fixture.chat.ExternalId__c).location(lat, lon);
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -135,7 +250,7 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().sticker(12345);
+        fixture.sut().send(fixture.chat.ExternalId__c).sticker(12345);
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -148,11 +263,118 @@ private class ViberBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().url('https://example.com/#some-topic');
+        fixture.sut().send(fixture.chat.ExternalId__c).url('https://example.com/#some-topic');
         Test.getEventBus().deliver();
         Test.stopTest();
 
         fixture.assertMessageIsCreated(BotMessageType.Url, null, 'https://example.com/#some-topic', new ValueMap());
+    }
+
+    @IsTest
+    private static void send_carousel_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        ViberSendKeyboardOptions.ButtonInternalBrowser internalBrowserConfig = new ViberSendKeyboardOptions.ButtonInternalBrowser()
+            .setActionButton('none', null, null)
+            .setTitle('default')
+            .setTitle('Some cool browser page!')
+            .setMode('fullscreen')
+            .withFooter(true);
+
+        ViberSendKeyboardOptions.ButtonMediaPlayer buttonMediaPlayerConfig = new ViberSendKeyboardOptions.ButtonMediaPlayer(
+            'Cool player!',
+            'I\'m telling you!',
+            null,
+            null
+        );
+
+        ViberSendKeyboardOptions.FavoritesMetadata favorites = new ViberSendKeyboardOptions.FavoritesMetadata(
+                'link',
+                'https://example.com/images/1'
+            )
+            .setTitle('Nice picture!')
+            .setDomain('https://example.com')
+            .setThumbnail(null, null, null)
+            .setAlternativeContent(
+                'Unfortunately you can not see it, follow the link',
+                'https://example.com/alternative-url'
+            );
+
+        ViberSendKeyboardOptions carouselOptions = new ViberSendKeyboardOptions()
+            .setLayout(7, 6)
+            .setBackgroundColor('#242240')
+            .setHeight(null, null, true)
+            .setInputFieldState('hidden')
+            .allowSaveToFavorites(favorites)
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asOpenUrl('https://www.google.com')
+                    .setBackgroundColor('#BDCCFF')
+                    .setLayout(7, 6)
+            )
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asOpenUrl('https://www.google.com', 'video', buttonMediaPlayerConfig, internalBrowserConfig)
+                    .setBackgroundColor('#BDCCFF')
+                    .setLayout(7, 6)
+                    .setImage('https://example.com/images/1')
+            )
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asOpenMap(12.22, 120.55)
+                    .setBackgroundMedia('https://example.com/images/2', 'fill', false, false)
+                    .setLayout(7, 6)
+                    .setText('Open Map!')
+            )
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asReply('Value!', 'Some text')
+                    .setLayout(7, 6)
+                    .setTextStyle(null, 'large', null, null)
+                    .setBorders(2, 15, '#2398AB')
+                    .useSilentMode(true)
+            )
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asReplyWithImage('Value!', 'https://example.com/images/3')
+                    .setLayout(7, 6)
+                    .setTextStyle(null, 'large', null, null)
+            )
+            .addButton(
+                new ViberSendKeyboardOptions.Button()
+                    .asNoActionButton('Some text, no action')
+                    .setTextAlignment('middle', 'left')
+                    .setTextPaddings(0, 10, 0, 10)
+                    .setLayout(7, 6)
+            );
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).carousel(carouselOptions);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(BotMessageType.Custom, null, null, carouselOptions);
+    }
+
+    @IsTest
+    private static void sendBroadcast_text_shouldSendAndCreateMessageRecords() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        List<String> chatIds = new List<String> {
+            fixture.chat.ExternalId__c,
+            createChat(fixture.bot, 1).ExternalId__c,
+            createChat(fixture.bot, 2).ExternalId__c
+        };
+
+        Test.startTest();
+        fixture.sut().sendBroadcast(chatIds).text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(chatIds.get(0), BotMessageType.Text, 'Hello world!', null, new ValueMap());
+        fixture.assertMessageIsCreated(chatIds.get(1), BotMessageType.Text, 'Hello world!', null, new ValueMap());
+        fixture.assertMessageIsCreated(chatIds.get(2), BotMessageType.Text, 'Hello world!', null, new ValueMap());
     }
 
     private class SenderFixture {
@@ -161,49 +383,60 @@ private class ViberBotServiceTest {
 
         private SenderFixture() {
             this.bot = createBot();
-            this.chat = createChat(bot);
+            this.chat = createChat(bot, 0);
         }
 
-        public ViberBotSenderService sut() {
-            return createService(bot).send(chat.ExternalId__c);
+        public ViberBotService sut() {
+            return createService(bot);
         }
 
         public void assertMessageIsCreated(BotMessageType messageType, String text, String mediaUrl, ValueMap params) {
-            List<ChatMessage__c> messages = [
-                SELECT Bot__c, User__c, Chat__c, ExternalId__c, Text__c, Type__c, MediaUrl__c, Parameters__c
-                FROM ChatMessage__c
-            ];
-            System.assertEquals(1, messages.size());
-            ChatMessage__c message = messages.get(0);
-            System.assertEquals(bot.id, message.Bot__c);
-            System.assertEquals(chat.Id, message.Chat__c);
-            System.assert(String.isNotBlank(message.ExternalId__c));
-            System.assert(String.isBlank(message.User__c));
+            assertMessageIsCreated(null, messageType, text, mediaUrl, params);
+        }
 
-            System.assertEquals(messageType.name(), message.Type__c);
-            System.assertEquals(text, message.Text__c);
-            System.assertEquals(mediaUrl, message.MediaUrl__c);
-            System.assertEquals(params.toJson(true), message.Parameters__c);
+        public void assertMessageIsCreated(
+            String chatId,
+            BotMessageType messageType,
+            String text,
+            String mediaUrl,
+            ValueMap params
+        ) {
+            List<ChatMessage__c> messages = (List<ChatMessage__c>) Database.query(
+                'SELECT Bot__c, User__c, Chat__c, Chat__r.ExternalId__c, ExternalId__c, Text__c, Type__c, MediaUrl__c, Parameters__c ' +
+                    'FROM ChatMessage__c ' +
+                    (chatId == null ? '' : 'WHERE Chat__r.ExternalId__c = \'' + chatId + '\'')
+            );
+            Assert.areEqual(1, messages.size());
+            ChatMessage__c message = messages.get(0);
+            Assert.areEqual(bot.id, message.Bot__c);
+            Assert.areEqual(chatId == null ? chat.ExternalId__c : chatId, message.Chat__r.ExternalId__c);
+            Assert.isTrue(String.isNotBlank(message.ExternalId__c));
+            Assert.isTrue(String.isBlank(message.User__c));
+
+            Assert.areEqual(messageType.name(), message.Type__c);
+            Assert.areEqual(text, message.Text__c);
+            Assert.areEqual(mediaUrl, message.MediaUrl__c);
+            Assert.areEqual(params.toJson(true), message.Parameters__c);
         }
 
         public void assertCalloutException(ViberBotMethod method, Exception error, Integer statusCode) {
-            System.assert(error != null);
-            System.assert(error instanceof BotCalloutService.BotCalloutException);
+            Assert.isNotNull(error);
+            Assert.isInstanceOfType(error, BotCalloutService.BotCalloutException.class);
 
             BotCustomException customException = (BotCustomException) error;
-            System.assert(customException.payload.has('request'));
+            Assert.isTrue(customException.payload.has('request'));
 
             ValueMap requestPayload = customException.payload.getValueMap('request');
-            System.assertEquals(bot.id, requestPayload.getString('botId'));
-            System.assertEquals(method.name(), requestPayload.getString('botMethod'));
+            Assert.areEqual(bot.id, requestPayload.getString('botId'));
+            Assert.areEqual(method.name(), requestPayload.getString('botMethod'));
 
-            System.assert(customException.payload.has('response'));
-            System.assertEquals(statusCode, customException.payload.getValueMap('response').getInteger('statusCode'));
+            Assert.isTrue(customException.payload.has('response'));
+            Assert.areEqual(statusCode, customException.payload.getValueMap('response').getInteger('statusCode'));
         }
     }
 
     private static BotCalloutMock setCalloutMock() {
-        BotCalloutMock mock = new BotCalloutMock(BOT_TYPE);
+        BotCalloutMock mock = new ViberBotCalloutMock();
         Test.setMock(HttpCalloutMock.class, mock);
         return mock;
     }
@@ -224,11 +457,11 @@ private class ViberBotServiceTest {
         );
     }
 
-    private static Chat__c createChat(BotModel bot) {
+    private static Chat__c createChat(BotModel bot, Integer index) {
         Chat__c chat = new Chat__c(
-            Name = 'TestChat',
+            Name = 'TestChat' + index,
             Bot__c = bot.id,
-            ExternalId__c = '3214:' + bot.tokenHash.substring(0, 20)
+            ExternalId__c = (3214 + index) + ':' + bot.tokenHash.substring(0, 20)
         );
         insert chat;
         return chat;

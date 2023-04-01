@@ -101,4 +101,24 @@ Sends a location. Latitude and longitude values are not validated
 | `latitude`  | The location latitude  |
 | `longitude` | The location longitude |
 
+### `withReplyKeyboard(BotReplyKeyboardButton buttons)`
+
+Sets a custom keyboard for the message that the receiver will have instead of the standard input keyboard
+
+#### Parameters
+
+| Param     | Description                                     |
+| --------- | ----------------------------------------------- |
+| `buttons` | The list of buttons to be shown to the receiver |
+
+#### Return
+
+**Type**
+
+IBotSenderService
+
+**Description**
+
+The current [IBotSenderService](/types/Interfaces/IBotSenderService.md) instance
+
 ---

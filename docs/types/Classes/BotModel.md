@@ -48,19 +48,25 @@ String
 
 JSON serialized current instance
 
-### `toSObject()`
+### `equals(Object other)`
 
-Returns the source `Bot__c` sObject record
+Checks if the passed object equals to the current instance
+
+#### Parameters
+
+| Param   | Description                               |
+| ------- | ----------------------------------------- |
+| `other` | Any object this instance is compared with |
 
 #### Return
 
 **Type**
 
-Bot\_\_c
+Boolean
 
 **Description**
 
-The `Bot__c` sObject record
+`true` if the passed object equals to the current instance by a reference or Id value
 
 ### `static fromJson(String jsonStr)`
 
@@ -81,25 +87,5 @@ BotModel
 **Description**
 
 The new [BotModel](/types/Classes/BotModel.md) instance
-
-### `equals(Object other)`
-
-Checks if the passed object equals to the current instance
-
-#### Parameters
-
-| Param   | Description                               |
-| ------- | ----------------------------------------- |
-| `other` | Any object this instance is compared with |
-
-#### Return
-
-**Type**
-
-Boolean
-
-**Description**
-
-`true` if the passed object equals to the current instance by a reference or Id value
 
 ---
