@@ -62,26 +62,6 @@ Bot\_\_c
 
 The `Bot__c` sObject record
 
-### `static fromJson(String jsonStr)`
-
-Converts the JSON string back to the [BotModel](/types/Classes/BotModel.md) instance
-
-#### Parameters
-
-| Param     | Description                                                            |
-| --------- | ---------------------------------------------------------------------- |
-| `jsonStr` | The JSON string with serialized [BotModel](/types/Classes/BotModel.md) |
-
-#### Return
-
-**Type**
-
-BotModel
-
-**Description**
-
-The new [BotModel](/types/Classes/BotModel.md) instance
-
 ### `equals(Object other)`
 
 Checks if the passed object equals to the current instance
@@ -101,5 +81,25 @@ Boolean
 **Description**
 
 `true` if the passed object equals to the current instance by a reference or Id value
+
+### `static fromJson(String jsonStr)`
+
+Converts the JSON string back to the [BotModel](/types/Classes/BotModel.md) instance
+
+#### Parameters
+
+| Param     | Description                                                            |
+| --------- | ---------------------------------------------------------------------- |
+| `jsonStr` | The JSON string with serialized [BotModel](/types/Classes/BotModel.md) |
+
+#### Return
+
+**Type**
+
+BotModel
+
+**Description**
+
+The new [BotModel](/types/Classes/BotModel.md) instance
 
 ---

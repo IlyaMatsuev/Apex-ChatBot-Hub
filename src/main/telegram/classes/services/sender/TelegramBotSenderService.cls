@@ -172,7 +172,7 @@ global class TelegramBotSenderService implements IBotSenderService {
 
     /**
      * @description Sets a simple custom keyboard for the message that the receiver will have instead of the standard input keyboard
-     * @param buttons The list of buttons to be shown to the receiver
+     * @param keyboard The instance of <<TelegramSendKeyboardOptions>> class, custom keyboard to be shown to the receiver
      * @return The current instance of `Telegram` sender service
      */
     global TelegramBotSenderService withReplyKeyboard(TelegramSendKeyboardOptions keyboard) {

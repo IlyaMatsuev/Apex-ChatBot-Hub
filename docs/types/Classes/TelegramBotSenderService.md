@@ -113,4 +113,44 @@ Sends a sticker
 | ---------------- | --------------------------------------------------------------- |
 | `stickerIdOrUrl` | The unique identifier of the sticker or the URL to `.WEBP` file |
 
+### `withReplyKeyboard(BotReplyKeyboardButton buttons)`
+
+Sets a simple custom keyboard for the message that the receiver will have instead of the standard input keyboard
+
+#### Parameters
+
+| Param     | Description                                     |
+| --------- | ----------------------------------------------- |
+| `buttons` | The list of buttons to be shown to the receiver |
+
+#### Return
+
+**Type**
+
+TelegramBotSenderService
+
+**Description**
+
+The current instance of `Telegram` sender service
+
+### `withReplyKeyboard(TelegramSendKeyboardOptions keyboard)`
+
+Sets a simple custom keyboard for the message that the receiver will have instead of the standard input keyboard
+
+#### Parameters
+
+| Param      | Description                                                                                                                                     |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `keyboard` | The instance of [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) class, custom keyboard to be shown to the receiver |
+
+#### Return
+
+**Type**
+
+TelegramBotSenderService
+
+**Description**
+
+The current instance of `Telegram` sender service
+
 ---

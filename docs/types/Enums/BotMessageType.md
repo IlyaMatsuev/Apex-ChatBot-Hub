@@ -14,6 +14,10 @@ BotMessageType
 
 The message sharing contact details
 
+### `Custom` → `BotMessageType`
+
+The message with custom layout
+
 ### `File` → `BotMessageType`
 
 The document message
@@ -99,28 +103,6 @@ Boolean
 **Description**
 
 `true` if the passed object equals to the current instance by a reference or a String value
-
-### `compareTo(Object compareTo)`
-
-_Inherited_
-
-Compares the passed object with the current instance as strings
-
-#### Parameters
-
-| Param       | Description                                    |
-| ----------- | ---------------------------------------------- |
-| `compareTo` | Any object this enum instance is compared with |
-
-#### Return
-
-**Type**
-
-Integer
-
-**Description**
-
-The same result as the native `String.compareTo()` method, checking enum string values
 
 ### `hashCode()`
 
