@@ -13,7 +13,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().text('Hello world!');
+        fixture.sut().send(fixture.chat.ExternalId__c).text('Hello world!');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -26,7 +26,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().text('https://example.com/#some-topic');
+        fixture.sut().send(fixture.chat.ExternalId__c).text('https://example.com/#some-topic');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -42,7 +42,7 @@ private class TelegramBotServiceTest {
         Test.startTest();
         Exception error;
         try {
-            fixture.sut().text('Hello world!');
+            fixture.sut().send(fixture.chat.ExternalId__c).text('Hello world!');
         } catch (Exception ex) {
             error = ex;
         }
@@ -53,12 +53,39 @@ private class TelegramBotServiceTest {
     }
 
     @IsTest
+    private static void send_textWithReplyKeyboard_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        List<BotReplyKeyboardButton> replyButtons = new List<BotReplyKeyboardButton> {
+            new BotReplyKeyboardButton('Share my contact ☎️').shareContact(),
+            new BotReplyKeyboardButton('Share my location 📍').shareLocation(),
+            new BotReplyKeyboardButton('I do not wanna share anything 😤')
+        };
+        TelegramSendKeyboardOptions expectedKeyboard = new TelegramSendKeyboardOptions()
+            .addButton(new TelegramSendKeyboardOptions.Button('Share my contact ☎️').asContactRequest())
+            .addButton(1, new TelegramSendKeyboardOptions.Button('Share my location 📍').asLocationRequest())
+            .addButton(2, new TelegramSendKeyboardOptions.Button('I do not wanna share anything 😤'));
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).withReplyKeyboard(replyButtons).text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world!',
+            null,
+            new ValueMap().set('keyboard', expectedKeyboard)
+        );
+    }
+
+    @IsTest
     private static void send_image_shouldSendAndCreateMessageRecord() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().image('https://example.com/image.jpeg');
+        fixture.sut().send(fixture.chat.ExternalId__c).image('https://example.com/image.jpeg');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -71,7 +98,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().video('https://example.com/video.mp4');
+        fixture.sut().send(fixture.chat.ExternalId__c).video('https://example.com/video.mp4');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -84,7 +111,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().file('https://example.com/file.pdf');
+        fixture.sut().send(fixture.chat.ExternalId__c).file('https://example.com/file.pdf');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -97,7 +124,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().contact('John Wick', '3168998280');
+        fixture.sut().send(fixture.chat.ExternalId__c).contact('John Wick', '3168998280');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -117,7 +144,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().location(lat, lon);
+        fixture.sut().send(fixture.chat.ExternalId__c).location(lat, lon);
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -135,7 +162,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().sticker('some-long-sticker-id');
+        fixture.sut().send(fixture.chat.ExternalId__c).sticker('some-long-sticker-id');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -153,7 +180,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().sticker('http://example.com/some-sticker-url');
+        fixture.sut().send(fixture.chat.ExternalId__c).sticker('http://example.com/some-sticker-url');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -165,8 +192,6 @@ private class TelegramBotServiceTest {
         );
     }
 
-    // TODO: Add tests for withReplyKeyboard method
-
     private class SenderFixture {
         public BotModel bot;
         public Chat__c chat;
@@ -176,19 +201,30 @@ private class TelegramBotServiceTest {
             this.chat = createChat(bot);
         }
 
-        public TelegramBotSenderService sut() {
-            return createService(bot).send(chat.ExternalId__c);
+        public TelegramBotService sut() {
+            return createService(bot);
         }
 
         public void assertMessageIsCreated(BotMessageType messageType, String text, String mediaUrl, ValueMap params) {
-            List<ChatMessage__c> messages = [
-                SELECT Bot__c, User__c, Chat__c, ExternalId__c, Text__c, Type__c, MediaUrl__c, Parameters__c
-                FROM ChatMessage__c
-            ];
+            assertMessageIsCreated(null, messageType, text, mediaUrl, params);
+        }
+
+        public void assertMessageIsCreated(
+            String chatId,
+            BotMessageType messageType,
+            String text,
+            String mediaUrl,
+            ValueMap params
+        ) {
+            List<ChatMessage__c> messages = (List<ChatMessage__c>) Database.query(
+                'SELECT Bot__c, User__c, Chat__c, Chat__r.ExternalId__c, ExternalId__c, Text__c, Type__c, MediaUrl__c, Parameters__c ' +
+                    'FROM ChatMessage__c ' +
+                    (chatId == null ? '' : 'WHERE Chat__r.ExternalId__c = \'' + chatId + '\'')
+            );
             Assert.areEqual(1, messages.size());
             ChatMessage__c message = messages.get(0);
             Assert.areEqual(bot.id, message.Bot__c);
-            Assert.areEqual(chat.Id, message.Chat__c);
+            Assert.areEqual(chatId == null ? chat.ExternalId__c : chatId, message.Chat__r.ExternalId__c);
             Assert.isTrue(String.isNotBlank(message.ExternalId__c));
             Assert.isTrue(String.isBlank(message.User__c));
 

@@ -2,7 +2,7 @@
  * @description Service class that provides access to all `Viber` `send` methods
  */
 global class ViberBotSenderService implements IBotSenderService {
-    private static final Integer RICH_MEDIA_MESSAGE_API_VERSION = 7;
+    private static final Integer VIBER_MIN_API_VERSION = 7;
 
     private final String senderName;
     private final List<String> chatIds;
@@ -226,9 +226,7 @@ global class ViberBotSenderService implements IBotSenderService {
      * @param carousel The instance of the <<ViberSendKeyboardOptions>> class for customizing the carousel layout
      */
     global void carousel(ViberSendKeyboardOptions carousel) {
-        ValueMap payload = prepareMessagePayload('rich_media')
-            .set('min_api_version', RICH_MEDIA_MESSAGE_API_VERSION)
-            .set('rich_media', carousel.setType('rich_media'));
+        ValueMap payload = prepareMessagePayload('rich_media').set('rich_media', carousel.setType('rich_media'));
         ValueMap callbackParams = new ValueMap().set('type', BotMessageType.Custom.name()).set('parameters', carousel);
 
         send(payload, callbackParams);
@@ -267,7 +265,10 @@ global class ViberBotSenderService implements IBotSenderService {
     }
 
     private ValueMap prepareMessagePayload(String type) {
-        ValueMap payload = new ValueMap().set('sender', new ValueMap().set('name', senderName)).set('type', type);
+        ValueMap payload = new ValueMap()
+            .set('sender', new ValueMap().set('name', senderName))
+            .set('type', type)
+            .set('min_api_version', VIBER_MIN_API_VERSION);
 
         if (sendMethod == ViberBotMethod.SendMessage) {
             payload.set('receiver', chatIds.get(0));
