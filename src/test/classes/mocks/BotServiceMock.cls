@@ -76,5 +76,9 @@ public class BotServiceMock extends BotService {
                 new ValueMap().set('type', BotMessageType.Location.name()).set('lat', latitude).set('lon', longitude)
             );
         }
+
+        public SenderService withReplyKeyboard(BotReplyKeyboardButton[] buttons) {
+            return this;
+        }
     }
 }
