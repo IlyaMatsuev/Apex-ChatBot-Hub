@@ -80,6 +80,48 @@ private class TelegramBotServiceTest {
     }
 
     @IsTest
+    private static void send_textWithTelegramReplyKeyboard_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramSendKeyboardOptions keyboard = new TelegramSendKeyboardOptions()
+            .allowResizeKeyboard()
+            .asPersistent()
+            .asOneTimeKeyboard()
+            .asSelective()
+            .setInputPlaceholder('Select an answer instead of typing...')
+            .addButton(new TelegramSendKeyboardOptions.Button('Share one of my contacts').asUserRequest())
+            .addButton(1, new TelegramSendKeyboardOptions.Button('Share one of my chats').asChatRequest())
+            .addButton(
+                1,
+                new TelegramSendKeyboardOptions.Button('Share one of my special chats')
+                    .asChatRequest(
+                        new TelegramSendKeyboardOptions.ButtonRequestChatConfigs()
+                            .withChannels(true)
+                            .withForums(false)
+                            .withUsername(true)
+                            .withCreated(false)
+                            .withBot(true)
+                            .withUserAdminRights(new List<String> { 'is_anonymous', 'can_manage_chat' })
+                            .withBotAdminRights(new List<String> { 'is_anonymous', 'can_manage_chat' })
+                    )
+            )
+            .addButton(2, new TelegramSendKeyboardOptions.Button('Create a pool').asPollRequest())
+            .addButton(2, new TelegramSendKeyboardOptions.Button('Launch a game!').asWebAppLauncher('some-app-url'));
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).withReplyKeyboard(keyboard).text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world!',
+            null,
+            new ValueMap().set('keyboard', keyboard)
+        );
+    }
+
+    @IsTest
     private static void send_image_shouldSendAndCreateMessageRecord() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();

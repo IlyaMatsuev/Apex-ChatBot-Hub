@@ -42,14 +42,6 @@ global class BotModel {
     }
 
     /**
-     * @description Returns the source `Bot__c` sObject record
-     * @return The `Bot__c` sObject record
-     */
-    global Bot__c toSObject() {
-        return entity;
-    }
-
-    /**
      * @description Checks if the passed object equals to the current instance
      * @param other Any object this instance is compared with
      * @return `true` if the passed object equals to the current instance by a reference or Id value

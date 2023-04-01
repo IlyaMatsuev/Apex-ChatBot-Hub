@@ -48,20 +48,6 @@ String
 
 JSON serialized current instance
 
-### `toSObject()`
-
-Returns the source `Bot__c` sObject record
-
-#### Return
-
-**Type**
-
-Bot\_\_c
-
-**Description**
-
-The `Bot__c` sObject record
-
 ### `equals(Object other)`
 
 Checks if the passed object equals to the current instance
