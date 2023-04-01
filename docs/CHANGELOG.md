@@ -26,12 +26,6 @@ Also, checkout the page with all Apex Classes definitions: https://ilyamatsuev.g
 
 For users, who only need to work with the data captured by bots, there's now a `Bot Readonly User` permission set.
 
-## What's Changed
-
-### Fix for an issue when Telegram Message Id was not unique
-
-Due to the format the telegram message ids are generated there was a possibility of the duplicated external id. That should be the case anymore.
-
 ### Support sending different message types
 
 It used to be possible to send the text messages only. Now, these message types are supported:
@@ -62,6 +56,39 @@ service.send(chatId).sticker('some-telegram-sticker-file-id');
 ```
 
 More methods can be found in [`TelegramBotSenderService`](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types/Classes/TelegramBotSenderService) and [`ViberBotSenderService`](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types/Classes/ViberBotSenderService).
+
+### Support attaching a custom keyboard to a message
+
+If you want your users to have predefined options to choose as a reply on your bot's messages, you can use custom keyboard for both `Viber` and `Telegram` bots. Here is how you can have a generic implementataion for both messangers:
+
+```java
+// Pass the `bot` instance to the factory and create a service (doesn't matter if it's `Viber` or `Telegram` bot)
+IBotService service = new BotServiceFactory().createBotService(bot);
+
+// Prepare the list of buttons
+List<BotReplyKeyboardButton> replyButtons = new List<BotReplyKeyboardButton> {
+    new BotReplyKeyboardButton('Share my contact ☎️').shareContact(),
+    new BotReplyKeyboardButton('Share my location 📍').shareLocation(),
+    new BotReplyKeyboardButton('I do not wanna share anything 😤')
+};
+
+// The `botUserId` is the if of the user to whom you want to send the message
+service.send(botUserId).withReplyKeyboard(replyButtons).text('Some informative message!');
+```
+
+That's it. Now the user is going to receive a text message with the 3 buttons as the options for response. And it works in the same way for both `Viber` and `Telegram`!
+
+However, `Viber` and `Telegram` keyboards are pretty much different and support different features. So, if you want to use something specific for either of these messangers you should use `TelegramBotService` and `TelegramSendKeyboardOptions`, or `ViberBotService` and `ViberSendKeyboardOptions` via the `withReplyKeyboard` method. More information about these classes can be found [here](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types).
+
+## What's Changed
+
+### BotAdmin users are now able to see encrypted data
+
+Due to some technical limitation it was necessary to give the permission to the `BotAdmin` permission set to be able to see the encrypted data, which means that the bots' tokens are now going to be visible for them. So, please assign that permission set carefully!
+
+### Fix for an issue when Telegram Message Id was not unique
+
+Due to the format the telegram message ids are generated there was a possibility of the duplicated external id. That should be the case anymore.
 
 ## Bugfixes
 
