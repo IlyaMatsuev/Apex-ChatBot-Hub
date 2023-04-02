@@ -20,13 +20,26 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param text The message text to send
      */
     global void text(String text) {
-        ValueMap callbackParams = new ValueMap();
+        text(text, new TelegramSendTextOptions());
+    }
+
+    /**
+     * @description Sends a text message with the provided optional parameters
+     * @param text The message text to send
+     * @param options The instance of <<TelegramSendTextOptions>> with other optional parameters
+     */
+    global void text(String text, TelegramSendTextOptions options) {
+        ValueMap callbackParams = new ValueMap().set('parameters', options);
         if (BotUtils.isUrl(text)) {
             callbackParams.set('type', BotMessageType.Url.name()).set('mediaUrl', text);
         } else {
             callbackParams.set('type', BotMessageType.Text.name()).set('text', text);
         }
-        send(TelegramBotMethod.SendMessage, new ValueMap().set('chat_id', chatId).set('text', text), callbackParams);
+        send(
+            TelegramBotMethod.SendMessage,
+            new ValueMap(options).set('chat_id', chatId).set('text', text),
+            callbackParams
+        );
     }
 
     /**
@@ -34,7 +47,7 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param imageUrl The image URL
      */
     global void image(String imageUrl) {
-        image(imageUrl, null);
+        image(imageUrl, new TelegramSendImageOptions());
     }
 
     /**
@@ -43,10 +56,23 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param caption The text to attach to the image
      */
     global void image(String imageUrl, String caption) {
+        image(imageUrl, new TelegramSendImageOptions().withCaption(caption));
+    }
+
+    /**
+     * @description Sends an image with the provided optional parameters
+     * @param imageUrl The image URL
+     * @param options The instance of <<TelegramSendImageOptions>> with other optional parameters
+     */
+    global void image(String imageUrl, TelegramSendImageOptions options) {
         send(
             TelegramBotMethod.SendPhoto,
-            new ValueMap().set('chat_id', chatId).set('caption', caption, true).set('photo', imageUrl),
-            new ValueMap().set('type', BotMessageType.Image.name()).set('text', caption).set('mediaUrl', imageUrl)
+            new ValueMap(options).set('chat_id', chatId).set('photo', imageUrl),
+            new ValueMap()
+                .set('type', BotMessageType.Image.name())
+                .set('text', options.getString('caption'))
+                .set('mediaUrl', imageUrl)
+                .set('parameters', options)
         );
     }
 
@@ -55,7 +81,7 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param videoUrl The video URL
      */
     global void video(String videoUrl) {
-        video(videoUrl, null);
+        video(videoUrl, new TelegramSendVideoOptions());
     }
 
     /**
@@ -64,10 +90,23 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param caption The text to attach to the video
      */
     global void video(String videoUrl, String caption) {
+        video(videoUrl, new TelegramSendVideoOptions().withCaption(caption));
+    }
+
+    /**
+     * @description Sends a video with the provided optional parameters
+     * @param videoUrl The video URL
+     * @param options The instance of <<TelegramSendVideoOptions>> with other optional parameters
+     */
+    global void video(String videoUrl, TelegramSendVideoOptions options) {
         send(
             TelegramBotMethod.SendVideo,
-            new ValueMap().set('chat_id', chatId).set('caption', caption, true).set('video', videoUrl),
-            new ValueMap().set('type', BotMessageType.Video.name()).set('text', caption).set('mediaUrl', videoUrl)
+            new ValueMap(options).set('chat_id', chatId).set('video', videoUrl),
+            new ValueMap()
+                .set('type', BotMessageType.Video.name())
+                .set('text', options.getString('caption'))
+                .set('mediaUrl', videoUrl)
+                .set('parameters', options)
         );
     }
 
@@ -76,19 +115,32 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param fileUrl The file URL. Should include file name with extension in the end
      */
     global void file(String fileUrl) {
-        file(fileUrl, null);
+        file(fileUrl, new TelegramSendFileOptions());
     }
 
     /**
-     * @description Sends a file
+     * @description Sends a file with a caption
      * @param fileUrl The file URL
      * @param caption The text to attach to the file
      */
     global void file(String fileUrl, String caption) {
+        file(fileUrl, new TelegramSendFileOptions().withCaption(caption));
+    }
+
+    /**
+     * @description Sends a file with the provided optional parameters
+     * @param fileUrl The file URL
+     * @param options The instance of <<TelegramSendFileOptions>> with other optional parameters
+     */
+    global void file(String fileUrl, TelegramSendFileOptions options) {
         send(
             TelegramBotMethod.SendDocument,
-            new ValueMap().set('chat_id', chatId).set('caption', caption, true).set('document', fileUrl),
-            new ValueMap().set('type', BotMessageType.File.name()).set('text', caption).set('mediaUrl', fileUrl)
+            new ValueMap(options).set('chat_id', chatId).set('document', fileUrl),
+            new ValueMap()
+                .set('type', BotMessageType.File.name())
+                .set('text', options.getString('caption'))
+                .set('mediaUrl', fileUrl)
+                .set('parameters', options)
         );
     }
 
@@ -98,19 +150,29 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param phone The contact phone number
      */
     global void contact(String name, String phone) {
+        contact(name, phone, new TelegramSendContactOptions());
+    }
+
+    /**
+     * @description Sends a contact reference with the provided optional parameters
+     * @param name The contact first name or full name (via spaces)
+     * @param phone The contact phone number
+     * @param options The instance of <<TelegramSendContactOptions>> with other optional parameters
+     */
+    global void contact(String name, String phone, TelegramSendContactOptions options) {
         String firstName = name.substringBefore(' ');
         String lastName = name.contains(' ') ? name.substringAfter(' ') : null;
 
         send(
             TelegramBotMethod.SendContact,
-            new ValueMap()
+            new ValueMap(options)
                 .set('chat_id', chatId)
                 .set('first_name', firstName)
                 .set('last_name', lastName, true)
                 .set('phone_number', phone),
             new ValueMap()
                 .set('type', BotMessageType.Contact.name())
-                .set('parameters', new ValueMap().set('name', name).set('phone', phone))
+                .set('parameters', new ValueMap(options).set('name', name).set('phone', phone))
         );
     }
 
@@ -120,12 +182,22 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param longitude The location longitude
      */
     global void location(Decimal latitude, Decimal longitude) {
+        location(latitude, longitude, new TelegramSendLocationOptions());
+    }
+
+    /**
+     * @description Sends a location with the provided optional parameters. Latitude and longitude values are not validated
+     * @param latitude The location latitude
+     * @param longitude The location longitude
+     * @param options The instance of <<TelegramSendLocationOptions>> with other optional parameters
+     */
+    global void location(Decimal latitude, Decimal longitude, TelegramSendLocationOptions options) {
         send(
             TelegramBotMethod.SendLocation,
-            new ValueMap().set('chat_id', chatId).set('latitude', latitude).set('longitude', longitude),
+            new ValueMap(options).set('chat_id', chatId).set('latitude', latitude).set('longitude', longitude),
             new ValueMap()
                 .set('type', BotMessageType.Location.name())
-                .set('parameters', new ValueMap().set('lat', latitude).set('lon', longitude))
+                .set('parameters', new ValueMap(options).set('lat', latitude).set('lon', longitude))
         );
     }
 
@@ -134,6 +206,15 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param stickerIdOrUrl The unique identifier of the sticker or the URL to `.WEBP` file
      */
     global void sticker(String stickerIdOrUrl) {
+        sticker(stickerIdOrUrl, new TelegramSendStickerOptions());
+    }
+
+    /**
+     * @description Sends a sticker with the provided optional parameters
+     * @param stickerIdOrUrl The unique identifier of the sticker or the URL to `.WEBP` file
+     * @param options The instance of <<TelegramSendLocationOptions>> with other optional parameters
+     */
+    global void sticker(String stickerIdOrUrl, TelegramSendStickerOptions options) {
         String stickerId = stickerIdOrUrl;
         String stickerUrl;
         if (BotUtils.isUrl(stickerIdOrUrl)) {
@@ -142,11 +223,11 @@ global class TelegramBotSenderService implements IBotSenderService {
         }
         send(
             TelegramBotMethod.SendSticker,
-            new ValueMap().set('chat_id', chatId).set('sticker', stickerIdOrUrl),
+            new ValueMap(options).set('chat_id', chatId).set('sticker', stickerIdOrUrl),
             new ValueMap()
                 .set('type', BotMessageType.Sticker.name())
                 .set('mediaUrl', stickerUrl, true)
-                .set('parameters', new ValueMap().set('stickerId', stickerId, true))
+                .set('parameters', new ValueMap(options).set('stickerId', stickerId, true))
         );
     }
 

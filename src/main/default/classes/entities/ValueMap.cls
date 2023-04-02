@@ -5,8 +5,13 @@ public virtual class ValueMap {
         this(new Map<String, Object>());
     }
 
+    public ValueMap(ValueMap values) {
+        this(values.getValues());
+    }
+
     public ValueMap(Map<String, Object> values) {
-        this.values = values;
+        this.values = new Map<String, Object>();
+        this.values.putAll(values);
     }
 
     public static ValueMap fromJson(String jsonValues) {

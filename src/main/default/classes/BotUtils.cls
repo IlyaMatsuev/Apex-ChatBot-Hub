@@ -28,6 +28,10 @@ public class BotUtils {
         return (sourceExternalId + ':').rightPad(EXTERNAL_ID_LENGTH, sourceSaltValue);
     }
 
+    public static String parseExternalId(String externalId) {
+        return externalId?.substringBefore(':');
+    }
+
     public static Object createInstance(String typeName) {
         return createInstance(typeName, new Map<String, Object>());
     }
