@@ -10,6 +10,14 @@ BotMessageType
 
 ## Fields
 
+### `Animation` → `BotMessageType`
+
+The animation message (a video without sound, e.g. `gif`)
+
+### `Audio` → `BotMessageType`
+
+The audio message
+
 ### `Contact` → `BotMessageType`
 
 The message sharing contact details
@@ -22,6 +30,10 @@ The message with custom layout
 
 The document message
 
+### `GroupMedia` → `BotMessageType`
+
+The message with multiple images/video/files
+
 ### `Image` → `BotMessageType`
 
 The image message
@@ -29,6 +41,14 @@ The image message
 ### `Location` → `BotMessageType`
 
 The message sharing location details
+
+### `Other` → `BotMessageType`
+
+Any other message types
+
+### `Poll` → `BotMessageType`
+
+The poll message
 
 ### `Sticker` → `BotMessageType`
 
@@ -40,7 +60,11 @@ The plain text message
 
 ### `Url` → `BotMessageType`
 
-The chat URL message
+The URL message
+
+### `Venue` → `BotMessageType`
+
+The message sharing a venue details
 
 ### `Video` → `BotMessageType`
 

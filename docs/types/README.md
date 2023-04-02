@@ -34,9 +34,61 @@ Service class that provides access to all `Telegram` `send` methods
 
 The concrete service for the `Telegram` messanger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Telegram` only
 
+### [TelegramSendAudioOptions](/types/Classes/TelegramSendAudioOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendAudio` and `sendVoice` methods. The sources: https://core.telegram.org/bots/api#sendaudio, https://core.telegram.org/bots/api#sendvoice
+
+### [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendContact` method. The source: https://core.telegram.org/bots/api#sendcontact
+
+### [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendDice` method. The source: https://core.telegram.org/bots/api#senddice
+
+### [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendDocument` method. The source: https://core.telegram.org/bots/api#senddocument
+
+### [TelegramSendImageOptions](/types/Classes/TelegramSendImageOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendPhoto` method. The source: https://core.telegram.org/bots/api#sendphoto
+
 ### [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md)
 
 The builder-like class that represents parameters for sending a custom reply keyboard to the user via the `Telegram` bot service. The source: https://core.telegram.org/bots/api#replykeyboardmarkup
+
+### [TelegramSendLocationOptions](/types/Classes/TelegramSendLocationOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendLocation` method. The source: https://core.telegram.org/bots/api#sendlocation
+
+### [TelegramSendMessageOptions](/types/Classes/TelegramSendMessageOptions.md)
+
+The builder-like class that describes common optional parameters of the `Telegram` for sending messages
+
+### [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendPoll` method. The source: https://core.telegram.org/bots/api#sendpoll
+
+### [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendSticker` method. The source: https://core.telegram.org/bots/api#sendsticker
+
+### [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendMessage` method. The source: https://core.telegram.org/bots/api#sendmessage
+
+### [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendVenue` method. The source: https://core.telegram.org/bots/api#sendvenue
+
+### [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendVideoNote` method. The source: https://core.telegram.org/bots/api#sendvideonote
+
+### [TelegramSendVideoOptions](/types/Classes/TelegramSendVideoOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendVideo` and `sendAnimation` methods. The source: https://core.telegram.org/bots/api#sendvideo
 
 ### [ViberBotSenderService](/types/Classes/ViberBotSenderService.md)
 
