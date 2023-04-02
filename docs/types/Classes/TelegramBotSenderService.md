@@ -18,6 +18,17 @@ Sends a text message
 | ------ | ------------------------ |
 | `text` | The message text to send |
 
+### `text(String text, TelegramSendTextOptions options)`
+
+Sends a text message with the provided optional parameters
+
+#### Parameters
+
+| Param     | Description                                                                                                         |
+| --------- | ------------------------------------------------------------------------------------------------------------------- |
+| `text`    | The message text to send                                                                                            |
+| `options` | The instance of [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) with other optional parameters |
+
 ### `image(String imageUrl)`
 
 Sends an image
@@ -38,6 +49,17 @@ Sends an image with a caption
 | ---------- | ------------------------------- |
 | `imageUrl` | The image URL                   |
 | `caption`  | The text to attach to the image |
+
+### `image(String imageUrl, TelegramSendImageOptions options)`
+
+Sends an image with the provided optional parameters
+
+#### Parameters
+
+| Param      | Description                                                                                                           |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| `imageUrl` | The image URL                                                                                                         |
+| `options`  | The instance of [TelegramSendImageOptions](/types/Classes/TelegramSendImageOptions.md) with other optional parameters |
 
 ### `video(String videoUrl)`
 
@@ -60,6 +82,134 @@ Sends a video with a caption
 | `videoUrl` | The video URL                   |
 | `caption`  | The text to attach to the video |
 
+### `video(String videoUrl, TelegramSendVideoOptions options)`
+
+Sends a video with the provided optional parameters
+
+#### Parameters
+
+| Param      | Description                                                                                                           |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| `videoUrl` | The video URL                                                                                                         |
+| `options`  | The instance of [TelegramSendVideoOptions](/types/Classes/TelegramSendVideoOptions.md) with other optional parameters |
+
+### `videoNote(String videoNoteId)`
+
+Sends a video note
+
+#### Parameters
+
+| Param         | Description                                                               |
+| ------------- | ------------------------------------------------------------------------- |
+| `videoNoteId` | The video file id that was uploaded to `Telegram`. URLs are not supported |
+
+### `videoNote(String videoNoteId, TelegramSendVideoNoteOptions options)`
+
+Sends a video note with the provided optional parameters
+
+#### Parameters
+
+| Param         | Description                                                                                                                   |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| `videoNoteId` | The video file id that was uploaded to `Telegram`. URLs are not supported                                                     |
+| `options`     | The instance of [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) with other optional parameters |
+
+### `animation(String animationUrl)`
+
+Sends an animation, e.g. `gif` or a video without sound
+
+#### Parameters
+
+| Param          | Description       |
+| -------------- | ----------------- |
+| `animationUrl` | The animation URL |
+
+### `animation(String animationUrl, String caption)`
+
+Sends an animation, e.g. `gif` or a video without sound with a caption
+
+#### Parameters
+
+| Param          | Description                         |
+| -------------- | ----------------------------------- |
+| `animationUrl` | The animation URL                   |
+| `caption`      | The text to attach to the animation |
+
+### `animation(String animationUrl, TelegramSendVideoOptions options)`
+
+Sends an animation, e.g. `gif` or a video without sound with the provided optional parameters
+
+#### Parameters
+
+| Param      | Description                                                                                                           |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| `videoUrl` | The video URL                                                                                                         |
+| `options`  | The instance of [TelegramSendVideoOptions](/types/Classes/TelegramSendVideoOptions.md) with other optional parameters |
+
+### `audio(String audioUrl)`
+
+Sends an audio
+
+#### Parameters
+
+| Param      | Description   |
+| ---------- | ------------- |
+| `audioUrl` | The audio URL |
+
+### `audio(String audioUrl, String caption)`
+
+Sends an audio with a caption
+
+#### Parameters
+
+| Param      | Description                     |
+| ---------- | ------------------------------- |
+| `audioUrl` | The audio URL                   |
+| `caption`  | The text to attach to the audio |
+
+### `audio(String audioUrl, TelegramSendAudioOptions options)`
+
+Sends an audio with the provided optional parameters
+
+#### Parameters
+
+| Param      | Description                                                                                                           |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| `audioUrl` | The audio URL                                                                                                         |
+| `options`  | The instance of [TelegramSendAudioOptions](/types/Classes/TelegramSendAudioOptions.md) with other optional parameters |
+
+### `voice(String voiceUrl)`
+
+Sends an audio as a voice message
+
+#### Parameters
+
+| Param      | Description                                                                                             |
+| ---------- | ------------------------------------------------------------------------------------------------------- |
+| `voiceUrl` | The voice URL. Accepts only `.OGG` files encoded with `OPUS`, otherwise will be sent as `audio` message |
+
+### `voice(String voiceUrl, String caption)`
+
+Sends an audio as a voice message with a caption
+
+#### Parameters
+
+| Param      | Description                                                                                             |
+| ---------- | ------------------------------------------------------------------------------------------------------- |
+| `voiceUrl` | The voice URL. Accepts only `.OGG` files encoded with `OPUS`, otherwise will be sent as `audio` message |
+| `caption`  | The text to attach to the audio                                                                         |
+
+### `voice(String voiceUrl, TelegramSendAudioOptions options)`
+
+Sends an audio as a voice message with the provided optional parameters
+
+#### Parameters
+
+| Param      | Description                                                                                                           |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- |
+| `voiceUrl` | The voice URL. Accepts only `.OGG` files encoded with `OPUS`, otherwise will be sent as `audio` message               |
+| `options`  | The instance of [TelegramSendAudioOptions](/types/Classes/TelegramSendAudioOptions.md) with other optional parameters |
+
 ### `file(String fileUrl)`
 
 Sends a file
@@ -72,7 +222,7 @@ Sends a file
 
 ### `file(String fileUrl, String caption)`
 
-Sends a file
+Sends a file with a caption
 
 #### Parameters
 
@@ -80,6 +230,17 @@ Sends a file
 | --------- | ------------------------------ |
 | `fileUrl` | The file URL                   |
 | `caption` | The text to attach to the file |
+
+### `file(String fileUrl, TelegramSendFileOptions options)`
+
+Sends a file with the provided optional parameters
+
+#### Parameters
+
+| Param     | Description                                                                                                         |
+| --------- | ------------------------------------------------------------------------------------------------------------------- |
+| `fileUrl` | The file URL                                                                                                        |
+| `options` | The instance of [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) with other optional parameters |
 
 ### `contact(String name, String phone)`
 
@@ -92,9 +253,21 @@ Sends a contact reference
 | `name`  | The contact first name or full name (via spaces) |
 | `phone` | The contact phone number                         |
 
+### `contact(String name, String phone, TelegramSendContactOptions options)`
+
+Sends a contact reference with the provided optional parameters
+
+#### Parameters
+
+| Param     | Description                                                                                                               |
+| --------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `name`    | The contact first name or full name (via spaces)                                                                          |
+| `phone`   | The contact phone number                                                                                                  |
+| `options` | The instance of [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) with other optional parameters |
+
 ### `location(Decimal latitude, Decimal longitude)`
 
-Sends a location. Latitude and longitude values are not validated
+Sends a location
 
 #### Parameters
 
@@ -102,6 +275,45 @@ Sends a location. Latitude and longitude values are not validated
 | ----------- | ---------------------- |
 | `latitude`  | The location latitude  |
 | `longitude` | The location longitude |
+
+### `location(Decimal latitude, Decimal longitude, TelegramSendLocationOptions options)`
+
+Sends a location with the provided optional parameters
+
+#### Parameters
+
+| Param       | Description                                                                                                                 |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `latitude`  | The location latitude                                                                                                       |
+| `longitude` | The location longitude                                                                                                      |
+| `options`   | The instance of [TelegramSendLocationOptions](/types/Classes/TelegramSendLocationOptions.md) with other optional parameters |
+
+### `venue(String title, String address, Decimal latitude, Decimal longitude)`
+
+Sends a venue
+
+#### Parameters
+
+| Param       | Description         |
+| ----------- | ------------------- |
+| `title`     | The venue title     |
+| `address`   | The venue address   |
+| `latitude`  | The venue latitude  |
+| `longitude` | The venue longitude |
+
+### `venue(String title, String address, Decimal latitude, Decimal longitude, TelegramSendVenueOptions options)`
+
+Sends a venue with the provided optional parameters
+
+#### Parameters
+
+| Param       | Description                                                                                                           |
+| ----------- | --------------------------------------------------------------------------------------------------------------------- |
+| `title`     | The venue title                                                                                                       |
+| `address`   | The venue address                                                                                                     |
+| `latitude`  | The venue latitude                                                                                                    |
+| `longitude` | The venue longitude                                                                                                   |
+| `options`   | The instance of [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) with other optional parameters |
 
 ### `sticker(String stickerIdOrUrl)`
 
@@ -112,6 +324,74 @@ Sends a sticker
 | Param            | Description                                                     |
 | ---------------- | --------------------------------------------------------------- |
 | `stickerIdOrUrl` | The unique identifier of the sticker or the URL to `.WEBP` file |
+
+### `sticker(String stickerIdOrUrl, TelegramSendStickerOptions options)`
+
+Sends a sticker with the provided optional parameters
+
+#### Parameters
+
+| Param            | Description                                                                                                                 |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `stickerIdOrUrl` | The unique identifier of the sticker or the URL to `.WEBP` file                                                             |
+| `options`        | The instance of [TelegramSendLocationOptions](/types/Classes/TelegramSendLocationOptions.md) with other optional parameters |
+
+### `poll(String question, String answers)`
+
+Sends a poll
+
+#### Parameters
+
+| Param      | Description                                                                                                    |
+| ---------- | -------------------------------------------------------------------------------------------------------------- |
+| `question` | The poll question. Up to `300` characters                                                                      |
+| `answers`  | The list of answers to the poll question. Should have at from `2` to `10` answers, up to `100` characters each |
+
+### `poll(String question, TelegramSendPollOptions options)`
+
+Sends a poll
+
+#### Parameters
+
+| Param      | Description                                                                                                    |
+| ---------- | -------------------------------------------------------------------------------------------------------------- |
+| `question` | The poll question. Up to `300` characters                                                                      |
+| `answers`  | The list of answers to the poll question. Should have at from `2` to `10` answers, up to `100` characters each |
+
+### `dice()`
+
+Sends an animated emoji displaying a random value
+
+### `dice(TelegramSendDiceOptions options)`
+
+Sends an animated emoji displaying a random value with the provided options
+
+#### Parameters
+
+| Param     | Description                                                                                                         |
+| --------- | ------------------------------------------------------------------------------------------------------------------- |
+| `options` | The instance of [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) with other optional parameters |
+
+### `chatAction(String action)`
+
+Sends the bot's status for 5 seconds or until the next message. E.g. `typing...`
+
+#### Parameters
+
+| Param    | Description                                                                                                                                                                                                                               |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `action` | The action to show to the user. Possible values: `typing`, `upload_photo`, `record_video`, `upload_video`, `record_voice`, `upload_voice`, `upload_document`, `choose_sticker`, `find_location`, `record_video_note`, `upload_video_note` |
+
+### `chatAction(String action, String threadId)`
+
+Sends the bot's status for 5 seconds or until the next message. E.g. `typing...`
+
+#### Parameters
+
+| Param      | Description                                                                                                                                                                                                                               |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `action`   | The action to show to the user. Possible values: `typing`, `upload_photo`, `record_video`, `upload_video`, `record_voice`, `upload_voice`, `upload_document`, `choose_sticker`, `find_location`, `record_video_note`, `upload_video_note` |
+| `threadId` | The id of the channel thread (topic) to where the message should be sent                                                                                                                                                                  |
 
 ### `withReplyKeyboard(BotReplyKeyboardButton buttons)`
 

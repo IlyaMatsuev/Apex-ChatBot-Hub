@@ -37,7 +37,7 @@ It used to be possible to send the text messages only. Now, these message types 
 -   contact
 -   location
 
-These are common message types that supported when using a `IBotService` interface. If you know exactly which service you want to use, you'll have access to more methods, like sending a sticker for example.
+These are common message types that supported when using a `IBotService` interface. If you know exactly which service you want to use, you'll have access to more methods, like sending a sticker, venue, or audio (for `Telegram`).
 
 Example to send an image:
 

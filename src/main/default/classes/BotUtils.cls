@@ -13,6 +13,9 @@ public class BotUtils {
     }
 
     public static Boolean isUrl(String text) {
+        if (text == null) {
+            return false;
+        }
         return Pattern.matches(URL_REGEX, text);
     }
 
@@ -26,6 +29,10 @@ public class BotUtils {
             return concatenatedExternalId;
         }
         return (sourceExternalId + ':').rightPad(EXTERNAL_ID_LENGTH, sourceSaltValue);
+    }
+
+    public static String parseExternalId(String externalId) {
+        return externalId?.substringBefore(':');
     }
 
     public static Object createInstance(String typeName) {
