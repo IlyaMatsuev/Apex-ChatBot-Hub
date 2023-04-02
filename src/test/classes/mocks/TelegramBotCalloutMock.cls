@@ -17,8 +17,20 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
             when 'sendVideo' {
                 return sendVideo(request);
             }
+            when 'sendVideoNote' {
+                return sendVideoNote(request);
+            }
+            when 'sendAudio' {
+                return sendAudio(request);
+            }
+            when 'sendVoice' {
+                return sendVoice(request);
+            }
             when 'sendDocument' {
                 return sendDocument(request);
+            }
+            when 'sendMediaGroup' {
+                return sendMediaGroup(request);
             }
             when 'sendContact' {
                 return sendContact(request);
@@ -26,8 +38,23 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
             when 'sendLocation' {
                 return sendLocation(request);
             }
+            when 'sendVenue' {
+                return sendVenue(request);
+            }
             when 'sendSticker' {
                 return sendSticker(request);
+            }
+            when 'sendAnimation' {
+                return sendAnimation(request);
+            }
+            when 'sendPoll' {
+                return sendPoll(request);
+            }
+            when 'sendDice' {
+                return sendDice(request);
+            }
+            when 'sendChatAction' {
+                return sendChatAction(request);
             }
         }
         throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
@@ -62,8 +89,28 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
         return getSuccessTelegramMessageResponse(request);
     }
 
+    private String sendVideoNote(ValueMap request) {
+        Assert.isTrue(request.hasValue('video_note'));
+        return getSuccessTelegramMessageResponse(request);
+    }
+
+    private String sendAudio(ValueMap request) {
+        Assert.isTrue(request.hasValue('audio'));
+        return getSuccessTelegramMessageResponse(request);
+    }
+
+    private String sendVoice(ValueMap request) {
+        Assert.isTrue(request.hasValue('voice'));
+        return getSuccessTelegramMessageResponse(request);
+    }
+
     private String sendDocument(ValueMap request) {
         Assert.isTrue(request.hasValue('document'));
+        return getSuccessTelegramMessageResponse(request);
+    }
+
+    private String sendMediaGroup(ValueMap request) {
+        Assert.isTrue(request.hasValue('media'));
         return getSuccessTelegramMessageResponse(request);
     }
 
@@ -79,8 +126,36 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
         return getSuccessTelegramMessageResponse(request);
     }
 
+    private String sendVenue(ValueMap request) {
+        Assert.isTrue(request.hasValue('latitude'));
+        Assert.isTrue(request.hasValue('longitude'));
+        Assert.isTrue(request.hasValue('title'));
+        Assert.isTrue(request.hasValue('address'));
+        return getSuccessTelegramMessageResponse(request);
+    }
+
     private String sendSticker(ValueMap request) {
         Assert.isTrue(request.hasValue('sticker'));
+        return getSuccessTelegramMessageResponse(request);
+    }
+
+    private String sendAnimation(ValueMap request) {
+        Assert.isTrue(request.hasValue('animation'));
+        return getSuccessTelegramMessageResponse(request);
+    }
+
+    private String sendPoll(ValueMap request) {
+        Assert.isTrue(request.hasValue('question'));
+        Assert.isTrue(request.hasValue('options'));
+        return getSuccessTelegramMessageResponse(request);
+    }
+
+    private String sendDice(ValueMap request) {
+        return getSuccessTelegramMessageResponse(request);
+    }
+
+    private String sendChatAction(ValueMap request) {
+        Assert.isTrue(request.hasValue('action'));
         return getSuccessTelegramMessageResponse(request);
     }
 

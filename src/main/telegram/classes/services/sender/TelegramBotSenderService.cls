@@ -1,4 +1,3 @@
-// TODO: Implement: sendMediaGroup, sendAudio, sendAnimation, sendVoice, sendVideoNote, sendVenue, sendPoll, sendDice, sendChatAction
 /**
  * @description Service class that provides access to all `Telegram` `send` methods
  */
@@ -111,6 +110,131 @@ global class TelegramBotSenderService implements IBotSenderService {
     }
 
     /**
+     * @description Sends a video note
+     * @param videoNoteId The video file id that was uploaded to `Telegram`. URLs are not supported
+     */
+    global void videoNote(String videoNoteId) {
+        videoNote(videoNoteId, new TelegramSendVideoNoteOptions());
+    }
+
+    /**
+     * @description Sends a video note with the provided optional parameters
+     * @param videoNoteId The video file id that was uploaded to `Telegram`. URLs are not supported
+     * @param options The instance of <<TelegramSendVideoNoteOptions>> with other optional parameters
+     */
+    global void videoNote(String videoNoteId, TelegramSendVideoNoteOptions options) {
+        send(
+            TelegramBotMethod.SendVideoNote,
+            new ValueMap(options).set('chat_id', chatId).set('video_note', videoNoteId),
+            new ValueMap()
+                .set('type', BotMessageType.Video.name())
+                .set('parameters', new ValueMap(options).set('videoNoteId', videoNoteId))
+        );
+    }
+
+    /**
+     * @description Sends an animation, e.g. `gif` or a video without sound
+     * @param animationUrl The animation URL
+     */
+    global void animation(String animationUrl) {
+        animation(animationUrl, new TelegramSendVideoOptions());
+    }
+
+    /**
+     * @description Sends an animation, e.g. `gif` or a video without sound with a caption
+     * @param animationUrl The animation URL
+     * @param caption The text to attach to the animation
+     */
+    global void animation(String animationUrl, String caption) {
+        animation(animationUrl, new TelegramSendVideoOptions().withCaption(caption));
+    }
+
+    /**
+     * @description Sends an animation, e.g. `gif` or a video without sound with the provided optional parameters
+     * @param videoUrl The video URL
+     * @param options The instance of <<TelegramSendVideoOptions>> with other optional parameters
+     */
+    global void animation(String animationUrl, TelegramSendVideoOptions options) {
+        send(
+            TelegramBotMethod.SendAnimation,
+            new ValueMap(options).set('chat_id', chatId).set('animation', animationUrl),
+            new ValueMap()
+                .set('type', BotMessageType.Animation.name())
+                .set('text', options.getString('caption'))
+                .set('mediaUrl', animationUrl)
+                .set('parameters', options)
+        );
+    }
+
+    /**
+     * @description Sends an audio
+     * @param audioUrl The audio URL
+     */
+    global void audio(String audioUrl) {
+        audio(audioUrl, new TelegramSendAudioOptions());
+    }
+
+    /**
+     * @description Sends an audio with a caption
+     * @param audioUrl The audio URL
+     * @param caption The text to attach to the audio
+     */
+    global void audio(String audioUrl, String caption) {
+        audio(audioUrl, new TelegramSendAudioOptions().withCaption(caption));
+    }
+
+    /**
+     * @description Sends an audio with the provided optional parameters
+     * @param audioUrl The audio URL
+     * @param options The instance of <<TelegramSendAudioOptions>> with other optional parameters
+     */
+    global void audio(String audioUrl, TelegramSendAudioOptions options) {
+        send(
+            TelegramBotMethod.SendAudio,
+            new ValueMap(options).set('chat_id', chatId).set('audio', audioUrl),
+            new ValueMap()
+                .set('type', BotMessageType.Audio.name())
+                .set('text', options.getString('caption'))
+                .set('mediaUrl', audioUrl)
+                .set('parameters', options)
+        );
+    }
+
+    /**
+     * @description Sends an audio as a voice message
+     * @param voiceUrl The voice URL. Accepts only `.OGG` files encoded with `OPUS`, otherwise will be sent as `audio` message
+     */
+    global void voice(String voiceUrl) {
+        voice(voiceUrl, new TelegramSendAudioOptions());
+    }
+
+    /**
+     * @description Sends an audio as a voice message with a caption
+     * @param voiceUrl The voice URL. Accepts only `.OGG` files encoded with `OPUS`, otherwise will be sent as `audio` message
+     * @param caption The text to attach to the audio
+     */
+    global void voice(String voiceUrl, String caption) {
+        voice(voiceUrl, new TelegramSendAudioOptions().withCaption(caption));
+    }
+
+    /**
+     * @description Sends an audio as a voice message with the provided optional parameters
+     * @param voiceUrl The voice URL. Accepts only `.OGG` files encoded with `OPUS`, otherwise will be sent as `audio` message
+     * @param options The instance of <<TelegramSendAudioOptions>> with other optional parameters
+     */
+    global void voice(String voiceUrl, TelegramSendAudioOptions options) {
+        send(
+            TelegramBotMethod.SendVoice,
+            new ValueMap(options).set('chat_id', chatId).set('voice', voiceUrl),
+            new ValueMap()
+                .set('type', BotMessageType.Audio.name())
+                .set('text', options.getString('caption'))
+                .set('mediaUrl', voiceUrl)
+                .set('parameters', options)
+        );
+    }
+
+    /**
      * @description Sends a file
      * @param fileUrl The file URL. Should include file name with extension in the end
      */
@@ -177,7 +301,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     }
 
     /**
-     * @description Sends a location. Latitude and longitude values are not validated
+     * @description Sends a location
      * @param latitude The location latitude
      * @param longitude The location longitude
      */
@@ -186,7 +310,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     }
 
     /**
-     * @description Sends a location with the provided optional parameters. Latitude and longitude values are not validated
+     * @description Sends a location with the provided optional parameters
      * @param latitude The location latitude
      * @param longitude The location longitude
      * @param options The instance of <<TelegramSendLocationOptions>> with other optional parameters
@@ -199,6 +323,54 @@ global class TelegramBotSenderService implements IBotSenderService {
                 .set('type', BotMessageType.Location.name())
                 .set('parameters', new ValueMap(options).set('lat', latitude).set('lon', longitude))
         );
+    }
+
+    /**
+     * @description Sends a venue
+     * @param title The venue title
+     * @param address The venue address
+     * @param latitude The venue latitude
+     * @param longitude The venue longitude
+     */
+    global void venue(String title, String address, Decimal latitude, Decimal longitude) {
+        venue(title, address, latitude, longitude, new TelegramSendVenueOptions());
+    }
+
+    /**
+     * @description Sends a venue with the provided optional parameters
+     * @param title The venue title
+     * @param address The venue address
+     * @param latitude The venue latitude
+     * @param longitude The venue longitude
+     * @param options The instance of <<TelegramSendVenueOptions>> with other optional parameters
+     */
+    global void venue(
+        String title,
+        String address,
+        Decimal latitude,
+        Decimal longitude,
+        TelegramSendVenueOptions options
+    ) {
+        ValueMap payload = new ValueMap(options)
+            .set('chat_id', chatId)
+            .set('title', title)
+            .set('address', address)
+            .set('latitude', latitude)
+            .set('longitude', longitude);
+
+        ValueMap callbackParams = new ValueMap()
+            .set('type', BotMessageType.Venue.name())
+            .set('text', title)
+            .set(
+                'parameters',
+                new ValueMap(options)
+                    .set('title', title)
+                    .set('address', address)
+                    .set('lat', latitude)
+                    .set('lon', longitude)
+            );
+
+        send(TelegramBotMethod.SendVenue, payload, callbackParams);
     }
 
     /**
@@ -228,6 +400,68 @@ global class TelegramBotSenderService implements IBotSenderService {
                 .set('type', BotMessageType.Sticker.name())
                 .set('mediaUrl', stickerUrl, true)
                 .set('parameters', new ValueMap(options).set('stickerId', stickerId, true))
+        );
+    }
+
+    /**
+     * @description Sends a poll
+     * @param question The poll question. Up to `300` characters
+     * @param answers The list of answers to the poll question. Should have at from `2` to `10` answers, up to `100` characters each
+     */
+    global void poll(String question, String[] answers) {
+        poll(question, new TelegramSendPollOptions().withAnswers(answers));
+    }
+
+    /**
+     * @description Sends a poll
+     * @param question The poll question. Up to `300` characters
+     * @param answers The list of answers to the poll question. Should have at from `2` to `10` answers, up to `100` characters each
+     */
+    global void poll(String question, TelegramSendPollOptions options) {
+        send(
+            TelegramBotMethod.SendPoll,
+            new ValueMap(options).set('chat_id', chatId).set('question', question),
+            new ValueMap().set('type', BotMessageType.Poll.name()).set('text', question).set('parameters', options)
+        );
+    }
+
+    /**
+     * @description Sends an animated emoji displaying a random value
+     */
+    global void dice() {
+        dice(new TelegramSendDiceOptions());
+    }
+
+    /**
+     * @description Sends an animated emoji displaying a random value with the provided options
+     * @param options The instance of <<TelegramSendDiceOptions>> with other optional parameters
+     */
+    global void dice(TelegramSendDiceOptions options) {
+        send(
+            TelegramBotMethod.SendDice,
+            new ValueMap(options).set('chat_id', chatId),
+            new ValueMap().set('type', BotMessageType.Other.name()).set('parameters', options)
+        );
+    }
+
+    /**
+     * @description Sends the bot's status for 5 seconds or until the next message. E.g. `typing...`
+     * @param action The action to show to the user. Possible values: `typing`, `upload_photo`, `record_video`, `upload_video`, `record_voice`, `upload_voice`, `upload_document`, `choose_sticker`, `find_location`, `record_video_note`, `upload_video_note`
+     */
+    global void chatAction(String action) {
+        chatAction(action, null);
+    }
+
+    /**
+     * @description Sends the bot's status for 5 seconds or until the next message. E.g. `typing...`
+     * @param action The action to show to the user. Possible values: `typing`, `upload_photo`, `record_video`, `upload_video`, `record_voice`, `upload_voice`, `upload_document`, `choose_sticker`, `find_location`, `record_video_note`, `upload_video_note`
+     * @param threadId The id of the channel thread (topic) to where the message should be sent
+     */
+    global void chatAction(String action, String threadId) {
+        send(
+            TelegramBotMethod.SendChatAction,
+            new ValueMap().set('chat_id', chatId).set('action', action).set('message_thread_id', threadId, true),
+            null
         );
     }
 
@@ -271,6 +505,9 @@ global class TelegramBotSenderService implements IBotSenderService {
             'result',
             TelegramBotMessageEntity.class
         );
-        callback.execute(callbackParams.set('messageId', message.getId()).set('keyboard', replyKeyboard, true));
+
+        if (callbackParams != null) {
+            callback.execute(callbackParams.set('messageId', message.getId()).set('keyboard', replyKeyboard, true));
+        }
     }
 }

@@ -1,5 +1,5 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendVideo` method. The source: https://core.telegram.org/bots/api#sendvideo
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendVideo` and `sendAnimation` methods. The source: https://core.telegram.org/bots/api#sendvideo
  */
 global class TelegramSendVideoOptions extends TelegramSendMessageOptions {
     /**
@@ -61,7 +61,7 @@ global class TelegramSendVideoOptions extends TelegramSendMessageOptions {
     }
 
     /**
-     * @description Marks the video as suitable for streaming
+     * @description Marks the video as suitable for streaming. Does not work for the `animation` message
      * @return The current instance of the <<TelegramSendVideoOptions>> class
      */
     global TelegramSendVideoOptions withStreamingSupport() {

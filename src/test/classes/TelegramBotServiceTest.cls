@@ -267,6 +267,81 @@ private class TelegramBotServiceTest {
     }
 
     @IsTest
+    private static void send_videoNote_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).videoNote('some-video-id');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Video,
+            null,
+            null,
+            new ValueMap().set('videoNoteId', 'some-video-id')
+        );
+    }
+
+    @IsTest
+    private static void send_videoNoteWithOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramSendVideoNoteOptions options = new TelegramSendVideoNoteOptions()
+            .withThreadId(null)
+            .withThumbnail('https://example.com/thumbnail.jpg')
+            .withoutNotification()
+            .withProtectedContent()
+            .asReplyToMessage('some-message-id')
+            .withDuration(10)
+            .withSize(300);
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).videoNote('some-video-id', options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Video,
+            null,
+            null,
+            new ValueMap(options).set('videoNoteId', 'some-video-id')
+        );
+    }
+
+    @IsTest
+    private static void send_animation_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).animation('https://example.com/mem.gif');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(BotMessageType.Animation, null, 'https://example.com/mem.gif', new ValueMap());
+    }
+
+    @IsTest
+    private static void send_animationWithCaption_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).animation('https://example.com/mem.gif', 'Some caption');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Animation,
+            'Some caption',
+            'https://example.com/mem.gif',
+            new ValueMap().set('caption', 'Some caption')
+        );
+    }
+
+    @IsTest
     private static void send_file_shouldSendAndCreateMessageRecord() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();
@@ -421,6 +496,57 @@ private class TelegramBotServiceTest {
     }
 
     @IsTest
+    private static void send_venue_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        String title = 'Party!';
+        String address = 'Collingwood 122';
+        Decimal lat = 38.9228;
+        Decimal lon = 96.1232;
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).venue(title, address, lat, lon);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Venue,
+            title,
+            null,
+            new ValueMap().set('title', title).set('address', address).set('lat', lat).set('lon', lon)
+        );
+    }
+
+    @IsTest
+    private static void send_venueWithOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        String title = 'Party!';
+        String address = 'Collingwood 122';
+        Decimal lat = 38.9228;
+        Decimal lon = 96.1232;
+        SenderFixture fixture = new SenderFixture();
+        TelegramSendVenueOptions options = new TelegramSendVenueOptions()
+            .withThreadId(null)
+            .withoutNotification()
+            .withProtectedContent()
+            .asReplyToMessage('some-message-id')
+            .asFoursquarePlace('some-id', 'arts_entertainment/aquarium')
+            .asGooglePlace(null, null);
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).venue(title, address, lat, lon, options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Venue,
+            title,
+            null,
+            new ValueMap(options).set('title', title).set('address', address).set('lat', lat).set('lon', lon)
+        );
+    }
+
+    @IsTest
     private static void send_stickerAsId_shouldSendAndCreateMessageRecord() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();
@@ -480,6 +606,180 @@ private class TelegramBotServiceTest {
         );
     }
 
+    @IsTest
+    private static void send_audio_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).audio('https://examlple.com/audio.mp3');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(BotMessageType.Audio, null, 'https://examlple.com/audio.mp3', new ValueMap());
+    }
+
+    @IsTest
+    private static void send_audioWithCaption_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).audio('https://examlple.com/audio.mp3', 'Hello World!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Audio,
+            'Hello World!',
+            'https://examlple.com/audio.mp3',
+            new ValueMap().set('caption', 'Hello World!')
+        );
+    }
+
+    @IsTest
+    private static void send_audioWithOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramSendAudioOptions options = new TelegramSendAudioOptions()
+            .withThreadId(null)
+            .withTrackName('Arctic Monkeys', 'Do I Wanna Know?')
+            .withThumbnail('https://example.com/thumbnail.jpg')
+            .withCaption('Some caption')
+            .withParseMode(null)
+            .withoutNotification()
+            .withProtectedContent()
+            .asReplyToMessage('some-message-id')
+            .withDuration(210)
+            .withMessageEntity(new TelegramSendMessageOptions.MessageEntity('italic', 0, 23));
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).audio('https://examlple.com/audio.mp3', options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(BotMessageType.Audio, 'Some caption', 'https://examlple.com/audio.mp3', options);
+    }
+
+    @IsTest
+    private static void send_voice_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).audio('https://examlple.com/audio.ogg');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(BotMessageType.Audio, null, 'https://examlple.com/audio.ogg', new ValueMap());
+    }
+
+    @IsTest
+    private static void send_voiceWithCaption_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).audio('https://examlple.com/audio.ogg', 'Hello World!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Audio,
+            'Hello World!',
+            'https://examlple.com/audio.ogg',
+            new ValueMap().set('caption', 'Hello World!')
+        );
+    }
+
+    @IsTest
+    private static void send_poll_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        List<String> answers = new List<String> { 'Answer1?', 'Answer2?', 'Answer3?' };
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).poll('question?', answers);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(BotMessageType.Poll, 'question?', null, new ValueMap().set('options', answers));
+    }
+
+    @IsTest
+    private static void send_pollWithOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramSendPollOptions options = new TelegramSendPollOptions()
+            .withAnswer('answer1')
+            .withAnswer('answer2')
+            .withAnswer('answer3')
+            .allowMultipleAnswers()
+            .asAnonymous()
+            .asQuiz(1, 'I <b>dont</b> care what you choose')
+            .withExplanationParseMode('HTML')
+            .withExplanationMessageEntity(new TelegramSendMessageOptions.MessageEntity('italic', 14, 4))
+            .withOpenPeriod(null)
+            .withCloseDate(DateTime.now().addSeconds(100))
+            .asClosed()
+            .withoutNotification()
+            .withProtectedContent()
+            .asReplyToMessage('reply-message-id')
+            .withThreadId(null);
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).poll('question?', options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(BotMessageType.Poll, 'question?', null, options);
+    }
+
+    @IsTest
+    private static void send_dice_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).dice();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, new ValueMap());
+    }
+
+    @IsTest
+    private static void send_diceWithOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramSendDiceOptions options = new TelegramSendDiceOptions()
+            .withEmoji('🎲')
+            .withoutNotification()
+            .withProtectedContent()
+            .asReplyToMessage('reply-message-id')
+            .withThreadId(null);
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).dice(options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, options);
+    }
+
+    @IsTest
+    private static void send_chatAction_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).chatAction('typing');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsNotCreated();
+    }
+
     private class SenderFixture {
         public BotModel bot;
         public Chat__c chat;
@@ -520,6 +820,11 @@ private class TelegramBotServiceTest {
             Assert.areEqual(text, message.Text__c);
             Assert.areEqual(mediaUrl, message.MediaUrl__c);
             Assert.areEqual(params.toJson(true), message.Parameters__c);
+        }
+
+        public void assertMessageIsNotCreated() {
+            List<ChatMessage__c> messages = [SELECT Id FROM ChatMessage__c];
+            Assert.isTrue(messages.isEmpty());
         }
 
         public void assertCalloutException(TelegramBotMethod method, Exception error, Integer statusCode) {

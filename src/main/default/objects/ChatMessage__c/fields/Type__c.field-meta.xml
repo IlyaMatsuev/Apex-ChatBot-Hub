@@ -27,9 +27,24 @@
                 <label>Video</label>
             </value>
             <value>
+                <fullName>Animation</fullName>
+                <default>false</default>
+                <label>Animation</label>
+            </value>
+            <value>
+                <fullName>Audio</fullName>
+                <default>false</default>
+                <label>Audio</label>
+            </value>
+            <value>
                 <fullName>File</fullName>
                 <default>false</default>
                 <label>File</label>
+            </value>
+            <value>
+                <fullName>GroupMedia</fullName>
+                <default>false</default>
+                <label>GroupMedia</label>
             </value>
             <value>
                 <fullName>Contact</fullName>
@@ -42,6 +57,11 @@
                 <label>Location</label>
             </value>
             <value>
+                <fullName>Venue</fullName>
+                <default>false</default>
+                <label>Venue</label>
+            </value>
+            <value>
                 <fullName>Sticker</fullName>
                 <default>false</default>
                 <label>Sticker</label>
@@ -52,9 +72,19 @@
                 <label>Url</label>
             </value>
             <value>
+                <fullName>Poll</fullName>
+                <default>false</default>
+                <label>Poll</label>
+            </value>
+            <value>
                 <fullName>Custom</fullName>
                 <default>false</default>
                 <label>Custom</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
             </value>
         </valueSetDefinition>
     </valueSet>

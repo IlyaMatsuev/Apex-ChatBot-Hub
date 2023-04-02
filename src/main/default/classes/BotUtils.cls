@@ -13,6 +13,9 @@ public class BotUtils {
     }
 
     public static Boolean isUrl(String text) {
+        if (text == null) {
+            return false;
+        }
         return Pattern.matches(URL_REGEX, text);
     }
 
