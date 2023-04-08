@@ -1,20 +1,38 @@
-public class ViberBotUserEntity extends ValueMap implements IBotUserEntity {
+/**
+ * @description Describes the sender payload received as an update from a `Viber` bot
+ */
+global class ViberBotUserEntity extends ValueMap implements IBotUserEntity {
     private static UserName fullName;
 
-    public String getId() {
+    /**
+     * @description Returns the `Viber` user id
+     * @return The `Viber` user id
+     */
+    global String getId() {
         return getString('id');
     }
 
-    public String getFirstName() {
+    /**
+     * @description Returns the `Viber` user first name
+     * @return The `Viber` user first name
+     */
+    global String getFirstName() {
         return getFullName().firstName;
     }
 
-    public String getLastName() {
+    /**
+     * @description Returns the `Viber` user last name
+     * @return The `Viber` user last name
+     */
+    global String getLastName() {
         return getFullName().lastName;
     }
 
-    // Viber doesn't have usernames so use Id's instead
-    public String getUsername() {
+    /**
+     * @description Returns the `Viber` user id since there are no usernames
+     * @return The `Viber` user id
+     */
+    global String getUsername() {
         return getId();
     }
 

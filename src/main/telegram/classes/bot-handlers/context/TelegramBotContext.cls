@@ -26,7 +26,7 @@ global class TelegramBotContext extends BotContext {
         return (TelegramBotUpdateEventEntity) updateEntity;
     }
 
-    protected override ValueMap initializeUpdateEntity(String payload) {
-        return ValueMap.fromJson(payload, TelegramBotUpdateEventEntity.class);
+    protected override Type getUpdateEntityType() {
+        return TelegramBotUpdateEventEntity.class;
     }
 }

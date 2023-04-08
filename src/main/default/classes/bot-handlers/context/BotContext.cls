@@ -10,7 +10,7 @@ global abstract class BotContext implements IBotContext {
     protected transient ValueMap updateEntity {
         get {
             if (updateEntity == null) {
-                updateEntity = initializeUpdateEntity(updatePayload);
+                updateEntity = ValueMap.fromJson(updatePayload, getUpdateEntityType());
             }
             return updateEntity;
         }
@@ -67,7 +67,7 @@ global abstract class BotContext implements IBotContext {
     }
 
     // Using virtual with exception because not possible to have protected abstract in global class
-    protected virtual ValueMap initializeUpdateEntity(String payload) {
+    protected virtual Type getUpdateEntityType() {
         throw new TypeException('Not possible to initialize the update payload.');
     }
 }
