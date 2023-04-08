@@ -1,24 +1,35 @@
-public class TelegramBotChatEntity extends ValueMap implements IBotChatEntity {
-    public String getId() {
+/**
+ * @description Describes the chat payload received as an update from a `Telegram` bot
+ */
+global class TelegramBotChatEntity extends ValueMap implements IBotChatEntity {
+    /**
+     * @description Returns the `Telegram` chat id
+     * @return The `Telegram` chat id
+     */
+    global String getId() {
         return getString('id');
     }
 
-    public String getTitle() {
+    /**
+     * @description Returns the chat title
+     * @return The chat title
+     */
+    global String getTitle() {
         if (hasValue('title')) {
             return getString('title');
         } else if (hasValue('first_name') || hasValue('last_name')) {
-            String firstName = getValueOrEmptyString(getString('first_name'));
-            String lastName = getValueOrEmptyString(getString('last_name'));
+            String firstName = hasValue('first_name') ? getString('first_name') : '';
+            String lastName = hasValue('last_name') ? getString('last_name') : '';
             return (firstName + ' ' + lastName).trim();
         }
         return getString('username');
     }
 
-    public IBotUserEntity getSender() {
-        return (IBotUserEntity) getValueMap('user');
-    }
-
-    private String getValueOrEmptyString(String value) {
-        return String.isBlank(value) ? '' : value;
+    /**
+     * @description Returns the payload of the `Telegram` user who wrote the message received in the update
+     * @return The instance of the <<IBotUserEntity>> interface
+     */
+    global TelegramBotUserEntity getSender() {
+        return (TelegramBotUserEntity) getValueMap('user', TelegramBotUserEntity.class);
     }
 }

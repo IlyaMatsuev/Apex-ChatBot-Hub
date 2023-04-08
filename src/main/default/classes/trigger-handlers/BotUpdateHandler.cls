@@ -25,15 +25,12 @@ public class BotUpdateHandler implements Triggers.IHandler {
         List<BotContext> botContexts = new List<BotContext>();
         for (BotUpdateEvent__e event : events) {
             BotModel bot = BotModel.fromJson(event.Bot__c);
-            BotSetting__mdt settings = BotSettingsProvider.get(bot.type);
 
-            IBotUpdateEventEntity updateEventEntity = (IBotUpdateEventEntity) ValueMap.fromJson(
-                event.Payload__c,
-                Type.forName(settings.BotUpdateEventEntity__c)
-            );
+            IBotContext context = serviceFactory.createBotContext(bot, event.Payload__c);
+            BotUpdateEventType updateEventType = context.getReceivedUpdate().getType();
 
-            if (shouldHandleEvent(settings, updateEventEntity)) {
-                botContexts.add(new BotContext(bot, new BotUpdateModel(updateEventEntity), serviceFactory));
+            if (shouldHandleEvent(BotSettingsProvider.get(bot.type), updateEventType)) {
+                botContexts.add((BotContext) context);
             }
         }
         return botContexts;
@@ -42,7 +39,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
     private void collectChatDetails(List<BotContext> botContexts) {
         List<SObject> chatsDetails = new List<SObject>();
         for (BotContext context : botContexts) {
-            for (SObject chatDetailEntry : getChatDetails(context)) {
+            for (SObject chatDetailEntry : getChatDetails(context.bot, context)) {
                 if (!chatsDetails.contains(chatDetailEntry)) {
                     chatsDetails.add(chatDetailEntry);
                 }
@@ -59,47 +56,51 @@ public class BotUpdateHandler implements Triggers.IHandler {
         }
     }
 
-    private Boolean shouldHandleEvent(BotSetting__mdt settings, IBotUpdateEventEntity updateEventEntity) {
+    private Boolean shouldHandleEvent(BotSetting__mdt settings, BotUpdateEventType updateEventType) {
         List<String> ignoreEventTypes = settings.EventTypesToIgnore__c?.split(';');
-        return ignoreEventTypes == null || !ignoreEventTypes.contains(updateEventEntity.getType().name());
+        return ignoreEventTypes == null || !ignoreEventTypes.contains(updateEventType.name());
     }
 
-    private List<SObject> getChatDetails(BotContext context) {
-        Chat__c chat = getChat(context.bot, context.received.chat);
-        ChatUser__c user = getChatUser(context.received.chat.sender);
-        ChatMessage__c message = getChatMessage(chat.ExternalId__c, user.ExternalId__c, context.received.message);
+    private List<SObject> getChatDetails(BotModel bot, IBotContext context) {
+        Chat__c chat = getChat(bot, context.getReceivedUpdate().getChat());
+        ChatUser__c user = getChatUser(context.getReceivedUpdate().getChat().getSender());
+        ChatMessage__c message = getChatMessage(
+            chat.ExternalId__c,
+            user.ExternalId__c,
+            context.getReceivedUpdate().getMessage()
+        );
         return new List<SObject> { chat, user, message };
     }
 
-    private Chat__c getChat(BotModel bot, BotUpdateModel.ChatModel chat) {
+    private Chat__c getChat(BotModel bot, IBotChatEntity chat) {
         return new Chat__c(
-            Name = chat.title,
+            Name = chat.getTitle(),
             Bot__c = bot.id,
-            ExternalId__c = BotUtils.generateExternalId(chat.id, bot.tokenHash)
+            ExternalId__c = BotUtils.generateExternalId(chat.getId(), bot.tokenHash)
         );
     }
 
-    private ChatUser__c getChatUser(BotUpdateModel.UserModel user) {
-        String userName = user.username;
-        if (String.isNotBlank(user.firstName) || String.isNotBlank(user.lastName)) {
-            userName = getValueOrEmptyString(user.firstName) + ' ' + getValueOrEmptyString(user.lastName);
+    private ChatUser__c getChatUser(IBotUserEntity user) {
+        String userName = user.getUsername();
+        if (String.isNotBlank(user.getFirstName()) || String.isNotBlank(user.getLastName())) {
+            userName = getValueOrEmptyString(user.getFirstName()) + ' ' + getValueOrEmptyString(user.getLastName());
         }
         return new ChatUser__c(
             Name = userName.trim(),
-            FirstName__c = user.firstName,
-            LastName__c = user.lastName,
-            Username__c = user.username,
-            ExternalId__c = user.id
+            FirstName__c = user.getFirstName(),
+            LastName__c = user.getLastName(),
+            Username__c = user.getUsername(),
+            ExternalId__c = user.getId()
         );
     }
 
-    private ChatMessage__c getChatMessage(String chatId, String userId, BotUpdateModel.MessageModel message) {
+    private ChatMessage__c getChatMessage(String chatId, String userId, IBotMessageEntity message) {
         return new ChatMessage__c(
             Chat__r = new Chat__c(ExternalId__c = chatId),
             User__r = new ChatUser__c(ExternalId__c = userId),
-            Text__c = message.text,
-            SendDate__c = message.sentAt,
-            ExternalId__c = BotUtils.generateExternalId(message.id, chatId)
+            Text__c = message.getText(),
+            SendDate__c = message.getSendDate(),
+            ExternalId__c = BotUtils.generateExternalId(message.getId(), chatId)
         );
     }
 

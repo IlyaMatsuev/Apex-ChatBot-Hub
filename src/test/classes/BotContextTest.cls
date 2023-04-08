@@ -20,7 +20,7 @@ private class BotContextTest {
         IBotService newService = context.getService(new BotModel(differentBot));
         Test.stopTest();
 
-        Assert.isTrue(newService != context.service);
+        Assert.isTrue(newService != ((IBotContext) context).getService());
         Assert.isTrue(newService instanceof BotServiceMock);
     }
 
@@ -32,7 +32,7 @@ private class BotContextTest {
         IBotService newService = context.getService(context.bot);
         Test.stopTest();
 
-        Assert.isTrue(newService == context.service);
+        Assert.isTrue(newService == ((IBotContext) context).getService());
         Assert.isTrue(newService instanceof BotServiceMock);
     }
 
@@ -48,9 +48,9 @@ private class BotContextTest {
     }
 
     @IsTest
-    private static void reply_houldReturnSender() {
-        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
-        Assert.isInstanceOfType(context.reply, BotServiceMock.SenderService.class);
+    private static void reply_shouldReturnSender() {
+        IBotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+        Assert.isInstanceOfType(context.reply(), BotServiceMock.SenderService.class);
     }
 
     /**
@@ -59,7 +59,7 @@ private class BotContextTest {
 
     @IsTest
     private static void received_telegramUpdateModelWithMessage_containsAllFields() {
-        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+        IBotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
 
         ValueMap expectedPayload = new ValueMap()
             .set(
@@ -90,7 +90,7 @@ private class BotContextTest {
                     .set('text', '/start hello   world!')
             );
 
-        Assert.areEqual(expectedPayload.toJson(), JSON.serialize(context.received));
+        Assert.areEqual(expectedPayload.toJson(), JSON.serialize(context.getReceivedUpdate()));
     }
 
     /**
@@ -99,7 +99,7 @@ private class BotContextTest {
 
     @IsTest
     private static void received_viberUpdateModelWithMessage_containsAllFields() {
-        BotContext context = createBotContext(BotType.Viber, createViberPayload());
+        IBotContext context = createBotContext(BotType.Viber, createViberPayload());
 
         ValueMap expectedPayload = new ValueMap()
             .set(
@@ -130,7 +130,7 @@ private class BotContextTest {
                     .set('text', '/start hello   world!')
             );
 
-        Assert.areEqual(expectedPayload.toJson(), JSON.serialize(context.received));
+        Assert.areEqual(expectedPayload.toJson(), JSON.serialize(context.getReceivedUpdate()));
     }
 
     private static BotContext createBotContext(BotType botType, ValueMap payload) {
@@ -146,11 +146,7 @@ private class BotContextTest {
             WHERE Type__c = :botType.name()
             LIMIT 1
         ];
-        IBotUpdateEventEntity updateEventEntity = (IBotUpdateEventEntity) ValueMap.fromJson(
-            payload.toJson(),
-            Type.forName(BotSettingsProvider.get(botType).BotUpdateEventEntity__c)
-        );
-        return new BotContext(new BotModel(bot), new BotUpdateModel(updateEventEntity), new BotServiceFactoryMock());
+        return (BotContext) new BotServiceFactoryMock().createBotContext(new BotModel(bot), payload.toJson());
     }
 
     private static ValueMap createTelegramPayload() {
@@ -216,6 +212,10 @@ private class BotContextTest {
 
         public override BotWebhookService createWebhookService(BotModel bot) {
             return null;
+        }
+
+        public override IBotContext createBotContext(BotModel bot, String updatePayload) {
+            return super.createBotContext(bot, updatePayload);
         }
     }
 }

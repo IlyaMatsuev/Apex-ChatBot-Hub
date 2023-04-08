@@ -11,12 +11,12 @@
         <value xsi:type="xsd:string">BotCalloutService</value>
     </values>
     <values>
-        <field>BotService__c</field>
-        <value xsi:type="xsd:string">TelegramBotService</value>
+        <field>BotHandlerContext__c</field>
+        <value xsi:type="xsd:string">TelegramBotContext</value>
     </values>
     <values>
-        <field>BotUpdateEventEntity__c</field>
-        <value xsi:type="xsd:string">TelegramBotUpdateEventEntity</value>
+        <field>BotService__c</field>
+        <value xsi:type="xsd:string">TelegramBotService</value>
     </values>
     <values>
         <field>BotUpdateResolver__c</field>

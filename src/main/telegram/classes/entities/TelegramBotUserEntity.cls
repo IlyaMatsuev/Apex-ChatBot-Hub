@@ -1,17 +1,36 @@
-public class TelegramBotUserEntity extends ValueMap implements IBotUserEntity {
-    public String getId() {
+/**
+ * @description Describes the sender payload received as an update from a `Telegram` bot
+ */
+global class TelegramBotUserEntity extends ValueMap implements IBotUserEntity {
+    /**
+     * @description Returns the `Telegram` user id
+     * @return The `Telegram` user id
+     */
+    global String getId() {
         return getString('id');
     }
 
-    public String getFirstName() {
+    /**
+     * @description Returns the `Telegram` user first name
+     * @return The `Telegram` user first name
+     */
+    global String getFirstName() {
         return getString('first_name');
     }
 
-    public String getLastName() {
+    /**
+     * @description Returns the `Telegram` user last name
+     * @return The `Telegram` user last name
+     */
+    global String getLastName() {
         return getString('last_name');
     }
 
-    public String getUsername() {
+    /**
+     * @description Returns the `Telegram` user username
+     * @return The `Telegram` user username
+     */
+    global String getUsername() {
         return getString('username');
     }
 }

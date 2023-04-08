@@ -27,4 +27,11 @@ global virtual class BotServiceFactory {
             new Map<String, Object> { 'bot' => bot }
         );
     }
+
+    public virtual IBotContext createBotContext(BotModel bot, String updatePayload) {
+        return (IBotContext) BotUtils.createInstance(
+            BotSettingsProvider.get(bot.type).BotHandlerContext__c,
+            new Map<String, Object> { 'bot' => bot, 'updatePayload' => updatePayload, 'factory' => this }
+        );
+    }
 }

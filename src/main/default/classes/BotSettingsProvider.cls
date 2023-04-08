@@ -13,7 +13,7 @@ public class BotSettingsProvider {
                     BotWebhookService__c,
                     BotCalloutService__c,
                     BotUpdateResolver__c,
-                    BotUpdateEventEntity__c,
+                    BotHandlerContext__c,
                     EventTypesToIgnore__c
                 FROM BotSetting__mdt
                 WHERE DeveloperName = :type.name()
@@ -35,7 +35,7 @@ public class BotSettingsProvider {
                 DeveloperName = BotType.Telegram.name(),
                 ApiUrl__c = 'https://tg.bot-api.org/bot',
                 BotService__c = 'TelegramBotService',
-                BotUpdateEventEntity__c = 'TelegramBotUpdateEventEntity',
+                BotHandlerContext__c = 'TelegramBotContext',
                 BotUpdateResolver__c = 'TelegramBotUpdateResolver',
                 BotWebhookService__c = 'TelegramBotWebhookService',
                 BotCalloutService__c = 'BotCalloutService'
@@ -47,7 +47,7 @@ public class BotSettingsProvider {
                 DeveloperName = BotType.Viber.name(),
                 ApiUrl__c = 'https://vb.bot-api.org/bot',
                 BotService__c = 'ViberBotService',
-                BotUpdateEventEntity__c = 'ViberBotUpdateEventEntity',
+                BotHandlerContext__c = 'ViberBotContext',
                 BotUpdateResolver__c = 'ViberBotUpdateResolver',
                 BotWebhookService__c = 'ViberBotWebhookService',
                 EventTypesToIgnore__c = 'webhook',
