@@ -28,12 +28,6 @@ global interface IBotContext {
     IBotService getService(BotModel bot);
 
     /**
-     * @description Returns the payload received as the update from a bot
-     * @return The instance of the <<IBotUpdateEvent>> interface
-     */
-    IBotUpdateEvent getReceivedUpdate();
-
-    /**
      * @description Upserts a record asynchronously. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
      * @param record SObject record to be upserted
      */

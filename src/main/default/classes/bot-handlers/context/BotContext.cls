@@ -6,12 +6,15 @@ global abstract class BotContext implements IBotContext {
     private final String updatePayload;
     private final BotServiceFactory factory;
 
-    protected transient ValueMap updateEntity {
+    protected transient IBotUpdateEvent updateEvent {
         get {
-            if (updateEntity == null) {
-                updateEntity = ValueMap.fromJson(updatePayload, getUpdateEntityType());
+            if (updateEvent == null) {
+                updateEvent = (IBotUpdateEvent) ValueMap.fromJson(
+                    updatePayload,
+                    BotSettingsProvider.getClassType(bot.type, BotSetting__mdt.BotUpdateEvent__c)
+                );
             }
-            return updateEntity;
+            return updateEvent;
         }
         private set;
     }
@@ -68,10 +71,5 @@ global abstract class BotContext implements IBotContext {
      */
     global void save(List<SObject> records, String externalIdField) {
         BotUtils.saveAsync(records, externalIdField);
-    }
-
-    // Using virtual with exception because not possible to have protected abstract in global class
-    protected virtual Type getUpdateEntityType() {
-        throw new TypeException('Not possible to initialize the update payload.');
     }
 }

@@ -1,5 +1,5 @@
 /**
- * @description Represents the context with variables and entities for handling the incoming updates for `Viber` bots
+ * @description Represents the context with variables and methods for handling the incoming updates for `Viber` bots
  */
 global class ViberBotContext extends BotContext {
     /**
@@ -7,7 +7,7 @@ global class ViberBotContext extends BotContext {
      * @return The instance of the <<ViberBotSenderService>> interface
      */
     global ViberBotSenderService reply() {
-        return getService().send(getReceivedUpdate().getChat().getId());
+        return getService().send(updateEvent.getChat().getId());
     }
 
     /**
@@ -16,17 +16,5 @@ global class ViberBotContext extends BotContext {
      */
     global ViberBotService getService() {
         return (ViberBotService) service;
-    }
-
-    /**
-     * @description Returns the payload received as the update from the `Viber` bot
-     * @return The instance of the <<ViberBotUpdateEvent>> class
-     */
-    global ViberBotUpdateEvent getReceivedUpdate() {
-        return (ViberBotUpdateEvent) updateEntity;
-    }
-
-    protected override Type getUpdateEntityType() {
-        return ViberBotUpdateEvent.class;
     }
 }

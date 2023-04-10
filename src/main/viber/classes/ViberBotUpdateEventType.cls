@@ -8,6 +8,14 @@ global class ViberBotUpdateEventType extends BotUpdateEventType {
      */
     global static final ViberBotUpdateEventType WebhookCallback = new ViberBotUpdateEventType('webhook');
     /**
+     * @descpirtion The `Viber` subscribe event. Received when a new user allows messages from the bot
+     */
+    global static final ViberBotUpdateEventType Subscribed = new ViberBotUpdateEventType('subscribed');
+    /**
+     * @descpirtion The `Viber` unsubscribe event. Received when a new user forbids messages from the bot
+     */
+    global static final ViberBotUpdateEventType Unsubscribed = new ViberBotUpdateEventType('unsubscribed');
+    /**
      * @descpirtion The `Viber` message event. Received when a user sends a message to the bot
      */
     global static final ViberBotUpdateEventType Message = new ViberBotUpdateEventType('message');
@@ -19,6 +27,10 @@ global class ViberBotUpdateEventType extends BotUpdateEventType {
      * @descpirtion The `Viber` message event. Received when a message sent by the bot is seen by the user
      */
     global static final ViberBotUpdateEventType Seen = new ViberBotUpdateEventType('seen');
+    /**
+     * @descpirtion The `Viber` fail event. Received when a sent message is failed because of some client's validations
+     */
+    global static final ViberBotUpdateEventType Failed = new ViberBotUpdateEventType('failed');
 
     private ViberBotUpdateEventType(String value) {
         super(value, ViberBotUpdateEventType.class);

@@ -19,6 +19,10 @@
         <value xsi:type="xsd:string">ViberBotService</value>
     </values>
     <values>
+        <field>BotUpdateEvent__c</field>
+        <value xsi:type="xsd:string">ViberBotUpdateEvent</value>
+    </values>
+    <values>
         <field>BotUpdateResolver__c</field>
         <value xsi:type="xsd:string">ViberBotUpdateResolver</value>
     </values>

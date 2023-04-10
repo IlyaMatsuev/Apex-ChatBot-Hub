@@ -19,6 +19,10 @@
         <value xsi:type="xsd:string">TelegramBotService</value>
     </values>
     <values>
+        <field>BotUpdateEvent__c</field>
+        <value xsi:type="xsd:string">TelegramBotUpdateEvent</value>
+    </values>
+    <values>
         <field>BotUpdateResolver__c</field>
         <value xsi:type="xsd:string">TelegramBotUpdateResolver</value>
     </values>

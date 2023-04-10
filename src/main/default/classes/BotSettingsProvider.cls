@@ -13,6 +13,7 @@ public class BotSettingsProvider {
                     BotWebhookService__c,
                     BotCalloutService__c,
                     BotUpdateResolver__c,
+                    BotUpdateEvent__c,
                     BotHandlerContext__c,
                     EventTypesToIgnore__c
                 FROM BotSetting__mdt
@@ -27,6 +28,10 @@ public class BotSettingsProvider {
         return settings.get(type);
     }
 
+    public static Type getClassType(BotType botType, SObjectField field) {
+        return Type.forName(get(botType).get(field).toString());
+    }
+
     @TestVisible
     private static void mock() {
         settings.put(
@@ -35,6 +40,7 @@ public class BotSettingsProvider {
                 DeveloperName = BotType.Telegram.name(),
                 ApiUrl__c = 'https://tg.bot-api.org/bot',
                 BotService__c = 'TelegramBotService',
+                BotUpdateEvent__c = 'TelegramBotUpdateEvent',
                 BotHandlerContext__c = 'TelegramBotContext',
                 BotUpdateResolver__c = 'TelegramBotUpdateResolver',
                 BotWebhookService__c = 'TelegramBotWebhookService',
@@ -47,6 +53,7 @@ public class BotSettingsProvider {
                 DeveloperName = BotType.Viber.name(),
                 ApiUrl__c = 'https://vb.bot-api.org/bot',
                 BotService__c = 'ViberBotService',
+                BotUpdateEvent__c = 'ViberBotUpdateEvent',
                 BotHandlerContext__c = 'ViberBotContext',
                 BotUpdateResolver__c = 'ViberBotUpdateResolver',
                 BotWebhookService__c = 'ViberBotWebhookService',
