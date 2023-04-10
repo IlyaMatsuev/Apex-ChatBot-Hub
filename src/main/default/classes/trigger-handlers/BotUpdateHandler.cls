@@ -74,7 +74,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
         return new List<SObject> { chat, user, message };
     }
 
-    private Chat__c getChat(BotModel bot, IBotChatEntity chat) {
+    private Chat__c getChat(BotModel bot, IBotChat chat) {
         return new Chat__c(
             Name = chat.getTitle(),
             Bot__c = bot.id,
@@ -82,7 +82,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
         );
     }
 
-    private ChatUser__c getChatUser(IBotUserEntity user) {
+    private ChatUser__c getChatUser(IBotUser user) {
         String userName = user.getUsername();
         if (String.isNotBlank(user.getFirstName()) || String.isNotBlank(user.getLastName())) {
             userName = getValueOrEmptyString(user.getFirstName()) + ' ' + getValueOrEmptyString(user.getLastName());
@@ -96,7 +96,7 @@ public class BotUpdateHandler implements Triggers.IHandler {
         );
     }
 
-    private ChatMessage__c getChatMessage(String chatId, String userId, IBotMessageEntity message) {
+    private ChatMessage__c getChatMessage(String chatId, String userId, IBotMessage message) {
         return new ChatMessage__c(
             Chat__r = new Chat__c(ExternalId__c = chatId),
             User__r = new ChatUser__c(ExternalId__c = userId),

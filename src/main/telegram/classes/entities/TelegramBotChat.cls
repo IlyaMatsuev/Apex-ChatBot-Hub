@@ -1,7 +1,7 @@
 /**
  * @description Describes the chat payload received as an update from a `Telegram` bot
  */
-global class TelegramBotChatEntity extends ValueMap implements IBotChatEntity {
+global class TelegramBotChat extends ValueMap implements IBotChat {
     /**
      * @description Returns the `Telegram` chat id
      * @return The `Telegram` chat id
@@ -27,9 +27,9 @@ global class TelegramBotChatEntity extends ValueMap implements IBotChatEntity {
 
     /**
      * @description Returns the payload of the `Telegram` user who wrote the message received in the update
-     * @return The instance of the <<IBotUserEntity>> interface
+     * @return The instance of the <<TelegramBotUser>> interface
      */
-    global TelegramBotUserEntity getSender() {
-        return (TelegramBotUserEntity) getValueMap('user', TelegramBotUserEntity.class);
+    global TelegramBotUser getSender() {
+        return (TelegramBotUser) getValueMap('user', TelegramBotUser.class);
     }
 }

@@ -1,7 +1,7 @@
 /**
  * @description Describes the message payload received as an update from a `Telegram` bot
  */
-global class TelegramBotMessageEntity extends ValueMap implements IBotMessageEntity {
+global class TelegramBotMessage extends ValueMap implements IBotMessage {
     /**
      * @description Returns the `Telegram` message id
      * @return The `Telegram` message id

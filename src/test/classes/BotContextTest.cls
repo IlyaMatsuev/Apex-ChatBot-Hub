@@ -49,26 +49,26 @@ private class BotContextTest {
     private static void received_telegramUpdateModelWithMessage_containsAllFields() {
         IBotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
 
-        IBotUpdateEventEntity receivedUpdate = context.getReceivedUpdate();
+        IBotUpdateEvent receivedUpdate = context.getReceivedUpdate();
 
-        Assert.isInstanceOfType(receivedUpdate, TelegramBotUpdateEventEntity.class);
+        Assert.isInstanceOfType(receivedUpdate, TelegramBotUpdateEvent.class);
 
-        TelegramBotUpdateEventEntity receivedTgUpdate = (TelegramBotUpdateEventEntity) receivedUpdate;
+        TelegramBotUpdateEvent receivedTgUpdate = (TelegramBotUpdateEvent) receivedUpdate;
 
         Assert.areEqual(TelegramBotUpdateEventType.Message, receivedTgUpdate.getType());
 
-        TelegramBotMessageEntity messageUpdate = receivedTgUpdate.getMessage();
+        TelegramBotMessage messageUpdate = receivedTgUpdate.getMessage();
 
         Assert.areEqual('223123123', messageUpdate.getId());
         Assert.areEqual('/start hello   world!', messageUpdate.getText());
         Assert.areEqual(DateTime.newInstanceGmt(2022, 1, 1, 8, 0, 0), messageUpdate.getSendDate());
 
-        TelegramBotChatEntity chatUpdate = receivedTgUpdate.getChat();
+        TelegramBotChat chatUpdate = receivedTgUpdate.getChat();
 
         Assert.areEqual('876541222', chatUpdate.getId());
         Assert.areEqual('matsuev', chatUpdate.getTitle());
 
-        TelegramBotUserEntity userUpdate = chatUpdate.getSender();
+        TelegramBotUser userUpdate = chatUpdate.getSender();
 
         Assert.areEqual('876541222', userUpdate.getId());
         Assert.isNull(userUpdate.getFirstName());
@@ -84,26 +84,26 @@ private class BotContextTest {
     private static void received_viberUpdateModelWithMessage_containsAllFields() {
         IBotContext context = createBotContext(BotType.Viber, createViberPayload());
 
-        IBotUpdateEventEntity receivedUpdate = context.getReceivedUpdate();
+        IBotUpdateEvent receivedUpdate = context.getReceivedUpdate();
 
-        Assert.isInstanceOfType(receivedUpdate, ViberBotUpdateEventEntity.class);
+        Assert.isInstanceOfType(receivedUpdate, ViberBotUpdateEvent.class);
 
-        ViberBotUpdateEventEntity receivedVbUpdate = (ViberBotUpdateEventEntity) receivedUpdate;
+        ViberBotUpdateEvent receivedVbUpdate = (ViberBotUpdateEvent) receivedUpdate;
 
         Assert.areEqual(ViberBotUpdateEventType.Message, receivedVbUpdate.getType());
 
-        ViberBotMessageEntity messageUpdate = receivedVbUpdate.getMessage();
+        ViberBotMessage messageUpdate = receivedVbUpdate.getMessage();
 
         Assert.areEqual('4912661846655238145', messageUpdate.getId());
         Assert.areEqual('/start hello   world!', messageUpdate.getText());
         Assert.areEqual(DateTime.newInstance(2022, 1, 1), messageUpdate.getSendDate());
 
-        ViberBotChatEntity chatUpdate = receivedVbUpdate.getChat();
+        ViberBotChat chatUpdate = receivedVbUpdate.getChat();
 
         Assert.areEqual('01234567890A=', chatUpdate.getId());
         Assert.areEqual('John McClane', chatUpdate.getTitle());
 
-        ViberBotUserEntity userUpdate = chatUpdate.getSender();
+        ViberBotUser userUpdate = chatUpdate.getSender();
 
         Assert.areEqual('01234567890A=', userUpdate.getId());
         Assert.areEqual('John', userUpdate.getFirstName());

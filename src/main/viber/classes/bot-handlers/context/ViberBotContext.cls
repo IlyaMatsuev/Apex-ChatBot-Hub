@@ -20,13 +20,13 @@ global class ViberBotContext extends BotContext {
 
     /**
      * @description Returns the payload received as the update from the `Viber` bot
-     * @return The instance of the <<ViberBotUpdateEventEntity>> class
+     * @return The instance of the <<ViberBotUpdateEvent>> class
      */
-    global ViberBotUpdateEventEntity getReceivedUpdate() {
-        return (ViberBotUpdateEventEntity) updateEntity;
+    global ViberBotUpdateEvent getReceivedUpdate() {
+        return (ViberBotUpdateEvent) updateEntity;
     }
 
     protected override Type getUpdateEntityType() {
-        return ViberBotUpdateEventEntity.class;
+        return ViberBotUpdateEvent.class;
     }
 }

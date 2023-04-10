@@ -20,13 +20,13 @@ global class TelegramBotContext extends BotContext {
 
     /**
      * @description Returns the payload received as the update from the `Telegram` bot
-     * @return The instance of the <<TelegramBotUpdateEventEntity>> class
+     * @return The instance of the <<TelegramBotUpdateEvent>> class
      */
-    global TelegramBotUpdateEventEntity getReceivedUpdate() {
-        return (TelegramBotUpdateEventEntity) updateEntity;
+    global TelegramBotUpdateEvent getReceivedUpdate() {
+        return (TelegramBotUpdateEvent) updateEntity;
     }
 
     protected override Type getUpdateEntityType() {
-        return TelegramBotUpdateEventEntity.class;
+        return TelegramBotUpdateEvent.class;
     }
 }

@@ -1,7 +1,7 @@
 /**
  * @description Describes the payload received as an update from a `Viber` bot
  */
-global class ViberBotUpdateEventEntity extends ValueMap implements IBotUpdateEventEntity {
+global class ViberBotUpdateEvent extends ValueMap implements IBotUpdateEvent {
     /**
      * @description Returns the type of the received `Viber` update
      * @return The instance of the <<ViberBotUpdateEventType>> enum
@@ -12,20 +12,20 @@ global class ViberBotUpdateEventEntity extends ValueMap implements IBotUpdateEve
 
     /**
      * @description Returns the `Viber` message payload received in the update. Can be null
-     * @return The instance of the <<ViberBotMessageEntity>> interface
+     * @return The instance of the <<ViberBotMessage>> interface
      */
-    global ViberBotMessageEntity getMessage() {
-        ValueMap message = getValueMap('message', ViberBotMessageEntity.class);
-        // Set timestamp and message id to the message payload so that they can be accessed from IBotMessageEntity
+    global ViberBotMessage getMessage() {
+        ValueMap message = getValueMap('message', ViberBotMessage.class);
+        // Set timestamp and message id to the message payload so that they can be accessed from IBotMessage
         message.set('timestamp', getLong('timestamp')).set('message_id', getString('message_token'));
-        return (ViberBotMessageEntity) message;
+        return (ViberBotMessage) message;
     }
 
     /**
      * @description Returns the `Viber` chat payload received in the update
-     * @return The instance of the <<ViberBotChatEntity>> interface
+     * @return The instance of the <<ViberBotChat>> interface
      */
-    global ViberBotChatEntity getChat() {
-        return (ViberBotChatEntity) getValueMap('sender', ViberBotChatEntity.class);
+    global ViberBotChat getChat() {
+        return (ViberBotChat) getValueMap('sender', ViberBotChat.class);
     }
 }

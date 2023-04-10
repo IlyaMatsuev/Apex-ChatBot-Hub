@@ -1,7 +1,7 @@
 /**
  * @description Describes the message payload received as an update from a bot
  */
-global interface IBotMessageEntity {
+global interface IBotMessage {
     /**
      * @description Returns the message external id
      * @return The message external id

@@ -1,7 +1,7 @@
 /**
  * @description Describes the message payload received as an update from a `Viber` bot
  */
-global class ViberBotMessageEntity extends ValueMap implements IBotMessageEntity {
+global class ViberBotMessage extends ValueMap implements IBotMessage {
     /**
      * @description Returns the `Viber` message id
      * @return The `Viber` message id

@@ -29,9 +29,9 @@ global interface IBotContext {
 
     /**
      * @description Returns the payload received as the update from a bot
-     * @return The instance of the <<IBotUpdateEventEntity>> interface
+     * @return The instance of the <<IBotUpdateEvent>> interface
      */
-    IBotUpdateEventEntity getReceivedUpdate();
+    IBotUpdateEvent getReceivedUpdate();
 
     /**
      * @description Upserts a record asynchronously. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution

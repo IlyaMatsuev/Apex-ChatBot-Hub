@@ -1,7 +1,7 @@
 /**
  * @description Describes the chat payload received as an update from a bot
  */
-global interface IBotChatEntity {
+global interface IBotChat {
     /**
      * @description Returns the chat external id
      * @return The chat external id
@@ -16,7 +16,7 @@ global interface IBotChatEntity {
 
     /**
      * @description Returns the payload of the user who wrote the message received in the update
-     * @return The instance of the <<IBotUserEntity>> interface
+     * @return The instance of the <<IBotUser>> interface
      */
-    IBotUserEntity getSender();
+    IBotUser getSender();
 }

@@ -1,7 +1,7 @@
 /**
  * @description Describes the payload received as an update from a bot
  */
-global interface IBotUpdateEventEntity {
+global interface IBotUpdateEvent {
     /**
      * @description Returns the type of the received update
      * @return The instance of the <<BotUpdateEventType>> enum
@@ -10,13 +10,13 @@ global interface IBotUpdateEventEntity {
 
     /**
      * @description Returns the message payload received in the update. Can be null
-     * @return The instance of the <<IBotMessageEntity>> interface
+     * @return The instance of the <<IBotMessage>> interface
      */
-    IBotMessageEntity getMessage();
+    IBotMessage getMessage();
 
     /**
      * @description Returns the sender payload received in the update
-     * @return The instance of the <<IBotChatEntity>> interface
+     * @return The instance of the <<IBotChat>> interface
      */
-    IBotChatEntity getChat();
+    IBotChat getChat();
 }

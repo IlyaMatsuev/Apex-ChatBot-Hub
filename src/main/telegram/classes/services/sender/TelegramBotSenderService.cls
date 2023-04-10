@@ -501,10 +501,7 @@ global class TelegramBotSenderService implements IBotSenderService {
         }
 
         ValueMap response = calloutService.call(method, payload);
-        TelegramBotMessageEntity message = (TelegramBotMessageEntity) response.getValueMap(
-            'result',
-            TelegramBotMessageEntity.class
-        );
+        TelegramBotMessage message = (TelegramBotMessage) response.getValueMap('result', TelegramBotMessage.class);
 
         if (callbackParams != null) {
             callback.execute(callbackParams.set('messageId', message.getId()).set('keyboard', replyKeyboard, true));
