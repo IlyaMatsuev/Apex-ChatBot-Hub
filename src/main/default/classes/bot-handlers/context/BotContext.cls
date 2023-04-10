@@ -2,10 +2,9 @@
  * @description Represents the context with all necessary variables and entities for properly handling the incoming updates for bot
  */
 global abstract class BotContext implements IBotContext {
-    /**
-     * @description The <<BotModel>> instance associated with the current update
-     */
-    global final BotModel bot;
+    protected final BotModel bot;
+    private final String updatePayload;
+    private final BotServiceFactory factory;
 
     protected transient ValueMap updateEntity {
         get {
@@ -27,10 +26,15 @@ global abstract class BotContext implements IBotContext {
         private set;
     }
 
-    private final String updatePayload;
-    private final BotServiceFactory factory;
-
     protected BotContext() {}
+
+    /**
+     * @description Returns the bot model related to the received update
+     * @return The instance of the <<BotModel>> class
+     */
+    global BotModel getBot() {
+        return bot;
+    }
 
     /**
      * @description Creates a bot service instance not related to the current context

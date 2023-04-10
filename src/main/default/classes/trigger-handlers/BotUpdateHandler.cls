@@ -11,18 +11,18 @@ public class BotUpdateHandler implements Triggers.IHandler {
     }
 
     public void handle(Triggers.Context context) {
-        List<BotContext> botContexts = createBotContexts((List<BotUpdateEvent__e>) context.props.newList);
+        List<IBotContext> botContexts = createBotContexts((List<BotUpdateEvent__e>) context.props.newList);
 
         collectChatDetails(botContexts);
 
-        for (BotContext botContext : botContexts) {
+        for (IBotContext botContext : botContexts) {
             handleUpdateEvent(botContext);
         }
     }
 
-    private List<BotContext> createBotContexts(List<BotUpdateEvent__e> events) {
+    private List<IBotContext> createBotContexts(List<BotUpdateEvent__e> events) {
         // The loop is needed when a user sends several messages at the same time
-        List<BotContext> botContexts = new List<BotContext>();
+        List<IBotContext> botContexts = new List<IBotContext>();
         for (BotUpdateEvent__e event : events) {
             BotModel bot = BotModel.fromJson(event.Bot__c);
 
@@ -30,16 +30,16 @@ public class BotUpdateHandler implements Triggers.IHandler {
             BotUpdateEventType updateEventType = context.getReceivedUpdate().getType();
 
             if (shouldHandleEvent(BotSettingsProvider.get(bot.type), updateEventType)) {
-                botContexts.add((BotContext) context);
+                botContexts.add(context);
             }
         }
         return botContexts;
     }
 
-    private void collectChatDetails(List<BotContext> botContexts) {
+    private void collectChatDetails(List<IBotContext> botContexts) {
         List<SObject> chatsDetails = new List<SObject>();
-        for (BotContext context : botContexts) {
-            for (SObject chatDetailEntry : getChatDetails(context.bot, context)) {
+        for (IBotContext context : botContexts) {
+            for (SObject chatDetailEntry : getChatDetails(context)) {
                 if (!chatsDetails.contains(chatDetailEntry)) {
                     chatsDetails.add(chatDetailEntry);
                 }
@@ -48,11 +48,13 @@ public class BotUpdateHandler implements Triggers.IHandler {
         BotUtils.saveAsync(chatsDetails, 'ExternalId__c');
     }
 
-    private void handleUpdateEvent(BotContext context) {
+    private void handleUpdateEvent(IBotContext context) {
+        BotModel bot;
         try {
-            context.bot.handler.handle(context);
+            bot = context.getBot();
+            bot.handler.handle(context);
         } catch (Exception error) {
-            BotErrorLogger.log(context.bot.id, error);
+            BotErrorLogger.log(bot?.id, error);
         }
     }
 
@@ -61,8 +63,8 @@ public class BotUpdateHandler implements Triggers.IHandler {
         return ignoreEventTypes == null || !ignoreEventTypes.contains(updateEventType.name());
     }
 
-    private List<SObject> getChatDetails(BotModel bot, IBotContext context) {
-        Chat__c chat = getChat(bot, context.getReceivedUpdate().getChat());
+    private List<SObject> getChatDetails(IBotContext context) {
+        Chat__c chat = getChat(context.getBot(), context.getReceivedUpdate().getChat());
         ChatUser__c user = getChatUser(context.getReceivedUpdate().getChat().getSender());
         ChatMessage__c message = getChatMessage(
             chat.ExternalId__c,
