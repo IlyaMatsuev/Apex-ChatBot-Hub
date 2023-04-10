@@ -46,7 +46,7 @@ private class BotUpdateEventTriggerTest {
         Assert.areEqual('223123123:876541222', messages.get(0).ExternalId__c);
         Assert.areEqual(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
 
-        List<BotContext> contexts = BotHandlerMock.executedContexts;
+        List<IBotContext> contexts = BotHandlerMock.executedContexts;
         Assert.areEqual(1, contexts.size());
     }
 
@@ -146,7 +146,7 @@ private class BotUpdateEventTriggerTest {
         Assert.areEqual('4912661846655238145:01234567890A=', messages.get(0).ExternalId__c);
         Assert.areEqual(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
 
-        List<BotContext> contexts = BotHandlerMock.executedContexts;
+        List<IBotContext> contexts = BotHandlerMock.executedContexts;
         Assert.areEqual(1, contexts.size());
     }
 
