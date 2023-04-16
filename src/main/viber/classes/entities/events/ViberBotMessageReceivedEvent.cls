@@ -3,7 +3,7 @@ global class ViberBotMessageReceivedEvent extends ViberBotMessageEvent {
     global final ViberBotUser sender;
     global final ViberBotMessage message;
 
-    public ViberBotMessageReceivedEvent(ViberBotUpdateEvent event) {
+    global ViberBotMessageReceivedEvent(ViberBotUpdateEvent event) {
         super(event);
         this.sender = (ViberBotUser) event.getValueMap('sender', ViberBotUser.class);
         this.userId = this.sender.getId();

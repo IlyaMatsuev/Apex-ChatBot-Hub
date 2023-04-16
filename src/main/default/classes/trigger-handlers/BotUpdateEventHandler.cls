@@ -20,6 +20,7 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         System.enqueueJob(new UpdateEventExecutor(updateEvents));
     }
 
+    // TODO: Make this handler able to handle not only message events
     private List<UpdateEventWrapper> createUpdateEventWrappers(List<BotUpdateEvent__e> events) {
         // The loop is needed when a user sends several messages at the same time
         List<UpdateEventWrapper> updateEvents = new List<UpdateEventWrapper>();
