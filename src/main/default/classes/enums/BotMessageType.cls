@@ -81,4 +81,14 @@ global class BotMessageType extends BotEnumType {
     public BotMessageType(String value) {
         super(value, BotMessageType.class);
     }
+
+    /**
+     * @description Attempts to convert a string value to the <<BotMessageType>> enum
+     * @param value The string value to be converted
+     * @return The instance of the <<BotMessageType>> enum
+     * @throws NoSuchElementException If the string value cannot be converted to the enum
+     */
+    global static BotMessageType valueOf(String value) {
+        return (BotMessageType) BotEnumType.valueOf(value, BotMessageType.class);
+    }
 }
