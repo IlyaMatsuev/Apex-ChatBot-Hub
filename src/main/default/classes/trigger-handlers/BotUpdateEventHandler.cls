@@ -1,12 +1,12 @@
-public class BotUpdateHandler implements Triggers.IHandler {
+public class BotUpdateEventHandler implements Triggers.IHandler {
     private final BotServiceFactory serviceFactory;
 
-    public BotUpdateHandler() {
+    public BotUpdateEventHandler() {
         this(new BotServiceFactory());
     }
 
     @TestVisible
-    private BotUpdateHandler(BotServiceFactory serviceFactory) {
+    private BotUpdateEventHandler(BotServiceFactory serviceFactory) {
         this.serviceFactory = serviceFactory;
     }
 
@@ -15,11 +15,9 @@ public class BotUpdateHandler implements Triggers.IHandler {
             (List<BotUpdateEvent__e>) context.props.newList
         );
 
-        collectChatDetails(updateEvents);
+        saveChatDetails(updateEvents);
 
-        for (UpdateEventWrapper updateEvent : updateEvents) {
-            handleUpdateEvent(updateEvent);
-        }
+        System.enqueueJob(new UpdateEventExecutor(updateEvents));
     }
 
     private List<UpdateEventWrapper> createUpdateEventWrappers(List<BotUpdateEvent__e> events) {
@@ -41,43 +39,37 @@ public class BotUpdateHandler implements Triggers.IHandler {
         return updateEvents;
     }
 
-    private void collectChatDetails(List<UpdateEventWrapper> updateEvents) {
-        List<SObject> chatsDetails = new List<SObject>();
+    private void saveChatDetails(List<UpdateEventWrapper> updateEvents) {
+        List<Chat__c> chats = new List<Chat__c>();
+        List<ChatUser__c> chatUsers = new List<ChatUser__c>();
+        List<ChatMessage__c> chatMessages = new List<ChatMessage__c>();
         for (UpdateEventWrapper updateEvent : updateEvents) {
-            for (SObject chatDetailEntry : getChatDetails(updateEvent.context)) {
-                if (!chatsDetails.contains(chatDetailEntry)) {
-                    chatsDetails.add(chatDetailEntry);
-                }
+            Chat__c chat = getChat(updateEvent.context.getBot(), updateEvent.updateEvent.getChat());
+            ChatUser__c user = getChatUser(updateEvent.updateEvent.getChat().getSender());
+            ChatMessage__c message = getChatMessage(
+                chat.ExternalId__c,
+                user.ExternalId__c,
+                updateEvent.updateEvent.getMessage()
+            );
+            if (!chats.contains(chat)) {
+                chats.add(chat);
+            }
+            if (!chatUsers.contains(user)) {
+                chatUsers.add(user);
+            }
+            if (!chatMessages.contains(message)) {
+                chatMessages.add(message);
             }
         }
-        // TODO: Can I save these records syncroniusly?
-        BotUtils.saveAsync(chatsDetails, 'ExternalId__c');
-    }
 
-    private void handleUpdateEvent(UpdateEventWrapper updateEvent) {
-        BotModel bot;
-        try {
-            bot = updateEvent.context.getBot();
-            bot.handler.handle(updateEvent.context, updateEvent.updateEvent);
-        } catch (Exception error) {
-            BotErrorLogger.log(bot?.id, error);
-        }
+        Database.upsert(chats, Chat__c.ExternalId__c);
+        Database.upsert(chatUsers, ChatUser__c.ExternalId__c);
+        Database.upsert(chatMessages, ChatMessage__c.ExternalId__c);
     }
 
     private Boolean shouldHandleEvent(BotSetting__mdt settings, BotUpdateEventType updateEventType) {
         List<String> ignoreEventTypes = settings.EventTypesToIgnore__c?.split(';');
         return ignoreEventTypes == null || !ignoreEventTypes.contains(updateEventType.name());
-    }
-
-    private List<SObject> getChatDetails(IBotContext context) {
-        Chat__c chat = getChat(context.getBot(), context.getReceivedUpdate().getChat());
-        ChatUser__c user = getChatUser(context.getReceivedUpdate().getChat().getSender());
-        ChatMessage__c message = getChatMessage(
-            chat.ExternalId__c,
-            user.ExternalId__c,
-            context.getReceivedUpdate().getMessage()
-        );
-        return new List<SObject> { chat, user, message };
     }
 
     private Chat__c getChat(BotModel bot, IBotChat chat) {
@@ -123,6 +115,30 @@ public class BotUpdateHandler implements Triggers.IHandler {
         private UpdateEventWrapper(IBotContext context, IBotUpdateEvent updateEvent) {
             this.context = context;
             this.updateEvent = updateEvent;
+        }
+    }
+
+    private class UpdateEventExecutor implements Queueable, Database.AllowsCallouts {
+        private final List<UpdateEventWrapper> updateEvents;
+
+        public UpdateEventExecutor(List<UpdateEventWrapper> updateEvents) {
+            this.updateEvents = updateEvents;
+        }
+
+        public void execute(QueueableContext ctx) {
+            for (UpdateEventWrapper updateEvent : updateEvents) {
+                handleUpdateEvent(updateEvent);
+            }
+        }
+
+        private void handleUpdateEvent(UpdateEventWrapper updateEvent) {
+            BotModel bot;
+            try {
+                bot = updateEvent.context.getBot();
+                bot.handler.handle(updateEvent.context, updateEvent.updateEvent);
+            } catch (Exception error) {
+                BotErrorLogger.log(bot?.id, error);
+            }
         }
     }
 }
