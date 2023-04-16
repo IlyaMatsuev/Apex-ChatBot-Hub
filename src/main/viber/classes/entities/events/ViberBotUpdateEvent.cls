@@ -26,6 +26,7 @@ global class ViberBotUpdateEvent extends ValueMap implements IBotUpdateEvent {
      * @return The instance of the <<ViberBotChat>> interface
      */
     global ViberBotChat getChat() {
-        return (ViberBotChat) getValueMap('sender', ViberBotChat.class);
+        String chatField = has('user') ? 'user' : 'sender';
+        return (ViberBotChat) getValueMap(chatField, ViberBotChat.class);
     }
 }
