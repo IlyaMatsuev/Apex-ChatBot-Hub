@@ -1,7 +1,7 @@
 /**
  * @description The builder-like class that represents parameters for sending a custom carousel/keyboard to the user via the `Viber` bot service. The source: https://developers.viber.com/docs/tools/keyboards/#general-keyboard-parameters
  */
-global class ViberSendKeyboardOptions extends ValueMap {
+global class ViberSendKeyboardOptions extends BotJsonPayload {
     /**
      * @description The list of buttons to be shown to the receiver
      */
@@ -109,7 +109,7 @@ global class ViberSendKeyboardOptions extends ValueMap {
     /**
      * @description The wrapper class representing a button in the `Viber` carousel/keyboard. The source: https://developers.viber.com/docs/tools/keyboards/#buttons-parameters
      */
-    global class Button extends ValueMap {
+    global class Button extends BotJsonPayload {
         private String actionType { set { set('ActionType', value); } }
         private String actionBody { set { set('ActionBody', value); } }
 
@@ -235,7 +235,7 @@ global class ViberSendKeyboardOptions extends ValueMap {
          */
         global Button asOpenMap(Decimal latitude, Decimal longitude) {
             this.actionType = 'open-map';
-            set('Map', new ValueMap().set('Latitude', latitude).set('Longitude', longitude));
+            set('Map', new BotJsonPayload().set('Latitude', latitude).set('Longitude', longitude));
             return this;
         }
 
@@ -328,7 +328,7 @@ global class ViberSendKeyboardOptions extends ValueMap {
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setBorders(Integer borderWidth, Integer cornerRadius, String borderColor) {
-            ValueMap frame = new ValueMap()
+            BotJsonPayload frame = new BotJsonPayload()
                 .set('BorderWidth', borderWidth, true)
                 .set('CornerRadius', cornerRadius, true)
                 .set('BorderColor', borderColor, true);
@@ -448,7 +448,7 @@ global class ViberSendKeyboardOptions extends ValueMap {
     /**
      * @description The wrapper class representing configurations for the internal browser opening for `open-url` button action type
      */
-    global class ButtonInternalBrowser extends ValueMap {
+    global class ButtonInternalBrowser extends BotJsonPayload {
         /**
          * @description Sets properties for the internal browser action button
          * @param action The action button type in the internal's browser navigation bar.
@@ -510,7 +510,7 @@ global class ViberSendKeyboardOptions extends ValueMap {
     /**
      * @description The wrapper class representing configurations for the internal media player
      */
-    global class ButtonMediaPlayer extends ValueMap {
+    global class ButtonMediaPlayer extends BotJsonPayload {
         /**
          * @description Creates an instance of a media player configurations
          * @param title The media player's title (first line)

@@ -9,7 +9,7 @@ public abstract class BotCalloutMock implements HttpCalloutMock {
         response.setStatusCode(200);
         response.setHeader('Content-Type', 'application/json');
         response.setBody(
-            handleRequest(ValueMap.fromJson(request.getBody()), request.getEndpoint().substringAfterLast('/'))
+            handleRequest(BotJsonPayload.fromJson(request.getBody()), request.getEndpoint().substringAfterLast('/'))
         );
 
         if (overrides != null) {
@@ -24,7 +24,7 @@ public abstract class BotCalloutMock implements HttpCalloutMock {
         return this;
     }
 
-    protected abstract String handleRequest(ValueMap request, String method);
+    protected abstract String handleRequest(BotJsonPayload request, String method);
 
     protected Long generateExternalId() {
         Long min = 1000000L;

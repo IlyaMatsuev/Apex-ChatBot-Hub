@@ -27,7 +27,7 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         for (BotUpdateEvent__e event : events) {
             BotModel bot = BotModel.fromJson(event.Bot__c);
 
-            IBotUpdateEvent updateEvent = (IBotUpdateEvent) ValueMap.fromJson(
+            IBotUpdateEvent updateEvent = (IBotUpdateEvent) BotJsonPayload.fromJson(
                 event.Payload__c,
                 BotSettingsProvider.getClassType(bot.type, BotSetting__mdt.BotUpdateEvent__c)
             );

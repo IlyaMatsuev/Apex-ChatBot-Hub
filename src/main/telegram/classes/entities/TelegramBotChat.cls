@@ -1,7 +1,7 @@
 /**
  * @description Describes the chat payload received as an update from a `Telegram` bot
  */
-global class TelegramBotChat extends ValueMap implements IBotChat {
+global class TelegramBotChat extends BotJsonPayload implements IBotChat {
     /**
      * @description Returns the `Telegram` chat id
      * @return The `Telegram` chat id
@@ -30,6 +30,6 @@ global class TelegramBotChat extends ValueMap implements IBotChat {
      * @return The instance of the <<TelegramBotUser>> interface
      */
     global TelegramBotUser getSender() {
-        return (TelegramBotUser) getValueMap('user', TelegramBotUser.class);
+        return (TelegramBotUser) getJsonPayload('user', TelegramBotUser.class);
     }
 }

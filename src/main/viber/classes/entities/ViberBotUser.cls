@@ -1,7 +1,7 @@
 /**
  * @description Describes the sender payload received as an update from a `Viber` bot
  */
-global class ViberBotUser extends ValueMap implements IBotUser {
+global class ViberBotUser extends BotJsonPayload implements IBotUser {
     private static UserName fullName;
 
     /**

@@ -1,7 +1,7 @@
 /**
  * @description The builder-like class that describes all optional parameters of the `Telegram` `sendSticker` method. The source: https://core.telegram.org/bots/api#sendsticker
  */
-global class TelegramSendStickerOptions extends ValueMap {
+global class TelegramSendStickerOptions extends BotJsonPayload {
     /**
      * @description Sets the forum channel thread id where the sticker has to be sent
      * @param threadId The `Telegram` unique id for the target message thread (topic)

@@ -1,6 +1,6 @@
 @IsTest
 public class BotServiceMock extends BotService {
-    public static final Map<String, ValueMap> outboundMessages = new Map<String, ValueMap>();
+    public static final Map<String, BotJsonPayload> outboundMessages = new Map<String, BotJsonPayload>();
 
     public BotServiceMock(BotModel bot) {
         this.bot = bot;
@@ -18,7 +18,10 @@ public class BotServiceMock extends BotService {
         }
 
         public void text(String text) {
-            outboundMessages.put(chatId, new ValueMap().set('type', BotMessageType.Text.name()).set('text', text));
+            outboundMessages.put(
+                chatId,
+                new BotJsonPayload().set('type', BotMessageType.Text.name()).set('text', text)
+            );
         }
 
         public void image(String imageUrl) {
@@ -28,7 +31,7 @@ public class BotServiceMock extends BotService {
         public void image(String imageUrl, String caption) {
             outboundMessages.put(
                 chatId,
-                new ValueMap()
+                new BotJsonPayload()
                     .set('type', BotMessageType.Image.name())
                     .set('text', caption, true)
                     .set('mediaUrl', imageUrl)
@@ -42,7 +45,7 @@ public class BotServiceMock extends BotService {
         public void video(String videoUrl, String caption) {
             outboundMessages.put(
                 chatId,
-                new ValueMap()
+                new BotJsonPayload()
                     .set('type', BotMessageType.Video.name())
                     .set('text', caption, true)
                     .set('mediaUrl', videoUrl)
@@ -56,7 +59,7 @@ public class BotServiceMock extends BotService {
         public void file(String fileUrl, String caption) {
             outboundMessages.put(
                 chatId,
-                new ValueMap()
+                new BotJsonPayload()
                     .set('type', BotMessageType.File.name())
                     .set('text', caption, true)
                     .set('mediaUrl', fileUrl)
@@ -66,14 +69,17 @@ public class BotServiceMock extends BotService {
         public void contact(String name, String phone) {
             outboundMessages.put(
                 chatId,
-                new ValueMap().set('type', BotMessageType.Contact.name()).set('name', name).set('phone', phone)
+                new BotJsonPayload().set('type', BotMessageType.Contact.name()).set('name', name).set('phone', phone)
             );
         }
 
         public void location(Decimal latitude, Decimal longitude) {
             outboundMessages.put(
                 chatId,
-                new ValueMap().set('type', BotMessageType.Location.name()).set('lat', latitude).set('lon', longitude)
+                new BotJsonPayload()
+                    .set('type', BotMessageType.Location.name())
+                    .set('lat', latitude)
+                    .set('lon', longitude)
             );
         }
 

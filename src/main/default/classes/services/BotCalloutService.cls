@@ -5,13 +5,13 @@ public virtual class BotCalloutService {
 
     protected BotCalloutService() {}
 
-    public ValueMap call(BotMethod method, ValueMap body) {
+    public BotJsonPayload call(BotMethod method, BotJsonPayload body) {
         return call(method, body, true);
     }
 
-    public ValueMap call(BotMethod method, ValueMap body, Boolean throwOnFail) {
+    public BotJsonPayload call(BotMethod method, BotJsonPayload body, Boolean throwOnFail) {
         HttpResponse response = new Http().send(prepareRequest(method, body));
-        ValueMap responsePayload = ValueMap.fromJson(response.getBody());
+        BotJsonPayload responsePayload = BotJsonPayload.fromJson(response.getBody());
 
         if (throwOnFail && !isSuccessResponse(response, responsePayload)) {
             throw new BotCalloutException(
@@ -21,21 +21,21 @@ public virtual class BotCalloutService {
                     method +
                     '" with status: ' +
                     response.getStatus(),
-                new ValueMap()
+                new BotJsonPayload()
                     .set(
                         'request',
-                        new ValueMap().set('body', body).set('botMethod', method.name()).set('botId', bot.id)
+                        new BotJsonPayload().set('body', body).set('botMethod', method.name()).set('botId', bot.id)
                     )
                     .set(
                         'response',
-                        new ValueMap().set('body', responsePayload).set('statusCode', response.getStatusCode())
+                        new BotJsonPayload().set('body', responsePayload).set('statusCode', response.getStatusCode())
                     )
             );
         }
         return responsePayload;
     }
 
-    protected virtual HttpRequest prepareRequest(BotMethod method, ValueMap body) {
+    protected virtual HttpRequest prepareRequest(BotMethod method, BotJsonPayload body) {
         HttpRequest request = new HttpRequest();
         request.setEndpoint(settings.ApiUrl__c + bot.token + '/' + method);
         request.setMethod('POST');
@@ -44,12 +44,12 @@ public virtual class BotCalloutService {
         return request;
     }
 
-    protected virtual Boolean isSuccessResponse(HttpResponse response, ValueMap payload) {
+    protected virtual Boolean isSuccessResponse(HttpResponse response, BotJsonPayload payload) {
         return response.getStatusCode() == 200;
     }
 
     public class BotCalloutException extends BotCustomException {
-        public BotCalloutException(String message, ValueMap payload) {
+        public BotCalloutException(String message, BotJsonPayload payload) {
             super(message, payload);
         }
     }

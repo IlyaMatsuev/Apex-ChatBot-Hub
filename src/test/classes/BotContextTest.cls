@@ -111,7 +111,7 @@ private class BotContextTest {
         Assert.areEqual('01234567890A=', userUpdate.getUsername());
     }
 
-    private static IBotContext createBotContext(BotType botType, ValueMap payload) {
+    private static IBotContext createBotContext(BotType botType, BotJsonPayload payload) {
         setCalloutMock(botType);
         insert new Bot__c(
             Name = botType.name(),
@@ -141,16 +141,16 @@ private class BotContextTest {
         return mock;
     }
 
-    private static ValueMap createTelegramPayload() {
-        return new ValueMap()
+    private static BotJsonPayload createTelegramPayload() {
+        return new BotJsonPayload()
             .set('update_id', 12312311L)
             .set(
                 'message',
-                new ValueMap()
+                new BotJsonPayload()
                     .set('message_id', 223123123L)
                     .set(
                         'from',
-                        new ValueMap()
+                        new BotJsonPayload()
                             .set('id', 876541222L)
                             .set('first_name', null)
                             .set('last_name', 'matsuev')
@@ -159,7 +159,7 @@ private class BotContextTest {
                     .set('date', 1641024000)
                     .set(
                         'chat',
-                        new ValueMap()
+                        new BotJsonPayload()
                             .set('id', 876541222L)
                             .set('type', 'private')
                             .set('title', null)
@@ -172,14 +172,14 @@ private class BotContextTest {
             );
     }
 
-    private static ValueMap createViberPayload() {
-        return new ValueMap()
+    private static BotJsonPayload createViberPayload() {
+        return new BotJsonPayload()
             .set('event', 'message')
             .set('timestamp', DateTime.newInstance(2022, 1, 1).getTime())
             .set('message_token', 4912661846655238145L)
             .set(
                 'sender',
-                new ValueMap()
+                new BotJsonPayload()
                     .set('id', '01234567890A=')
                     .set('name', 'John McClane')
                     .set('avatar', 'http://avatar.example.com')
@@ -189,11 +189,11 @@ private class BotContextTest {
             )
             .set(
                 'message',
-                new ValueMap()
+                new BotJsonPayload()
                     .set('type', 'text')
                     .set('text', '/start hello   world!')
                     .set('media', 'https://example.com')
-                    .set('location', new ValueMap().set('lat', 50.76891).set('lon', 6.11499))
+                    .set('location', new BotJsonPayload().set('lat', 50.76891).set('lon', 6.11499))
             );
     }
 

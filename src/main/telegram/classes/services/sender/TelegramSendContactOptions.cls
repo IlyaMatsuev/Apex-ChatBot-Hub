@@ -1,7 +1,7 @@
 /**
  * @description The builder-like class that describes all optional parameters of the `Telegram` `sendContact` method. The source: https://core.telegram.org/bots/api#sendcontact
  */
-global class TelegramSendContactOptions extends ValueMap {
+global class TelegramSendContactOptions extends BotJsonPayload {
     /**
      * @description Sets the forum channel thread id where the message has to be sent
      * @param threadId The `Telegram` unique id for the target message thread (topic)

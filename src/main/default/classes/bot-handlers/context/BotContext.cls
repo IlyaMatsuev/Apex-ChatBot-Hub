@@ -9,7 +9,7 @@ global abstract class BotContext implements IBotContext {
     protected transient IBotUpdateEvent updateEvent {
         get {
             if (updateEvent == null) {
-                updateEvent = (IBotUpdateEvent) ValueMap.fromJson(
+                updateEvent = (IBotUpdateEvent) BotJsonPayload.fromJson(
                     updatePayload,
                     BotSettingsProvider.getClassType(bot.type, BotSetting__mdt.BotUpdateEvent__c)
                 );

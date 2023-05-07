@@ -1,25 +1,25 @@
-public virtual class ValueMap {
+public virtual class BotJsonPayload {
     private final Map<String, Object> values;
 
-    public ValueMap() {
+    public BotJsonPayload() {
         this(new Map<String, Object>());
     }
 
-    public ValueMap(ValueMap values) {
+    public BotJsonPayload(BotJsonPayload values) {
         this(values.getValues());
     }
 
-    public ValueMap(Map<String, Object> values) {
+    public BotJsonPayload(Map<String, Object> values) {
         this.values = new Map<String, Object>();
         this.values.putAll(values);
     }
 
-    public static ValueMap fromJson(String jsonValues) {
-        return fromJson(jsonValues, ValueMap.class);
+    public static BotJsonPayload fromJson(String jsonValues) {
+        return fromJson(jsonValues, BotJsonPayload.class);
     }
 
-    public static ValueMap fromJson(String jsonValues, Type valueMapType) {
-        ValueMap values = (ValueMap) valueMapType.newInstance();
+    public static BotJsonPayload fromJson(String jsonValues, Type payloadType) {
+        BotJsonPayload values = (BotJsonPayload) payloadType.newInstance();
         try {
             values.getValues().putAll((Map<String, Object>) JSON.deserializeUntyped(jsonValues));
         } catch (JSONException ex) {
@@ -75,19 +75,19 @@ public virtual class ValueMap {
         return (DateTime) value;
     }
 
-    public ValueMap getValueMap(String key) {
-        return getValueMap(key, ValueMap.class);
+    public BotJsonPayload getJsonPayload(String key) {
+        return getJsonPayload(key, BotJsonPayload.class);
     }
 
-    public ValueMap getValueMap(String key, Type valueMapType) {
+    public BotJsonPayload getJsonPayload(String key, Type payloadType) {
         Object value = get(key);
-        if (value instanceof ValueMap) {
-            return (ValueMap) value;
+        if (value instanceof BotJsonPayload) {
+            return (BotJsonPayload) value;
         }
-        ValueMap newValueMap = (ValueMap) valueMapType.newInstance();
-        newValueMap.values.putAll((Map<String, Object>) value);
-        values.put(key, newValueMap);
-        return newValueMap;
+        BotJsonPayload newPayload = (BotJsonPayload) payloadType.newInstance();
+        newPayload.values.putAll((Map<String, Object>) value);
+        values.put(key, newPayload);
+        return newPayload;
     }
 
     public Object get(String key) {
@@ -98,11 +98,11 @@ public virtual class ValueMap {
         return values;
     }
 
-    public ValueMap set(String key, Object value) {
+    public BotJsonPayload set(String key, Object value) {
         return set(key, value, false);
     }
 
-    public ValueMap set(String key, Object value, Boolean skipNull) {
+    public BotJsonPayload set(String key, Object value, Boolean skipNull) {
         if (!skipNull || value != null) {
             values.put(key, value);
         }
@@ -127,8 +127,8 @@ public virtual class ValueMap {
     }
 
     private Object escapeExtraValueProperty(Object value) {
-        if (value instanceof ValueMap) {
-            return escapeExtraValuesProperty(((ValueMap) value).values);
+        if (value instanceof BotJsonPayload) {
+            return escapeExtraValuesProperty(((BotJsonPayload) value).values);
         } else if (value instanceof Map<String, Object>) {
             return escapeExtraValuesProperty((Map<String, Object>) value);
         } else if (value instanceof List<Object>) {

@@ -17,7 +17,7 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Text, 'Hello world!', null, new ValueMap());
+        fixture.assertMessageIsCreated(BotMessageType.Text, 'Hello world!', null, new BotJsonPayload());
     }
 
     @IsTest
@@ -30,7 +30,12 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Url, null, 'https://example.com/#some-topic', new ValueMap());
+        fixture.assertMessageIsCreated(
+            BotMessageType.Url,
+            null,
+            'https://example.com/#some-topic',
+            new BotJsonPayload()
+        );
     }
 
     @IsTest
@@ -75,7 +80,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Text,
             'Hello world!',
             null,
-            new ValueMap().set('keyboard', expectedKeyboard)
+            new BotJsonPayload().set('keyboard', expectedKeyboard)
         );
     }
 
@@ -117,7 +122,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Text,
             'Hello world!',
             null,
-            new ValueMap().set('keyboard', keyboard)
+            new BotJsonPayload().set('keyboard', keyboard)
         );
     }
 
@@ -154,7 +159,12 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Image, null, 'https://example.com/image.jpeg', new ValueMap());
+        fixture.assertMessageIsCreated(
+            BotMessageType.Image,
+            null,
+            'https://example.com/image.jpeg',
+            new BotJsonPayload()
+        );
     }
 
     @IsTest
@@ -171,7 +181,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Image,
             'Some caption',
             'https://example.com/image.jpeg',
-            new ValueMap().set('caption', 'Some caption')
+            new BotJsonPayload().set('caption', 'Some caption')
         );
     }
 
@@ -212,7 +222,12 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Video, null, 'https://example.com/video.mp4', new ValueMap());
+        fixture.assertMessageIsCreated(
+            BotMessageType.Video,
+            null,
+            'https://example.com/video.mp4',
+            new BotJsonPayload()
+        );
     }
 
     @IsTest
@@ -229,7 +244,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Video,
             'Some caption',
             'https://example.com/video.mp4',
-            new ValueMap().set('caption', 'Some caption')
+            new BotJsonPayload().set('caption', 'Some caption')
         );
     }
 
@@ -280,7 +295,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Video,
             null,
             null,
-            new ValueMap().set('videoNoteId', 'some-video-id')
+            new BotJsonPayload().set('videoNoteId', 'some-video-id')
         );
     }
 
@@ -306,7 +321,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Video,
             null,
             null,
-            new ValueMap(options).set('videoNoteId', 'some-video-id')
+            new BotJsonPayload(options).set('videoNoteId', 'some-video-id')
         );
     }
 
@@ -320,7 +335,12 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Animation, null, 'https://example.com/mem.gif', new ValueMap());
+        fixture.assertMessageIsCreated(
+            BotMessageType.Animation,
+            null,
+            'https://example.com/mem.gif',
+            new BotJsonPayload()
+        );
     }
 
     @IsTest
@@ -337,7 +357,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Animation,
             'Some caption',
             'https://example.com/mem.gif',
-            new ValueMap().set('caption', 'Some caption')
+            new BotJsonPayload().set('caption', 'Some caption')
         );
     }
 
@@ -351,7 +371,7 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.File, null, 'https://example.com/file.pdf', new ValueMap());
+        fixture.assertMessageIsCreated(BotMessageType.File, null, 'https://example.com/file.pdf', new BotJsonPayload());
     }
 
     @IsTest
@@ -368,7 +388,7 @@ private class TelegramBotServiceTest {
             BotMessageType.File,
             'Some caption',
             'https://example.com/file.pdf',
-            new ValueMap().set('caption', 'Some caption')
+            new BotJsonPayload().set('caption', 'Some caption')
         );
     }
 
@@ -416,7 +436,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Contact,
             null,
             null,
-            new ValueMap().set('name', 'John Wick').set('phone', '3168998280')
+            new BotJsonPayload().set('name', 'John Wick').set('phone', '3168998280')
         );
     }
 
@@ -442,7 +462,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Contact,
             null,
             null,
-            new ValueMap(options).set('name', 'John Wick').set('phone', '3168998280')
+            new BotJsonPayload(options).set('name', 'John Wick').set('phone', '3168998280')
         );
     }
 
@@ -462,7 +482,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Location,
             null,
             null,
-            new ValueMap().set('lat', lat).set('lon', lon)
+            new BotJsonPayload().set('lat', lat).set('lon', lon)
         );
     }
 
@@ -491,7 +511,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Location,
             null,
             null,
-            new ValueMap(options).set('lat', lat).set('lon', lon)
+            new BotJsonPayload(options).set('lat', lat).set('lon', lon)
         );
     }
 
@@ -513,7 +533,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Venue,
             title,
             null,
-            new ValueMap().set('title', title).set('address', address).set('lat', lat).set('lon', lon)
+            new BotJsonPayload().set('title', title).set('address', address).set('lat', lat).set('lon', lon)
         );
     }
 
@@ -542,7 +562,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Venue,
             title,
             null,
-            new ValueMap(options).set('title', title).set('address', address).set('lat', lat).set('lon', lon)
+            new BotJsonPayload(options).set('title', title).set('address', address).set('lat', lat).set('lon', lon)
         );
     }
 
@@ -560,7 +580,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Sticker,
             null,
             null,
-            new ValueMap().set('stickerId', 'some-long-sticker-id')
+            new BotJsonPayload().set('stickerId', 'some-long-sticker-id')
         );
     }
 
@@ -578,7 +598,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Sticker,
             null,
             'http://example.com/some-sticker-url',
-            new ValueMap()
+            new BotJsonPayload()
         );
     }
 
@@ -602,7 +622,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Sticker,
             null,
             null,
-            new ValueMap(options).set('stickerId', 'some-long-sticker-id')
+            new BotJsonPayload(options).set('stickerId', 'some-long-sticker-id')
         );
     }
 
@@ -616,7 +636,12 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Audio, null, 'https://examlple.com/audio.mp3', new ValueMap());
+        fixture.assertMessageIsCreated(
+            BotMessageType.Audio,
+            null,
+            'https://examlple.com/audio.mp3',
+            new BotJsonPayload()
+        );
     }
 
     @IsTest
@@ -633,7 +658,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Audio,
             'Hello World!',
             'https://examlple.com/audio.mp3',
-            new ValueMap().set('caption', 'Hello World!')
+            new BotJsonPayload().set('caption', 'Hello World!')
         );
     }
 
@@ -671,7 +696,12 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Audio, null, 'https://examlple.com/audio.ogg', new ValueMap());
+        fixture.assertMessageIsCreated(
+            BotMessageType.Audio,
+            null,
+            'https://examlple.com/audio.ogg',
+            new BotJsonPayload()
+        );
     }
 
     @IsTest
@@ -688,7 +718,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Audio,
             'Hello World!',
             'https://examlple.com/audio.ogg',
-            new ValueMap().set('caption', 'Hello World!')
+            new BotJsonPayload().set('caption', 'Hello World!')
         );
     }
 
@@ -703,7 +733,12 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Poll, 'question?', null, new ValueMap().set('options', answers));
+        fixture.assertMessageIsCreated(
+            BotMessageType.Poll,
+            'question?',
+            null,
+            new BotJsonPayload().set('options', answers)
+        );
     }
 
     @IsTest
@@ -745,7 +780,7 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, new ValueMap());
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, new BotJsonPayload());
     }
 
     @IsTest
@@ -793,7 +828,12 @@ private class TelegramBotServiceTest {
             return createService(bot);
         }
 
-        public void assertMessageIsCreated(BotMessageType messageType, String text, String mediaUrl, ValueMap params) {
+        public void assertMessageIsCreated(
+            BotMessageType messageType,
+            String text,
+            String mediaUrl,
+            BotJsonPayload params
+        ) {
             assertMessageIsCreated(null, messageType, text, mediaUrl, params);
         }
 
@@ -802,7 +842,7 @@ private class TelegramBotServiceTest {
             BotMessageType messageType,
             String text,
             String mediaUrl,
-            ValueMap params
+            BotJsonPayload params
         ) {
             List<ChatMessage__c> messages = (List<ChatMessage__c>) Database.query(
                 'SELECT Bot__c, User__c, Chat__c, Chat__r.ExternalId__c, ExternalId__c, Text__c, Type__c, MediaUrl__c, Parameters__c ' +
@@ -834,12 +874,12 @@ private class TelegramBotServiceTest {
             BotCustomException customException = (BotCustomException) error;
             Assert.isTrue(customException.payload.has('request'));
 
-            ValueMap requestPayload = customException.payload.getValueMap('request');
+            BotJsonPayload requestPayload = customException.payload.getJsonPayload('request');
             Assert.areEqual(bot.id, requestPayload.getString('botId'));
             Assert.areEqual(method.name(), requestPayload.getString('botMethod'));
 
             Assert.isTrue(customException.payload.has('response'));
-            Assert.areEqual(statusCode, customException.payload.getValueMap('response').getInteger('statusCode'));
+            Assert.areEqual(statusCode, customException.payload.getJsonPayload('response').getInteger('statusCode'));
         }
     }
 

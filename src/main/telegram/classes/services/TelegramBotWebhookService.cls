@@ -3,7 +3,7 @@ public class TelegramBotWebhookService extends BotWebhookService {
     private TelegramBotWebhookService() {}
 
     public override void setWebhook() {
-        ValueMap payload = new ValueMap()
+        BotJsonPayload payload = new BotJsonPayload()
             .set('url', webhookUrl)
             .set('allowed_updates', new List<String> { TelegramBotUpdateEventType.Message.name() })
             .set('secret_token', bot.tokenHash);
@@ -11,6 +11,6 @@ public class TelegramBotWebhookService extends BotWebhookService {
     }
 
     public override void unsetWebhook() {
-        calloutService.call(TelegramBotMethod.DeleteWebhook, new ValueMap().set('drop_pending_updates', true));
+        calloutService.call(TelegramBotMethod.DeleteWebhook, new BotJsonPayload().set('drop_pending_updates', true));
     }
 }

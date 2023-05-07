@@ -1,7 +1,7 @@
 /**
  * @description The builder-like class that describes common optional parameters of the `Telegram` for sending messages
  */
-global abstract class TelegramSendMessageOptions extends ValueMap {
+global abstract class TelegramSendMessageOptions extends BotJsonPayload {
     private final String entitiesFieldName;
 
     /**
@@ -60,7 +60,7 @@ global abstract class TelegramSendMessageOptions extends ValueMap {
     /**
      * @description The builder-like class representing a special entity in a message text. For example, hashtags, usernames, etc. The source: https://core.telegram.org/bots/api#messageentity
      */
-    global class MessageEntity extends ValueMap {
+    global class MessageEntity extends BotJsonPayload {
         /**
          * @description Creates an instance of the message entity with the provided type and coordinates in the message text
          * @param type The type of the entity. Possible values: `mention`, `hashtag`, `cashtag`, `bot_command`, `url`, `email`, `phone_number`, `bold`, `italic`, `underline`, `strikethrough`, `spoiler`, `code`, `pre`, `text_link`, `text_mention`, `custom_emoji`
@@ -89,7 +89,7 @@ global abstract class TelegramSendMessageOptions extends ValueMap {
          * @return The current instance of the message entity
          */
         global MessageEntity asUserMention(String userId) {
-            set('user', new ValueMap().set('id', BotUtils.parseExternalId(userId)));
+            set('user', new BotJsonPayload().set('id', BotUtils.parseExternalId(userId)));
             return this;
         }
 

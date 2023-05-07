@@ -1,7 +1,7 @@
 /**
  * @description The builder-like class that represents parameters for sending a custom reply keyboard to the user via the `Telegram` bot service. The source: https://core.telegram.org/bots/api#replykeyboardmarkup
  */
-global class TelegramSendKeyboardOptions extends ValueMap {
+global class TelegramSendKeyboardOptions extends BotJsonPayload {
     /**
      * @description The matrix of keyboard buttons to be shown to the receiver. Represents the list of button rows
      */
@@ -165,7 +165,7 @@ global class TelegramSendKeyboardOptions extends ValueMap {
     /**
      * @description The builder-like class representing a button in the `Telegram` reply keyboard. The source: https://core.telegram.org/bots/api#keyboardbutton
      */
-    global class Button extends ValueMap {
+    global class Button extends BotJsonPayload {
         /**
          * @description Creates an instance of the button with the provided text
          * @param text The button text
@@ -209,7 +209,7 @@ global class TelegramSendKeyboardOptions extends ValueMap {
         global Button asUserRequest(Boolean botsOnly, Boolean premiumOnly) {
             set(
                 'request_user',
-                new ValueMap()
+                new BotJsonPayload()
                     .set('request_id', DateTime.now().getTime().intValue())
                     .set('user_is_bot', botsOnly, true)
                     .set('user_is_premium', premiumOnly, true)
@@ -249,7 +249,7 @@ global class TelegramSendKeyboardOptions extends ValueMap {
          * @return The current <<TelegramSendKeyboardOptions.Button>> instance
          */
         global Button asPollRequest(String pollType) {
-            set('request_poll', new ValueMap().set('type', pollType));
+            set('request_poll', new BotJsonPayload().set('type', pollType));
             return this;
         }
 
@@ -259,7 +259,7 @@ global class TelegramSendKeyboardOptions extends ValueMap {
          * @return The current <<TelegramSendKeyboardOptions.Button>> instance
          */
         global Button asWebAppLauncher(String webAppUrl) {
-            set('web_app', new ValueMap().set('url', webAppUrl));
+            set('web_app', new BotJsonPayload().set('url', webAppUrl));
             return this;
         }
     }
@@ -267,7 +267,7 @@ global class TelegramSendKeyboardOptions extends ValueMap {
     /**
      * @description The builder-like class for requesting to share a specific list of chats. The source: https://core.telegram.org/bots/api#keyboardbuttonrequestchat
      */
-    global class ButtonRequestChatConfigs extends ValueMap {
+    global class ButtonRequestChatConfigs extends BotJsonPayload {
         /**
          * @description Creates an instance of the request chat configs without any requirenments
          */
@@ -331,7 +331,7 @@ global class TelegramSendKeyboardOptions extends ValueMap {
          * @return The current <<TelegramSendKeyboardOptions.ButtonRequestChatConfigs>> instance
          */
         global ButtonRequestChatConfigs withUserAdminRights(List<String> rights) {
-            ValueMap rightsList = new ValueMap();
+            BotJsonPayload rightsList = new BotJsonPayload();
             for (String right : rights) {
                 rightsList.set(right, true);
             }
@@ -345,7 +345,7 @@ global class TelegramSendKeyboardOptions extends ValueMap {
          * @return The current <<TelegramSendKeyboardOptions.ButtonRequestChatConfigs>> instance
          */
         global ButtonRequestChatConfigs withBotAdminRights(List<String> rights) {
-            ValueMap rightsList = new ValueMap();
+            BotJsonPayload rightsList = new BotJsonPayload();
             for (String right : rights) {
                 rightsList.set(right, true);
             }

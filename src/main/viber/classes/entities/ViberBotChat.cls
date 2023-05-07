@@ -1,7 +1,7 @@
 /**
  * @description Describes the chat payload received as an update from a `Viber` bot
  */
-global class ViberBotChat extends ValueMap implements IBotChat {
+global class ViberBotChat extends BotJsonPayload implements IBotChat {
     /**
      * @description Returns the `Viber` chat id
      * @return The `Viber` chat id
@@ -23,6 +23,6 @@ global class ViberBotChat extends ValueMap implements IBotChat {
      * @return The instance of the <<ViberBotUser>> interface
      */
     global ViberBotUser getSender() {
-        return (ViberBotUser) ValueMap.fromJson(toJson(), ViberBotUser.class);
+        return (ViberBotUser) BotJsonPayload.fromJson(toJson(), ViberBotUser.class);
     }
 }

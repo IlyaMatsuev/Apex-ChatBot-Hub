@@ -23,7 +23,7 @@ global class BotUpdateApi {
             if (bot == null) {
                 throw new BotUpdateApiException(
                     'There is no bot with the provided type and id',
-                    new ValueMap().set('params', params).set('uri', request.requestURI)
+                    new BotJsonPayload().set('params', params).set('uri', request.requestURI)
                 );
             }
 
@@ -44,7 +44,7 @@ global class BotUpdateApi {
     }
 
     public class BotUpdateApiException extends BotCustomException {
-        public BotUpdateApiException(String message, ValueMap payload) {
+        public BotUpdateApiException(String message, BotJsonPayload payload) {
             super(message, payload);
         }
     }
@@ -59,7 +59,7 @@ global class BotUpdateApi {
             if (!paramsMatcher.matches()) {
                 throw new BotUpdateApiException(
                     'Invalid URL format or the URI parameters are incorrect. The correct format is: /bots/<botType>/<botId>/<?token>',
-                    new ValueMap().set('uri', uri)
+                    new BotJsonPayload().set('uri', uri)
                 );
             }
 

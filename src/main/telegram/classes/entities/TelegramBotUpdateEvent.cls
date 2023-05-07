@@ -1,7 +1,7 @@
 /**
  * @description Describes the payload received as an update from a `Telegram` bot
  */
-global class TelegramBotUpdateEvent extends ValueMap implements IBotUpdateEvent {
+global class TelegramBotUpdateEvent extends BotJsonPayload implements IBotUpdateEvent {
     private static final String ID_FIELD_NAME = 'update_id';
 
     /**
@@ -23,7 +23,7 @@ global class TelegramBotUpdateEvent extends ValueMap implements IBotUpdateEvent 
      * @return The instance of the <<TelegramBotMessage>> interface
      */
     global TelegramBotMessage getMessage() {
-        return (TelegramBotMessage) getValueMap(getType().name(), TelegramBotMessage.class);
+        return (TelegramBotMessage) getJsonPayload(getType().name(), TelegramBotMessage.class);
     }
 
     /**
@@ -32,8 +32,8 @@ global class TelegramBotUpdateEvent extends ValueMap implements IBotUpdateEvent 
      */
     global TelegramBotChat getChat() {
         TelegramBotMessage message = (TelegramBotMessage) getMessage();
-        TelegramBotUser user = (TelegramBotUser) message.getValueMap('from', TelegramBotUser.class);
-        TelegramBotChat chat = (TelegramBotChat) message.getValueMap('chat', TelegramBotChat.class);
+        TelegramBotUser user = (TelegramBotUser) message.getJsonPayload('from', TelegramBotUser.class);
+        TelegramBotChat chat = (TelegramBotChat) message.getJsonPayload('chat', TelegramBotChat.class);
         // Set user payload into the chat payload so that it can be accessed from the IBotChat
         chat.set('user', user);
         return chat;

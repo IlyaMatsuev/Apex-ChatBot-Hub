@@ -1,7 +1,7 @@
 /**
  * @description The builder-like class that describes all optional parameters of the `Telegram` `sendLocation` method. The source: https://core.telegram.org/bots/api#sendlocation
  */
-global class TelegramSendLocationOptions extends ValueMap {
+global class TelegramSendLocationOptions extends BotJsonPayload {
     /**
      * @description Sets the forum channel thread id where the message has to be sent
      * @param threadId The `Telegram` unique id for the target message thread (topic)

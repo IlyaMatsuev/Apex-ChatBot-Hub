@@ -216,20 +216,20 @@ private class BotUpdateEventTriggerTest {
         );
     }
 
-    private static ValueMap createTelegramPayload() {
+    private static BotJsonPayload createTelegramPayload() {
         return createTelegramPayload(TelegramBotUpdateEventType.Message);
     }
 
-    private static ValueMap createTelegramPayload(TelegramBotUpdateEventType eventType) {
-        return new ValueMap()
+    private static BotJsonPayload createTelegramPayload(TelegramBotUpdateEventType eventType) {
+        return new BotJsonPayload()
             .set('update_id', 12312311L)
             .set(
                 eventType.name(),
-                new ValueMap()
+                new BotJsonPayload()
                     .set('message_id', 223123123L)
                     .set(
                         'from',
-                        new ValueMap()
+                        new BotJsonPayload()
                             .set('id', 876541222L)
                             .set('first_name', null)
                             .set('last_name', 'matsuev')
@@ -238,7 +238,7 @@ private class BotUpdateEventTriggerTest {
                     .set('date', DateTime.newInstance(2022, 1, 1).getTime())
                     .set(
                         'chat',
-                        new ValueMap()
+                        new BotJsonPayload()
                             .set('id', 876541222L)
                             .set('type', 'private')
                             .set('title', null)
@@ -251,8 +251,8 @@ private class BotUpdateEventTriggerTest {
             );
     }
 
-    private static ValueMap createViberPayload(ViberBotUpdateEventType eventType) {
-        ValueMap payload = new ValueMap()
+    private static BotJsonPayload createViberPayload(ViberBotUpdateEventType eventType) {
+        BotJsonPayload payload = new BotJsonPayload()
             .set('event', eventType.name())
             .set('timestamp', DateTime.newInstance(2022, 1, 1).getTime())
             .set('message_token', 4912661846655238145L);
@@ -261,7 +261,7 @@ private class BotUpdateEventTriggerTest {
             payload
                 .set(
                     'sender',
-                    new ValueMap()
+                    new BotJsonPayload()
                         .set('id', '01234567890A=')
                         .set('name', 'John McClane')
                         .set('avatar', 'http://avatar.example.com')
@@ -271,11 +271,11 @@ private class BotUpdateEventTriggerTest {
                 )
                 .set(
                     'message',
-                    new ValueMap()
+                    new BotJsonPayload()
                         .set('type', 'text')
                         .set('text', 'Hello world!')
                         .set('media', 'https://example.com')
-                        .set('location', new ValueMap().set('lat', 50.76891).set('lon', 6.11499))
+                        .set('location', new BotJsonPayload().set('lat', 50.76891).set('lon', 6.11499))
                 );
         }
         return payload;
