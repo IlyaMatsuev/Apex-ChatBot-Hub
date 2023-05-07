@@ -12,7 +12,7 @@ global class TelegramSendDiceOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendDiceOptions>> class
      */
     global TelegramSendDiceOptions withEmoji(String emoji) {
-        set('emoji', emoji, true);
+        payload.set('emoji', emoji, true);
         return this;
     }
 

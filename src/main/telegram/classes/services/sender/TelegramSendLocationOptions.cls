@@ -1,14 +1,14 @@
 /**
  * @description The builder-like class that describes all optional parameters of the `Telegram` `sendLocation` method. The source: https://core.telegram.org/bots/api#sendlocation
  */
-global class TelegramSendLocationOptions extends BotJsonPayload {
+global class TelegramSendLocationOptions extends BotPayload {
     /**
      * @description Sets the forum channel thread id where the message has to be sent
      * @param threadId The `Telegram` unique id for the target message thread (topic)
      * @return The current instance of the <<TelegramSendLocationOptions>> class
      */
     global TelegramSendLocationOptions withThreadId(String threadId) {
-        set('message_thread_id', BotUtils.parseExternalId(threadId), true);
+        payload.set('message_thread_id', BotUtils.parseExternalId(threadId), true);
         return this;
     }
 
@@ -18,7 +18,7 @@ global class TelegramSendLocationOptions extends BotJsonPayload {
      * @return The current instance of the <<TelegramSendLocationOptions>> class
      */
     global TelegramSendLocationOptions withHorizontalAccuracy(Decimal accuracy) {
-        set('horizontal_accuracy', accuracy, true);
+        payload.set('horizontal_accuracy', accuracy, true);
         return this;
     }
 
@@ -28,7 +28,7 @@ global class TelegramSendLocationOptions extends BotJsonPayload {
      * @return The current instance of the <<TelegramSendLocationOptions>> class
      */
     global TelegramSendLocationOptions withLivePeriod(Integer period) {
-        set('live_period', period, true);
+        payload.set('live_period', period, true);
         return this;
     }
 
@@ -38,7 +38,7 @@ global class TelegramSendLocationOptions extends BotJsonPayload {
      * @return The current instance of the <<TelegramSendLocationOptions>> class
      */
     global TelegramSendLocationOptions withProximityAlertRadius(Integer alertRadius) {
-        set('proximity_alert_radius', alertRadius, true);
+        payload.set('proximity_alert_radius', alertRadius, true);
         return this;
     }
 
@@ -48,7 +48,7 @@ global class TelegramSendLocationOptions extends BotJsonPayload {
      * @return The current instance of the <<TelegramSendLocationOptions>> class
      */
     global TelegramSendLocationOptions withHeading(Integer heading) {
-        set('heading', heading, true);
+        payload.set('heading', heading, true);
         return this;
     }
 
@@ -57,7 +57,7 @@ global class TelegramSendLocationOptions extends BotJsonPayload {
      * @return The current instance of the <<TelegramSendLocationOptions>> class
      */
     global TelegramSendLocationOptions withoutNotification() {
-        set('disable_notification', true);
+        payload.set('disable_notification', true);
         return this;
     }
 
@@ -66,7 +66,7 @@ global class TelegramSendLocationOptions extends BotJsonPayload {
      * @return The current instance of the <<TelegramSendLocationOptions>> class
      */
     global TelegramSendLocationOptions withProtectedContent() {
-        set('protect_content', true);
+        payload.set('protect_content', true);
         return this;
     }
 
@@ -76,8 +76,8 @@ global class TelegramSendLocationOptions extends BotJsonPayload {
      * @return The current instance of the <<TelegramSendLocationOptions>> class
      */
     global TelegramSendLocationOptions asReplyToMessage(String messageId) {
-        set('reply_to_message_id', BotUtils.parseExternalId(messageId), true);
-        set('allow_sending_without_reply', true);
+        payload.set('reply_to_message_id', BotUtils.parseExternalId(messageId), true);
+        payload.set('allow_sending_without_reply', true);
         return this;
     }
 }

@@ -1,13 +1,13 @@
 /**
  * @description The builder-like class that represents parameters for sending a custom reply keyboard to the user via the `Telegram` bot service. The source: https://core.telegram.org/bots/api#replykeyboardmarkup
  */
-global class TelegramSendKeyboardOptions extends BotJsonPayload {
+global class TelegramSendKeyboardOptions extends BotPayload {
     /**
      * @description The matrix of keyboard buttons to be shown to the receiver. Represents the list of button rows
      */
     global List<List<Button>> buttons {
-        get { return (List<List<Button>>) get('keyboard'); }
-        private set { set('keyboard', value); }
+        get { return (List<List<Button>>) payload.get('keyboard'); }
+        private set { payload.set('keyboard', value); }
     }
 
     /**
@@ -30,6 +30,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
      * @param buttons The list of button rows to be shown to the user
      */
     global TelegramSendKeyboardOptions(List<List<Button>> buttons) {
+        super();
         this.buttons = buttons;
     }
 
@@ -90,7 +91,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
      * @return The current <<TelegramSendKeyboardOptions>> instance
      */
     global TelegramSendKeyboardOptions allowResizeKeyboard(Boolean allowResize) {
-        set('resize_keyboard', allowResize, true);
+        payload.set('resize_keyboard', allowResize, true);
         return this;
     }
 
@@ -108,7 +109,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
      * @return The current <<TelegramSendKeyboardOptions>> instance
      */
     global TelegramSendKeyboardOptions asPersistent(Boolean isPersistent) {
-        set('is_persistent', isPersistent, true);
+        payload.set('is_persistent', isPersistent, true);
         return this;
     }
 
@@ -126,7 +127,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
      * @return The current <<TelegramSendKeyboardOptions>> instance
      */
     global TelegramSendKeyboardOptions asOneTimeKeyboard(Boolean isOneTime) {
-        set('one_time_keyboard', isOneTime, true);
+        payload.set('one_time_keyboard', isOneTime, true);
         return this;
     }
 
@@ -136,7 +137,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
      * @return The current <<TelegramSendKeyboardOptions>> instance
      */
     global TelegramSendKeyboardOptions setInputPlaceholder(String placeholder) {
-        set('input_field_placeholder', placeholder, true);
+        payload.set('input_field_placeholder', placeholder, true);
         return this;
     }
 
@@ -158,20 +159,21 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
      * @return The current <<TelegramSendKeyboardOptions>> instance
      */
     global TelegramSendKeyboardOptions asSelective(Boolean isSelective) {
-        set('selective', isSelective, true);
+        payload.set('selective', isSelective, true);
         return this;
     }
 
     /**
      * @description The builder-like class representing a button in the `Telegram` reply keyboard. The source: https://core.telegram.org/bots/api#keyboardbutton
      */
-    global class Button extends BotJsonPayload {
+    global class Button extends BotPayload {
         /**
          * @description Creates an instance of the button with the provided text
          * @param text The button text
          */
         global Button(String text) {
-            set('text', text);
+            super();
+            payload.set('text', text);
         }
 
         /**
@@ -179,7 +181,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<TelegramSendKeyboardOptions.Button>> instance
          */
         global Button asContactRequest() {
-            set('request_contact', true);
+            payload.set('request_contact', true);
             return this;
         }
 
@@ -188,7 +190,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<TelegramSendKeyboardOptions.Button>> instance
          */
         global Button asLocationRequest() {
-            set('request_location', true);
+            payload.set('request_location', true);
             return this;
         }
 
@@ -207,7 +209,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<TelegramSendKeyboardOptions.Button>> instance
          */
         global Button asUserRequest(Boolean botsOnly, Boolean premiumOnly) {
-            set(
+            payload.set(
                 'request_user',
                 new BotJsonPayload()
                     .set('request_id', DateTime.now().getTime().intValue())
@@ -231,7 +233,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<TelegramSendKeyboardOptions.Button>> instance
          */
         global Button asChatRequest(ButtonRequestChatConfigs chatRequestConfigs) {
-            set('request_chat', chatRequestConfigs);
+            payload.set('request_chat', chatRequestConfigs);
             return this;
         }
 
@@ -249,7 +251,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<TelegramSendKeyboardOptions.Button>> instance
          */
         global Button asPollRequest(String pollType) {
-            set('request_poll', new BotJsonPayload().set('type', pollType));
+            payload.set('request_poll', new BotJsonPayload().set('type', pollType));
             return this;
         }
 
@@ -259,7 +261,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<TelegramSendKeyboardOptions.Button>> instance
          */
         global Button asWebAppLauncher(String webAppUrl) {
-            set('web_app', new BotJsonPayload().set('url', webAppUrl));
+            payload.set('web_app', new BotJsonPayload().set('url', webAppUrl));
             return this;
         }
     }
@@ -267,12 +269,13 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
     /**
      * @description The builder-like class for requesting to share a specific list of chats. The source: https://core.telegram.org/bots/api#keyboardbuttonrequestchat
      */
-    global class ButtonRequestChatConfigs extends BotJsonPayload {
+    global class ButtonRequestChatConfigs extends BotPayload {
         /**
          * @description Creates an instance of the request chat configs without any requirenments
          */
         global ButtonRequestChatConfigs() {
-            set('request_id', DateTime.now().getTime().intValue());
+            super();
+            payload.set('request_id', DateTime.now().getTime().intValue());
         }
 
         /**
@@ -281,7 +284,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<TelegramSendKeyboardOptions.ButtonRequestChatConfigs>> instance
          */
         global ButtonRequestChatConfigs withChannels(Boolean isChannel) {
-            set('chat_is_channel', isChannel, true);
+            payload.set('chat_is_channel', isChannel, true);
             return this;
         }
 
@@ -291,7 +294,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<TelegramSendKeyboardOptions.ButtonRequestChatConfigs>> instance
          */
         global ButtonRequestChatConfigs withForums(Boolean isForum) {
-            set('chat_is_forum', isForum, true);
+            payload.set('chat_is_forum', isForum, true);
             return this;
         }
 
@@ -301,7 +304,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<TelegramSendKeyboardOptions.ButtonRequestChatConfigs>> instance
          */
         global ButtonRequestChatConfigs withUsername(Boolean hasUsername) {
-            set('chat_has_username', hasUsername, true);
+            payload.set('chat_has_username', hasUsername, true);
             return this;
         }
 
@@ -311,7 +314,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<TelegramSendKeyboardOptions.ButtonRequestChatConfigs>> instance
          */
         global ButtonRequestChatConfigs withCreated(Boolean isCreated) {
-            set('chat_is_created', isCreated, true);
+            payload.set('chat_is_created', isCreated, true);
             return this;
         }
 
@@ -321,7 +324,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<TelegramSendKeyboardOptions.ButtonRequestChatConfigs>> instance
          */
         global ButtonRequestChatConfigs withBot(Boolean hasBot) {
-            set('bot_is_member', hasBot, true);
+            payload.set('bot_is_member', hasBot, true);
             return this;
         }
 
@@ -335,7 +338,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
             for (String right : rights) {
                 rightsList.set(right, true);
             }
-            set('user_administrator_rights', rightsList);
+            payload.set('user_administrator_rights', rightsList);
             return this;
         }
 
@@ -349,7 +352,7 @@ global class TelegramSendKeyboardOptions extends BotJsonPayload {
             for (String right : rights) {
                 rightsList.set(right, true);
             }
-            set('bot_administrator_rights', rightsList);
+            payload.set('bot_administrator_rights', rightsList);
             return this;
         }
     }

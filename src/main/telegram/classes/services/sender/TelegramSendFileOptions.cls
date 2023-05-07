@@ -15,7 +15,7 @@ global class TelegramSendFileOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendFileOptions>> class
      */
     global TelegramSendFileOptions withCaption(String caption) {
-        set('caption', caption, true);
+        payload.set('caption', caption, true);
         return this;
     }
 
@@ -25,7 +25,7 @@ global class TelegramSendFileOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendFileOptions>> class
      */
     global TelegramSendFileOptions withThumbnail(String thumbnailUrl) {
-        set('thumbnail', thumbnailUrl, true);
+        payload.set('thumbnail', thumbnailUrl, true);
         return this;
     }
 
@@ -34,7 +34,7 @@ global class TelegramSendFileOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendFileOptions>> class
      */
     global TelegramSendFileOptions withoutContentTypeDetection() {
-        set('disable_content_type_detection', true);
+        payload.set('disable_content_type_detection', true);
         return this;
     }
 

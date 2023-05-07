@@ -15,7 +15,7 @@ global class TelegramSendVideoOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendVideoOptions>> class
      */
     global TelegramSendVideoOptions withCaption(String caption) {
-        set('caption', caption, true);
+        payload.set('caption', caption, true);
         return this;
     }
 
@@ -24,7 +24,7 @@ global class TelegramSendVideoOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendVideoOptions>> class
      */
     global TelegramSendVideoOptions withSpoiler() {
-        set('has_spoiler', true);
+        payload.set('has_spoiler', true);
         return this;
     }
 
@@ -34,7 +34,7 @@ global class TelegramSendVideoOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendVideoOptions>> class
      */
     global TelegramSendVideoOptions withDuration(Integer duration) {
-        set('duration', duration, true);
+        payload.set('duration', duration, true);
         return this;
     }
 
@@ -45,8 +45,8 @@ global class TelegramSendVideoOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendVideoOptions>> class
      */
     global TelegramSendVideoOptions withLayout(Integer width, Integer height) {
-        set('width', width, true);
-        set('height', height, true);
+        payload.set('width', width, true);
+        payload.set('height', height, true);
         return this;
     }
 
@@ -56,7 +56,7 @@ global class TelegramSendVideoOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendVideoOptions>> class
      */
     global TelegramSendVideoOptions withThumbnail(String thumbnailUrl) {
-        set('thumbnail', thumbnailUrl, true);
+        payload.set('thumbnail', thumbnailUrl, true);
         return this;
     }
 
@@ -65,7 +65,7 @@ global class TelegramSendVideoOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendVideoOptions>> class
      */
     global TelegramSendVideoOptions withStreamingSupport() {
-        set('supports_streaming', true);
+        payload.set('supports_streaming', true);
         return this;
     }
 

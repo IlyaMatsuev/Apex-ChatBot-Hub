@@ -8,7 +8,7 @@ global class TelegramSendVideoNoteOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendVideoNoteOptions>> class
      */
     global TelegramSendVideoNoteOptions withDuration(Integer duration) {
-        set('duration', duration, true);
+        payload.set('duration', duration, true);
         return this;
     }
 
@@ -18,7 +18,7 @@ global class TelegramSendVideoNoteOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendVideoNoteOptions>> class
      */
     global TelegramSendVideoNoteOptions withSize(Integer length) {
-        set('length', length, true);
+        payload.set('length', length, true);
         return this;
     }
 
@@ -37,7 +37,7 @@ global class TelegramSendVideoNoteOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendVideoNoteOptions>> class
      */
     global TelegramSendVideoNoteOptions withThumbnail(String thumbnailUrl) {
-        set('thumbnail', thumbnailUrl, true);
+        payload.set('thumbnail', thumbnailUrl, true);
         return this;
     }
 

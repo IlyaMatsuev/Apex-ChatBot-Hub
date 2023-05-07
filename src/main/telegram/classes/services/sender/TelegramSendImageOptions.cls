@@ -15,7 +15,7 @@ global class TelegramSendImageOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendImageOptions>> class
      */
     global TelegramSendImageOptions withCaption(String caption) {
-        set('caption', caption, true);
+        payload.set('caption', caption, true);
         return this;
     }
 
@@ -24,7 +24,7 @@ global class TelegramSendImageOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendImageOptions>> class
      */
     global TelegramSendImageOptions withSpoiler() {
-        set('has_spoiler', true);
+        payload.set('has_spoiler', true);
         return this;
     }
 

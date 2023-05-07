@@ -28,10 +28,6 @@ public class BotSettingsProvider {
         return settings.get(type);
     }
 
-    public static Type getClassType(BotType botType, SObjectField field) {
-        return Type.forName(get(botType).get(field).toString());
-    }
-
     @TestVisible
     private static void mock() {
         settings.put(

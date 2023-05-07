@@ -1,13 +1,17 @@
 /**
  * @description Describes the message payload received as an update from a `Viber` bot
  */
-global class ViberBotMessage extends BotJsonPayload implements IBotMessage {
+global class ViberBotMessage extends BotPayload implements IBotMessage {
+    public ViberBotMessage(BotJsonPayload payload) {
+        super(payload);
+    }
+
     /**
      * @description Returns the `Viber` message id
      * @return The `Viber` message id
      */
     global String getId() {
-        return getString('message_id');
+        return payload.getString('message_id');
     }
 
     /**
@@ -15,7 +19,7 @@ global class ViberBotMessage extends BotJsonPayload implements IBotMessage {
      * @return The message text
      */
     global String getText() {
-        return getString('text');
+        return payload.getString('text');
     }
 
     /**
@@ -23,6 +27,6 @@ global class ViberBotMessage extends BotJsonPayload implements IBotMessage {
      * @return The message send date
      */
     global DateTime getSendDate() {
-        return getDateTime('timestamp');
+        return payload.getDateTime('timestamp');
     }
 }

@@ -27,10 +27,7 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         for (BotUpdateEvent__e event : events) {
             BotModel bot = BotModel.fromJson(event.Bot__c);
 
-            IBotUpdateEvent updateEvent = (IBotUpdateEvent) BotJsonPayload.fromJson(
-                event.Payload__c,
-                BotSettingsProvider.getClassType(bot.type, BotSetting__mdt.BotUpdateEvent__c)
-            );
+            IBotUpdateEvent updateEvent = serviceFactory.createBotUpdateEvent(bot, event.Payload__c);
 
             if (shouldHandleEvent(BotSettingsProvider.get(bot.type), updateEvent.getType())) {
                 IBotContext context = serviceFactory.createBotContext(bot, event.Payload__c);

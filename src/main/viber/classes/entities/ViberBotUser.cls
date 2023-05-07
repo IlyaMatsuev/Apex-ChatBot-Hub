@@ -1,15 +1,27 @@
 /**
  * @description Describes the sender payload received as an update from a `Viber` bot
  */
-global class ViberBotUser extends BotJsonPayload implements IBotUser {
-    private static UserName fullName;
+global class ViberBotUser extends BotPayload implements IBotUser {
+    private UserName fullName {
+        get {
+            if (fullName == null) {
+                fullName = new UserName(payload.getString('name'));
+            }
+            return fullName;
+        }
+        set;
+    }
+
+    public ViberBotUser(BotJsonPayload payload) {
+        super(payload);
+    }
 
     /**
      * @description Returns the `Viber` user id
      * @return The `Viber` user id
      */
     global String getId() {
-        return getString('id');
+        return payload.getString('id');
     }
 
     /**
@@ -17,7 +29,7 @@ global class ViberBotUser extends BotJsonPayload implements IBotUser {
      * @return The `Viber` user first name
      */
     global String getFirstName() {
-        return getFullName().firstName;
+        return fullName.firstName;
     }
 
     /**
@@ -25,7 +37,7 @@ global class ViberBotUser extends BotJsonPayload implements IBotUser {
      * @return The `Viber` user last name
      */
     global String getLastName() {
-        return getFullName().lastName;
+        return fullName.lastName;
     }
 
     /**
@@ -34,13 +46,6 @@ global class ViberBotUser extends BotJsonPayload implements IBotUser {
      */
     global String getUsername() {
         return getId();
-    }
-
-    private UserName getFullName() {
-        if (fullName == null) {
-            fullName = new UserName(getString('name'));
-        }
-        return fullName;
     }
 
     private class UserName {

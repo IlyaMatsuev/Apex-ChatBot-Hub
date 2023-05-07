@@ -5,7 +5,10 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
     /**
      * @description The list of poll answers (options)
      */
-    global List<String> answers { get { return (List<String>) get('options'); } set { set('options', value); } }
+    global List<String> answers {
+        get { return (List<String>) payload.get('options'); }
+        set { payload.set('options', value); }
+    }
 
     /**
      * @description Creates a new instance of the poll options
@@ -59,7 +62,7 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
     global TelegramSendPollOptions asAnonymous(Boolean isAnonymous) {
-        set('is_anonymous', isAnonymous, true);
+        payload.set('is_anonymous', isAnonymous, true);
         return this;
     }
 
@@ -77,7 +80,7 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
     global TelegramSendPollOptions allowMultipleAnswers(Boolean allowMultiAnswers) {
-        set('allows_multiple_answers', allowMultiAnswers, true);
+        payload.set('allows_multiple_answers', allowMultiAnswers, true);
         return this;
     }
 
@@ -113,9 +116,9 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
     global TelegramSendPollOptions asQuiz(Integer correctOptionId, String explanation) {
-        set('type', 'quiz');
-        set('correct_option_id', correctOptionId, true);
-        set('explanation', explanation, true);
+        payload.set('type', 'quiz');
+        payload.set('correct_option_id', correctOptionId, true);
+        payload.set('explanation', explanation, true);
         return this;
     }
 
@@ -125,7 +128,7 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
     global TelegramSendPollOptions withExplanationParseMode(String mode) {
-        set('explanation_parse_mode', mode, true);
+        payload.set('explanation_parse_mode', mode, true);
         return this;
     }
 
@@ -153,7 +156,7 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
     global TelegramSendPollOptions withOpenPeriod(Integer period) {
-        set('open_period', period, true);
+        payload.set('open_period', period, true);
         return this;
     }
 
@@ -163,7 +166,7 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
     global TelegramSendPollOptions withCloseDate(DateTime closeDate) {
-        set('close_date', closeDate?.getTime() / 1000, true);
+        payload.set('close_date', closeDate?.getTime() / 1000, true);
         return this;
     }
 
@@ -172,7 +175,7 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
     global TelegramSendPollOptions asClosed() {
-        set('is_closed', true);
+        payload.set('is_closed', true);
         return this;
     }
 }

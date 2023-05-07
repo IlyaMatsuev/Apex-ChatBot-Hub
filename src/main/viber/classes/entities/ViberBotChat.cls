@@ -1,13 +1,17 @@
 /**
  * @description Describes the chat payload received as an update from a `Viber` bot
  */
-global class ViberBotChat extends BotJsonPayload implements IBotChat {
+global class ViberBotChat extends BotPayload implements IBotChat {
+    public ViberBotChat(BotJsonPayload payload) {
+        super(payload);
+    }
+
     /**
      * @description Returns the `Viber` chat id
      * @return The `Viber` chat id
      */
     global String getId() {
-        return getString('id');
+        return payload.getString('id');
     }
 
     /**
@@ -15,14 +19,14 @@ global class ViberBotChat extends BotJsonPayload implements IBotChat {
      * @return The chat title
      */
     global String getTitle() {
-        return getString('name');
+        return payload.getString('name');
     }
 
     /**
      * @description Returns the payload of the `Viber` user who wrote the message received in the update
-     * @return The instance of the <<ViberBotUser>> interface
+     * @return The instance of the <<ViberBotUser>> class
      */
     global ViberBotUser getSender() {
-        return (ViberBotUser) BotJsonPayload.fromJson(toJson(), ViberBotUser.class);
+        return new ViberBotUser(payload);
     }
 }

@@ -1,14 +1,14 @@
 /**
  * @description The builder-like class that describes all optional parameters of the `Telegram` `sendContact` method. The source: https://core.telegram.org/bots/api#sendcontact
  */
-global class TelegramSendContactOptions extends BotJsonPayload {
+global class TelegramSendContactOptions extends BotPayload {
     /**
      * @description Sets the forum channel thread id where the message has to be sent
      * @param threadId The `Telegram` unique id for the target message thread (topic)
      * @return The current instance of the <<TelegramSendContactOptions>> class
      */
     global TelegramSendContactOptions withThreadId(String threadId) {
-        set('message_thread_id', BotUtils.parseExternalId(threadId), true);
+        payload.set('message_thread_id', BotUtils.parseExternalId(threadId), true);
         return this;
     }
 
@@ -18,7 +18,7 @@ global class TelegramSendContactOptions extends BotJsonPayload {
      * @return The current instance of the <<TelegramSendContactOptions>> class
      */
     global TelegramSendContactOptions withVCard(String vcard) {
-        set('vcard', vcard, true);
+        payload.set('vcard', vcard, true);
         return this;
     }
 
@@ -27,7 +27,7 @@ global class TelegramSendContactOptions extends BotJsonPayload {
      * @return The current instance of the <<TelegramSendContactOptions>> class
      */
     global TelegramSendContactOptions withoutNotification() {
-        set('disable_notification', true);
+        payload.set('disable_notification', true);
         return this;
     }
 
@@ -36,7 +36,7 @@ global class TelegramSendContactOptions extends BotJsonPayload {
      * @return The current instance of the <<TelegramSendContactOptions>> class
      */
     global TelegramSendContactOptions withProtectedContent() {
-        set('protect_content', true);
+        payload.set('protect_content', true);
         return this;
     }
 
@@ -46,8 +46,8 @@ global class TelegramSendContactOptions extends BotJsonPayload {
      * @return The current instance of the <<TelegramSendContactOptions>> class
      */
     global TelegramSendContactOptions asReplyToMessage(String messageId) {
-        set('reply_to_message_id', BotUtils.parseExternalId(messageId), true);
-        set('allow_sending_without_reply', true);
+        payload.set('reply_to_message_id', BotUtils.parseExternalId(messageId), true);
+        payload.set('allow_sending_without_reply', true);
         return this;
     }
 }

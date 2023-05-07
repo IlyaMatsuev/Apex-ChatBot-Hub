@@ -68,7 +68,7 @@ global class TelegramSendTextOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendTextOptions>> class
      */
     global TelegramSendTextOptions withoutLinksPreview() {
-        set('disable_web_page_preview', true);
+        payload.set('disable_web_page_preview', true);
         return this;
     }
 }

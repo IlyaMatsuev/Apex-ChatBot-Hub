@@ -15,7 +15,7 @@ global class TelegramSendAudioOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendAudioOptions>> class
      */
     global TelegramSendAudioOptions withCaption(String caption) {
-        set('caption', caption, true);
+        payload.set('caption', caption, true);
         return this;
     }
 
@@ -26,8 +26,8 @@ global class TelegramSendAudioOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendAudioOptions>> class
      */
     global TelegramSendAudioOptions withTrackName(String performer, String title) {
-        set('performer', performer, true);
-        set('title', title, true);
+        payload.set('performer', performer, true);
+        payload.set('title', title, true);
         return this;
     }
 
@@ -37,7 +37,7 @@ global class TelegramSendAudioOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendAudioOptions>> class
      */
     global TelegramSendAudioOptions withDuration(Integer duration) {
-        set('duration', duration, true);
+        payload.set('duration', duration, true);
         return this;
     }
 
@@ -47,7 +47,7 @@ global class TelegramSendAudioOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendAudioOptions>> class
      */
     global TelegramSendAudioOptions withThumbnail(String thumbnailUrl) {
-        set('thumbnail', thumbnailUrl, true);
+        payload.set('thumbnail', thumbnailUrl, true);
         return this;
     }
 

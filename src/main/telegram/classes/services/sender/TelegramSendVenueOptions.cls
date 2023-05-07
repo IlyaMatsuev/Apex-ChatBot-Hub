@@ -43,8 +43,8 @@ global class TelegramSendVenueOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendVenueOptions>> class
      */
     global TelegramSendVenueOptions asFoursquarePlace(String id, String type) {
-        set('foursquare_id', id, true);
-        set('foursquare_type', type, true);
+        payload.set('foursquare_id', id, true);
+        payload.set('foursquare_type', type, true);
         return this;
     }
 
@@ -55,8 +55,8 @@ global class TelegramSendVenueOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendVenueOptions>> class
      */
     global TelegramSendVenueOptions asGooglePlace(String id, String type) {
-        set('google_place_id', id, true);
-        set('google_place_type', type, true);
+        payload.set('google_place_id', id, true);
+        payload.set('google_place_type', type, true);
         return this;
     }
 }

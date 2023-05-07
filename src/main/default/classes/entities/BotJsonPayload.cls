@@ -104,7 +104,17 @@ global virtual class BotJsonPayload {
      * @return The `String` value from the JSON
      */
     global String getString(String key) {
-        return String.valueOf(get(key));
+        return getString(key, null);
+    }
+
+    /**
+     * @description Returns a value from the JSON by the provided key, converting it to `String`. Returns default if the JSON value is `null` or does not exist
+     * @param key The JSON value key
+     * @param defaultValue The default value to return if the JSON value is `null` or does not exist
+     * @return The `String` value from the JSON or default value
+     */
+    global String getString(String key, String defaultValue) {
+        return hasValue(key) ? String.valueOf(get(key)) : defaultValue;
     }
 
     /**
@@ -181,6 +191,9 @@ global virtual class BotJsonPayload {
         if (value instanceof BotJsonPayload) {
             return (BotJsonPayload) value;
         }
+        if (value instanceof BotPayload) {
+            return ((BotPayload) value).getPayload();
+        }
         BotJsonPayload newPayload = (BotJsonPayload) payloadType.newInstance();
         newPayload.values.putAll((Map<String, Object>) value);
         values.put(key, newPayload);
@@ -234,7 +247,9 @@ global virtual class BotJsonPayload {
     }
 
     private Object escapeExtraValueProperty(Object value) {
-        if (value instanceof BotJsonPayload) {
+        if (value instanceof BotPayload) {
+            return escapeExtraValueProperty(((BotPayload) value).getPayload());
+        } else if (value instanceof BotJsonPayload) {
             return escapeExtraValuesProperty(((BotJsonPayload) value).values);
         } else if (value instanceof Map<String, Object>) {
             return escapeExtraValuesProperty((Map<String, Object>) value);

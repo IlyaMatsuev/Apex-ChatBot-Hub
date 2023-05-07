@@ -11,7 +11,7 @@ public class BotErrorLogger implements Triggers.IErrorHandler {
         System.debug(LoggingLevel.ERROR, error.getMessage() + '\n' + error.getStackTraceString());
         BotError__c botError = new BotError__c(
             Bot__c = botId,
-            Message__c = error.getMessage(),
+            Message__c = error.getMessage().abbreviate(255),
             ExceptionType__c = error.getTypeName(),
             StackTrace__c = error.getStackTraceString()
         );

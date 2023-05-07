@@ -1,15 +1,15 @@
 /**
  * @description The builder-like class that describes common optional parameters of the `Telegram` for sending messages
  */
-global abstract class TelegramSendMessageOptions extends BotJsonPayload {
+global abstract class TelegramSendMessageOptions extends BotPayload {
     private final String entitiesFieldName;
 
     /**
      * @description The list of special entities that appear in a message text. E.g. hashtag, username, URL, etc.
      */
     global List<MessageEntity> entities {
-        get { return (List<MessageEntity>) get(entitiesFieldName); }
-        private set { set(entitiesFieldName, value); }
+        get { return (List<MessageEntity>) payload.get(entitiesFieldName); }
+        private set { payload.set(entitiesFieldName, value); }
     }
 
     /**
@@ -20,16 +20,17 @@ global abstract class TelegramSendMessageOptions extends BotJsonPayload {
     }
 
     protected TelegramSendMessageOptions(String entitiesFieldName) {
+        super();
         this.entitiesFieldName = entitiesFieldName;
     }
 
     protected TelegramSendMessageOptions setThreadId(String threadId) {
-        set('message_thread_id', BotUtils.parseExternalId(threadId), true);
+        payload.set('message_thread_id', BotUtils.parseExternalId(threadId), true);
         return this;
     }
 
     protected TelegramSendMessageOptions setParseMode(String mode) {
-        set('parse_mode', mode, true);
+        payload.set('parse_mode', mode, true);
         return this;
     }
 
@@ -42,25 +43,25 @@ global abstract class TelegramSendMessageOptions extends BotJsonPayload {
     }
 
     protected TelegramSendMessageOptions disableNotification() {
-        set('disable_notification', true);
+        payload.set('disable_notification', true);
         return this;
     }
 
     protected TelegramSendMessageOptions setProtectedContent() {
-        set('protect_content', true);
+        payload.set('protect_content', true);
         return this;
     }
 
     protected TelegramSendMessageOptions setReplyMessageId(String messageId) {
-        set('reply_to_message_id', BotUtils.parseExternalId(messageId), true);
-        set('allow_sending_without_reply', true);
+        payload.set('reply_to_message_id', BotUtils.parseExternalId(messageId), true);
+        payload.set('allow_sending_without_reply', true);
         return this;
     }
 
     /**
      * @description The builder-like class representing a special entity in a message text. For example, hashtags, usernames, etc. The source: https://core.telegram.org/bots/api#messageentity
      */
-    global class MessageEntity extends BotJsonPayload {
+    global class MessageEntity extends BotPayload {
         /**
          * @description Creates an instance of the message entity with the provided type and coordinates in the message text
          * @param type The type of the entity. Possible values: `mention`, `hashtag`, `cashtag`, `bot_command`, `url`, `email`, `phone_number`, `bold`, `italic`, `underline`, `strikethrough`, `spoiler`, `code`, `pre`, `text_link`, `text_mention`, `custom_emoji`
@@ -68,9 +69,10 @@ global abstract class TelegramSendMessageOptions extends BotJsonPayload {
          * @param length The length of the entity
          */
         global MessageEntity(String type, Integer offset, Integer length) {
-            set('type', type);
-            set('offset', offset);
-            set('length', length);
+            super();
+            payload.set('type', type);
+            payload.set('offset', offset);
+            payload.set('length', length);
         }
 
         /**
@@ -79,7 +81,7 @@ global abstract class TelegramSendMessageOptions extends BotJsonPayload {
          * @return The current instance of the message entity
          */
         global MessageEntity asUrl(String url) {
-            set('url', url, true);
+            payload.set('url', url, true);
             return this;
         }
 
@@ -89,7 +91,7 @@ global abstract class TelegramSendMessageOptions extends BotJsonPayload {
          * @return The current instance of the message entity
          */
         global MessageEntity asUserMention(String userId) {
-            set('user', new BotJsonPayload().set('id', BotUtils.parseExternalId(userId)));
+            payload.set('user', new BotJsonPayload().set('id', BotUtils.parseExternalId(userId)));
             return this;
         }
 
@@ -99,7 +101,7 @@ global abstract class TelegramSendMessageOptions extends BotJsonPayload {
          * @return The current instance of the message entity
          */
         global MessageEntity asProgrammingLanguage(String language) {
-            set('language', language, true);
+            payload.set('language', language, true);
             return this;
         }
 
@@ -109,7 +111,7 @@ global abstract class TelegramSendMessageOptions extends BotJsonPayload {
          * @return The current instance of the message entity
          */
         global MessageEntity asCustomEmoji(String emojiId) {
-            set('custom_emoji_id', emojiId, true);
+            payload.set('custom_emoji_id', emojiId, true);
             return this;
         }
     }

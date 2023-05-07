@@ -1,11 +1,14 @@
 /**
  * @description The builder-like class that represents parameters for sending a custom carousel/keyboard to the user via the `Viber` bot service. The source: https://developers.viber.com/docs/tools/keyboards/#general-keyboard-parameters
  */
-global class ViberSendKeyboardOptions extends BotJsonPayload {
+global class ViberSendKeyboardOptions extends BotPayload {
     /**
      * @description The list of buttons to be shown to the receiver
      */
-    global List<Button> buttons { get { return (List<Button>) get('Buttons'); } private set { set('Buttons', value); } }
+    global List<Button> buttons {
+        get { return (List<Button>) payload.get('Buttons'); }
+        private set { payload.set('Buttons', value); }
+    }
 
     /**
      * @description Creates an instance of the carousel/keyboard without any buttons, so that they can be added separately
@@ -19,6 +22,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
      * @param buttons The list of <<ViberSendKeyboardOptions.Button>> instances that represent buttons to be shown to the user
      */
     global ViberSendKeyboardOptions(List<Button> buttons) {
+        super();
         this.buttons = buttons;
     }
 
@@ -48,8 +52,8 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
      * @return The current <<ViberSendKeyboardOptions>> instance
      */
     global ViberSendKeyboardOptions setLayout(Integer groupRows, Integer groupColumns) {
-        set('ButtonsGroupRows', groupRows, true);
-        set('ButtonsGroupColumns', groupColumns, true);
+        payload.set('ButtonsGroupRows', groupRows, true);
+        payload.set('ButtonsGroupColumns', groupColumns, true);
         return this;
     }
 
@@ -59,7 +63,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
      * @return The current <<ViberSendKeyboardOptions>> instance
      */
     global ViberSendKeyboardOptions setBackgroundColor(String backgroundColor) {
-        set('BgColor', backgroundColor, true);
+        payload.set('BgColor', backgroundColor, true);
         return this;
     }
 
@@ -75,9 +79,9 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
         Integer heightScale,
         Boolean useDefaultHeight
     ) {
-        set('CustomDefaultHeight', customDefaultHeight, true);
-        set('HeightScale', heightScale, true);
-        set('DefaultHeight', useDefaultHeight, true);
+        payload.set('CustomDefaultHeight', customDefaultHeight, true);
+        payload.set('HeightScale', heightScale, true);
+        payload.set('DefaultHeight', useDefaultHeight, true);
         return this;
     }
 
@@ -87,7 +91,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
      * @return The current <<ViberSendKeyboardOptions>> instance
      */
     global ViberSendKeyboardOptions setInputFieldState(String inputFieldState) {
-        set('InputFieldState', inputFieldState, true);
+        payload.set('InputFieldState', inputFieldState, true);
         return this;
     }
 
@@ -97,21 +101,21 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
      * @return The current <<ViberSendKeyboardOptions>> instance
      */
     global ViberSendKeyboardOptions allowSaveToFavorites(FavoritesMetadata favoritesMetadata) {
-        set('FavoritesMetadata', favoritesMetadata);
+        payload.set('FavoritesMetadata', favoritesMetadata);
         return this;
     }
 
     public ViberSendKeyboardOptions setType(String keyboardType) {
-        set('Type', keyboardType);
+        payload.set('Type', keyboardType);
         return this;
     }
 
     /**
      * @description The wrapper class representing a button in the `Viber` carousel/keyboard. The source: https://developers.viber.com/docs/tools/keyboards/#buttons-parameters
      */
-    global class Button extends BotJsonPayload {
-        private String actionType { set { set('ActionType', value); } }
-        private String actionBody { set { set('ActionBody', value); } }
+    global class Button extends BotPayload {
+        private String actionType { set { payload.set('ActionType', value); } }
+        private String actionBody { set { payload.set('ActionBody', value); } }
 
         /**
          * @description Sets the button layout
@@ -120,8 +124,8 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setLayout(Integer rows, Integer columns) {
-            set('Rows', rows, true);
-            set('Columns', columns, true);
+            payload.set('Rows', rows, true);
+            payload.set('Columns', columns, true);
             return this;
         }
 
@@ -131,7 +135,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setBackgroundColor(String backgroundColor) {
-            set('BgColor', backgroundColor, true);
+            payload.set('BgColor', backgroundColor, true);
             return this;
         }
 
@@ -144,10 +148,10 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setBackgroundMedia(String mediaUrl, String mediaScaleType, Boolean isGif, Boolean loopGif) {
-            set('BgMedia', mediaUrl, true);
-            set('BgMediaScaleType', mediaScaleType, true);
-            set('BgMediaType', isGif ? 'gif' : 'picture');
-            set('BgLoop', isGif ? loopGif : null, true);
+            payload.set('BgMedia', mediaUrl, true);
+            payload.set('BgMediaScaleType', mediaScaleType, true);
+            payload.set('BgMediaType', isGif ? 'gif' : 'picture');
+            payload.set('BgLoop', isGif ? loopGif : null, true);
             return this;
         }
 
@@ -221,9 +225,9 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
             this.actionType = 'open-url';
             this.actionBody = url;
             useInternalBrowser();
-            set('OpenURLMediaType', mediaType, true);
-            set('MediaPlayer', mediaPlayerConfig, true);
-            set('InternalBrowser', internalBrowserConfig, true);
+            payload.set('OpenURLMediaType', mediaType, true);
+            payload.set('MediaPlayer', mediaPlayerConfig, true);
+            payload.set('InternalBrowser', internalBrowserConfig, true);
             return this;
         }
 
@@ -235,7 +239,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          */
         global Button asOpenMap(Decimal latitude, Decimal longitude) {
             this.actionType = 'open-map';
-            set('Map', new BotJsonPayload().set('Latitude', latitude).set('Longitude', longitude));
+            payload.set('Map', new BotJsonPayload().set('Latitude', latitude).set('Longitude', longitude));
             return this;
         }
 
@@ -265,7 +269,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setText(String text) {
-            set('Text', text, true);
+            payload.set('Text', text, true);
             return this;
         }
 
@@ -276,8 +280,8 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setTextAlignment(String verticalAlign, String horizontalAlign) {
-            set('TextVAlign', verticalAlign, true);
-            set('TextHAlign', horizontalAlign, true);
+            payload.set('TextVAlign', verticalAlign, true);
+            payload.set('TextHAlign', horizontalAlign, true);
             return this;
         }
 
@@ -290,7 +294,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setTextPaddings(Integer top, Integer right, Integer bottom, Integer left) {
-            set('TextPaddings', new List<Integer> { top, right, bottom, left });
+            payload.set('TextPaddings', new List<Integer> { top, right, bottom, left });
             return this;
         }
 
@@ -303,10 +307,10 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setTextStyle(Integer opacity, String size, String bgGradientColor, Boolean fitText) {
-            set('TextOpacity', opacity, true);
-            set('TextSize', size, true);
-            set('TextBgGradientColor', bgGradientColor, true);
-            set('TextShouldFit', fitText, true);
+            payload.set('TextOpacity', opacity, true);
+            payload.set('TextSize', size, true);
+            payload.set('TextBgGradientColor', bgGradientColor, true);
+            payload.set('TextShouldFit', fitText, true);
             return this;
         }
 
@@ -316,7 +320,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button setImage(String imageUrl) {
-            set('Image', imageUrl, true);
+            payload.set('Image', imageUrl, true);
             return this;
         }
 
@@ -333,7 +337,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
                 .set('CornerRadius', cornerRadius, true)
                 .set('BorderColor', borderColor, true);
 
-            set('Frame', frame);
+            payload.set('Frame', frame);
             return this;
         }
 
@@ -351,7 +355,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button useInternalBrowser(Boolean shouldUseInternalBrowser) {
-            set('OpenURLType', shouldUseInternalBrowser ? 'internal' : 'external');
+            payload.set('OpenURLType', shouldUseInternalBrowser ? 'internal' : 'external');
             return this;
         }
 
@@ -361,7 +365,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current <<ViberSendKeyboardOptions.Button>> instance
          */
         global Button useSilentMode(Boolean useSilent) {
-            set('Silent', useSilent, true);
+            payload.set('Silent', useSilent, true);
             return this;
         }
     }
@@ -448,7 +452,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
     /**
      * @description The wrapper class representing configurations for the internal browser opening for `open-url` button action type
      */
-    global class ButtonInternalBrowser extends BotJsonPayload {
+    global class ButtonInternalBrowser extends BotPayload {
         /**
          * @description Sets properties for the internal browser action button
          * @param action The action button type in the internal's browser navigation bar.
@@ -463,9 +467,9 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>>
          */
         global ButtonInternalBrowser setActionButton(String action, String predefinedMessage, String replyData) {
-            set('ActionButton', action, true);
-            set('ActionPredefinedURL', predefinedMessage, true);
-            set('ActionReplyData', replyData, true);
+            payload.set('ActionButton', action, true);
+            payload.set('ActionPredefinedURL', predefinedMessage, true);
+            payload.set('ActionReplyData', replyData, true);
             return this;
         }
 
@@ -479,9 +483,9 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          */
         global ButtonInternalBrowser setTitle(String title) {
             if (title == 'domain' || title == 'default') {
-                set('TitleType', title);
+                payload.set('TitleType', title);
             } else {
-                set('CustomTitle', title, true);
+                payload.set('CustomTitle', title, true);
             }
             return this;
         }
@@ -492,7 +496,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>>
          */
         global ButtonInternalBrowser setMode(String mode) {
-            set('Mode', mode, true);
+            payload.set('Mode', mode, true);
             return this;
         }
 
@@ -502,7 +506,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @return The current instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>>
          */
         global ButtonInternalBrowser withFooter(Boolean showFooter) {
-            set('FooterType', showFooter ? 'default' : 'hidden');
+            payload.set('FooterType', showFooter ? 'default' : 'hidden');
             return this;
         }
     }
@@ -510,7 +514,7 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
     /**
      * @description The wrapper class representing configurations for the internal media player
      */
-    global class ButtonMediaPlayer extends BotJsonPayload {
+    global class ButtonMediaPlayer extends BotPayload {
         /**
          * @description Creates an instance of a media player configurations
          * @param title The media player's title (first line)
@@ -519,10 +523,11 @@ global class ViberSendKeyboardOptions extends BotJsonPayload {
          * @param shouldLoop Whether the media player should be looped forever or not. Default is `false`
          */
         global ButtonMediaPlayer(String title, String subtitle, String thumbnail, Boolean shouldLoop) {
-            set('Title', title, true);
-            set('Subtitle', subtitle, true);
-            set('ThumbnailURL', thumbnail, true);
-            set('Loop', shouldLoop, true);
+            super();
+            payload.set('Title', title, true);
+            payload.set('Subtitle', subtitle, true);
+            payload.set('ThumbnailURL', thumbnail, true);
+            payload.set('Loop', shouldLoop, true);
         }
     }
 }

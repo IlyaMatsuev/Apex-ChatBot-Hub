@@ -1,13 +1,17 @@
 /**
  * @description Describes the message payload received as an update from a `Telegram` bot
  */
-global class TelegramBotMessage extends BotJsonPayload implements IBotMessage {
+global class TelegramBotMessage extends BotPayload implements IBotMessage {
+    public TelegramBotMessage(BotJsonPayload payload) {
+        super(payload);
+    }
+
     /**
      * @description Returns the `Telegram` message id
      * @return The `Telegram` message id
      */
     global String getId() {
-        return getString('message_id');
+        return payload.getString('message_id');
     }
 
     /**
@@ -15,7 +19,7 @@ global class TelegramBotMessage extends BotJsonPayload implements IBotMessage {
      * @return The message text
      */
     global String getText() {
-        return getString('text');
+        return payload.getString('text');
     }
 
     /**
@@ -23,6 +27,6 @@ global class TelegramBotMessage extends BotJsonPayload implements IBotMessage {
      * @return The message send date
      */
     global DateTime getSendDate() {
-        return getDateTime('date');
+        return payload.getDateTime('date');
     }
 }
