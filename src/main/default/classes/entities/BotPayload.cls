@@ -20,7 +20,7 @@ public abstract class BotPayload {
         this.payload = payload;
     }
 
-    public BotJsonPayload getPayload() {
+    public BotJsonPayload getJsonPayload() {
         return payload;
     }
 }

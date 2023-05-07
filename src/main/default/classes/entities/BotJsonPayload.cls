@@ -15,8 +15,12 @@ global virtual class BotJsonPayload {
      * @description Creates a new instance of JSON payload by the provided values from another instance
      * @param values Another instance of <<BotJsonPayload>> to copy values from
      */
-    global BotJsonPayload(BotJsonPayload values) {
-        this(values.getValues());
+    global BotJsonPayload(BotJsonPayload payload) {
+        this(payload.getValues());
+    }
+
+    public BotJsonPayload(BotPayload payload) {
+        this(payload.getJsonPayload().getValues());
     }
 
     /**
@@ -192,7 +196,7 @@ global virtual class BotJsonPayload {
             return (BotJsonPayload) value;
         }
         if (value instanceof BotPayload) {
-            return ((BotPayload) value).getPayload();
+            return ((BotPayload) value).getJsonPayload();
         }
         BotJsonPayload newPayload = (BotJsonPayload) payloadType.newInstance();
         newPayload.values.putAll((Map<String, Object>) value);
@@ -248,7 +252,7 @@ global virtual class BotJsonPayload {
 
     private Object escapeExtraValueProperty(Object value) {
         if (value instanceof BotPayload) {
-            return escapeExtraValueProperty(((BotPayload) value).getPayload());
+            return escapeExtraValueProperty(((BotPayload) value).getJsonPayload());
         } else if (value instanceof BotJsonPayload) {
             return escapeExtraValuesProperty(((BotJsonPayload) value).values);
         } else if (value instanceof Map<String, Object>) {

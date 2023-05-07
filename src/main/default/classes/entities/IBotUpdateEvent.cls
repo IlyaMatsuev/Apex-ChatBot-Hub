@@ -19,4 +19,10 @@ global interface IBotUpdateEvent {
      * @return The instance of the <<IBotChat>> interface
      */
     IBotChat getChat();
+
+    /**
+     * @description Returns the source JSON payload of the update event
+     * @return The instance of the <<BotJsonPayload>>
+     */
+    BotJsonPayload getPayload();
 }

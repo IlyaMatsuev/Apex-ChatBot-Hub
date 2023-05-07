@@ -35,4 +35,12 @@ global class ViberBotUpdateEvent extends BotPayload implements IBotUpdateEvent {
         String chatField = payload.has('user') ? 'user' : 'sender';
         return new ViberBotChat(payload.getJsonPayload(chatField));
     }
+
+    /**
+     * @description Returns the source JSON payload of the update event
+     * @return The instance of the <<BotJsonPayload>>
+     */
+    global BotJsonPayload getPayload() {
+        return getJsonPayload();
+    }
 }

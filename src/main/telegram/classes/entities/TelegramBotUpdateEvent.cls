@@ -43,4 +43,12 @@ global class TelegramBotUpdateEvent extends BotPayload implements IBotUpdateEven
         chat.payload.set('user', user);
         return chat;
     }
+
+    /**
+     * @description Returns the source JSON payload of the update event
+     * @return The instance of the <<BotJsonPayload>>
+     */
+    global BotJsonPayload getPayload() {
+        return getJsonPayload();
+    }
 }
