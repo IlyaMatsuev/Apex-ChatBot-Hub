@@ -26,14 +26,15 @@ global class ViberBotUpdateEvent extends BotPayload implements IBotUpdateEvent {
         return new ViberBotMessage(message);
     }
 
-    // TODO: This can be null in some cases: Unsubscribed, Delivered, Seen, Failed
     /**
-     * @description Returns the `Viber` chat payload received in the update
+     * @description Returns the `Viber` chat payload received in the update. Can be null if the received update does not contain chat information
      * @return The instance of the <<ViberBotChat>> class
      */
     global ViberBotChat getChat() {
-        String chatField = payload.has('user') ? 'user' : 'sender';
-        return new ViberBotChat(payload.getJsonPayload(chatField));
+        if (!payload.has('user') && !payload.has('sender')) {
+            return null;
+        }
+        return new ViberBotChat(payload.getJsonPayload(payload.has('user') ? 'user' : 'sender'));
     }
 
     /**

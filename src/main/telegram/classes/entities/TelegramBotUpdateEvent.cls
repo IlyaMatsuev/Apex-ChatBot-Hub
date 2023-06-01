@@ -29,18 +29,19 @@ global class TelegramBotUpdateEvent extends BotPayload implements IBotUpdateEven
         return new TelegramBotMessage(payload.getJsonPayload(TelegramBotUpdateEventType.Message.name()));
     }
 
-    // TODO: Check if this can ever be null
     /**
-     * @description Returns the `Telegram` chat payload received in the update
+     * @description Returns the `Telegram` chat payload received in the update. Can be `null` if the update is not chat-related
      * @return The instance of the <<TelegramBotChat>> class
      */
     global TelegramBotChat getChat() {
-        // TODO: This won't work in case on another update type other than `message`
-        TelegramBotMessage message = getMessage();
-        TelegramBotUser user = new TelegramBotUser(message.payload.getJsonPayload('from'));
-        TelegramBotChat chat = new TelegramBotChat(message.payload.getJsonPayload('chat'));
-        // Set user payload into the chat payload so that it can be accessed from the IBotChat
-        chat.payload.set('user', user);
+        BotJsonPayload updatePayload = payload.getJsonPayload(getType().name());
+        TelegramBotChat chat;
+        if (updatePayload.has('chat')) {
+            chat = new TelegramBotChat(updatePayload.getJsonPayload('chat'));
+            chat.payload.set('user', new TelegramBotUser(updatePayload.getJsonPayload('from')));
+        } else if (updatePayload.has('from')) {
+            chat = new TelegramBotChat(updatePayload.getJsonPayload('from'));
+        }
         return chat;
     }
 
