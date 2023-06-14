@@ -26,10 +26,6 @@
                 <behavior>Required</behavior>
                 <field>ApiUrl__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>EventTypesToIgnore__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

@@ -14,8 +14,7 @@ public class BotSettingsProvider {
                     BotCalloutService__c,
                     BotUpdateResolver__c,
                     BotUpdateEvent__c,
-                    BotHandlerContext__c,
-                    EventTypesToIgnore__c
+                    BotHandlerContext__c
                 FROM BotSetting__mdt
                 WHERE DeveloperName = :type.name()
                 LIMIT 1
@@ -53,7 +52,6 @@ public class BotSettingsProvider {
                 BotHandlerContext__c = 'ViberBotContext',
                 BotUpdateResolver__c = 'ViberBotUpdateResolver',
                 BotWebhookService__c = 'ViberBotWebhookService',
-                EventTypesToIgnore__c = 'webhook',
                 BotCalloutService__c = 'ViberBotCalloutService'
             )
         );

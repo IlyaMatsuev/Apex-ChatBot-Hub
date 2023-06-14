@@ -20,19 +20,14 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         System.enqueueJob(new UpdateEventExecutor(updateEvents));
     }
 
-    // TODO: Make this handler able to handle not only message events
     private List<UpdateEventWrapper> createUpdateEventWrappers(List<BotUpdateEvent__e> events) {
         // The loop is needed when a user sends several messages at the same time
         List<UpdateEventWrapper> updateEvents = new List<UpdateEventWrapper>();
         for (BotUpdateEvent__e event : events) {
             BotModel bot = BotModel.fromJson(event.Bot__c);
-
+            IBotContext context = serviceFactory.createBotContext(bot, event.Payload__c);
             IBotUpdateEvent updateEvent = serviceFactory.createBotUpdateEvent(bot, event.Payload__c);
-
-            if (shouldHandleEvent(BotSettingsProvider.get(bot.type), updateEvent.getType())) {
-                IBotContext context = serviceFactory.createBotContext(bot, event.Payload__c);
-                updateEvents.add(new UpdateEventWrapper(context, updateEvent));
-            }
+            updateEvents.add(new UpdateEventWrapper(context, updateEvent));
         }
         return updateEvents;
     }
@@ -44,18 +39,20 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         for (UpdateEventWrapper updateEvent : updateEvents) {
             Chat__c chat = getChat(updateEvent.context.getBot(), updateEvent.updateEvent.getChat());
             ChatUser__c user = getChatUser(updateEvent.updateEvent.getChat().getSender());
+
             ChatMessage__c message = getChatMessage(
                 chat.ExternalId__c,
                 user.ExternalId__c,
                 updateEvent.updateEvent.getMessage()
             );
-            if (!chats.contains(chat)) {
+
+            if (chat != null && !chats.contains(chat)) {
                 chats.add(chat);
             }
-            if (!chatUsers.contains(user)) {
+            if (user != null && !chatUsers.contains(user)) {
                 chatUsers.add(user);
             }
-            if (!chatMessages.contains(message)) {
+            if (message != null && !chatMessages.contains(message)) {
                 chatMessages.add(message);
             }
         }
@@ -65,12 +62,11 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         Database.upsert(chatMessages, ChatMessage__c.ExternalId__c);
     }
 
-    private Boolean shouldHandleEvent(BotSetting__mdt settings, BotUpdateEventType updateEventType) {
-        List<String> ignoreEventTypes = settings.EventTypesToIgnore__c?.split(';');
-        return ignoreEventTypes == null || !ignoreEventTypes.contains(updateEventType.name());
-    }
-
     private Chat__c getChat(BotModel bot, IBotChat chat) {
+        if (chat == null) {
+            return null;
+        }
+
         return new Chat__c(
             Name = chat.getTitle(),
             Bot__c = bot.id,
@@ -79,6 +75,10 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
     }
 
     private ChatUser__c getChatUser(IBotUser user) {
+        if (user == null) {
+            return null;
+        }
+
         String userName = user.getUsername();
         if (String.isNotBlank(user.getFirstName()) || String.isNotBlank(user.getLastName())) {
             userName = getValueOrEmptyString(user.getFirstName()) + ' ' + getValueOrEmptyString(user.getLastName());
@@ -93,6 +93,10 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
     }
 
     private ChatMessage__c getChatMessage(String chatId, String userId, IBotMessage message) {
+        if (message == null) {
+            return null;
+        }
+
         return new ChatMessage__c(
             Chat__r = new Chat__c(ExternalId__c = chatId),
             User__r = new ChatUser__c(ExternalId__c = userId),
