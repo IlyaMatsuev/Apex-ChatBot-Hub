@@ -10,6 +10,6 @@ global class ViberBotMessageFailedEvent extends ViberBotMessageEvent {
 
     public ViberBotMessageFailedEvent(ViberBotUpdateEvent event) {
         super(event);
-        this.errorDescription = event.getString('desc');
+        this.errorDescription = event.getPayload().getString('desc');
     }
 }

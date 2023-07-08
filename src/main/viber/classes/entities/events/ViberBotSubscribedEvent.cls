@@ -10,7 +10,7 @@ global class ViberBotSubscribedEvent extends ViberBotMessageEvent {
 
     public ViberBotSubscribedEvent(ViberBotUpdateEvent event) {
         super(event);
-        this.user = (ViberBotUser) event.getJsonPayload('user', ViberBotUser.class);
+        this.user = new ViberBotUser(event.getPayload().getJsonPayload('user'));
         this.userId = this.user.getId();
     }
 }

@@ -21,8 +21,8 @@ global virtual class ViberBotMessageEvent {
     global final String userId;
 
     public ViberBotMessageEvent(ViberBotUpdateEvent event) {
-        this.messageId = event.getString('message_token');
-        this.eventDate = event.getDateTime('timestamp');
-        this.userId = event.getString('user_id');
+        this.messageId = event.getPayload().getString('message_token');
+        this.eventDate = event.getPayload().getDateTime('timestamp');
+        this.userId = event.getPayload().getString('user_id');
     }
 }

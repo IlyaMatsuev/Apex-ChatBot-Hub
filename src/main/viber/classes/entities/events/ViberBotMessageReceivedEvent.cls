@@ -15,7 +15,7 @@ global class ViberBotMessageReceivedEvent extends ViberBotMessageEvent {
 
     public ViberBotMessageReceivedEvent(ViberBotUpdateEvent event) {
         super(event);
-        this.sender = (ViberBotUser) event.getJsonPayload('sender', ViberBotUser.class);
+        this.sender = new ViberBotUser(event.getPayload().getJsonPayload('sender'));
         this.userId = this.sender.getId();
         this.message = event.getMessage();
     }
