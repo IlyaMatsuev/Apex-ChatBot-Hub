@@ -1,9 +1,20 @@
 name: Prod Deployment
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+    paths:
+      - 'src/**'
+
+env:
+  SFDX_CLI_URL: https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
+  PROD_ORG_ALIAS: prod
+
+# Required secrets:
+# 1. PROD_SFDX_URL - SFDX auth URL of the production org where the package has to be deployed
+# 2. CODECOV_TOKEN - Codecov token needed for test coverage overview, required only for private repositories
 
 jobs:
   deploy:
@@ -11,39 +22,25 @@ jobs:
     steps:
       - name: 'Install Salesforce CLI'
         run: |
-          wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
+          wget ${{ env.SFDX_CLI_URL }}
           mkdir ~/sfdx
           tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1
           echo "$HOME/sfdx/bin" >> $GITHUB_PATH
           ~/sfdx/bin/sfdx version
 
       - name: 'Checkout source code'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: 'Populate auth file with DEVHUB_SFDX_URL secret'
+      - name: 'Authenticate Production'
         shell: bash
         run: |
-          echo ${{ secrets.DEVHUB_SFDX_URL }} > ./DEVHUB_SFDX_URL.txt
-          secretFileSize=$(wc -c "./DEVHUB_SFDX_URL.txt" | awk '{print $1}')
+          echo ${{ secrets.PROD_SFDX_URL }} > ./PROD_SFDX_URL.txt
+          secretFileSize=$(wc -c "./PROD_SFDX_URL.txt" | awk '{print $1}')
           if [ $secretFileSize == 1 ]; then
-            echo "Missing DEVHUB_SFDX_URL secret. Is this workflow running on a fork?";
+            echo "Missing PROD_SFDX_URL secret. Is this workflow running on a fork?";
             exit 1;
           fi
-
-      - name: 'Authenticate Dev Hub'
-        run: sfdx auth:sfdxurl:store -f ./DEVHUB_SFDX_URL.txt -a devhub -d
+          sfdx auth:sfdxurl:store -f ./PROD_SFDX_URL.txt -a ${{ env.PROD_ORG_ALIAS }} -d
 
       - name: 'Deploy Package'
-        run: sh ./scripts/pkg-deploy.sh devhub
-
-      - name: 'Run Apex Tests'
-        run: sfdx force:apex:test:run -c -r human -d ./coverage/apex -w 20 -u devhub
-
-      - name: 'Upload Test Coverage'
-        uses: codecov/codecov-action@v2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/apex/test-result-codecoverage.json
-          fail_ci_if_error: false
-          flags: Apex,unittests
-          verbose: true
+        run: sh ./scripts/pkg-deploy.sh ${{ env.PROD_ORG_ALIAS }}
