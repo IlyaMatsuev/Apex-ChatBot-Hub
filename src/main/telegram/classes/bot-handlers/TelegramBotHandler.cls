@@ -14,7 +14,7 @@ global abstract class TelegramBotHandler implements IBotHandler {
      * @param context The `Telegram` bot context
      * @param event The instance of <<TelegramBotMessageEvent>> class, describing the edited message event
      */
-    global abstract void onMessageEdited(TelegramBotContext context, TelegramBotMessageEvent event);
+    global virtual void onMessageEdited(TelegramBotContext context, TelegramBotMessageEvent event) {}
 
     /**
      * @description The common handler for all webhook event types
@@ -28,9 +28,9 @@ global abstract class TelegramBotHandler implements IBotHandler {
 
         // TODO: Other event types (need to check API)
         if (eventType == TelegramBotUpdateEventType.Message) {
-            onMessageReceived(tgContext, new TelegramBotMessageEvent(tgEvent));
+            onMessageReceived(tgContext, new TelegramBotMessageEvent(TelegramBotUpdateEventType.Message, tgEvent));
         } else if (eventType == TelegramBotUpdateEventType.EditedMessage) {
-            onMessageEdited(tgContext, new TelegramBotMessageEvent(tgEvent));
+            onMessageEdited(tgContext, new TelegramBotMessageEvent(TelegramBotUpdateEventType.EditedMessage, tgEvent));
         }
     }
 }

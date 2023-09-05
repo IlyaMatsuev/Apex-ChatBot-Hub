@@ -13,7 +13,7 @@ global virtual class BotJsonPayload {
 
     /**
      * @description Creates a new instance of JSON payload by the provided values from another instance
-     * @param values Another instance of <<BotJsonPayload>> to copy values from
+     * @param payload Another instance of <<BotJsonPayload>> to copy values from
      */
     global BotJsonPayload(BotJsonPayload payload) {
         this(payload.getValues());

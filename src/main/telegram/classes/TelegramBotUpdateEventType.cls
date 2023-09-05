@@ -4,11 +4,11 @@
  */
 global class TelegramBotUpdateEventType extends BotUpdateEventType {
     /**
-     * @descpirtion The `Telegram` message event. Received when a user sends a message to the chat with the bot
+     * @description The `Telegram` message event. Received when a user sends a message to the chat with the bot
      */
     global static final TelegramBotUpdateEventType Message = new TelegramBotUpdateEventType('message');
     /**
-     * @descpirtion The `Telegram` edited message event. Received when a user edits their message in the chat with the bot
+     * @description The `Telegram` edited message event. Received when a user edits their message in the chat with the bot
      */
     global static final TelegramBotUpdateEventType EditedMessage = new TelegramBotUpdateEventType('edited_message');
 

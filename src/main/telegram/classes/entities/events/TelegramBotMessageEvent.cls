@@ -10,9 +10,14 @@ global class TelegramBotMessageEvent {
      */
     global Integer messageId { get { return eventPayload.getInteger('message_id'); } }
 
+    /**
+     * @description The message text
+     */
+    global String text { get { return eventPayload.getString('text'); } }
+
     // TODO: Add other event properties, look here: https://core.telegram.org/bots/api#message
 
-    public TelegramBotMessageEvent(TelegramBotUpdateEvent event) {
-        this.eventPayload = event.getPayload();
+    public TelegramBotMessageEvent(TelegramBotUpdateEventType eventType, TelegramBotUpdateEvent event) {
+        this.eventPayload = event.getPayload().getJsonPayload(eventType.name());
     }
 }

@@ -12,7 +12,7 @@ public class BotErrorLogger implements Triggers.IErrorHandler {
         BotError__c botError = new BotError__c(
             Bot__c = botId,
             Message__c = error.getMessage().abbreviate(255),
-            ExceptionType__c = error.getTypeName(),
+            ExceptionType__c = error.getTypeName().substringAfterLast('.'),
             StackTrace__c = error.getStackTraceString()
         );
         if (error instanceof BotCustomException) {
