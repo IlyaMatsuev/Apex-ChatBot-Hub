@@ -15,7 +15,7 @@ private class BotUpdateEventTriggerTest {
 
         BotModel bot = createBot(BotType.Telegram);
         Test.startTest();
-        Eventbus.publish(new BotUpdateEvent__e(Bot__c = bot.toJson(), Payload__c = createTelegramPayload().toJson()));
+        EventBus.publish(new BotUpdateEvent__e(Bot__c = bot.toJson(), Payload__c = createTelegramPayload().toJson()));
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -46,7 +46,7 @@ private class BotUpdateEventTriggerTest {
         Assert.areEqual('223123123:876541222', messages.get(0).ExternalId__c);
         Assert.areEqual(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
 
-        List<IBotContext> contexts = BotHandlerMock.executedContexts;
+        List<BotHandlerMock.ReceivedContext> contexts = BotHandlerMock.executedContexts;
         Assert.areEqual(1, contexts.size());
     }
 
@@ -57,7 +57,7 @@ private class BotUpdateEventTriggerTest {
         BotModel bot = createBot(BotType.Telegram);
         BotHandlerMock.throwError = true;
         Test.startTest();
-        Eventbus.publish(new BotUpdateEvent__e(Bot__c = bot.toJson(), Payload__c = createTelegramPayload().toJson()));
+        EventBus.publish(new BotUpdateEvent__e(Bot__c = bot.toJson(), Payload__c = createTelegramPayload().toJson()));
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -72,34 +72,6 @@ private class BotUpdateEventTriggerTest {
         Assert.areEqual(1, messages.size());
     }
 
-    @IsTest
-    private static void handle_telegramNotSupportedUpdateType_shouldIgnoreUpdate() {
-        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
-
-        BotModel bot = createBot(BotType.Telegram);
-        Test.startTest();
-        Eventbus.publish(
-            new BotUpdateEvent__e(
-                Bot__c = bot.toJson(),
-                Payload__c = createTelegramPayload(TelegramBotUpdateEventType.EditedMessage).toJson()
-            )
-        );
-        Test.getEventBus().deliver();
-        Test.stopTest();
-
-        List<Chat__c> chats = [SELECT Name, Bot__c, ExternalId__c FROM Chat__c];
-        List<ChatUser__c> users = [SELECT Name, FirstName__c, LastName__c, Username__c, ExternalId__c FROM ChatUser__c];
-        List<ChatMessage__c> messages = [
-            SELECT Name, Text__c, User__c, Bot__c, Chat__c, ExternalId__c, SendDate__c
-            FROM ChatMessage__c
-        ];
-
-        Assert.isTrue(chats.isEmpty());
-        Assert.isTrue(users.isEmpty());
-        Assert.isTrue(messages.isEmpty());
-        Assert.isTrue(BotHandlerMock.executedContexts.isEmpty());
-    }
-
     /**
      * Viber tests
      */
@@ -110,7 +82,7 @@ private class BotUpdateEventTriggerTest {
 
         BotModel bot = createBot(BotType.Viber);
         Test.startTest();
-        Eventbus.publish(
+        EventBus.publish(
             new BotUpdateEvent__e(
                 Bot__c = bot.toJson(),
                 Payload__c = createViberPayload(ViberBotUpdateEventType.Message).toJson()
@@ -146,7 +118,7 @@ private class BotUpdateEventTriggerTest {
         Assert.areEqual('4912661846655238145:01234567890A=', messages.get(0).ExternalId__c);
         Assert.areEqual(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
 
-        List<IBotContext> contexts = BotHandlerMock.executedContexts;
+        List<BotHandlerMock.ReceivedContext> contexts = BotHandlerMock.executedContexts;
         Assert.areEqual(1, contexts.size());
     }
 
@@ -157,7 +129,7 @@ private class BotUpdateEventTriggerTest {
         BotModel bot = createBot(BotType.Viber);
         BotHandlerMock.throwError = true;
         Test.startTest();
-        Eventbus.publish(
+        EventBus.publish(
             new BotUpdateEvent__e(
                 Bot__c = bot.toJson(),
                 Payload__c = createViberPayload(ViberBotUpdateEventType.Message).toJson()
@@ -178,12 +150,12 @@ private class BotUpdateEventTriggerTest {
     }
 
     @IsTest
-    private static void handle_viberWebhookUrlCallback_shouldIgnore() {
+    private static void handle_viberWebhookUrlCallback_shouldHandleUpdateAndIgnoreChatDetails() {
         Test.setMock(HttpCalloutMock.class, new ViberBotCalloutMock());
 
         BotModel bot = createBot(BotType.Viber);
         Test.startTest();
-        Eventbus.publish(
+        EventBus.publish(
             new BotUpdateEvent__e(
                 Bot__c = bot.toJson(),
                 Payload__c = createViberPayload(ViberBotUpdateEventType.WebhookCallback).toJson()
@@ -201,7 +173,11 @@ private class BotUpdateEventTriggerTest {
         Assert.isTrue(chats.isEmpty());
         Assert.isTrue(users.isEmpty());
         Assert.isTrue(messages.isEmpty());
-        Assert.isTrue(BotHandlerMock.executedContexts.isEmpty());
+        Assert.areEqual(1, BotHandlerMock.executedContexts.size());
+        Assert.areEqual(
+            ViberBotUpdateEventType.WebhookCallback,
+            BotHandlerMock.executedContexts.get(0).event.getType()
+        );
     }
 
     private static BotModel createBot(BotType type) {

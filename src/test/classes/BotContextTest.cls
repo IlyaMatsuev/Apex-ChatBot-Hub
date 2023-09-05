@@ -44,12 +44,9 @@ private class BotContextTest {
     /**
      * Telegram tests
      */
-
     @IsTest
     private static void received_telegramUpdateModelWithMessage_containsAllFields() {
-        IBotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
-
-        IBotUpdateEvent receivedUpdate = context.getReceivedUpdate();
+        IBotUpdateEvent receivedUpdate = createBotUpdateEvent(BotType.Telegram, createTelegramPayload());
 
         Assert.isInstanceOfType(receivedUpdate, TelegramBotUpdateEvent.class);
 
@@ -79,12 +76,9 @@ private class BotContextTest {
     /**
      * Viber tests
      */
-
     @IsTest
     private static void received_viberUpdateModelWithMessage_containsAllFields() {
-        IBotContext context = createBotContext(BotType.Viber, createViberPayload());
-
-        IBotUpdateEvent receivedUpdate = context.getReceivedUpdate();
+        IBotUpdateEvent receivedUpdate = createBotUpdateEvent(BotType.Viber, createViberPayload());
 
         Assert.isInstanceOfType(receivedUpdate, ViberBotUpdateEvent.class);
 
@@ -126,6 +120,23 @@ private class BotContextTest {
             LIMIT 1
         ];
         return new BotServiceFactoryMock().createBotContext(new BotModel(bot), payload.toJson());
+    }
+
+    private static IBotUpdateEvent createBotUpdateEvent(BotType botType, BotJsonPayload payload) {
+        setCalloutMock(botType);
+        insert new Bot__c(
+            Name = botType.name(),
+            Type__c = botType.name(),
+            Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
+            Handler__c = 'BotHandlerMock'
+        );
+        Bot__c bot = [
+            SELECT Name, Type__c, Handler__c, TokenHash__c
+            FROM Bot__c
+            WHERE Type__c = :botType.name()
+            LIMIT 1
+        ];
+        return new BotServiceFactoryMock().createBotUpdateEvent(new BotModel(bot), payload.toJson());
     }
 
     private static BotCalloutMock setCalloutMock(BotType type) {
@@ -208,6 +219,10 @@ private class BotContextTest {
 
         public override IBotContext createBotContext(BotModel bot, String updatePayload) {
             return super.createBotContext(bot, updatePayload);
+        }
+
+        public override IBotUpdateEvent createBotUpdateEvent(BotModel bot, String updatePayload) {
+            return super.createBotUpdateEvent(bot, updatePayload);
         }
     }
 }

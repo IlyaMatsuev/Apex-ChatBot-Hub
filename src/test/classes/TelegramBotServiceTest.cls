@@ -146,7 +146,12 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Text, 'Hello world! The user: userLink', null, options);
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world! The user: userLink',
+            null,
+            options.getJsonPayload()
+        );
     }
 
     @IsTest
@@ -208,7 +213,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Image,
             'Some caption with url',
             'https://example.com/image.jpeg',
-            options
+            options.getJsonPayload()
         );
     }
 
@@ -277,7 +282,7 @@ private class TelegramBotServiceTest {
             BotMessageType.Video,
             'Some caption with emoji',
             'https://example.com/video.mp4',
-            options
+            options.getJsonPayload()
         );
     }
 
@@ -418,7 +423,7 @@ private class TelegramBotServiceTest {
             BotMessageType.File,
             'Some caption with Integer i = 0;',
             'https://example.com/file.pdf',
-            options
+            options.getJsonPayload()
         );
     }
 
@@ -683,7 +688,12 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Audio, 'Some caption', 'https://examlple.com/audio.mp3', options);
+        fixture.assertMessageIsCreated(
+            BotMessageType.Audio,
+            'Some caption',
+            'https://examlple.com/audio.mp3',
+            options.getJsonPayload()
+        );
     }
 
     @IsTest
@@ -767,7 +777,7 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Poll, 'question?', null, options);
+        fixture.assertMessageIsCreated(BotMessageType.Poll, 'question?', null, options.getJsonPayload());
     }
 
     @IsTest
@@ -799,7 +809,7 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, options);
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, options.getJsonPayload());
     }
 
     @IsTest

@@ -374,7 +374,7 @@ private class ViberBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
-        fixture.assertMessageIsCreated(BotMessageType.Custom, null, null, carouselOptions);
+        fixture.assertMessageIsCreated(BotMessageType.Custom, null, null, carouselOptions.getJsonPayload());
     }
 
     @IsTest

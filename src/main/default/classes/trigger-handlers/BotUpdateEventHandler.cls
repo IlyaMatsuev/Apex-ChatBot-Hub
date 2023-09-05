@@ -38,13 +38,12 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         List<ChatMessage__c> chatMessages = new List<ChatMessage__c>();
         for (UpdateEventWrapper updateEvent : updateEvents) {
             Chat__c chat = getChat(updateEvent.context.getBot(), updateEvent.updateEvent.getChat());
-            ChatUser__c user = getChatUser(updateEvent.updateEvent.getChat().getSender());
+            ChatUser__c user = getChatUser(updateEvent.updateEvent.getChat()?.getSender());
+            ChatMessage__c message;
 
-            ChatMessage__c message = getChatMessage(
-                chat.ExternalId__c,
-                user.ExternalId__c,
-                updateEvent.updateEvent.getMessage()
-            );
+            if (chat != null && user != null) {
+                message = getChatMessage(chat.ExternalId__c, user.ExternalId__c, updateEvent.updateEvent.getMessage());
+            }
 
             if (chat != null && !chats.contains(chat)) {
                 chats.add(chat);

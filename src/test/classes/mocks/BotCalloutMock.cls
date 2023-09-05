@@ -33,8 +33,8 @@ public abstract class BotCalloutMock implements HttpCalloutMock {
     }
 
     private class ResponseOverrides {
-        private Integer statusCode;
-        private String responseBody;
+        private final Integer statusCode;
+        private final String responseBody;
 
         public ResponseOverrides(Integer statusCode, String responseBody) {
             this.statusCode = statusCode;
