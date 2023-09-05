@@ -37,14 +37,13 @@ sfdx package:install -p 04t5Y000001wNArQAM -w 10 -b 10 -o "$org_alias" \
 
 info "Deploying to ${org_alias}..."
 # SObjects, App, Apex and permissions
-sfdx project:deploy:start -o "$org_alias" -d "./src/main/default/objects,./src/main/default/layouts,\
-    ./src/main/default/flexipages,./src/main/default/tabs,./src/main/default/applications,./src/main/default/classes,\
-    ./src/main/default/triggers,./src/main/default/permissionsets,./src/main/telegram,./src/main/viber,./src/test" \
-    || { exit 1; }
+sfdx project:deploy:start -o "$org_alias" -d ./src/main || { exit 1; }
+# Apex Tests
+sfdx project:deploy:start -o "$org_alias" -d ./src/test || { exit 1; }
 # Public site
-sfdx project:deploy:start -o "$org_alias" -d ./src/main/default/pages,./src/main/default/sites || { exit 1; }
+sfdx project:deploy:start -o "$org_alias" -d ./src/site || { exit 1; }
 # Public site profile
-sfdx project:deploy:start -o "$org_alias" -d ./src/main/default/profiles || { exit 1; }
+sfdx project:deploy:start -o "$org_alias" -d ./src/site-permissions || { exit 1; }
 
 info "Assigning permissions..."
 sfdx user:permset:assign -n BotAdmin -u "$org_alias"

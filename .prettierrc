@@ -1,5 +1,5 @@
 {
-    "plugins": ["@ilyamatsuev/prettier-plugin-apex"],
+    "plugins": ["@ilyamatsuev/prettier-plugin-apex", "@prettier/plugin-xml"],
     "trailingComma": "none",
     "printWidth": 120,
     "tabWidth": 4,
