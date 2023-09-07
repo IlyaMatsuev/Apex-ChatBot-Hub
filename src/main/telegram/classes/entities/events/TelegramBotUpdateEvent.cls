@@ -24,6 +24,7 @@ global class TelegramBotUpdateEvent extends BotPayload implements IBotUpdateEven
      */
     global TelegramBotMessage getMessage() {
         // TODO: Review this check. Consider creating messages of other types, even for EditedMessage as for history tracking
+        // TODO: There is a list of `Message` event types: https://core.telegram.org/bots/api#getting-updates
         if (getType() != TelegramBotUpdateEventType.Message) {
             return null;
         }

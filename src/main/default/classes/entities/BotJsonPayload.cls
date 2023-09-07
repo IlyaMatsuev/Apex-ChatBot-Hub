@@ -122,6 +122,22 @@ global virtual class BotJsonPayload {
     }
 
     /**
+     * @description Returns a value from the JSON by the provided key, converting it to `List<String>`
+     * @param key The JSON value key
+     * @return The `List<String>` value from the JSON
+     */
+    global List<String> getStringList(String key) {
+        if (!hasValue(key) || !(values.get(key) instanceof List<Object>)) {
+            return null;
+        }
+        List<String> strList = new List<String>();
+        for (Object el : (List<Object>) get(key)) {
+            strList.add(String.valueOf(el));
+        }
+        return strList;
+    }
+
+    /**
      * @description Returns a value from the JSON by the provided key, converting it to `Integer`
      * @param key The JSON value key
      * @return The `Integer` value from the JSON
@@ -202,6 +218,23 @@ global virtual class BotJsonPayload {
         newPayload.values.putAll((Map<String, Object>) value);
         values.put(key, newPayload);
         return newPayload;
+    }
+
+    /**
+     * @description Returns a value from the JSON by the provided key, converting it to a `List` of <<BotJsonPayload>>
+     * @param key The JSON value key
+     * @return The <<BotJsonPayload>> `List` instance
+     */
+    global List<BotJsonPayload> getJsonPayloadList(String key) {
+        Object value = get(key);
+        if (value == null || !(value instanceof List<Object>)) {
+            return null;
+        }
+        List<BotJsonPayload> payloadList = new List<BotJsonPayload>();
+        for (Object val : (List<Object>) value) {
+            payloadList.add(new BotJsonPayload((Map<String, Object>) val));
+        }
+        return payloadList;
     }
 
     /**

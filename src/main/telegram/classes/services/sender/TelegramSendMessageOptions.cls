@@ -58,10 +58,13 @@ global abstract class TelegramSendMessageOptions extends BotPayload {
         return this;
     }
 
+    // TODO: Move this class out of this class, as it's also needed in TelegramBotMessage
     /**
      * @description The builder-like class representing a special entity in a message text. For example, hashtags, usernames, etc. The source: https://core.telegram.org/bots/api#messageentity
      */
     global class MessageEntity extends BotPayload {
+        // TODO: Add all fields according to https://core.telegram.org/bots/api#messageentity
+
         /**
          * @description Creates an instance of the message entity with the provided type and coordinates in the message text
          * @param type The type of the entity. Possible values: `mention`, `hashtag`, `cashtag`, `bot_command`, `url`, `email`, `phone_number`, `bold`, `italic`, `underline`, `strikethrough`, `spoiler`, `code`, `pre`, `text_link`, `text_mention`, `custom_emoji`
