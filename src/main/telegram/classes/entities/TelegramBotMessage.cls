@@ -112,22 +112,21 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
      */
     global String text { get { return payload.getString('text'); } }
 
-    // TODO: Add `TelegramBotMessageEntity` class
-    //    /**
-    //     * @description For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
-    //     */
-    //    global List<TelegramBotMessageEntity> entities {
-    //        get {
-    //            List<TelegramBotMessageEntity> entityList = new List<TelegramBotMessageEntity>();
-    //            List<BotJsonPayload> payloadList = payload.getJsonPayloadList('entities');
-    //            if (payloadList != null) {
-    //                for (BotJsonPayload payload : payloadList) {
-    //                    entityList.add(new TelegramBotMessageEntity(payload));
-    //                }
-    //            }
-    //            return entityList;
-    //        }
-    //    }
+    /**
+     * @description For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
+     */
+    global List<TelegramBotMessageEntity> entities {
+        get {
+            List<TelegramBotMessageEntity> entityList = new List<TelegramBotMessageEntity>();
+            List<BotJsonPayload> payloadList = payload.getJsonPayloadList('entities');
+            if (payloadList != null) {
+                for (BotJsonPayload payload : payloadList) {
+                    entityList.add(new TelegramBotMessageEntity(payload));
+                }
+            }
+            return entityList;
+        }
+    }
 
     // TODO: Add `TelegramBotAnimation` class
     //    /**
@@ -198,22 +197,21 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
      */
     global String caption { get { return payload.getString('caption'); } }
 
-    // TODO: Add `TelegramBotMessageEntity` class
-    //    /**
-    //     * @description For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
-    //     */
-    //    global List<TelegramBotMessageEntity> captionEntities {
-    //        get {
-    //            List<TelegramBotMessageEntity> entityList = new List<TelegramBotMessageEntity>();
-    //            List<BotJsonPayload> payloadList = payload.getJsonPayloadList('caption_entities');
-    //            if (payloadList != null) {
-    //                for (BotJsonPayload payload : payloadList) {
-    //                    entityList.add(new TelegramBotMessageEntity(payload));
-    //                }
-    //            }
-    //            return entityList;
-    //        }
-    //    }
+    /**
+     * @description For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
+     */
+    global List<TelegramBotMessageEntity> captionEntities {
+        get {
+            List<TelegramBotMessageEntity> entityList = new List<TelegramBotMessageEntity>();
+            List<BotJsonPayload> payloadList = payload.getJsonPayloadList('caption_entities');
+            if (payloadList != null) {
+                for (BotJsonPayload payload : payloadList) {
+                    entityList.add(new TelegramBotMessageEntity(payload));
+                }
+            }
+            return entityList;
+        }
+    }
 
     /**
      * @description `True` if the message media is covered by a spoiler animation
