@@ -6,7 +6,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     private final BotCalloutService calloutService;
     private final IBotCallback callback;
 
-    private TelegramSendKeyboardOptions replyKeyboard;
+    private BotPayload replyMarkup;
 
     public TelegramBotSenderService(String chatId, BotCalloutService calloutService, IBotCallback callback) {
         this.chatId = chatId;
@@ -474,10 +474,12 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @return The current instance of `Telegram` sender service
      */
     global TelegramBotSenderService withReplyKeyboard(BotReplyKeyboardButton[] buttons) {
-        TelegramSendKeyboardOptions keyboard = new TelegramSendKeyboardOptions();
+        TelegramReplyKeyboardMarkupOptions keyboard = new TelegramReplyKeyboardMarkupOptions();
         for (Integer i = 0; i < buttons.size(); i++) {
             BotReplyKeyboardButton button = buttons.get(i);
-            TelegramSendKeyboardOptions.Button keyboardButton = new TelegramSendKeyboardOptions.Button(button.text);
+            TelegramReplyKeyboardMarkupOptions.Button keyboardButton = new TelegramReplyKeyboardMarkupOptions.Button(
+                button.text
+            );
             if (button.sharesContact) {
                 keyboardButton.asContactRequest();
             } else if (button.sharesLocation) {
@@ -489,25 +491,53 @@ global class TelegramBotSenderService implements IBotSenderService {
     }
 
     /**
-     * @description Sets a simple custom keyboard for the message that the receiver will have instead of the standard input keyboard
-     * @param keyboard The instance of <<TelegramSendKeyboardOptions>> class, custom keyboard to be shown to the receiver
+     * @description Sets a reply keyboard for the message that the receiver will have instead of the standard input keyboard
+     * @param keyboard The instance of <<TelegramReplyKeyboardMarkupOptions>> class, custom reply keyboard to be shown
      * @return The current instance of `Telegram` sender service
      */
-    global TelegramBotSenderService withReplyKeyboard(TelegramSendKeyboardOptions keyboard) {
-        this.replyKeyboard = keyboard;
+    global TelegramBotSenderService withReplyKeyboard(TelegramReplyKeyboardMarkupOptions keyboard) {
+        this.replyMarkup = keyboard;
+        return this;
+    }
+
+    /**
+     * @description Sets a signal that the reply keyboard has to be deleted for the receiver
+     * @return The current instance of `Telegram` sender service
+     */
+    global TelegramBotSenderService withReplyKeyboardRemoved() {
+        return withReplyKeyboardRemoved(new TelegramReplyKeyboardRemoveOptions());
+    }
+
+    /**
+     * @description Sets a signal that the reply keyboard has to be deleted for the receiver
+     * @param removeOptions Additional options for removing the reply keyboard
+     * @return The current instance of `Telegram` sender service
+     */
+    global TelegramBotSenderService withReplyKeyboardRemoved(TelegramReplyKeyboardRemoveOptions removeOptions) {
+        this.replyMarkup = removeOptions;
+        return this;
+    }
+
+    /**
+     * @description Sets an inline keyboard for the message that will be shown next to the message
+     * @param keyboard The instance of <<TelegramInlineKeyboardMarkupOptions>> class, custom inline keyboard to be shown
+     * @return The current instance of `Telegram` sender service
+     */
+    global TelegramBotSenderService withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard) {
+        this.replyMarkup = keyboard;
         return this;
     }
 
     private void send(TelegramBotMethod method, BotJsonPayload payload, BotJsonPayload callbackParams) {
-        if (replyKeyboard != null) {
-            payload.set('reply_markup', replyKeyboard);
+        if (replyMarkup != null) {
+            payload.set('reply_markup', replyMarkup);
         }
 
         BotJsonPayload response = calloutService.call(method, payload);
         TelegramBotMessage message = new TelegramBotMessage(response.getJsonPayload('result'));
 
         if (callbackParams != null) {
-            callback.execute(callbackParams.set('messageId', message.getId()).set('keyboard', replyKeyboard, true));
+            callback.execute(callbackParams.set('messageId', message.getId()).set('keyboard', replyMarkup, true));
         }
     }
 }

@@ -66,13 +66,13 @@ private class TelegramBotServiceTest {
             new BotReplyKeyboardButton('Share my location 📍').shareLocation(),
             new BotReplyKeyboardButton('I do not wanna share anything 😤')
         };
-        TelegramSendKeyboardOptions expectedKeyboard = new TelegramSendKeyboardOptions()
-            .addButton(new TelegramSendKeyboardOptions.Button('Share my contact ☎️').asContactRequest())
-            .addButton(1, new TelegramSendKeyboardOptions.Button('Share my location 📍').asLocationRequest())
-            .addButton(2, new TelegramSendKeyboardOptions.Button('I do not wanna share anything 😤'));
+        TelegramReplyKeyboardMarkupOptions expectedKeyboard = new TelegramReplyKeyboardMarkupOptions()
+            .addButton(new TelegramReplyKeyboardMarkupOptions.Button('Share my contact ☎️').asContactRequest())
+            .addButton(1, new TelegramReplyKeyboardMarkupOptions.Button('Share my location 📍').asLocationRequest())
+            .addButton(2, new TelegramReplyKeyboardMarkupOptions.Button('I do not wanna share anything 😤'));
 
         Test.startTest();
-        fixture.sut().send(fixture.chat.ExternalId__c).withReplyKeyboard(replyButtons).text('Hello world!');
+        fixture.sut().send(fixture.chat.ExternalId__c).withReplyMarkup(replyButtons).text('Hello world!');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -88,19 +88,19 @@ private class TelegramBotServiceTest {
     private static void send_textWithTelegramReplyKeyboard_shouldSendAndCreateMessageRecord() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();
-        TelegramSendKeyboardOptions keyboard = new TelegramSendKeyboardOptions()
+        TelegramReplyKeyboardMarkupOptions keyboard = new TelegramReplyKeyboardMarkupOptions()
             .allowResizeKeyboard()
             .asPersistent()
             .asOneTimeKeyboard()
             .asSelective()
             .setInputPlaceholder('Select an answer instead of typing...')
-            .addButton(new TelegramSendKeyboardOptions.Button('Share one of my contacts').asUserRequest())
-            .addButton(1, new TelegramSendKeyboardOptions.Button('Share one of my chats').asChatRequest())
+            .addButton(new TelegramReplyKeyboardMarkupOptions.Button('Share one of my contacts').asUserRequest())
+            .addButton(1, new TelegramReplyKeyboardMarkupOptions.Button('Share one of my chats').asChatRequest())
             .addButton(
                 1,
-                new TelegramSendKeyboardOptions.Button('Share one of my special chats')
+                new TelegramReplyKeyboardMarkupOptions.Button('Share one of my special chats')
                     .asChatRequest(
-                        new TelegramSendKeyboardOptions.ButtonRequestChatConfigs()
+                        new TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs()
                             .withChannels(true)
                             .withForums(false)
                             .withUsername(true)
@@ -110,11 +110,14 @@ private class TelegramBotServiceTest {
                             .withBotAdminRights(new List<String> { 'is_anonymous', 'can_manage_chat' })
                     )
             )
-            .addButton(2, new TelegramSendKeyboardOptions.Button('Create a pool').asPollRequest())
-            .addButton(2, new TelegramSendKeyboardOptions.Button('Launch a game!').asWebAppLauncher('some-app-url'));
+            .addButton(2, new TelegramReplyKeyboardMarkupOptions.Button('Create a pool').asPollRequest())
+            .addButton(
+                2,
+                new TelegramReplyKeyboardMarkupOptions.Button('Launch a game!').asWebAppLauncher('some-app-url')
+            );
 
         Test.startTest();
-        fixture.sut().send(fixture.chat.ExternalId__c).withReplyKeyboard(keyboard).text('Hello world!');
+        fixture.sut().send(fixture.chat.ExternalId__c).withReplyMarkup(keyboard).text('Hello world!');
         Test.getEventBus().deliver();
         Test.stopTest();
 

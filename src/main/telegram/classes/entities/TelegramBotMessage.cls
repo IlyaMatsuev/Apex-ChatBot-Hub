@@ -161,33 +161,27 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
         }
     }
 
-    // TODO: Implement all commented out properties below
-
     /**
      * @description If the message is a sticker, information about the sticker
      */
     global TelegramBotSticker sticker { get { return new TelegramBotSticker(payload.getJsonPayload('sticker')); } }
 
-    //    /**
-    //     * @description If the message is a video, information about the video
-    //     */
-    //    global TelegramBotVideo video {
-    //        get { return new TelegramBotVideo(payload.getJsonPayload('video')); }
-    //    }
+    /**
+     * @description If the message is a video, information about the video
+     */
+    global TelegramBotVideo video { get { return new TelegramBotVideo(payload.getJsonPayload('video')); } }
 
-    //    /**
-    //     * @description If the message is a video note, information about the video message
-    //     */
-    //    global TelegramBotVideoNote videoNote {
-    //        get { return new TelegramBotVideoNote(payload.getJsonPayload('video_note')); }
-    //    }
+    /**
+     * @description If the message is a video note, information about the video message
+     */
+    global TelegramBotVideoNote videoNote {
+        get { return new TelegramBotVideoNote(payload.getJsonPayload('video_note')); }
+    }
 
-    //    /**
-    //     * @description If the message is a voice message, information about the file
-    //     */
-    //    global TelegramBotVoice voice {
-    //        get { return new TelegramBotVoice(payload.getJsonPayload('voice')); }
-    //    }
+    /**
+     * @description If the message is a voice message, information about the file
+     */
+    global TelegramBotVoice voice { get { return new TelegramBotVoice(payload.getJsonPayload('voice')); } }
 
     /**
      * @description The caption for the animation, audio, document, photo, video or voice
@@ -215,33 +209,25 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
      */
     global Boolean hasMediaSpoiler { get { return payload.getBoolean('has_media_spoiler'); } }
 
-    //    /**
-    //     * @description If the message is a shared contact, information about the contact
-    //     */
-    //    global TelegramBotContact contact {
-    //        get { return new TelegramBotContact(payload.getJsonPayload('contact')); }
-    //    }
+    /**
+     * @description If the message is a shared contact, information about the contact
+     */
+    global TelegramBotContact contact { get { return new TelegramBotContact(payload.getJsonPayload('contact')); } }
 
-    //    /**
-    //     * @description If the message is a dice with random value
-    //     */
-    //    global TelegramBotDice dice {
-    //        get { return new TelegramBotDice(payload.getJsonPayload('dice')); }
-    //    }
+    /**
+     * @description If the message is a dice with random value
+     */
+    global TelegramBotDice dice { get { return new TelegramBotDice(payload.getJsonPayload('dice')); } }
 
-    //    /**
-    //     * @description If the message is a native poll, information about the poll
-    //     */
-    //    global TelegramBotPoll poll {
-    //        get { return new TelegramBotPoll(payload.getJsonPayload('poll')); }
-    //    }
+    /**
+     * @description If the message is a native poll, information about the poll
+     */
+    global TelegramBotPoll poll { get { return new TelegramBotPoll(payload.getJsonPayload('poll')); } }
 
-    //    /**
-    //     * @description If the message is a venue, information about the venue. For backward compatibility, when this field is set, the location field will also be set
-    //     */
-    //    global TelegramBotVenue venue {
-    //        get { return new TelegramBotVenue(payload.getJsonPayload('venue')); }
-    //    }
+    /**
+     * @description If the message is a venue, information about the venue. For backward compatibility, when this field is set, the location field will also be set
+     */
+    global TelegramBotVenue venue { get { return new TelegramBotVenue(payload.getJsonPayload('venue')); } }
 
     /**
      * @description If the message is a shared location, information about the location
@@ -299,6 +285,7 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
         get { return new TelegramBotMessage(payload.getJsonPayload('pinned_message')); }
     }
 
+    // TODO: Implement all commented out properties below
     //    /**
     //     * @description The inline keyboard attached to the message
     //     */

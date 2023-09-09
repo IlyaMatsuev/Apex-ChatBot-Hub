@@ -4,7 +4,7 @@
 global class TelegramSendDiceOptions extends TelegramSendMessageOptions {
     /**
      * @description Sets a specific emoji on which the dice throw animation is based
-     * @param emoji One of the supported emojies:
+     * @param emoji One of the supported emojis:
      * `🎲`, `🎯` and `🎳` - generate values in range: `1..6`
      * `🏀` and `⚽` - generate values in range `1..5`
      * `🎰` - generate values in range `1..64`
