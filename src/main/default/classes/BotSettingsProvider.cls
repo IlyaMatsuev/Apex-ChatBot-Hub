@@ -48,7 +48,7 @@ public class BotSettingsProvider {
                 DeveloperName = BotType.Viber.name(),
                 ApiUrl__c = 'https://vb.bot-api.org/bot',
                 BotService__c = 'ViberBotService',
-                BotUpdateEvent__c = 'ViberBotUpdateEvent',
+                BotUpdateEvent__c = 'ViberUpdateEvent',
                 BotHandlerContext__c = 'ViberBotContext',
                 BotUpdateResolver__c = 'ViberBotUpdateResolver',
                 BotWebhookService__c = 'ViberBotWebhookService',

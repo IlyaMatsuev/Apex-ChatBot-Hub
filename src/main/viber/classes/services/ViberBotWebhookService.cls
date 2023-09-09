@@ -10,9 +10,9 @@ public class ViberBotWebhookService extends BotWebhookService {
             .set(
                 'event_types',
                 new List<String> {
-                    ViberBotUpdateEventType.Message.name(),
-                    ViberBotUpdateEventType.Delivered.name(),
-                    ViberBotUpdateEventType.Seen.name()
+                    ViberUpdateEventType.Message.name(),
+                    ViberUpdateEventType.Delivered.name(),
+                    ViberUpdateEventType.Seen.name()
                 }
             );
         calloutService.call(ViberBotMethod.SetWebhook, payload);

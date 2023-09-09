@@ -1,8 +1,8 @@
 /**
  * @description Describes the chat payload received as an update from a `Viber` bot
  */
-global class ViberBotChat extends BotPayload implements IBotChat {
-    public ViberBotChat(BotJsonPayload payload) {
+global class ViberChat extends BotPayload implements IBotChat {
+    public ViberChat(BotJsonPayload payload) {
         super(payload);
     }
 
@@ -24,9 +24,9 @@ global class ViberBotChat extends BotPayload implements IBotChat {
 
     /**
      * @description Returns the payload of the `Viber` user who wrote the message received in the update
-     * @return The instance of the <<ViberBotUser>> class
+     * @return The instance of the <<ViberUser>> class
      */
-    global ViberBotUser getSender() {
-        return new ViberBotUser(payload);
+    global ViberUser getSender() {
+        return new ViberUser(payload);
     }
 }

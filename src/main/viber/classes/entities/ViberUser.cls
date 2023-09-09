@@ -1,7 +1,7 @@
 /**
  * @description Describes the sender payload received as an update from a `Viber` bot
  */
-global class ViberBotUser extends BotPayload implements IBotUser {
+global class ViberUser extends BotPayload implements IBotUser {
     private UserName fullName {
         get {
             if (fullName == null) {
@@ -12,7 +12,7 @@ global class ViberBotUser extends BotPayload implements IBotUser {
         set;
     }
 
-    public ViberBotUser(BotJsonPayload payload) {
+    public ViberUser(BotJsonPayload payload) {
         super(payload);
     }
 

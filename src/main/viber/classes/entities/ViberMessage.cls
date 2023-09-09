@@ -1,8 +1,8 @@
 /**
  * @description Describes the message payload received as an update from a `Viber` bot
  */
-global class ViberBotMessage extends BotPayload implements IBotMessage {
-    public ViberBotMessage(BotJsonPayload payload) {
+global class ViberMessage extends BotPayload implements IBotMessage {
+    public ViberMessage(BotJsonPayload payload) {
         super(payload);
     }
 

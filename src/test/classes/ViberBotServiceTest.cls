@@ -66,11 +66,11 @@ private class ViberBotServiceTest {
             new BotReplyKeyboardButton('Share my location 📍').shareLocation(),
             new BotReplyKeyboardButton('I do not wanna share anything 😤')
         };
-        ViberSendKeyboardOptions expectedKeyboard = new ViberSendKeyboardOptions()
-            .addButton(new ViberSendKeyboardOptions.Button().asPhoneSharing('Share my contact ☎️'))
-            .addButton(new ViberSendKeyboardOptions.Button().asLocationSharing('Share my location 📍'))
+        ViberReplyKeyboardOptions expectedKeyboard = new ViberReplyKeyboardOptions()
+            .addButton(new ViberReplyKeyboardOptions.Button().asPhoneSharing('Share my contact ☎️'))
+            .addButton(new ViberReplyKeyboardOptions.Button().asLocationSharing('Share my location 📍'))
             .addButton(
-                new ViberSendKeyboardOptions.Button()
+                new ViberReplyKeyboardOptions.Button()
                     .asReply('I do not wanna share anything 😤', 'I do not wanna share anything 😤')
             )
             .setType('keyboard');
@@ -295,21 +295,21 @@ private class ViberBotServiceTest {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();
 
-        ViberSendKeyboardOptions.ButtonInternalBrowser internalBrowserConfig = new ViberSendKeyboardOptions.ButtonInternalBrowser()
+        ViberReplyKeyboardOptions.ButtonInternalBrowser internalBrowserConfig = new ViberReplyKeyboardOptions.ButtonInternalBrowser()
             .setActionButton('none', null, null)
             .setTitle('default')
             .setTitle('Some cool browser page!')
             .setMode('fullscreen')
             .withFooter(true);
 
-        ViberSendKeyboardOptions.ButtonMediaPlayer buttonMediaPlayerConfig = new ViberSendKeyboardOptions.ButtonMediaPlayer(
+        ViberReplyKeyboardOptions.ButtonMediaPlayer buttonMediaPlayerConfig = new ViberReplyKeyboardOptions.ButtonMediaPlayer(
             'Cool player!',
             'I\'m telling you!',
             null,
             null
         );
 
-        ViberSendKeyboardOptions.FavoritesMetadata favorites = new ViberSendKeyboardOptions.FavoritesMetadata(
+        ViberReplyKeyboardOptions.FavoritesMetadata favorites = new ViberReplyKeyboardOptions.FavoritesMetadata(
                 'link',
                 'https://example.com/images/1'
             )
@@ -321,34 +321,34 @@ private class ViberBotServiceTest {
                 'https://example.com/alternative-url'
             );
 
-        ViberSendKeyboardOptions carouselOptions = new ViberSendKeyboardOptions()
+        ViberReplyKeyboardOptions carouselOptions = new ViberReplyKeyboardOptions()
             .setLayout(7, 6)
             .setBackgroundColor('#242240')
             .setHeight(null, null, true)
             .setInputFieldState('hidden')
             .allowSaveToFavorites(favorites)
             .addButton(
-                new ViberSendKeyboardOptions.Button()
+                new ViberReplyKeyboardOptions.Button()
                     .asOpenUrl('https://www.google.com')
                     .setBackgroundColor('#BDCCFF')
                     .setLayout(7, 6)
             )
             .addButton(
-                new ViberSendKeyboardOptions.Button()
+                new ViberReplyKeyboardOptions.Button()
                     .asOpenUrl('https://www.google.com', 'video', buttonMediaPlayerConfig, internalBrowserConfig)
                     .setBackgroundColor('#BDCCFF')
                     .setLayout(7, 6)
                     .setImage('https://example.com/images/1')
             )
             .addButton(
-                new ViberSendKeyboardOptions.Button()
+                new ViberReplyKeyboardOptions.Button()
                     .asOpenMap(12.22, 120.55)
                     .setBackgroundMedia('https://example.com/images/2', 'fill', false, false)
                     .setLayout(7, 6)
                     .setText('Open Map!')
             )
             .addButton(
-                new ViberSendKeyboardOptions.Button()
+                new ViberReplyKeyboardOptions.Button()
                     .asReply('Value!', 'Some text')
                     .setLayout(7, 6)
                     .setTextStyle(null, 'large', null, null)
@@ -356,13 +356,13 @@ private class ViberBotServiceTest {
                     .useSilentMode(true)
             )
             .addButton(
-                new ViberSendKeyboardOptions.Button()
+                new ViberReplyKeyboardOptions.Button()
                     .asReplyWithImage('Value!', 'https://example.com/images/3')
                     .setLayout(7, 6)
                     .setTextStyle(null, 'large', null, null)
             )
             .addButton(
-                new ViberSendKeyboardOptions.Button()
+                new ViberReplyKeyboardOptions.Button()
                     .asNoActionButton('Some text, no action')
                     .setTextAlignment('middle', 'left')
                     .setTextPaddings(0, 10, 0, 10)

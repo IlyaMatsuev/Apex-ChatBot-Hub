@@ -2,15 +2,15 @@
  * @description Describes the `Viber` bot payload when a new user subscribes to the bot
  * Source: https://developers.viber.com/docs/api/rest-bot-api/#subscribed
  */
-global class ViberBotSubscribedEvent extends ViberBotMessageEvent {
+global class ViberSubscribedEvent extends ViberMessageEvent {
     /**
      * @description The subscriber's user information
      */
-    global final ViberBotUser user;
+    global final ViberUser user;
 
-    public ViberBotSubscribedEvent(ViberBotUpdateEvent event) {
+    public ViberSubscribedEvent(ViberUpdateEvent event) {
         super(event);
-        this.user = new ViberBotUser(event.getPayload().getJsonPayload('user'));
+        this.user = new ViberUser(event.getPayload().getJsonPayload('user'));
         this.userId = this.user.getId();
     }
 }

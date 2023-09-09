@@ -85,7 +85,7 @@ private class BotUpdateEventTriggerTest {
         EventBus.publish(
             new BotUpdateEvent__e(
                 Bot__c = bot.toJson(),
-                Payload__c = createViberPayload(ViberBotUpdateEventType.Message).toJson()
+                Payload__c = createViberPayload(ViberUpdateEventType.Message).toJson()
             )
         );
         Test.getEventBus().deliver();
@@ -132,7 +132,7 @@ private class BotUpdateEventTriggerTest {
         EventBus.publish(
             new BotUpdateEvent__e(
                 Bot__c = bot.toJson(),
-                Payload__c = createViberPayload(ViberBotUpdateEventType.Message).toJson()
+                Payload__c = createViberPayload(ViberUpdateEventType.Message).toJson()
             )
         );
         Test.getEventBus().deliver();
@@ -158,7 +158,7 @@ private class BotUpdateEventTriggerTest {
         EventBus.publish(
             new BotUpdateEvent__e(
                 Bot__c = bot.toJson(),
-                Payload__c = createViberPayload(ViberBotUpdateEventType.WebhookCallback).toJson()
+                Payload__c = createViberPayload(ViberUpdateEventType.WebhookCallback).toJson()
             )
         );
         Test.getEventBus().deliver();
@@ -174,10 +174,7 @@ private class BotUpdateEventTriggerTest {
         Assert.isTrue(users.isEmpty());
         Assert.isTrue(messages.isEmpty());
         Assert.areEqual(1, BotHandlerMock.executedContexts.size());
-        Assert.areEqual(
-            ViberBotUpdateEventType.WebhookCallback,
-            BotHandlerMock.executedContexts.get(0).event.getType()
-        );
+        Assert.areEqual(ViberUpdateEventType.WebhookCallback, BotHandlerMock.executedContexts.get(0).event.getType());
     }
 
     private static BotModel createBot(BotType type) {
@@ -227,13 +224,13 @@ private class BotUpdateEventTriggerTest {
             );
     }
 
-    private static BotJsonPayload createViberPayload(ViberBotUpdateEventType eventType) {
+    private static BotJsonPayload createViberPayload(ViberUpdateEventType eventType) {
         BotJsonPayload payload = new BotJsonPayload()
             .set('event', eventType.name())
             .set('timestamp', DateTime.newInstance(2022, 1, 1).getTime())
             .set('message_token', 4912661846655238145L);
 
-        if (eventType == ViberBotUpdateEventType.Message) {
+        if (eventType == ViberUpdateEventType.Message) {
             payload
                 .set(
                     'sender',

@@ -1,7 +1,7 @@
 /**
  * @description The builder-like class that represents parameters for sending a custom carousel/keyboard to the user via the `Viber` bot service. The source: https://developers.viber.com/docs/tools/keyboards/#general-keyboard-parameters
  */
-global class ViberSendKeyboardOptions extends BotPayload {
+global class ViberReplyKeyboardOptions extends BotPayload {
     /**
      * @description The list of buttons to be shown to the receiver
      */
@@ -13,34 +13,34 @@ global class ViberSendKeyboardOptions extends BotPayload {
     /**
      * @description Creates an instance of the carousel/keyboard without any buttons, so that they can be added separately
      */
-    global ViberSendKeyboardOptions() {
+    global ViberReplyKeyboardOptions() {
         this(new List<Button>());
     }
 
     /**
      * @description Creates an instance of the carousel/keyboard with the provided buttons
-     * @param buttons The list of <<ViberSendKeyboardOptions.Button>> instances that represent buttons to be shown to the user
+     * @param buttons The list of <<ViberReplyKeyboardOptions.Button>> instances that represent buttons to be shown to the user
      */
-    global ViberSendKeyboardOptions(List<Button> buttons) {
+    global ViberReplyKeyboardOptions(List<Button> buttons) {
         super();
         this.buttons = buttons;
     }
 
     /**
      * @description Adds a button to the carousel/keyboard
-     * @param button The instance of the <<ViberSendKeyboardOptions.Button>> class, representing a button to add to the layout
-     * @return The current <<ViberSendKeyboardOptions>> instance
+     * @param button The instance of the <<ViberReplyKeyboardOptions.Button>> class, representing a button to add to the layout
+     * @return The current <<ViberReplyKeyboardOptions>> instance
      */
-    global ViberSendKeyboardOptions addButton(Button button) {
+    global ViberReplyKeyboardOptions addButton(Button button) {
         return addButtons(new List<Button> { button });
     }
 
     /**
      * @description Adds multiple buttons to the carousel/keyboard
-     * @param buttons The list of instances of the <<ViberSendKeyboardOptions.Button>> class, representing buttons to add to the layout
-     * @return The current <<ViberSendKeyboardOptions>> instance
+     * @param buttons The list of instances of the <<ViberReplyKeyboardOptions.Button>> class, representing buttons to add to the layout
+     * @return The current <<ViberReplyKeyboardOptions>> instance
      */
-    global ViberSendKeyboardOptions addButtons(Button[] buttons) {
+    global ViberReplyKeyboardOptions addButtons(Button[] buttons) {
         this.buttons.addAll(buttons);
         return this;
     }
@@ -49,9 +49,9 @@ global class ViberSendKeyboardOptions extends BotPayload {
      * @description Sets the size of carousel/keyboard block for grouping buttons on the layout
      * @param groupRows The number of button row groups. Accepts numbers in range: `1..7`. Default is `7` for carousels and `2` for keyboards
      * @param groupColumns The number of button column groups. Accepts numbers in range: `1..6`. Default is `6`
-     * @return The current <<ViberSendKeyboardOptions>> instance
+     * @return The current <<ViberReplyKeyboardOptions>> instance
      */
-    global ViberSendKeyboardOptions setLayout(Integer groupRows, Integer groupColumns) {
+    global ViberReplyKeyboardOptions setLayout(Integer groupRows, Integer groupColumns) {
         payload.set('ButtonsGroupRows', groupRows, true);
         payload.set('ButtonsGroupColumns', groupColumns, true);
         return this;
@@ -60,9 +60,9 @@ global class ViberSendKeyboardOptions extends BotPayload {
     /**
      * @description Sets the background color of the carousel/keyboard
      * @param backgroundColor The HEX value of the carousel/keyboard background color
-     * @return The current <<ViberSendKeyboardOptions>> instance
+     * @return The current <<ViberReplyKeyboardOptions>> instance
      */
-    global ViberSendKeyboardOptions setBackgroundColor(String backgroundColor) {
+    global ViberReplyKeyboardOptions setBackgroundColor(String backgroundColor) {
         payload.set('BgColor', backgroundColor, true);
         return this;
     }
@@ -72,9 +72,9 @@ global class ViberSendKeyboardOptions extends BotPayload {
      * @param customDefaultHeight How much percent of free screen space in chat should be taken by keyboard. The final height will not be less than height of the system keyboard. Accepts numbers in range: `40..70`
      * @param heightScale Scales the height of the default square block (which is defined on client side) to the given value in percents. Accepts numbers in range: `20..100`. Default is `100`
      * @param useDefaultHeight When `true` the keyboard will be displayed with the same height as the native keyboard. When `false` short keyboards will be displayed with the minimal possible height. Default is `false`
-     * @return The current <<ViberSendKeyboardOptions>> instance
+     * @return The current <<ViberReplyKeyboardOptions>> instance
      */
-    global ViberSendKeyboardOptions setHeight(
+    global ViberReplyKeyboardOptions setHeight(
         Integer customDefaultHeight,
         Integer heightScale,
         Boolean useDefaultHeight
@@ -88,24 +88,24 @@ global class ViberSendKeyboardOptions extends BotPayload {
     /**
      * @description Customizes the receiver's keyboard input field
      * @param inputFieldState Possible values: `regular`, `minimized`, `hidden`. Default is `regular`
-     * @return The current <<ViberSendKeyboardOptions>> instance
+     * @return The current <<ViberReplyKeyboardOptions>> instance
      */
-    global ViberSendKeyboardOptions setInputFieldState(String inputFieldState) {
+    global ViberReplyKeyboardOptions setInputFieldState(String inputFieldState) {
         payload.set('InputFieldState', inputFieldState, true);
         return this;
     }
 
     /**
      * @description Allows the carousel/keyboard content to be saved by the receiver
-     * @param favoritesMetadata The instance of <<ViberSendKeyboardOptions.FavoritesMetadata>> describing content to be saved via favorites, if saving is available
-     * @return The current <<ViberSendKeyboardOptions>> instance
+     * @param favoritesMetadata The instance of <<ViberReplyKeyboardOptions.FavoritesMetadata>> describing content to be saved via favorites, if saving is available
+     * @return The current <<ViberReplyKeyboardOptions>> instance
      */
-    global ViberSendKeyboardOptions allowSaveToFavorites(FavoritesMetadata favoritesMetadata) {
+    global ViberReplyKeyboardOptions allowSaveToFavorites(FavoritesMetadata favoritesMetadata) {
         payload.set('FavoritesMetadata', favoritesMetadata);
         return this;
     }
 
-    public ViberSendKeyboardOptions setType(String keyboardType) {
+    public ViberReplyKeyboardOptions setType(String keyboardType) {
         payload.set('Type', keyboardType);
         return this;
     }
@@ -121,7 +121,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @description Sets the button layout
          * @param rows The button height. Accepts numbers in range: `1..7` for carousels and `1-2` for keyboards. Default is `1`
          * @param columns The button width. Accepts numbers in range: `1..6`. Default is `6`
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button setLayout(Integer rows, Integer columns) {
             payload.set('Rows', rows, true);
@@ -132,7 +132,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Sets the button background color
          * @param backgroundColor The backgroun color of the button (HEX value)
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button setBackgroundColor(String backgroundColor) {
             payload.set('BgColor', backgroundColor, true);
@@ -145,7 +145,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @param mediaScaleType The options for scaling the bounds of the background to the bounds of the view. Possible values: `crop`, `fill`, `fit`
          * @param isGif If the passed media refer to a `.gif` file or not. Default is `false`
          * @param loopGif If the passed media refer to a `.gif` file, decide whether to loop it or play only once. Default is `true`
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button setBackgroundMedia(String mediaUrl, String mediaScaleType, Boolean isGif, Boolean loopGif) {
             payload.set('BgMedia', mediaUrl, true);
@@ -158,7 +158,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Makes the button to behave as an informative button without the possibility to click it
          * @param buttonText The text to be shown on the button
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button asNoActionButton(String buttonText) {
             this.actionType = 'none';
@@ -169,7 +169,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @description Makes the button to behave as a text reply from the receiver, sending a message back to the bot
          * @param replyValue The actual text value to be sent back to bot
          * @param replyText The text message to appear in the chat sent by the receiver
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button asReply(String replyValue, String replyText) {
             this.actionType = 'reply';
@@ -181,7 +181,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @description Makes the button to behave as an image reply from the receiver, sending a message back to the bot
          * @param replyValue The actual text value to be sent back to bot
          * @param imageUrl The URL of the image to appear in the chat sent by the receiver
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button asReplyWithImage(String replyValue, String imageUrl) {
             this.actionType = 'reply';
@@ -192,7 +192,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Makes the button to behave as a link to a website, sending the clicked link URL back to the bot
          * @param url The URL of the link. Will be sent back to the bot, appearing in the chat as message from the receiver
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button asOpenUrl(String url) {
             return asOpenUrl(url, null);
@@ -201,8 +201,8 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Makes the button to behave as a link to a website, sending the clicked link URL back to the bot
          * @param url The URL of the link. Will be sent back to the bot, appearing in the chat as message from the receiver
-         * @param internalBrowserConfig The instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>> class describing configurations for the `Viber` internal browser
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @param internalBrowserConfig The instance of <<ViberReplyKeyboardOptions.ButtonInternalBrowser>> class describing configurations for the `Viber` internal browser
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button asOpenUrl(String url, ButtonInternalBrowser internalBrowserConfig) {
             return asOpenUrl(url, null, null, internalBrowserConfig);
@@ -212,9 +212,9 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @description Makes the button to behave as a link to a website or a media content, sending the clicked link URL back to the bot
          * @param url The URL of the link or media. Will be sent back to the bot, appearing in the chat as message from the receiver
          * @param mediaType The type of the content under the provided link. Possible values: `not-media`, `video`, `gif`, `picture`. Default is `not-media`
-         * @param mediaPlayerConfig The instance of <<ViberSendKeyboardOptions.ButtonMediaPlayer>> class describing configurations for the `Viber` media player
-         * @param internalBrowserConfig The instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>> class describing configurations for the `Viber` internal browser
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @param mediaPlayerConfig The instance of <<ViberReplyKeyboardOptions.ButtonMediaPlayer>> class describing configurations for the `Viber` media player
+         * @param internalBrowserConfig The instance of <<ViberReplyKeyboardOptions.ButtonInternalBrowser>> class describing configurations for the `Viber` internal browser
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button asOpenUrl(
             String url,
@@ -235,7 +235,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @description Makes the button to behave as a link to a location on a map, sending the picked location to the bot
          * @param latitude The latitude of the location
          * @param longitude The longitude of the location
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button asOpenMap(Decimal latitude, Decimal longitude) {
             this.actionType = 'open-map';
@@ -246,7 +246,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Makes the button to behave as a button to share the receiver's phone number. Only available for keyboard
          * @param text The button text to be shown to the user
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button asPhoneSharing(String text) {
             this.actionType = 'share-phone';
@@ -256,7 +256,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Makes the button to behave as a button to share the receiver's location. Only available for keyboard
          * @param text The button text to be shown to the user
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button asLocationSharing(String text) {
             this.actionType = 'location-picker';
@@ -266,7 +266,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Sets the button text
          * @param text The text to be displayed on the button. Can contain such HTML tags as: `<b>`, `<i>`, `<u>`, `<br>`, `<s>` and `<font size="N" color="#7F00FF">`. Max `250` characters
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button setText(String text) {
             payload.set('Text', text, true);
@@ -277,7 +277,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @description Sets the button text vertical and horizontal alignment
          * @param verticalAlign The vertical alignment of the text. Possible values: `top`, `middle`, `bottom`. Default is `middle`
          * @param horizontalAlign The horizontal alignment of the text. Possible values: `left`, `center`, `right`. Default is `center`
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button setTextAlignment(String verticalAlign, String horizontalAlign) {
             payload.set('TextVAlign', verticalAlign, true);
@@ -291,7 +291,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @param right The top padding
          * @param bottom The top padding
          * @param left The top padding
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button setTextPaddings(Integer top, Integer right, Integer bottom, Integer left) {
             payload.set('TextPaddings', new List<Integer> { top, right, bottom, left });
@@ -304,7 +304,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @param opecity The text opacity. Accepts numbers in range: `0..100`. Default is `100`
          * @param bgGradientColor The background gradient to use under text (HEX value). Works only when text is aligned vertically to `top` or `bottom`
          * @param fitText If set to `true` the size of the text will be decreased to fit (minimum size is `12`). Default is `false`
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button setTextStyle(Integer opacity, String size, String bgGradientColor, Boolean fitText) {
             payload.set('TextOpacity', opacity, true);
@@ -317,7 +317,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Sets the image on top of the button's background
          * @param imageUrl The URL of the image to be placed on top of the button background
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button setImage(String imageUrl) {
             payload.set('Image', imageUrl, true);
@@ -329,7 +329,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @param borderWidth The width of the borders. Accepts numbers in range: `0..10`. Default is `1`
          * @param cornerRadius The radius of the border corners. Accepts numbers in range: `0..10`. Default is `0`
          * @param borderColor The color of the borders (HEX value)
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button setBorders(Integer borderWidth, Integer cornerRadius, String borderColor) {
             BotJsonPayload frame = new BotJsonPayload()
@@ -343,7 +343,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
 
         /**
          * @description Sets the setting to use the internal `Viber` browser for opening button links
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button useInternalBrowser() {
             return useInternalBrowser(true);
@@ -352,7 +352,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Determines if the internal `Viber` browser should be used for opening button links
          * @param shouldUseInternalBrowser Determines if the internal `Viber` browser should be used for opening button links. Default is `true`
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button useInternalBrowser(Boolean shouldUseInternalBrowser) {
             payload.set('OpenURLType', shouldUseInternalBrowser ? 'internal' : 'external');
@@ -362,7 +362,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Determines whether the user action is presented in the conversation
          * @param useSilent Determines whether the user action is presented in the conversation. Default is `false`
-         * @return The current <<ViberSendKeyboardOptions.Button>> instance
+         * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button useSilentMode(Boolean useSilent) {
             payload.set('Silent', useSilent, true);
@@ -405,7 +405,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Sets the content title
          * @param title The content title
-         * @return The current <<ViberSendKeyboardOptions.FavoritesMetadata>> instance
+         * @return The current <<ViberReplyKeyboardOptions.FavoritesMetadata>> instance
          */
         global FavoritesMetadata setTitle(String title) {
             this.title = title;
@@ -417,7 +417,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @param thumbnail The accessible thumbnail for the content (PNG, JPEG)
          * @param width The width of the thumbnail image in pixels
          * @param height The height of the thumbnail image in pixels
-         * @return The current <<ViberSendKeyboardOptions.FavoritesMetadata>> instance
+         * @return The current <<ViberReplyKeyboardOptions.FavoritesMetadata>> instance
          */
         global FavoritesMetadata setThumbnail(String thumbnail, Integer width, Integer height) {
             this.thumbnail = thumbnail;
@@ -430,7 +430,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * @description Sets the alternative text and URL for clients with API version not supporting favorites saving
          * @param text The alternative text for the URL
          * @param url The alternative URL
-         * @return The current <<ViberSendKeyboardOptions.FavoritesMetadata>> instance
+         * @return The current <<ViberReplyKeyboardOptions.FavoritesMetadata>> instance
          */
         global FavoritesMetadata setAlternativeContent(String text, String url) {
             this.alternativeText = text;
@@ -441,7 +441,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Sets the top domain of the content URL
          * @param domain The top domain of the content URL
-         * @return The current <<ViberSendKeyboardOptions.FavoritesMetadata>> instance
+         * @return The current <<ViberReplyKeyboardOptions.FavoritesMetadata>> instance
          */
         global FavoritesMetadata setDomain(String domain) {
             this.domain = domain;
@@ -464,7 +464,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * Default is `forward`
          * @param predefinedMessage The predefined message to be sent if `actionButton` is set to `send` or `forward`
          * @param replyData The custom reply data if `actionButton` is set to `send-to-bot`
-         * @return The current instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>>
+         * @return The current instance of <<ViberReplyKeyboardOptions.ButtonInternalBrowser>>
          */
         global ButtonInternalBrowser setActionButton(String action, String predefinedMessage, String replyData) {
             payload.set('ActionButton', action, true);
@@ -479,7 +479,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
          * `default` displays the content of the page's `<title>` tag
          * Any other value for a custom title
          * @param title The title display type of the title custom value
-         * @return The current instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>>
+         * @return The current instance of <<ViberReplyKeyboardOptions.ButtonInternalBrowser>>
          */
         global ButtonInternalBrowser setTitle(String title) {
             if (title == 'domain' || title == 'default') {
@@ -493,7 +493,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Determines how should the internal browser be opened. Possible values: `fullscreen`, `fullscreen-portrait`, `fullscreen-landscape`, `partial-size`. Default is `fullscreen`
          * @param mode The mode option
-         * @return The current instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>>
+         * @return The current instance of <<ViberReplyKeyboardOptions.ButtonInternalBrowser>>
          */
         global ButtonInternalBrowser setMode(String mode) {
             payload.set('Mode', mode, true);
@@ -503,7 +503,7 @@ global class ViberSendKeyboardOptions extends BotPayload {
         /**
          * @description Determines if the website footer should be shown in the internal browser
          * @param showFooter Whether to show the website footer or not
-         * @return The current instance of <<ViberSendKeyboardOptions.ButtonInternalBrowser>>
+         * @return The current instance of <<ViberReplyKeyboardOptions.ButtonInternalBrowser>>
          */
         global ButtonInternalBrowser withFooter(Boolean showFooter) {
             payload.set('FooterType', showFooter ? 'default' : 'hidden');
