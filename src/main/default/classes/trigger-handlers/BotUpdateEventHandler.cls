@@ -91,8 +91,6 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         );
     }
 
-    // TODO: Make it possible for incoming messages to save MediaUrl and Parameters the same way we do for out coming messages
-    // - Add `getType: BotMessageType`, `getMediaUrl: String` and `getParameters: BotJsonPayload` method to the interface
     private ChatMessage__c getChatMessage(String chatId, String userId, IBotMessage message) {
         if (message == null) {
             return null;
@@ -102,7 +100,10 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
             Chat__r = new Chat__c(ExternalId__c = chatId),
             User__r = new ChatUser__c(ExternalId__c = userId),
             Text__c = message.getText(),
+            Type__c = message.getType().name(),
+            MediaUrl__c = message.getMediaUrl(),
             SendDate__c = message.getSendDate(),
+            Parameters__c = message.getParameters().toJson(true),
             ExternalId__c = BotUtils.generateExternalId(message.getId(), chatId)
         );
     }

@@ -307,6 +307,37 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     }
 
     /**
+     * @description Returns the message type
+     * @return The instance of the <<BotMessageType>> enum
+     */
+    global BotMessageType getType() {
+        if (payload.has('text')) {
+            return BotUtils.isUrl(text) ? BotMessageType.Url : BotMessageType.Text;
+        } else if (payload.has('photo')) {
+            return BotMessageType.Image;
+        } else if (payload.has('video') || payload.has('video_note')) {
+            return BotMessageType.Video;
+        } else if (payload.has('animation')) {
+            return BotMessageType.Animation;
+        } else if (payload.has('audio') || payload.has('voice')) {
+            return BotMessageType.Audio;
+        } else if (payload.has('document')) {
+            return BotMessageType.File;
+        } else if (payload.has('contact')) {
+            return BotMessageType.Contact;
+        } else if (payload.has('sticker')) {
+            return BotMessageType.Sticker;
+        } else if (payload.has('location')) {
+            return BotMessageType.Location;
+        } else if (payload.has('venue')) {
+            return BotMessageType.Venue;
+        } else if (payload.has('poll')) {
+            return BotMessageType.Poll;
+        }
+        return BotMessageType.Other;
+    }
+
+    /**
      * @description Returns the message text
      * @return The message text
      */
@@ -315,10 +346,56 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     }
 
     /**
+     * @description Returns the media URL if it was attached to the message
+     * @return The message media URL
+     */
+    global String getMediaUrl() {
+        for (TelegramBotMessageEntity entity : entities) {
+            if (entity.type == 'url') {
+                return entity.url;
+            }
+        }
+        return null;
+    }
+
+    /**
      * @description Returns the message send date
      * @return The message send date
      */
     global DateTime getSendDate() {
         return sendDate;
+    }
+
+    /**
+     * @description Returns the additional message parameters
+     * @return The instance of the <<BotJsonPayload>> class
+     */
+    global BotJsonPayload getParameters() {
+        if (payload.has('photo')) {
+            return payload.getJsonPayload('photo');
+        } else if (payload.has('video')) {
+            return payload.getJsonPayload('video');
+        } else if (payload.has('video_note')) {
+            return payload.getJsonPayload('video_note');
+        } else if (payload.has('animation')) {
+            return payload.getJsonPayload('animation');
+        } else if (payload.has('audio')) {
+            return payload.getJsonPayload('audio');
+        } else if (payload.has('voice')) {
+            return payload.getJsonPayload('voice');
+        } else if (payload.has('document')) {
+            return payload.getJsonPayload('document');
+        } else if (payload.has('contact')) {
+            return payload.getJsonPayload('contact');
+        } else if (payload.has('sticker')) {
+            return payload.getJsonPayload('sticker');
+        } else if (payload.has('location')) {
+            return payload.getJsonPayload('location');
+        } else if (payload.has('venue')) {
+            return payload.getJsonPayload('venue');
+        } else if (payload.has('poll')) {
+            return payload.getJsonPayload('poll');
+        }
+        return new BotJsonPayload();
     }
 }
