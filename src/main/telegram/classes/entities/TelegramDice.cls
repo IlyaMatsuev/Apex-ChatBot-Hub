@@ -2,7 +2,7 @@
  * @description Describes the dice payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#dice
  */
-global class TelegramBotDice extends BotPayload {
+global class TelegramDice extends BotPayload {
     /**
      * @description The emoji on which the dice throw animation is based
      */
@@ -16,7 +16,7 @@ global class TelegramBotDice extends BotPayload {
      */
     global Integer value { get { return payload.getInteger('value'); } }
 
-    public TelegramBotDice(BotJsonPayload payload) {
+    public TelegramDice(BotJsonPayload payload) {
         super(payload);
     }
 }

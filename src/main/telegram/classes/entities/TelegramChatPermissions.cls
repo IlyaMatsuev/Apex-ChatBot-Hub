@@ -2,7 +2,7 @@
  * @description Describes the chat permissions payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#chatpermissions
  */
-global class TelegramBotChatPermissions extends BotPayload {
+global class TelegramChatPermissions extends BotPayload {
     /**
      * @description `True` if the user is allowed to send text messages, contacts, invoices, locations and venues
      */
@@ -73,7 +73,7 @@ global class TelegramBotChatPermissions extends BotPayload {
      */
     global Boolean canManageTopics { get { return payload.getBoolean('can_manage_topics'); } }
 
-    public TelegramBotChatPermissions(BotJsonPayload payload) {
+    public TelegramChatPermissions(BotJsonPayload payload) {
         super(payload);
     }
 }

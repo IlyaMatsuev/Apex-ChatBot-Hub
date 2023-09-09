@@ -134,19 +134,19 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
 
     /**
      * @description Adds a special entity that appear in the explanation text. For example username tags
-     * @param entity The instance of <<TelegramSendMessageOptions.TelegramBotMessageEntity>>, special message entity. E.g. hashtag, username, URL, etc.
+     * @param entity The instance of <<TelegramSendMessageOptions.TelegramMessageEntity>>, special message entity. E.g. hashtag, username, URL, etc.
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
-    global TelegramSendPollOptions withExplanationMessageEntity(TelegramBotMessageEntity entity) {
-        return withExplanationMessageEntities(new List<TelegramBotMessageEntity> { entity });
+    global TelegramSendPollOptions withExplanationMessageEntity(TelegramMessageEntity entity) {
+        return withExplanationMessageEntities(new List<TelegramMessageEntity> { entity });
     }
 
     /**
      * @description Adds special entities that appear in the explanation text. For example username tags
-     * @param entities The list of <<TelegramSendMessageOptions.TelegramBotMessageEntity>> instances, special message entities. E.g. hashtag, username, URL, etc.
+     * @param entities The list of <<TelegramSendMessageOptions.TelegramMessageEntity>> instances, special message entities. E.g. hashtag, username, URL, etc.
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
-    global TelegramSendPollOptions withExplanationMessageEntities(TelegramBotMessageEntity[] entities) {
+    global TelegramSendPollOptions withExplanationMessageEntities(TelegramMessageEntity[] entities) {
         return (TelegramSendPollOptions) addMessageEntities(entities);
     }
 

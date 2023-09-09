@@ -2,7 +2,7 @@
  * @description Describes the common payload properties for the `Telegram` bot chosen inline result events
  * Source: https://core.telegram.org/bots/api#choseninlineresult
  */
-global class TelegramBotChosenInlineResultEvent extends BotPayload {
+global class TelegramChosenInlineResultEvent extends BotPayload {
     /**
      * @description The unique identifier for the result that was chosen
      */
@@ -11,12 +11,12 @@ global class TelegramBotChosenInlineResultEvent extends BotPayload {
     /**
      * @description The user that chose the result
      */
-    global TelegramBotUser sender { get { return new TelegramBotUser(payload.getJsonPayload('from')); } }
+    global TelegramUser sender { get { return new TelegramUser(payload.getJsonPayload('from')); } }
 
     /**
      * @description The sender location, only for bots that require user location
      */
-    global TelegramBotLocation location { get { return new TelegramBotLocation(payload.getJsonPayload('location')); } }
+    global TelegramLocation location { get { return new TelegramLocation(payload.getJsonPayload('location')); } }
 
     /**
      * @description The identifier of the sent inline message. Available only if there is an inline keyboard attached to the message
@@ -28,7 +28,7 @@ global class TelegramBotChosenInlineResultEvent extends BotPayload {
      */
     global String query { get { return payload.getString('query'); } }
 
-    public TelegramBotChosenInlineResultEvent(BotJsonPayload payload) {
+    public TelegramChosenInlineResultEvent(BotJsonPayload payload) {
         super(payload);
     }
 }

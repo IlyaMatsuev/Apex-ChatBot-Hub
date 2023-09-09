@@ -35,7 +35,7 @@ public class BotSettingsProvider {
                 DeveloperName = BotType.Telegram.name(),
                 ApiUrl__c = 'https://tg.bot-api.org/bot',
                 BotService__c = 'TelegramBotService',
-                BotUpdateEvent__c = 'TelegramBotUpdateEvent',
+                BotUpdateEvent__c = 'TelegramUpdateEvent',
                 BotHandlerContext__c = 'TelegramBotContext',
                 BotUpdateResolver__c = 'TelegramBotUpdateResolver',
                 BotWebhookService__c = 'TelegramBotWebhookService',

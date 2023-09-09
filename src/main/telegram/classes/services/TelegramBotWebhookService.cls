@@ -8,8 +8,8 @@ public class TelegramBotWebhookService extends BotWebhookService {
             .set(
                 'allowed_updates',
                 new List<String> {
-                    TelegramBotUpdateEventType.Message.name(),
-                    TelegramBotUpdateEventType.EditedMessage.name()
+                    TelegramUpdateEventType.Message.name(),
+                    TelegramUpdateEventType.EditedMessage.name()
                 }
             )
             .set('secret_token', bot.tokenHash);

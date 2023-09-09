@@ -2,11 +2,11 @@
  * @description Describes the venue payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#venue
  */
-global class TelegramBotVenue extends BotPayload {
+global class TelegramVenue extends BotPayload {
     /**
      * @description The venue location. Can't be a live location
      */
-    global TelegramBotLocation location { get { return new TelegramBotLocation(payload.getJsonPayload('location')); } }
+    global TelegramLocation location { get { return new TelegramLocation(payload.getJsonPayload('location')); } }
 
     /**
      * @description The name of the venue
@@ -38,7 +38,7 @@ global class TelegramBotVenue extends BotPayload {
      */
     global String googlePlaceType { get { return payload.getString('google_place_type'); } }
 
-    public TelegramBotVenue(BotJsonPayload payload) {
+    public TelegramVenue(BotJsonPayload payload) {
         super(payload);
     }
 }

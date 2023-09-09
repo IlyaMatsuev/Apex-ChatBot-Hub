@@ -2,7 +2,7 @@
  * @description Describes the common payload properties for the `Telegram` bot inline query events
  * Source: https://core.telegram.org/bots/api#inlinequery
  */
-global class TelegramBotInlineQueryEvent extends BotPayload {
+global class TelegramInlineQueryEvent extends BotPayload {
     /**
      * @description The unique identifier for this query
      */
@@ -11,7 +11,7 @@ global class TelegramBotInlineQueryEvent extends BotPayload {
     /**
      * @description The sender of the inline query
      */
-    global TelegramBotUser sender { get { return new TelegramBotUser(payload.getJsonPayload('from')); } }
+    global TelegramUser sender { get { return new TelegramUser(payload.getJsonPayload('from')); } }
 
     /**
      * @description The text of the query (up to `256` characters)
@@ -31,9 +31,9 @@ global class TelegramBotInlineQueryEvent extends BotPayload {
     /**
      * @description The sender location, only for bots that request user location
      */
-    global TelegramBotLocation location { get { return new TelegramBotLocation(payload.getJsonPayload('location')); } }
+    global TelegramLocation location { get { return new TelegramLocation(payload.getJsonPayload('location')); } }
 
-    public TelegramBotInlineQueryEvent(BotJsonPayload payload) {
+    public TelegramInlineQueryEvent(BotJsonPayload payload) {
         super(payload);
     }
 }

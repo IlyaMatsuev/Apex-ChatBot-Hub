@@ -2,7 +2,7 @@
  * @description Describes the poll payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#poll
  */
-global class TelegramBotPoll extends BotPayload {
+global class TelegramPoll extends BotPayload {
     /**
      * @description The unique poll identifier
      */
@@ -67,13 +67,13 @@ global class TelegramBotPoll extends BotPayload {
     /**
      * @description The special entities like usernames, URLs, bot commands, etc. that appear in the explanation
      */
-    global List<TelegramBotMessageEntity> explanationEntities {
+    global List<TelegramMessageEntity> explanationEntities {
         get {
-            List<TelegramBotMessageEntity> entities = new List<TelegramBotMessageEntity>();
+            List<TelegramMessageEntity> entities = new List<TelegramMessageEntity>();
             List<BotJsonPayload> payloadList = payload.getJsonPayloadList('explanation_entities');
             if (payloadList != null) {
                 for (BotJsonPayload payload : payloadList) {
-                    entities.add(new TelegramBotMessageEntity(payload));
+                    entities.add(new TelegramMessageEntity(payload));
                 }
             }
             return entities;
@@ -90,7 +90,7 @@ global class TelegramBotPoll extends BotPayload {
      */
     global DateTime closeDate { get { return payload.getDateTime('close_date'); } }
 
-    public TelegramBotPoll(BotJsonPayload payload) {
+    public TelegramPoll(BotJsonPayload payload) {
         super(payload);
     }
 

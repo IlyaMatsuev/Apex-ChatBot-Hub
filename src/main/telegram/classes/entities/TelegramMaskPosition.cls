@@ -2,7 +2,7 @@
  * @description Describes the mask position payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#maskposition
  */
-global class TelegramBotMaskPosition extends BotPayload {
+global class TelegramMaskPosition extends BotPayload {
     /**
      * @description The part of the face relative to which the mask should be placed. One of `forehead`, `eyes`, `mouth`, or `chin`
      */
@@ -23,7 +23,7 @@ global class TelegramBotMaskPosition extends BotPayload {
      */
     global Decimal scale { get { return payload.getDecimal('scale'); } }
 
-    public TelegramBotMaskPosition(BotJsonPayload payload) {
+    public TelegramMaskPosition(BotJsonPayload payload) {
         super(payload);
     }
 }

@@ -2,7 +2,7 @@
  * @description The builder-like class representing a special entity in a message text. For example, hashtags, usernames, etc.
  * Source: https://core.telegram.org/bots/api#messageentity
  */
-global class TelegramBotMessageEntity extends BotPayload {
+global class TelegramMessageEntity extends BotPayload {
     /**
      * @description The type of the entity. Possible values: `mention`, `hashtag`, `cashtag`, `bot_command`, `url`, `email`, `phone_number`, `bold`, `italic`, `underline`, `strikethrough`, `spoiler`, `code`, `pre`, `text_link`, `text_mention`, `custom_emoji`
      */
@@ -26,8 +26,8 @@ global class TelegramBotMessageEntity extends BotPayload {
     /**
      * @description For `text_mention` only, the mentioned user
      */
-    global TelegramBotUser user {
-        get { return new TelegramBotUser(payload.getJsonPayload('user')); }
+    global TelegramUser user {
+        get { return new TelegramUser(payload.getJsonPayload('user')); }
         private set { payload.set('user', value.getJsonPayload()); }
     }
 
@@ -47,7 +47,7 @@ global class TelegramBotMessageEntity extends BotPayload {
         private set { payload.set('custom_emoji_id', value, true); }
     }
 
-    public TelegramBotMessageEntity(BotJsonPayload payload) {
+    public TelegramMessageEntity(BotJsonPayload payload) {
         super(payload);
     }
 
@@ -57,7 +57,7 @@ global class TelegramBotMessageEntity extends BotPayload {
      * @param offset The offset to start of the message entity
      * @param length The length of the entity
      */
-    global TelegramBotMessageEntity(String type, Integer offset, Integer length) {
+    global TelegramMessageEntity(String type, Integer offset, Integer length) {
         super();
         this.type = type;
         this.offset = offset;
@@ -69,7 +69,7 @@ global class TelegramBotMessageEntity extends BotPayload {
      * @param url The URL that will be opened when the user taps the text
      * @return The current instance of the message entity
      */
-    global TelegramBotMessageEntity asUrl(String url) {
+    global TelegramMessageEntity asUrl(String url) {
         this.url = url;
         return this;
     }
@@ -79,8 +79,8 @@ global class TelegramBotMessageEntity extends BotPayload {
      * @param userId The `Telegram` id of the user that needs to be mentioned
      * @return The current instance of the message entity
      */
-    global TelegramBotMessageEntity asUserMention(String userId) {
-        this.user = new TelegramBotUser(new BotJsonPayload().set('id', BotUtils.parseExternalId(userId)));
+    global TelegramMessageEntity asUserMention(String userId) {
+        this.user = new TelegramUser(new BotJsonPayload().set('id', BotUtils.parseExternalId(userId)));
         return this;
     }
 
@@ -89,7 +89,7 @@ global class TelegramBotMessageEntity extends BotPayload {
      * @param language The programing language to use syntax for
      * @return The current instance of the message entity
      */
-    global TelegramBotMessageEntity asProgrammingLanguage(String language) {
+    global TelegramMessageEntity asProgrammingLanguage(String language) {
         this.language = language;
         return this;
     }
@@ -99,7 +99,7 @@ global class TelegramBotMessageEntity extends BotPayload {
      * @param emojiId The custom emoji id
      * @return The current instance of the message entity
      */
-    global TelegramBotMessageEntity asCustomEmoji(String emojiId) {
+    global TelegramMessageEntity asCustomEmoji(String emojiId) {
         this.customEmojiId = emojiId;
         return this;
     }

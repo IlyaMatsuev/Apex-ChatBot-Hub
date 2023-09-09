@@ -2,7 +2,7 @@
  * @description Describes the file payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#file
  */
-global class TelegramBotFile extends BotPayload {
+global class TelegramFile extends BotPayload {
     /**
      * @description The identifier for this file, which can be used to download or reuse the file
      */
@@ -23,7 +23,7 @@ global class TelegramBotFile extends BotPayload {
      */
     global String filePath { get { return payload.getString('file_path'); } }
 
-    public TelegramBotFile(BotJsonPayload payload) {
+    public TelegramFile(BotJsonPayload payload) {
         super(payload);
     }
 }

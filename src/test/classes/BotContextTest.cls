@@ -48,24 +48,24 @@ private class BotContextTest {
     private static void received_telegramUpdateModelWithMessage_containsAllFields() {
         IBotUpdateEvent receivedUpdate = createBotUpdateEvent(BotType.Telegram, createTelegramPayload());
 
-        Assert.isInstanceOfType(receivedUpdate, TelegramBotUpdateEvent.class);
+        Assert.isInstanceOfType(receivedUpdate, TelegramUpdateEvent.class);
 
-        TelegramBotUpdateEvent receivedTgUpdate = (TelegramBotUpdateEvent) receivedUpdate;
+        TelegramUpdateEvent receivedTgUpdate = (TelegramUpdateEvent) receivedUpdate;
 
-        Assert.areEqual(TelegramBotUpdateEventType.Message, receivedTgUpdate.getType());
+        Assert.areEqual(TelegramUpdateEventType.Message, receivedTgUpdate.getType());
 
-        TelegramBotMessage messageUpdate = receivedTgUpdate.getMessage();
+        TelegramMessage messageUpdate = receivedTgUpdate.getMessage();
 
         Assert.areEqual('223123123', messageUpdate.getId());
         Assert.areEqual('/start hello   world!', messageUpdate.getText());
         Assert.areEqual(DateTime.newInstanceGmt(2022, 1, 1, 8, 0, 0), messageUpdate.getSendDate());
 
-        TelegramBotChat chatUpdate = receivedTgUpdate.getChat();
+        TelegramChat chatUpdate = receivedTgUpdate.getChat();
 
         Assert.areEqual('876541222', chatUpdate.getId());
         Assert.areEqual('matsuev', chatUpdate.getTitle());
 
-        TelegramBotUser userUpdate = chatUpdate.getSender();
+        TelegramUser userUpdate = chatUpdate.getSender();
 
         Assert.areEqual('876541222', userUpdate.getId());
         Assert.isNull(userUpdate.getFirstName());

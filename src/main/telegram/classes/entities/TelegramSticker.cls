@@ -2,7 +2,7 @@
  * @description Describes the sticker payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#sticker
  */
-global class TelegramBotSticker extends BotPayload {
+global class TelegramSticker extends BotPayload {
     /**
      * @description The identifier for this file, which can be used to download or reuse the file
      */
@@ -41,9 +41,7 @@ global class TelegramBotSticker extends BotPayload {
     /**
      * @description The sticker thumbnail in the .WEBP or .JPG format
      */
-    global TelegramBotPhotoSize thumbnail {
-        get { return new TelegramBotPhotoSize(payload.getJsonPayload('thumbnail')); }
-    }
+    global TelegramPhotoSize thumbnail { get { return new TelegramPhotoSize(payload.getJsonPayload('thumbnail')); } }
 
     /**
      * @description The emoji associated with the sticker
@@ -58,15 +56,15 @@ global class TelegramBotSticker extends BotPayload {
     /**
      * @description For premium regular stickers, premium animation for the sticker
      */
-    global TelegramBotFile premiumAnimation {
-        get { return new TelegramBotFile(payload.getJsonPayload('premium_animation')); }
+    global TelegramFile premiumAnimation {
+        get { return new TelegramFile(payload.getJsonPayload('premium_animation')); }
     }
 
     /**
      * @description For mask stickers, the position where the mask should be placed
      */
-    global TelegramBotMaskPosition maskPosition {
-        get { return new TelegramBotMaskPosition(payload.getJsonPayload('mask_position')); }
+    global TelegramMaskPosition maskPosition {
+        get { return new TelegramMaskPosition(payload.getJsonPayload('mask_position')); }
     }
 
     /**
@@ -84,7 +82,7 @@ global class TelegramBotSticker extends BotPayload {
      */
     global Integer fileSize { get { return payload.getInteger('file_size'); } }
 
-    public TelegramBotSticker(BotJsonPayload payload) {
+    public TelegramSticker(BotJsonPayload payload) {
         super(payload);
     }
 }

@@ -72,7 +72,7 @@ private class TelegramBotServiceTest {
             .addButton(2, new TelegramReplyKeyboardMarkupOptions.Button('I do not wanna share anything 😤'));
 
         Test.startTest();
-        fixture.sut().send(fixture.chat.ExternalId__c).withReplyMarkup(replyButtons).text('Hello world!');
+        fixture.sut().send(fixture.chat.ExternalId__c).withReplyKeyboard(replyButtons).text('Hello world!');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -117,7 +117,7 @@ private class TelegramBotServiceTest {
             );
 
         Test.startTest();
-        fixture.sut().send(fixture.chat.ExternalId__c).withReplyMarkup(keyboard).text('Hello world!');
+        fixture.sut().send(fixture.chat.ExternalId__c).withReplyKeyboard(keyboard).text('Hello world!');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -140,7 +140,7 @@ private class TelegramBotServiceTest {
             .withProtectedContent()
             .withoutLinksPreview()
             .asReplyToMessage('some-message-id')
-            .withMessageEntity(new TelegramBotMessageEntity('text_mention', 23, 8).asUserMention('12312'));
+            .withMessageEntity(new TelegramMessageEntity('text_mention', 23, 8).asUserMention('12312'));
 
         Test.startTest();
         fixture.sut().send(fixture.chat.ExternalId__c).text('Hello world! The user: userLink', options);
@@ -203,7 +203,7 @@ private class TelegramBotServiceTest {
             .withoutNotification()
             .withProtectedContent()
             .asReplyToMessage('some-message-id')
-            .withMessageEntity(new TelegramBotMessageEntity('url', 18, 3).asUrl('https://example.com'));
+            .withMessageEntity(new TelegramMessageEntity('url', 18, 3).asUrl('https://example.com'));
 
         Test.startTest();
         fixture.sut().send(fixture.chat.ExternalId__c).image('https://example.com/image.jpeg', options);
@@ -270,7 +270,7 @@ private class TelegramBotServiceTest {
             .withDuration(10)
             .withLayout(400, 300)
             .withStreamingSupport()
-            .withMessageEntity(new TelegramBotMessageEntity('custom_emoji', 18, 5).asCustomEmoji('emoji-id'));
+            .withMessageEntity(new TelegramMessageEntity('custom_emoji', 18, 5).asCustomEmoji('emoji-id'));
 
         Test.startTest();
         fixture.sut().send(fixture.chat.ExternalId__c).video('https://example.com/video.mp4', options);
@@ -409,7 +409,7 @@ private class TelegramBotServiceTest {
             .withProtectedContent()
             .withoutContentTypeDetection()
             .asReplyToMessage('some-message-id')
-            .withMessageEntity(new TelegramBotMessageEntity('pre', 18, 14).asProgrammingLanguage('java'));
+            .withMessageEntity(new TelegramMessageEntity('pre', 18, 14).asProgrammingLanguage('java'));
 
         Test.startTest();
         fixture.sut().send(fixture.chat.ExternalId__c).file('https://example.com/file.pdf', options);
@@ -678,7 +678,7 @@ private class TelegramBotServiceTest {
             .withProtectedContent()
             .asReplyToMessage('some-message-id')
             .withDuration(210)
-            .withMessageEntity(new TelegramBotMessageEntity('italic', 0, 23));
+            .withMessageEntity(new TelegramMessageEntity('italic', 0, 23));
 
         Test.startTest();
         fixture.sut().send(fixture.chat.ExternalId__c).audio('https://examlple.com/audio.mp3', options);
@@ -760,7 +760,7 @@ private class TelegramBotServiceTest {
             .asAnonymous()
             .asQuiz(1, 'I <b>dont</b> care what you choose')
             .withExplanationParseMode('HTML')
-            .withExplanationMessageEntity(new TelegramBotMessageEntity('italic', 14, 4))
+            .withExplanationMessageEntity(new TelegramMessageEntity('italic', 14, 4))
             .withOpenPeriod(null)
             .withCloseDate(DateTime.now().addSeconds(100))
             .asClosed()

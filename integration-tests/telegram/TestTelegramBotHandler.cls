@@ -2,7 +2,7 @@
  * @description !This class is not part of the package and is being used specifically for testing the functionality!
  */
 public class TestTelegramBotHandler extends TelegramBotHandler {
-    public override void onMessageReceived(TelegramBotContext context, TelegramBotMessageEvent event) {
+    public override void onMessageReceived(TelegramBotContext context, TelegramMessageEvent event) {
         BotJsonPayload payload = new BotJsonPayload();
         payload.set('message', event.getJsonPayload());
 
@@ -14,7 +14,7 @@ public class TestTelegramBotHandler extends TelegramBotHandler {
         );
     }
 
-    public override void onMessageEdited(TelegramBotContext context, TelegramBotMessageEvent event) {
+    public override void onMessageEdited(TelegramBotContext context, TelegramMessageEvent event) {
         BotJsonPayload payload = new BotJsonPayload();
         payload.set('message', event.getJsonPayload());
 

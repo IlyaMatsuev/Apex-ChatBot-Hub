@@ -4,8 +4,8 @@
  */
 
 // TODO: Need to rename all entities to remove `Bot` part
-global class TelegramBotMessageEvent extends TelegramBotMessage {
-    public TelegramBotMessageEvent(BotJsonPayload payload) {
+global class TelegramMessageEvent extends TelegramMessage {
+    public TelegramMessageEvent(BotJsonPayload payload) {
         super(payload);
     }
 }

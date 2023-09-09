@@ -2,7 +2,7 @@
  * @description Describes the location payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#location
  */
-global class TelegramBotLocation extends BotPayload {
+global class TelegramLocation extends BotPayload {
     /**
      * @description The longitude as defined by sender
      */
@@ -33,7 +33,7 @@ global class TelegramBotLocation extends BotPayload {
      */
     global Integer proximityAlertRadius { get { return payload.getInteger('proximity_alert_radius'); } }
 
-    public TelegramBotLocation(BotJsonPayload payload) {
+    public TelegramLocation(BotJsonPayload payload) {
         super(payload);
     }
 }

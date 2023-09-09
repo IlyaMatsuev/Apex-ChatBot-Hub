@@ -2,7 +2,7 @@
  * @description Describes the audio payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#audio
  */
-global class TelegramBotAudio extends BotPayload {
+global class TelegramAudio extends BotPayload {
     /**
      * @description The identifier for this file, which can be used to download or reuse the file
      */
@@ -46,11 +46,9 @@ global class TelegramBotAudio extends BotPayload {
     /**
      * @description The thumbnail of the album cover to which the music file belongs
      */
-    global TelegramBotPhotoSize thumbnail {
-        get { return new TelegramBotPhotoSize(payload.getJsonPayload('thumbnail')); }
-    }
+    global TelegramPhotoSize thumbnail { get { return new TelegramPhotoSize(payload.getJsonPayload('thumbnail')); } }
 
-    public TelegramBotAudio(BotJsonPayload payload) {
+    public TelegramAudio(BotJsonPayload payload) {
         super(payload);
     }
 }

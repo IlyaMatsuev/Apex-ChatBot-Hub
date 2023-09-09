@@ -2,7 +2,7 @@
  * @description Describes the animation payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#animation
  */
-global class TelegramBotAnimation extends BotPayload {
+global class TelegramAnimation extends BotPayload {
     /**
      * @description The identifier for this file, which can be used to download or reuse the file
      */
@@ -31,9 +31,7 @@ global class TelegramBotAnimation extends BotPayload {
     /**
      * @description The animation thumbnail as defined by sender
      */
-    global TelegramBotPhotoSize thumbnail {
-        get { return new TelegramBotPhotoSize(payload.getJsonPayload('thumbnail')); }
-    }
+    global TelegramPhotoSize thumbnail { get { return new TelegramPhotoSize(payload.getJsonPayload('thumbnail')); } }
 
     /**
      * @description The original animation filename as defined by sender
@@ -50,7 +48,7 @@ global class TelegramBotAnimation extends BotPayload {
      */
     global Integer fileSize { get { return payload.getInteger('file_size'); } }
 
-    public TelegramBotAnimation(BotJsonPayload payload) {
+    public TelegramAnimation(BotJsonPayload payload) {
         super(payload);
     }
 }

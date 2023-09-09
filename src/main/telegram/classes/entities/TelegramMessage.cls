@@ -2,7 +2,7 @@
  * @description Describes the message payload received as an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#message
  */
-global virtual class TelegramBotMessage extends BotPayload implements IBotMessage {
+global virtual class TelegramMessage extends BotPayload implements IBotMessage {
     /**
      * @description The unique message identifier inside this chat
      */
@@ -16,12 +16,12 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     /**
      * @description The sender of the message; empty for messages sent to channels
      */
-    global TelegramBotUser sender { get { return new TelegramBotUser(payload.getJsonPayload('from')); } }
+    global TelegramUser sender { get { return new TelegramUser(payload.getJsonPayload('from')); } }
 
     /**
      * @description The sender of the message, sent on behalf of a chat. For example, the channel itself for channel posts, the supergroup itself for messages from anonymous group administrators, the linked channel for messages automatically forwarded to the discussion group
      */
-    global TelegramBotChat senderChat { get { return new TelegramBotChat(payload.getJsonPayload('sender_chat')); } }
+    global TelegramChat senderChat { get { return new TelegramChat(payload.getJsonPayload('sender_chat')); } }
 
     /**
      * @description The date the message was sent
@@ -31,18 +31,18 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     /**
      * @description The conversation the message belongs to
      */
-    global TelegramBotChat chat { get { return new TelegramBotChat(payload.getJsonPayload('chat')); } }
+    global TelegramChat chat { get { return new TelegramChat(payload.getJsonPayload('chat')); } }
 
     /**
      * @description For forwarded messages, sender of the original message
      */
-    global TelegramBotUser forwardFrom { get { return new TelegramBotUser(payload.getJsonPayload('forward_from')); } }
+    global TelegramUser forwardFrom { get { return new TelegramUser(payload.getJsonPayload('forward_from')); } }
 
     /**
      * @description For messages forwarded from channels or from anonymous administrators, information about the original sender chat
      */
-    global TelegramBotChat forwardFromChat {
-        get { return new TelegramBotChat(payload.getJsonPayload('forward_from_chat')); }
+    global TelegramChat forwardFromChat {
+        get { return new TelegramChat(payload.getJsonPayload('forward_from_chat')); }
     }
 
     /**
@@ -76,16 +76,16 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     global Boolean isAutomaticForward { get { return payload.getBoolean('is_automatic_forward'); } }
 
     /**
-     * @description For replies, the original message. Note that the <<TelegramBotMessage>> object in this field will not contain further reply_to_message fields even if it itself is a reply
+     * @description For replies, the original message. Note that the <<TelegramMessage>> object in this field will not contain further reply_to_message fields even if it itself is a reply
      */
-    global TelegramBotMessage replyToMessage {
-        get { return new TelegramBotMessage(payload.getJsonPayload('reply_to_message')); }
+    global TelegramMessage replyToMessage {
+        get { return new TelegramMessage(payload.getJsonPayload('reply_to_message')); }
     }
 
     /**
      * @description The bot through which the message was sent
      */
-    global TelegramBotUser viaBot { get { return new TelegramBotUser(payload.getJsonPayload('via_bot')); } }
+    global TelegramUser viaBot { get { return new TelegramUser(payload.getJsonPayload('via_bot')); } }
 
     /**
      * @description Date the message was last edited
@@ -115,13 +115,13 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     /**
      * @description For text messages, special entities like usernames, URLs, bot commands, etc. that appear in the text
      */
-    global List<TelegramBotMessageEntity> entities {
+    global List<TelegramMessageEntity> entities {
         get {
-            List<TelegramBotMessageEntity> entityList = new List<TelegramBotMessageEntity>();
+            List<TelegramMessageEntity> entityList = new List<TelegramMessageEntity>();
             List<BotJsonPayload> payloadList = payload.getJsonPayloadList('entities');
             if (payloadList != null) {
                 for (BotJsonPayload payload : payloadList) {
-                    entityList.add(new TelegramBotMessageEntity(payload));
+                    entityList.add(new TelegramMessageEntity(payload));
                 }
             }
             return entityList;
@@ -131,30 +131,28 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     /**
      * @description If the message is an animation, information about the animation
      */
-    global TelegramBotAnimation animation {
-        get { return new TelegramBotAnimation(payload.getJsonPayload('animation')); }
-    }
+    global TelegramAnimation animation { get { return new TelegramAnimation(payload.getJsonPayload('animation')); } }
 
     /**
      * @description If the message is an audio file, information about the file
      */
-    global TelegramBotAudio audio { get { return new TelegramBotAudio(payload.getJsonPayload('audio')); } }
+    global TelegramAudio audio { get { return new TelegramAudio(payload.getJsonPayload('audio')); } }
 
     /**
      * @description If the message is a general file, information about the file
      */
-    global TelegramBotDocument document { get { return new TelegramBotDocument(payload.getJsonPayload('document')); } }
+    global TelegramDocument document { get { return new TelegramDocument(payload.getJsonPayload('document')); } }
 
     /**
      * @description If the message is a photo, available sizes of the photo
      */
-    global List<TelegramBotPhotoSize> photo {
+    global List<TelegramPhotoSize> photo {
         get {
-            List<TelegramBotPhotoSize> photoSizes = new List<TelegramBotPhotoSize>();
+            List<TelegramPhotoSize> photoSizes = new List<TelegramPhotoSize>();
             List<BotJsonPayload> payloadList = payload.getJsonPayloadList('photo');
             if (payloadList != null) {
                 for (BotJsonPayload payload : payloadList) {
-                    photoSizes.add(new TelegramBotPhotoSize(payload));
+                    photoSizes.add(new TelegramPhotoSize(payload));
                 }
             }
             return photoSizes;
@@ -164,24 +162,22 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     /**
      * @description If the message is a sticker, information about the sticker
      */
-    global TelegramBotSticker sticker { get { return new TelegramBotSticker(payload.getJsonPayload('sticker')); } }
+    global TelegramSticker sticker { get { return new TelegramSticker(payload.getJsonPayload('sticker')); } }
 
     /**
      * @description If the message is a video, information about the video
      */
-    global TelegramBotVideo video { get { return new TelegramBotVideo(payload.getJsonPayload('video')); } }
+    global TelegramVideo video { get { return new TelegramVideo(payload.getJsonPayload('video')); } }
 
     /**
      * @description If the message is a video note, information about the video message
      */
-    global TelegramBotVideoNote videoNote {
-        get { return new TelegramBotVideoNote(payload.getJsonPayload('video_note')); }
-    }
+    global TelegramVideoNote videoNote { get { return new TelegramVideoNote(payload.getJsonPayload('video_note')); } }
 
     /**
      * @description If the message is a voice message, information about the file
      */
-    global TelegramBotVoice voice { get { return new TelegramBotVoice(payload.getJsonPayload('voice')); } }
+    global TelegramVoice voice { get { return new TelegramVoice(payload.getJsonPayload('voice')); } }
 
     /**
      * @description The caption for the animation, audio, document, photo, video or voice
@@ -191,13 +187,13 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     /**
      * @description For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
      */
-    global List<TelegramBotMessageEntity> captionEntities {
+    global List<TelegramMessageEntity> captionEntities {
         get {
-            List<TelegramBotMessageEntity> entityList = new List<TelegramBotMessageEntity>();
+            List<TelegramMessageEntity> entityList = new List<TelegramMessageEntity>();
             List<BotJsonPayload> payloadList = payload.getJsonPayloadList('caption_entities');
             if (payloadList != null) {
                 for (BotJsonPayload payload : payloadList) {
-                    entityList.add(new TelegramBotMessageEntity(payload));
+                    entityList.add(new TelegramMessageEntity(payload));
                 }
             }
             return entityList;
@@ -212,38 +208,38 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     /**
      * @description If the message is a shared contact, information about the contact
      */
-    global TelegramBotContact contact { get { return new TelegramBotContact(payload.getJsonPayload('contact')); } }
+    global TelegramContact contact { get { return new TelegramContact(payload.getJsonPayload('contact')); } }
 
     /**
      * @description If the message is a dice with random value
      */
-    global TelegramBotDice dice { get { return new TelegramBotDice(payload.getJsonPayload('dice')); } }
+    global TelegramDice dice { get { return new TelegramDice(payload.getJsonPayload('dice')); } }
 
     /**
      * @description If the message is a native poll, information about the poll
      */
-    global TelegramBotPoll poll { get { return new TelegramBotPoll(payload.getJsonPayload('poll')); } }
+    global TelegramPoll poll { get { return new TelegramPoll(payload.getJsonPayload('poll')); } }
 
     /**
      * @description If the message is a venue, information about the venue. For backward compatibility, when this field is set, the location field will also be set
      */
-    global TelegramBotVenue venue { get { return new TelegramBotVenue(payload.getJsonPayload('venue')); } }
+    global TelegramVenue venue { get { return new TelegramVenue(payload.getJsonPayload('venue')); } }
 
     /**
      * @description If the message is a shared location, information about the location
      */
-    global TelegramBotLocation location { get { return new TelegramBotLocation(payload.getJsonPayload('location')); } }
+    global TelegramLocation location { get { return new TelegramLocation(payload.getJsonPayload('location')); } }
 
     /**
      * @description New members that were added to the group or supergroup and information about them (the bot itself may be one of these members)
      */
-    global List<TelegramBotUser> newChatMembers {
+    global List<TelegramUser> newChatMembers {
         get {
-            List<TelegramBotUser> members = new List<TelegramBotUser>();
+            List<TelegramUser> members = new List<TelegramUser>();
             List<BotJsonPayload> payloadList = payload.getJsonPayloadList('new_chat_members');
             if (payloadList != null) {
                 for (BotJsonPayload payload : payloadList) {
-                    members.add(new TelegramBotUser(payload));
+                    members.add(new TelegramUser(payload));
                 }
             }
             return members;
@@ -253,9 +249,7 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     /**
      * @description A member was removed from the group, information about them (this member may be the bot itself)
      */
-    global TelegramBotUser leftChatMember {
-        get { return new TelegramBotUser(payload.getJsonPayload('left_chat_member')); }
-    }
+    global TelegramUser leftChatMember { get { return new TelegramUser(payload.getJsonPayload('left_chat_member')); } }
 
     /**
      * @description A chat title was changed to this value
@@ -265,13 +259,13 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     /**
      * @description A chat photo was change to this value
      */
-    global List<TelegramBotPhotoSize> newChatPhoto {
+    global List<TelegramPhotoSize> newChatPhoto {
         get {
-            List<TelegramBotPhotoSize> photoSizes = new List<TelegramBotPhotoSize>();
+            List<TelegramPhotoSize> photoSizes = new List<TelegramPhotoSize>();
             List<BotJsonPayload> payloadList = payload.getJsonPayloadList('new_chat_photo');
             if (payloadList != null) {
                 for (BotJsonPayload payload : payloadList) {
-                    photoSizes.add(new TelegramBotPhotoSize(payload));
+                    photoSizes.add(new TelegramPhotoSize(payload));
                 }
             }
             return photoSizes;
@@ -281,8 +275,8 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     /**
      * @description The specified message was pinned
      */
-    global TelegramBotMessage pinnedMessage {
-        get { return new TelegramBotMessage(payload.getJsonPayload('pinned_message')); }
+    global TelegramMessage pinnedMessage {
+        get { return new TelegramMessage(payload.getJsonPayload('pinned_message')); }
     }
 
     // TODO: Implement all commented out properties below
@@ -293,7 +287,7 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotInlineKeyboardMarkup(payload.getJsonPayload('reply_markup')); }
     //    }
 
-    public TelegramBotMessage(BotJsonPayload payload) {
+    public TelegramMessage(BotJsonPayload payload) {
         super(payload);
     }
 
@@ -349,7 +343,7 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
      * @return The message media URL
      */
     global String getMediaUrl() {
-        for (TelegramBotMessageEntity entity : entities) {
+        for (TelegramMessageEntity entity : entities) {
             if (entity.type == 'url') {
                 return entity.url;
             }

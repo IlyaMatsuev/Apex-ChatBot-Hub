@@ -2,7 +2,7 @@
  * @description Describes the contact payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#contact
  */
-global class TelegramBotContact extends BotPayload {
+global class TelegramContact extends BotPayload {
     /**
      * @description The contact's phone number
      */
@@ -28,7 +28,7 @@ global class TelegramBotContact extends BotPayload {
      */
     global String vCard { get { return payload.getString('vcard'); } }
 
-    public TelegramBotContact(BotJsonPayload payload) {
+    public TelegramContact(BotJsonPayload payload) {
         super(payload);
     }
 }

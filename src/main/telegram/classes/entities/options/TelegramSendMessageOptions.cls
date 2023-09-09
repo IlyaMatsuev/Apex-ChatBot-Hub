@@ -7,8 +7,8 @@ global abstract class TelegramSendMessageOptions extends BotPayload {
     /**
      * @description The list of special entities that appear in a message text. E.g. hashtag, username, URL, etc.
      */
-    global List<TelegramBotMessageEntity> entities {
-        get { return (List<TelegramBotMessageEntity>) payload.get(entitiesFieldName); }
+    global List<TelegramMessageEntity> entities {
+        get { return (List<TelegramMessageEntity>) payload.get(entitiesFieldName); }
         private set { payload.set(entitiesFieldName, value); }
     }
 
@@ -34,9 +34,9 @@ global abstract class TelegramSendMessageOptions extends BotPayload {
         return this;
     }
 
-    protected TelegramSendMessageOptions addMessageEntities(TelegramBotMessageEntity[] entities) {
+    protected TelegramSendMessageOptions addMessageEntities(TelegramMessageEntity[] entities) {
         if (this.entities == null) {
-            this.entities = new List<TelegramBotMessageEntity>();
+            this.entities = new List<TelegramMessageEntity>();
         }
         this.entities.addAll(entities);
         return this;

@@ -2,7 +2,7 @@
  * @description Describes the video note payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#videonote
  */
-global class TelegramBotVideoNote extends BotPayload {
+global class TelegramVideoNote extends BotPayload {
     /**
      * @description The identifier for this file, which can be used to download or reuse the file
      */
@@ -26,16 +26,14 @@ global class TelegramBotVideoNote extends BotPayload {
     /**
      * @description The video thumbnail
      */
-    global TelegramBotPhotoSize thumbnail {
-        get { return new TelegramBotPhotoSize(payload.getJsonPayload('thumbnail')); }
-    }
+    global TelegramPhotoSize thumbnail { get { return new TelegramPhotoSize(payload.getJsonPayload('thumbnail')); } }
 
     /**
      * @description The file size in bytes
      */
     global Integer fileSize { get { return payload.getInteger('file_size'); } }
 
-    public TelegramBotVideoNote(BotJsonPayload payload) {
+    public TelegramVideoNote(BotJsonPayload payload) {
         super(payload);
     }
 }

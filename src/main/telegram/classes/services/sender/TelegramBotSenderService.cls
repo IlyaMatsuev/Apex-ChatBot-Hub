@@ -534,7 +534,7 @@ global class TelegramBotSenderService implements IBotSenderService {
         }
 
         BotJsonPayload response = calloutService.call(method, payload);
-        TelegramBotMessage message = new TelegramBotMessage(response.getJsonPayload('result'));
+        TelegramMessage message = new TelegramMessage(response.getJsonPayload('result'));
 
         if (callbackParams != null) {
             callback.execute(callbackParams.set('messageId', message.getId()).set('keyboard', replyMarkup, true));

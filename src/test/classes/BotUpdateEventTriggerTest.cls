@@ -193,10 +193,10 @@ private class BotUpdateEventTriggerTest {
     }
 
     private static BotJsonPayload createTelegramPayload() {
-        return createTelegramPayload(TelegramBotUpdateEventType.Message);
+        return createTelegramPayload(TelegramUpdateEventType.Message);
     }
 
-    private static BotJsonPayload createTelegramPayload(TelegramBotUpdateEventType eventType) {
+    private static BotJsonPayload createTelegramPayload(TelegramUpdateEventType eventType) {
         return new BotJsonPayload()
             .set('update_id', 12312311L)
             .set(

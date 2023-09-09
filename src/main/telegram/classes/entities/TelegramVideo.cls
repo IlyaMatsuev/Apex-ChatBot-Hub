@@ -2,7 +2,7 @@
  * @description Describes the video payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#video
  */
-global class TelegramBotVideo extends BotPayload {
+global class TelegramVideo extends BotPayload {
     /**
      * @description The identifier for this file, which can be used to download or reuse the file
      */
@@ -31,9 +31,7 @@ global class TelegramBotVideo extends BotPayload {
     /**
      * @description The video thumbnail
      */
-    global TelegramBotPhotoSize thumbnail {
-        get { return new TelegramBotPhotoSize(payload.getJsonPayload('thumbnail')); }
-    }
+    global TelegramPhotoSize thumbnail { get { return new TelegramPhotoSize(payload.getJsonPayload('thumbnail')); } }
 
     /**
      * @description The filename as defined by sender
@@ -50,7 +48,7 @@ global class TelegramBotVideo extends BotPayload {
      */
     global Integer fileSize { get { return payload.getInteger('file_size'); } }
 
-    public TelegramBotVideo(BotJsonPayload payload) {
+    public TelegramVideo(BotJsonPayload payload) {
         super(payload);
     }
 }

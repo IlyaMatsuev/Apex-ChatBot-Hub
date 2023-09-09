@@ -2,7 +2,7 @@
  * @description Describes the sender payload received as an update from a `Telegram` bot.
  * Source: https://core.telegram.org/bots/api#user
  */
-global class TelegramBotUser extends BotPayload implements IBotUser {
+global class TelegramUser extends BotPayload implements IBotUser {
     /**
      * @description The unique identifier for this user or bot
      */
@@ -58,7 +58,7 @@ global class TelegramBotUser extends BotPayload implements IBotUser {
      */
     global Boolean supportsInlineQueries { get { return payload.getBoolean('supports_inline_queries'); } }
 
-    public TelegramBotUser(BotJsonPayload payload) {
+    public TelegramUser(BotJsonPayload payload) {
         super(payload);
     }
 

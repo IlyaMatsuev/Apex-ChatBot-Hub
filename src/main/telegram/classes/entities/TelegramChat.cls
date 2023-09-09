@@ -2,7 +2,7 @@
  * @description Describes the chat payload received as an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#chat
  */
-global class TelegramBotChat extends BotPayload implements IBotChat {
+global class TelegramChat extends BotPayload implements IBotChat {
     /**
      * @description The unique identifier for this chat
      */
@@ -98,15 +98,15 @@ global class TelegramBotChat extends BotPayload implements IBotChat {
     /**
      * @description The most recent pinned message (by sending date). Returned only in `getChat`
      */
-    global TelegramBotMessage pinnedMessage {
-        get { return new TelegramBotMessage(payload.getJsonPayload('pinned_message')); }
+    global TelegramMessage pinnedMessage {
+        get { return new TelegramMessage(payload.getJsonPayload('pinned_message')); }
     }
 
     /**
      * @description The default chat member permissions, for groups and supergroups. Returned only in `getChat`
      */
-    global TelegramBotChatPermissions permissions {
-        get { return new TelegramBotChatPermissions(payload.getJsonPayload('permissions')); }
+    global TelegramChatPermissions permissions {
+        get { return new TelegramChatPermissions(payload.getJsonPayload('permissions')); }
     }
 
     /**
@@ -156,7 +156,7 @@ global class TelegramBotChat extends BotPayload implements IBotChat {
      */
     global Location location { get { return new Location(payload.getJsonPayload('location')); } }
 
-    public TelegramBotChat(BotJsonPayload payload) {
+    public TelegramChat(BotJsonPayload payload) {
         super(payload);
     }
 
@@ -183,10 +183,10 @@ global class TelegramBotChat extends BotPayload implements IBotChat {
 
     /**
      * @description Returns the payload of the `Telegram` user who wrote the message received in the update
-     * @return The instance of the <<TelegramBotUser>> class
+     * @return The instance of the <<TelegramUser>> class
      */
-    global TelegramBotUser getSender() {
-        return (TelegramBotUser) payload.get('user');
+    global TelegramUser getSender() {
+        return (TelegramUser) payload.get('user');
     }
 
     /**
@@ -227,9 +227,7 @@ global class TelegramBotChat extends BotPayload implements IBotChat {
         /**
          * @description The location to which the supergroup is connected. Can't be a live location
          */
-        global TelegramBotLocation location {
-            get { return new TelegramBotLocation(payload.getJsonPayload('location')); }
-        }
+        global TelegramLocation location { get { return new TelegramLocation(payload.getJsonPayload('location')); } }
 
         /**
          * @description The location address; `1-64` characters, as defined by the chat owner

@@ -2,7 +2,7 @@
  * @description Describes the photo size payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#photosize
  */
-global class TelegramBotPhotoSize extends BotPayload {
+global class TelegramPhotoSize extends BotPayload {
     /**
      * @description The identifier for this file, which can be used to download or reuse the file
      */
@@ -28,7 +28,7 @@ global class TelegramBotPhotoSize extends BotPayload {
      */
     global Integer fileSize { get { return payload.getInteger('file_size'); } }
 
-    public TelegramBotPhotoSize(BotJsonPayload payload) {
+    public TelegramPhotoSize(BotJsonPayload payload) {
         super(payload);
     }
 }

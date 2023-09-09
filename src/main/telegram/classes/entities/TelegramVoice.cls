@@ -1,8 +1,8 @@
 /**
- * @description Describes the general file payload that can be received as part of an update from a `Telegram` bot
- * Source: https://core.telegram.org/bots/api#document
+ * @description Describes the voice payload that can be received as part of an update from a `Telegram` bot
+ * Source: https://core.telegram.org/bots/api#voice
  */
-global class TelegramBotDocument extends BotPayload {
+global class TelegramVoice extends BotPayload {
     /**
      * @description The identifier for this file, which can be used to download or reuse the file
      */
@@ -14,16 +14,9 @@ global class TelegramBotDocument extends BotPayload {
     global String fileUniqueId { get { return payload.getString('file_unique_id'); } }
 
     /**
-     * @description The document thumbnail as defined by sender
+     * @description The duration of the audio in seconds as defined by sender or by audio tags
      */
-    global TelegramBotPhotoSize thumbnail {
-        get { return new TelegramBotPhotoSize(payload.getJsonPayload('thumbnail')); }
-    }
-
-    /**
-     * @description The filename as defined by sender
-     */
-    global String fileName { get { return payload.getString('file_name'); } }
+    global Integer duration { get { return payload.getInteger('duration'); } }
 
     /**
      * @description The MIME type of the file as defined by sender
@@ -35,7 +28,7 @@ global class TelegramBotDocument extends BotPayload {
      */
     global Integer fileSize { get { return payload.getInteger('file_size'); } }
 
-    public TelegramBotDocument(BotJsonPayload payload) {
+    public TelegramVoice(BotJsonPayload payload) {
         super(payload);
     }
 }
