@@ -34,7 +34,7 @@ global class TelegramSendLocationOptions extends BotPayload {
 
     /**
      * @description Sets the maximum distance in meters for proximity alerts about approaching another chat member
-     * @param period The maximum distance in meters for proximity alerts about approaching another chat member. Accepts values in range: `1..100000`
+     * @param alertRadius The maximum distance in meters for proximity alerts about approaching another chat member. Accepts values in range: `1..100000`
      * @return The current instance of the <<TelegramSendLocationOptions>> class
      */
     global TelegramSendLocationOptions withProximityAlertRadius(Integer alertRadius) {

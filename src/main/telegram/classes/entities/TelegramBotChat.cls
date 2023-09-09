@@ -38,11 +38,10 @@ global class TelegramBotChat extends BotPayload implements IBotChat {
      */
     global Boolean isForum { get { return payload.getBoolean('is_forum'); } }
 
-    // TODO: Add `TelegramBotChatPhoto` class
-    //    /**
-    //     * @description The chat photo. Returned only in `getChat`
-    //     */
-    //    global TelegramBotChatPhoto photo { get { return new TelegramBotChatPhoto(payload.getJsonPayload('photo')); } }
+    /**
+     * @description The chat photo. Returned only in `getChat`
+     */
+    global Photo photo { get { return new Photo(payload.getJsonPayload('photo')); } }
 
     /**
      * @description If non-empty, the list of all active chat usernames; for private chats, supergroups and channels. Returned only in `getChat`
@@ -103,13 +102,12 @@ global class TelegramBotChat extends BotPayload implements IBotChat {
         get { return new TelegramBotMessage(payload.getJsonPayload('pinned_message')); }
     }
 
-    // TODO: Add `TelegramBotChatPermissions` class
-    //    /**
-    //     * @description The default chat member permissions, for groups and supergroups. Returned only in `getChat`
-    //     */
-    //    global TelegramBotChatPermissions permissions {
-    //        get { return new TelegramBotChatPermissions(payload.getJsonPayload('permissions')); }
-    //    }
+    /**
+     * @description The default chat member permissions, for groups and supergroups. Returned only in `getChat`
+     */
+    global TelegramBotChatPermissions permissions {
+        get { return new TelegramBotChatPermissions(payload.getJsonPayload('permissions')); }
+    }
 
     /**
      * @description For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds. Returned only in `getChat`
@@ -153,11 +151,10 @@ global class TelegramBotChat extends BotPayload implements IBotChat {
      */
     global Integer linkedChatId { get { return payload.getInteger('linked_chat_id'); } }
 
-    // TODO: Add `TelegramBotChatLocation` class
-    //    /**
-    //     * @description For supergroups, the location to which the supergroup is connected. Returned only in `getChat`
-    //     */
-    //    global TelegramBotChatLocation location { get { return new TelegramBotChatLocation(payload.getJsonPayload('location')); } }
+    /**
+     * @description For supergroups, the location to which the supergroup is connected. Returned only in `getChat`
+     */
+    global Location location { get { return new Location(payload.getJsonPayload('location')); } }
 
     public TelegramBotChat(BotJsonPayload payload) {
         super(payload);
@@ -190,5 +187,57 @@ global class TelegramBotChat extends BotPayload implements IBotChat {
      */
     global TelegramBotUser getSender() {
         return (TelegramBotUser) payload.get('user');
+    }
+
+    /**
+     * @description Describes a payload of a chat photo
+     * Source: https://core.telegram.org/bots/api#chatphoto
+     */
+    global class Photo extends BotPayload {
+        /**
+         * @description The file identifier of small (`160x160`) chat photo
+         */
+        global String smallFileId { get { return payload.getString('small_file_id'); } }
+
+        /**
+         * @description The unique file identifier of small (`160x160`) chat photo, which is supposed to be the same over time and for different bots
+         */
+        global String smallFileUniqueId { get { return payload.getString('small_file_unique_id'); } }
+
+        /**
+         * @description The file identifier of big (`640x640`) chat photo. This file_id can be used only for photo download and only for as long as the photo is not changed
+         */
+        global String bigFileId { get { return payload.getString('big_file_id'); } }
+
+        /**
+         * @description The unique file identifier of big (`640x640`) chat photo, which is supposed to be the same over time and for different bots
+         */
+        global String bigFileUniqueId { get { return payload.getString('big_file_unique_id'); } }
+
+        public Photo(BotJsonPayload payload) {
+            super(payload);
+        }
+    }
+
+    /**
+     * @description Describes a payload of a location to which a chat is connected
+     * Source: https://core.telegram.org/bots/api#chatlocation
+     */
+    global class Location extends BotPayload {
+        /**
+         * @description The location to which the supergroup is connected. Can't be a live location
+         */
+        global TelegramBotLocation location {
+            get { return new TelegramBotLocation(payload.getJsonPayload('location')); }
+        }
+
+        /**
+         * @description The location address; `1-64` characters, as defined by the chat owner
+         */
+        global String address { get { return payload.getString('address'); } }
+
+        public Location(BotJsonPayload payload) {
+            super(payload);
+        }
     }
 }

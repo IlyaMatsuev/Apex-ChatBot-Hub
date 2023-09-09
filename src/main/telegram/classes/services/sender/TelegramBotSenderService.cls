@@ -151,7 +151,7 @@ global class TelegramBotSenderService implements IBotSenderService {
 
     /**
      * @description Sends an animation, e.g. `gif` or a video without sound with the provided optional parameters
-     * @param videoUrl The video URL
+     * @param animationUrl The video URL
      * @param options The instance of <<TelegramSendVideoOptions>> with other optional parameters
      */
     global void animation(String animationUrl, TelegramSendVideoOptions options) {
@@ -415,7 +415,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     /**
      * @description Sends a poll
      * @param question The poll question. Up to `300` characters
-     * @param answers The list of answers to the poll question. Should have at from `2` to `10` answers, up to `100` characters each
+     * @param options The instance of <<TelegramSendPollOptions>> with other optional parameters
      */
     global void poll(String question, TelegramSendPollOptions options) {
         send(

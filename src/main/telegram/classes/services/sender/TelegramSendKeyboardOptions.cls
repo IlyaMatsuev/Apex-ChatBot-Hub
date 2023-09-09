@@ -229,7 +229,7 @@ global class TelegramSendKeyboardOptions extends BotPayload {
 
         /**
          * @description Determines if the clicking on the button will request to share specific chats with the bot (user will get a prompt with the list of available chats)
-         * @param chatRequestConfigs The object with requirenments for the chat to choose
+         * @param chatRequestConfigs The object with requirements for the chat to choose
          * @return The current <<TelegramSendKeyboardOptions.Button>> instance
          */
         global Button asChatRequest(ButtonRequestChatConfigs chatRequestConfigs) {
@@ -271,7 +271,7 @@ global class TelegramSendKeyboardOptions extends BotPayload {
      */
     global class ButtonRequestChatConfigs extends BotPayload {
         /**
-         * @description Creates an instance of the request chat configs without any requirenments
+         * @description Creates an instance of the request chat configs without any requirements
          */
         global ButtonRequestChatConfigs() {
             super();

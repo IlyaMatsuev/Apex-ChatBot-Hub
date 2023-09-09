@@ -128,7 +128,8 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
         }
     }
 
-    // TODO: Add `TelegramBotAnimation` class
+    // TODO: Implement all commented out properties below
+
     //    /**
     //     * @description If the message is an animation, information about the animation
     //     */
@@ -136,7 +137,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotAnimation(payload.getJsonPayload('animation')); }
     //    }
 
-    // TODO: Add `TelegramBotAudio` class
     //    /**
     //     * @description If the message is an audio file, information about the file
     //     */
@@ -144,7 +144,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotAudio(payload.getJsonPayload('audio')); }
     //    }
 
-    // TODO: Add `TelegramBotDocument` class
     //    /**
     //     * @description If the message is a general file, information about the file
     //     */
@@ -152,7 +151,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotDocument(payload.getJsonPayload('document')); }
     //    }
 
-    // TODO: Add `TelegramBotPhotoSize` class
     //    /**
     //     * @description If the message is a photo, available sizes of the photo
     //     */
@@ -160,7 +158,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return payload.getObject('photo', List<TelegramBotPhotoSize>.class); }
     //    }
 
-    // TODO: Add `TelegramBotSticker` class
     //    /**
     //     * @description If the message is a sticker, information about the sticker
     //     */
@@ -168,7 +165,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotSticker(payload.getJsonPayload('sticker')); }
     //    }
 
-    // TODO: Add `TelegramBotVideo` class
     //    /**
     //     * @description If the message is a video, information about the video
     //     */
@@ -176,7 +172,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotVideo(payload.getJsonPayload('video')); }
     //    }
 
-    // TODO: Add `TelegramBotVideoNote` class
     //    /**
     //     * @description If the message is a video note, information about the video message
     //     */
@@ -184,7 +179,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotVideoNote(payload.getJsonPayload('video_note')); }
     //    }
 
-    // TODO: Add `TelegramBotVoice` class
     //    /**
     //     * @description If the message is a voice message, information about the file
     //     */
@@ -218,7 +212,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
      */
     global Boolean hasMediaSpoiler { get { return payload.getBoolean('has_media_spoiler'); } }
 
-    // TODO: Add `TelegramBotContact` class
     //    /**
     //     * @description If the message is a shared contact, information about the contact
     //     */
@@ -226,7 +219,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotContact(payload.getJsonPayload('contact')); }
     //    }
 
-    // TODO: Add `TelegramBotDice` class
     //    /**
     //     * @description If the message is a dice with random value
     //     */
@@ -234,7 +226,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotDice(payload.getJsonPayload('dice')); }
     //    }
 
-    // TODO: Add `TelegramBotPoll` class
     //    /**
     //     * @description If the message is a native poll, information about the poll
     //     */
@@ -242,7 +233,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotPoll(payload.getJsonPayload('poll')); }
     //    }
 
-    // TODO: Add `TelegramBotVenue` class
     //    /**
     //     * @description If the message is a venue, information about the venue. For backward compatibility, when this field is set, the location field will also be set
     //     */
@@ -250,7 +240,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotVenue(payload.getJsonPayload('venue')); }
     //    }
 
-    // TODO: Add `TelegramBotLocation` class
     //    /**
     //     * @description If the message is a shared location, information about the location
     //     */
@@ -286,7 +275,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
      */
     global String newChatTitle { get { return payload.getString('new_chat_title'); } }
 
-    // TODO: Add `TelegramBotPhotoSize` class
     //    /**
     //     * @description A chat photo was change to this value
     //     */
@@ -299,7 +287,6 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
         get { return new TelegramBotMessage(payload.getJsonPayload('pinned_message')); }
     }
 
-    // TODO: Add `TelegramBotInlineKeyboardMarkup` class
     //    /**
     //     * @description The inline keyboard attached to the message
     //     */
