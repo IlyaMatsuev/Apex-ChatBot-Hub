@@ -4,8 +4,9 @@
 public class TestTelegramBotHandler extends TelegramBotHandler {
     public override void onMessageReceived(TelegramBotContext context, TelegramBotMessageEvent event) {
         BotJsonPayload payload = new BotJsonPayload();
-        payload.set('message.message_id', event.messageId);
-        payload.set('message.text', event.text);
+        payload.set('message', event.getJsonPayload());
+
+        context.reply().text('Echo: ' + event.text);
 
         BotErrorLogger.log(
             context.getBot().id,
@@ -15,8 +16,10 @@ public class TestTelegramBotHandler extends TelegramBotHandler {
 
     public override void onMessageEdited(TelegramBotContext context, TelegramBotMessageEvent event) {
         BotJsonPayload payload = new BotJsonPayload();
-        payload.set('message.message_id', event.messageId);
-        payload.set('message.text', event.text);
+        payload.set('message', event.getJsonPayload());
+
+        context.reply()
+            .text('Hey! Stop editing this message!', new TelegramSendTextOptions().asReplyToMessage(event.getId()));
 
         BotErrorLogger.log(context.getBot().id, new TelegramBotLogEntryException('onMessageEdited: Success', payload));
     }

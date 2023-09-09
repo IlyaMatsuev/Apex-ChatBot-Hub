@@ -3,7 +3,7 @@
  * Source: https://core.telegram.org/bots/api#message
  */
 global class TelegramBotMessageEvent extends TelegramBotMessage {
-    public TelegramBotMessageEvent(TelegramBotUpdateEventType eventType, TelegramBotUpdateEvent event) {
-        super(event.getPayload().getJsonPayload(eventType.name()));
+    public TelegramBotMessageEvent(BotJsonPayload payload) {
+        super(payload);
     }
 }

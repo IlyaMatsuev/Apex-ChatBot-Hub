@@ -4,18 +4,27 @@
 global class TelegramBotUpdateEvent extends BotPayload implements IBotUpdateEvent {
     private static final String ID_FIELD_NAME = 'update_id';
 
+    private final TelegramBotUpdateEventType eventType {
+        get {
+            if (eventType == null) {
+                // Telegram Webhook update payload contains `update_id` and one optional object that represents event type
+                for (String key : payload.getValues().keySet()) {
+                    if (key != ID_FIELD_NAME) {
+                        eventType = TelegramBotUpdateEventType.valueOf(key);
+                    }
+                }
+            }
+            return eventType;
+        }
+        set;
+    }
+
     /**
      * @description Returns the type of the received `Telegram` update
      * @return The instance of the <<TelegramBotUpdateEventType>> enum
      */
     global TelegramBotUpdateEventType getType() {
-        // Telegram Webhook update payload contains only "update_id" and one optional object that represents event type
-        for (String key : payload.getValues().keySet()) {
-            if (key != ID_FIELD_NAME) {
-                return TelegramBotUpdateEventType.valueOf(key);
-            }
-        }
-        throw new NoSuchElementException('There is no event type in the webhook provided');
+        return eventType;
     }
 
     /**
@@ -23,12 +32,10 @@ global class TelegramBotUpdateEvent extends BotPayload implements IBotUpdateEven
      * @return The instance of the <<TelegramBotMessage>> class
      */
     global TelegramBotMessage getMessage() {
-        // TODO: Review this check. Consider creating messages of other types, even for EditedMessage as for history tracking
-        // TODO: There is a list of `Message` event types: https://core.telegram.org/bots/api#getting-updates
-        if (getType() != TelegramBotUpdateEventType.Message) {
+        if (!TelegramBotUpdateEventType.isMessageEventType(eventType)) {
             return null;
         }
-        return new TelegramBotMessage(payload.getJsonPayload(TelegramBotUpdateEventType.Message.name()));
+        return new TelegramBotMessage(payload.getJsonPayload(eventType.name()));
     }
 
     /**
