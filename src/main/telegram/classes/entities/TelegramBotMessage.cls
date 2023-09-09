@@ -128,42 +128,45 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
         }
     }
 
+    /**
+     * @description If the message is an animation, information about the animation
+     */
+    global TelegramBotAnimation animation {
+        get { return new TelegramBotAnimation(payload.getJsonPayload('animation')); }
+    }
+
+    /**
+     * @description If the message is an audio file, information about the file
+     */
+    global TelegramBotAudio audio { get { return new TelegramBotAudio(payload.getJsonPayload('audio')); } }
+
+    /**
+     * @description If the message is a general file, information about the file
+     */
+    global TelegramBotDocument document { get { return new TelegramBotDocument(payload.getJsonPayload('document')); } }
+
+    /**
+     * @description If the message is a photo, available sizes of the photo
+     */
+    global List<TelegramBotPhotoSize> photo {
+        get {
+            List<TelegramBotPhotoSize> photoSizes = new List<TelegramBotPhotoSize>();
+            List<BotJsonPayload> payloadList = payload.getJsonPayloadList('photo');
+            if (payloadList != null) {
+                for (BotJsonPayload payload : payloadList) {
+                    photoSizes.add(new TelegramBotPhotoSize(payload));
+                }
+            }
+            return photoSizes;
+        }
+    }
+
     // TODO: Implement all commented out properties below
 
-    //    /**
-    //     * @description If the message is an animation, information about the animation
-    //     */
-    //    global TelegramBotAnimation animation {
-    //        get { return new TelegramBotAnimation(payload.getJsonPayload('animation')); }
-    //    }
-
-    //    /**
-    //     * @description If the message is an audio file, information about the file
-    //     */
-    //    global TelegramBotAudio audio {
-    //        get { return new TelegramBotAudio(payload.getJsonPayload('audio')); }
-    //    }
-
-    //    /**
-    //     * @description If the message is a general file, information about the file
-    //     */
-    //    global TelegramBotDocument document {
-    //        get { return new TelegramBotDocument(payload.getJsonPayload('document')); }
-    //    }
-
-    //    /**
-    //     * @description If the message is a photo, available sizes of the photo
-    //     */
-    //    global List<TelegramBotPhotoSize> photo {
-    //        get { return payload.getObject('photo', List<TelegramBotPhotoSize>.class); }
-    //    }
-
-    //    /**
-    //     * @description If the message is a sticker, information about the sticker
-    //     */
-    //    global TelegramBotSticker sticker {
-    //        get { return new TelegramBotSticker(payload.getJsonPayload('sticker')); }
-    //    }
+    /**
+     * @description If the message is a sticker, information about the sticker
+     */
+    global TelegramBotSticker sticker { get { return new TelegramBotSticker(payload.getJsonPayload('sticker')); } }
 
     //    /**
     //     * @description If the message is a video, information about the video
@@ -240,12 +243,10 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
     //        get { return new TelegramBotVenue(payload.getJsonPayload('venue')); }
     //    }
 
-    //    /**
-    //     * @description If the message is a shared location, information about the location
-    //     */
-    //    global TelegramBotLocation location {
-    //        get { return new TelegramBotLocation(payload.getJsonPayload('location')); }
-    //    }
+    /**
+     * @description If the message is a shared location, information about the location
+     */
+    global TelegramBotLocation location { get { return new TelegramBotLocation(payload.getJsonPayload('location')); } }
 
     /**
      * @description New members that were added to the group or supergroup and information about them (the bot itself may be one of these members)
@@ -275,10 +276,21 @@ global virtual class TelegramBotMessage extends BotPayload implements IBotMessag
      */
     global String newChatTitle { get { return payload.getString('new_chat_title'); } }
 
-    //    /**
-    //     * @description A chat photo was change to this value
-    //     */
-    //    global List<TelegramBotPhotoSize> newChatPhoto { get { return payload.getString('new_chat_photo'); } }
+    /**
+     * @description A chat photo was change to this value
+     */
+    global List<TelegramBotPhotoSize> newChatPhoto {
+        get {
+            List<TelegramBotPhotoSize> photoSizes = new List<TelegramBotPhotoSize>();
+            List<BotJsonPayload> payloadList = payload.getJsonPayloadList('new_chat_photo');
+            if (payloadList != null) {
+                for (BotJsonPayload payload : payloadList) {
+                    photoSizes.add(new TelegramBotPhotoSize(payload));
+                }
+            }
+            return photoSizes;
+        }
+    }
 
     /**
      * @description The specified message was pinned
