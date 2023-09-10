@@ -147,6 +147,22 @@ global virtual class BotJsonPayload {
     }
 
     /**
+     * @description Returns a value from the JSON by the provided key, converting it to `List<Integer>`
+     * @param key The JSON value key
+     * @return The `List<Integer>` value from the JSON
+     */
+    global List<Integer> getIntegerList(String key) {
+        if (!hasValue(key) || !(values.get(key) instanceof List<Object>)) {
+            return null;
+        }
+        List<Integer> intList = new List<Integer>();
+        for (Object el : (List<Object>) get(key)) {
+            intList.add(Integer.valueOf(el));
+        }
+        return intList;
+    }
+
+    /**
      * @description Returns a value from the JSON by the provided key, converting it to `Long`
      * @param key The JSON value key
      * @return The `Long` value from the JSON

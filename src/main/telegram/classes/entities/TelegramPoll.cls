@@ -2,7 +2,7 @@
  * @description Describes the poll payload that can be received as part of an update from a `Telegram` bot
  * Source: https://core.telegram.org/bots/api#poll
  */
-global class TelegramPoll extends BotPayload {
+global virtual class TelegramPoll extends BotPayload {
     /**
      * @description The unique poll identifier
      */
