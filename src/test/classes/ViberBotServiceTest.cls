@@ -475,7 +475,7 @@ private class ViberBotServiceTest {
         );
         return new BotModel(
             [
-                SELECT Name, Type__c, Handler__c, Token__c, TokenHash__c
+                SELECT Name, Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
                 FROM Bot__c
                 LIMIT 1
             ]

@@ -20,7 +20,11 @@ private class BotTriggerTest {
         insert new Bot__c(Type__c = BotType.Telegram.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
         Test.stopTest();
 
-        List<Bot__c> newBots = [SELECT Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
+        List<Bot__c> newBots = [
+            SELECT Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
+            FROM Bot__c
+            LIMIT 1
+        ];
         Assert.areEqual(1, newBots.size());
         Assert.isTrue(String.isNotBlank(newBots.get(0).TokenHash__c));
     }
@@ -74,7 +78,11 @@ private class BotTriggerTest {
         insert new Bot__c(Type__c = BotType.Viber.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
         Test.stopTest();
 
-        List<Bot__c> newBots = [SELECT Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
+        List<Bot__c> newBots = [
+            SELECT Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
+            FROM Bot__c
+            LIMIT 1
+        ];
         Assert.areEqual(1, newBots.size());
         Assert.isTrue(String.isNotBlank(newBots.get(0).TokenHash__c));
     }

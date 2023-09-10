@@ -7,14 +7,7 @@ public class ViberBotWebhookService extends BotWebhookService {
             .set('url', webhookUrl + '/' + bot.tokenHash)
             .set('send_name', true)
             .set('send_photo', true)
-            .set(
-                'event_types',
-                new List<String> {
-                    ViberUpdateEventType.Message.name(),
-                    ViberUpdateEventType.Delivered.name(),
-                    ViberUpdateEventType.Seen.name()
-                }
-            );
+            .set('event_types', bot.webhookEvents);
         calloutService.call(ViberBotMethod.SetWebhook, payload);
     }
 

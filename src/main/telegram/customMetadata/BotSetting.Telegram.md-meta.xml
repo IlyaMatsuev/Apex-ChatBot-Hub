@@ -20,7 +20,7 @@
     </values>
     <values>
         <field>BotUpdateEvent__c</field>
-        <value xsi:type="xsd:string">TelegramBotUpdateEvent</value>
+        <value xsi:type="xsd:string">TelegramUpdateEvent</value>
     </values>
     <values>
         <field>BotUpdateResolver__c</field>

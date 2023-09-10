@@ -15,7 +15,7 @@ public abstract class BotWebhookService {
         private set;
     }
 
-    private static Site botSite {
+    private static final Site botSite {
         get {
             if (botSite == null) {
                 botSite = [SELECT Id FROM Site WHERE Name = :BOT_PUBLIC_SITE_NAME LIMIT 1];
@@ -25,7 +25,7 @@ public abstract class BotWebhookService {
         private set;
     }
 
-    private static SiteDetail botSiteDetails {
+    private static final SiteDetail botSiteDetails {
         get {
             if (botSiteDetails == null) {
                 // It's not possible to query by Durable.Name directly

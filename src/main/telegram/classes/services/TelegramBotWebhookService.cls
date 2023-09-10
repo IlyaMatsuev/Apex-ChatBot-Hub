@@ -5,13 +5,7 @@ public class TelegramBotWebhookService extends BotWebhookService {
     public override void setWebhook() {
         BotJsonPayload payload = new BotJsonPayload()
             .set('url', webhookUrl)
-            .set(
-                'allowed_updates',
-                new List<String> {
-                    TelegramUpdateEventType.Message.name(),
-                    TelegramUpdateEventType.EditedMessage.name()
-                }
-            )
+            .set('allowed_updates', bot.webhookEvents)
             .set('secret_token', bot.tokenHash);
         calloutService.call(TelegramBotMethod.SetWebhook, payload);
     }

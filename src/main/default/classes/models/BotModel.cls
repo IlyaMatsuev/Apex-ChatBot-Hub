@@ -19,6 +19,11 @@ global class BotModel {
      */
     global transient BotType type { get { return BotType.valueOf(entity.Type__c); } }
 
+    /**
+     * @description The list of the webhook events handled by the bot. Based on `Bot__c.WebhookEvents__c` field value
+     */
+    global transient List<String> webhookEvents { get { return entity.WebhookEvents__c?.split(';'); } }
+
     public transient String token { get { return entity.Token__c; } }
 
     public transient String tokenHash { get { return entity.TokenHash__c; } }

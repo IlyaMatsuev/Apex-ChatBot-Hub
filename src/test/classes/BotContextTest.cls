@@ -114,7 +114,7 @@ private class BotContextTest {
             Handler__c = 'BotHandlerMock'
         );
         Bot__c bot = [
-            SELECT Name, Type__c, Handler__c, TokenHash__c
+            SELECT Name, Type__c, WebhookEvents__c, Handler__c, TokenHash__c
             FROM Bot__c
             WHERE Type__c = :botType.name()
             LIMIT 1
@@ -131,7 +131,7 @@ private class BotContextTest {
             Handler__c = 'BotHandlerMock'
         );
         Bot__c bot = [
-            SELECT Name, Type__c, Handler__c, TokenHash__c
+            SELECT Name, Type__c, WebhookEvents__c, Handler__c, TokenHash__c
             FROM Bot__c
             WHERE Type__c = :botType.name()
             LIMIT 1
