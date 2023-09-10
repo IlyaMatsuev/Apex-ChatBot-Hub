@@ -7,7 +7,23 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
      * @description The matrix of inline keyboard buttons to be shown next to the message. Represents the list of button rows
      */
     global List<List<Button>> buttons {
-        get { return (List<List<Button>>) payload.get('inline_keyboard'); }
+        get {
+            List<List<Button>> btns = new List<List<Button>>();
+            List<Object> payloadMatrix = (List<Object>) payload.get('inline_keyboard');
+            if (payloadMatrix != null) {
+                for (Integer i = 0; i < payloadMatrix.size(); i++) {
+                    btns.add(new List<Button>());
+                    for (Object col : (List<Object>) payloadMatrix.get(i)) {
+                        if (col instanceof Button) {
+                            btns.get(i).add((Button) col);
+                        } else {
+                            btns.get(i).add(new Button(new BotJsonPayload((Map<String, Object>) col)));
+                        }
+                    }
+                }
+            }
+            return btns;
+        }
         private set { payload.set('inline_keyboard', value); }
     }
 
@@ -33,6 +49,10 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
     global TelegramInlineKeyboardMarkupOptions(List<List<Button>> buttons) {
         super();
         this.buttons = buttons;
+    }
+
+    public TelegramInlineKeyboardMarkupOptions(BotJsonPayload payload) {
+        super(payload);
     }
 
     /**
@@ -84,12 +104,74 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
      */
     global class Button extends BotPayload {
         /**
+         * @description The label text on the button
+         */
+        global String text { get { return payload.getString('text'); } private set { payload.set('text', value); } }
+
+        /**
+         * @description The URL to be opened when the button is pressed
+         */
+        global String url { get { return payload.getString('url'); } private set { payload.set('url', value, true); } }
+
+        /**
+         * @description The data to be sent in a callback query to the bot when the button is pressed. `1-64` bytes
+         */
+        global String callbackData {
+            get { return payload.getString('callback_data'); }
+            private set { payload.set('callback_data', value, true); }
+        }
+
+        /**
+         * @description The description of the Web App that will be launched when the user presses the button
+         */
+        global TelegramWebAppInfo webApp {
+            get { return new TelegramWebAppInfo(payload.getJsonPayload('web_app')); }
+            private set { payload.set('web_app', value.getJsonPayload()); }
+        }
+
+        /**
+         * @description An HTTPS URL used to automatically authorize the user
+         */
+        global LoginConfigs loginUrl {
+            get { return new LoginConfigs(payload.getJsonPayload('login_url')); }
+            private set { payload.set('login_url', value.getJsonPayload()); }
+        }
+
+        /**
+         * @description If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted
+         */
+        global String switchInlineQuery {
+            get { return payload.getString('switch_inline_query'); }
+            private set { payload.set('switch_inline_query', value); }
+        }
+
+        /**
+         * @description If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted
+         */
+        global String switchInlineQueryCurrentChat {
+            get { return payload.getString('switch_inline_query_current_chat'); }
+            private set { payload.set('switch_inline_query_current_chat', value); }
+        }
+
+        /**
+         * @description If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field
+         */
+        global SwitchInlineQueryChatConfigs switchInlineQueryChosenChat {
+            get { return new SwitchInlineQueryChatConfigs(payload.getJsonPayload('switch_inline_query_chosen_chat')); }
+            private set { payload.set('switch_inline_query_chosen_chat', value.getJsonPayload()); }
+        }
+
+        /**
          * @description Creates an instance of the button with the provided text
          * @param text The button text
          */
         global Button(String text) {
             super();
-            payload.set('text', text);
+            this.text = text;
+        }
+
+        public Button(BotJsonPayload payload) {
+            super(payload);
         }
 
         /**
@@ -98,7 +180,7 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
          * @return The current <<TelegramInlineKeyboardMarkupOptions.Button>> instance
          */
         global Button withCallbackData(String data) {
-            payload.set('callback_data', data, true);
+            this.callbackData = data;
             return this;
         }
 
@@ -108,7 +190,7 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
          * @return The current <<TelegramInlineKeyboardMarkupOptions.Button>> instance
          */
         global Button asUrl(String url) {
-            payload.set('url', url, true);
+            this.url = url;
             return this;
         }
 
@@ -118,37 +200,7 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
          * @return The current <<TelegramInlineKeyboardMarkupOptions.Button>> instance
          */
         global Button asLoginUrl(LoginConfigs loginConfigs) {
-            payload.set('login_url', loginConfigs);
-            return this;
-        }
-
-        /**
-         * @description If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted
-         * @param query The query to be pasted in another chat
-         * @return The current <<TelegramInlineKeyboardMarkupOptions.Button>> instance
-         */
-        global Button asSwitchInlineQuery(String query) {
-            payload.set('switch_inline_query', query);
-            return this;
-        }
-
-        /**
-         * @description If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted
-         * @param query The query to be pasted in another chat
-         * @return The current <<TelegramInlineKeyboardMarkupOptions.Button>> instance
-         */
-        global Button asSwitchInlineQueryCurrentChat(String query) {
-            payload.set('switch_inline_query_current_chat', query);
-            return this;
-        }
-
-        /**
-         * @description If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field
-         * @param chatConfigs The configs for the chat selection
-         * @return The current <<TelegramInlineKeyboardMarkupOptions.Button>> instance
-         */
-        global Button asSwitchInlineQueryChosenChat(SwitchInlineQueryChatConfigs chatConfigs) {
-            payload.set('switch_inline_query_chosen_chat', chatConfigs);
+            this.loginUrl = loginConfigs;
             return this;
         }
 
@@ -158,7 +210,37 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
          * @return The current <<TelegramInlineKeyboardMarkupOptions.Button>> instance
          */
         global Button asWebAppLauncher(String webAppUrl) {
-            payload.set('web_app', new BotJsonPayload().set('url', webAppUrl));
+            this.webApp = new TelegramWebAppInfo(new BotJsonPayload().set('url', webAppUrl));
+            return this;
+        }
+
+        /**
+         * @description If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted
+         * @param query The query to be pasted in another chat
+         * @return The current <<TelegramInlineKeyboardMarkupOptions.Button>> instance
+         */
+        global Button asSwitchInlineQuery(String query) {
+            this.switchInlineQuery = query;
+            return this;
+        }
+
+        /**
+         * @description If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted
+         * @param query The query to be pasted in another chat
+         * @return The current <<TelegramInlineKeyboardMarkupOptions.Button>> instance
+         */
+        global Button asSwitchInlineQueryCurrentChat(String query) {
+            this.switchInlineQueryCurrentChat = query;
+            return this;
+        }
+
+        /**
+         * @description If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field
+         * @param chatConfigs The configs for the chat selection
+         * @return The current <<TelegramInlineKeyboardMarkupOptions.Button>> instance
+         */
+        global Button asSwitchInlineQueryChosenChat(SwitchInlineQueryChatConfigs chatConfigs) {
+            this.switchInlineQueryChosenChat = chatConfigs;
             return this;
         }
     }
@@ -169,12 +251,45 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
      */
     global class LoginConfigs extends BotPayload {
         /**
+         * @description An HTTPS URL to be opened with user authorization data added to the query string when the button is pressed
+         */
+        global String url { get { return payload.getString('url'); } private set { payload.set('url', value); } }
+
+        /**
+         * @description The new text of the button in forwarded messages
+         */
+        global String forwardText {
+            get { return payload.getString('forward_text'); }
+            private set { payload.set('forward_text', value, true); }
+        }
+
+        /**
+         * @description The username of a bot that will be used for the user authorization
+         */
+        global String botUsername {
+            get { return payload.getString('bot_username'); }
+            private set { payload.set('bot_username', value, true); }
+        }
+
+        /**
+         * @description `True` to request the permission for your bot to send messages to the user
+         */
+        global Boolean requestWriteAccess {
+            get { return payload.getBoolean('request_write_access'); }
+            private set { payload.set('request_write_access', value); }
+        }
+
+        /**
          * @description Creates an instance of the login configs with the provided service url
          * @param url An HTTPS URL to be opened with user authorization data added to the query string when the button is pressed
          */
         global LoginConfigs(String url) {
             super();
-            payload.set('url', url);
+            this.url = url;
+        }
+
+        public LoginConfigs(BotJsonPayload payload) {
+            super(payload);
         }
 
         /**
@@ -183,7 +298,7 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
          * @return The current <<TelegramInlineKeyboardMarkupOptions.LoginConfigs>> instance
          */
         global LoginConfigs withForwardText(String text) {
-            payload.set('forward_text', text, true);
+            this.forwardText = text;
             return this;
         }
 
@@ -193,7 +308,7 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
          * @return The current <<TelegramInlineKeyboardMarkupOptions.LoginConfigs>> instance
          */
         global LoginConfigs withAuthorizationBot(String botUsername) {
-            payload.set('bot_username', botUsername, true);
+            this.botUsername = botUsername;
             return this;
         }
 
@@ -202,7 +317,7 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
          * @return The current <<TelegramInlineKeyboardMarkupOptions.LoginConfigs>> instance
          */
         global LoginConfigs withWriteAccess() {
-            payload.set('request_write_access', true);
+            this.requestWriteAccess = true;
             return this;
         }
     }
@@ -213,20 +328,61 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
      */
     global class SwitchInlineQueryChatConfigs extends BotPayload {
         /**
+         * @description The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted
+         */
+        global String query { get { return payload.getString('query'); } private set { payload.set('query', value); } }
+
+        /**
+         * @description `True` if private chats with users can be chosen
+         */
+        global Boolean allowUserChats {
+            get { return payload.getBoolean('allow_user_chats'); }
+            private set { payload.set('allow_user_chats', value); }
+        }
+
+        /**
+         * @description `True` if private chats with bots can be chosen
+         */
+        global Boolean allowBotChats {
+            get { return payload.getBoolean('allow_bot_chats'); }
+            private set { payload.set('allow_bot_chats', value); }
+        }
+
+        /**
+         * @description `True` if group and supergroup chats can be chosen
+         */
+        global Boolean allowGroupChats {
+            get { return payload.getBoolean('allow_group_chats'); }
+            private set { payload.set('allow_group_chats', value); }
+        }
+
+        /**
+         * @description `True` if channel chats can be chosen
+         */
+        global Boolean allowChannelChats {
+            get { return payload.getBoolean('allow_channel_chats'); }
+            private set { payload.set('allow_channel_chats', value); }
+        }
+
+        /**
          * @description Creates an instance of the switch inline query configs with the provided query
          * @param query The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted
          */
         global SwitchInlineQueryChatConfigs(String query) {
             super();
-            payload.set('query', query);
+            this.query = query;
+        }
+
+        public SwitchInlineQueryChatConfigs(BotJsonPayload payload) {
+            super(payload);
         }
 
         /**
          * @description Defines if private chats with users can be chosen
          * @return The current <<TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs>> instance
          */
-        global SwitchInlineQueryChatConfigs allowUserChats() {
-            payload.set('allow_user_chats', true);
+        global SwitchInlineQueryChatConfigs withUserChats() {
+            allowUserChats = true;
             return this;
         }
 
@@ -234,8 +390,8 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
          * @description Defines if private chats with bots can be chosen
          * @return The current <<TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs>> instance
          */
-        global SwitchInlineQueryChatConfigs allowBotChats() {
-            payload.set('allow_bot_chats', true);
+        global SwitchInlineQueryChatConfigs withBotChats() {
+            allowBotChats = true;
             return this;
         }
 
@@ -243,8 +399,8 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
          * @description Defines if group and supergroup chats can be chosen
          * @return The current <<TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs>> instance
          */
-        global SwitchInlineQueryChatConfigs allowGroupChats() {
-            payload.set('allow_group_chats', true);
+        global SwitchInlineQueryChatConfigs withGroupChats() {
+            allowGroupChats = true;
             return this;
         }
 
@@ -252,8 +408,8 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
          * @description Defines if channel chats can be chosen
          * @return The current <<TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs>> instance
          */
-        global SwitchInlineQueryChatConfigs allowChannelChats() {
-            payload.set('allow_channel_chats', true);
+        global SwitchInlineQueryChatConfigs withChannelChats() {
+            allowChannelChats = true;
             return this;
         }
     }

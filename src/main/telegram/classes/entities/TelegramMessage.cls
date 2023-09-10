@@ -279,13 +279,12 @@ global virtual class TelegramMessage extends BotPayload implements IBotMessage {
         get { return new TelegramMessage(payload.getJsonPayload('pinned_message')); }
     }
 
-    // TODO: Implement all commented out properties below
-    //    /**
-    //     * @description The inline keyboard attached to the message
-    //     */
-    //    global TelegramBotInlineKeyboardMarkup replyMarkup {
-    //        get { return new TelegramBotInlineKeyboardMarkup(payload.getJsonPayload('reply_markup')); }
-    //    }
+    /**
+     * @description The inline keyboard attached to the message
+     */
+    global TelegramInlineKeyboardMarkupOptions replyMarkup {
+        get { return new TelegramInlineKeyboardMarkupOptions(payload.getJsonPayload('reply_markup')); }
+    }
 
     public TelegramMessage(BotJsonPayload payload) {
         super(payload);
