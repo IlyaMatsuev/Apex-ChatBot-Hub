@@ -6,6 +6,7 @@ private class BotUpsertDataEventTriggerTest {
         BotSettingsProvider.mock();
         insert new Bot__c(
             Type__c = BotType.Telegram.name(),
+            WebhookEvents__c = 'message',
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
             Handler__c = 'BotHandlerMock'
         );

@@ -181,6 +181,7 @@ private class BotUpdateEventTriggerTest {
         insert new Bot__c(
             Name = type.name(),
             Type__c = type.name(),
+            WebhookEvents__c = 'message',
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
             Handler__c = 'BotHandlerMock'
         );

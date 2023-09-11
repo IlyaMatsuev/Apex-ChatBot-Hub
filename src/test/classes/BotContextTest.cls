@@ -13,6 +13,7 @@ private class BotContextTest {
         Bot__c differentBot = new Bot__c(
             Name = 'Test',
             Type__c = BotType.Viber.name(),
+            WebhookEvents__c = 'message',
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g23323423werw',
             Handler__c = 'BotHandlerMock'
         );
@@ -110,6 +111,7 @@ private class BotContextTest {
         insert new Bot__c(
             Name = botType.name(),
             Type__c = botType.name(),
+            WebhookEvents__c = 'message',
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
             Handler__c = 'BotHandlerMock'
         );
@@ -127,6 +129,7 @@ private class BotContextTest {
         insert new Bot__c(
             Name = botType.name(),
             Type__c = botType.name(),
+            WebhookEvents__c = 'message',
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
             Handler__c = 'BotHandlerMock'
         );

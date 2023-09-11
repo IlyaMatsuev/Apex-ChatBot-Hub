@@ -900,6 +900,7 @@ private class TelegramBotServiceTest {
         insert new Bot__c(
             Name = 'TestBot',
             Type__c = BOT_TYPE.name(),
+            WebhookEvents__c = 'message',
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
             Handler__c = 'BotHandlerMock'
         );
