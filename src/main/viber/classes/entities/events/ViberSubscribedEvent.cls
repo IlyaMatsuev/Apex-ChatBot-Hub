@@ -6,11 +6,9 @@ global class ViberSubscribedEvent extends ViberMessageEvent {
     /**
      * @description The subscriber's user information
      */
-    global final ViberUser user;
+    global final ViberUser user { get { return new ViberUser(payload.getJsonPayload('user')); } }
 
     public ViberSubscribedEvent(ViberUpdateEvent event) {
         super(event);
-        this.user = new ViberUser(event.getPayload().getJsonPayload('user'));
-        this.userId = this.user.getId();
     }
 }

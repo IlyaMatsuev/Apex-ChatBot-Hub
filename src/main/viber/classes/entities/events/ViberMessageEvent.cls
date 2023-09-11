@@ -4,25 +4,23 @@
  * - https://developers.viber.com/docs/api/rest-bot-api/#message-receipts-callbacks
  * - https://developers.viber.com/docs/api/rest-bot-api/#unsubscribed
  */
-global virtual class ViberMessageEvent {
+global virtual class ViberMessageEvent extends BotPayload {
     /**
      * @description The unique identifier of the related message
      */
-    global final String messageId;
+    global String messageToken { get { return payload.getString('message_token'); } }
 
     /**
      * @description The event date and time
      */
-    global final DateTime eventDate;
+    global DateTime timestamp { get { return payload.getDateTime('timestamp'); } }
 
     /**
      * @description The sender's `Viber` user id
      */
-    global final String userId;
+    global String userId { get { return payload.getString('user_id'); } }
 
     public ViberMessageEvent(ViberUpdateEvent event) {
-        this.messageId = event.getPayload().getString('message_token');
-        this.eventDate = event.getPayload().getDateTime('timestamp');
-        this.userId = event.getPayload().getString('user_id');
+        super(event.getPayload());
     }
 }

@@ -5,6 +5,9 @@ private class BotContextTest {
         BotSettingsProvider.mock();
     }
 
+    // TODO: Add tests
+    // - for ViberBotContext methods: getService, reply
+
     @IsTest
     private static void getService_forDifferentBot_shouldCreateNewService() {
         IBotContext context = createBotContext(BotType.Telegram, createTelegramPayload());

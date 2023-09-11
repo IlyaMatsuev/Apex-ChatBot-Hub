@@ -5,6 +5,10 @@ private class BotUpdateEventTriggerTest {
         BotSettingsProvider.mock();
     }
 
+    // TODO: Add tests
+    // - handle for an update that should be ignored (not included in the `WebhookEvents__c` value
+    // - handle for an update without a message object
+
     /**
      * Telegram tests
      */

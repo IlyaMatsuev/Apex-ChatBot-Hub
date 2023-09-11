@@ -6,10 +6,9 @@ global class ViberMessageFailedEvent extends ViberMessageEvent {
     /**
      * @description The error description
      */
-    global final String errorDescription;
+    global String description { get { return payload.getString('desc'); } }
 
     public ViberMessageFailedEvent(ViberUpdateEvent event) {
         super(event);
-        this.errorDescription = event.getPayload().getString('desc');
     }
 }

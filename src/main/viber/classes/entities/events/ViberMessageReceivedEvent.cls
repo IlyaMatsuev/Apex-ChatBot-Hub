@@ -6,17 +6,14 @@ global class ViberMessageReceivedEvent extends ViberMessageEvent {
     /**
      * @description The sender's user information
      */
-    global final ViberUser sender;
+    global ViberUser sender { get { return new ViberUser(payload.getJsonPayload('sender')); } }
 
     /**
      * @description The message details
      */
-    global final ViberMessage message;
+    global ViberMessage message { get { return new ViberMessage(payload.getJsonPayload('message')); } }
 
     public ViberMessageReceivedEvent(ViberUpdateEvent event) {
         super(event);
-        this.sender = new ViberUser(event.getPayload().getJsonPayload('sender'));
-        this.userId = this.sender.getId();
-        this.message = event.getMessage();
     }
 }
