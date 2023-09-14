@@ -364,7 +364,7 @@ global virtual class TelegramMessage extends BotPayload implements IBotMessage {
      */
     global BotJsonPayload getParameters() {
         if (payload.has('photo')) {
-            return payload.getJsonPayload('photo');
+            return new BotJsonPayload().set('photoSizes', payload.get('photo'));
         } else if (payload.has('video')) {
             return payload.getJsonPayload('video');
         } else if (payload.has('video_note')) {

@@ -528,6 +528,24 @@ global class TelegramBotSenderService implements IBotSenderService {
         return this;
     }
 
+    /**
+     * @description Will force `Telegram` client to display a reply interface to the user to the current bot's message
+     * @return The current instance of `Telegram` sender service
+     */
+    global TelegramBotSenderService withForceReply() {
+        return withForceReply(new TelegramForceReplyOptions());
+    }
+
+    /**
+     * @description Will force `Telegram` client to display a reply interface to the user to the current bot's message
+     * @param forceReplyOptions The instance of <<TelegramForceReplyOptions>> class with additional reply options
+     * @return The current instance of `Telegram` sender service
+     */
+    global TelegramBotSenderService withForceReply(TelegramForceReplyOptions forceReplyOptions) {
+        this.replyMarkup = forceReplyOptions;
+        return this;
+    }
+
     private void send(TelegramBotMethod method, BotJsonPayload payload, BotJsonPayload callbackParams) {
         if (replyMarkup != null) {
             payload.set('reply_markup', replyMarkup);

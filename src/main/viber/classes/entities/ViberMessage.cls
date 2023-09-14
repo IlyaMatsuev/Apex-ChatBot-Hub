@@ -111,7 +111,7 @@ global class ViberMessage extends BotPayload implements IBotMessage {
      * @return The message media URL
      */
     global String getMediaUrl() {
-        return payload.getString('media');
+        return media;
     }
 
     /**

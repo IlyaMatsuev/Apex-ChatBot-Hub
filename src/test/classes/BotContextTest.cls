@@ -5,12 +5,24 @@ private class BotContextTest {
         BotSettingsProvider.mock();
     }
 
-    // TODO: Add tests
-    // - for ViberBotContext methods: getService, reply
+    @IsTest
+    private static void save_noExternalId_shouldPublishUpsertEvent() {
+        IBotContext context = createBotContext(BotType.Telegram);
+
+        Test.startTest();
+        context.save(new ChatUser__c(Name = 'Test', Username__c = 'test.name', ExternalId__c = '1234'));
+        Test.stopTest();
+
+        Assert.areEqual(1, [SELECT Id FROM ChatUser__c].size());
+    }
+
+    /**
+     * Telegram tests
+     */
 
     @IsTest
-    private static void getService_forDifferentBot_shouldCreateNewService() {
-        IBotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+    private static void getService_telegramForDifferentBot_shouldCreateNewService() {
+        IBotContext context = createBotContext(BotType.Telegram);
 
         Test.startTest();
         Bot__c differentBot = new Bot__c(
@@ -29,91 +41,32 @@ private class BotContextTest {
     }
 
     @IsTest
-    private static void save_noExternalId_shouldPublishUpsertEvent() {
-        IBotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
-
-        Test.startTest();
-        context.save(new ChatUser__c(Name = 'Test', Username__c = 'test.name', ExternalId__c = '1234'));
-        Test.stopTest();
-
-        Assert.areEqual(1, [SELECT Id FROM ChatUser__c].size());
-    }
-
-    @IsTest
-    private static void reply_shouldReturnSender() {
-        IBotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+    private static void reply_telegramContext_shouldReturnSender() {
+        IBotContext context = createBotContext(BotType.Telegram);
         Assert.isInstanceOfType(context.reply(), TelegramBotSenderService.class);
-    }
-
-    /**
-     * Telegram tests
-     */
-    @IsTest
-    private static void received_telegramUpdateModelWithMessage_containsAllFields() {
-        IBotUpdateEvent receivedUpdate = createBotUpdateEvent(BotType.Telegram, createTelegramPayload());
-
-        Assert.isInstanceOfType(receivedUpdate, TelegramUpdateEvent.class);
-
-        TelegramUpdateEvent receivedTgUpdate = (TelegramUpdateEvent) receivedUpdate;
-
-        Assert.areEqual(TelegramUpdateEventType.Message, receivedTgUpdate.getType());
-
-        TelegramMessage messageUpdate = receivedTgUpdate.getMessage();
-
-        Assert.areEqual('223123123', messageUpdate.getId());
-        Assert.areEqual('/start hello   world!', messageUpdate.getText());
-        Assert.areEqual(DateTime.newInstanceGmt(2022, 1, 1, 8, 0, 0), messageUpdate.getSendDate());
-
-        TelegramChat chatUpdate = receivedTgUpdate.getChat();
-
-        Assert.areEqual('876541222', chatUpdate.getId());
-        Assert.areEqual('matsuev', chatUpdate.getTitle());
-
-        TelegramUser userUpdate = chatUpdate.getSender();
-
-        Assert.areEqual('876541222', userUpdate.getId());
-        Assert.isNull(userUpdate.getFirstName());
-        Assert.areEqual('matsuev', userUpdate.getLastName());
-        Assert.areEqual('ilyamatsuev', userUpdate.getUsername());
     }
 
     /**
      * Viber tests
      */
+
     @IsTest
-    private static void received_viberUpdateModelWithMessage_containsAllFields() {
-        IBotUpdateEvent receivedUpdate = createBotUpdateEvent(BotType.Viber, createViberPayload());
-
-        Assert.isInstanceOfType(receivedUpdate, ViberUpdateEvent.class);
-
-        ViberUpdateEvent receivedVbUpdate = (ViberUpdateEvent) receivedUpdate;
-
-        Assert.areEqual(ViberUpdateEventType.Message, receivedVbUpdate.getType());
-
-        ViberMessage messageUpdate = receivedVbUpdate.getMessage();
-
-        Assert.areEqual('4912661846655238145', messageUpdate.getId());
-        Assert.areEqual('/start hello   world!', messageUpdate.getText());
-        Assert.areEqual(DateTime.newInstance(2022, 1, 1), messageUpdate.getSendDate());
-
-        ViberChat chatUpdate = receivedVbUpdate.getChat();
-
-        Assert.areEqual('01234567890A=', chatUpdate.getId());
-        Assert.areEqual('John McClane', chatUpdate.getTitle());
-
-        ViberUser userUpdate = chatUpdate.getSender();
-
-        Assert.areEqual('01234567890A=', userUpdate.getId());
-        Assert.areEqual('John', userUpdate.getFirstName());
-        Assert.areEqual('McClane', userUpdate.getLastName());
-        Assert.areEqual('01234567890A=', userUpdate.getUsername());
+    private static void getService_viberContext_shouldReturnViberService() {
+        IBotContext context = createBotContext(BotType.Viber);
+        Assert.isInstanceOfType(context.getService(), ViberBotService.class);
     }
 
-    private static IBotContext createBotContext(BotType botType, BotJsonPayload payload) {
-        setCalloutMock(botType);
+    @IsTest
+    private static void reply_viberContext_shouldReturnSender() {
+        IBotContext context = createBotContext(BotType.Viber);
+        Assert.isInstanceOfType(context.reply(), ViberBotSenderService.class);
+    }
+
+    private static IBotContext createBotContext(BotType type) {
+        setCalloutMock(type);
         insert new Bot__c(
-            Name = botType.name(),
-            Type__c = botType.name(),
+            Name = type.name(),
+            Type__c = type.name(),
             WebhookEvents__c = 'message',
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
             Handler__c = 'BotHandlerMock'
@@ -121,28 +74,11 @@ private class BotContextTest {
         Bot__c bot = [
             SELECT Name, Type__c, WebhookEvents__c, Handler__c, TokenHash__c
             FROM Bot__c
-            WHERE Type__c = :botType.name()
+            WHERE Type__c = :type.name()
             LIMIT 1
         ];
+        BotJsonPayload payload = type == BotType.Telegram ? createTelegramPayload() : createViberPayload();
         return new BotServiceFactoryMock().createBotContext(new BotModel(bot), payload.toJson());
-    }
-
-    private static IBotUpdateEvent createBotUpdateEvent(BotType botType, BotJsonPayload payload) {
-        setCalloutMock(botType);
-        insert new Bot__c(
-            Name = botType.name(),
-            Type__c = botType.name(),
-            WebhookEvents__c = 'message',
-            Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
-            Handler__c = 'BotHandlerMock'
-        );
-        Bot__c bot = [
-            SELECT Name, Type__c, WebhookEvents__c, Handler__c, TokenHash__c
-            FROM Bot__c
-            WHERE Type__c = :botType.name()
-            LIMIT 1
-        ];
-        return new BotServiceFactoryMock().createBotUpdateEvent(new BotModel(bot), payload.toJson());
     }
 
     private static BotCalloutMock setCalloutMock(BotType type) {

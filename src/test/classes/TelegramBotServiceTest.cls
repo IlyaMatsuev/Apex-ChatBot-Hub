@@ -121,6 +121,151 @@ private class TelegramBotServiceTest {
         Test.getEventBus().deliver();
         Test.stopTest();
 
+        Assert.areEqual(3, keyboard.buttons.size());
+        Assert.areEqual(1, keyboard.buttons.get(0).size());
+        Assert.areEqual(2, keyboard.buttons.get(1).size());
+        Assert.areEqual(2, keyboard.buttons.get(2).size());
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world!',
+            null,
+            new BotJsonPayload().set('keyboard', keyboard)
+        );
+    }
+
+    @IsTest
+    private static void send_textWithReplyKeyboardRemoved_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramReplyKeyboardRemoveOptions expectedKeyboard = new TelegramReplyKeyboardRemoveOptions();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).withReplyKeyboardRemoved().text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world!',
+            null,
+            new BotJsonPayload().set('keyboard', expectedKeyboard)
+        );
+    }
+
+    @IsTest
+    private static void send_textWithReplyKeyboardRemovedOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramReplyKeyboardRemoveOptions keyboardRemovedOptions = new TelegramReplyKeyboardRemoveOptions()
+            .asSelective(true);
+
+        Test.startTest();
+        fixture.sut()
+            .send(fixture.chat.ExternalId__c)
+            .withReplyKeyboardRemoved(keyboardRemovedOptions)
+            .text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world!',
+            null,
+            new BotJsonPayload().set('keyboard', keyboardRemovedOptions)
+        );
+    }
+
+    @IsTest
+    private static void send_textWithForceReply_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramForceReplyOptions expectedKeyboard = new TelegramForceReplyOptions();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).withForceReply().text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world!',
+            null,
+            new BotJsonPayload().set('keyboard', expectedKeyboard)
+        );
+    }
+
+    @IsTest
+    private static void send_textWithForceReplyOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramForceReplyOptions forceReplyOptions = new TelegramForceReplyOptions()
+            .setInputPlaceholder('Reply with something...')
+            .asSelective(true);
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).withForceReply(forceReplyOptions).text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertMessageIsCreated(
+            BotMessageType.Text,
+            'Hello world!',
+            null,
+            new BotJsonPayload().set('keyboard', forceReplyOptions)
+        );
+    }
+
+    @IsTest
+    private static void send_textWithInlineKeyboard_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramInlineKeyboardMarkupOptions.Button button1 = new TelegramInlineKeyboardMarkupOptions.Button('Hello!')
+            .withCallbackData('hello');
+
+        TelegramInlineKeyboardMarkupOptions.Button button2 = new TelegramInlineKeyboardMarkupOptions.Button('World!')
+            .asUrl('https://example.com');
+
+        TelegramInlineKeyboardMarkupOptions.Button button3 = new TelegramInlineKeyboardMarkupOptions.Button('Launch')
+            .asWebAppLauncher('https://example.com/app');
+
+        TelegramInlineKeyboardMarkupOptions.Button button4 = new TelegramInlineKeyboardMarkupOptions.Button('Login')
+            .asLoginUrl(
+                new TelegramInlineKeyboardMarkupOptions.LoginConfigs('https://example.com/login')
+                    .withForwardText('This is secret!')
+                    .withAuthorizationBot('SalesforceIntegratorVictor')
+                    .withWriteAccess()
+            );
+
+        TelegramInlineKeyboardMarkupOptions.Button button5 = new TelegramInlineKeyboardMarkupOptions.Button(
+                'Switch chat'
+            )
+            .asSwitchInlineQuery('some new query')
+            .asSwitchInlineQueryCurrentChat('some query in the current chat')
+            .asSwitchInlineQueryChosenChat(
+                new TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs('some query in another chat')
+                    .withUserChats()
+                    .withBotChats()
+                    .withGroupChats()
+                    .withChannelChats()
+            );
+
+        TelegramInlineKeyboardMarkupOptions keyboard = new TelegramInlineKeyboardMarkupOptions()
+            .addButton(button1)
+            .addButton(button2)
+            .addButton(button3)
+            .addButton(1, button4)
+            .addButton(1, button5);
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).withInlineKeyboard(keyboard).text('Hello world!');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        Assert.areEqual(2, keyboard.buttons.size());
+        Assert.areEqual(3, keyboard.buttons.get(0).size());
+        Assert.areEqual(2, keyboard.buttons.get(1).size());
+
         fixture.assertMessageIsCreated(
             BotMessageType.Text,
             'Hello world!',
@@ -699,7 +844,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().send(fixture.chat.ExternalId__c).audio('https://examlple.com/audio.ogg');
+        fixture.sut().send(fixture.chat.ExternalId__c).voice('https://examlple.com/audio.ogg');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -717,7 +862,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().send(fixture.chat.ExternalId__c).audio('https://examlple.com/audio.ogg', 'Hello World!');
+        fixture.sut().send(fixture.chat.ExternalId__c).voice('https://examlple.com/audio.ogg', 'Hello World!');
         Test.getEventBus().deliver();
         Test.stopTest();
 

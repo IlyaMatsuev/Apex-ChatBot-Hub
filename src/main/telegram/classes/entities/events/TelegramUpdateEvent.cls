@@ -49,7 +49,9 @@ global class TelegramUpdateEvent extends BotPayload implements IBotUpdateEvent {
             chat = new TelegramChat(updatePayload.getJsonPayload('chat'));
             chat.payload.set('user', new TelegramUser(updatePayload.getJsonPayload('from')));
         } else if (updatePayload.has('from')) {
-            chat = new TelegramChat(updatePayload.getJsonPayload('from'));
+            BotJsonPayload senderPayload = updatePayload.getJsonPayload('from');
+            chat = new TelegramChat(senderPayload);
+            chat.payload.set('user', new TelegramUser(senderPayload));
         }
         return chat;
     }

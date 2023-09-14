@@ -5,10 +5,6 @@ private class BotUpdateEventTriggerTest {
         BotSettingsProvider.mock();
     }
 
-    // TODO: Add tests
-    // - handle for an update that should be ignored (not included in the `WebhookEvents__c` value
-    // - handle for an update without a message object
-
     /**
      * Telegram tests
      */
@@ -31,7 +27,7 @@ private class BotUpdateEventTriggerTest {
         ];
         // Chat
         Assert.areEqual(1, chats.size());
-        Assert.areEqual('matsuev', chats.get(0).Name);
+        Assert.areEqual('Awesome chat', chats.get(0).Name);
         Assert.areEqual(bot.id, chats.get(0).Bot__c);
         Assert.areEqual('876541222:'.rightPad(40, bot.tokenHash), chats.get(0).ExternalId__c);
         // User
@@ -52,6 +48,85 @@ private class BotUpdateEventTriggerTest {
 
         List<BotHandlerMock.ReceivedContext> contexts = BotHandlerMock.executedContexts;
         Assert.areEqual(1, contexts.size());
+        Assert.isInstanceOfType(contexts.get(0).event, TelegramUpdateEvent.class);
+
+        IBotUpdateEvent updateEvent = contexts.get(0).event;
+        Assert.areEqual(TelegramUpdateEventType.Message, updateEvent.getType());
+
+        IBotMessage messageUpdate = updateEvent.getMessage();
+
+        Assert.areEqual('223123123', messageUpdate.getId());
+        Assert.areEqual('Hello world!', messageUpdate.getText());
+        Assert.isNull(messageUpdate.getMediaUrl());
+        Assert.areEqual(BotMessageType.Text, messageUpdate.getType());
+        Assert.isNotNull(messageUpdate.getParameters());
+        Assert.areEqual(Date.newInstance(2022, 1, 1), messageUpdate.getSendDate().date());
+
+        IBotChat chatUpdate = updateEvent.getChat();
+
+        Assert.areEqual('876541222', chatUpdate.getId());
+        Assert.areEqual('Awesome chat', chatUpdate.getTitle());
+
+        IBotUser userUpdate = chatUpdate.getSender();
+
+        Assert.areEqual('876541222', userUpdate.getId());
+        Assert.isNull(userUpdate.getFirstName());
+        Assert.areEqual('matsuev', userUpdate.getLastName());
+        Assert.areEqual('ilyamatsuev', userUpdate.getUsername());
+    }
+
+    @IsTest
+    private static void handle_telegramBotInlineQuery_shouldHandleInlineQueryAndInsertChatDetails() {
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
+
+        BotModel bot = createBot(BotType.Telegram);
+        Test.startTest();
+        EventBus.publish(
+            new BotUpdateEvent__e(
+                Bot__c = bot.toJson(),
+                Payload__c = createTelegramPayload(TelegramUpdateEventType.InlineQuery).toJson()
+            )
+        );
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<Chat__c> chats = [SELECT Name, Bot__c, ExternalId__c FROM Chat__c];
+        List<ChatUser__c> users = [SELECT Name, FirstName__c, LastName__c, Username__c, ExternalId__c FROM ChatUser__c];
+        List<ChatMessage__c> messages = [SELECT Id FROM ChatMessage__c];
+        // Chat
+        Assert.areEqual(1, chats.size());
+        Assert.areEqual('matsuev', chats.get(0).Name);
+        Assert.areEqual(bot.id, chats.get(0).Bot__c);
+        Assert.areEqual('876541222:'.rightPad(40, bot.tokenHash), chats.get(0).ExternalId__c);
+        // User
+        Assert.areEqual(1, users.size());
+        Assert.areEqual('matsuev', users.get(0).Name);
+        Assert.isNull(users.get(0).FirstName__c);
+        Assert.areEqual('matsuev', users.get(0).LastName__c);
+        Assert.areEqual('ilyamatsuev', users.get(0).Username__c);
+        Assert.areEqual('876541222', users.get(0).ExternalId__c);
+        // Message
+        Assert.isTrue(messages.isEmpty());
+
+        List<BotHandlerMock.ReceivedContext> contexts = BotHandlerMock.executedContexts;
+        Assert.areEqual(1, contexts.size());
+        Assert.isInstanceOfType(contexts.get(0).event, TelegramUpdateEvent.class);
+
+        IBotUpdateEvent updateEvent = contexts.get(0).event;
+        Assert.areEqual(TelegramUpdateEventType.InlineQuery, updateEvent.getType());
+        Assert.isNull(updateEvent.getMessage());
+
+        IBotChat chatUpdate = updateEvent.getChat();
+
+        Assert.areEqual('876541222', chatUpdate.getId());
+        Assert.areEqual('matsuev', chatUpdate.getTitle());
+
+        IBotUser userUpdate = chatUpdate.getSender();
+
+        Assert.areEqual('876541222', userUpdate.getId());
+        Assert.isNull(userUpdate.getFirstName());
+        Assert.areEqual('matsuev', userUpdate.getLastName());
+        Assert.areEqual('ilyamatsuev', userUpdate.getUsername());
     }
 
     @IsTest
@@ -124,6 +199,31 @@ private class BotUpdateEventTriggerTest {
 
         List<BotHandlerMock.ReceivedContext> contexts = BotHandlerMock.executedContexts;
         Assert.areEqual(1, contexts.size());
+        Assert.isInstanceOfType(contexts.get(0).event, ViberUpdateEvent.class);
+
+        IBotUpdateEvent updateEvent = contexts.get(0).event;
+        Assert.areEqual(ViberUpdateEventType.Message, updateEvent.getType());
+
+        IBotMessage messageUpdate = updateEvent.getMessage();
+
+        Assert.areEqual('4912661846655238145', messageUpdate.getId());
+        Assert.areEqual('Hello world!', messageUpdate.getText());
+        Assert.areEqual('https://example.com', messageUpdate.getMediaUrl());
+        Assert.areEqual(BotMessageType.Text, messageUpdate.getType());
+        Assert.isNotNull(messageUpdate.getParameters());
+        Assert.areEqual(Date.newInstance(2022, 1, 1), messageUpdate.getSendDate().date());
+
+        IBotChat chatUpdate = updateEvent.getChat();
+
+        Assert.areEqual('01234567890A=', chatUpdate.getId());
+        Assert.areEqual('John McClane', chatUpdate.getTitle());
+
+        IBotUser userUpdate = chatUpdate.getSender();
+
+        Assert.areEqual('01234567890A=', userUpdate.getId());
+        Assert.areEqual('John', userUpdate.getFirstName());
+        Assert.areEqual('McClane', userUpdate.getLastName());
+        Assert.areEqual('01234567890A=', userUpdate.getUsername());
     }
 
     @IsTest
@@ -177,8 +277,16 @@ private class BotUpdateEventTriggerTest {
         Assert.isTrue(chats.isEmpty());
         Assert.isTrue(users.isEmpty());
         Assert.isTrue(messages.isEmpty());
-        Assert.areEqual(1, BotHandlerMock.executedContexts.size());
-        Assert.areEqual(ViberUpdateEventType.WebhookCallback, BotHandlerMock.executedContexts.get(0).event.getType());
+
+        List<BotHandlerMock.ReceivedContext> contexts = BotHandlerMock.executedContexts;
+        Assert.areEqual(1, contexts.size());
+        Assert.isInstanceOfType(contexts.get(0).event, ViberUpdateEvent.class);
+
+        IBotUpdateEvent updateEvent = contexts.get(0).event;
+        Assert.areEqual(ViberUpdateEventType.WebhookCallback, updateEvent.getType());
+
+        Assert.isNull(updateEvent.getMessage());
+        Assert.isNull(updateEvent.getChat());
     }
 
     private static BotModel createBot(BotType type) {
@@ -204,34 +312,45 @@ private class BotUpdateEventTriggerTest {
     }
 
     private static BotJsonPayload createTelegramPayload(TelegramUpdateEventType eventType) {
-        return new BotJsonPayload()
-            .set('update_id', 12312311L)
-            .set(
-                eventType.name(),
-                new BotJsonPayload()
-                    .set('message_id', 223123123L)
-                    .set(
-                        'from',
-                        new BotJsonPayload()
-                            .set('id', 876541222L)
-                            .set('first_name', null)
-                            .set('last_name', 'matsuev')
-                            .set('username', 'ilyamatsuev')
-                    )
-                    .set('date', DateTime.newInstance(2022, 1, 1).getTime())
-                    .set(
-                        'chat',
-                        new BotJsonPayload()
-                            .set('id', 876541222L)
-                            .set('type', 'private')
-                            .set('title', null)
-                            .set('first_name', null)
-                            .set('last_name', 'matsuev')
-                            .set('username', 'ilyamatsuev')
-                            .set('description', null)
-                    )
-                    .set('text', 'Hello world!')
-            );
+        BotJsonPayload eventPayload = new BotJsonPayload();
+        if (eventType == TelegramUpdateEventType.Message || eventType == TelegramUpdateEventType.EditedMessage) {
+            eventPayload
+                .set('message_id', 223123123L)
+                .set(
+                    'from',
+                    new BotJsonPayload()
+                        .set('id', 876541222L)
+                        .set('first_name', null)
+                        .set('last_name', 'matsuev')
+                        .set('username', 'ilyamatsuev')
+                )
+                .set('date', DateTime.newInstance(2022, 1, 1).getTime())
+                .set(
+                    'chat',
+                    new BotJsonPayload()
+                        .set('id', 876541222L)
+                        .set('type', 'private')
+                        .set('title', 'Awesome chat')
+                        .set('first_name', null)
+                        .set('last_name', 'matsuev')
+                        .set('username', 'ilyamatsuev')
+                        .set('description', null)
+                )
+                .set('text', 'Hello world!');
+        } else if (eventType == TelegramUpdateEventType.InlineQuery) {
+            eventPayload
+                .set('id', '')
+                .set(
+                    'from',
+                    new BotJsonPayload()
+                        .set('id', 876541222L)
+                        .set('first_name', null)
+                        .set('last_name', 'matsuev')
+                        .set('username', 'ilyamatsuev')
+                )
+                .set('query', 'abra bla bla');
+        }
+        return new BotJsonPayload().set('update_id', 12312311L).set(eventType.name(), eventPayload);
     }
 
     private static BotJsonPayload createViberPayload(ViberUpdateEventType eventType) {

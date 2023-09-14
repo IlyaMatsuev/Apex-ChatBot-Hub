@@ -6,7 +6,7 @@ global class TelegramWebAppInfo extends BotPayload {
     /**
      * @description An HTTPS URL of a Web App to be opened with additional data
      */
-    global String url { get { return payload.getString('url'); } private set { payload.set('url', value); } }
+    global String url { get { return payload.getString('url'); } }
 
     public TelegramWebAppInfo(BotJsonPayload payload) {
         super(payload);

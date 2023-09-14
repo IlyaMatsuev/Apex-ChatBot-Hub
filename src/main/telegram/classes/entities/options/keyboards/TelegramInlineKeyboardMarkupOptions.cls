@@ -8,21 +8,19 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
      */
     global List<List<Button>> buttons {
         get {
-            List<List<Button>> btns = new List<List<Button>>();
-            List<Object> payloadMatrix = (List<Object>) payload.get('inline_keyboard');
-            if (payloadMatrix != null) {
-                for (Integer i = 0; i < payloadMatrix.size(); i++) {
-                    btns.add(new List<Button>());
-                    for (Object col : (List<Object>) payloadMatrix.get(i)) {
-                        if (col instanceof Button) {
-                            btns.get(i).add((Button) col);
-                        } else {
-                            btns.get(i).add(new Button(new BotJsonPayload((Map<String, Object>) col)));
+            if (buttons == null) {
+                buttons = new List<List<Button>>();
+                List<Object> payloadMatrix = (List<Object>) payload.get('inline_keyboard');
+                if (payloadMatrix != null) {
+                    for (Integer i = 0; i < payloadMatrix.size(); i++) {
+                        buttons.add(new List<Button>());
+                        for (Object col : (List<Object>) payloadMatrix.get(i)) {
+                            buttons.get(i).add(new Button(new BotJsonPayload((Map<String, Object>) col)));
                         }
                     }
                 }
             }
-            return btns;
+            return buttons;
         }
         private set { payload.set('inline_keyboard', value); }
     }

@@ -50,7 +50,9 @@ global virtual class BotJsonPayload {
     global static BotJsonPayload fromJson(String jsonValues, Type payloadType) {
         BotJsonPayload values = (BotJsonPayload) payloadType.newInstance();
         try {
-            values.getValues().putAll((Map<String, Object>) JSON.deserializeUntyped(jsonValues));
+            if (String.isNotBlank(jsonValues)) {
+                values.getValues().putAll((Map<String, Object>) JSON.deserializeUntyped(jsonValues));
+            }
         } catch (JSONException ex) {
             // In case the input is not JSON
             values.getValues().put('raw', jsonValues);
@@ -224,6 +226,9 @@ global virtual class BotJsonPayload {
      */
     global BotJsonPayload getJsonPayload(String key, Type payloadType) {
         Object value = get(key);
+        if (value == null) {
+            return null;
+        }
         if (value instanceof BotJsonPayload) {
             return (BotJsonPayload) value;
         }
