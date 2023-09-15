@@ -43,49 +43,49 @@ private class TelegramBotHandlerTest {
     }
 
     @IsTest
-    private static void onChosenInlineResult_shouldPopulateInlineQueryEventFields() {
+    private static void onChosenInlineResult_shouldPopulateChosenInlineResultEventFields() {
         BotPayload event = runTest(TelegramUpdateEventType.ChosenInlineResult);
         Assert.isInstanceOfType(event, TelegramChosenInlineResultEvent.class);
         assertChosenInlineResultEvent((TelegramChosenInlineResultEvent) event);
     }
 
     @IsTest
-    private static void onCallbackQuery_shouldPopulateInlineQueryEventFields() {
+    private static void onCallbackQuery_shouldPopulateCallbackQueryEventFields() {
         BotPayload event = runTest(TelegramUpdateEventType.CallbackQuery);
         Assert.isInstanceOfType(event, TelegramCallbackQueryEvent.class);
         assertCallbackQueryEvent((TelegramCallbackQueryEvent) event);
     }
 
     @IsTest
-    private static void onPollUpdated_shouldPopulateInlineQueryEventFields() {
+    private static void onPollUpdated_shouldPopulatePollEventFields() {
         BotPayload event = runTest(TelegramUpdateEventType.Poll);
         Assert.isInstanceOfType(event, TelegramPollEvent.class);
         assertPollUpdatedEvent((TelegramPollEvent) event);
     }
 
     @IsTest
-    private static void onPollAnswer_shouldPopulateInlineQueryEventFields() {
+    private static void onPollAnswer_shouldPopulatePollAnswerEventFields() {
         BotPayload event = runTest(TelegramUpdateEventType.PollAnswer);
         Assert.isInstanceOfType(event, TelegramPollAnswerEvent.class);
         assertPollAnswerEvent((TelegramPollAnswerEvent) event);
     }
 
     @IsTest
-    private static void onMyChatMemberUpdated_shouldPopulateInlineQueryEventFields() {
+    private static void onMyChatMemberUpdated_shouldPopulateChatMemberEventFields() {
         BotPayload event = runTest(TelegramUpdateEventType.MyChatMember);
         Assert.isInstanceOfType(event, TelegramChatMemberUpdatedEvent.class);
         assertChatMemberUpdatedEvent((TelegramChatMemberUpdatedEvent) event);
     }
 
     @IsTest
-    private static void onChatMemberUpdated_shouldPopulateInlineQueryEventFields() {
+    private static void onChatMemberUpdated_shouldPopulateChatMemberEventFields() {
         BotPayload event = runTest(TelegramUpdateEventType.ChatMember);
         Assert.isInstanceOfType(event, TelegramChatMemberUpdatedEvent.class);
         assertChatMemberUpdatedEvent((TelegramChatMemberUpdatedEvent) event);
     }
 
     @IsTest
-    private static void onChatJoinRequest_shouldPopulateInlineQueryEventFields() {
+    private static void onChatJoinRequest_shouldPopulateChatJoinRequestEventFields() {
         BotPayload event = runTest(TelegramUpdateEventType.ChatJoinRequest);
         Assert.isInstanceOfType(event, TelegramChatJoinRequestEvent.class);
         assertChatJoinRequestEvent((TelegramChatJoinRequestEvent) event);

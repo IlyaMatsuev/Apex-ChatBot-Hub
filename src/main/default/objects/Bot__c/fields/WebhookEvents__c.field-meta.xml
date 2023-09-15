@@ -98,11 +98,6 @@
                 <default>false</default>
                 <label>Unsubscribed</label>
             </value>
-            <value>
-                <fullName>webhook</fullName>
-                <default>false</default>
-                <label>Webhook</label>
-            </value>
         </valueSetDefinition>
         <valueSettings>
             <controllingFieldValue>Telegram</controllingFieldValue>
@@ -172,10 +167,6 @@
         <valueSettings>
             <controllingFieldValue>Viber</controllingFieldValue>
             <valueName>unsubscribed</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Viber</controllingFieldValue>
-            <valueName>webhook</valueName>
         </valueSettings>
     </valueSet>
     <visibleLines>5</visibleLines>
