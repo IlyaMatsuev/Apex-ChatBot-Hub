@@ -51,13 +51,8 @@ jobs:
         if: steps.cache-npm.outputs.cache-hit != 'true'
         run: npm i
 
-      - name: 'Start-up prettier server'
-        run: |
-          nohup start-apex-server > /dev/null 2>&1 &
-          npx wait-on http://localhost:2117/api/ast/
-
       - name: 'Verify formatting'
-        run: npm run prettier:verify ./ --  --apex-standalone-parser built-in
+        run: npm run prettier:verify ./
 
   scratch-testing:
     name: 'Create a new scratch org and run Unit Tests'
