@@ -44,9 +44,6 @@ public class BotUtils {
         if (params.isEmpty()) {
             return type.newInstance();
         }
-        System.debug('typeName: ' + typeName);
-        System.debug('type: ' + type);
-        System.debug('params: ' + params);
         return JSON.deserialize(JSON.serialize(params), type);
     }
 }
