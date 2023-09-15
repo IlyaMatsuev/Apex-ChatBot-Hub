@@ -85,9 +85,5 @@
             <fullName>unsubscribed</fullName>
             <default>false</default>
         </values>
-        <values>
-            <fullName>webhook</fullName>
-            <default>false</default>
-        </values>
     </picklistValues>
 </RecordType>
