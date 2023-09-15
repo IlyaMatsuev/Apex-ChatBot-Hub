@@ -42,16 +42,9 @@ global abstract class BotEnumType {
      * @return `true` if the passed object equals to the current instance by a reference or a String value
      */
     global virtual Boolean equals(Object other) {
-        if (this === other) {
-            return true;
-        }
-        if (other instanceof BotEnumType) {
-            return this.value == ((BotEnumType) other).value;
-        }
-        if (other instanceof String) {
-            return this.value == (String) other;
-        }
-        return this.value == other || this.value == String.valueOf(other);
+        return this === other ||
+            this.value == other?.toString() ||
+            (other instanceof BotEnumType && this.value == ((BotEnumType) other)?.value);
     }
 
     /**

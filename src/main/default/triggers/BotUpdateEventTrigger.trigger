@@ -1,3 +1,3 @@
 trigger BotUpdateEventTrigger on BotUpdateEvent__e(after insert) {
-    Triggers.dispatcher.bindAsync(TriggerOperation.AFTER_INSERT, new BotUpdateHandler()).run(new BotErrorLogger());
+    Triggers.dispatcher.bind(TriggerOperation.AFTER_INSERT, new BotUpdateEventHandler()).run(new BotErrorLogger());
 }

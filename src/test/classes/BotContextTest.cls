@@ -6,39 +6,8 @@ private class BotContextTest {
     }
 
     @IsTest
-    private static void getService_forDifferentBot_shouldCreateNewService() {
-        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
-
-        Test.startTest();
-        Bot__c differentBot = new Bot__c(
-            Name = 'Test',
-            Type__c = BotType.Viber.name(),
-            Token__c = '74712731t723gjhbbfkwnkqwguqg17g23323423werw',
-            Handler__c = 'BotHandlerMock'
-        );
-        insert differentBot;
-        IBotService newService = context.getService(new BotModel(differentBot));
-        Test.stopTest();
-
-        Assert.isTrue(newService != context.service);
-        Assert.isTrue(newService instanceof BotServiceMock);
-    }
-
-    @IsTest
-    private static void getService_sameBot_shouldCreateNewService() {
-        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
-
-        Test.startTest();
-        IBotService newService = context.getService(context.bot);
-        Test.stopTest();
-
-        Assert.isTrue(newService == context.service);
-        Assert.isTrue(newService instanceof BotServiceMock);
-    }
-
-    @IsTest
     private static void save_noExternalId_shouldPublishUpsertEvent() {
-        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+        IBotContext context = createBotContext(BotType.Telegram);
 
         Test.startTest();
         context.save(new ChatUser__c(Name = 'Test', Username__c = 'test.name', ExternalId__c = '1234'));
@@ -47,50 +16,34 @@ private class BotContextTest {
         Assert.areEqual(1, [SELECT Id FROM ChatUser__c].size());
     }
 
-    @IsTest
-    private static void reply_houldReturnSender() {
-        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
-        Assert.isInstanceOfType(context.reply, BotServiceMock.SenderService.class);
-    }
-
     /**
      * Telegram tests
      */
 
     @IsTest
-    private static void received_telegramUpdateModelWithMessage_containsAllFields() {
-        BotContext context = createBotContext(BotType.Telegram, createTelegramPayload());
+    private static void getService_telegramForDifferentBot_shouldCreateNewService() {
+        IBotContext context = createBotContext(BotType.Telegram);
 
-        ValueMap expectedPayload = new ValueMap()
-            .set(
-                'chat',
-                new ValueMap()
-                    .set('id', '876541222')
-                    .set('isDM', true)
-                    .set(
-                        'sender',
-                        new ValueMap()
-                            .set('firstName', null)
-                            .set('id', '876541222')
-                            .set('lastName', 'matsuev')
-                            .set('username', 'ilyamatsuev')
-                    )
-                    .set('title', 'matsuev')
-            )
-            .set('eventType', new ValueMap().set('value', 'message'))
-            .set(
-                'message',
-                new ValueMap()
-                    .set(
-                        'command',
-                        new ValueMap().set('name', 'start').set('params', new List<String> { 'hello', 'world!' })
-                    )
-                    .set('id', '223123123')
-                    .set('sentAt', DateTime.newInstanceGmt(2022, 1, 1, 8, 0, 0))
-                    .set('text', '/start hello   world!')
-            );
+        Test.startTest();
+        Bot__c differentBot = new Bot__c(
+            Name = 'Test',
+            Type__c = BotType.Viber.name(),
+            WebhookEvents__c = 'message',
+            Token__c = '74712731t723gjhbbfkwnkqwguqg17g23323423werw',
+            Handler__c = 'BotHandlerMock'
+        );
+        insert differentBot;
+        IBotService newService = context.getService(new BotModel(differentBot));
+        Test.stopTest();
 
-        Assert.areEqual(expectedPayload.toJson(), JSON.serialize(context.received));
+        Assert.isInstanceOfType(context.getService(), TelegramBotService.class);
+        Assert.isInstanceOfType(newService, ViberBotService.class);
+    }
+
+    @IsTest
+    private static void reply_telegramContext_shouldReturnSender() {
+        IBotContext context = createBotContext(BotType.Telegram);
+        Assert.isInstanceOfType(context.reply(), TelegramBotSenderService.class);
     }
 
     /**
@@ -98,71 +51,59 @@ private class BotContextTest {
      */
 
     @IsTest
-    private static void received_viberUpdateModelWithMessage_containsAllFields() {
-        BotContext context = createBotContext(BotType.Viber, createViberPayload());
-
-        ValueMap expectedPayload = new ValueMap()
-            .set(
-                'chat',
-                new ValueMap()
-                    .set('id', '01234567890A=')
-                    .set('isDM', true)
-                    .set(
-                        'sender',
-                        new ValueMap()
-                            .set('firstName', 'John')
-                            .set('id', '01234567890A=')
-                            .set('lastName', 'McClane')
-                            .set('username', '01234567890A=')
-                    )
-                    .set('title', 'John McClane')
-            )
-            .set('eventType', new ValueMap().set('value', 'message'))
-            .set(
-                'message',
-                new ValueMap()
-                    .set(
-                        'command',
-                        new ValueMap().set('name', 'start').set('params', new List<String> { 'hello', 'world!' })
-                    )
-                    .set('id', '4912661846655238145')
-                    .set('sentAt', DateTime.newInstance(2022, 1, 1))
-                    .set('text', '/start hello   world!')
-            );
-
-        Assert.areEqual(expectedPayload.toJson(), JSON.serialize(context.received));
+    private static void getService_viberContext_shouldReturnViberService() {
+        IBotContext context = createBotContext(BotType.Viber);
+        Assert.isInstanceOfType(context.getService(), ViberBotService.class);
     }
 
-    private static BotContext createBotContext(BotType botType, ValueMap payload) {
+    @IsTest
+    private static void reply_viberContext_shouldReturnSender() {
+        IBotContext context = createBotContext(BotType.Viber);
+        Assert.isInstanceOfType(context.reply(), ViberBotSenderService.class);
+    }
+
+    private static IBotContext createBotContext(BotType type) {
+        setCalloutMock(type);
         insert new Bot__c(
-            Name = botType.name(),
-            Type__c = botType.name(),
+            Name = type.name(),
+            Type__c = type.name(),
+            WebhookEvents__c = 'message',
             Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
             Handler__c = 'BotHandlerMock'
         );
         Bot__c bot = [
-            SELECT Name, Type__c, Handler__c, TokenHash__c
+            SELECT Name, Type__c, WebhookEvents__c, Handler__c, TokenHash__c
             FROM Bot__c
-            WHERE Type__c = :botType.name()
+            WHERE Type__c = :type.name()
             LIMIT 1
         ];
-        IBotUpdateEventEntity updateEventEntity = (IBotUpdateEventEntity) ValueMap.fromJson(
-            payload.toJson(),
-            Type.forName(BotSettingsProvider.get(botType).BotUpdateEventEntity__c)
-        );
-        return new BotContext(new BotModel(bot), new BotUpdateModel(updateEventEntity), new BotServiceFactoryMock());
+        BotJsonPayload payload = type == BotType.Telegram ? createTelegramPayload() : createViberPayload();
+        return new BotServiceFactoryMock().createBotContext(new BotModel(bot), payload.toJson());
     }
 
-    private static ValueMap createTelegramPayload() {
-        return new ValueMap()
+    private static BotCalloutMock setCalloutMock(BotType type) {
+        BotCalloutMock mock;
+        if (type == BotType.Telegram) {
+            mock = new TelegramBotCalloutMock();
+        } else if (type == BotType.Viber) {
+            mock = new ViberBotCalloutMock();
+        } else {
+            throw new AssertException('The provided bot callout mock is not supported: ' + type);
+        }
+        Test.setMock(HttpCalloutMock.class, mock);
+        return mock;
+    }
+
+    private static BotJsonPayload createTelegramPayload() {
+        return new BotJsonPayload()
             .set('update_id', 12312311L)
             .set(
                 'message',
-                new ValueMap()
+                new BotJsonPayload()
                     .set('message_id', 223123123L)
                     .set(
                         'from',
-                        new ValueMap()
+                        new BotJsonPayload()
                             .set('id', 876541222L)
                             .set('first_name', null)
                             .set('last_name', 'matsuev')
@@ -171,7 +112,7 @@ private class BotContextTest {
                     .set('date', 1641024000)
                     .set(
                         'chat',
-                        new ValueMap()
+                        new BotJsonPayload()
                             .set('id', 876541222L)
                             .set('type', 'private')
                             .set('title', null)
@@ -184,14 +125,14 @@ private class BotContextTest {
             );
     }
 
-    private static ValueMap createViberPayload() {
-        return new ValueMap()
+    private static BotJsonPayload createViberPayload() {
+        return new BotJsonPayload()
             .set('event', 'message')
             .set('timestamp', DateTime.newInstance(2022, 1, 1).getTime())
             .set('message_token', 4912661846655238145L)
             .set(
                 'sender',
-                new ValueMap()
+                new BotJsonPayload()
                     .set('id', '01234567890A=')
                     .set('name', 'John McClane')
                     .set('avatar', 'http://avatar.example.com')
@@ -201,11 +142,11 @@ private class BotContextTest {
             )
             .set(
                 'message',
-                new ValueMap()
+                new BotJsonPayload()
                     .set('type', 'text')
                     .set('text', '/start hello   world!')
                     .set('media', 'https://example.com')
-                    .set('location', new ValueMap().set('lat', 50.76891).set('lon', 6.11499))
+                    .set('location', new BotJsonPayload().set('lat', 50.76891).set('lon', 6.11499))
             );
     }
 
@@ -216,6 +157,14 @@ private class BotContextTest {
 
         public override BotWebhookService createWebhookService(BotModel bot) {
             return null;
+        }
+
+        public override IBotContext createBotContext(BotModel bot, String updatePayload) {
+            return super.createBotContext(bot, updatePayload);
+        }
+
+        public override IBotUpdateEvent createBotUpdateEvent(BotModel bot, String updatePayload) {
+            return super.createBotUpdateEvent(bot, updatePayload);
         }
     }
 }

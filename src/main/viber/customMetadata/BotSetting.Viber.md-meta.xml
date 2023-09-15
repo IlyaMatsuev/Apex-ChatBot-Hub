@@ -11,12 +11,16 @@
         <value xsi:type="xsd:string">ViberBotCalloutService</value>
     </values>
     <values>
+        <field>BotHandlerContext__c</field>
+        <value xsi:type="xsd:string">ViberBotContext</value>
+    </values>
+    <values>
         <field>BotService__c</field>
         <value xsi:type="xsd:string">ViberBotService</value>
     </values>
     <values>
-        <field>BotUpdateEventEntity__c</field>
-        <value xsi:type="xsd:string">ViberBotUpdateEventEntity</value>
+        <field>BotUpdateEvent__c</field>
+        <value xsi:type="xsd:string">ViberUpdateEvent</value>
     </values>
     <values>
         <field>BotUpdateResolver__c</field>
@@ -25,9 +29,5 @@
     <values>
         <field>BotWebhookService__c</field>
         <value xsi:type="xsd:string">ViberBotWebhookService</value>
-    </values>
-    <values>
-        <field>EventTypesToIgnore__c</field>
-        <value xsi:type="xsd:string">webhook;delivered;seen;failed;subscribed;unsubscribed;conversation_started</value>
     </values>
 </CustomMetadata>

@@ -1,6 +1,6 @@
 @IsTest
 public class TelegramBotCalloutMock extends BotCalloutMock {
-    protected override String handleRequest(ValueMap request, String method) {
+    protected override String handleRequest(BotJsonPayload request, String method) {
         switch on method {
             when 'setWebhook' {
                 return setWebhook(request);
@@ -60,7 +60,7 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
         throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
     }
 
-    private String setWebhook(ValueMap request) {
+    private String setWebhook(BotJsonPayload request) {
         String webhookUrl = request.getString('url');
         Assert.isTrue(webhookUrl.substringBeforeLast('/').endsWith('/Telegram'));
         Assert.isTrue(webhookUrl.substringAfterLast('/') instanceof Id);
@@ -69,64 +69,64 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
         return 'True';
     }
 
-    private String deleteWebhook(ValueMap request) {
+    private String deleteWebhook(BotJsonPayload request) {
         Assert.isTrue(request.getBoolean('drop_pending_updates'));
         return 'True';
     }
 
-    private String sendMessage(ValueMap request) {
+    private String sendMessage(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('text'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendPhoto(ValueMap request) {
+    private String sendPhoto(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('photo'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendVideo(ValueMap request) {
+    private String sendVideo(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('video'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendVideoNote(ValueMap request) {
+    private String sendVideoNote(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('video_note'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendAudio(ValueMap request) {
+    private String sendAudio(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('audio'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendVoice(ValueMap request) {
+    private String sendVoice(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('voice'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendDocument(ValueMap request) {
+    private String sendDocument(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('document'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendMediaGroup(ValueMap request) {
+    private String sendMediaGroup(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('media'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendContact(ValueMap request) {
+    private String sendContact(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('first_name'));
         Assert.isTrue(request.hasValue('phone_number'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendLocation(ValueMap request) {
+    private String sendLocation(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('latitude'));
         Assert.isTrue(request.hasValue('longitude'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendVenue(ValueMap request) {
+    private String sendVenue(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('latitude'));
         Assert.isTrue(request.hasValue('longitude'));
         Assert.isTrue(request.hasValue('title'));
@@ -134,36 +134,36 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendSticker(ValueMap request) {
+    private String sendSticker(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('sticker'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendAnimation(ValueMap request) {
+    private String sendAnimation(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('animation'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendPoll(ValueMap request) {
+    private String sendPoll(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('question'));
         Assert.isTrue(request.hasValue('options'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendDice(ValueMap request) {
+    private String sendDice(BotJsonPayload request) {
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String sendChatAction(ValueMap request) {
+    private String sendChatAction(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('action'));
         return getSuccessTelegramMessageResponse(request);
     }
 
-    private String getSuccessTelegramMessageResponse(ValueMap request) {
+    private String getSuccessTelegramMessageResponse(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('chat_id'));
-        return new ValueMap()
+        return new BotJsonPayload()
             .set('status', 'ok')
-            .set('result', new ValueMap().set('message_id', generateExternalId()).getValues())
+            .set('result', new BotJsonPayload().set('message_id', generateExternalId()).getValues())
             .toJson();
     }
 }

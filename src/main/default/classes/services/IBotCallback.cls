@@ -1,3 +1,3 @@
 public interface IBotCallback {
-    void execute(ValueMap params);
+    void execute(BotJsonPayload params);
 }

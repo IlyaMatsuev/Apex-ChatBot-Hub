@@ -5,6 +5,8 @@
     <testClassName>BotUpdateApiTest</testClassName>
     <testClassName>BotUpdateEventTriggerTest</testClassName>
     <testClassName>BotUpsertDataEventTriggerTest</testClassName>
+    <testClassName>TelegramBotHandlerTest</testClassName>
     <testClassName>TelegramBotServiceTest</testClassName>
+    <testClassName>ViberBotHandlerTest</testClassName>
     <testClassName>ViberBotServiceTest</testClassName>
 </ApexTestSuite>

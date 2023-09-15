@@ -23,15 +23,15 @@ global abstract class BotService implements IBotService {
             this.bot = bot;
         }
 
-        public void execute(ValueMap params) {
+        public void execute(BotJsonPayload params) {
             List<ChatMessage__c> messages = new List<ChatMessage__c>();
             for (String chatId : chatIds) {
-                ValueMap parameters = new ValueMap();
+                BotJsonPayload parameters = new BotJsonPayload();
                 if (params.has('parameters')) {
-                    parameters = params.getValueMap('parameters');
+                    parameters = params.getJsonPayload('parameters');
                 }
                 if (params.has('keyboard')) {
-                    parameters.set('keyboard', params.getValueMap('keyboard'));
+                    parameters.set('keyboard', params.getJsonPayload('keyboard'));
                 }
                 messages.add(
                     new ChatMessage__c(

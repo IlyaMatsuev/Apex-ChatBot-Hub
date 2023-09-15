@@ -4,20 +4,20 @@
     "version": "2.0.0",
     "description": "Salesforce Apex package for quick configuration and managing of the chat bots (e.g. Telegram, Viber)",
     "scripts": {
-        "prettier": "prettier --write",
-        "prettier:verify": "prettier --list-different",
+        "prettier": "prettier --plugin=@ilyamatsuev/prettier-plugin-apex --plugin=@prettier/plugin-xml --write",
+        "prettier:verify": "prettier --plugin=@ilyamatsuev/prettier-plugin-apex --plugin=@prettier/plugin-xml --list-different",
         "docs:types:refresh": "npm run docs:types:clean && npm run docs:types:generate && npm run prettier ./docs/types",
         "docs:types:clean": "shx rm -r ./docs/types",
         "docs:types:generate": "apexdocs-generate -s ./src/main -t ./docs/types --documentationRootDir '/types' -p global -g docsify --defaultGroupName Classes --title 'Type Definitions'"
     },
     "devDependencies": {
         "@cparra/apexdocs": "^2.15.0",
-        "@ilyamatsuev/prettier-plugin-apex": "^2.2.0",
-        "@prettier/plugin-xml": "^0.12.0",
+        "@ilyamatsuev/prettier-plugin-apex": "^3.0.0",
+        "@prettier/plugin-xml": "^3.2.0",
         "docsify-cli": "^4.4.4",
         "husky": "^4.2.1",
         "lint-staged": "^10.0.7",
-        "prettier": "^2.8.1",
+        "prettier": "^3.0.3",
         "shx": "^0.3.4"
     },
     "husky": {
@@ -27,7 +27,7 @@
     },
     "lint-staged": {
         "**/*.{cls,html,js,css,json,md,trigger,xml,yaml,yml}": [
-            "prettier --write"
+            "prettier --plugin=@ilyamatsuev/prettier-plugin-apex --plugin=@prettier/plugin-xml --write"
         ]
     }
 }

@@ -135,7 +135,7 @@
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <recordTypeVisibilities>
-        <recordType>Bot__c.BaseMessanger</recordType>
+        <recordType>Bot__c.BaseMessenger</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <tabSettings>

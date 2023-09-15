@@ -17,10 +17,14 @@ private class BotTriggerTest {
         Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
 
         Test.startTest();
-        insert new Bot__c(Type__c = BotType.Telegram.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
+        insert createBot(BotType.Telegram, BOT_HANDLER);
         Test.stopTest();
 
-        List<Bot__c> newBots = [SELECT Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
+        List<Bot__c> newBots = [
+            SELECT Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
+            FROM Bot__c
+            LIMIT 1
+        ];
         Assert.areEqual(1, newBots.size());
         Assert.isTrue(String.isNotBlank(newBots.get(0).TokenHash__c));
     }
@@ -32,11 +36,7 @@ private class BotTriggerTest {
         Exception error;
         Test.startTest();
         try {
-            insert new Bot__c(
-                Type__c = BotType.Telegram.name(),
-                Token__c = BOT_TOKEN,
-                Handler__c = 'BotTriggerTest.FakeBotHandler'
-            );
+            insert createBot(BotType.Telegram, 'BotTriggerTest.FakeBotHandler');
         } catch (Exception ex) {
             error = ex;
         }
@@ -55,7 +55,7 @@ private class BotTriggerTest {
         Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
 
         Test.startTest();
-        Bot__c bot = new Bot__c(Type__c = BotType.Telegram.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
+        Bot__c bot = createBot(BotType.Telegram, BOT_HANDLER);
         insert bot;
 
         delete bot;
@@ -71,10 +71,14 @@ private class BotTriggerTest {
         Test.setMock(HttpCalloutMock.class, new ViberBotCalloutMock());
 
         Test.startTest();
-        insert new Bot__c(Type__c = BotType.Viber.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
+        insert createBot(BotType.Viber, BOT_HANDLER);
         Test.stopTest();
 
-        List<Bot__c> newBots = [SELECT Type__c, Handler__c, Token__c, TokenHash__c FROM Bot__c LIMIT 1];
+        List<Bot__c> newBots = [
+            SELECT Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
+            FROM Bot__c
+            LIMIT 1
+        ];
         Assert.areEqual(1, newBots.size());
         Assert.isTrue(String.isNotBlank(newBots.get(0).TokenHash__c));
     }
@@ -86,11 +90,7 @@ private class BotTriggerTest {
         Exception error;
         Test.startTest();
         try {
-            insert new Bot__c(
-                Type__c = BotType.Viber.name(),
-                Token__c = BOT_TOKEN,
-                Handler__c = 'BotTriggerTest.FakeBotHandler'
-            );
+            insert createBot(BotType.Viber, 'BotTriggerTest.FakeBotHandler');
         } catch (Exception ex) {
             error = ex;
         }
@@ -109,10 +109,19 @@ private class BotTriggerTest {
         Test.setMock(HttpCalloutMock.class, new ViberBotCalloutMock());
 
         Test.startTest();
-        Bot__c bot = new Bot__c(Type__c = BotType.Viber.name(), Token__c = BOT_TOKEN, Handler__c = BOT_HANDLER);
+        Bot__c bot = createBot(BotType.Viber, BOT_HANDLER);
         insert bot;
 
         delete bot;
         Test.stopTest();
+    }
+
+    private static Bot__c createBot(BotType type, String handlerName) {
+        return new Bot__c(
+            Type__c = type.name(),
+            WebhookEvents__c = 'message',
+            Token__c = BOT_TOKEN,
+            Handler__c = handlerName
+        );
     }
 }

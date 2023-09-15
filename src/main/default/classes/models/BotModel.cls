@@ -19,6 +19,8 @@ global class BotModel {
      */
     global transient BotType type { get { return BotType.valueOf(entity.Type__c); } }
 
+    public transient List<String> webhookEvents { get { return entity.WebhookEvents__c?.split(';'); } }
+
     public transient String token { get { return entity.Token__c; } }
 
     public transient String tokenHash { get { return entity.TokenHash__c; } }
@@ -39,15 +41,6 @@ global class BotModel {
      */
     global String toJson() {
         return JSON.serialize(this);
-    }
-
-    /**
-     * @description Checks if the passed object equals to the current instance
-     * @param other Any object this instance is compared with
-     * @return `true` if the passed object equals to the current instance by a reference or Id value
-     */
-    global Boolean equals(Object other) {
-        return other instanceof BotModel && (this === other || this.id == ((BotModel) other).id);
     }
 
     /**
