@@ -3,7 +3,6 @@ private class BotUpsertDataEventTriggerTest {
     @TestSetup
     private static void init() {
         Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
-        BotSettingsProvider.mock();
         insert new Bot__c(
             Type__c = BotType.Telegram.name(),
             WebhookEvents__c = 'message',

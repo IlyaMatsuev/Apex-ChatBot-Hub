@@ -1,10 +1,5 @@
 @IsTest(isParallel = true)
 private class BotContextTest {
-    @TestSetup
-    private static void init() {
-        BotSettingsProvider.mock();
-    }
-
     @IsTest
     private static void save_noExternalId_shouldPublishUpsertEvent() {
         IBotContext context = createBotContext(BotType.Telegram);
@@ -46,6 +41,24 @@ private class BotContextTest {
         Assert.isInstanceOfType(context.reply(), TelegramBotSenderService.class);
     }
 
+    @IsTest
+    private static void reply_telegramContextWithoutChat_shouldThrowException() {
+        BotJsonPayload payload = createTelegramPayload();
+        Map<String, Object> messagePayload = payload.getJsonPayload('message').getValues();
+        messagePayload.remove('chat');
+        messagePayload.remove('from');
+
+        IBotContext context = createBotContext(BotType.Telegram, payload);
+
+        try {
+            context.reply();
+            Assert.fail('The exception was not thrown');
+        } catch (Exception error) {
+            System.debug(error.getMessage() + '\n' + error.getStackTraceString());
+            Assert.isInstanceOfType(error, BotContext.NoReplyOptionException.class);
+        }
+    }
+
     /**
      * Viber tests
      */
@@ -62,7 +75,28 @@ private class BotContextTest {
         Assert.isInstanceOfType(context.reply(), ViberBotSenderService.class);
     }
 
+    @IsTest
+    private static void reply_viberContextWithoutChat_shouldThrowException() {
+        BotJsonPayload payload = createViberPayload();
+        payload.getValues().remove('sender');
+
+        IBotContext context = createBotContext(BotType.Viber, payload);
+
+        try {
+            context.reply();
+            Assert.fail('The exception was not thrown');
+        } catch (Exception error) {
+            System.debug(error.getMessage() + '\n' + error.getStackTraceString());
+            Assert.isInstanceOfType(error, BotContext.NoReplyOptionException.class);
+        }
+    }
+
     private static IBotContext createBotContext(BotType type) {
+        BotJsonPayload payload = type == BotType.Telegram ? createTelegramPayload() : createViberPayload();
+        return createBotContext(type, payload);
+    }
+
+    private static IBotContext createBotContext(BotType type, BotJsonPayload payload) {
         setCalloutMock(type);
         insert new Bot__c(
             Name = type.name(),
@@ -77,7 +111,6 @@ private class BotContextTest {
             WHERE Type__c = :type.name()
             LIMIT 1
         ];
-        BotJsonPayload payload = type == BotType.Telegram ? createTelegramPayload() : createViberPayload();
         return new BotServiceFactoryMock().createBotContext(new BotModel(bot), payload.toJson());
     }
 

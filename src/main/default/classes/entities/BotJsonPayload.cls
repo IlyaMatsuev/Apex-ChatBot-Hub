@@ -16,11 +16,11 @@ global virtual class BotJsonPayload {
      * @param payload Another instance of <<BotJsonPayload>> to copy values from
      */
     global BotJsonPayload(BotJsonPayload payload) {
-        this(payload.getValues());
+        this(payload?.getValues());
     }
 
     public BotJsonPayload(BotPayload payload) {
-        this(payload.getJsonPayload().getValues());
+        this(payload?.getJsonPayload()?.getValues());
     }
 
     /**
@@ -29,7 +29,9 @@ global virtual class BotJsonPayload {
      */
     global BotJsonPayload(Map<String, Object> values) {
         this.values = new Map<String, Object>();
-        this.values.putAll(values);
+        if (values != null) {
+            this.values.putAll(values);
+        }
     }
 
     /**

@@ -2,11 +2,6 @@
 private class TelegramBotServiceTest {
     private static final BotType BOT_TYPE = BotType.Telegram;
 
-    @TestSetup
-    private static void init() {
-        BotSettingsProvider.mock();
-    }
-
     @IsTest
     private static void send_text_shouldSendAndCreateMessageRecord() {
         setCalloutMock();

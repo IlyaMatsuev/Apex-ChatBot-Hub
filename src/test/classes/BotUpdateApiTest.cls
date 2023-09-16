@@ -1,10 +1,5 @@
 @IsTest(isParallel = true)
 private class BotUpdateApiTest {
-    @TestSetup
-    private static void init() {
-        BotSettingsProvider.mock();
-    }
-
     /**
      * Telegram tests
      */

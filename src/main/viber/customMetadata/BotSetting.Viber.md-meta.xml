@@ -30,4 +30,8 @@
         <field>BotWebhookService__c</field>
         <value xsi:type="xsd:string">ViberBotWebhookService</value>
     </values>
+    <values>
+        <field>BaseBotHandler__c</field>
+        <value xsi:type="xsd:string">ViberBotHandler</value>
+    </values>
 </CustomMetadata>
