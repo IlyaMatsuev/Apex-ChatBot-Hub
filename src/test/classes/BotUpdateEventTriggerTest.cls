@@ -289,12 +289,12 @@ private class BotUpdateEventTriggerTest {
             Name = type.name(),
             Type__c = type.name(),
             WebhookEvents__c = 'message',
-            Token__c = '74712731t723gjhbbfkwnkqwguqg17g2717283',
+            Token__c = '74712731t72317g2717283',
             Handler__c = 'BotHandlerMock'
         );
         return new BotModel(
             [
-                SELECT Name, Type__c, WebhookEvents__c, Handler__c, TokenHash__c
+                SELECT Name, Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
                 FROM Bot__c
                 WHERE Type__c = :type.name()
                 LIMIT 1

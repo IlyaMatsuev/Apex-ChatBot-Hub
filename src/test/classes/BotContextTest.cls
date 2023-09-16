@@ -11,6 +11,19 @@ private class BotContextTest {
         Assert.areEqual(1, [SELECT Id FROM ChatUser__c].size());
     }
 
+    @IsTest
+    private static void createBotContext_missingRequiredFields_shouldThrowException() {
+        createBotContext(BotType.Telegram);
+        BotModel bot = new BotModel([SELECT Id, Name, Type__c FROM Bot__c LIMIT 1]);
+
+        try {
+            new BotServiceFactoryMock().createBotContext(bot, createTelegramPayload().toJson());
+            Assert.fail('The exception was not thrown');
+        } catch (Exception ex) {
+            Assert.isInstanceOfType(ex, BotServiceFactory.BotMissingRequiredFieldsException.class);
+        }
+    }
+
     /**
      * Telegram tests
      */
@@ -24,7 +37,8 @@ private class BotContextTest {
             Name = 'Test',
             Type__c = BotType.Viber.name(),
             WebhookEvents__c = 'message',
-            Token__c = '74712731t723gjhbbfkwnkqwguqg17g23323423werw',
+            Token__c = '74712731t72317g23323423',
+            TokenHash__c = '74712731t72317g23323423',
             Handler__c = 'BotHandlerMock'
         );
         insert differentBot;
@@ -54,7 +68,6 @@ private class BotContextTest {
             context.reply();
             Assert.fail('The exception was not thrown');
         } catch (Exception error) {
-            System.debug(error.getMessage() + '\n' + error.getStackTraceString());
             Assert.isInstanceOfType(error, BotContext.NoReplyOptionException.class);
         }
     }
@@ -86,7 +99,6 @@ private class BotContextTest {
             context.reply();
             Assert.fail('The exception was not thrown');
         } catch (Exception error) {
-            System.debug(error.getMessage() + '\n' + error.getStackTraceString());
             Assert.isInstanceOfType(error, BotContext.NoReplyOptionException.class);
         }
     }
@@ -106,7 +118,7 @@ private class BotContextTest {
             Handler__c = 'BotHandlerMock'
         );
         Bot__c bot = [
-            SELECT Name, Type__c, WebhookEvents__c, Handler__c, TokenHash__c
+            SELECT Name, Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
             FROM Bot__c
             WHERE Type__c = :type.name()
             LIMIT 1
