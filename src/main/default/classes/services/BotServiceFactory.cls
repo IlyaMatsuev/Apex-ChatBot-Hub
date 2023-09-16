@@ -7,6 +7,7 @@ global virtual class BotServiceFactory {
      * @param bot The <<BotModel>> instance to create service for
      * @return The instance of <<IBotService>>
      */
+    // TODO: Always require all bot fields to be selected
     global virtual IBotService createBotService(BotModel bot) {
         return (IBotService) BotUtils.createInstance(
             BotSettingsProvider.get(bot.type).BotService__c,
