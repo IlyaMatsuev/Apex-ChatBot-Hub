@@ -51,4 +51,8 @@ global class BotModel {
     global static BotModel fromJson(String jsonStr) {
         return (BotModel) JSON.deserialize(jsonStr, BotModel.class);
     }
+
+    public Bot__c getSObject() {
+        return entity;
+    }
 }
