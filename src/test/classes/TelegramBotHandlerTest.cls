@@ -2,11 +2,6 @@
 private class TelegramBotHandlerTest {
     private static final BotType BOT_TYPE = BotType.Telegram;
 
-    @TestSetup
-    private static void init() {
-        BotSettingsProvider.mock();
-    }
-
     @IsTest
     private static void onMessageReceived_shouldPopulateMessageEventFields() {
         BotPayload event = runTest(TelegramUpdateEventType.Message);

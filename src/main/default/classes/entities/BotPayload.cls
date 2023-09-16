@@ -17,7 +17,7 @@ public abstract class BotPayload {
     }
 
     protected BotPayload(BotJsonPayload payload) {
-        this.payload = payload;
+        this.payload = new BotJsonPayload(payload);
     }
 
     public BotJsonPayload getJsonPayload() {

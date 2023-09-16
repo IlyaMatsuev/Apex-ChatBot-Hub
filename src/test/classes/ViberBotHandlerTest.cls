@@ -2,11 +2,6 @@
 private class ViberBotHandlerTest {
     private static final BotType BOT_TYPE = BotType.Viber;
 
-    @TestSetup
-    private static void init() {
-        BotSettingsProvider.mock();
-    }
-
     @IsTest
     private static void onMessageReceived_shouldPopulateMessageReceivedEventFields() {
         BotPayload event = runTest(ViberUpdateEventType.Message);

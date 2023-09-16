@@ -3,11 +3,6 @@ private class BotTriggerTest {
     private static final String BOT_TOKEN = '74712731t723gjhbbfkwnkqwguqg17g2717283';
     private static final String BOT_HANDLER = 'BotHandlerMock';
 
-    @TestSetup
-    private static void init() {
-        BotSettingsProvider.mock();
-    }
-
     /**
      * Telegram tests
      */
@@ -46,6 +41,25 @@ private class BotTriggerTest {
         Assert.isTrue(
             error.getMessage().contains('Bot handler does not exist or does not implement the IBotHandler interface')
         );
+        List<BotError__c> errors = [SELECT Id FROM BotError__c];
+        Assert.areEqual(0, errors.size());
+    }
+
+    @IsTest
+    private static void insert_telegramWithBaseHandlerForDifferentType_shouldThrowException() {
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
+
+        Exception error;
+        Test.startTest();
+        try {
+            insert createBot(BotType.Telegram, 'ViberBotHandlerMock');
+        } catch (Exception ex) {
+            error = ex;
+        }
+        Test.stopTest();
+
+        Assert.isTrue(error != null);
+        Assert.isTrue(error.getMessage().contains('Bot handler that extends ViberBotHandler must be of type Viber'));
         List<BotError__c> errors = [SELECT Id FROM BotError__c];
         Assert.areEqual(0, errors.size());
     }

@@ -19,6 +19,7 @@ global class TelegramInlineKeyboardMarkupOptions extends BotPayload {
                         }
                     }
                 }
+                payload.set('inline_keyboard', buttons);
             }
             return buttons;
         }

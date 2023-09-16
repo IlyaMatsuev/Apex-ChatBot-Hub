@@ -69,4 +69,13 @@ global abstract class BotContext implements IBotContext {
     global void save(List<SObject> records, String externalIdField) {
         BotUtils.saveAsync(records, externalIdField);
     }
+
+    /**
+     * @description Exception that is thrown when there is no possibility to reply to the user. For example, when the update was received from a non-chat event
+     */
+    global class NoReplyOptionException extends BotCustomException {
+        public NoReplyOptionException(String message, BotJsonPayload payload) {
+            super(message, payload);
+        }
+    }
 }
