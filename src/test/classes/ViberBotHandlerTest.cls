@@ -156,7 +156,7 @@ private class ViberBotHandlerTest {
         Assert.isNull(message.duration);
         Assert.isNull(message.stickerId);
 
-        ViberMessage.Location location = message.location;
+        ViberLocation location = message.location;
         Assert.areEqual(50.76891, location.latitude);
         Assert.areEqual(6.11499, location.longitude);
 

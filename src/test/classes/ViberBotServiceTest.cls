@@ -392,6 +392,67 @@ private class ViberBotServiceTest {
         fixture.assertMessageIsCreated(chatIds.get(2), BotMessageType.Text, 'Hello world!', null, new BotJsonPayload());
     }
 
+    @IsTest
+    private static void getAccount_shouldSendAndReturnAccount() {
+        setCalloutMock();
+        BotModel bot = createBot();
+        ViberBotService service = createService(bot);
+
+        Test.startTest();
+        ViberAccount account = service.getAccount();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<BotError__c> errors = [SELECT Id FROM BotError__c];
+        Assert.isTrue(errors.isEmpty());
+        Assert.areEqual('some_account_id', account.id);
+        Assert.areEqual('John Wick', account.name);
+        Assert.areEqual('apex-botlib-test', account.uri);
+        Assert.isNull(account.background);
+        Assert.isNull(account.category);
+        Assert.isNull(account.subcategory);
+        Assert.isNull(account.country);
+        Assert.isNull(account.webhook);
+        Assert.isNull(account.eventTypes);
+        Assert.isNull(account.subscribersCount);
+        Assert.isNotNull(account.location);
+    }
+
+    @IsTest
+    private static void getUser_shouldSendAndReturnUser() {
+        setCalloutMock();
+        BotModel bot = createBot();
+        ViberBotService service = createService(bot);
+
+        Test.startTest();
+        ViberUser user = service.getUser('some_id');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<BotError__c> errors = [SELECT Id FROM BotError__c];
+        Assert.isTrue(errors.isEmpty());
+        Assert.areEqual('some_id', user.id);
+        Assert.areEqual('John Wick', user.name);
+    }
+
+    @IsTest
+    private static void getOnline_oneUser_shouldSendAndReturnOnline() {
+        setCalloutMock();
+        BotModel bot = createBot();
+        ViberBotService service = createService(bot);
+
+        Test.startTest();
+        ViberOnlineStatus onlineStatus = service.getOnline('some_id');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<BotError__c> errors = [SELECT Id FROM BotError__c];
+        Assert.isTrue(errors.isEmpty());
+        Assert.areEqual('some_id', onlineStatus.id);
+        Assert.areEqual(2, onlineStatus.onlineStatus);
+        Assert.areEqual('undisclosed', onlineStatus.onlineStatusMessage);
+    }
+
     private class SenderFixture {
         public BotModel bot;
         public Chat__c chat;

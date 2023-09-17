@@ -12,6 +12,15 @@ public class ViberBotCalloutMock extends BotCalloutMock {
             when 'broadcast_message' {
                 return broadcastMessage(request);
             }
+            when 'get_account_info' {
+                return getAccountInfo();
+            }
+            when 'get_user_details' {
+                return getUserDetails(request);
+            }
+            when 'get_online' {
+                return getOnline(request);
+            }
         }
         throw new IllegalArgumentException('The provided viber bot method is not correct: ' + method);
     }
@@ -92,6 +101,43 @@ public class ViberBotCalloutMock extends BotCalloutMock {
             .set('status_message', 'ok')
             .set('message_token', generateExternalId())
             .set('failed_list', new List<Object>())
+            .toJson();
+    }
+
+    private String getAccountInfo() {
+        return new BotJsonPayload()
+            .set('status', 0)
+            .set('status_message', 'ok')
+            .set('id', 'some_account_id')
+            .set('name', 'John Wick')
+            .set('uri', 'apex-botlib-test')
+            .set('eventTypes', new List<Object> { 'message' })
+            .toJson();
+    }
+
+    private String getUserDetails(BotJsonPayload request) {
+        Assert.isTrue(request.hasValue('id'));
+        return new BotJsonPayload()
+            .set('status', 0)
+            .set('status_message', 'ok')
+            .set('user', new BotJsonPayload().set('id', 'some_id').set('name', 'John Wick'))
+            .toJson();
+    }
+
+    private String getOnline(BotJsonPayload request) {
+        Assert.isTrue(request.hasValue('ids'));
+        return new BotJsonPayload()
+            .set('status', 0)
+            .set('status_message', 'ok')
+            .set(
+                'users',
+                new List<Object> {
+                    new BotJsonPayload()
+                        .set('id', 'some_id')
+                        .set('online_status', 2)
+                        .set('online_status_message', 'undisclosed')
+                }
+            )
             .toJson();
     }
 
