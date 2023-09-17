@@ -488,9 +488,9 @@ private class TelegramBotHandlerTest {
         Assert.isNotNull(chatMember.chat);
         Assert.isNotNull(chatMember.sender);
 
-        TelegramChatMemberUpdatedEvent.Member oldMember = chatMember.oldChatMember;
-        Assert.isInstanceOfType(oldMember, TelegramChatMemberUpdatedEvent.AdministratorMember.class);
-        TelegramChatMemberUpdatedEvent.AdministratorMember oldMemberAdmin = (TelegramChatMemberUpdatedEvent.AdministratorMember) oldMember;
+        TelegramChatMember oldMember = chatMember.oldChatMember;
+        Assert.isInstanceOfType(oldMember, TelegramChatMemberAdmin.class);
+        TelegramChatMemberAdmin oldMemberAdmin = (TelegramChatMemberAdmin) oldMember;
         Assert.areEqual('administrator', oldMemberAdmin.status);
         Assert.areEqual('Cool guy', oldMemberAdmin.customTitle);
         Assert.isFalse(oldMemberAdmin.isAnonymous);
@@ -508,9 +508,9 @@ private class TelegramBotHandlerTest {
         Assert.isNull(oldMemberAdmin.canPinMessages);
         Assert.isNull(oldMemberAdmin.canManageTopics);
 
-        TelegramChatMemberUpdatedEvent.Member newMember = chatMember.newChatMember;
-        Assert.isInstanceOfType(newMember, TelegramChatMemberUpdatedEvent.RestrictedMember.class);
-        TelegramChatMemberUpdatedEvent.RestrictedMember newMemberRestricted = (TelegramChatMemberUpdatedEvent.RestrictedMember) newMember;
+        TelegramChatMember newMember = chatMember.newChatMember;
+        Assert.isInstanceOfType(newMember, TelegramChatMemberRestricted.class);
+        TelegramChatMemberRestricted newMemberRestricted = (TelegramChatMemberRestricted) newMember;
         Assert.areEqual('restricted', newMemberRestricted.status);
         Assert.isNotNull(newMemberRestricted.user);
         Assert.isNull(newMemberRestricted.isMember);
