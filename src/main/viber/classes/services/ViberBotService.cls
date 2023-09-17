@@ -27,4 +27,48 @@ global class ViberBotService extends BotService {
             new BotService.SaveSentMessageCallback(chatIds, bot)
         );
     }
+
+    /**
+     * @description Gets the details about the bot account
+     * @return The instance of the <<ViberAccount>> class
+     */
+    global ViberAccount getAccount() {
+        BotJsonPayload response = calloutService.call(ViberBotMethod.GetAccountInfo, new BotJsonPayload());
+        return new ViberAccount(response);
+    }
+
+    /**
+     * @description Gets the details about the a `Viber` user account
+     * @param userId The unique `Viber` user id
+     * @return The instance of the <<ViberUser>> class
+     */
+    global ViberUser getUser(String userId) {
+        BotJsonPayload request = new BotJsonPayload().set('id', userId);
+        BotJsonPayload response = calloutService.call(ViberBotMethod.GetUserDetails, request);
+        return new ViberUser(response.getJsonPayload('user'));
+    }
+
+    /**
+     * @description Gets the online status of the provided user account
+     * @param userId The unique `Viber` user id
+     * @return The instance of the <<ViberUser>> class
+     */
+    global ViberOnlineStatus getOnline(String userId) {
+        return getOnline(new List<String> { userId }).get(0);
+    }
+
+    /**
+     * @description Gets the online status of the provided user accounts
+     * @param userIds The unique `Viber` user ids
+     * @return The list of the <<ViberUser>> class
+     */
+    global List<ViberOnlineStatus> getOnline(List<String> userIds) {
+        List<ViberOnlineStatus> statuses = new List<ViberOnlineStatus>();
+        BotJsonPayload request = new BotJsonPayload().set('ids', new Set<String>(userIds));
+        BotJsonPayload response = calloutService.call(ViberBotMethod.GetOnline, request);
+        for (BotJsonPayload statusPayload : response.getJsonPayloadList('users')) {
+            statuses.add(new ViberOnlineStatus(statusPayload));
+        }
+        return statuses;
+    }
 }

@@ -20,7 +20,7 @@ global class ViberMessage extends BotPayload implements IBotMessage {
     /**
      * @description The shared location details
      */
-    global Location location { get { return new Location(payload.getJsonPayload('location')); } }
+    global ViberLocation location { get { return new ViberLocation(payload.getJsonPayload('location')); } }
 
     /**
      * @description The shared contact details
@@ -128,25 +128,6 @@ global class ViberMessage extends BotPayload implements IBotMessage {
      */
     global BotJsonPayload getParameters() {
         return payload;
-    }
-
-    /**
-     * @description Represents the coordinates for a location message
-     */
-    global class Location extends BotPayload {
-        /**
-         * @description The location latitude
-         */
-        global Decimal latitude { get { return payload.getDecimal('lat'); } }
-
-        /**
-         * @description The location longitude
-         */
-        global Decimal longitude { get { return payload.getDecimal('lon'); } }
-
-        private Location(BotJsonPayload payload) {
-            super(payload);
-        }
     }
 
     /**
