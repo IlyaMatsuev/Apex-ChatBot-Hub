@@ -89,6 +89,14 @@ global class TelegramBotChatMemberService {
         call(TelegramBotMethod.PromoteChatMember, promoteOptions.getJsonPayload());
     }
 
+    /**
+     * @description Sets a custom title for an administrator in a supergroup
+     * @param title The custom title for the administrator. `0-16` characters, emoji are not allowed
+     */
+    global void setCustomTitle(String title) {
+        call(TelegramBotMethod.SetChatAdministratorCustomTitle, new BotJsonPayload().set('custom_title', title));
+    }
+
     private BotJsonPayload call(TelegramBotMethod method, BotJsonPayload request) {
         return calloutService.call(method, new BotJsonPayload(request).set('chat_id', chatId).set('user_id', userId));
     }
