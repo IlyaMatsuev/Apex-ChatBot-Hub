@@ -56,6 +56,84 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
             when 'sendChatAction' {
                 return sendChatAction(request);
             }
+            when 'getChat' {
+                return getChat(request);
+            }
+            when 'leaveChat' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'getChatMemberCount' {
+                return getChatMemberCount(request);
+            }
+            when 'setChatPermissions' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'setChatPhoto' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'deleteChatPhoto' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'setChatTitle' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'setChatDescription' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'pinChatMessage' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'unpinChatMessage' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'unpinAllChatMessages' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'getChatAdministrators' {
+                return getChatAdministrators(request);
+            }
+            when 'setChatStickerSet' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'deleteChatStickerSet' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'exportChatInviteLink' {
+                return exportChatInviteLink(request);
+            }
+            when 'createChatInviteLink' {
+                return createEditChatInviteLink(request);
+            }
+            when 'editChatInviteLink' {
+                return createEditChatInviteLink(request);
+            }
+            when 'revokeChatInviteLink' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'approveChatJoinRequest' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'declineChatJoinRequest' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'getChatMember' {
+                return getChatMember(request);
+            }
+            when 'banChatMember' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'unbanChatMember' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'restrictChatMember' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'promoteChatMember' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'setChatAdministratorCustomTitle' {
+                return getSuccessTelegramResponse(request);
+            }
         }
         throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
     }
@@ -159,11 +237,60 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
         return getSuccessTelegramMessageResponse(request);
     }
 
+    private String getChat(BotJsonPayload request) {
+        Assert.isTrue(request.hasValue('chat_id'));
+        return new BotJsonPayload()
+            .set('result', new TelegramChat(new BotJsonPayload().set('id', Integer.valueOf(request.get('chat_id')))))
+            .toJson();
+    }
+
+    private String getChatMemberCount(BotJsonPayload request) {
+        Assert.isTrue(request.hasValue('chat_id'));
+        return new BotJsonPayload().set('result', 3).toJson();
+    }
+
+    private String getChatAdministrators(BotJsonPayload request) {
+        Assert.isTrue(request.hasValue('chat_id'));
+        return new BotJsonPayload()
+            .set('result', new List<Object> { new TelegramChatMemberAdmin(new BotJsonPayload().set('id', 21312123)) })
+            .toJson();
+    }
+
+    private String exportChatInviteLink(BotJsonPayload request) {
+        Assert.isTrue(request.hasValue('chat_id'));
+        return new BotJsonPayload().set('result', 'https://tg.com/invite/1231').toJson();
+    }
+
+    private String createEditChatInviteLink(BotJsonPayload request) {
+        Assert.isTrue(request.hasValue('chat_id'));
+        return new BotJsonPayload()
+            .set(
+                'result',
+                new TelegramChatInviteLink(new BotJsonPayload().set('invite_link', 'https://tg.com/invite/1231'))
+            )
+            .toJson();
+    }
+
+    private String getChatMember(BotJsonPayload request) {
+        Assert.isTrue(request.hasValue('chat_id'));
+        Assert.isTrue(request.hasValue('user_id'));
+        return new BotJsonPayload()
+            .set(
+                'result',
+                new TelegramChatMemberRestricted(new BotJsonPayload().set('id', 21312145).set('status', 'restricted'))
+            )
+            .toJson();
+    }
+
     private String getSuccessTelegramMessageResponse(BotJsonPayload request) {
         Assert.isTrue(request.hasValue('chat_id'));
         return new BotJsonPayload()
             .set('status', 'ok')
             .set('result', new BotJsonPayload().set('message_id', generateExternalId()).getValues())
             .toJson();
+    }
+
+    private String getSuccessTelegramResponse(BotJsonPayload request) {
+        return new BotJsonPayload().set('status', 'ok').set('result', true).toJson();
     }
 }

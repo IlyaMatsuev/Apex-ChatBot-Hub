@@ -962,6 +962,425 @@ private class TelegramBotServiceTest {
         fixture.assertMessageIsNotCreated();
     }
 
+    @IsTest
+    private static void chat_get_shouldReturnChat() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        TelegramChat chat = fixture.sut().chat(externalChatId).get();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        Assert.areEqual(Integer.valueOf(externalChatId), chat.id);
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_getAdministrators_shouldReturnAdmins() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        List<TelegramChatMemberAdmin> admins = fixture.sut().chat(externalChatId).getAdministrators();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        Assert.areEqual(1, admins.size());
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_leave_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).leave();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_getMembersCount_shouldGetChatMembersCount() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        Integer members = fixture.sut().chat(externalChatId).getMembersCount();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        Assert.areEqual(3, members);
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_setPermissions_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+        TelegramChatPermissions permissions = new TelegramChatPermissions()
+            .allowSendMessages(true)
+            .allowSendAudios(true)
+            .allowSendDocuments(true)
+            .allowSendPhotos(true)
+            .allowSendVideos(true)
+            .allowSendVideoNotes(true)
+            .allowSendVoiceNotes(true)
+            .allowSendPolls(true)
+            .allowSendOtherMessages(true)
+            .allowAddWebPagePreviews(true)
+            .allowChangeInfo(true)
+            .allowInviteUsers(true)
+            .allowPinMessages(true)
+            .allowManageTopics(true);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).setPermissions(permissions);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_setPhoto_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).setPhoto('photo_unique_tg_id');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_deletePhoto_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).deletePhoto();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_setTitle_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).setTitle('Some new title');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_setDescription_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).setDescription('Some new description');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_pinMessage_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).pinMessage(123124);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_unpinMessage_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).unpinMessage();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_unpinAllMessages_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).unpinAllMessages();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_setStickerSet_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).setStickerSet('sticker_set_name');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_deleteStickerSet_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).deleteStickerSet();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_inviteLink_export_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        String inviteLink = fixture.sut().chat(externalChatId).inviteLink().export();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        Assert.areEqual('https://tg.com/invite/1231', inviteLink);
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_inviteLink_create_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        TelegramChatInviteLink inviteLink = fixture.sut().chat(externalChatId).inviteLink().create();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        Assert.areEqual('https://tg.com/invite/1231', inviteLink.inviteLink);
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_inviteLink_createWithOptions_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+        TelegramBotChatInviteLinkService.LinkOptions options = new TelegramBotChatInviteLinkService.LinkOptions('test')
+            .withExpireDate(Date.today().addMonths(1))
+            .withMemberLimit(null)
+            .withRequestApproval();
+
+        Test.startTest();
+        TelegramChatInviteLink inviteLink = fixture.sut().chat(externalChatId).inviteLink().create(options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        Assert.areEqual('https://tg.com/invite/1231', inviteLink.inviteLink);
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_inviteLink_edit_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        TelegramChatInviteLink inviteLink = fixture.sut().chat(externalChatId).inviteLink().edit('test');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        Assert.areEqual('https://tg.com/invite/1231', inviteLink.inviteLink);
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_inviteLink_revoke_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).inviteLink().revoke('https://tg.com/invite/1231');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_joinRequest_approve_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).joinRequest(1231231).approve();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_joinRequest_decline_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).joinRequest(1231231).decline();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_member_get_shouldSendCalloutAndReturnChatMember() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        TelegramChatMember member = fixture.sut().chat(externalChatId).member(1231231).get();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        Assert.isInstanceOfType(member, TelegramChatMemberRestricted.class);
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_member_ban_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).member(1231231).ban();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_member_unban_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).member(1231231).unban();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_member_restrict_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+        TelegramChatPermissions permissions = new TelegramChatPermissions().allowManageTopics(false);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).member(1231231).restrict(permissions);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_member_promote_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+        TelegramPromoteChatMemberOptions options = new TelegramPromoteChatMemberOptions()
+            .asAnonymous(true)
+            .allowManageChat(true)
+            .allowPostMessages(true)
+            .allowEditMessages(true)
+            .allowDeleteMessages(true)
+            .allowManageVideoChats(true)
+            .allowRestrictMembers(true)
+            .allowPromoteMembers(true)
+            .allowChangeInfo(true)
+            .allowInviteUsers(true)
+            .allowPinMessages(true)
+            .allowManageTopics(false);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).member(1231231).promote(options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void chat_member_setCustomTitle_shouldSendCallout() {
+        setCalloutMock();
+        ChatFixture fixture = new ChatFixture();
+        String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
+
+        Test.startTest();
+        fixture.sut().chat(externalChatId).member(1231231).setCustomTitle('The king');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
     private class SenderFixture {
         public BotModel bot;
         public Chat__c chat;
@@ -1027,6 +1446,25 @@ private class TelegramBotServiceTest {
 
             Assert.isTrue(customException.payload.has('response'));
             Assert.areEqual(statusCode, customException.payload.getJsonPayload('response').getInteger('statusCode'));
+        }
+    }
+
+    private class ChatFixture {
+        public BotModel bot;
+        public Chat__c chat;
+
+        private ChatFixture() {
+            this.bot = createBot();
+            this.chat = createChat(bot);
+        }
+
+        public TelegramBotService sut() {
+            return createService(bot);
+        }
+
+        public void assertErrorIsNotCreated() {
+            List<BotError__c> errors = [SELECT Id FROM BotError__c];
+            Assert.isTrue(errors.isEmpty());
         }
     }
 

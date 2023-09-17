@@ -25,6 +25,50 @@ public class TelegramBotMethod extends BotMethod {
     public static final TelegramBotMethod SendDice = new TelegramBotMethod('sendDice');
     public static final TelegramBotMethod SendChatAction = new TelegramBotMethod('sendChatAction');
 
+    /**
+     * Chat methods
+     */
+    public static final TelegramBotMethod GetChat = new TelegramBotMethod('getChat');
+    public static final TelegramBotMethod LeaveChat = new TelegramBotMethod('leaveChat');
+    public static final TelegramBotMethod GetChatMemberCount = new TelegramBotMethod('getChatMemberCount');
+    public static final TelegramBotMethod SetChatPermissions = new TelegramBotMethod('setChatPermissions');
+    public static final TelegramBotMethod SetChatPhoto = new TelegramBotMethod('setChatPhoto');
+    public static final TelegramBotMethod DeleteChatPhoto = new TelegramBotMethod('deleteChatPhoto');
+    public static final TelegramBotMethod SetChatTitle = new TelegramBotMethod('setChatTitle');
+    public static final TelegramBotMethod SetChatDescription = new TelegramBotMethod('setChatDescription');
+    public static final TelegramBotMethod PinChatMessage = new TelegramBotMethod('pinChatMessage');
+    public static final TelegramBotMethod UnpinChatMessage = new TelegramBotMethod('unpinChatMessage');
+    public static final TelegramBotMethod UnpinAllChatMessages = new TelegramBotMethod('unpinAllChatMessages');
+    public static final TelegramBotMethod GetChatAdministrators = new TelegramBotMethod('getChatAdministrators');
+    public static final TelegramBotMethod SetChatStickerSet = new TelegramBotMethod('setChatStickerSet');
+    public static final TelegramBotMethod DeleteChatStickerSet = new TelegramBotMethod('deleteChatStickerSet');
+
+    /**
+     * Chat Invite Links methods
+     */
+    public static final TelegramBotMethod ExportChatInviteLink = new TelegramBotMethod('exportChatInviteLink');
+    public static final TelegramBotMethod CreateChatInviteLink = new TelegramBotMethod('createChatInviteLink');
+    public static final TelegramBotMethod EditChatInviteLink = new TelegramBotMethod('editChatInviteLink');
+    public static final TelegramBotMethod RevokeChatInviteLink = new TelegramBotMethod('revokeChatInviteLink');
+
+    /**
+     * Chat Join Request methods
+     */
+    public static final TelegramBotMethod ApproveChatJoinRequest = new TelegramBotMethod('approveChatJoinRequest');
+    public static final TelegramBotMethod DeclineChatJoinRequest = new TelegramBotMethod('declineChatJoinRequest');
+
+    /**
+     * Chat member methods
+     */
+    public static final TelegramBotMethod GetChatMember = new TelegramBotMethod('getChatMember');
+    public static final TelegramBotMethod BanChatMember = new TelegramBotMethod('banChatMember');
+    public static final TelegramBotMethod UnbanChatMember = new TelegramBotMethod('unbanChatMember');
+    public static final TelegramBotMethod RestrictChatMember = new TelegramBotMethod('restrictChatMember');
+    public static final TelegramBotMethod PromoteChatMember = new TelegramBotMethod('promoteChatMember');
+    public static final TelegramBotMethod SetChatAdministratorCustomTitle = new TelegramBotMethod(
+        'setChatAdministratorCustomTitle'
+    );
+
     private TelegramBotMethod(String value) {
         super(value, TelegramBotMethod.class);
     }

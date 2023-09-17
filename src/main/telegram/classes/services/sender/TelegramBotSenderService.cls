@@ -14,6 +14,10 @@ global class TelegramBotSenderService implements IBotSenderService {
         this.callback = callback;
     }
 
+    // TODO:
+    // - forwardMessage
+    // - copyMessage
+
     /**
      * @description Sends a text message
      * @param text The message text to send

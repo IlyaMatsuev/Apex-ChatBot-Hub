@@ -1,8 +1,13 @@
 /**
- * @description Describes the chat permissions payload that can be received as part of an update from a `Telegram` bot
- * Source: https://core.telegram.org/bots/api#chatpermissions
+ * @description Describes the information about a restricted `Telegram` chat member
+ * Source: https://core.telegram.org/bots/api#chatmemberrestricted
  */
-global class TelegramChatPermissions extends BotPayload {
+global class TelegramChatMemberRestricted extends TelegramChatMember {
+    /**
+     * @description `True` if the user is a member of the chat at the moment of the request
+     */
+    global Boolean isMember { get { return payload.getBoolean('is_member'); } }
+
     /**
      * @description `True` if the user is allowed to send text messages, contacts, invoices, locations and venues
      */
@@ -54,7 +59,7 @@ global class TelegramChatPermissions extends BotPayload {
     global Boolean canAddWebPagePreviews { get { return payload.getBoolean('can_add_web_page_previews'); } }
 
     /**
-     * @description `True` if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
+     * @description `True` if the user is allowed to change the chat title, photo and other settings
      */
     global Boolean canChangeInfo { get { return payload.getBoolean('can_change_info'); } }
 
@@ -64,16 +69,21 @@ global class TelegramChatPermissions extends BotPayload {
     global Boolean canInviteUsers { get { return payload.getBoolean('can_invite_users'); } }
 
     /**
-     * @description `True` if the user is allowed to pin messages. Ignored in public supergroups
+     * @description `True` if the user is allowed to pin messages
      */
     global Boolean canPinMessages { get { return payload.getBoolean('can_pin_messages'); } }
 
     /**
-     * @description `True` if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages
+     * @description `True` if the user is allowed to create forum topics
      */
     global Boolean canManageTopics { get { return payload.getBoolean('can_manage_topics'); } }
 
-    public TelegramChatPermissions(BotJsonPayload payload) {
+    /**
+     * @description The date when restrictions will be lifted for this user. If `0` then the user is restricted forever
+     */
+    global DateTime untilDate { get { return payload.getDateTime('until_date'); } }
+
+    public TelegramChatMemberRestricted(BotJsonPayload payload) {
         super(payload);
     }
 }
