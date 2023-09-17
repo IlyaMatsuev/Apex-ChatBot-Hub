@@ -115,6 +115,13 @@ global class TelegramChatPermissions extends BotPayload {
         private set { payload.set('can_manage_topics', value, true); }
     }
 
+    /**
+     * @description Creates a new instance of chat permissions
+     */
+    global TelegramChatPermissions() {
+        super();
+    }
+
     public TelegramChatPermissions(BotJsonPayload payload) {
         super(payload);
     }

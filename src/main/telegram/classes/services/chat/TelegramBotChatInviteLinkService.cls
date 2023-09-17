@@ -105,7 +105,7 @@ global class TelegramBotChatInviteLinkService {
          * @return The current instance of the <<TelegramBotChatInviteLinkService.LinkOptions>> class
          */
         global LinkOptions withMemberLimit(Integer memberLimit) {
-            payload.set('member_limit', memberLimit);
+            payload.set('member_limit', memberLimit, true);
             return this;
         }
 

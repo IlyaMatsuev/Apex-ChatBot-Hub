@@ -24,13 +24,12 @@ global class TelegramBotService extends BotService {
      * @return The instance of the <<TelegramBotChatService>> class
      */
     global TelegramBotChatService chat(String chatId) {
-        return new TelegramBotChatService(
-            chatId,
-            calloutService,
-            new BotService.SaveSentMessageCallback(new List<String> { chatId }, bot)
-        );
+        return new TelegramBotChatService(chatId, calloutService);
     }
 
     // TODO:
     // - TelegramBotMyService
+    // - TelegramBotInlineQueryService
+    // - TelegramBotEditService
+    // - TelegramBotStickerService
 }
