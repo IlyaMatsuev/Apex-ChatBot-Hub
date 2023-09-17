@@ -21,12 +21,16 @@ global class TelegramChatMemberUpdatedEvent extends BotPayload {
     /**
      * @description The previous information about the chat member
      */
-    global TelegramChatMember oldChatMember { get { return getChatMember('old_chat_member'); } }
+    global TelegramChatMember oldChatMember {
+        get { return TelegramChatMember.getChatMember(payload.getJsonPayload('old_chat_member')); }
+    }
 
     /**
      * @description The new information about the chat member
      */
-    global TelegramChatMember newChatMember { get { return getChatMember('new_chat_member'); } }
+    global TelegramChatMember newChatMember {
+        get { return TelegramChatMember.getChatMember(payload.getJsonPayload('new_chat_member')); }
+    }
 
     /**
      * @description The chat invite link, which was used by the user to join the chat; for joining by invite link events only
@@ -42,27 +46,5 @@ global class TelegramChatMemberUpdatedEvent extends BotPayload {
 
     public TelegramChatMemberUpdatedEvent(BotJsonPayload payload) {
         super(payload);
-    }
-
-    private TelegramChatMember getChatMember(String payloadKey) {
-        BotJsonPayload memberPayload = payload.getJsonPayload(payloadKey);
-        switch on memberPayload.getString('status') {
-            when 'creator' {
-                return new TelegramChatMemberOwner(memberPayload);
-            }
-            when 'administrator' {
-                return new TelegramChatMemberAdmin(memberPayload);
-            }
-            when 'restricted' {
-                return new TelegramChatMemberRestricted(memberPayload);
-            }
-            when 'left' {
-                return new TelegramChatMemberLeft(memberPayload);
-            }
-            when 'kicked' {
-                return new TelegramChatMemberBanned(memberPayload);
-            }
-        }
-        return new TelegramChatMember(memberPayload);
     }
 }

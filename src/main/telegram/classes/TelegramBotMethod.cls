@@ -25,6 +25,15 @@ public class TelegramBotMethod extends BotMethod {
     public static final TelegramBotMethod SendDice = new TelegramBotMethod('sendDice');
     public static final TelegramBotMethod SendChatAction = new TelegramBotMethod('sendChatAction');
 
+    /**
+     * Chat member methods
+     */
+    public static final TelegramBotMethod GetChatMember = new TelegramBotMethod('getChatMember');
+    public static final TelegramBotMethod BanChatMember = new TelegramBotMethod('banChatMember');
+    public static final TelegramBotMethod UnbanChatMember = new TelegramBotMethod('unbanChatMember');
+    public static final TelegramBotMethod RestrictChatMember = new TelegramBotMethod('restrictChatMember');
+    public static final TelegramBotMethod PromoteChatMember = new TelegramBotMethod('promoteChatMember');
+
     private TelegramBotMethod(String value) {
         super(value, TelegramBotMethod.class);
     }

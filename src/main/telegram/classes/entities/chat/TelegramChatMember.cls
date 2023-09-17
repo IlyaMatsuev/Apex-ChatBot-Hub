@@ -16,4 +16,25 @@ global virtual class TelegramChatMember extends BotPayload {
     public TelegramChatMember(BotJsonPayload payload) {
         super(payload);
     }
+
+    public static TelegramChatMember getChatMember(BotJsonPayload memberPayload) {
+        switch on memberPayload.getString('status') {
+            when 'creator' {
+                return new TelegramChatMemberOwner(memberPayload);
+            }
+            when 'administrator' {
+                return new TelegramChatMemberAdmin(memberPayload);
+            }
+            when 'restricted' {
+                return new TelegramChatMemberRestricted(memberPayload);
+            }
+            when 'left' {
+                return new TelegramChatMemberLeft(memberPayload);
+            }
+            when 'kicked' {
+                return new TelegramChatMemberBanned(memberPayload);
+            }
+        }
+        return new TelegramChatMember(memberPayload);
+    }
 }
