@@ -27,9 +27,17 @@ global class TelegramBotService extends BotService {
         return new TelegramBotChatService(chatId, calloutService);
     }
 
+    /**
+     * @description Creates an instance of the `Telegram` inline query service
+     * @param inlineQueryId The unique identifier for the answered query
+     * @return The instance of the <<TelegramBotInlineQueryService>> class
+     */
+    global TelegramBotInlineQueryService inlineQuery(String inlineQueryId) {
+        return new TelegramBotInlineQueryService(inlineQueryId, calloutService);
+    }
+
     // TODO:
     // - TelegramBotMyService
-    // - TelegramBotInlineQueryService
     // - TelegramBotEditService
     // - TelegramBotStickerService
 }
