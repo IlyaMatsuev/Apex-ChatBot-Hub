@@ -17,13 +17,35 @@ public class TestTelegramBotHandler extends TelegramBotHandler {
         logEvent(context.getBot().id, 'onMessageEdited', event);
     }
 
+    // Make sure the inline mode is enabled for the bot: https://core.telegram.org/bots/inline
     // Activate inline mode for the bot via BotFather. Use inline mode with the bot
     public override void onInlineQuery(TelegramBotContext context, TelegramInlineQueryEvent event) {
-        context.reply().text('I see you\'re trying to make some inline query right there: ' + event.query);
+        TelegramInlineKeyboardMarkupOptions inlineKeyboard = new TelegramInlineKeyboardMarkupOptions()
+            .addButton(new TelegramInlineKeyboardMarkupOptions.Button('Share me...').asSwitchInlineQuery(''));
+
+        List<TelegramInlineQueryResultArticle> results = new List<TelegramInlineQueryResultArticle> {
+            new TelegramInlineQueryResultArticle('1')
+                .withTitle('How gay are you?')
+                .withDescription('Send your current gayness to the chat.')
+                .withInputMessage(new TelegramInputTextMessageContent('I am 15% gay!').disableWebPagePreview())
+                .withInlineKeyboard(inlineKeyboard)
+                .withThumbnail('https://img.kieran.de/8N3nfe4.png'),
+            new TelegramInlineQueryResultArticle('2')
+                .withTitle('Help')
+                .withDescription('Show the instructions.')
+                .withInputMessage(
+                    new TelegramInputTextMessageContent('Some ass-long description here...').disableWebPagePreview()
+                )
+                .withInlineKeyboard(inlineKeyboard)
+                .withThumbnail('https://img.kieran.de/8N3nfe4.png')
+        };
+
+        context.getService().inlineQuery(event.id).answer(results);
         logEvent(context.getBot().id, 'onInlineQuery', event);
     }
 
-    // Not possible to test yet
+    // Make sure the collecting feedback is enabled for the bot: https://core.telegram.org/bots/inline#collecting-feedback.
+    // Choose any inline result
     public override void onChosenInlineResult(TelegramBotContext context, TelegramChosenInlineResultEvent event) {
         logEvent(context.getBot().id, 'onChosenInlineResult', event);
     }

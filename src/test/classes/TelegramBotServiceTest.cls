@@ -1381,6 +1381,293 @@ private class TelegramBotServiceTest {
         fixture.assertErrorIsNotCreated();
     }
 
+    @IsTest
+    private static void inlineQuery_answer_withOptionsAndArticleResults_shouldSendCallout() {
+        setCalloutMock();
+        InlineQueryFixture fixture = new InlineQueryFixture();
+        TelegramInputTextMessageContent message = new TelegramInputTextMessageContent('Message!')
+            .withMessageEntity(null)
+            .withParseMode('HTML')
+            .disableWebPagePreview();
+
+        TelegramInlineQueryResultArticle article1 = new TelegramInlineQueryResultArticle('art1')
+            .withTitle('title')
+            .withUrl('https://example.com')
+            .withDescription('Description...')
+            .withThumbnail('https://example.com/th.png')
+            .withInputMessage(message)
+            .withInlineKeyboard(null);
+
+        TelegramAnswerInlineQueryOptions options = new TelegramAnswerInlineQueryOptions()
+            .addResult(article1)
+            .asPersonal()
+            .withCacheTime(300)
+            .withNextOffset(null)
+            .withButton(new TelegramAnswerInlineQueryOptions.Button('Test').withStartParameter('test'));
+
+        Test.startTest();
+        fixture.sut().inlineQuery(fixture.inlineQueryId).answer(options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void inlineQuery_answer_withAudioResults_shouldSendCallout() {
+        setCalloutMock();
+        InlineQueryFixture fixture = new InlineQueryFixture();
+        TelegramInputContactMessageContent contact = new TelegramInputContactMessageContent('Ilya', '0627362273')
+            .withLastName('Mister')
+            .withVCard('No idea what this is');
+
+        List<TelegramInlineQueryResultAudio> results = new List<TelegramInlineQueryResultAudio> {
+            new TelegramInlineQueryResultAudio('1', 'https://example.com/audio.mp3')
+                .withTitle('title')
+                .withCaption('caption')
+                .withPerformer('Mc POH')
+                .withDuration(5)
+                .withMessageEntity(null)
+                .withParseMode('HTML')
+                .withInputMessage(contact)
+                .withInlineKeyboard(null),
+            new TelegramInlineQueryResultAudio('2', 'some-file-id')
+        };
+
+        Test.startTest();
+        fixture.sut().inlineQuery(fixture.inlineQueryId).answer(results);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void inlineQuery_answer_withContactResults_shouldSendCallout() {
+        setCalloutMock();
+        InlineQueryFixture fixture = new InlineQueryFixture();
+        TelegramInputLocationMessageContent location = new TelegramInputLocationMessageContent(10.2122, 19.4322)
+            .withHorizontalAccuracy(1500)
+            .withLivePeriod(80000)
+            .withProximityAlertRadius(10000)
+            .withHeading(180);
+
+        List<TelegramInlineQueryResultContact> results = new List<TelegramInlineQueryResultContact> {
+            new TelegramInlineQueryResultContact('1', 'Ilya', '0627362273')
+                .withLastName('Mister')
+                .withVCard('No idea what this is')
+                .withThumbnail(null, null, null)
+                .withInputMessage(location)
+                .withInlineKeyboard(null)
+        };
+
+        Test.startTest();
+        fixture.sut().inlineQuery(fixture.inlineQueryId).answer(results);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void inlineQuery_answer_withDocumentResults_shouldSendCallout() {
+        setCalloutMock();
+        InlineQueryFixture fixture = new InlineQueryFixture();
+        TelegramInputVenueMessageContent venue = new TelegramInputVenueMessageContent(10.2122, 19.4322)
+            .withTitle('Party')
+            .withAddress('USSR st. 69')
+            .withFoursquare('123', 'arts_entertainment')
+            .withGooglePlaces('321', 'aquarium');
+
+        List<TelegramInlineQueryResultDocument> results = new List<TelegramInlineQueryResultDocument> {
+            new TelegramInlineQueryResultDocument('1', 'https://example.com/doc1.pdf')
+                .withTitle('Title')
+                .withCaption('Caption')
+                .withDescription('Caption!')
+                .withMimeType('application/pdf')
+                .withParseMode('HTML')
+                .withThumbnail(null, null, null)
+                .withMessageEntity(null)
+                .withInputMessage(venue)
+                .withInlineKeyboard(null),
+            new TelegramInlineQueryResultDocument('2', 'some-file-id')
+        };
+
+        Test.startTest();
+        fixture.sut().inlineQuery(fixture.inlineQueryId).answer(results);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void inlineQuery_answer_withGifResults_shouldSendCallout() {
+        setCalloutMock();
+        InlineQueryFixture fixture = new InlineQueryFixture();
+        List<TelegramInlineQueryResultGif> results = new List<TelegramInlineQueryResultGif> {
+            new TelegramInlineQueryResultGif('1', 'https://example.com/gif1.gif')
+                .withTitle('Title')
+                .withCaption('Caption')
+                .withDuration(6)
+                .withSizes(200, 400)
+                .withThumbnail(null, null)
+                .withParseMode('HTML')
+                .withMessageEntity(null)
+                .withInputMessage(null)
+                .withInlineKeyboard(null),
+            new TelegramInlineQueryResultGif('2', 'some-file-id')
+        };
+
+        Test.startTest();
+        fixture.sut().inlineQuery(fixture.inlineQueryId).answer(results);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void inlineQuery_answer_withLocationResults_shouldSendCallout() {
+        setCalloutMock();
+        InlineQueryFixture fixture = new InlineQueryFixture();
+        List<TelegramInlineQueryResultLocation> results = new List<TelegramInlineQueryResultLocation> {
+            new TelegramInlineQueryResultLocation('1', 15.3223, 89.1232)
+                .withTitle('Title')
+                .withHorizontalAccuracy(1500)
+                .withLivePeriod(80000)
+                .withProximityAlertRadius(10000)
+                .withHeading(180)
+                .withThumbnail(null, null, null)
+                .withInputMessage(null)
+                .withInlineKeyboard(null)
+        };
+
+        Test.startTest();
+        fixture.sut().inlineQuery(fixture.inlineQueryId).answer(results);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void inlineQuery_answer_withPhotoResults_shouldSendCallout() {
+        setCalloutMock();
+        InlineQueryFixture fixture = new InlineQueryFixture();
+        List<TelegramInlineQueryResultPhoto> results = new List<TelegramInlineQueryResultPhoto> {
+            new TelegramInlineQueryResultPhoto('1', 'https://example.com/photo1.png')
+                .withTitle('Title')
+                .withDescription('Description...')
+                .withCaption('Caption')
+                .withSizes(200, 400)
+                .withParseMode('HTML')
+                .withMessageEntity(null)
+                .withThumbnail(null)
+                .withInputMessage(null)
+                .withInlineKeyboard(null),
+            new TelegramInlineQueryResultPhoto('2', 'some-file-id')
+        };
+
+        Test.startTest();
+        fixture.sut().inlineQuery(fixture.inlineQueryId).answer(results);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void inlineQuery_answer_withStickerResults_shouldSendCallout() {
+        setCalloutMock();
+        InlineQueryFixture fixture = new InlineQueryFixture();
+        List<TelegramInlineQueryResultSticker> results = new List<TelegramInlineQueryResultSticker> {
+            new TelegramInlineQueryResultSticker('1', 'some-file-id').withInputMessage(null).withInlineKeyboard(null)
+        };
+
+        Test.startTest();
+        fixture.sut().inlineQuery(fixture.inlineQueryId).answer(results);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void inlineQuery_answer_withVenueResults_shouldSendCallout() {
+        setCalloutMock();
+        InlineQueryFixture fixture = new InlineQueryFixture();
+        List<TelegramInlineQueryResultVenue> results = new List<TelegramInlineQueryResultVenue> {
+            new TelegramInlineQueryResultVenue('1', 15.3223, 89.1232)
+                .withTitle('Title')
+                .withAddress('USSR st. 69')
+                .withFoursquare('123', 'arts_entertainment')
+                .withGooglePlaces('321', 'aquarium')
+                .withThumbnail(null, null, null)
+                .withInputMessage(null)
+                .withInlineKeyboard(null)
+        };
+
+        Test.startTest();
+        fixture.sut().inlineQuery(fixture.inlineQueryId).answer(results);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void inlineQuery_answer_withVideoResults_shouldSendCallout() {
+        setCalloutMock();
+        InlineQueryFixture fixture = new InlineQueryFixture();
+        List<TelegramInlineQueryResultVideo> results = new List<TelegramInlineQueryResultVideo> {
+            new TelegramInlineQueryResultVideo('1', 'https://example.com/video1.mp4')
+                .withTitle('Title')
+                .withDescription('Some video')
+                .withCaption('Caption')
+                .withMimeType('video/mp4')
+                .withThumbnail(null)
+                .withSizes(200, 400)
+                .withDuration(10)
+                .withParseMode('HTML')
+                .withMessageEntity(null)
+                .withInputMessage(null)
+                .withInlineKeyboard(null),
+            new TelegramInlineQueryResultVideo('2', 'some-file-id')
+        };
+
+        Test.startTest();
+        fixture.sut().inlineQuery(fixture.inlineQueryId).answer(results);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void inlineQuery_answer_withVoiceResults_shouldSendCallout() {
+        setCalloutMock();
+        InlineQueryFixture fixture = new InlineQueryFixture();
+        List<TelegramInlineQueryResultVoice> results = new List<TelegramInlineQueryResultVoice> {
+            new TelegramInlineQueryResultVoice('1', 'https://example.com/voice.mp3')
+                .withTitle('Title')
+                .withCaption('Caption')
+                .withDuration(10)
+                .withParseMode('HTML')
+                .withMessageEntity(null)
+                .withInputMessage(null)
+                .withInlineKeyboard(null),
+            new TelegramInlineQueryResultVoice('2', 'some-file-id')
+        };
+
+        Test.startTest();
+        fixture.sut().inlineQuery(fixture.inlineQueryId).answer(results);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
     private class SenderFixture {
         public BotModel bot;
         public Chat__c chat;
@@ -1456,6 +1743,25 @@ private class TelegramBotServiceTest {
         private ChatFixture() {
             this.bot = createBot();
             this.chat = createChat(bot);
+        }
+
+        public TelegramBotService sut() {
+            return createService(bot);
+        }
+
+        public void assertErrorIsNotCreated() {
+            List<BotError__c> errors = [SELECT Id FROM BotError__c];
+            Assert.isTrue(errors.isEmpty());
+        }
+    }
+
+    private class InlineQueryFixture {
+        public BotModel bot;
+        public String inlineQueryId;
+
+        private InlineQueryFixture() {
+            this.bot = createBot();
+            this.inlineQueryId = 'test_query';
         }
 
         public TelegramBotService sut() {

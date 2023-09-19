@@ -26,6 +26,11 @@ public class TelegramBotMethod extends BotMethod {
     public static final TelegramBotMethod SendChatAction = new TelegramBotMethod('sendChatAction');
 
     /**
+     * Inline mode methods
+     */
+    public static final TelegramBotMethod AnswerInlineQuery = new TelegramBotMethod('answerInlineQuery');
+
+    /**
      * Chat methods
      */
     public static final TelegramBotMethod GetChat = new TelegramBotMethod('getChat');

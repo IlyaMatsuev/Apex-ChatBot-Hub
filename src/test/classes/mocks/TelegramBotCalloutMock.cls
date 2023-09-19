@@ -134,6 +134,9 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
             when 'setChatAdministratorCustomTitle' {
                 return getSuccessTelegramResponse(request);
             }
+            when 'answerInlineQuery' {
+                return getSuccessTelegramResponse(request);
+            }
         }
         throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
     }
