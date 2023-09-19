@@ -15,7 +15,7 @@ global class TelegramAnswerInlineQueryOptions extends BotPayload {
      * @description Creates an instance of the answer inline query options without any results, so that they can be added separately
      */
     global TelegramAnswerInlineQueryOptions() {
-        super();
+        this(new List<TelegramInlineQueryResult>());
     }
 
     /**
@@ -23,7 +23,6 @@ global class TelegramAnswerInlineQueryOptions extends BotPayload {
      * @param results The list of results to be shown to the user
      */
     global TelegramAnswerInlineQueryOptions(TelegramInlineQueryResult[] results) {
-        super();
         this.results = results;
     }
 
