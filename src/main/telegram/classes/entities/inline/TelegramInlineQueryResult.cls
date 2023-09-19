@@ -8,5 +8,13 @@ global abstract class TelegramInlineQueryResult extends BotPayload {
         payload.set('type', type);
     }
 
-    // TODO: Add other QueryResult types: https://core.telegram.org/bots/api#inlinequeryresult
+    protected TelegramInlineQueryResult addInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard) {
+        payload.set('reply_markup', keyboard);
+        return this;
+    }
+
+    protected TelegramInlineQueryResult addInputMessage(TelegramInputMessageContent messageContent) {
+        payload.set('input_message_content', messageContent);
+        return this;
+    }
 }

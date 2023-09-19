@@ -22,7 +22,7 @@ global class TelegramSendTextOptions extends TelegramSendMessageOptions {
 
     /**
      * @description Adds a special entity that appear in the message text. For example username tags
-     * @param entity The instance of <<TelegramSendMessageOptions.TelegramMessageEntity>>, special message entity. E.g. hashtag, username, URL, etc.
+     * @param entity The instance of <<TelegramMessageEntity>>, special message entity. E.g. hashtag, username, URL, etc.
      * @return The current instance of the <<TelegramSendTextOptions>> class
      */
     global TelegramSendTextOptions withMessageEntity(TelegramMessageEntity entity) {
@@ -31,7 +31,7 @@ global class TelegramSendTextOptions extends TelegramSendMessageOptions {
 
     /**
      * @description Adds special entities that appear in the message text. For example username tags
-     * @param entities The list of <<TelegramSendMessageOptions.TelegramMessageEntity>> instances, special message entities. E.g. hashtag, username, URL, etc.
+     * @param entities The list of <<TelegramMessageEntity>> instances, special message entities. E.g. hashtag, username, URL, etc.
      * @return The current instance of the <<TelegramSendTextOptions>> class
      */
     global TelegramSendTextOptions withMessageEntities(TelegramMessageEntity[] entities) {

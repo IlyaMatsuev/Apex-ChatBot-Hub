@@ -4,7 +4,7 @@
  */
 global class TelegramInlineQueryResultArticle extends TelegramInlineQueryResult {
     /**
-     * @description Creates a new instance of the article inline query result with the provided id
+     * @description Creates a new instance of the article inline query result with the provided result id
      * @param id The unique identifier for the result, `1-64 bytes`
      */
     global TelegramInlineQueryResultArticle(String id) {
@@ -36,8 +36,7 @@ global class TelegramInlineQueryResultArticle extends TelegramInlineQueryResult 
      * @return The current instance of the <<TelegramInlineQueryResultArticle>> class
      */
     global TelegramInlineQueryResultArticle withInputMessage(TelegramInputMessageContent messageContent) {
-        payload.set('input_message_content', messageContent);
-        return this;
+        return (TelegramInlineQueryResultArticle) addInputMessage(messageContent);
     }
 
     /**
@@ -91,7 +90,6 @@ global class TelegramInlineQueryResultArticle extends TelegramInlineQueryResult 
      * @return The current instance of the <<TelegramInlineQueryResultArticle>> class
      */
     global TelegramInlineQueryResultArticle withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard) {
-        payload.set('reply_markup', keyboard);
-        return this;
+        return (TelegramInlineQueryResultArticle) addInlineKeyboard(keyboard);
     }
 }
