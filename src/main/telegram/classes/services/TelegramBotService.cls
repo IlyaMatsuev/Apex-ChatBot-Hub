@@ -37,7 +37,5 @@ global class TelegramBotService extends BotService {
     }
 
     // TODO:
-    // - TelegramBotMyService
     // - TelegramBotEditService
-    // - TelegramBotStickerService
 }

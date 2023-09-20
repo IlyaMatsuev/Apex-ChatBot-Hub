@@ -14,10 +14,6 @@ global class TelegramBotSenderService implements IBotSenderService {
         this.callback = callback;
     }
 
-    // TODO:
-    // - forwardMessage
-    // - copyMessage
-
     /**
      * @description Sends a text message
      * @param text The message text to send
@@ -38,11 +34,7 @@ global class TelegramBotSenderService implements IBotSenderService {
         } else {
             callbackParams.set('type', BotMessageType.Text.name()).set('text', text);
         }
-        send(
-            TelegramBotMethod.SendMessage,
-            new BotJsonPayload(options).set('chat_id', chatId).set('text', text),
-            callbackParams
-        );
+        send(TelegramBotMethod.SendMessage, new BotJsonPayload(options).set('text', text), callbackParams);
     }
 
     /**
@@ -70,7 +62,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void image(String imageUrl, TelegramSendImageOptions options) {
         send(
             TelegramBotMethod.SendPhoto,
-            new BotJsonPayload(options).set('chat_id', chatId).set('photo', imageUrl),
+            new BotJsonPayload(options).set('photo', imageUrl),
             new BotJsonPayload()
                 .set('type', BotMessageType.Image.name())
                 .set('text', options.getJsonPayload().getString('caption'))
@@ -104,7 +96,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void video(String videoUrl, TelegramSendVideoOptions options) {
         send(
             TelegramBotMethod.SendVideo,
-            new BotJsonPayload(options).set('chat_id', chatId).set('video', videoUrl),
+            new BotJsonPayload(options).set('video', videoUrl),
             new BotJsonPayload()
                 .set('type', BotMessageType.Video.name())
                 .set('text', options.getJsonPayload().getString('caption'))
@@ -129,7 +121,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void videoNote(String videoNoteId, TelegramSendVideoNoteOptions options) {
         send(
             TelegramBotMethod.SendVideoNote,
-            new BotJsonPayload(options).set('chat_id', chatId).set('video_note', videoNoteId),
+            new BotJsonPayload(options).set('video_note', videoNoteId),
             new BotJsonPayload()
                 .set('type', BotMessageType.Video.name())
                 .set('parameters', new BotJsonPayload(options).set('videoNoteId', videoNoteId))
@@ -161,7 +153,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void animation(String animationUrl, TelegramSendVideoOptions options) {
         send(
             TelegramBotMethod.SendAnimation,
-            new BotJsonPayload(options).set('chat_id', chatId).set('animation', animationUrl),
+            new BotJsonPayload(options).set('animation', animationUrl),
             new BotJsonPayload()
                 .set('type', BotMessageType.Animation.name())
                 .set('text', options.getJsonPayload().getString('caption'))
@@ -195,7 +187,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void audio(String audioUrl, TelegramSendAudioOptions options) {
         send(
             TelegramBotMethod.SendAudio,
-            new BotJsonPayload(options).set('chat_id', chatId).set('audio', audioUrl),
+            new BotJsonPayload(options).set('audio', audioUrl),
             new BotJsonPayload()
                 .set('type', BotMessageType.Audio.name())
                 .set('text', options.getJsonPayload().getString('caption'))
@@ -229,7 +221,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void voice(String voiceUrl, TelegramSendAudioOptions options) {
         send(
             TelegramBotMethod.SendVoice,
-            new BotJsonPayload(options).set('chat_id', chatId).set('voice', voiceUrl),
+            new BotJsonPayload(options).set('voice', voiceUrl),
             new BotJsonPayload()
                 .set('type', BotMessageType.Audio.name())
                 .set('text', options.getJsonPayload().getString('caption'))
@@ -263,7 +255,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void file(String fileUrl, TelegramSendFileOptions options) {
         send(
             TelegramBotMethod.SendDocument,
-            new BotJsonPayload(options).set('chat_id', chatId).set('document', fileUrl),
+            new BotJsonPayload(options).set('document', fileUrl),
             new BotJsonPayload()
                 .set('type', BotMessageType.File.name())
                 .set('text', options.getJsonPayload().getString('caption'))
@@ -294,7 +286,6 @@ global class TelegramBotSenderService implements IBotSenderService {
         send(
             TelegramBotMethod.SendContact,
             new BotJsonPayload(options)
-                .set('chat_id', chatId)
                 .set('first_name', firstName)
                 .set('last_name', lastName, true)
                 .set('phone_number', phone),
@@ -322,7 +313,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void location(Decimal latitude, Decimal longitude, TelegramSendLocationOptions options) {
         send(
             TelegramBotMethod.SendLocation,
-            new BotJsonPayload(options).set('chat_id', chatId).set('latitude', latitude).set('longitude', longitude),
+            new BotJsonPayload(options).set('latitude', latitude).set('longitude', longitude),
             new BotJsonPayload()
                 .set('type', BotMessageType.Location.name())
                 .set('parameters', new BotJsonPayload(options).set('lat', latitude).set('lon', longitude))
@@ -356,7 +347,6 @@ global class TelegramBotSenderService implements IBotSenderService {
         TelegramSendVenueOptions options
     ) {
         BotJsonPayload payload = new BotJsonPayload(options)
-            .set('chat_id', chatId)
             .set('title', title)
             .set('address', address)
             .set('latitude', latitude)
@@ -399,7 +389,7 @@ global class TelegramBotSenderService implements IBotSenderService {
         }
         send(
             TelegramBotMethod.SendSticker,
-            new BotJsonPayload(options).set('chat_id', chatId).set('sticker', stickerIdOrUrl),
+            new BotJsonPayload(options).set('sticker', stickerIdOrUrl),
             new BotJsonPayload()
                 .set('type', BotMessageType.Sticker.name())
                 .set('mediaUrl', stickerUrl, true)
@@ -424,7 +414,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void poll(String question, TelegramSendPollOptions options) {
         send(
             TelegramBotMethod.SendPoll,
-            new BotJsonPayload(options).set('chat_id', chatId).set('question', question),
+            new BotJsonPayload(options).set('question', question),
             new BotJsonPayload()
                 .set('type', BotMessageType.Poll.name())
                 .set('text', question)
@@ -446,7 +436,7 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void dice(TelegramSendDiceOptions options) {
         send(
             TelegramBotMethod.SendDice,
-            new BotJsonPayload(options).set('chat_id', chatId),
+            new BotJsonPayload(options),
             new BotJsonPayload().set('type', BotMessageType.Other.name()).set('parameters', options)
         );
     }
@@ -467,9 +457,63 @@ global class TelegramBotSenderService implements IBotSenderService {
     global void chatAction(String action, String threadId) {
         send(
             TelegramBotMethod.SendChatAction,
-            new BotJsonPayload().set('chat_id', chatId).set('action', action).set('message_thread_id', threadId, true),
+            new BotJsonPayload().set('action', action).set('message_thread_id', threadId, true),
             null
         );
+    }
+
+    /**
+     * @description Forwards a message
+     * @param fromChatId The unique identifier for the chat where the original message was sent
+     * @param messageId The message identifier in the chat specified in `fromChatId`
+     */
+    global void forward(String fromChatId, Integer messageId) {
+        forward(fromChatId, messageId, new TelegramForwardOptions());
+    }
+
+    /**
+     * @description Forwards a message
+     * @param fromChatId The unique identifier for the chat where the original message was sent
+     * @param messageId The message identifier in the chat specified in `fromChatId`
+     * @param options The instance of <<TelegramForwardOptions>> with other optional parameters
+     */
+    global void forward(String fromChatId, Integer messageId, TelegramForwardOptions options) {
+        BotJsonPayload request = new BotJsonPayload(options)
+            .set('from_chat_id', fromChatId)
+            .set('message_id', messageId);
+
+        BotJsonPayload callbackParams = new BotJsonPayload()
+            .set('type', BotMessageType.Other.name())
+            .set('parameters', new BotJsonPayload(request).set('type', 'Forward'));
+
+        send(TelegramBotMethod.ForwardMessage, request, callbackParams);
+    }
+
+    /**
+     * @description Sends a copy of the specified message without referencing the original message
+     * @param fromChatId The unique identifier for the chat where the original message was sent
+     * @param messageId The message identifier in the chat specified in `fromChatId`
+     */
+    global void copy(String fromChatId, Integer messageId) {
+        copy(fromChatId, messageId, new TelegramCopyOptions());
+    }
+
+    /**
+     * @description Sends a copy of the specified message without referencing the original message
+     * @param fromChatId The unique identifier for the chat where the original message was sent
+     * @param messageId The message identifier in the chat specified in `fromChatId`
+     * @param options The instance of <<TelegramCopyOptions>> with other optional parameters
+     */
+    global void copy(String fromChatId, Integer messageId, TelegramCopyOptions options) {
+        BotJsonPayload request = new BotJsonPayload(options)
+            .set('from_chat_id', fromChatId)
+            .set('message_id', messageId);
+
+        BotJsonPayload callbackParams = new BotJsonPayload()
+            .set('type', BotMessageType.Other.name())
+            .set('parameters', new BotJsonPayload(request).set('type', 'Copy'));
+
+        send(TelegramBotMethod.CopyMessage, request, callbackParams);
     }
 
     /**
@@ -555,7 +599,7 @@ global class TelegramBotSenderService implements IBotSenderService {
             payload.set('reply_markup', replyMarkup);
         }
 
-        BotJsonPayload response = calloutService.call(method, payload);
+        BotJsonPayload response = calloutService.call(method, payload.set('chat_id', chatId));
         TelegramMessage message = new TelegramMessage(response.getJsonPayload('result'));
 
         if (callbackParams != null) {

@@ -950,6 +950,90 @@ private class TelegramBotServiceTest {
     }
 
     @IsTest
+    private static void forward_withoutOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).forward(fixture.chat.ExternalId__c, 1234);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        BotJsonPayload expectedOptions = new BotJsonPayload()
+            .set('from_chat_id', fixture.chat.ExternalId__c)
+            .set('message_id', 1234)
+            .set('type', 'Forward');
+
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
+    }
+
+    @IsTest
+    private static void forward_withOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramForwardOptions options = new TelegramForwardOptions()
+            .withoutNotification()
+            .withProtectedContent()
+            .withThreadId(null);
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).forward(fixture.chat.ExternalId__c, 1234, options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        BotJsonPayload expectedOptions = new BotJsonPayload(options)
+            .set('from_chat_id', fixture.chat.ExternalId__c)
+            .set('message_id', 1234)
+            .set('type', 'Forward');
+
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
+    }
+
+    @IsTest
+    private static void copy_withoutOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).copy(fixture.chat.ExternalId__c, 1234);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        BotJsonPayload expectedOptions = new BotJsonPayload()
+            .set('from_chat_id', fixture.chat.ExternalId__c)
+            .set('message_id', 1234)
+            .set('type', 'Copy');
+
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
+    }
+
+    @IsTest
+    private static void copy_withOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramCopyOptions options = new TelegramCopyOptions()
+            .withCaption('Caption')
+            .withParseMode('HTML')
+            .withMessageEntity(null)
+            .asReplyToMessage(null)
+            .withoutNotification()
+            .withProtectedContent()
+            .withThreadId(null);
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).copy(fixture.chat.ExternalId__c, 1234, options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        BotJsonPayload expectedOptions = new BotJsonPayload(options)
+            .set('from_chat_id', fixture.chat.ExternalId__c)
+            .set('message_id', 1234)
+            .set('type', 'Copy');
+
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
+    }
+
+    @IsTest
     private static void send_chatAction_shouldSendAndCreateMessageRecord() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();

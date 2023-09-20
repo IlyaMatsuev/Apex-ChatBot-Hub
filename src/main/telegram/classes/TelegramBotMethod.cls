@@ -24,6 +24,8 @@ public class TelegramBotMethod extends BotMethod {
     public static final TelegramBotMethod SendPoll = new TelegramBotMethod('sendPoll');
     public static final TelegramBotMethod SendDice = new TelegramBotMethod('sendDice');
     public static final TelegramBotMethod SendChatAction = new TelegramBotMethod('sendChatAction');
+    public static final TelegramBotMethod ForwardMessage = new TelegramBotMethod('forwardMessage');
+    public static final TelegramBotMethod CopyMessage = new TelegramBotMethod('copyMessage');
 
     /**
      * Inline mode methods

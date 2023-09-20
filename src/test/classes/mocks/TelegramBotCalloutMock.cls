@@ -56,6 +56,12 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
             when 'sendChatAction' {
                 return sendChatAction(request);
             }
+            when 'forwardMessage' {
+                return getSuccessTelegramMessageResponse(request);
+            }
+            when 'copyMessage' {
+                return getSuccessTelegramMessageResponse(request);
+            }
             when 'getChat' {
                 return getChat(request);
             }
