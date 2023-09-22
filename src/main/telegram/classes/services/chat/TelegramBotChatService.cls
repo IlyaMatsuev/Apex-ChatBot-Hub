@@ -49,7 +49,7 @@ global class TelegramBotChatService {
      * @param userId The `Telegram` id of the user whose request needs to be approved or declined
      * @return The instance of the <<TelegramBotChatJoinRequestService>> class
      */
-    global TelegramBotChatJoinRequestService joinRequest(Integer userId) {
+    global TelegramBotChatJoinRequestService joinRequest(Long userId) {
         return new TelegramBotChatJoinRequestService(chatId, userId, calloutService);
     }
 
@@ -58,7 +58,7 @@ global class TelegramBotChatService {
      * @param userId The `Telegram` id of the chat member user
      * @return The instance of the <<TelegramBotChatMemberService>> class
      */
-    global TelegramBotChatMemberService member(Integer userId) {
+    global TelegramBotChatMemberService member(Long userId) {
         return new TelegramBotChatMemberService(chatId, userId, calloutService);
     }
 

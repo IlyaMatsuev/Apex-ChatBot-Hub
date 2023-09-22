@@ -16,7 +16,7 @@ global class TelegramChatJoinRequestEvent extends BotPayload {
     /**
      * @description The identifier of a private chat with the user who sent the join request
      */
-    global Integer userChatId { get { return payload.getInteger('user_chat_id'); } }
+    global Long userChatId { get { return payload.getLong('user_chat_id'); } }
 
     /**
      * @description The date the request was sent

@@ -6,7 +6,7 @@ global class TelegramChat extends BotPayload implements IBotChat {
     /**
      * @description The unique identifier for this chat
      */
-    global Integer id { get { return payload.getInteger('id'); } }
+    global Long id { get { return payload.getLong('id'); } }
 
     /**
      * @description The type of chat, can be either “private”, “group”, “supergroup” or “channel”
@@ -149,7 +149,7 @@ global class TelegramChat extends BotPayload implements IBotChat {
     /**
      * @description The unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice versa; for supergroups and channel chats. Returned only in `getChat`
      */
-    global Integer linkedChatId { get { return payload.getInteger('linked_chat_id'); } }
+    global Long linkedChatId { get { return payload.getLong('linked_chat_id'); } }
 
     /**
      * @description For supergroups, the location to which the supergroup is connected. Returned only in `getChat`
