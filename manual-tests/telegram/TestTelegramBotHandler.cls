@@ -5,7 +5,7 @@ public class TestTelegramBotHandler extends TelegramBotHandler {
     // Send any message to the bot
     public override void onMessageReceived(TelegramBotContext context, TelegramMessageEvent event) {
         String replyText = event.text == null ? event.caption : event.text;
-        context.reply().withForceReply().text('Echo: ' + replyText);
+        context.reply().text('Echo: ' + replyText);
         logEvent(context.getBot().id, 'onMessageReceived', event);
     }
 

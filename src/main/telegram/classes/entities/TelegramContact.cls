@@ -21,7 +21,7 @@ global class TelegramContact extends BotPayload {
     /**
      * @description The contact's user identifier in `Telegram`
      */
-    global Integer userId { get { return payload.getInteger('user_id'); } }
+    global Long userId { get { return payload.getLong('user_id'); } }
 
     /**
      * @description The additional data about the contact in the form of a vCard

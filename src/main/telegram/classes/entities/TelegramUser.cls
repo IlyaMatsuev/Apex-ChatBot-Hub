@@ -6,7 +6,7 @@ global class TelegramUser extends BotPayload implements IBotUser {
     /**
      * @description The unique identifier for this user or bot
      */
-    global Integer id { get { return payload.getInteger('id'); } }
+    global Long id { get { return payload.getLong('id'); } }
 
     /**
      * @description `True` if this user is a bot
