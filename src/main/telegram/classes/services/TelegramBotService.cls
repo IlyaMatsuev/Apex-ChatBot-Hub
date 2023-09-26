@@ -19,6 +19,27 @@ global class TelegramBotService extends BotService {
     }
 
     /**
+     * @description Creates an instance of the `Telegram` edit service
+     * @param chatId The id of the chat where a message needs to be edited
+     * @param messageId The id of the message to edit
+     * @return The instance of the <<TelegramBotEditorService>> class
+     */
+    global TelegramBotEditorService edit(String chatId, String messageId) {
+        return edit(chatId, messageId, false);
+    }
+
+    /**
+     * @description Creates an instance of the `Telegram` edit service
+     * @param chatId The id of the chat where a message needs to be edited
+     * @param messageId The id of the message to edit
+     * @param isInlineMessage Determines if the message to edit is an inline message
+     * @return The instance of the <<TelegramBotEditorService>> class
+     */
+    global TelegramBotEditorService edit(String chatId, String messageId, Boolean isInlineMessage) {
+        return new TelegramBotEditorService(chatId, messageId, isInlineMessage, calloutService);
+    }
+
+    /**
      * @description Creates an instance of the `Telegram` chat service
      * @param chatId The id of the chat which information needs to be updated
      * @return The instance of the <<TelegramBotChatService>> class
@@ -35,7 +56,4 @@ global class TelegramBotService extends BotService {
     global TelegramBotInlineQueryService inlineQuery(String inlineQueryId) {
         return new TelegramBotInlineQueryService(inlineQueryId, calloutService);
     }
-
-    // TODO:
-    // - TelegramBotEditService
 }
