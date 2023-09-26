@@ -24,14 +24,14 @@ global abstract class TelegramBotHandler implements IBotHandler {
     global virtual void onChannelPostEdited(TelegramBotContext context, TelegramMessageEvent event) {}
 
     /**
-     * @description The method that is called when an inline query is made via the bot
+     * @description The method that is called when an inline query is made via the bot. Using inline mode for a bot requires enabling it: https://core.telegram.org/bots/inline
      * @param context The `Telegram` bot context
      * @param event The instance of <<TelegramInlineQueryEvent>> class, describing the received inline query event
      */
     global virtual void onInlineQuery(TelegramBotContext context, TelegramInlineQueryEvent event) {}
 
     /**
-     * @description The method that is called when the result of any inline query was chosen by the user and sent to their chat partner
+     * @description The method that is called when the result of any inline query was chosen by the user and sent to their chat partner. Receiving this events requires enabling collecting feedback: https://core.telegram.org/bots/inline#collecting-feedback
      * @param context The `Telegram` bot context
      * @param event The instance of <<TelegramChosenInlineResultEvent>> class, describing the inline query result event
      */

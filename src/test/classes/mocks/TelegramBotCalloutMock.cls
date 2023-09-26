@@ -56,8 +56,38 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
             when 'sendChatAction' {
                 return sendChatAction(request);
             }
+            when 'forwardMessage' {
+                return getSuccessTelegramMessageResponse(request);
+            }
+            when 'copyMessage' {
+                return getSuccessTelegramMessageResponse(request);
+            }
             when 'getChat' {
                 return getChat(request);
+            }
+            when 'editMessageText' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'editMessageCaption' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'editMessageMedia' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'editMessageLiveLocation' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'stopMessageLiveLocation' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'editMessageReplyMarkup' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'stopPoll' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'deleteMessage' {
+                return getSuccessTelegramResponse(request);
             }
             when 'leaveChat' {
                 return getSuccessTelegramResponse(request);

@@ -950,6 +950,90 @@ private class TelegramBotServiceTest {
     }
 
     @IsTest
+    private static void forward_withoutOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).forward(fixture.chat.ExternalId__c, 1234);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        BotJsonPayload expectedOptions = new BotJsonPayload()
+            .set('from_chat_id', fixture.chat.ExternalId__c)
+            .set('message_id', 1234)
+            .set('type', 'Forward');
+
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
+    }
+
+    @IsTest
+    private static void forward_withOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramForwardOptions options = new TelegramForwardOptions()
+            .withoutNotification()
+            .withProtectedContent()
+            .withThreadId(null);
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).forward(fixture.chat.ExternalId__c, 1234, options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        BotJsonPayload expectedOptions = new BotJsonPayload(options)
+            .set('from_chat_id', fixture.chat.ExternalId__c)
+            .set('message_id', 1234)
+            .set('type', 'Forward');
+
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
+    }
+
+    @IsTest
+    private static void copy_withoutOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).copy(fixture.chat.ExternalId__c, 1234);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        BotJsonPayload expectedOptions = new BotJsonPayload()
+            .set('from_chat_id', fixture.chat.ExternalId__c)
+            .set('message_id', 1234)
+            .set('type', 'Copy');
+
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
+    }
+
+    @IsTest
+    private static void copy_withOptions_shouldSendAndCreateMessageRecord() {
+        setCalloutMock();
+        SenderFixture fixture = new SenderFixture();
+        TelegramCopyOptions options = new TelegramCopyOptions()
+            .withCaption('Caption')
+            .withParseMode('HTML')
+            .withMessageEntity(null)
+            .asReplyToMessage(null)
+            .withoutNotification()
+            .withProtectedContent()
+            .withThreadId(null);
+
+        Test.startTest();
+        fixture.sut().send(fixture.chat.ExternalId__c).copy(fixture.chat.ExternalId__c, 1234, options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        BotJsonPayload expectedOptions = new BotJsonPayload(options)
+            .set('from_chat_id', fixture.chat.ExternalId__c)
+            .set('message_id', 1234)
+            .set('type', 'Copy');
+
+        fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
+    }
+
+    @IsTest
     private static void send_chatAction_shouldSendAndCreateMessageRecord() {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();
@@ -960,6 +1044,265 @@ private class TelegramBotServiceTest {
         Test.stopTest();
 
         fixture.assertMessageIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_text_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).text('Altered');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_textWithInlineKeyboard_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+        TelegramInlineKeyboardMarkupOptions keyboard = new TelegramInlineKeyboardMarkupOptions()
+            .addButton(new TelegramInlineKeyboardMarkupOptions.Button('Test').withCallbackData('result1'));
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).withInlineKeyboard(keyboard).text('Altered');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_textWithOptions_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+        TelegramEditTextOptions options = new TelegramEditTextOptions()
+            .withParseMode('HTML')
+            .withMessageEntity(null)
+            .withoutLinksPreview();
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).text('Altered', options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_caption_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).caption('Altered');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_captionWithOptions_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+        TelegramEditCaptionOptions options = new TelegramEditCaptionOptions()
+            .withParseMode('HTML')
+            .withMessageEntity(null);
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).caption('Altered', options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_mediaWithPhoto_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+        TelegramInputMedia media = new TelegramInputMediaPhoto('http://example.com/pic.jpg')
+            .withCaption('Caption...')
+            .withParseMode('HTML')
+            .withMessageEntity(null)
+            .withSpoiler();
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).media(media);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_mediaWithVideo_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+        TelegramInputMedia media = new TelegramInputMediaVideo('http://example.com/vid.mp4')
+            .withThumbnail('http://example.com/pic.jpg')
+            .withCaption('Caption...')
+            .withParseMode('HTML')
+            .withMessageEntity(null)
+            .withDuration(10)
+            .withLayout(200, 300)
+            .withStreamingSupport()
+            .withSpoiler();
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).media(media);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_mediaWithAnimation_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+        TelegramInputMedia media = new TelegramInputMediaAnimation('http://example.com/vid.mp4')
+            .withThumbnail('http://example.com/pic.jpg')
+            .withCaption('Caption...')
+            .withParseMode('HTML')
+            .withMessageEntity(null)
+            .withDuration(10)
+            .withLayout(200, 300)
+            .withSpoiler();
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).media(media);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_mediaWithAudio_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+        TelegramInputMedia media = new TelegramInputMediaAudio('http://example.com/aud.mp3')
+            .withThumbnail('http://example.com/pic.jpg')
+            .withCaption('Caption...')
+            .withParseMode('HTML')
+            .withMessageEntity(null)
+            .withDuration(10)
+            .withTitle('Some title')
+            .withPerformer('Bruce Lee');
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).media(media);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_mediaWithDocument_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+        TelegramInputMedia media = new TelegramInputMediaDocument('http://example.com/doc.pdf')
+            .withThumbnail('http://example.com/pic.jpg')
+            .withCaption('Caption...')
+            .withParseMode('HTML')
+            .withMessageEntity(null)
+            .withoutContentTypeDetection();
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).media(media);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_liveLocation_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).liveLocation(12.4321, 43.9999);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_liveLocationWithOptions_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+        TelegramEditLiveLocationOptions options = new TelegramEditLiveLocationOptions()
+            .withHorizontalAccuracy(10.2)
+            .withProximityAlertRadius(100)
+            .withHeading(100);
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).liveLocation(12.4321, 43.9999, options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_stopLiveLocation_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).stopLiveLocation();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_inlineKeyboard_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+        TelegramInlineKeyboardMarkupOptions keyboard = new TelegramInlineKeyboardMarkupOptions()
+            .addButton(new TelegramInlineKeyboardMarkupOptions.Button('Test').withCallbackData('result1'));
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).inlineKeyboard(keyboard);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_stopPoll_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).stopPoll();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void edit_deleteMessage_shouldSendCallout() {
+        setCalloutMock();
+        EditorFixture fixture = new EditorFixture();
+
+        Test.startTest();
+        fixture.sut().edit(fixture.chatId, fixture.messageId).deleteMessage();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
     }
 
     @IsTest
@@ -1733,6 +2076,27 @@ private class TelegramBotServiceTest {
 
             Assert.isTrue(customException.payload.has('response'));
             Assert.areEqual(statusCode, customException.payload.getJsonPayload('response').getInteger('statusCode'));
+        }
+    }
+
+    private class EditorFixture {
+        public BotModel bot;
+        public String chatId;
+        public String messageId;
+
+        private EditorFixture() {
+            this.bot = createBot();
+            this.chatId = '41241241';
+            this.messageId = '1234';
+        }
+
+        public TelegramBotService sut() {
+            return createService(bot);
+        }
+
+        public void assertErrorIsNotCreated() {
+            List<BotError__c> errors = [SELECT Id FROM BotError__c];
+            Assert.isTrue(errors.isEmpty());
         }
     }
 

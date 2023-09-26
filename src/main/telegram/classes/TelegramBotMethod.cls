@@ -24,6 +24,20 @@ public class TelegramBotMethod extends BotMethod {
     public static final TelegramBotMethod SendPoll = new TelegramBotMethod('sendPoll');
     public static final TelegramBotMethod SendDice = new TelegramBotMethod('sendDice');
     public static final TelegramBotMethod SendChatAction = new TelegramBotMethod('sendChatAction');
+    public static final TelegramBotMethod ForwardMessage = new TelegramBotMethod('forwardMessage');
+    public static final TelegramBotMethod CopyMessage = new TelegramBotMethod('copyMessage');
+
+    /**
+     * Editing methods
+     */
+    public static final TelegramBotMethod EditMessageText = new TelegramBotMethod('editMessageText');
+    public static final TelegramBotMethod EditMessageCaption = new TelegramBotMethod('editMessageCaption');
+    public static final TelegramBotMethod EditMessageMedia = new TelegramBotMethod('editMessageMedia');
+    public static final TelegramBotMethod EditMessageLiveLocation = new TelegramBotMethod('editMessageLiveLocation');
+    public static final TelegramBotMethod StopMessageLiveLocation = new TelegramBotMethod('stopMessageLiveLocation');
+    public static final TelegramBotMethod EditMessageReplyMarkup = new TelegramBotMethod('editMessageReplyMarkup');
+    public static final TelegramBotMethod StopPoll = new TelegramBotMethod('stopPoll');
+    public static final TelegramBotMethod DeleteMessage = new TelegramBotMethod('deleteMessage');
 
     /**
      * Inline mode methods
