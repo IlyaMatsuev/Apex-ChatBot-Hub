@@ -19,6 +19,14 @@ global class ViberBotContext extends BotContext {
     }
 
     /**
+     * @description Returns a received `Viber` bot update event
+     * @return The instance of the <<ViberUpdateEvent>> class
+     */
+    global ViberUpdateEvent getUpdateEvent() {
+        return (ViberUpdateEvent) updateEvent;
+    }
+
+    /**
      * @description Returns the instance of the `Viber` bot service
      * @return The instance of the <<ViberBotService>> class
      */

@@ -15,6 +15,12 @@ global interface IBotContext {
     IBotSenderService reply();
 
     /**
+     * @description Returns a received update event
+     * @return The instance of the <<IBotUpdateEvent>> interface
+     */
+    IBotUpdateEvent getUpdateEvent();
+
+    /**
      * @description Returns an instance of the <<IBotService>> for the current bot type
      * @return The instance of the <<IBotService>> interface
      */

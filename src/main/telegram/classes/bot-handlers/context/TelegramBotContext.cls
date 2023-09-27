@@ -19,6 +19,14 @@ global class TelegramBotContext extends BotContext {
     }
 
     /**
+     * @description Returns a received `Telegram` bot update event
+     * @return The instance of the <<TelegramUpdateEvent>> class
+     */
+    global TelegramUpdateEvent getUpdateEvent() {
+        return (TelegramUpdateEvent) updateEvent;
+    }
+
+    /**
      * @description Returns the instance of the `Telegram` bot service
      * @return The instance of the <<TelegramBotService>> class
      */

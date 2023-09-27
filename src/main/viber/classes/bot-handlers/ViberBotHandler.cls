@@ -47,11 +47,10 @@ global abstract class ViberBotHandler implements IBotHandler {
     /**
      * @description The common handler for all webhook event types
      * @param context The context variable that contains all necessary methods for handling the incoming update. The instance of the <<ViberBotContext>> class
-     * @param event The information about the received update from the bot. E.g. new message, sender, chat, etc. The instance of the <<ViberUpdateEvent>> class
      */
-    global void handle(IBotContext context, IBotUpdateEvent event) {
+    global void handle(IBotContext context) {
         ViberBotContext viberContext = (ViberBotContext) context;
-        ViberUpdateEvent viberEvent = (ViberUpdateEvent) event;
+        ViberUpdateEvent viberEvent = viberContext.getUpdateEvent();
         ViberUpdateEventType eventType = viberEvent.getType();
 
         if (eventType == ViberUpdateEventType.Subscribed) {
