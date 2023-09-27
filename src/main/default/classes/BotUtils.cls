@@ -35,6 +35,10 @@ public class BotUtils {
         return externalId?.substringBefore(':');
     }
 
+    public static Long parseShortUnixTimestamp(DateTime dt) {
+        return dt == null ? null : dt.getTime() / 1000;
+    }
+
     public static Object createInstance(String typeName) {
         return createInstance(typeName, new Map<String, Object>());
     }

@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendVenue` method. The source: https://core.telegram.org/bots/api#sendvenue
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendVenue` method.
+ * Source: https://core.telegram.org/bots/api#sendvenue
  */
 global class TelegramSendVenueOptions extends TelegramSendMessageOptions {
     /**

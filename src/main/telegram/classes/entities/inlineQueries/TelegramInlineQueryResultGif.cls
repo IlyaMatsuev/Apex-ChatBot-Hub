@@ -1,5 +1,5 @@
 /**
- * @description Describes the gif result payload that can be attached as part of answer to a `Telegram` bot inline query
+ * @description Describes the gif result payload that can be attached as part of answer to a `Telegram` bot inline query.
  * Source: https://core.telegram.org/bots/api#inlinequeryresultgif, https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
  */
 global class TelegramInlineQueryResultGif extends TelegramInlineQueryResult {

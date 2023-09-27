@@ -153,7 +153,7 @@ private class TelegramBotServiceTest {
         setCalloutMock();
         SenderFixture fixture = new SenderFixture();
         TelegramReplyKeyboardRemoveOptions keyboardRemovedOptions = new TelegramReplyKeyboardRemoveOptions()
-            .asSelective(true);
+            .asSelective();
 
         Test.startTest();
         fixture.sut()
@@ -196,7 +196,7 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
         TelegramForceReplyOptions forceReplyOptions = new TelegramForceReplyOptions()
             .setInputPlaceholder('Reply with something...')
-            .asSelective(true);
+            .asSelective();
 
         Test.startTest();
         fixture.sut().send(fixture.chat.ExternalId__c).withForceReply(forceReplyOptions).text('Hello world!');
@@ -589,7 +589,7 @@ private class TelegramBotServiceTest {
         TelegramSendContactOptions options = new TelegramSendContactOptions()
             .withThreadId(null)
             .withVCard(
-                'BEGIN:VCARD\nFN:Simon Perreault\nN:Perreault;Simon;;;ing. jr,M.Sc.\nBDAY:--0203\nGENDER:M\nEMAIL;TYPE=work:simon.perreault@viagenie.ca\nEND:VCARD'
+                'BEGIN:VCARD\nFN:Simon Perrault\nN:Perrault;Simon;;;ing. jr,M.Sc.\nBDAY:--0203\nGENDER:M\nEMAIL;TYPE=work:simon.perreault@viagenie.ca\nEND:VCARD'
             )
             .withoutNotification()
             .withProtectedContent()
@@ -955,13 +955,13 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().send(fixture.chat.ExternalId__c).forward(fixture.chat.ExternalId__c, 1234);
+        fixture.sut().send(fixture.chat.ExternalId__c).forward(fixture.chat.ExternalId__c, '1234');
         Test.getEventBus().deliver();
         Test.stopTest();
 
         BotJsonPayload expectedOptions = new BotJsonPayload()
             .set('from_chat_id', fixture.chat.ExternalId__c)
-            .set('message_id', 1234)
+            .set('message_id', '1234')
             .set('type', 'Forward');
 
         fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
@@ -977,13 +977,13 @@ private class TelegramBotServiceTest {
             .withThreadId(null);
 
         Test.startTest();
-        fixture.sut().send(fixture.chat.ExternalId__c).forward(fixture.chat.ExternalId__c, 1234, options);
+        fixture.sut().send(fixture.chat.ExternalId__c).forward(fixture.chat.ExternalId__c, '1234', options);
         Test.getEventBus().deliver();
         Test.stopTest();
 
         BotJsonPayload expectedOptions = new BotJsonPayload(options)
             .set('from_chat_id', fixture.chat.ExternalId__c)
-            .set('message_id', 1234)
+            .set('message_id', '1234')
             .set('type', 'Forward');
 
         fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
@@ -995,13 +995,13 @@ private class TelegramBotServiceTest {
         SenderFixture fixture = new SenderFixture();
 
         Test.startTest();
-        fixture.sut().send(fixture.chat.ExternalId__c).copy(fixture.chat.ExternalId__c, 1234);
+        fixture.sut().send(fixture.chat.ExternalId__c).copy(fixture.chat.ExternalId__c, '1234');
         Test.getEventBus().deliver();
         Test.stopTest();
 
         BotJsonPayload expectedOptions = new BotJsonPayload()
             .set('from_chat_id', fixture.chat.ExternalId__c)
-            .set('message_id', 1234)
+            .set('message_id', '1234')
             .set('type', 'Copy');
 
         fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
@@ -1021,13 +1021,13 @@ private class TelegramBotServiceTest {
             .withThreadId(null);
 
         Test.startTest();
-        fixture.sut().send(fixture.chat.ExternalId__c).copy(fixture.chat.ExternalId__c, 1234, options);
+        fixture.sut().send(fixture.chat.ExternalId__c).copy(fixture.chat.ExternalId__c, '1234', options);
         Test.getEventBus().deliver();
         Test.stopTest();
 
         BotJsonPayload expectedOptions = new BotJsonPayload(options)
             .set('from_chat_id', fixture.chat.ExternalId__c)
-            .set('message_id', 1234)
+            .set('message_id', '1234')
             .set('type', 'Copy');
 
         fixture.assertMessageIsCreated(BotMessageType.Other, null, null, expectedOptions);
@@ -1456,7 +1456,7 @@ private class TelegramBotServiceTest {
         String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
 
         Test.startTest();
-        fixture.sut().chat(externalChatId).pinMessage(123124);
+        fixture.sut().chat(externalChatId).pinMessage('123124');
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -1604,7 +1604,7 @@ private class TelegramBotServiceTest {
         String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
 
         Test.startTest();
-        fixture.sut().chat(externalChatId).joinRequest(1231231).approve();
+        fixture.sut().chat(externalChatId).joinRequest('1231231').approve();
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -1618,7 +1618,7 @@ private class TelegramBotServiceTest {
         String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
 
         Test.startTest();
-        fixture.sut().chat(externalChatId).joinRequest(1231231).decline();
+        fixture.sut().chat(externalChatId).joinRequest('1231231').decline();
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -1632,7 +1632,7 @@ private class TelegramBotServiceTest {
         String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
 
         Test.startTest();
-        TelegramChatMember member = fixture.sut().chat(externalChatId).member(1231231).get();
+        TelegramChatMember member = fixture.sut().chat(externalChatId).member('1231231').get();
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -1647,7 +1647,7 @@ private class TelegramBotServiceTest {
         String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
 
         Test.startTest();
-        fixture.sut().chat(externalChatId).member(1231231).ban();
+        fixture.sut().chat(externalChatId).member('1231231').ban();
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -1661,7 +1661,7 @@ private class TelegramBotServiceTest {
         String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
 
         Test.startTest();
-        fixture.sut().chat(externalChatId).member(1231231).unban();
+        fixture.sut().chat(externalChatId).member('1231231').unban();
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -1676,7 +1676,7 @@ private class TelegramBotServiceTest {
         TelegramChatPermissions permissions = new TelegramChatPermissions().allowManageTopics(false);
 
         Test.startTest();
-        fixture.sut().chat(externalChatId).member(1231231).restrict(permissions);
+        fixture.sut().chat(externalChatId).member('1231231').restrict(permissions);
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -1703,7 +1703,7 @@ private class TelegramBotServiceTest {
             .allowManageTopics(false);
 
         Test.startTest();
-        fixture.sut().chat(externalChatId).member(1231231).promote(options);
+        fixture.sut().chat(externalChatId).member('1231231').promote(options);
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -1717,7 +1717,7 @@ private class TelegramBotServiceTest {
         String externalChatId = BotUtils.parseExternalId(fixture.chat.ExternalId__c);
 
         Test.startTest();
-        fixture.sut().chat(externalChatId).member(1231231).setCustomTitle('The king');
+        fixture.sut().chat(externalChatId).member('1231231').setCustomTitle('The king');
         Test.getEventBus().deliver();
         Test.stopTest();
 

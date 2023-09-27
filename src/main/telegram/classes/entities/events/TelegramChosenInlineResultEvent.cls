@@ -1,5 +1,5 @@
 /**
- * @description Describes the common payload properties for the `Telegram` bot chosen inline result events
+ * @description Describes the common payload properties for the `Telegram` bot chosen inline result events.
  * Source: https://core.telegram.org/bots/api#choseninlineresult
  */
 global class TelegramChosenInlineResultEvent extends BotPayload {

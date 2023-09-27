@@ -1,5 +1,5 @@
 /**
- * @description Describes the common payload properties for the `Telegram` bot poll answer events
+ * @description Describes the common payload properties for the `Telegram` bot poll answer events.
  * Source: https://core.telegram.org/bots/api#pollanswer
  */
 global class TelegramPollAnswerEvent extends BotPayload {

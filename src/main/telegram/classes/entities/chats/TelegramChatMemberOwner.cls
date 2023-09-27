@@ -1,5 +1,5 @@
 /**
- * @description Describes the information about an owner `Telegram` chat member
+ * @description Describes the information about an owner `Telegram` chat member.
  * Source: https://core.telegram.org/bots/api#chatmemberowner
  */
 global virtual class TelegramChatMemberOwner extends TelegramChatMember {

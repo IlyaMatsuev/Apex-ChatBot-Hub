@@ -10,7 +10,7 @@ global class ViberBotSenderService implements IBotSenderService {
     private final IBotCallback callback;
 
     private ViberReplyKeyboardOptions replyKeyboard;
-    private ViberBotMethod sendMethod {
+    private final ViberBotMethod sendMethod {
         get { return chatIds.size() > 1 ? ViberBotMethod.BroadcastMessage : ViberBotMethod.SendMessage; }
     }
 

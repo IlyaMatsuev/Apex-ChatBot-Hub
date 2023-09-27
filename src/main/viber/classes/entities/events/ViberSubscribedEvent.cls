@@ -1,5 +1,5 @@
 /**
- * @description Describes the `Viber` bot payload when a new user subscribes to the bot
+ * @description Describes the `Viber` bot payload when a new user subscribes to the bot.
  * Source: https://developers.viber.com/docs/api/rest-bot-api/#subscribed
  */
 global class ViberSubscribedEvent extends ViberMessageEvent {

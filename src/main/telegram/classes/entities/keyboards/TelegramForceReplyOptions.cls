@@ -24,6 +24,16 @@ global class TelegramForceReplyOptions extends BotPayload {
      * @description Makes the force reply available for the specific users only
      * 1) Users that are mentioned `@` in the sent message
      * 2) If the current message is a reply, use the target user
+     * @return The current <<TelegramForceReplyOptions>> instance
+     */
+    global TelegramForceReplyOptions asSelective() {
+        return asSelective(true);
+    }
+
+    /**
+     * @description Makes the force reply available for the specific users only
+     * 1) Users that are mentioned `@` in the sent message
+     * 2) If the current message is a reply, use the target user
      * @param isSelective Determines whether the force reply will be available for the specific users only or not. Default is `false`
      * @return The current <<TelegramForceReplyOptions>> instance
      */

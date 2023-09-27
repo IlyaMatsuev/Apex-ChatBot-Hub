@@ -1,6 +1,6 @@
 /**
  * @description Custom enum type that provides more flexibility comparing to the native Apex enums
- * @ignore
+ * @group Enums
  */
 global abstract class BotEnumType {
     private static final transient Map<Type, Map<String, BotEnumType>> cachedEnumValues = new Map<Type, Map<String, BotEnumType>>();

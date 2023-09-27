@@ -1,5 +1,5 @@
 /**
- * @description Describes the chat payload received as an update from a `Telegram` bot
+ * @description Describes the chat payload received as an update from a `Telegram` bot.
  * Source: https://core.telegram.org/bots/api#chat
  */
 global class TelegramChat extends BotPayload implements IBotChat {
@@ -190,7 +190,7 @@ global class TelegramChat extends BotPayload implements IBotChat {
     }
 
     /**
-     * @description Describes a payload of a chat photo
+     * @description Describes a payload of a chat photo.
      * Source: https://core.telegram.org/bots/api#chatphoto
      */
     global class Photo extends BotPayload {
@@ -220,7 +220,7 @@ global class TelegramChat extends BotPayload implements IBotChat {
     }
 
     /**
-     * @description Describes a payload of a location to which a chat is connected
+     * @description Describes a payload of a location to which a chat is connected.
      * Source: https://core.telegram.org/bots/api#chatlocation
      */
     global class Location extends BotPayload {

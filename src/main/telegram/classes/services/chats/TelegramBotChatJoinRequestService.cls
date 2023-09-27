@@ -3,10 +3,10 @@
  */
 global class TelegramBotChatJoinRequestService {
     private final String chatId;
-    private final Long userId;
+    private final String userId;
     private final BotCalloutService calloutService;
 
-    public TelegramBotChatJoinRequestService(String chatId, Long userId, BotCalloutService calloutService) {
+    public TelegramBotChatJoinRequestService(String chatId, String userId, BotCalloutService calloutService) {
         this.chatId = chatId;
         this.userId = userId;
         this.calloutService = calloutService;

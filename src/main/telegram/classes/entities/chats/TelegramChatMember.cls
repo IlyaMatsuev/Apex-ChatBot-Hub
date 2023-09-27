@@ -1,5 +1,5 @@
 /**
- * @description Describes the information about a basic `Telegram` chat member
+ * @description Describes the information about a basic `Telegram` chat member.
  * Source: https://core.telegram.org/bots/api#chatmembermember
  */
 global virtual class TelegramChatMember extends BotPayload {

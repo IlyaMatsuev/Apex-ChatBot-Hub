@@ -1,5 +1,5 @@
 /**
- * @description Represents the coordinates for a location message.
+ * @description Represents the coordinates for a location message
  */
 global class ViberLocation extends BotPayload {
     /**

@@ -1,5 +1,5 @@
 /**
- * @description Describes the common payload properties for the `Telegram` bot chat member updated events
+ * @description Describes the common payload properties for the `Telegram` bot chat member updated events.
  * Source: https://core.telegram.org/bots/api#chatmemberupdated
  */
 global class TelegramChatMemberUpdatedEvent extends BotPayload {

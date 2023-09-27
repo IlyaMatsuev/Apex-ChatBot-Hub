@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendPhoto` method. The source: https://core.telegram.org/bots/api#sendphoto
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendPhoto` method.
+ * Source: https://core.telegram.org/bots/api#sendphoto
  */
 global class TelegramSendImageOptions extends TelegramSendMessageOptions {
     /**

@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that represents parameters for sending a custom carousel/keyboard to the user via the `Viber` bot service. The source: https://developers.viber.com/docs/tools/keyboards/#general-keyboard-parameters
+ * @description The builder-like class that represents parameters for sending a custom carousel/keyboard to the user via the `Viber` bot service.
+ * Source: https://developers.viber.com/docs/tools/keyboards/#general-keyboard-parameters
  */
 global class ViberReplyKeyboardOptions extends BotPayload {
     /**
@@ -131,7 +132,7 @@ global class ViberReplyKeyboardOptions extends BotPayload {
 
         /**
          * @description Sets the button background color
-         * @param backgroundColor The backgroun color of the button (HEX value)
+         * @param backgroundColor The background color of the button (HEX value)
          * @return The current <<ViberReplyKeyboardOptions.Button>> instance
          */
         global Button setBackgroundColor(String backgroundColor) {
@@ -300,8 +301,8 @@ global class ViberReplyKeyboardOptions extends BotPayload {
 
         /**
          * @description Applies additional styling properties to the button text
+         * @param opacity The text opacity. Accepts numbers in range: `0..100`. Default is `100`
          * @param size The text size. Possible values: `small`, `regular`, `large`. Default is `regular`
-         * @param opecity The text opacity. Accepts numbers in range: `0..100`. Default is `100`
          * @param bgGradientColor The background gradient to use under text (HEX value). Works only when text is aligned vertically to `top` or `bottom`
          * @param fitText If set to `true` the size of the text will be decreased to fit (minimum size is `12`). Default is `false`
          * @return The current <<ViberReplyKeyboardOptions.Button>> instance
@@ -455,7 +456,7 @@ global class ViberReplyKeyboardOptions extends BotPayload {
     global class ButtonInternalBrowser extends BotPayload {
         /**
          * @description Sets properties for the internal browser action button
-         * @param action The action button type in the internal's browser navigation bar.
+         * @param action The action button type in the internal browser navigation bar.
          * `forward` will open the forward via Viber screen and share current URL or predefined URL;
          * `send` sends the currently opened URL as an URL message, or predefined URL if `actionPredefinedUrl` is not empty;
          * `open-externally` opens external browser with the current URL;

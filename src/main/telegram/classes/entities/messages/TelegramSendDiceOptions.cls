@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendDice` method. The source: https://core.telegram.org/bots/api#senddice
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendDice` method.
+ * Source: https://core.telegram.org/bots/api#senddice
  */
 global class TelegramSendDiceOptions extends TelegramSendMessageOptions {
     /**

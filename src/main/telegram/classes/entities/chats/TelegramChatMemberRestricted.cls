@@ -1,5 +1,5 @@
 /**
- * @description Describes the information about a restricted `Telegram` chat member
+ * @description Describes the information about a restricted `Telegram` chat member.
  * Source: https://core.telegram.org/bots/api#chatmemberrestricted
  */
 global class TelegramChatMemberRestricted extends TelegramChatMember {

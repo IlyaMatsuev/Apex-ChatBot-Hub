@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendPoll` method. The source: https://core.telegram.org/bots/api#sendpoll
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendPoll` method.
+ * Source: https://core.telegram.org/bots/api#sendpoll
  */
 global class TelegramSendPollOptions extends TelegramSendMessageOptions {
     /**
@@ -134,7 +135,7 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
 
     /**
      * @description Adds a special entity that appear in the explanation text. For example username tags
-     * @param entity The instance of <<TelegramSendMessageOptions.TelegramMessageEntity>>, special message entity. E.g. hashtag, username, URL, etc.
+     * @param entity The instance of <<TelegramMessageEntity>>, special message entity. E.g. hashtag, username, URL, etc.
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
     global TelegramSendPollOptions withExplanationMessageEntity(TelegramMessageEntity entity) {
@@ -143,7 +144,7 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
 
     /**
      * @description Adds special entities that appear in the explanation text. For example username tags
-     * @param entities The list of <<TelegramSendMessageOptions.TelegramMessageEntity>> instances, special message entities. E.g. hashtag, username, URL, etc.
+     * @param entities The list of <<TelegramMessageEntity>> instances, special message entities. E.g. hashtag, username, URL, etc.
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
     global TelegramSendPollOptions withExplanationMessageEntities(TelegramMessageEntity[] entities) {
@@ -166,7 +167,7 @@ global class TelegramSendPollOptions extends TelegramSendMessageOptions {
      * @return The current instance of the <<TelegramSendPollOptions>> class
      */
     global TelegramSendPollOptions withCloseDate(DateTime closeDate) {
-        payload.set('close_date', closeDate?.getTime() / 1000, true);
+        payload.set('close_date', BotUtils.parseShortUnixTimestamp(closeDate), true);
         return this;
     }
 

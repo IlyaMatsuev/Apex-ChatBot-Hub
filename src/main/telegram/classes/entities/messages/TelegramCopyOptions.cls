@@ -1,5 +1,5 @@
 /**
- * @description Represents the optional parameters for the `Telegram` `copy` method
+ * @description Represents the optional parameters for the `Telegram` `copy` method.
  * Source: https://core.telegram.org/bots/api#copymessage
  */
 global class TelegramCopyOptions extends TelegramSendMessageOptions {

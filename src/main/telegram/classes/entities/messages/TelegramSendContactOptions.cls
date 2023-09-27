@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendContact` method. The source: https://core.telegram.org/bots/api#sendcontact
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendContact` method.
+ * Source: https://core.telegram.org/bots/api#sendcontact
  */
 global class TelegramSendContactOptions extends BotPayload {
     /**

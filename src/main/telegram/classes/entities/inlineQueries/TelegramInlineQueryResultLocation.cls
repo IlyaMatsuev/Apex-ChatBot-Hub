@@ -1,5 +1,5 @@
 /**
- * @description Describes the location result payload that can be attached as part of answer to a `Telegram` bot inline query
+ * @description Describes the location result payload that can be attached as part of answer to a `Telegram` bot inline query.
  * Source: https://core.telegram.org/bots/api#inlinequeryresultlocation
  */
 global class TelegramInlineQueryResultLocation extends TelegramInlineQueryResult {

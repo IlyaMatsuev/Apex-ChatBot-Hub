@@ -1,5 +1,5 @@
 /**
- * @description Describes the common payload properties for the `Telegram` bot chat join request events
+ * @description Describes the common payload properties for the `Telegram` bot chat join request events.
  * Source: https://core.telegram.org/bots/api#chatjoinrequest
  */
 global class TelegramChatJoinRequestEvent extends BotPayload {

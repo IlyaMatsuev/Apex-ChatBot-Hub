@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendMessage` method. The source: https://core.telegram.org/bots/api#sendmessage
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendMessage` method.
+ * Source: https://core.telegram.org/bots/api#sendmessage
  */
 global class TelegramSendTextOptions extends TelegramSendMessageOptions {
     /**

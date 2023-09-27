@@ -1,5 +1,5 @@
 /**
- * @description Describes the chat invite link payload that can be received as part of an update from a `Telegram` bot
+ * @description Describes the chat invite link payload that can be received as part of an update from a `Telegram` bot.
  * Source: https://core.telegram.org/bots/api#chatinvitelink
  */
 global class TelegramChatInviteLink extends BotPayload {

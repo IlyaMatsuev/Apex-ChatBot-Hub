@@ -1,5 +1,5 @@
 /**
- * @description Describes the web app info payload received as an update from a `Telegram` bot
+ * @description Describes the web app info payload received as an update from a `Telegram` bot.
  * Source: https://core.telegram.org/bots/api#webappinfo
  */
 global class TelegramWebAppInfo extends BotPayload {

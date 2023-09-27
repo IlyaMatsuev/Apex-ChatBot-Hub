@@ -3,10 +3,10 @@
  */
 global class TelegramBotChatMemberService {
     private final String chatId;
-    private final Long userId;
+    private final String userId;
     private final BotCalloutService calloutService;
 
-    public TelegramBotChatMemberService(String chatId, Long userId, BotCalloutService calloutService) {
+    public TelegramBotChatMemberService(String chatId, String userId, BotCalloutService calloutService) {
         this.chatId = chatId;
         this.userId = userId;
         this.calloutService = calloutService;
@@ -46,7 +46,7 @@ global class TelegramBotChatMemberService {
      */
     global void ban(DateTime untilDate, Boolean revokeMessages) {
         BotJsonPayload request = new BotJsonPayload()
-            .set('until_date', untilDate?.getTime(), true)
+            .set('until_date', BotUtils.parseShortUnixTimestamp(untilDate), true)
             .set('revoke_messages', revokeMessages, true);
 
         call(TelegramBotMethod.BanChatMember, request);
@@ -76,7 +76,7 @@ global class TelegramBotChatMemberService {
         BotJsonPayload request = new BotJsonPayload()
             .set('permissions', permissions)
             .set('use_independent_chat_permissions', true)
-            .set('until_date', untilDate, true);
+            .set('until_date', BotUtils.parseShortUnixTimestamp(untilDate), true);
 
         call(TelegramBotMethod.RestrictChatMember, request);
     }

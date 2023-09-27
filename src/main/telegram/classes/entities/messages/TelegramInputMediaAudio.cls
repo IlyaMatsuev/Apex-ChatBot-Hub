@@ -1,5 +1,5 @@
 /**
- * @description Describes the input audio media payload that can be attached as part of `send` or `edit` `Telegram` bot methods
+ * @description Describes the input audio media payload that can be attached as part of `send` or `edit` `Telegram` bot methods.
  * Source: https://core.telegram.org/bots/api#inputmediaaudio
  */
 global class TelegramInputMediaAudio extends TelegramInputMedia {
