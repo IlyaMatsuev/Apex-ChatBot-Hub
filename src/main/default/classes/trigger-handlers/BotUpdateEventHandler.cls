@@ -11,38 +11,35 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
     }
 
     public void handle(Triggers.Context context) {
-        List<UpdateEventWrapper> updateEvents = createUpdateEventWrappers(
-            (List<BotUpdateEvent__e>) context.props.newList
-        );
+        List<IBotContext> contexts = createBotContexts((List<BotUpdateEvent__e>) context.props.newList);
 
-        saveChatDetails(updateEvents);
+        saveChatDetails(contexts);
 
-        System.enqueueJob(new UpdateEventExecutor(updateEvents));
+        System.enqueueJob(new UpdateEventExecutor(contexts));
     }
 
-    private List<UpdateEventWrapper> createUpdateEventWrappers(List<BotUpdateEvent__e> events) {
+    private List<IBotContext> createBotContexts(List<BotUpdateEvent__e> events) {
         // The loop is needed when a user sends several messages at the same time
-        List<UpdateEventWrapper> updateEvents = new List<UpdateEventWrapper>();
+        List<IBotContext> contexts = new List<IBotContext>();
         for (BotUpdateEvent__e event : events) {
             BotModel bot = BotModel.fromJson(event.Bot__c);
-            IBotContext context = serviceFactory.createBotContext(bot, event.Payload__c);
-            IBotUpdateEvent updateEvent = serviceFactory.createBotUpdateEvent(bot, event.Payload__c);
-            updateEvents.add(new UpdateEventWrapper(context, updateEvent));
+            contexts.add(serviceFactory.createBotContext(bot, event.Payload__c));
         }
-        return updateEvents;
+        return contexts;
     }
 
-    private void saveChatDetails(List<UpdateEventWrapper> updateEvents) {
+    private void saveChatDetails(List<IBotContext> contexts) {
         List<Chat__c> chats = new List<Chat__c>();
         List<ChatUser__c> chatUsers = new List<ChatUser__c>();
         List<ChatMessage__c> chatMessages = new List<ChatMessage__c>();
-        for (UpdateEventWrapper updateEvent : updateEvents) {
-            Chat__c chat = getChat(updateEvent.context.getBot(), updateEvent.updateEvent.getChat());
-            ChatUser__c user = getChatUser(updateEvent.updateEvent.getChat()?.getSender());
+        for (IBotContext context : contexts) {
+            IBotUpdateEvent updateEvent = context.getUpdateEvent();
+            Chat__c chat = getChat(context.getBot(), updateEvent.getChat());
+            ChatUser__c user = getChatUser(updateEvent.getChat()?.getSender());
             ChatMessage__c message;
 
             if (chat != null && user != null) {
-                message = getChatMessage(chat.ExternalId__c, user.ExternalId__c, updateEvent.updateEvent.getMessage());
+                message = getChatMessage(chat.ExternalId__c, user.ExternalId__c, updateEvent.getMessage());
             }
 
             if (chat != null && !chats.contains(chat)) {
@@ -123,23 +120,23 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
     }
 
     private class UpdateEventExecutor implements Queueable, Database.AllowsCallouts {
-        private final List<UpdateEventWrapper> updateEvents;
+        private final List<IBotContext> contexts;
 
-        public UpdateEventExecutor(List<UpdateEventWrapper> updateEvents) {
-            this.updateEvents = updateEvents;
+        public UpdateEventExecutor(List<IBotContext> contexts) {
+            this.contexts = contexts;
         }
 
         public void execute(QueueableContext ctx) {
-            for (UpdateEventWrapper updateEvent : updateEvents) {
-                handleUpdateEvent(updateEvent);
+            for (IBotContext context : contexts) {
+                handleUpdateEvent(context);
             }
         }
 
-        private void handleUpdateEvent(UpdateEventWrapper updateEvent) {
+        private void handleUpdateEvent(IBotContext context) {
             BotModel bot;
             try {
-                bot = updateEvent.context.getBot();
-                bot.handler.handle(updateEvent.context, updateEvent.updateEvent);
+                bot = context.getBot();
+                bot.handler.handle(context);
             } catch (Exception error) {
                 BotErrorLogger.log(bot?.id, error);
             }

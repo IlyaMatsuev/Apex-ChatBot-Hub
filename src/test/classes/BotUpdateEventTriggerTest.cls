@@ -41,11 +41,11 @@ private class BotUpdateEventTriggerTest {
         Assert.areEqual('223123123:876541222', messages.get(0).ExternalId__c);
         Assert.areEqual(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
 
-        List<BotHandlerMock.ReceivedContext> contexts = BotHandlerMock.executedContexts;
+        List<IBotContext> contexts = BotHandlerMock.executedContexts;
         Assert.areEqual(1, contexts.size());
-        Assert.isInstanceOfType(contexts.get(0).event, TelegramUpdateEvent.class);
+        Assert.isInstanceOfType(contexts.get(0).getUpdateEvent(), TelegramUpdateEvent.class);
 
-        IBotUpdateEvent updateEvent = contexts.get(0).event;
+        IBotUpdateEvent updateEvent = contexts.get(0).getUpdateEvent();
         Assert.areEqual(TelegramUpdateEventType.Message, updateEvent.getType());
 
         IBotMessage messageUpdate = updateEvent.getMessage();
@@ -103,11 +103,11 @@ private class BotUpdateEventTriggerTest {
         // Message
         Assert.isTrue(messages.isEmpty());
 
-        List<BotHandlerMock.ReceivedContext> contexts = BotHandlerMock.executedContexts;
+        List<IBotContext> contexts = BotHandlerMock.executedContexts;
         Assert.areEqual(1, contexts.size());
-        Assert.isInstanceOfType(contexts.get(0).event, TelegramUpdateEvent.class);
+        Assert.isInstanceOfType(contexts.get(0).getUpdateEvent(), TelegramUpdateEvent.class);
 
-        IBotUpdateEvent updateEvent = contexts.get(0).event;
+        IBotUpdateEvent updateEvent = contexts.get(0).getUpdateEvent();
         Assert.areEqual(TelegramUpdateEventType.InlineQuery, updateEvent.getType());
         Assert.isNull(updateEvent.getMessage());
 
@@ -192,11 +192,11 @@ private class BotUpdateEventTriggerTest {
         Assert.areEqual('4912661846655238145:01234567890A=', messages.get(0).ExternalId__c);
         Assert.areEqual(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
 
-        List<BotHandlerMock.ReceivedContext> contexts = BotHandlerMock.executedContexts;
+        List<IBotContext> contexts = BotHandlerMock.executedContexts;
         Assert.areEqual(1, contexts.size());
-        Assert.isInstanceOfType(contexts.get(0).event, ViberUpdateEvent.class);
+        Assert.isInstanceOfType(contexts.get(0).getUpdateEvent(), ViberUpdateEvent.class);
 
-        IBotUpdateEvent updateEvent = contexts.get(0).event;
+        IBotUpdateEvent updateEvent = contexts.get(0).getUpdateEvent();
         Assert.areEqual(ViberUpdateEventType.Message, updateEvent.getType());
 
         IBotMessage messageUpdate = updateEvent.getMessage();
@@ -273,11 +273,11 @@ private class BotUpdateEventTriggerTest {
         Assert.isTrue(users.isEmpty());
         Assert.isTrue(messages.isEmpty());
 
-        List<BotHandlerMock.ReceivedContext> contexts = BotHandlerMock.executedContexts;
+        List<IBotContext> contexts = BotHandlerMock.executedContexts;
         Assert.areEqual(1, contexts.size());
-        Assert.isInstanceOfType(contexts.get(0).event, ViberUpdateEvent.class);
+        Assert.isInstanceOfType(contexts.get(0).getUpdateEvent(), ViberUpdateEvent.class);
 
-        IBotUpdateEvent updateEvent = contexts.get(0).event;
+        IBotUpdateEvent updateEvent = contexts.get(0).getUpdateEvent();
         Assert.areEqual(ViberUpdateEventType.WebhookCallback, updateEvent.getType());
 
         Assert.isNull(updateEvent.getMessage());

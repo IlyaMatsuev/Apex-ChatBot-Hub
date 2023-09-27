@@ -89,11 +89,10 @@ global abstract class TelegramBotHandler implements IBotHandler {
     /**
      * @description The common handler for all webhook event types
      * @param context The context variable that contains all necessary methods for handling the incoming update. The instance of the <<TelegramBotContext>> class
-     * @param event The information about the received update from the bot. E.g. new message, sender, chat, etc. The instance of the <<TelegramUpdateEvent>> class
      */
-    global void handle(IBotContext context, IBotUpdateEvent event) {
+    global void handle(IBotContext context) {
         TelegramBotContext tgContext = (TelegramBotContext) context;
-        TelegramUpdateEvent tgEvent = (TelegramUpdateEvent) event;
+        TelegramUpdateEvent tgEvent = tgContext.getUpdateEvent();
         TelegramUpdateEventType eventType = tgEvent.getType();
         BotJsonPayload eventPayload = tgEvent.getPayload().getJsonPayload(eventType.name());
 
