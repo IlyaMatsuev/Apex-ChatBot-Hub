@@ -36,7 +36,6 @@ public abstract class BotWebhookService {
         private set;
     }
 
-    // TODO: Make it possible to update webhook events
     public abstract void setWebhook();
     public abstract void unsetWebhook();
 

@@ -80,7 +80,7 @@ global class TelegramMessageEntity extends BotPayload {
      * @return The current instance of the message entity
      */
     global TelegramMessageEntity asUserMention(String userId) {
-        this.user = new TelegramUser(new BotJsonPayload().set('id', Long.valueOf(BotUtils.parseExternalId(userId))));
+        this.user = new TelegramUser(new BotJsonPayload().set('id', userId));
         return this;
     }
 

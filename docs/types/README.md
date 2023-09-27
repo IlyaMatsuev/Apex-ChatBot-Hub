@@ -32,7 +32,7 @@ Service class that provides access to all `Telegram` `send` methods
 
 ### [TelegramBotService](/types/Classes/TelegramBotService.md)
 
-The concrete service for the `Telegram` messanger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Telegram` only
+The concrete service for the `Telegram` messenger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Telegram` only
 
 ### [TelegramSendAudioOptions](/types/Classes/TelegramSendAudioOptions.md)
 
@@ -96,7 +96,7 @@ Service class that provides access to all `Viber` `send` methods
 
 ### [ViberBotService](/types/Classes/ViberBotService.md)
 
-The concrete service for the `Viber` messanger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Viber` only
+The concrete service for the `Viber` messenger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Viber` only
 
 ### [ViberSendFileOptions](/types/Classes/ViberSendFileOptions.md)
 
@@ -140,7 +140,7 @@ Custom enum class that contains all available event types for `Viber` bots. Docs
 
 ### [IBotHandler](/types/Interfaces/IBotHandler.md)
 
-The interface that is required to implement to handle chat bot updates
+The interface that is required to implement to handle chatbot updates
 
 ### [IBotSenderService](/types/Interfaces/IBotSenderService.md)
 

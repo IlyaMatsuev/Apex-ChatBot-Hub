@@ -4,7 +4,7 @@
 
 ### Refactoring
 
-It was decided, due to better maintainability in future, to split the responsibility on Bot's implementations between different services and not just have everything together in the `TelegramBotService` or `ViberBotService` as it would be nearly impossible to extend with the new methods in future.
+It was decided, due to better maintainability in the future, to split the responsibility on Bot's implementations between different services and not just have everything together in the `TelegramBotService` or `ViberBotService` as it would be nearly impossible to extend with the new methods in future.
 
 Instead, now there is [IBotService](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types/Interfaces/IBotService) interface that contains all of the methods that will be available to use for all bot services.
 
@@ -12,7 +12,7 @@ Currently, `IBotService` has only one method `send(String chatId)` with all meth
 
 ### Introducing `BotModel` class
 
-To be aligned with the OOP style that is being used accross the project, I created a new [BotModel](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types/Classes/BotModel) class which is just a wrapper around the `Bot__c` sObject record. All references of `Bot__c` where replaced with that model.
+To be aligned with the OOP style that is being used across the project, I created a new [BotModel](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types/Classes/BotModel) class which is just a wrapper around the `Bot__c` sObject record. All references of `Bot__c` where replaced with that model.
 
 ## What's New
 
@@ -59,7 +59,7 @@ More methods can be found in [`TelegramBotSenderService`](https://ilyamatsuev.gi
 
 ### Support attaching a custom keyboard to a message
 
-If you want your users to have predefined options to choose as a reply on your bot's messages, you can use custom keyboard for both `Viber` and `Telegram` bots. Here is how you can have a generic implementataion for both messangers:
+If you want your users to have predefined options to choose as a reply on your bot's messages, you can use custom keyboard for both `Viber` and `Telegram` bots. Here is how you can have a generic implementation for both messengers:
 
 ```java
 // Pass the `bot` instance to the factory and create a service (doesn't matter if it's `Viber` or `Telegram` bot)
@@ -78,7 +78,7 @@ service.send(botUserId).withReplyKeyboard(replyButtons).text('Some informative m
 
 That's it. Now the user is going to receive a text message with the 3 buttons as the options for response. And it works in the same way for both `Viber` and `Telegram`!
 
-However, `Viber` and `Telegram` keyboards are pretty much different and support different features. So, if you want to use something specific for either of these messangers you should use `TelegramBotService` and `TelegramSendKeyboardOptions`, or `ViberBotService` and `ViberSendKeyboardOptions` via the `withReplyKeyboard` method. More information about these classes can be found [here](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types).
+However, `Viber` and `Telegram` keyboards are pretty much different and support different features. So, if you want to use something specific for either of these messengers you should use `TelegramBotService` and `TelegramSendKeyboardOptions`, or `ViberBotService` and `ViberSendKeyboardOptions` via the `withReplyKeyboard` method. More information about these classes can be found [here](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types).
 
 ## What's Changed
 

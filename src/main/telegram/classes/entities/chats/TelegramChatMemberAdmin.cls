@@ -1,5 +1,5 @@
 /**
- * @description Describes the information about an administrator `Telegram` chat member
+ * @description Describes the information about an administrator `Telegram` chat member.
  * Source: https://core.telegram.org/bots/api#chatmemberadministrator
  */
 global class TelegramChatMemberAdmin extends TelegramChatMemberOwner {

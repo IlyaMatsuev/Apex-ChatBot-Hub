@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendSticker` method. The source: https://core.telegram.org/bots/api#sendsticker
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendSticker` method.
+ * Source: https://core.telegram.org/bots/api#sendsticker
  */
 global class TelegramSendStickerOptions extends BotPayload {
     /**

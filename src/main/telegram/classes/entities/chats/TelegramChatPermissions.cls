@@ -1,5 +1,5 @@
 /**
- * @description Describes the chat permissions payload that can be received as part of an update from a `Telegram` bot
+ * @description Describes the chat permissions payload that can be received as part of an update from a `Telegram` bot.
  * Source: https://core.telegram.org/bots/api#chatpermissions
  */
 global class TelegramChatPermissions extends BotPayload {

@@ -1,5 +1,5 @@
 /**
- * @description Describes the common payload properties for the `Viber` bot update events
+ * @description Describes the common payload properties for the `Viber` bot update events.
  * Sources:
  * - https://developers.viber.com/docs/api/rest-bot-api/#message-receipts-callbacks
  * - https://developers.viber.com/docs/api/rest-bot-api/#unsubscribed

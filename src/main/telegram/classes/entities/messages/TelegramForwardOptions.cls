@@ -1,5 +1,5 @@
 /**
- * @description Represents the optional parameters for the `Telegram` `forward` method
+ * @description Represents the optional parameters for the `Telegram` `forward` method.
  * Source: https://core.telegram.org/bots/api#forwardmessage
  */
 global class TelegramForwardOptions extends TelegramSendMessageOptions {

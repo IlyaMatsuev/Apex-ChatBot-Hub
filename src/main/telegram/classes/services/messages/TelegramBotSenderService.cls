@@ -467,7 +467,7 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param fromChatId The unique identifier for the chat where the original message was sent
      * @param messageId The message identifier in the chat specified in `fromChatId`
      */
-    global void forward(String fromChatId, Integer messageId) {
+    global void forward(String fromChatId, String messageId) {
         forward(fromChatId, messageId, new TelegramForwardOptions());
     }
 
@@ -477,7 +477,7 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param messageId The message identifier in the chat specified in `fromChatId`
      * @param options The instance of <<TelegramForwardOptions>> with other optional parameters
      */
-    global void forward(String fromChatId, Integer messageId, TelegramForwardOptions options) {
+    global void forward(String fromChatId, String messageId, TelegramForwardOptions options) {
         BotJsonPayload request = new BotJsonPayload(options)
             .set('from_chat_id', fromChatId)
             .set('message_id', messageId);
@@ -494,7 +494,7 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param fromChatId The unique identifier for the chat where the original message was sent
      * @param messageId The message identifier in the chat specified in `fromChatId`
      */
-    global void copy(String fromChatId, Integer messageId) {
+    global void copy(String fromChatId, String messageId) {
         copy(fromChatId, messageId, new TelegramCopyOptions());
     }
 
@@ -504,7 +504,7 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param messageId The message identifier in the chat specified in `fromChatId`
      * @param options The instance of <<TelegramCopyOptions>> with other optional parameters
      */
-    global void copy(String fromChatId, Integer messageId, TelegramCopyOptions options) {
+    global void copy(String fromChatId, String messageId, TelegramCopyOptions options) {
         BotJsonPayload request = new BotJsonPayload(options)
             .set('from_chat_id', fromChatId)
             .set('message_id', messageId);

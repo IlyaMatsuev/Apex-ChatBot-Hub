@@ -1,5 +1,5 @@
 /**
- * @description Describes the payload received as an update from a `Telegram` bot
+ * @description Describes the payload received as an update from a `Telegram` bot.
  */
 global class TelegramUpdateEvent extends BotPayload implements IBotUpdateEvent {
     private static final String ID_FIELD_NAME = 'update_id';

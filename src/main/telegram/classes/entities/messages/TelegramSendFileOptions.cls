@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendDocument` method. The source: https://core.telegram.org/bots/api#senddocument
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendDocument` method.
+ * Source: https://core.telegram.org/bots/api#senddocument
  */
 global class TelegramSendFileOptions extends TelegramSendMessageOptions {
     /**

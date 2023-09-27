@@ -1,5 +1,5 @@
 /**
- * @description Describes the video result payload that can be attached as part of answer to a `Telegram` bot inline query
+ * @description Describes the video result payload that can be attached as part of answer to a `Telegram` bot inline query.
  * Source: https://core.telegram.org/bots/api#inlinequeryresultvideo
  */
 global class TelegramInlineQueryResultVideo extends TelegramInlineQueryResult {

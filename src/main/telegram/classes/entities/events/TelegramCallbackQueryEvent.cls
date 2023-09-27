@@ -1,5 +1,5 @@
 /**
- * @description Describes the common payload properties for the `Telegram` bot callback query events
+ * @description Describes the common payload properties for the `Telegram` bot callback query events.
  * Source: https://core.telegram.org/bots/api#callbackquery
  */
 global class TelegramCallbackQueryEvent extends BotPayload {

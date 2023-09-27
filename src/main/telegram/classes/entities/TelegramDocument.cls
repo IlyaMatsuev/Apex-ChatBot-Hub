@@ -1,5 +1,5 @@
 /**
- * @description Describes the general file payload that can be received as part of an update from a `Telegram` bot
+ * @description Describes the general file payload that can be received as part of an update from a `Telegram` bot.
  * Source: https://core.telegram.org/bots/api#document
  */
 global class TelegramDocument extends BotPayload {

@@ -1,6 +1,6 @@
 # Demos
 
-Here I'll show you how to create a chatbot based on the `Telegram` messanger example. However, the flow and steps are absolutely the same as for `Viber`!
+Here I'll show you how to create a chatbot based on the `Telegram` messenger example. However, the flow and steps are absolutely the same as for `Viber`!
 
 ## How to create a new bot
 

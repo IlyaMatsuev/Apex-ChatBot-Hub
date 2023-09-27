@@ -1,5 +1,5 @@
 /**
- * @description Describes the message payload received as an update from a `Telegram` bot
+ * @description Describes the message payload received as an update from a `Telegram` bot.
  * Source: https://core.telegram.org/bots/api#message
  */
 global virtual class TelegramMessage extends BotPayload implements IBotMessage {

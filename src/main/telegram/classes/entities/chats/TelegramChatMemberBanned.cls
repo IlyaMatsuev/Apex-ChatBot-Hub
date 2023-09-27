@@ -1,5 +1,5 @@
 /**
- * @description Describes the information about a banned `Telegram` chat member
+ * @description Describes the information about a banned `Telegram` chat member.
  * Source: https://core.telegram.org/bots/api#chatmemberbanned
  */
 global class TelegramChatMemberBanned extends TelegramChatMember {

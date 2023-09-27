@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendAudio` and `sendVoice` methods. The sources: https://core.telegram.org/bots/api#sendaudio, https://core.telegram.org/bots/api#sendvoice
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendAudio` and `sendVoice` methods.
+ * Source: https://core.telegram.org/bots/api#sendaudio, https://core.telegram.org/bots/api#sendvoice
  */
 global class TelegramSendAudioOptions extends TelegramSendMessageOptions {
     /**

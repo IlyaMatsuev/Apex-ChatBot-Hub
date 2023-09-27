@@ -1,5 +1,5 @@
 /**
- * @description Describes the venue result payload that can be attached as part of answer to a `Telegram` bot inline query
+ * @description Describes the venue result payload that can be attached as part of answer to a `Telegram` bot inline query.
  * Source: https://core.telegram.org/bots/api#inlinequeryresultvenue
  */
 global class TelegramInlineQueryResultVenue extends TelegramInlineQueryResult {

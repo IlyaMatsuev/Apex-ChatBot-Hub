@@ -1,5 +1,5 @@
 /**
- * @description Describes the poll payload that can be received as part of an update from a `Telegram` bot
+ * @description Describes the poll payload that can be received as part of an update from a `Telegram` bot.
  * Source: https://core.telegram.org/bots/api#poll
  */
 global virtual class TelegramPoll extends BotPayload {
@@ -95,7 +95,7 @@ global virtual class TelegramPoll extends BotPayload {
     }
 
     /**
-     * @description Describes the information about one answer option in a poll
+     * @description Describes the information about one answer option in a poll.
      * Source: https://core.telegram.org/bots/api#polloption
      */
     global class Option extends BotPayload {

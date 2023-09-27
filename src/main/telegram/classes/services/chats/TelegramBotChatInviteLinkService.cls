@@ -95,7 +95,7 @@ global class TelegramBotChatInviteLinkService {
          * @return The current instance of the <<TelegramBotChatInviteLinkService.LinkOptions>> class
          */
         global LinkOptions withExpireDate(DateTime expireDate) {
-            payload.set('expire_date', expireDate.getTime());
+            payload.set('expire_date', BotUtils.parseShortUnixTimestamp(expireDate), true);
             return this;
         }
 

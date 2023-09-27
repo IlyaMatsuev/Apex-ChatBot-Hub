@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendVideo` and `sendAnimation` methods. The source: https://core.telegram.org/bots/api#sendvideo
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendVideo` and `sendAnimation` methods.
+ * Source: https://core.telegram.org/bots/api#sendvideo
  */
 global class TelegramSendVideoOptions extends TelegramSendMessageOptions {
     /**
@@ -89,7 +90,7 @@ global class TelegramSendVideoOptions extends TelegramSendMessageOptions {
 
     /**
      * @description Adds a special entity that appear in the message text. For example username tags
-     * @param entity The instance of <<TelegramSendMessageOptions.TelegramMessageEntity>>, special message entity. E.g. hashtag, username, URL, etc.
+     * @param entity The instance of <<TelegramMessageEntity>>, special message entity. E.g. hashtag, username, URL, etc.
      * @return The current instance of the <<TelegramSendVideoOptions>> class
      */
     global TelegramSendVideoOptions withMessageEntity(TelegramMessageEntity entity) {
@@ -98,7 +99,7 @@ global class TelegramSendVideoOptions extends TelegramSendMessageOptions {
 
     /**
      * @description Adds special entities that appear in the message text. For example username tags
-     * @param entities The list of <<TelegramSendMessageOptions.TelegramMessageEntity>> instances, special message entities. E.g. hashtag, username, URL, etc.
+     * @param entities The list of <<TelegramMessageEntity>> instances, special message entities. E.g. hashtag, username, URL, etc.
      * @return The current instance of the <<TelegramSendVideoOptions>> class
      */
     global TelegramSendVideoOptions withMessageEntities(TelegramMessageEntity[] entities) {

@@ -49,7 +49,7 @@ global class TelegramBotChatService {
      * @param userId The `Telegram` id of the user whose request needs to be approved or declined
      * @return The instance of the <<TelegramBotChatJoinRequestService>> class
      */
-    global TelegramBotChatJoinRequestService joinRequest(Long userId) {
+    global TelegramBotChatJoinRequestService joinRequest(String userId) {
         return new TelegramBotChatJoinRequestService(chatId, userId, calloutService);
     }
 
@@ -58,7 +58,7 @@ global class TelegramBotChatService {
      * @param userId The `Telegram` id of the chat member user
      * @return The instance of the <<TelegramBotChatMemberService>> class
      */
-    global TelegramBotChatMemberService member(Long userId) {
+    global TelegramBotChatMemberService member(String userId) {
         return new TelegramBotChatMemberService(chatId, userId, calloutService);
     }
 
@@ -114,7 +114,7 @@ global class TelegramBotChatService {
      * @description Pins the message in the chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the `can_pin_messages` administrator right in a supergroup or `can_edit_messages` administrator right in a channel
      * @param messageId The unique chat message id
      */
-    global void pinMessage(Integer messageId) {
+    global void pinMessage(String messageId) {
         pinMessage(messageId, null);
     }
 
@@ -123,7 +123,7 @@ global class TelegramBotChatService {
      * @param messageId The unique chat message id
      * @param disableNotification `True` if it is not necessary to send a notification to all chat members about the new pinned message. Notifications are always disabled in channels and private chats
      */
-    global void pinMessage(Integer messageId, Boolean disableNotification) {
+    global void pinMessage(String messageId, Boolean disableNotification) {
         BotJsonPayload request = new BotJsonPayload()
             .set('message_id', messageId)
             .set('disable_notification', disableNotification, true);
@@ -142,7 +142,7 @@ global class TelegramBotChatService {
      * @description Unpins the message in the chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the `can_pin_messages` administrator right in a supergroup or `can_edit_messages` administrator right in a channel
      * @param messageId The unique pinned chat message id
      */
-    global void unpinMessage(Integer messageId) {
+    global void unpinMessage(String messageId) {
         call(TelegramBotMethod.UnpinChatMessage, new BotJsonPayload().set('message_id', messageId, true));
     }
 

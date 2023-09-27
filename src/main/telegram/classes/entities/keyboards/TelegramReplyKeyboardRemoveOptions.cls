@@ -14,6 +14,16 @@ global class TelegramReplyKeyboardRemoveOptions extends BotPayload {
      * @description Makes the reply keyboard removed for the specific users only
      * 1) Users that are mentioned `@` in the sent message
      * 2) If the current message is a reply, use the target user
+     * @return The current <<TelegramReplyKeyboardRemoveOptions>> instance
+     */
+    global TelegramReplyKeyboardRemoveOptions asSelective() {
+        return asSelective(true);
+    }
+
+    /**
+     * @description Makes the reply keyboard removed for the specific users only
+     * 1) Users that are mentioned `@` in the sent message
+     * 2) If the current message is a reply, use the target user
      * @param isSelective Determines whether the reply keyboard will be removed for the specific users only or not. Default is `false`
      * @return The current <<TelegramReplyKeyboardRemoveOptions>> instance
      */

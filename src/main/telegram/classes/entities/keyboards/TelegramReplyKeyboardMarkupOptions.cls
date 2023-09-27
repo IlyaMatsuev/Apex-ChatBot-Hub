@@ -269,7 +269,7 @@ global class TelegramReplyKeyboardMarkupOptions extends BotPayload {
     }
 
     /**
-     * @description The builder-like class for requesting to share a specific list of chats
+     * @description The builder-like class for requesting to share a specific list of chats.
      * Source: https://core.telegram.org/bots/api#keyboardbuttonrequestchat
      */
     global class ButtonRequestChatConfigs extends BotPayload {

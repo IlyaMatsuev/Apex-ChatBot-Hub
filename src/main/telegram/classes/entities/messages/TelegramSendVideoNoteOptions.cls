@@ -1,5 +1,6 @@
 /**
- * @description The builder-like class that describes all optional parameters of the `Telegram` `sendVideoNote` method. The source: https://core.telegram.org/bots/api#sendvideonote
+ * @description The builder-like class that describes all optional parameters of the `Telegram` `sendVideoNote` method.
+ * Source: https://core.telegram.org/bots/api#sendvideonote
  */
 global class TelegramSendVideoNoteOptions extends TelegramSendMessageOptions {
     /**

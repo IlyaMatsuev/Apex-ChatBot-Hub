@@ -1,5 +1,5 @@
 /**
- * @description Describes the common payload properties for the `Telegram` bot inline query events
+ * @description Describes the common payload properties for the `Telegram` bot inline query events.
  * Source: https://core.telegram.org/bots/api#inlinequery
  */
 global class TelegramInlineQueryEvent extends BotPayload {
