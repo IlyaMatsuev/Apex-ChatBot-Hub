@@ -22,8 +22,8 @@ Contains settings specific for each messenger.
 
 -   `DeveloperName` - Bot type, e.g. `Telegram` or `Viber`
 -   `ApiUrl__c` - Bot API endpoint. For example, for `Telegram` it is https://api.telegram.org/bot
--   `BotService__c` - The bot service implementation for particular messanger.
+-   `BotService__c` - The bot service implementation for particular messenger.
 -   `BotCalloutService__c` - The bot service implementation for sending requests and handling responses for bot APIs.
--   `BotWebhookService__c` - The bot service implementation for particular messanger that handles webhooks set and unset.
+-   `BotWebhookService__c` - The bot service implementation for particular messenger that handles webhooks set and unset.
 -   `BotHandlerContext__c` - The bot context model implementation that will be passed to the handler on the incoming bot updates
--   `BotUpdateResolver__c` - The implementation for particular messanger to resolve the `Bot__c` record on the new webhook update.
+-   `BotUpdateResolver__c` - The implementation for particular messenger to resolve the `Bot__c` record on the new webhook update.

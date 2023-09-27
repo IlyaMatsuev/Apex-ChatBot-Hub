@@ -13,7 +13,7 @@ NOTE: This package deploys the new Force.com site to have a public REST API for 
 
 Before taking any steps on this library you first need to create the bot in the messenger itself (this is out of the scope of this package).
 
-For example, for `Telegram` you can create a bot following [these steps](https://core.telegram.org/bots#3-how-do-i-create-a-bot). To create a chatbot for the `Viber` messanger you should follow [these instructions](https://developers.viber.com/docs/api/rest-bot-api/#get-started).  
+For example, for `Telegram` you can create a bot following [these steps](https://core.telegram.org/bots#3-how-do-i-create-a-bot). To create a chatbot for the `Viber` messenger you should follow [these instructions](https://developers.viber.com/docs/api/rest-bot-api/#get-started).  
 All you need to get is the bot `authentication token`.
 
 If you got your token then you can proceed with the library.
@@ -53,7 +53,7 @@ You can also check out the [demos page](https://ilyamatsuev.github.io/Apex-ChatB
 
 Unfortunately, it's not possible to install this library as a Salesforce package because of the complicated deployment steps.
 
-However, you can run this schell script to create a **new scratch org** with the package:
+However, you can run this shell script to create a **new scratch org** with the package:
 
 ```sh
 ./scripts/pkg-from-scratch.sh <devhub-username> <scratch-alias>
@@ -73,7 +73,7 @@ Setup -> Type "Sites" in the left search box -> Sites -> Choose a name for your 
 ./scripts/pkg-deploy.sh <org-username>
 ```
 
-**NOTE**: For MacOS or Linux shell scripts can be run using `sh` command like this:
+**NOTE**: For macOS or Linux shell scripts can be run using `sh` command like this:
 
 ```sh
 sh <path to the shell script>
@@ -88,7 +88,7 @@ Changelog is also located [here](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/
 ## Questions
 
 If you have any questions you can start a discussion.  
-If you think something works not as expected or you want to request a new feature, you can create an issue with the appropriate template selected.
+If you think something works not as expected, or you want to request a new feature, you can create an issue with the appropriate template selected.
 
 ## Contributing
 

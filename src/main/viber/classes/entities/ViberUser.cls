@@ -32,7 +32,7 @@ global class ViberUser extends BotPayload implements IBotUser {
      */
     global Integer apiVersion { get { return payload.getInteger('api_version'); } }
 
-    private UserName fullName {
+    private final UserName fullName {
         get {
             if (fullName == null) {
                 fullName = new UserName(name);
