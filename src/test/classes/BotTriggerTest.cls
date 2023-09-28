@@ -18,7 +18,6 @@ private class BotTriggerTest {
         List<Bot__c> newBots = [
             SELECT Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
             FROM Bot__c
-            LIMIT 1
         ];
         Assert.areEqual(1, newBots.size());
         Assert.isTrue(String.isNotBlank(newBots.get(0).TokenHash__c));
@@ -65,6 +64,37 @@ private class BotTriggerTest {
     }
 
     @IsTest
+    private static void update_telegramWithNewWebhookEvents_shouldUpdateBotAndSetWebhook() {
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
+
+        Test.startTest();
+        insert createBot(BotType.Telegram, BOT_HANDLER);
+        Test.stopTest();
+
+        Bot__c bot = [
+            SELECT Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
+            FROM Bot__c
+            LIMIT 1
+        ];
+        bot.WebhookEvents__c =
+            TelegramUpdateEventType.Message.name() +
+            ';' +
+            TelegramUpdateEventType.EditedMessage.name();
+        update bot;
+
+        Bot__c updatedBot = [
+            SELECT Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
+            FROM Bot__c
+            LIMIT 1
+        ];
+
+        List<String> webhookEvents = updatedBot.WebhookEvents__c.split(';');
+        Assert.areEqual(2, webhookEvents.size());
+        Assert.isTrue(webhookEvents.contains('message'));
+        Assert.isTrue(webhookEvents.contains('edited_message'));
+    }
+
+    @IsTest
     private static void delete_telegramWithCorrectData_shouldDeleteAndUnsetWebhook() {
         Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
 
@@ -91,7 +121,6 @@ private class BotTriggerTest {
         List<Bot__c> newBots = [
             SELECT Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
             FROM Bot__c
-            LIMIT 1
         ];
         Assert.areEqual(1, newBots.size());
         Assert.isTrue(String.isNotBlank(newBots.get(0).TokenHash__c));
