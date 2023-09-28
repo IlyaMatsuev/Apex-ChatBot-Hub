@@ -88,7 +88,10 @@ private class BotTriggerTest {
             LIMIT 1
         ];
 
-        Assert.areEqual('edited_message;message', updatedBot.WebhookEvents__c);
+        List<String> webhookEvents = updatedBot.WebhookEvents__c.split(';');
+        Assert.areEqual(2, webhookEvents.size());
+        Assert.isTrue(webhookEvents.contains('message'));
+        Assert.isTrue(webhookEvents.contains('edited_message'));
     }
 
     @IsTest
