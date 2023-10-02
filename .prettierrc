@@ -28,6 +28,10 @@
             "options": {
                 "tabWidth": 2
             }
+        },
+        {
+            "files": "**/lwc/**/*.html",
+            "options": { "parser": "lwc" }
         }
     ]
 }
