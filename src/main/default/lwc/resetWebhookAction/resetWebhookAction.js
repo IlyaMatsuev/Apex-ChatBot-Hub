@@ -3,6 +3,7 @@ import resetWebhook from '@salesforce/apex/BotResetWebhookActionController.reset
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { CloseActionScreenEvent } from 'lightning/actions';
 
+// TODO: Rename LWC to botResetWebhookAction
 export default class ResetWebhookAction extends LightningElement {
     @api
     recordId;
