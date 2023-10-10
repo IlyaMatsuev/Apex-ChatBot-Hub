@@ -30,7 +30,7 @@ public class BotWebhookHandler implements Triggers.IHandler {
                 props.isInsert ||
                 props.isDelete ||
                 props.isUndelete ||
-                (props.isUpdate && areWebhookEventsChanged(bot, oldBot))
+                (props.isUpdate && (areWebhookEventsChanged(bot, oldBot) || isTokenChanged(bot, oldBot)))
             ) {
                 bots.add(new BotModel(bot));
             }
@@ -40,5 +40,9 @@ public class BotWebhookHandler implements Triggers.IHandler {
 
     private Boolean areWebhookEventsChanged(Bot__c bot, Bot__c oldBot) {
         return bot.WebhookEvents__c != oldBot?.WebhookEvents__c;
+    }
+
+    private Boolean isTokenChanged(Bot__c bot, Bot__c oldBot) {
+        return bot.Token__c != oldBot?.Token__c;
     }
 }
