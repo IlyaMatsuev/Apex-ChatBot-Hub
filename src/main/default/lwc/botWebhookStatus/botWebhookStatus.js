@@ -40,7 +40,7 @@ export default class BotWebhookStatus extends LightningElement {
 
     get statusIcon() {
         if (this.isLoading) {
-            return { name: `utility:spinner` };
+            return {};
         }
         const status = this.status.description;
         return {

@@ -13,6 +13,7 @@
             <lightning-layout horizontal-align="space" vertical-align="center">
                 <lightning-layout-item padding="around-small">
                     <lightning-icon
+                        lwc:if={statusIcon.name}
                         icon-name={statusIcon.name}
                         alternative-text={statusIcon.title}
                         title={statusIcon.title}
