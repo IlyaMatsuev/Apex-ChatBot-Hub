@@ -95,6 +95,31 @@ private class BotTriggerTest {
     }
 
     @IsTest
+    private static void update_telegramWithNewToken_shouldUpdateBotAndSetWebhook() {
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
+
+        Test.startTest();
+        insert createBot(BotType.Telegram, BOT_HANDLER);
+        Test.stopTest();
+
+        Bot__c bot = [
+            SELECT Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
+            FROM Bot__c
+            LIMIT 1
+        ];
+        bot.Token__c = 'new_token';
+        update bot;
+
+        Bot__c updatedBot = [
+            SELECT Type__c, WebhookEvents__c, Handler__c, Token__c, TokenHash__c
+            FROM Bot__c
+            LIMIT 1
+        ];
+
+        Assert.areEqual('new_token', updatedBot.Token__c);
+    }
+
+    @IsTest
     private static void delete_telegramWithCorrectData_shouldDeleteAndUnsetWebhook() {
         Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
 

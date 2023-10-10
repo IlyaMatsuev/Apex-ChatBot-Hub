@@ -5,7 +5,7 @@
     <testClassName>BotUpdateApiTest</testClassName>
     <testClassName>BotUpdateEventTriggerTest</testClassName>
     <testClassName>BotUpsertDataEventTriggerTest</testClassName>
-    <testClassName>BotResetWebhookActionControllerTest</testClassName>
+    <testClassName>BotWebhookStatusControllerTest</testClassName>
     <testClassName>TelegramBotHandlerTest</testClassName>
     <testClassName>TelegramBotServiceTest</testClassName>
     <testClassName>ViberBotHandlerTest</testClassName>

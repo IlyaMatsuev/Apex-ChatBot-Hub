@@ -1,0 +1,23 @@
+.status-loading {
+    border-color: #4094f9;
+}
+
+.status-loading lightning-layout {
+    visibility: hidden;
+}
+
+.status-loading lightning-spinner {
+    border-radius: var(--lwc-borderRadiusMedium, 0.25rem);
+}
+
+.status-success {
+    border-color: #3ba755;
+}
+
+.status-warning {
+    border-color: #f38305;
+}
+
+.status-error {
+    border-color: #ea001e;
+}

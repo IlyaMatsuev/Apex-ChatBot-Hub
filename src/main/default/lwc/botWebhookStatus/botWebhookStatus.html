@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title={labels.title} icon-name="utility:product_transfer">
+        <lightning-button-group slot="actions">
+            <lightning-button label={labels.refreshInfoButtonLabel} onclick={onRefreshStatus} disabled={isLoading}>
+            </lightning-button>
+            <lightning-button label={labels.resetWebhookButtonLabel} onclick={onResetWebhook} disabled={isLoading}>
+            </lightning-button>
+        </lightning-button-group>
+        <div
+            class="status-info slds-box slds-box_xx-small slds-m-horizontal_small slds-align_absolute-center slds-is-relative"
+        >
+            <lightning-spinner alternative-text="Loading" variant="brand" lwc:if={isLoading}> </lightning-spinner>
+            <lightning-layout horizontal-align="space" vertical-align="center">
+                <lightning-layout-item padding="around-small">
+                    <lightning-icon
+                        lwc:if={statusIcon.name}
+                        icon-name={statusIcon.name}
+                        alternative-text={statusIcon.title}
+                        title={statusIcon.title}
+                        variant={statusIcon.variant}
+                    >
+                    </lightning-icon>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <div class="slds-text-heading_medium">{statusTitle}</div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </lightning-card>
+</template>

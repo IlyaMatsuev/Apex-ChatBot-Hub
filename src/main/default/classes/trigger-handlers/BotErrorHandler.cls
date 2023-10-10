@@ -1,16 +1,9 @@
 public class BotErrorHandler implements Triggers.IErrorHandler {
     public void handle(Triggers.Context context, Exception error) {
-        List<Bot__c> botsToDelete = new List<Bot__c>();
         for (Bot__c bot : getRecords(context)) {
-            // If it's async execution then delete the created bots. Attach an error for sync execution
-            if (context.props.isAsync) {
-                botsToDelete.add(bot);
-            } else {
+            if (!context.props.isAsync) {
                 bot.addError(error);
             }
-        }
-        if (!botsToDelete.isEmpty()) {
-            Database.delete(botsToDelete, false);
         }
         if (!(error instanceof BotValidationException)) {
             BotErrorLogger.log(error);

@@ -1,12 +1,34 @@
 @IsTest(isParallel = true)
-private class BotResetWebhookActionControllerTest {
+private class BotWebhookStatusControllerTest {
+    @IsTest
+    private static void getWebhookStatus_withBotId_shouldReturnWebhookStatus() {
+        BotWebhookStatusController.serviceFactory = new BotServiceFactoryMock();
+        Bot__c bot = createBot(BotType.Telegram);
+
+        BotWebhookStatusController.WebhookStatusViewModel webhookStatus = BotWebhookStatusController.getWebhookStatus(
+            bot.Id
+        );
+
+        Assert.isFalse(webhookStatus.isNotSet);
+        Assert.isTrue(webhookStatus.isCorrectUrl);
+    }
+
+    @IsTest
+    private static void getWebhookStatus_withoutMatchingBot_shouldThrowException() {
+        try {
+            BotWebhookStatusController.getWebhookStatus('some_random_id');
+            Assert.fail('Exception should have been thrown');
+        } catch (Exception ex) {
+            Assert.isInstanceOfType(ex, AuraHandledException.class);
+        }
+    }
 
     @IsTest
     private static void resetWebhook_withBotId_shouldSetWebhook() {
-        BotResetWebhookActionController.serviceFactory = new BotServiceFactoryMock();
+        BotWebhookStatusController.serviceFactory = new BotServiceFactoryMock();
         Bot__c bot = createBot(BotType.Telegram);
 
-        BotResetWebhookActionController.resetWebhook(bot.Id);
+        BotWebhookStatusController.resetWebhook(bot.Id);
 
         Assert.areEqual(1, BotWebhookServiceMock.setWebhookCallCount);
         Assert.areEqual(0, BotWebhookServiceMock.unsetWebhookCallCount);
@@ -15,9 +37,7 @@ private class BotResetWebhookActionControllerTest {
     @IsTest
     private static void resetWebhook_withoutMatchingBot_shouldThrowException() {
         try {
-            BotResetWebhookActionController.serviceFactory = new BotServiceFactoryMock();
-
-            BotResetWebhookActionController.resetWebhook('some_random_id');
+            BotWebhookStatusController.resetWebhook('some_random_id');
             Assert.fail('Exception should have been thrown');
         } catch (Exception ex) {
             Assert.isInstanceOfType(ex, AuraHandledException.class);

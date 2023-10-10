@@ -2,6 +2,11 @@ public class ViberBotWebhookService extends BotWebhookService {
 
     private ViberBotWebhookService() {}
 
+    public override WebhookInfo getWebhookInfo() {
+        BotJsonPayload response = calloutService.call(ViberBotMethod.GetAccountInfo, new BotJsonPayload());
+        return new WebhookInfo(response.getString('webhook'), webhookUrl + '/' + bot.tokenHash);
+    }
+
     public override void setWebhook() {
         BotJsonPayload payload = new BotJsonPayload()
             .set('url', webhookUrl + '/' + bot.tokenHash)

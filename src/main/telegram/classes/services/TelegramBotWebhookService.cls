@@ -2,6 +2,12 @@ public class TelegramBotWebhookService extends BotWebhookService {
 
     private TelegramBotWebhookService() {}
 
+    public override WebhookInfo getWebhookInfo() {
+        BotJsonPayload response = calloutService.call(TelegramBotMethod.GetWebhookInfo, new BotJsonPayload());
+        String url = response.getJsonPayload('result').getString('url');
+        return new WebhookInfo(url, webhookUrl);
+    }
+
     public override void setWebhook() {
         BotJsonPayload payload = new BotJsonPayload()
             .set('url', webhookUrl)

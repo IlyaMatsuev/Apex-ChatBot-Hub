@@ -36,10 +36,21 @@ public abstract class BotWebhookService {
         private set;
     }
 
+    public abstract WebhookInfo getWebhookInfo();
     public abstract void setWebhook();
     public abstract void unsetWebhook();
 
     private String getApiUrl() {
         return botSiteDetails.SecureUrl + 'services/apexrest/bots/';
+    }
+
+    public class WebhookInfo {
+        public final String url;
+        public final String expectedWebhookUrl;
+
+        public WebhookInfo(String url, String expectedWebhookUrl) {
+            this.url = url;
+            this.expectedWebhookUrl = expectedWebhookUrl;
+        }
     }
 }

@@ -2,6 +2,7 @@ public class TelegramBotMethod extends BotMethod {
     /**
      * Webhook methods
      */
+    public static final TelegramBotMethod GetWebhookInfo = new TelegramBotMethod('getWebhookInfo');
     public static final TelegramBotMethod SetWebhook = new TelegramBotMethod('setWebhook');
     public static final TelegramBotMethod DeleteWebhook = new TelegramBotMethod('deleteWebhook');
 
