@@ -90,6 +90,7 @@ global class TelegramBotMeService {
         BotJsonPayload payload = new BotJsonPayload().set('for_channels', forChannels, true);
         BotJsonPayload result = send(TelegramBotMethod.GetMyDefaultAdministratorRights, payload)
             .getJsonPayload('result');
+
         return new TelegramChatAdministratorRights(result);
     }
 

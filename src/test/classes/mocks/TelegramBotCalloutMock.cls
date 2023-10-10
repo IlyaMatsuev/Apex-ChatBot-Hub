@@ -167,6 +167,33 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
             when 'answerInlineQuery' {
                 return getSuccessTelegramResponse(request);
             }
+            when 'getMe' {
+                return getMe();
+            }
+            when 'getMyName' {
+                return getMyName();
+            }
+            when 'getMyDescription' {
+                return getMyDescription();
+            }
+            when 'getMyShortDescription' {
+                return getMyShortDescription();
+            }
+            when 'getMyDefaultAdministratorRights' {
+                return getMyDefaultAdminRights();
+            }
+            when 'setMyName' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'setMyDescription' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'setMyShortDescription' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'setMyDefaultAdministratorRights' {
+                return getSuccessTelegramResponse(request);
+            }
         }
         throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
     }
@@ -313,6 +340,37 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
                 new TelegramChatMemberRestricted(new BotJsonPayload().set('id', 21312145).set('status', 'restricted'))
             )
             .toJson();
+    }
+
+    private String getMe() {
+        return new BotJsonPayload()
+            .set(
+                'result',
+                new TelegramUser(
+                    new BotJsonPayload().set('id', 21312145).set('username', 'some_username').set('is_bot', true)
+                )
+            )
+            .toJson();
+    }
+
+    private String getMyName() {
+        return new BotJsonPayload().set('result', new BotJsonPayload().set('name', 'Test Bot')).toJson();
+    }
+
+    private String getMyDescription() {
+        return new BotJsonPayload()
+            .set('result', new BotJsonPayload().set('description', 'Some test description'))
+            .toJson();
+    }
+
+    private String getMyShortDescription() {
+        return new BotJsonPayload()
+            .set('result', new BotJsonPayload().set('short_description', 'Some short test description'))
+            .toJson();
+    }
+
+    private String getMyDefaultAdminRights() {
+        return new BotJsonPayload().set('result', new TelegramChatAdministratorRights()).toJson();
     }
 
     private String getSuccessTelegramMessageResponse(BotJsonPayload request) {
