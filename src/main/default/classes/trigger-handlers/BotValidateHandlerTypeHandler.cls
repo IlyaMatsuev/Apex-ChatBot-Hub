@@ -1,14 +1,15 @@
 public class BotValidateHandlerTypeHandler implements Triggers.IHandler {
     public void handle(Triggers.Context context) {
         for (Bot__c bot : (List<Bot__c>) context.props.newList) {
-            verifyHandlerImplementationType(Type.forName(bot.Handler__c), BotType.valueOf(bot.Type__c));
+            verifyHandlerImplementationType(bot.Handler__c, BotType.valueOf(bot.Type__c));
         }
     }
 
-    private void verifyHandlerImplementationType(Type botHandlerType, BotType botType) {
+    private void verifyHandlerImplementationType(String botHandler, BotType botType) {
+        Type botHandlerType = Type.forName(botHandler);
         if (botHandlerType == null || !IBotHandler.class.isAssignableFrom(botHandlerType)) {
             throw new BotValidationException(
-                'Bot handler does not exist or does not implement the IBotHandler interface: ' + botHandlerType
+                'Bot handler does not exist or does not implement the IBotHandler interface: ' + botHandler
             );
         }
 
