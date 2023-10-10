@@ -2011,6 +2011,152 @@ private class TelegramBotServiceTest {
         fixture.assertErrorIsNotCreated();
     }
 
+    @IsTest
+    private static void me_get_shouldSendAndReturnBotDetails() {
+        setCalloutMock();
+        MeFixture fixture = new MeFixture();
+
+        Test.startTest();
+        TelegramUser botDetails = fixture.sut().me().get();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+        Assert.isTrue(botDetails.isBot);
+    }
+
+    @IsTest
+    private static void me_getName_shouldSendAndReturnBotName() {
+        setCalloutMock();
+        MeFixture fixture = new MeFixture();
+
+        Test.startTest();
+        String botName = fixture.sut().me().getName();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+        Assert.areEqual('Test Bot', botName);
+    }
+
+    @IsTest
+    private static void me_getDescription_shouldSendAndReturnBotDescription() {
+        setCalloutMock();
+        MeFixture fixture = new MeFixture();
+
+        Test.startTest();
+        String botDescription = fixture.sut().me().getDescription();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+        Assert.areEqual('Some test description', botDescription);
+    }
+
+    @IsTest
+    private static void me_getShortDescription_shouldSendAndReturnBotShortDescription() {
+        setCalloutMock();
+        MeFixture fixture = new MeFixture();
+
+        Test.startTest();
+        String botDescription = fixture.sut().me().getShortDescription();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+        Assert.areEqual('Some short test description', botDescription);
+    }
+
+    @IsTest
+    private static void me_getDefaultAdminRights_shouldSendAndReturnBotDefaultChatAdminRights() {
+        setCalloutMock();
+        MeFixture fixture = new MeFixture();
+
+        Test.startTest();
+        TelegramChatAdministratorRights botRights = fixture.sut().me().getDefaultAdminRights();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+        Assert.isNull(botRights.isAnonymous);
+        Assert.isNull(botRights.canManageChat);
+        Assert.isNull(botRights.canDeleteMessages);
+        Assert.isNull(botRights.canManageVideoChats);
+        Assert.isNull(botRights.canRestrictMembers);
+        Assert.isNull(botRights.canPromoteMembers);
+        Assert.isNull(botRights.canChangeInfo);
+        Assert.isNull(botRights.canInviteUsers);
+        Assert.isNull(botRights.canPostMessages);
+        Assert.isNull(botRights.canEditMessages);
+        Assert.isNull(botRights.canPinMessages);
+        Assert.isNull(botRights.canManageTopics);
+    }
+
+    @IsTest
+    private static void me_setName_shouldSendAndSetBotName() {
+        setCalloutMock();
+        MeFixture fixture = new MeFixture();
+
+        Test.startTest();
+        fixture.sut().me().setName('New name');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void me_setDescription_shouldSendAndSetBotDescription() {
+        setCalloutMock();
+        MeFixture fixture = new MeFixture();
+
+        Test.startTest();
+        fixture.sut().me().setDescription('New description');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void me_setShortDescription_shouldSendAndSetBotShortDescription() {
+        setCalloutMock();
+        MeFixture fixture = new MeFixture();
+
+        Test.startTest();
+        fixture.sut().me().setShortDescription('New short description');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void me_setDefaultAdminRights_shouldSendAndReturnBotDefaultChatAdminRights() {
+        setCalloutMock();
+        MeFixture fixture = new MeFixture();
+        TelegramChatAdministratorRights botRights = new TelegramChatAdministratorRights()
+            .asAnonymous(true)
+            .allowManageChat(false)
+            .allowPostMessages(false)
+            .allowEditMessages(false)
+            .allowDeleteMessages(false)
+            .allowManageVideoChats(false)
+            .allowRestrictMembers(false)
+            .allowPromoteMembers(false)
+            .allowChangeInfo(false)
+            .allowInviteUsers(false)
+            .allowPinMessages(false)
+            .allowManageTopics(false);
+
+        Test.startTest();
+        fixture.sut().me().setDefaultAdminRights(botRights);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
     private class SenderFixture {
         public BotModel bot;
         public Chat__c chat;
@@ -2126,6 +2272,23 @@ private class TelegramBotServiceTest {
         private InlineQueryFixture() {
             this.bot = createBot();
             this.inlineQueryId = 'test_query';
+        }
+
+        public TelegramBotService sut() {
+            return createService(bot);
+        }
+
+        public void assertErrorIsNotCreated() {
+            List<BotError__c> errors = [SELECT Id FROM BotError__c];
+            Assert.isTrue(errors.isEmpty());
+        }
+    }
+
+    private class MeFixture {
+        public BotModel bot;
+
+        private MeFixture() {
+            this.bot = createBot();
         }
 
         public TelegramBotService sut() {
