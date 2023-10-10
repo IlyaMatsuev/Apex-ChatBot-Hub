@@ -89,6 +89,23 @@ public class TelegramBotMethod extends BotMethod {
         'setChatAdministratorCustomTitle'
     );
 
+    /**
+     * Me and My methods
+     */
+    public static final TelegramBotMethod GetMe = new TelegramBotMethod('getMe');
+    public static final TelegramBotMethod GetMyName = new TelegramBotMethod('getMyName');
+    public static final TelegramBotMethod SetMyName = new TelegramBotMethod('setMyName');
+    public static final TelegramBotMethod GetMyDescription = new TelegramBotMethod('getMyDescription');
+    public static final TelegramBotMethod SetMyDescription = new TelegramBotMethod('setMyDescription');
+    public static final TelegramBotMethod GetMyShortDescription = new TelegramBotMethod('getMyShortDescription');
+    public static final TelegramBotMethod SetMyShortDescription = new TelegramBotMethod('setMyShortDescription');
+    public static final TelegramBotMethod GetMyDefaultAdministratorRights = new TelegramBotMethod(
+        'getMyDefaultAdministratorRights'
+    );
+    public static final TelegramBotMethod SetMyDefaultAdministratorRights = new TelegramBotMethod(
+        'setMyDefaultAdministratorRights'
+    );
+
     private TelegramBotMethod(String value) {
         super(value, TelegramBotMethod.class);
     }
