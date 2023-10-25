@@ -194,6 +194,42 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
             when 'setMyDefaultAdministratorRights' {
                 return getSuccessTelegramResponse(request);
             }
+            when 'getCustomEmojiStickers' {
+                return getCustomEmojiStickers();
+            }
+            when 'uploadStickerFile' {
+                return getUploadedStickerFile();
+            }
+            when 'setStickerEmojiList' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'setStickerKeywords' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'setStickerSetTitle' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'setStickerSetThumbnail' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'getStickerSet' {
+                return getStickerSet();
+            }
+            when 'createNewStickerSet' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'addStickerToSet' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'deleteStickerFromSet' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'deleteStickerSet' {
+                return getSuccessTelegramResponse(request);
+            }
+            when 'setStickerPositionInSet' {
+                return getSuccessTelegramResponse(request);
+            }
         }
         throw new IllegalArgumentException('The provided telegram bot method is not correct: ' + method);
     }
@@ -371,6 +407,30 @@ public class TelegramBotCalloutMock extends BotCalloutMock {
 
     private String getMyDefaultAdminRights() {
         return new BotJsonPayload().set('result', new TelegramChatAdministratorRights()).toJson();
+    }
+
+    private String getCustomEmojiStickers() {
+        return new BotJsonPayload()
+            .set('result', new List<BotJsonPayload> { new BotJsonPayload().set('file_id', 'test_sticker_id') })
+            .toJson();
+    }
+
+    private String getUploadedStickerFile() {
+        return new BotJsonPayload().set('result', new BotJsonPayload().set('file_id', 'test_file_id')).toJson();
+    }
+
+    private String getStickerSet() {
+        return new BotJsonPayload()
+            .set(
+                'result',
+                new BotJsonPayload()
+                    .set('name', 'test_sticker_set')
+                    .set(
+                        'stickers',
+                        new List<BotJsonPayload> { new BotJsonPayload().set('file_id', 'test_sticker_id') }
+                    )
+            )
+            .toJson();
     }
 
     private String getSuccessTelegramMessageResponse(BotJsonPayload request) {

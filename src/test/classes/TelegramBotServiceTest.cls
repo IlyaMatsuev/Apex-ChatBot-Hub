@@ -2132,7 +2132,7 @@ private class TelegramBotServiceTest {
     }
 
     @IsTest
-    private static void me_setDefaultAdminRights_shouldSendAndReturnBotDefaultChatAdminRights() {
+    private static void me_setDefaultAdminRights_shouldSendAndSetBotDefaultChatAdminRights() {
         setCalloutMock();
         MeFixture fixture = new MeFixture();
         TelegramChatAdministratorRights botRights = new TelegramChatAdministratorRights()
@@ -2151,6 +2151,204 @@ private class TelegramBotServiceTest {
 
         Test.startTest();
         fixture.sut().me().setDefaultAdminRights(botRights);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void stickers_get_shouldSendAndReturnStickers() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+
+        Test.startTest();
+        List<TelegramSticker> stickers = fixture.sut().stickers().get(new List<String> { 'some_sticker_id' });
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+        Assert.areEqual(1, stickers.size());
+        TelegramSticker sticker = stickers.get(0);
+        Assert.areEqual('test_sticker_id', sticker.fileId);
+    }
+
+    @IsTest
+    private static void stickers_upload_shouldSendAndReturnUploadedSticker() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+
+        Test.startTest();
+        TelegramFile stickerFile = fixture.sut()
+            .stickers()
+            .upload('user_id', 'https://example.com/sticker.png', 'static');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+        Assert.areEqual('test_file_id', stickerFile.fileId);
+    }
+
+    @IsTest
+    private static void stickers_setEmojiList_shouldSendAndSetEmojiList() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+
+        Test.startTest();
+        fixture.sut().stickers().setEmojiList('sticker_file_id', new List<String> { '\uD83D\uDEAC' });
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void stickers_setKeywords_shouldSendAndSetKeywords() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+
+        Test.startTest();
+        fixture.sut().stickers().setKeywords('sticker_file_id', new List<String> { 'cigs' });
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void stickers_set_get_shouldSendAndReturnStickerSet() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+
+        Test.startTest();
+        TelegramStickerSet stickerSet = fixture.sut().stickers().set('test_sticker_set').get();
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+        Assert.areEqual('test_sticker_set', stickerSet.name);
+        Assert.areEqual(1, stickerSet.stickers.size());
+        Assert.isNull(stickerSet.title);
+        Assert.isNull(stickerSet.stickerType);
+        Assert.isNull(stickerSet.isAnimated);
+        Assert.isNull(stickerSet.isVideo);
+        Assert.isNotNull(stickerSet.thumbnail);
+    }
+
+    @IsTest
+    private static void stickers_set_create_shouldSendAndCreateStickerSet() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+        List<TelegramInputSticker> stickers = new List<TelegramInputSticker> {
+            new TelegramInputSticker('some_file_id')
+                .withEmojis(new List<String> { '\uD83D\uDEAC' })
+                .withKeywords(new List<String> { 'cigs' })
+        };
+
+        Test.startTest();
+        fixture.sut().stickers().set('test_sticker_set').create('user_id', 'Some Title', stickers, 'static');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void stickers_set_createWithOptions_shouldSendAndCreateStickerSet() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+        List<TelegramInputSticker> stickers = new List<TelegramInputSticker> {
+            new TelegramInputSticker('some_file_id')
+                .withEmojis(new List<String> { '\uD83D\uDEAC' })
+                .withKeywords(new List<String> { 'cigs' })
+        };
+        TelegramStickerSetCreateOptions options = new TelegramStickerSetCreateOptions()
+            .withStickerType('regular')
+            .withRepainting(true);
+
+        Test.startTest();
+        fixture.sut().stickers().set('test_sticker_set').create('user_id', 'Some Title', stickers, 'static', options);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void stickers_set_setTitle_shouldSendAndSetStickerSetTitle() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+
+        Test.startTest();
+        fixture.sut().stickers().set('test_sticker_set').setTitle('Some Title');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void stickers_set_setThumbnail_shouldSendAndSetStickerSetThumbnail() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+
+        Test.startTest();
+        fixture.sut().stickers().set('test_sticker_set').setThumbnail('user_id', 'https://example.com/pic.png');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void stickers_set_addSticker_shouldSendAndAddStickerToSet() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+        TelegramInputSticker sticker = new TelegramInputSticker('some_file_id')
+            .withEmojis(new List<String> { '\uD83D\uDEAC' })
+            .withKeywords(new List<String> { 'cigs' });
+
+        Test.startTest();
+        fixture.sut().stickers().set('test_sticker_set').addSticker('user_id', sticker);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void stickers_set_removeSticker_shouldSendAndRemoveStickerFromSet() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+
+        Test.startTest();
+        fixture.sut().stickers().set('test_sticker_set').removeSticker('some_file_id');
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void stickers_set_setStickerPosition_shouldSendAndChangeStickerPositionInSet() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+
+        Test.startTest();
+        fixture.sut().stickers().set('test_sticker_set').setStickerPosition('some_file_id', 5);
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        fixture.assertErrorIsNotCreated();
+    }
+
+    @IsTest
+    private static void stickers_set_deleteSet_shouldSendAndDeleteSet() {
+        setCalloutMock();
+        StickerFixture fixture = new StickerFixture();
+
+        Test.startTest();
+        fixture.sut().stickers().set('test_sticker_set').deleteSet();
         Test.getEventBus().deliver();
         Test.stopTest();
 
@@ -2288,6 +2486,23 @@ private class TelegramBotServiceTest {
         public BotModel bot;
 
         private MeFixture() {
+            this.bot = createBot();
+        }
+
+        public TelegramBotService sut() {
+            return createService(bot);
+        }
+
+        public void assertErrorIsNotCreated() {
+            List<BotError__c> errors = [SELECT Id FROM BotError__c];
+            Assert.isTrue(errors.isEmpty());
+        }
+    }
+
+    private class StickerFixture {
+        public BotModel bot;
+
+        private StickerFixture() {
             this.bot = createBot();
         }
 
