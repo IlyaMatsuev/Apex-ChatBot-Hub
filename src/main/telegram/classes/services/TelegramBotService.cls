@@ -64,4 +64,12 @@ global class TelegramBotService extends BotService {
     global TelegramBotMeService me() {
         return new TelegramBotMeService(calloutService);
     }
+
+    /**
+     * @description Creates an instance of the `Telegram` `sticker` service
+     * @return The instance of the <<TelegramBotStickerService>> class
+     */
+    global TelegramBotStickerService stickers() {
+        return new TelegramBotStickerService(calloutService);
+    }
 }

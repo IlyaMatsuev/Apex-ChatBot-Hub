@@ -41,6 +41,22 @@ public class TelegramBotMethod extends BotMethod {
     public static final TelegramBotMethod DeleteMessage = new TelegramBotMethod('deleteMessage');
 
     /**
+     * Sticker methods
+     */
+    public static final TelegramBotMethod GetCustomEmojiStickers = new TelegramBotMethod('getCustomEmojiStickers');
+    public static final TelegramBotMethod UploadStickerFile = new TelegramBotMethod('uploadStickerFile');
+    public static final TelegramBotMethod SetStickerEmojiList = new TelegramBotMethod('setStickerEmojiList');
+    public static final TelegramBotMethod SetStickerKeywords = new TelegramBotMethod('setStickerKeywords');
+    public static final TelegramBotMethod SetStickerSetTitle = new TelegramBotMethod('setStickerSetTitle');
+    public static final TelegramBotMethod SetStickerSetThumbnail = new TelegramBotMethod('setStickerSetThumbnail');
+    public static final TelegramBotMethod GetStickerSet = new TelegramBotMethod('getStickerSet');
+    public static final TelegramBotMethod CreateNewStickerSet = new TelegramBotMethod('createNewStickerSet');
+    public static final TelegramBotMethod AddStickerToSet = new TelegramBotMethod('addStickerToSet');
+    public static final TelegramBotMethod DeleteStickerFromSet = new TelegramBotMethod('deleteStickerFromSet');
+    public static final TelegramBotMethod DeleteStickerSet = new TelegramBotMethod('deleteStickerSet');
+    public static final TelegramBotMethod SetStickerPositionInSet = new TelegramBotMethod('setStickerPositionInSet');
+
+    /**
      * Inline mode methods
      */
     public static final TelegramBotMethod AnswerInlineQuery = new TelegramBotMethod('answerInlineQuery');
