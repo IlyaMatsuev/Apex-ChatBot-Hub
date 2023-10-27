@@ -1,6 +1,6 @@
 # ViberBotService
 
-The concrete service for the `Viber` messanger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Viber` only
+The concrete service for the `Viber` messenger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Viber` only
 
 **Inheritance**
 
@@ -49,5 +49,79 @@ ViberBotSenderService
 **Description**
 
 The `Viber` implementation of the [IBotSenderService](/types/Interfaces/IBotSenderService.md)
+
+### `getAccount()`
+
+Gets the details about the bot account
+
+#### Return
+
+**Type**
+
+ViberAccount
+
+**Description**
+
+The instance of the [ViberAccount](/types/Classes/ViberAccount.md) class
+
+### `getUser(String userId)`
+
+Gets the details about the a `Viber` user account
+
+#### Parameters
+
+| Param    | Description                |
+| -------- | -------------------------- |
+| `userId` | The unique `Viber` user id |
+
+#### Return
+
+**Type**
+
+ViberUser
+
+**Description**
+
+The instance of the [ViberUser](/types/Classes/ViberUser.md) class
+
+### `getOnline(String userId)`
+
+Gets the online status of the provided user account
+
+#### Parameters
+
+| Param    | Description                |
+| -------- | -------------------------- |
+| `userId` | The unique `Viber` user id |
+
+#### Return
+
+**Type**
+
+ViberOnlineStatus
+
+**Description**
+
+The instance of the [ViberUser](/types/Classes/ViberUser.md) class
+
+### `getOnline(List<String> userIds)`
+
+Gets the online status of the provided user accounts
+
+#### Parameters
+
+| Param     | Description                 |
+| --------- | --------------------------- |
+| `userIds` | The unique `Viber` user ids |
+
+#### Return
+
+**Type**
+
+List&lt;ViberOnlineStatus&gt;
+
+**Description**
+
+The list of the [ViberUser](/types/Classes/ViberUser.md) class
 
 ---

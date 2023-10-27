@@ -1,6 +1,7 @@
 # TelegramSendPollOptions
 
-The builder-like class that describes all optional parameters of the `Telegram` `sendPoll` method. The source: https://core.telegram.org/bots/api#sendpoll
+The builder-like class that describes all optional parameters of the `Telegram` `sendPoll` method.
+Source: https://core.telegram.org/bots/api#sendpoll
 
 **Inheritance**
 
@@ -22,7 +23,7 @@ Creates a new instance of the poll options
 
 The list of poll answers (options)
 
-### `entities` → `List<MessageEntity>`
+### `entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -249,15 +250,15 @@ TelegramSendPollOptions
 
 The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
 
-### `withExplanationMessageEntity(MessageEntity entity)`
+### `withExplanationMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the explanation text. For example username tags
 
 #### Parameters
 
-| Param    | Description                                                                                                                                                     |
-| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `entity` | The instance of [TelegramSendMessageOptions.MessageEntity](TelegramSendMessageOptions.MessageEntity), special message entity. E.g. hashtag, username, URL, etc. |
+| Param    | Description                                                                                                                                 |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
 #### Return
 
@@ -269,15 +270,15 @@ TelegramSendPollOptions
 
 The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
 
-### `withExplanationMessageEntities(MessageEntity entities)`
+### `withExplanationMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the explanation text. For example username tags
 
 #### Parameters
 
-| Param      | Description                                                                                                                                                             |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `entities` | The list of [TelegramSendMessageOptions.MessageEntity](TelegramSendMessageOptions.MessageEntity) instances, special message entities. E.g. hashtag, username, URL, etc. |
+| Param      | Description                                                                                                                                         |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
 #### Return
 

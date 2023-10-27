@@ -1,6 +1,7 @@
 # TelegramSendVideoOptions
 
-The builder-like class that describes all optional parameters of the `Telegram` `sendVideo` and `sendAnimation` methods. The source: https://core.telegram.org/bots/api#sendvideo
+The builder-like class that describes all optional parameters of the `Telegram` `sendVideo` and `sendAnimation` methods.
+Source: https://core.telegram.org/bots/api#sendvideo
 
 **Inheritance**
 
@@ -18,7 +19,7 @@ Creates an instance of the video message options
 
 ## Properties
 
-### `entities` → `List<MessageEntity>`
+### `entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -177,15 +178,15 @@ TelegramSendVideoOptions
 
 The current instance of the [TelegramSendVideoOptions](/types/Classes/TelegramSendVideoOptions.md) class
 
-### `withMessageEntity(MessageEntity entity)`
+### `withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the message text. For example username tags
 
 #### Parameters
 
-| Param    | Description                                                                                                                                                     |
-| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `entity` | The instance of [TelegramSendMessageOptions.MessageEntity](TelegramSendMessageOptions.MessageEntity), special message entity. E.g. hashtag, username, URL, etc. |
+| Param    | Description                                                                                                                                 |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
 #### Return
 
@@ -197,15 +198,15 @@ TelegramSendVideoOptions
 
 The current instance of the [TelegramSendVideoOptions](/types/Classes/TelegramSendVideoOptions.md) class
 
-### `withMessageEntities(MessageEntity entities)`
+### `withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the message text. For example username tags
 
 #### Parameters
 
-| Param      | Description                                                                                                                                                             |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `entities` | The list of [TelegramSendMessageOptions.MessageEntity](TelegramSendMessageOptions.MessageEntity) instances, special message entities. E.g. hashtag, username, URL, etc. |
+| Param      | Description                                                                                                                                         |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
 #### Return
 

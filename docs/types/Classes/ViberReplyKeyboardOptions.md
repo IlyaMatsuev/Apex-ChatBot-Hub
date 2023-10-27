@@ -1,26 +1,27 @@
-# ViberSendKeyboardOptions
+# ViberReplyKeyboardOptions
 
-The builder-like class that represents parameters for sending a custom carousel/keyboard to the user via the `Viber` bot service. The source: https://developers.viber.com/docs/tools/keyboards/#general-keyboard-parameters
+The builder-like class that represents parameters for sending a custom carousel/keyboard to the user via the `Viber` bot service.
+Source: https://developers.viber.com/docs/tools/keyboards/#general-keyboard-parameters
 
 **Inheritance**
 
-ViberSendKeyboardOptions
+ViberReplyKeyboardOptions
 
 ## Constructors
 
-### `ViberSendKeyboardOptions()`
+### `ViberReplyKeyboardOptions()`
 
 Creates an instance of the carousel/keyboard without any buttons, so that they can be added separately
 
-### `ViberSendKeyboardOptions(List<Button> buttons)`
+### `ViberReplyKeyboardOptions(List<Button> buttons)`
 
 Creates an instance of the carousel/keyboard with the provided buttons
 
 #### Parameters
 
-| Param     | Description                                                                                                                             |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `buttons` | The list of [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instances that represent buttons to be shown to the user |
+| Param     | Description                                                                                                                               |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `buttons` | The list of [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instances that represent buttons to be shown to the user |
 
 ---
 
@@ -40,19 +41,19 @@ Adds a button to the carousel/keyboard
 
 #### Parameters
 
-| Param    | Description                                                                                                                              |
-| -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `button` | The instance of the [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) class, representing a button to add to the layout |
+| Param    | Description                                                                                                                                |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `button` | The instance of the [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) class, representing a button to add to the layout |
 
 #### Return
 
 **Type**
 
-ViberSendKeyboardOptions
+ViberReplyKeyboardOptions
 
 **Description**
 
-The current [ViberSendKeyboardOptions](/types/Classes/ViberSendKeyboardOptions.md) instance
+The current [ViberReplyKeyboardOptions](/types/Classes/ViberReplyKeyboardOptions.md) instance
 
 ### `addButtons(Button buttons)`
 
@@ -60,19 +61,19 @@ Adds multiple buttons to the carousel/keyboard
 
 #### Parameters
 
-| Param     | Description                                                                                                                                      |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `buttons` | The list of instances of the [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) class, representing buttons to add to the layout |
+| Param     | Description                                                                                                                                        |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `buttons` | The list of instances of the [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) class, representing buttons to add to the layout |
 
 #### Return
 
 **Type**
 
-ViberSendKeyboardOptions
+ViberReplyKeyboardOptions
 
 **Description**
 
-The current [ViberSendKeyboardOptions](/types/Classes/ViberSendKeyboardOptions.md) instance
+The current [ViberReplyKeyboardOptions](/types/Classes/ViberReplyKeyboardOptions.md) instance
 
 ### `setLayout(Integer groupRows, Integer groupColumns)`
 
@@ -89,11 +90,11 @@ Sets the size of carousel/keyboard block for grouping buttons on the layout
 
 **Type**
 
-ViberSendKeyboardOptions
+ViberReplyKeyboardOptions
 
 **Description**
 
-The current [ViberSendKeyboardOptions](/types/Classes/ViberSendKeyboardOptions.md) instance
+The current [ViberReplyKeyboardOptions](/types/Classes/ViberReplyKeyboardOptions.md) instance
 
 ### `setBackgroundColor(String backgroundColor)`
 
@@ -109,11 +110,11 @@ Sets the background color of the carousel/keyboard
 
 **Type**
 
-ViberSendKeyboardOptions
+ViberReplyKeyboardOptions
 
 **Description**
 
-The current [ViberSendKeyboardOptions](/types/Classes/ViberSendKeyboardOptions.md) instance
+The current [ViberReplyKeyboardOptions](/types/Classes/ViberReplyKeyboardOptions.md) instance
 
 ### `setHeight(Integer customDefaultHeight, Integer heightScale, Boolean useDefaultHeight)`
 
@@ -129,11 +130,11 @@ The current [ViberSendKeyboardOptions](/types/Classes/ViberSendKeyboardOptions.m
 
 **Type**
 
-ViberSendKeyboardOptions
+ViberReplyKeyboardOptions
 
 **Description**
 
-The current [ViberSendKeyboardOptions](/types/Classes/ViberSendKeyboardOptions.md) instance
+The current [ViberReplyKeyboardOptions](/types/Classes/ViberReplyKeyboardOptions.md) instance
 
 **Descriptions** Sets the height configurations for the carousel/keyboard
 
@@ -151,11 +152,11 @@ Customizes the receiver's keyboard input field
 
 **Type**
 
-ViberSendKeyboardOptions
+ViberReplyKeyboardOptions
 
 **Description**
 
-The current [ViberSendKeyboardOptions](/types/Classes/ViberSendKeyboardOptions.md) instance
+The current [ViberReplyKeyboardOptions](/types/Classes/ViberReplyKeyboardOptions.md) instance
 
 ### `allowSaveToFavorites(FavoritesMetadata favoritesMetadata)`
 
@@ -163,19 +164,19 @@ Allows the carousel/keyboard content to be saved by the receiver
 
 #### Parameters
 
-| Param               | Description                                                                                                                                                                   |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `favoritesMetadata` | The instance of [ViberSendKeyboardOptions.FavoritesMetadata](ViberSendKeyboardOptions.FavoritesMetadata) describing content to be saved via favorites, if saving is available |
+| Param               | Description                                                                                                                                                                     |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `favoritesMetadata` | The instance of [ViberReplyKeyboardOptions.FavoritesMetadata](ViberReplyKeyboardOptions.FavoritesMetadata) describing content to be saved via favorites, if saving is available |
 
 #### Return
 
 **Type**
 
-ViberSendKeyboardOptions
+ViberReplyKeyboardOptions
 
 **Description**
 
-The current [ViberSendKeyboardOptions](/types/Classes/ViberSendKeyboardOptions.md) instance
+The current [ViberReplyKeyboardOptions](/types/Classes/ViberReplyKeyboardOptions.md) instance
 
 ---
 
@@ -210,7 +211,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `setBackgroundColor(String backgroundColor)`
 
@@ -218,9 +219,9 @@ Sets the button background color
 
 ###### Parameters
 
-| Param             | Description                                   |
-| ----------------- | --------------------------------------------- |
-| `backgroundColor` | The backgroun color of the button (HEX value) |
+| Param             | Description                                    |
+| ----------------- | ---------------------------------------------- |
+| `backgroundColor` | The background color of the button (HEX value) |
 
 ###### Return
 
@@ -230,7 +231,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `setBackgroundMedia(String mediaUrl, String mediaScaleType, Boolean isGif, Boolean loopGif)`
 
@@ -253,7 +254,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `asNoActionButton(String buttonText)`
 
@@ -273,7 +274,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `asReply(String replyValue, String replyText)`
 
@@ -294,7 +295,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `asReplyWithImage(String replyValue, String imageUrl)`
 
@@ -315,7 +316,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `asOpenUrl(String url)`
 
@@ -335,7 +336,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `asOpenUrl(String url, ButtonInternalBrowser internalBrowserConfig)`
 
@@ -343,10 +344,10 @@ Makes the button to behave as a link to a website, sending the clicked link URL 
 
 ###### Parameters
 
-| Param                   | Description                                                                                                                                                                       |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `url`                   | The URL of the link. Will be sent back to the bot, appearing in the chat as message from the receiver                                                                             |
-| `internalBrowserConfig` | The instance of [ViberSendKeyboardOptions.ButtonInternalBrowser](ViberSendKeyboardOptions.ButtonInternalBrowser) class describing configurations for the `Viber` internal browser |
+| Param                   | Description                                                                                                                                                                         |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `url`                   | The URL of the link. Will be sent back to the bot, appearing in the chat as message from the receiver                                                                               |
+| `internalBrowserConfig` | The instance of [ViberReplyKeyboardOptions.ButtonInternalBrowser](ViberReplyKeyboardOptions.ButtonInternalBrowser) class describing configurations for the `Viber` internal browser |
 
 ###### Return
 
@@ -356,7 +357,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `asOpenUrl(String url, String mediaType, ButtonMediaPlayer mediaPlayerConfig, ButtonInternalBrowser internalBrowserConfig)`
 
@@ -364,12 +365,12 @@ Makes the button to behave as a link to a website or a media content, sending th
 
 ###### Parameters
 
-| Param                   | Description                                                                                                                                                                       |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `url`                   | The URL of the link or media. Will be sent back to the bot, appearing in the chat as message from the receiver                                                                    |
-| `mediaType`             | The type of the content under the provided link. Possible values: `not-media`, `video`, `gif`, `picture`. Default is `not-media`                                                  |
-| `mediaPlayerConfig`     | The instance of [ViberSendKeyboardOptions.ButtonMediaPlayer](ViberSendKeyboardOptions.ButtonMediaPlayer) class describing configurations for the `Viber` media player             |
-| `internalBrowserConfig` | The instance of [ViberSendKeyboardOptions.ButtonInternalBrowser](ViberSendKeyboardOptions.ButtonInternalBrowser) class describing configurations for the `Viber` internal browser |
+| Param                   | Description                                                                                                                                                                         |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `url`                   | The URL of the link or media. Will be sent back to the bot, appearing in the chat as message from the receiver                                                                      |
+| `mediaType`             | The type of the content under the provided link. Possible values: `not-media`, `video`, `gif`, `picture`. Default is `not-media`                                                    |
+| `mediaPlayerConfig`     | The instance of [ViberReplyKeyboardOptions.ButtonMediaPlayer](ViberReplyKeyboardOptions.ButtonMediaPlayer) class describing configurations for the `Viber` media player             |
+| `internalBrowserConfig` | The instance of [ViberReplyKeyboardOptions.ButtonInternalBrowser](ViberReplyKeyboardOptions.ButtonInternalBrowser) class describing configurations for the `Viber` internal browser |
 
 ###### Return
 
@@ -379,7 +380,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `asOpenMap(Decimal latitude, Decimal longitude)`
 
@@ -400,7 +401,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `asPhoneSharing(String text)`
 
@@ -420,7 +421,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `asLocationSharing(String text)`
 
@@ -440,7 +441,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `setText(String text)`
 
@@ -460,7 +461,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `setTextAlignment(String verticalAlign, String horizontalAlign)`
 
@@ -481,7 +482,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `setTextPaddings(Integer top, Integer right, Integer bottom, Integer left)`
 
@@ -504,7 +505,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `setTextStyle(Integer opacity, String size, String bgGradientColor, Boolean fitText)`
 
@@ -514,8 +515,8 @@ Applies additional styling properties to the button text
 
 | Param             | Description                                                                                                            |
 | ----------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `opacity`         | The text opacity. Accepts numbers in range: `0..100`. Default is `100`                                                 |
 | `size`            | The text size. Possible values: `small`, `regular`, `large`. Default is `regular`                                      |
-| `opecity`         | The text opacity. Accepts numbers in range: `0..100`. Default is `100`                                                 |
 | `bgGradientColor` | The background gradient to use under text (HEX value). Works only when text is aligned vertically to `top` or `bottom` |
 | `fitText`         | If set to `true` the size of the text will be decreased to fit (minimum size is `12`). Default is `false`              |
 
@@ -527,7 +528,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `setImage(String imageUrl)`
 
@@ -547,7 +548,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `setBorders(Integer borderWidth, Integer cornerRadius, String borderColor)`
 
@@ -569,7 +570,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `useInternalBrowser()`
 
@@ -583,7 +584,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `useInternalBrowser(Boolean shouldUseInternalBrowser)`
 
@@ -603,7 +604,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ##### `useSilentMode(Boolean useSilent)`
 
@@ -623,7 +624,7 @@ Button
 
 **Description**
 
-The current [ViberSendKeyboardOptions.Button](ViberSendKeyboardOptions.Button) instance
+The current [ViberReplyKeyboardOptions.Button](ViberReplyKeyboardOptions.Button) instance
 
 ---
 
@@ -643,11 +644,11 @@ Sets properties for the internal browser action button
 
 ###### Parameters
 
-| Param               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `action`            | The action button type in the internal's browser navigation bar. `forward` will open the forward via Viber screen and share current URL or predefined URL; `send` sends the currently opened URL as an URL message, or predefined URL if `actionPredefinedUrl` is not empty; `open-externally` opens external browser with the current URL; `send-to-bot` sends reply data to bot in order to receive message; `none` will not display any button Default is `forward` |
-| `predefinedMessage` | The predefined message to be sent if `actionButton` is set to `send` or `forward`                                                                                                                                                                                                                                                                                                                                                                                      |
-| `replyData`         | The custom reply data if `actionButton` is set to `send-to-bot`                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Param               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `action`            | The action button type in the internal browser navigation bar. `forward` will open the forward via Viber screen and share current URL or predefined URL; `send` sends the currently opened URL as an URL message, or predefined URL if `actionPredefinedUrl` is not empty; `open-externally` opens external browser with the current URL; `send-to-bot` sends reply data to bot in order to receive message; `none` will not display any button Default is `forward` |
+| `predefinedMessage` | The predefined message to be sent if `actionButton` is set to `send` or `forward`                                                                                                                                                                                                                                                                                                                                                                                    |
+| `replyData`         | The custom reply data if `actionButton` is set to `send-to-bot`                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 ###### Return
 
@@ -657,7 +658,7 @@ ButtonInternalBrowser
 
 **Description**
 
-The current instance of [ViberSendKeyboardOptions.ButtonInternalBrowser](ViberSendKeyboardOptions.ButtonInternalBrowser)
+The current instance of [ViberReplyKeyboardOptions.ButtonInternalBrowser](ViberReplyKeyboardOptions.ButtonInternalBrowser)
 
 ##### `setTitle(String title)`
 
@@ -677,7 +678,7 @@ ButtonInternalBrowser
 
 **Description**
 
-The current instance of [ViberSendKeyboardOptions.ButtonInternalBrowser](ViberSendKeyboardOptions.ButtonInternalBrowser)
+The current instance of [ViberReplyKeyboardOptions.ButtonInternalBrowser](ViberReplyKeyboardOptions.ButtonInternalBrowser)
 
 ##### `setMode(String mode)`
 
@@ -697,7 +698,7 @@ ButtonInternalBrowser
 
 **Description**
 
-The current instance of [ViberSendKeyboardOptions.ButtonInternalBrowser](ViberSendKeyboardOptions.ButtonInternalBrowser)
+The current instance of [ViberReplyKeyboardOptions.ButtonInternalBrowser](ViberReplyKeyboardOptions.ButtonInternalBrowser)
 
 ##### `withFooter(Boolean showFooter)`
 
@@ -717,7 +718,7 @@ ButtonInternalBrowser
 
 **Description**
 
-The current instance of [ViberSendKeyboardOptions.ButtonInternalBrowser](ViberSendKeyboardOptions.ButtonInternalBrowser)
+The current instance of [ViberReplyKeyboardOptions.ButtonInternalBrowser](ViberReplyKeyboardOptions.ButtonInternalBrowser)
 
 ---
 
@@ -797,7 +798,7 @@ FavoritesMetadata
 
 **Description**
 
-The current [ViberSendKeyboardOptions.FavoritesMetadata](ViberSendKeyboardOptions.FavoritesMetadata) instance
+The current [ViberReplyKeyboardOptions.FavoritesMetadata](ViberReplyKeyboardOptions.FavoritesMetadata) instance
 
 ##### `setThumbnail(String thumbnail, Integer width, Integer height)`
 
@@ -819,7 +820,7 @@ FavoritesMetadata
 
 **Description**
 
-The current [ViberSendKeyboardOptions.FavoritesMetadata](ViberSendKeyboardOptions.FavoritesMetadata) instance
+The current [ViberReplyKeyboardOptions.FavoritesMetadata](ViberReplyKeyboardOptions.FavoritesMetadata) instance
 
 ##### `setAlternativeContent(String text, String url)`
 
@@ -840,7 +841,7 @@ FavoritesMetadata
 
 **Description**
 
-The current [ViberSendKeyboardOptions.FavoritesMetadata](ViberSendKeyboardOptions.FavoritesMetadata) instance
+The current [ViberReplyKeyboardOptions.FavoritesMetadata](ViberReplyKeyboardOptions.FavoritesMetadata) instance
 
 ##### `setDomain(String domain)`
 
@@ -860,7 +861,7 @@ FavoritesMetadata
 
 **Description**
 
-The current [ViberSendKeyboardOptions.FavoritesMetadata](ViberSendKeyboardOptions.FavoritesMetadata) instance
+The current [ViberReplyKeyboardOptions.FavoritesMetadata](ViberReplyKeyboardOptions.FavoritesMetadata) instance
 
 ---
 

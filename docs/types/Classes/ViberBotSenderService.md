@@ -156,15 +156,15 @@ Sends a URL
 | ------ | ------------ |
 | `link` | The URL link |
 
-### `carousel(ViberSendKeyboardOptions carousel)`
+### `carousel(ViberReplyKeyboardOptions carousel)`
 
 Sends a carousel message with the custom layout
 
 #### Parameters
 
-| Param      | Description                                                                                                                          |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `carousel` | The instance of the [ViberSendKeyboardOptions](/types/Classes/ViberSendKeyboardOptions.md) class for customizing the carousel layout |
+| Param      | Description                                                                                                                            |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `carousel` | The instance of the [ViberReplyKeyboardOptions](/types/Classes/ViberReplyKeyboardOptions.md) class for customizing the carousel layout |
 
 ### `withReplyKeyboard(BotReplyKeyboardButton buttons)`
 
@@ -186,15 +186,15 @@ ViberBotSenderService
 
 The current instance of `Viber` sender service
 
-### `withReplyKeyboard(ViberSendKeyboardOptions keyboard)`
+### `withReplyKeyboard(ViberReplyKeyboardOptions keyboard)`
 
 Sets a custom keyboard with more options for the message that the receiver will have instead of the standard input keyboard
 
 #### Parameters
 
-| Param      | Description                                                                                                                          |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `keyboard` | The instance of the [ViberSendKeyboardOptions](/types/Classes/ViberSendKeyboardOptions.md) class for customizing the keyboard layout |
+| Param      | Description                                                                                                                            |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `keyboard` | The instance of the [ViberReplyKeyboardOptions](/types/Classes/ViberReplyKeyboardOptions.md) class for customizing the keyboard layout |
 
 #### Return
 

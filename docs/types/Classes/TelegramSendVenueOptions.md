@@ -1,6 +1,7 @@
 # TelegramSendVenueOptions
 
-The builder-like class that describes all optional parameters of the `Telegram` `sendVenue` method. The source: https://core.telegram.org/bots/api#sendvenue
+The builder-like class that describes all optional parameters of the `Telegram` `sendVenue` method.
+Source: https://core.telegram.org/bots/api#sendvenue
 
 **Inheritance**
 
@@ -10,7 +11,7 @@ TelegramSendVenueOptions
 
 ## Properties
 
-### `entities` → `List<MessageEntity>`
+### `entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 

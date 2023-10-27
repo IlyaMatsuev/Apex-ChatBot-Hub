@@ -1,6 +1,7 @@
 # TelegramSendLocationOptions
 
-The builder-like class that describes all optional parameters of the `Telegram` `sendLocation` method. The source: https://core.telegram.org/bots/api#sendlocation
+The builder-like class that describes all optional parameters of the `Telegram` `sendLocation` method.
+Source: https://core.telegram.org/bots/api#sendlocation
 
 **Inheritance**
 
@@ -74,9 +75,9 @@ Sets the maximum distance in meters for proximity alerts about approaching anoth
 
 #### Parameters
 
-| Param    | Description                                                                                                                     |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `period` | The maximum distance in meters for proximity alerts about approaching another chat member. Accepts values in range: `1..100000` |
+| Param         | Description                                                                                                                     |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `alertRadius` | The maximum distance in meters for proximity alerts about approaching another chat member. Accepts values in range: `1..100000` |
 
 #### Return
 

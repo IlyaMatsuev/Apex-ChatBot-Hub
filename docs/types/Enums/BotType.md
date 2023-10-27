@@ -4,6 +4,8 @@ Custom enum that contains all available bot types for the package. The same valu
 
 **Inheritance**
 
+[BotEnumType](/types/Enums/BotEnumType.md)
+&gt;
 BotType
 
 **Group** Enums

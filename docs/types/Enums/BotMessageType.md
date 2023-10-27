@@ -4,6 +4,8 @@ The enum with all available message types for sending and receiving messages
 
 **Inheritance**
 
+[BotEnumType](/types/Enums/BotEnumType.md)
+&gt;
 BotMessageType
 
 **Group** Enums

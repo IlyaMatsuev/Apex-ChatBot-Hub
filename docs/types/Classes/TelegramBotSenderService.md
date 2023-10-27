@@ -141,10 +141,10 @@ Sends an animation, e.g. `gif` or a video without sound with the provided option
 
 #### Parameters
 
-| Param      | Description                                                                                                           |
-| ---------- | --------------------------------------------------------------------------------------------------------------------- |
-| `videoUrl` | The video URL                                                                                                         |
-| `options`  | The instance of [TelegramSendVideoOptions](/types/Classes/TelegramSendVideoOptions.md) with other optional parameters |
+| Param          | Description                                                                                                           |
+| -------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `animationUrl` | The video URL                                                                                                         |
+| `options`      | The instance of [TelegramSendVideoOptions](/types/Classes/TelegramSendVideoOptions.md) with other optional parameters |
 
 ### `audio(String audioUrl)`
 
@@ -353,10 +353,10 @@ Sends a poll
 
 #### Parameters
 
-| Param      | Description                                                                                                    |
-| ---------- | -------------------------------------------------------------------------------------------------------------- |
-| `question` | The poll question. Up to `300` characters                                                                      |
-| `answers`  | The list of answers to the poll question. Should have at from `2` to `10` answers, up to `100` characters each |
+| Param      | Description                                                                                                         |
+| ---------- | ------------------------------------------------------------------------------------------------------------------- |
+| `question` | The poll question. Up to `300` characters                                                                           |
+| `options`  | The instance of [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) with other optional parameters |
 
 ### `dice()`
 
@@ -393,6 +393,52 @@ Sends the bot's status for 5 seconds or until the next message. E.g. `typing...`
 | `action`   | The action to show to the user. Possible values: `typing`, `upload_photo`, `record_video`, `upload_video`, `record_voice`, `upload_voice`, `upload_document`, `choose_sticker`, `find_location`, `record_video_note`, `upload_video_note` |
 | `threadId` | The id of the channel thread (topic) to where the message should be sent                                                                                                                                                                  |
 
+### `forward(String fromChatId, String messageId)`
+
+Forwards a message
+
+#### Parameters
+
+| Param        | Description                                                            |
+| ------------ | ---------------------------------------------------------------------- |
+| `fromChatId` | The unique identifier for the chat where the original message was sent |
+| `messageId`  | The message identifier in the chat specified in `fromChatId`           |
+
+### `forward(String fromChatId, String messageId, TelegramForwardOptions options)`
+
+Forwards a message
+
+#### Parameters
+
+| Param        | Description                                                                                                       |
+| ------------ | ----------------------------------------------------------------------------------------------------------------- |
+| `fromChatId` | The unique identifier for the chat where the original message was sent                                            |
+| `messageId`  | The message identifier in the chat specified in `fromChatId`                                                      |
+| `options`    | The instance of [TelegramForwardOptions](/types/Classes/TelegramForwardOptions.md) with other optional parameters |
+
+### `copy(String fromChatId, String messageId)`
+
+Sends a copy of the specified message without referencing the original message
+
+#### Parameters
+
+| Param        | Description                                                            |
+| ------------ | ---------------------------------------------------------------------- |
+| `fromChatId` | The unique identifier for the chat where the original message was sent |
+| `messageId`  | The message identifier in the chat specified in `fromChatId`           |
+
+### `copy(String fromChatId, String messageId, TelegramCopyOptions options)`
+
+Sends a copy of the specified message without referencing the original message
+
+#### Parameters
+
+| Param        | Description                                                                                                 |
+| ------------ | ----------------------------------------------------------------------------------------------------------- |
+| `fromChatId` | The unique identifier for the chat where the original message was sent                                      |
+| `messageId`  | The message identifier in the chat specified in `fromChatId`                                                |
+| `options`    | The instance of [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) with other optional parameters |
+
 ### `withReplyKeyboard(BotReplyKeyboardButton buttons)`
 
 Sets a simple custom keyboard for the message that the receiver will have instead of the standard input keyboard
@@ -413,15 +459,103 @@ TelegramBotSenderService
 
 The current instance of `Telegram` sender service
 
-### `withReplyKeyboard(TelegramSendKeyboardOptions keyboard)`
+### `withReplyKeyboard(TelegramReplyKeyboardMarkupOptions keyboard)`
 
-Sets a simple custom keyboard for the message that the receiver will have instead of the standard input keyboard
+Sets a reply keyboard for the message that the receiver will have instead of the standard input keyboard
 
 #### Parameters
 
-| Param      | Description                                                                                                                                     |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `keyboard` | The instance of [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) class, custom keyboard to be shown to the receiver |
+| Param      | Description                                                                                                                                         |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `keyboard` | The instance of [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) class, custom reply keyboard to be shown |
+
+#### Return
+
+**Type**
+
+TelegramBotSenderService
+
+**Description**
+
+The current instance of `Telegram` sender service
+
+### `withReplyKeyboardRemoved()`
+
+Sets a signal that the reply keyboard has to be deleted for the receiver
+
+#### Return
+
+**Type**
+
+TelegramBotSenderService
+
+**Description**
+
+The current instance of `Telegram` sender service
+
+### `withReplyKeyboardRemoved(TelegramReplyKeyboardRemoveOptions removeOptions)`
+
+Sets a signal that the reply keyboard has to be deleted for the receiver
+
+#### Parameters
+
+| Param           | Description                                        |
+| --------------- | -------------------------------------------------- |
+| `removeOptions` | Additional options for removing the reply keyboard |
+
+#### Return
+
+**Type**
+
+TelegramBotSenderService
+
+**Description**
+
+The current instance of `Telegram` sender service
+
+### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+
+Sets an inline keyboard for the message that will be shown next to the message
+
+#### Parameters
+
+| Param      | Description                                                                                                                                            |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `keyboard` | The instance of [TelegramInlineKeyboardMarkupOptions](/types/Classes/TelegramInlineKeyboardMarkupOptions.md) class, custom inline keyboard to be shown |
+
+#### Return
+
+**Type**
+
+TelegramBotSenderService
+
+**Description**
+
+The current instance of `Telegram` sender service
+
+### `withForceReply()`
+
+Will force `Telegram` client to display a reply interface to the user to the current bot's message
+
+#### Return
+
+**Type**
+
+TelegramBotSenderService
+
+**Description**
+
+The current instance of `Telegram` sender service
+
+### `withForceReply(TelegramForceReplyOptions forceReplyOptions)`
+
+Will force `Telegram` client to display a reply interface to the user to the current bot's message
+
+#### Parameters
+
+| Param               | Description                                                                                                                  |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `forceReplyOptions` | The instance of [TelegramForceReplyOptions](/types/Classes/TelegramForceReplyOptions.md) class with additional reply options |
 
 #### Return
 

@@ -1,28 +1,12 @@
-# TelegramBotUpdateEventType
+# BotEnumType
 
-Custom enum class that contains all available event types for `Telegram` bots. Docs: https://core.telegram.org/bots/api#update.
-
-**Inheritance**
-
-[BotUpdateEventType](/types/Enums/BotUpdateEventType.md)
-&gt;
-TelegramBotUpdateEventType
+Custom enum type that provides more flexibility comparing to the native Apex enums
 
 **Group** Enums
-
-## Fields
-
-### `EditedMessage` → `TelegramBotUpdateEventType`
-
-### `Message` → `TelegramBotUpdateEventType`
-
----
 
 ## Methods
 
 ### `name()`
-
-_Inherited_
 
 Returns the string representation of the enum. Works the same way as the native Apex enums
 
@@ -38,8 +22,6 @@ The string value the enum was initialized with
 
 ### `override toString()`
 
-_Inherited_
-
 Returns the string representation of the enum. Works the same way as the native Apex enums
 
 #### Return
@@ -53,8 +35,6 @@ String
 The String value the enum was initialized with
 
 ### `equals(Object other)`
-
-_Inherited_
 
 Checks if the passed object equals to the enum value
 
@@ -75,8 +55,6 @@ Boolean
 `true` if the passed object equals to the current instance by a reference or a String value
 
 ### `hashCode()`
-
-_Inherited_
 
 Generates a hashcode based on the string value this enum is initialized with
 
