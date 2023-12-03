@@ -34,7 +34,7 @@ public class TestMessageHandler implements IBotHandler {
         if (String.isNotBlank(receivedMessage)) {
             System.debug('Received: ' + receivedMessage);
             // Reply to the same user sending a message back
-            context.reply.text(receivedMessage);
+            context.reply().text(receivedMessage);
         }
     }
 }
