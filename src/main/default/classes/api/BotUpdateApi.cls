@@ -1,5 +1,6 @@
 /**
  * @description API for receiving webhooks for the bot updates. This class `MUST NOT` be edited
+ * @ignore
  */
 @RestResource(urlMapping = '/bots/*')
 global class BotUpdateApi {
@@ -18,17 +19,15 @@ global class BotUpdateApi {
         try {
             UriParams params = new UriParams(request.requestURI);
 
-            Bot__c bot = getBotResolver(params.type).resolve(params, request.headers);
+            BotModel bot = getBotResolver(params.type).resolve(params, request.headers);
             if (bot == null) {
                 throw new BotUpdateApiException(
                     'There is no bot with the provided type and id',
-                    new ValueMap().set('params', params).set('uri', request.requestURI)
+                    new BotJsonPayload().set('params', params).set('uri', request.requestURI)
                 );
             }
 
-            EventBus.publish(
-                new BotUpdateEvent__e(Bot__c = JSON.serialize(bot), Payload__c = request.requestBody.toString())
-            );
+            EventBus.publish(new BotUpdateEvent__e(Bot__c = bot.toJson(), Payload__c = request.requestBody.toString()));
 
             response.responseBody = Blob.valueOf(RESPONSE_OK);
         } catch (Exception error) {
@@ -45,7 +44,7 @@ global class BotUpdateApi {
     }
 
     public class BotUpdateApiException extends BotCustomException {
-        public BotUpdateApiException(String message, ValueMap payload) {
+        public BotUpdateApiException(String message, BotJsonPayload payload) {
             super(message, payload);
         }
     }
@@ -60,7 +59,7 @@ global class BotUpdateApi {
             if (!paramsMatcher.matches()) {
                 throw new BotUpdateApiException(
                     'Invalid URL format or the URI parameters are incorrect. The correct format is: /bots/<botType>/<botId>/<?token>',
-                    new ValueMap().set('uri', uri)
+                    new BotJsonPayload().set('uri', uri)
                 );
             }
 
@@ -75,9 +74,7 @@ global class BotUpdateApi {
                 botTypes.add(type.name());
             }
             return Pattern.compile(
-                '/bots/(?<botType>' +
-                String.join(botTypes, '|') +
-                ')/(?<botId>[A-Za-z\\d]{15,18})(/(?<token>\\w+))?'
+                '/bots/(?<botType>' + String.join(botTypes, '|') + ')/(?<botId>[A-Za-z\\d]{15,18})(/(?<token>\\w+))?'
             );
         }
     }

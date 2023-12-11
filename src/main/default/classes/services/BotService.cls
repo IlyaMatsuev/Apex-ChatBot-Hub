@@ -1,94 +1,51 @@
 /**
  * @description The base class that contains features common for all bots
  */
-global abstract class BotService {
-    protected final Bot__c bot;
+global abstract class BotService implements IBotService {
+    protected final BotModel bot;
 
-    protected BotType type {
+    protected BotCalloutService calloutService {
         get {
-            if (type == null) {
-                type = BotType.valueOf(bot.Type__c);
+            if (calloutService == null) {
+                calloutService = new BotServiceFactory().createCalloutService(bot);
             }
-            return type;
+            return calloutService;
         }
         private set;
     }
 
-    protected BotSetting__mdt settings { get { return BotSettingsProvider.get(type); } }
+    public class SaveSentMessageCallback implements IBotCallback {
+        private final List<String> chatIds;
+        private final BotModel bot;
 
-    protected BotService(Bot__c bot) {
-        this.bot = bot;
-    }
-
-    /**
-     * Send a text message to the chat
-     * @param chatId External id of the chat. Can be either source chat messenger id or the formed one that is stored in `Chat__c.ExternalId__c`
-     * @param message The text message to send
-     */
-    global void send(String chatId, String message) {
-        String messageId = sendMessage(chatId.substringBefore(':'), message);
-        ChatMessage__c messageRecord = new ChatMessage__c(
-            Text__c = message,
-            Chat__r = new Chat__c(ExternalId__c = BotUtils.generateChatId(bot.TokenHash__c, chatId)),
-            Bot__c = bot.id,
-            ExternalId__c = messageId
-        );
-        BotUtils.saveAsync(new List<SObject> { messageRecord }, 'ExternalId__c');
-    }
-
-    protected virtual String sendMessage(String chatId, String message) {
-        throw new BotServiceException(
-            'Not implemented: sendMessage(String chatId, String message)',
-            new ValueMap().set('chatId', chatId).set('message', message)
-        );
-    }
-
-    protected HttpResponse call(BotMethod method, ValueMap body) {
-        return call(method, body, true);
-    }
-
-    protected HttpResponse call(BotMethod method, ValueMap body, Boolean throwOnFail) {
-        HttpResponse response = new Http().send(prepareRequest(method, body));
-        // TODO: This doesn't work for Viber - they always send 200 respones
-        if (throwOnFail && response.getStatusCode() != 200) {
-            throw new BotServiceException(
-                'A call failed for the bot "' +
-                bot.Name +
-                '" and method "' +
-                method +
-                '": ' +
-                response.getStatus(),
-                new ValueMap()
-                    .set(
-                        'request',
-                        new ValueMap()
-                            .set('body', body.getValues())
-                            .set('botMethod', method.name())
-                            .set('botId', bot.Id)
-                    )
-                    .set(
-                        'response',
-                        new ValueMap()
-                            .set('body', ValueMap.fromJson(response.getBody()))
-                            .set('statusCode', response.getStatusCode())
-                    )
-            );
+        public SaveSentMessageCallback(List<String> chatIds, BotModel bot) {
+            this.chatIds = chatIds;
+            this.bot = bot;
         }
-        return response;
-    }
 
-    protected virtual HttpRequest prepareRequest(BotMethod method, ValueMap body) {
-        HttpRequest request = new HttpRequest();
-        request.setEndpoint(settings.ApiUrl__c + '/' + method);
-        request.setMethod('POST');
-        request.setHeader('Content-Type', 'application/json');
-        request.setBody(body.toJson());
-        return request;
-    }
-
-    public class BotServiceException extends BotCustomException {
-        public BotServiceException(String message, ValueMap payload) {
-            super(message, payload);
+        public void execute(BotJsonPayload params) {
+            List<ChatMessage__c> messages = new List<ChatMessage__c>();
+            for (String chatId : chatIds) {
+                BotJsonPayload parameters = new BotJsonPayload();
+                if (params.has('parameters')) {
+                    parameters = params.getJsonPayload('parameters');
+                }
+                if (params.has('keyboard')) {
+                    parameters.set('keyboard', params.getJsonPayload('keyboard'));
+                }
+                messages.add(
+                    new ChatMessage__c(
+                        Type__c = params.getString('type'),
+                        Text__c = params.getString('text'),
+                        MediaUrl__c = params.getString('mediaUrl'),
+                        Parameters__c = parameters.toJson(true),
+                        Chat__r = new Chat__c(ExternalId__c = BotUtils.generateExternalId(chatId, bot.tokenHash)),
+                        Bot__c = bot.id,
+                        ExternalId__c = BotUtils.generateExternalId(params.getString('messageId'), chatId)
+                    )
+                );
+            }
+            BotUtils.saveAsync(messages, 'ExternalId__c');
         }
     }
 }

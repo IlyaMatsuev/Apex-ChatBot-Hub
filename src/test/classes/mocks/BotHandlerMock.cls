@@ -1,9 +1,9 @@
 @IsTest
 public class BotHandlerMock implements IBotHandler {
-    public static final List<BotContext> executedContexts = new List<BotContext>();
+    public static final List<IBotContext> executedContexts = new List<IBotContext>();
     public static Boolean throwError = false;
 
-    public void handle(BotContext context) {
+    public void handle(IBotContext context) {
         if (throwError) {
             throw new TypeException('Unexpected error!');
         }

@@ -1,192 +1,661 @@
 # Type Definitions
 
-Here specified only `global` Apex types that are _supposed_ to be used by a user as part of this package.
+## Classes
 
-### Classes
+### [BotContext](/types/Classes/BotContext.md)
 
--   [BotService](#botservice)
--   [TelegramBotService](#telegrambotservice)
--   [ViberBotService](#viberbotservice)
--   [BotServiceFactory](#botservicefactory)
--   [BotContext](#botcontext)
--   [BotContext.Reply](#botcontextreply)
--   [BotUpdateModel](#botupdatemodel)
--   [BotUpdateModel.UserModel](#botupdatemodelusermodel)
--   [BotUpdateModel.ChatModel](#botupdatemodelchatmodel)
--   [BotUpdateModel.MessageModel](#botupdatemodelmessagemodel)
--   [BotUpdateModel.Command](#botupdatemodelcommand)
+Represents the context with all necessary variables and entities for properly handling the incoming updates for bot
 
-### Interfaces
+### [BotJsonPayload](/types/Classes/BotJsonPayload.md)
 
--   [IBotHandler](#ibothandler)
+Provides a convenient interface on top of the JSON payload via such methods as `getString()`, `getInteger()`, `toJson()`, etc.
 
-### Enums
+### [BotModel](/types/Classes/BotModel.md)
 
--   [BotType](#bottype)
--   [TelegramBotUpdateEventType](#telegrambotupdateeventtype)
--   [ViberBotUpdateEventType](#viberbotupdateeventtype)
+The `Bot__c` sObject model
 
----
+### [BotReplyKeyboardButton](/types/Classes/BotReplyKeyboardButton.md)
 
-### BotService
+The builder-like class for building custom keyboard buttons, used as reply by the user
 
-Base class that defines the common functionality for the bot services.
+### [BotService](/types/Classes/BotService.md)
 
-#### Methods
+The base class that contains features common for all bots
 
-`void send(String chatId, String message)` - Send text message to the chat by the provided `chatId`.
+### [BotServiceFactory](/types/Classes/BotServiceFactory.md)
 
-### TelegramBotService
+Factory for creating bot services
 
-The concrete service for the `Telegram` messanger bots. Extends `BotService` but also contains features related to `Telegram` only. _Right now there are no unique fields/methods for this service_.
+### [IBotChat](/types/Classes/IBotChat.md)
 
-### ViberBotService
+Describes the chat payload received as an update from a bot
 
-The concrete service for the `Viber` messanger bots. Extends `BotService` but also contains features related to `Viber` only. _Right now there are no unique fields/methods for this service_.
+### [IBotContext](/types/Classes/IBotContext.md)
 
-### BotServiceFactory
+Describes the context methods that are common for all bot types
 
-Factory for creating instances of the `BotService`.
+### [IBotMessage](/types/Classes/IBotMessage.md)
 
-#### Methods
+Describes the message payload received as an update from a bot
 
-`BotService createBotService(Bot__c bot)` - Create a new instance of the `BotService` class for the provided `Bot__c` object.
+### [IBotUpdateEvent](/types/Classes/IBotUpdateEvent.md)
 
-### BotContext
+Describes the payload received as an update from a bot
 
-Context class that provides functionality and information to interact with the current bot chat update.
+### [IBotUser](/types/Classes/IBotUser.md)
 
-#### Fields
+Describes the sender payload received as an update from a bot
 
-`Bot__c bot` - The `Bot__c` record associated with the current webhook update.
+### [TelegramAnimation](/types/Classes/TelegramAnimation.md)
 
-`BotType type` - Instance of the `BotType`. The type of the bot associated with the incoming update
+Describes the animation payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#animation
 
-`BotUpdateModel received` - Instance of the `BotUpdateModel` that contains details about the incoming update.
+### [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md)
 
-`Reply reply` - Instance of the `BotContext.Reply` that provides methods for answering to the incoming update.
+Represents the optional parameters for inline mode `answer` method.
+Source: https://core.telegram.org/bots/api#inlinequeryresult
 
-#### Methods
+### [TelegramAudio](/types/Classes/TelegramAudio.md)
 
-`BotService getService(Bot__c bot)` - Creates a new bot service for the provided `Bot__c` sObject.
+Describes the audio payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#audio
 
-`void save(SObject record)` - Publishes the record to be saved asynchronously during the update handler execution.
+### [TelegramBotChatInviteLinkService](/types/Classes/TelegramBotChatInviteLinkService.md)
 
-`void save(List<SObject> records)` - Publishes the records to be saved asynchronously during the update handler execution.
+Service class that provides access to all `Telegram` `chatInviteLink` methods
 
-`void save(List<SObject> records, String externalIdField)` - Publishes the records to be saved asynchronously by the external id during the update handler execution.
+### [TelegramBotChatJoinRequestService](/types/Classes/TelegramBotChatJoinRequestService.md)
 
-### BotContext.Reply
+Service class that provides access to all `Telegram` `chatJoinRequest` methods
 
-The nested class containing methods for answerting to the received update.
+### [TelegramBotChatMemberService](/types/Classes/TelegramBotChatMemberService.md)
 
-#### Methods
+Service class that provides access to all `Telegram` `chatMember` methods
 
-`void send(String message)` - Reply to the chat/user with the provided text message.
+### [TelegramBotChatService](/types/Classes/TelegramBotChatService.md)
 
-### BotUpdateModel
+### [TelegramBotContext](/types/Classes/TelegramBotContext.md)
 
-Contains all the details about the incoming update: message, chat and user information.
+Represents the context with variables and methods for handling the incoming updates for `Telegram` bots
 
-#### Fields
+### [TelegramBotEditorService](/types/Classes/TelegramBotEditorService.md)
 
-`BotUpdateEventType eventType` - The type of the incoming event. Event types are different for every bot (e.g. `TelegramBotUpdateEventType` or `ViberBotUpdateEventType`).
+Service class that provides access to all `Telegram` `edit` methods
 
-`ChatModel chat` - The chat model from where the update is coming. Instance of the `BotUpdateModel.ChatModel` class.
+### [TelegramBotHandler](/types/Classes/TelegramBotHandler.md)
 
-`MessageModel message` - The received message model. Instance of the `BotUpdateModel.MessageModel` class.
+The class designed for handling webhook events specifically for `Telegram` bots
 
-### BotUpdateModel.ChatModel
+### [TelegramBotInlineQueryService](/types/Classes/TelegramBotInlineQueryService.md)
 
-Contains information about the chat from where the update is coming.
+Service class that provides access to all `Telegram` `inline` mode methods
 
-#### Fields
+### [TelegramBotMeService](/types/Classes/TelegramBotMeService.md)
 
-`String id` - The messanger's chat id.
+Service class that provides access to all `Telegram` `me` and `my` methods
 
-`String title` - The messanger's chat title. Can be either firstname + lastname or username depending on how much profile information is filled by the user.
+### [TelegramBotSenderService](/types/Classes/TelegramBotSenderService.md)
 
-`UserModel sender` - The instance of `BotUpdateModel.UserModel` containing all details about the user who sent a message (or any other update) to the bot.
+Service class that provides access to all `Telegram` `send` methods
 
-#### Properties
+### [TelegramBotService](/types/Classes/TelegramBotService.md)
 
-`Boolean isDM { get; }` - Evaluates `true` if the current update is coming from the private chat (direct message)
+The concrete service for the `Telegram` messenger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Telegram` only
 
-### BotUpdateModel.UserModel
+### [TelegramBotStickerService](/types/Classes/TelegramBotStickerService.md)
 
-Contains all details about the the user who sent a message (or any other update) to the bot.
+Service class that provides access to all `Telegram` `sticker` methods
 
-#### Fields
+### [TelegramBotStickerSetService](/types/Classes/TelegramBotStickerSetService.md)
 
-`String id` - The messanger's user id.
+Service class that provides access to all `Telegram` `sticker` methods
 
-`String firstName` - First name of the sender.
+### [TelegramCallbackQueryEvent](/types/Classes/TelegramCallbackQueryEvent.md)
 
-`String lastName` - Last name of the sender.
+Describes the common payload properties for the `Telegram` bot callback query events.
+Source: https://core.telegram.org/bots/api#callbackquery
 
-`String username` - The messanger's user unique username.
+### [TelegramChat](/types/Classes/TelegramChat.md)
 
-### BotUpdateModel.MessageModel
+Describes the chat payload received as an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#chat
 
-Contains information about the received message.
+### [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md)
 
-#### Fields
+Describes the default administrator chat permissions payload for a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#chatadministratorrights
 
-`String id` - The messanger's user id.
+### [TelegramChatInviteLink](/types/Classes/TelegramChatInviteLink.md)
 
-`String text` - The incoming message text.
+Describes the chat invite link payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#chatinvitelink
 
-`DateTime sentAt` - Date and time when the message has been sent.
+### [TelegramChatJoinRequestEvent](/types/Classes/TelegramChatJoinRequestEvent.md)
 
-#### Properties
+Describes the common payload properties for the `Telegram` bot chat join request events.
+Source: https://core.telegram.org/bots/api#chatjoinrequest
 
-`Command command { get; }` - Returns the `Command` instance if the message is a command (starts with "/").
+### [TelegramChatMember](/types/Classes/TelegramChatMember.md)
 
-### BotUpdateModel.Command
+Describes the information about a basic `Telegram` chat member.
+Source: https://core.telegram.org/bots/api#chatmembermember
 
-Contains information about the command received with message.
+### [TelegramChatMemberAdmin](/types/Classes/TelegramChatMemberAdmin.md)
 
-#### Fields
+Describes the information about an administrator `Telegram` chat member.
+Source: https://core.telegram.org/bots/api#chatmemberadministrator
 
-`String name` - Name of the command.
+### [TelegramChatMemberBanned](/types/Classes/TelegramChatMemberBanned.md)
 
-`List<String> params` - Parameters split by space provided with the command.
+Describes the information about a banned `Telegram` chat member.
+Source: https://core.telegram.org/bots/api#chatmemberbanned
 
----
+### [TelegramChatMemberLeft](/types/Classes/TelegramChatMemberLeft.md)
 
-### IBotHandler
+Describes the information about a left `Telegram` chat member.
+Source: https://core.telegram.org/bots/api#chatmemberleft
 
-This interface is called when the new update comes from the bot webhook. For example, when somebody sends a new message to the bot.
+### [TelegramChatMemberOwner](/types/Classes/TelegramChatMemberOwner.md)
 
-`void handle(BotContext context)` - Handle the incoming update. Accepts the `BotContext` instance.
+Describes the information about an owner `Telegram` chat member.
+Source: https://core.telegram.org/bots/api#chatmemberowner
 
----
+### [TelegramChatMemberRestricted](/types/Classes/TelegramChatMemberRestricted.md)
 
-### BotType
+Describes the information about a restricted `Telegram` chat member.
+Source: https://core.telegram.org/bots/api#chatmemberrestricted
 
-Defines available bot implementation options.
+### [TelegramChatMemberUpdatedEvent](/types/Classes/TelegramChatMemberUpdatedEvent.md)
 
-#### Values
+Describes the common payload properties for the `Telegram` bot chat member updated events.
+Source: https://core.telegram.org/bots/api#chatmemberupdated
 
--   `Telegram`
--   `Viber`
+### [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md)
 
-### TelegramBotUpdateEventType
+Describes the chat permissions payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#chatpermissions
 
-Defines available `Telegram` bot event types to receive.
+### [TelegramChosenInlineResultEvent](/types/Classes/TelegramChosenInlineResultEvent.md)
 
-#### Values
+Describes the common payload properties for the `Telegram` bot chosen inline result events.
+Source: https://core.telegram.org/bots/api#choseninlineresult
 
--   `Message`
--   `EditedMessage`
+### [TelegramContact](/types/Classes/TelegramContact.md)
 
-### ViberBotUpdateEventType
+Describes the contact payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#contact
 
-Defines available `Viber` bot event types to receive.
+### [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md)
 
-#### Values
+Represents the optional parameters for the `Telegram` `copy` method.
+Source: https://core.telegram.org/bots/api#copymessage
 
--   `WebhookCallback` - Not supposed to be used
--   `Message`
--   `Delivered`
--   `Seen`
+### [TelegramDice](/types/Classes/TelegramDice.md)
+
+Describes the dice payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#dice
+
+### [TelegramDocument](/types/Classes/TelegramDocument.md)
+
+Describes the general file payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#document
+
+### [TelegramEditCaptionOptions](/types/Classes/TelegramEditCaptionOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `editMessageCaption` method.
+Source: https://core.telegram.org/bots/api#editmessagecaption
+
+### [TelegramEditLiveLocationOptions](/types/Classes/TelegramEditLiveLocationOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `editMessageLiveLocation` method.
+Source: https://core.telegram.org/bots/api#editmessagelivelocation
+
+### [TelegramEditTextOptions](/types/Classes/TelegramEditTextOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `editMessageText` method.
+Source: https://core.telegram.org/bots/api#editmessagetext
+
+### [TelegramFile](/types/Classes/TelegramFile.md)
+
+Describes the file payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#file
+
+### [TelegramForceReplyOptions](/types/Classes/TelegramForceReplyOptions.md)
+
+Represents parameters wrapper for sending a force reply to the user via the `Telegram` bot service.
+Source: https://core.telegram.org/bots/api#forcereply
+
+### [TelegramForwardOptions](/types/Classes/TelegramForwardOptions.md)
+
+Represents the optional parameters for the `Telegram` `forward` method.
+Source: https://core.telegram.org/bots/api#forwardmessage
+
+### [TelegramInlineKeyboardMarkupOptions](/types/Classes/TelegramInlineKeyboardMarkupOptions.md)
+
+Represents parameters wrapper for sending inline keyboard to the user via the `Telegram` bot service.
+Source: https://core.telegram.org/bots/api#inlinekeyboardmarkup
+
+### [TelegramInlineQueryEvent](/types/Classes/TelegramInlineQueryEvent.md)
+
+Describes the common payload properties for the `Telegram` bot inline query events.
+Source: https://core.telegram.org/bots/api#inlinequery
+
+### [TelegramInlineQueryResult](/types/Classes/TelegramInlineQueryResult.md)
+
+Describes the basic result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresult
+
+### [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md)
+
+Describes the article result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresultarticle
+
+### [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md)
+
+Describes the audio result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresultaudio
+
+### [TelegramInlineQueryResultContact](/types/Classes/TelegramInlineQueryResultContact.md)
+
+Describes the contact result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresultcontact
+
+### [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md)
+
+Describes the document result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresultdocument
+
+### [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md)
+
+Describes the gif result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresultgif, https://core.telegram.org/bots/api#inlinequeryresultmpeg4gif
+
+### [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md)
+
+Describes the location result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresultlocation
+
+### [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md)
+
+Describes the photo result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresultphoto
+
+### [TelegramInlineQueryResultSticker](/types/Classes/TelegramInlineQueryResultSticker.md)
+
+Describes the article result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresultarticle
+
+### [TelegramInlineQueryResultVenue](/types/Classes/TelegramInlineQueryResultVenue.md)
+
+Describes the venue result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresultvenue
+
+### [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md)
+
+Describes the video result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresultvideo
+
+### [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md)
+
+Describes the voice result payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inlinequeryresultvoice
+
+### [TelegramInputContactMessageContent](/types/Classes/TelegramInputContactMessageContent.md)
+
+Describes the input contact message payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inputcontactmessagecontent
+
+### [TelegramInputLocationMessageContent](/types/Classes/TelegramInputLocationMessageContent.md)
+
+Describes the input location message payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inputlocationmessagecontent
+
+### [TelegramInputMedia](/types/Classes/TelegramInputMedia.md)
+
+Describes the input media payload that can be attached as part of `send` or `edit` `Telegram` bot methods.
+Source: https://core.telegram.org/bots/api#inputmedia
+
+### [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md)
+
+Describes the input animation media payload that can be attached as part of `send` or `edit` `Telegram` bot methods.
+Source: https://core.telegram.org/bots/api#inputmediaanimation
+
+### [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md)
+
+Describes the input audio media payload that can be attached as part of `send` or `edit` `Telegram` bot methods.
+Source: https://core.telegram.org/bots/api#inputmediaaudio
+
+### [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md)
+
+Describes the input document media payload that can be attached as part of `send` or `edit` `Telegram` bot methods.
+Source: https://core.telegram.org/bots/api#inputmediadocument
+
+### [TelegramInputMediaPhoto](/types/Classes/TelegramInputMediaPhoto.md)
+
+Describes the input photo media payload that can be attached as part of `send` or `edit` `Telegram` bot methods.
+Source: https://core.telegram.org/bots/api#inputmediaphoto
+
+### [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md)
+
+Describes the input video media payload that can be attached as part of `send` or `edit` `Telegram` bot methods.
+Source: https://core.telegram.org/bots/api#inputmediavideo
+
+### [TelegramInputMessageContent](/types/Classes/TelegramInputMessageContent.md)
+
+Describes the basic input message payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inputmessagecontent
+
+### [TelegramInputSticker](/types/Classes/TelegramInputSticker.md)
+
+Describes the `Telegram` input sticker payload.
+Source: https://core.telegram.org/bots/api#inputsticker
+
+### [TelegramInputTextMessageContent](/types/Classes/TelegramInputTextMessageContent.md)
+
+Describes the input text message payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inputtextmessagecontent
+
+### [TelegramInputVenueMessageContent](/types/Classes/TelegramInputVenueMessageContent.md)
+
+Describes the input venue message payload that can be attached as part of answer to a `Telegram` bot inline query.
+Source: https://core.telegram.org/bots/api#inputvenuemessagecontent
+
+### [TelegramLocation](/types/Classes/TelegramLocation.md)
+
+Describes the location payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#location
+
+### [TelegramMaskPosition](/types/Classes/TelegramMaskPosition.md)
+
+Describes the mask position payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#maskposition
+
+### [TelegramMessage](/types/Classes/TelegramMessage.md)
+
+Describes the message payload received as an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#message
+
+### [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md)
+
+The builder-like class representing a special entity in a message text. For example, hashtags, usernames, etc.
+Source: https://core.telegram.org/bots/api#messageentity
+
+### [TelegramMessageEvent](/types/Classes/TelegramMessageEvent.md)
+
+Describes the common payload properties for the `Telegram` bot message events.
+Source: https://core.telegram.org/bots/api#message
+
+### [TelegramPhotoSize](/types/Classes/TelegramPhotoSize.md)
+
+Describes the photo size payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#photosize
+
+### [TelegramPoll](/types/Classes/TelegramPoll.md)
+
+Describes the poll payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#poll
+
+### [TelegramPollAnswerEvent](/types/Classes/TelegramPollAnswerEvent.md)
+
+Describes the common payload properties for the `Telegram` bot poll answer events.
+Source: https://core.telegram.org/bots/api#pollanswer
+
+### [TelegramPollEvent](/types/Classes/TelegramPollEvent.md)
+
+Describes the common payload properties for the `Telegram` bot poll events.
+Source: https://core.telegram.org/bots/api#poll
+
+### [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md)
+
+The builder-like class that describes optional parameters for promoting a `Telegram` chat member.
+Source: https://core.telegram.org/bots/api#promotechatmember
+
+### [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md)
+
+The builder-like class that represents parameters for sending a custom reply keyboard to the user via the `Telegram` bot service.
+Source: https://core.telegram.org/bots/api#replykeyboardmarkup
+
+### [TelegramReplyKeyboardRemoveOptions](/types/Classes/TelegramReplyKeyboardRemoveOptions.md)
+
+Represents parameters wrapper for sending a remove reply keyboard signal to the user via the `Telegram` bot service.
+Source: https://core.telegram.org/bots/api#replykeyboardremove
+
+### [TelegramSendAudioOptions](/types/Classes/TelegramSendAudioOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendAudio` and `sendVoice` methods.
+Source: https://core.telegram.org/bots/api#sendaudio, https://core.telegram.org/bots/api#sendvoice
+
+### [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendContact` method.
+Source: https://core.telegram.org/bots/api#sendcontact
+
+### [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendDice` method.
+Source: https://core.telegram.org/bots/api#senddice
+
+### [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendDocument` method.
+Source: https://core.telegram.org/bots/api#senddocument
+
+### [TelegramSendImageOptions](/types/Classes/TelegramSendImageOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendPhoto` method.
+Source: https://core.telegram.org/bots/api#sendphoto
+
+### [TelegramSendLocationOptions](/types/Classes/TelegramSendLocationOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendLocation` method.
+Source: https://core.telegram.org/bots/api#sendlocation
+
+### [TelegramSendMessageOptions](/types/Classes/TelegramSendMessageOptions.md)
+
+The builder-like class that describes common optional parameters of the `Telegram` for sending messages
+
+### [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendPoll` method.
+Source: https://core.telegram.org/bots/api#sendpoll
+
+### [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendSticker` method.
+Source: https://core.telegram.org/bots/api#sendsticker
+
+### [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendMessage` method.
+Source: https://core.telegram.org/bots/api#sendmessage
+
+### [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendVenue` method.
+Source: https://core.telegram.org/bots/api#sendvenue
+
+### [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendVideoNote` method.
+Source: https://core.telegram.org/bots/api#sendvideonote
+
+### [TelegramSendVideoOptions](/types/Classes/TelegramSendVideoOptions.md)
+
+The builder-like class that describes all optional parameters of the `Telegram` `sendVideo` and `sendAnimation` methods.
+Source: https://core.telegram.org/bots/api#sendvideo
+
+### [TelegramSticker](/types/Classes/TelegramSticker.md)
+
+Describes the sticker payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#sticker
+
+### [TelegramStickerSet](/types/Classes/TelegramStickerSet.md)
+
+Describes the `Telegram` sticker set payload.
+Source: https://core.telegram.org/bots/api#stickerset
+
+### [TelegramStickerSetCreateOptions](/types/Classes/TelegramStickerSetCreateOptions.md)
+
+Describes the `Telegram` optional parameters for creation of a sticker set.
+Source: https://core.telegram.org/bots/api#createnewstickerset
+
+### [TelegramUpdateEvent](/types/Classes/TelegramUpdateEvent.md)
+
+Describes the payload received as an update from a `Telegram` bot.
+
+### [TelegramUser](/types/Classes/TelegramUser.md)
+
+Describes the sender payload received as an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#user
+
+### [TelegramVenue](/types/Classes/TelegramVenue.md)
+
+Describes the venue payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#venue
+
+### [TelegramVideo](/types/Classes/TelegramVideo.md)
+
+Describes the video payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#video
+
+### [TelegramVideoNote](/types/Classes/TelegramVideoNote.md)
+
+Describes the video note payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#videonote
+
+### [TelegramVoice](/types/Classes/TelegramVoice.md)
+
+Describes the voice payload that can be received as part of an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#voice
+
+### [TelegramWebAppInfo](/types/Classes/TelegramWebAppInfo.md)
+
+Describes the web app info payload received as an update from a `Telegram` bot.
+Source: https://core.telegram.org/bots/api#webappinfo
+
+### [ViberAccount](/types/Classes/ViberAccount.md)
+
+Describes the account payload received as result of `Viber` `getAccount` method
+
+### [ViberBotContext](/types/Classes/ViberBotContext.md)
+
+Represents the context with variables and methods for handling the incoming updates for `Viber` bots
+
+### [ViberBotHandler](/types/Classes/ViberBotHandler.md)
+
+The class designed for handling webhook events specifically for `Viber` bots
+
+### [ViberBotSenderService](/types/Classes/ViberBotSenderService.md)
+
+Service class that provides access to all `Viber` `send` methods
+
+### [ViberBotService](/types/Classes/ViberBotService.md)
+
+The concrete service for the `Viber` messenger bots. Extends [BotService](/types/Classes/BotService.md) but also contains features related to `Viber` only
+
+### [ViberChat](/types/Classes/ViberChat.md)
+
+Describes the chat payload received as an update from a `Viber` bot
+
+### [ViberLocation](/types/Classes/ViberLocation.md)
+
+Represents the coordinates for a location message
+
+### [ViberMessage](/types/Classes/ViberMessage.md)
+
+Describes the message payload received as an update from a `Viber` bot
+
+### [ViberMessageEvent](/types/Classes/ViberMessageEvent.md)
+
+Describes the common payload properties for the `Viber` bot update events.
+Sources:
+
+-   https://developers.viber.com/docs/api/rest-bot-api/#message-receipts-callbacks
+-   https://developers.viber.com/docs/api/rest-bot-api/#unsubscribed
+
+### [ViberMessageFailedEvent](/types/Classes/ViberMessageFailedEvent.md)
+
+Describes the `Viber` bot payload for a failed message send attempt.
+Source: https://developers.viber.com/docs/api/rest-bot-api/#failed-callback
+
+### [ViberMessageReceivedEvent](/types/Classes/ViberMessageReceivedEvent.md)
+
+Describes the `Viber` bot payload received when the new message is received from a user.
+Source: https://developers.viber.com/docs/api/rest-bot-api/#receive-message-from-user
+
+### [ViberOnlineStatus](/types/Classes/ViberOnlineStatus.md)
+
+Describes the online status payload received as result of `Viber` `getOnline` method
+
+### [ViberReplyKeyboardOptions](/types/Classes/ViberReplyKeyboardOptions.md)
+
+The builder-like class that represents parameters for sending a custom carousel/keyboard to the user via the `Viber` bot service.
+Source: https://developers.viber.com/docs/tools/keyboards/#general-keyboard-parameters
+
+### [ViberSendFileOptions](/types/Classes/ViberSendFileOptions.md)
+
+The wrapper class that represents optional parameters for sending a file via the `Viber` bot service
+
+### [ViberSendImageOptions](/types/Classes/ViberSendImageOptions.md)
+
+The wrapper class that represents optional parameters for sending an image via the `Viber` bot service
+
+### [ViberSendVideoOptions](/types/Classes/ViberSendVideoOptions.md)
+
+The wrapper class that represents optional parameters for sending a video via the `Viber` bot service
+
+### [ViberSubscribedEvent](/types/Classes/ViberSubscribedEvent.md)
+
+Describes the `Viber` bot payload when a new user subscribes to the bot.
+Source: https://developers.viber.com/docs/api/rest-bot-api/#subscribed
+
+### [ViberUpdateEvent](/types/Classes/ViberUpdateEvent.md)
+
+Describes the payload received as an update from a `Viber` bot
+
+### [ViberUser](/types/Classes/ViberUser.md)
+
+Describes the sender payload received as an update from a `Viber` bot
+
+## Enums
+
+### [BotEnumType](/types/Enums/BotEnumType.md)
+
+Custom enum type that provides more flexibility comparing to the native Apex enums
+
+### [BotMessageType](/types/Enums/BotMessageType.md)
+
+The enum with all available message types for sending and receiving messages
+
+### [BotType](/types/Enums/BotType.md)
+
+Custom enum that contains all available bot types for the package. The same values are presented in the `Bot__c.Type__c` picklist
+
+### [BotUpdateEventType](/types/Enums/BotUpdateEventType.md)
+
+Custom enum base class that is extended by `Telegram` and `Viber` enums which contain all available event types
+
+### [TelegramUpdateEventType](/types/Enums/TelegramUpdateEventType.md)
+
+Custom enum class that contains all available event types for `Telegram` bots.
+Source: https://core.telegram.org/bots/api#update.
+
+### [ViberUpdateEventType](/types/Enums/ViberUpdateEventType.md)
+
+Custom enum class that contains all available event types for `Viber` bots.
+Source: https://developers.viber.com/docs/api/rest-bot-api/#setting-a-webhook
+
+## Interfaces
+
+### [IBotHandler](/types/Interfaces/IBotHandler.md)
+
+The interface that is required to implement to handle chat bot updates
+
+### [IBotSenderService](/types/Interfaces/IBotSenderService.md)
+
+The interface with all common methods for sending messages to the bot users
+
+### [IBotService](/types/Interfaces/IBotService.md)
+
+The BotService interface containing all main methods for every bot service

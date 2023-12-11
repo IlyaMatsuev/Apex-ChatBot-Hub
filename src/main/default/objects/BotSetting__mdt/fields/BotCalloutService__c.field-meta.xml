@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BotCalloutService__c</fullName>
+    <defaultValue>&quot;BotCalloutService&quot;</defaultValue>
+    <description>The name of the class that extends BotCalloutService and configures the way callouts are sent to a bot API</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>The name of the class that extends BotCalloutService class</inlineHelpText>
+    <label>Bot Callout Service</label>
+    <length>40</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

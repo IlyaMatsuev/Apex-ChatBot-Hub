@@ -8,7 +8,7 @@
         <enabled>true</enabled>
         <name>BotSetting__mdt</name>
     </customMetadataTypeAccesses>
-    <description>Contains permissions for all necessary components of the Apex Bot Lib</description>
+    <description>Contains &quot;write&quot; permissions for all necessary components of the Apex ChatBot Hub</description>
     <fieldPermissions>
         <editable>true</editable>
         <field>BotError__c.Bot__c</field>
@@ -32,6 +32,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ChatMessage__c.Bot__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ChatMessage__c.MediaUrl__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ChatMessage__c.Parameters__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -125,7 +135,7 @@
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <recordTypeVisibilities>
-        <recordType>Bot__c.BaseMessanger</recordType>
+        <recordType>Bot__c.BaseMessenger</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <tabSettings>
@@ -148,4 +158,8 @@
         <tab>Chat__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ViewEncryptedData</name>
+    </userPermissions>
 </PermissionSet>

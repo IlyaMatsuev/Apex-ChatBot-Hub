@@ -1,4 +1,5 @@
 {
+    "plugins": ["@ilyamatsuev/prettier-plugin-apex", "@prettier/plugin-xml"],
     "trailingComma": "none",
     "printWidth": 120,
     "tabWidth": 4,
@@ -8,12 +9,12 @@
     "apexInsertFinalNewline": true,
     "apexFormatAnnotations": true,
     "apexFormatStandardTypes": true,
-    "apexFormatInlineComments": true,
-    "apexAnnotationsArgsSpacing": true,
+    "apexFormatInlineComments": "spaced",
     "apexEmptyBlockBracketLine": true,
     "apexExpandOneLineProperties": false,
     "apexExplicitAccessModifier": true,
     "apexSortModifiers": true,
+    "apexForceCurly": true,
     "overrides": [
         {
             "files": "*.xml",
@@ -29,10 +30,8 @@
             }
         },
         {
-            "files": "*.trigger",
-            "options": {
-                "apexExplicitAccessModifier": false
-            }
+            "files": "**/lwc/**/*.html",
+            "options": { "parser": "lwc" }
         }
     ]
 }
