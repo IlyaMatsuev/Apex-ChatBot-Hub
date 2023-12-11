@@ -1,18 +1,19 @@
-# TelegramSendKeyboardOptions
+# TelegramReplyKeyboardMarkupOptions
 
-The builder-like class that represents parameters for sending a custom reply keyboard to the user via the `Telegram` bot service. The source: https://core.telegram.org/bots/api#replykeyboardmarkup
+The builder-like class that represents parameters for sending a custom reply keyboard to the user via the `Telegram` bot service.
+Source: https://core.telegram.org/bots/api#replykeyboardmarkup
 
 **Inheritance**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 ## Constructors
 
-### `TelegramSendKeyboardOptions()`
+### `TelegramReplyKeyboardMarkupOptions()`
 
 Creates an instance of the reply keyboard without any buttons, so that they can be added separately
 
-### `TelegramSendKeyboardOptions(Button buttons)`
+### `TelegramReplyKeyboardMarkupOptions(Button buttons)`
 
 Creates an instance of the reply keyboard with the provided buttons row
 
@@ -22,7 +23,7 @@ Creates an instance of the reply keyboard with the provided buttons row
 | --------- | ----------------------------------------------------------- |
 | `buttons` | The list of buttons as a single row to be shown to the user |
 
-### `TelegramSendKeyboardOptions(List<List<Button>> buttons)`
+### `TelegramReplyKeyboardMarkupOptions(List<List<Button>> buttons)`
 
 Creates an instance of the reply keyboard with the provided buttons matrix
 
@@ -58,11 +59,11 @@ Adds a button to the keyboard's first row
 
 **Type**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 **Description**
 
-The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) instance
+The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
 
 ### `addButton(Integer row, Button button)`
 
@@ -79,11 +80,11 @@ Adds a button to the specific keyboard's row
 
 **Type**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 **Description**
 
-The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) instance
+The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
 
 ### `addButtons(Button buttons)`
 
@@ -99,11 +100,11 @@ Adds multiple buttons to the keyboard's first row
 
 **Type**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 **Description**
 
-The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) instance
+The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
 
 ### `addButtons(Integer row, Button buttons)`
 
@@ -120,11 +121,11 @@ Adds multiple buttons to the specific keyboard's row
 
 **Type**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 **Description**
 
-The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) instance
+The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
 
 ### `allowResizeKeyboard()`
 
@@ -134,11 +135,11 @@ Allows to resize the keyboard vertically depending on the buttons height. By def
 
 **Type**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 **Description**
 
-The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) instance
+The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
 
 ### `allowResizeKeyboard(Boolean allowResize)`
 
@@ -154,11 +155,11 @@ Allows to resize the keyboard vertically depending on the buttons height. By def
 
 **Type**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 **Description**
 
-The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) instance
+The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
 
 ### `asPersistent()`
 
@@ -168,11 +169,11 @@ Makes the keyboard always shown to the client when the regular keyboard is hidde
 
 **Type**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 **Description**
 
-The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) instance
+The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
 
 ### `asPersistent(Boolean isPersistent)`
 
@@ -188,11 +189,11 @@ Makes the keyboard always shown to the client when the regular keyboard is hidde
 
 **Type**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 **Description**
 
-The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) instance
+The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
 
 ### `asOneTimeKeyboard()`
 
@@ -202,11 +203,11 @@ Makes the keyboard hidden as soon as it's used. User will have to open a custom 
 
 **Type**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 **Description**
 
-The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) instance
+The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
 
 ### `asOneTimeKeyboard(Boolean isOneTime)`
 
@@ -222,11 +223,11 @@ Makes the keyboard hidden as soon as it's used. User will have to open a custom 
 
 **Type**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 **Description**
 
-The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) instance
+The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
 
 ### `setInputPlaceholder(String placeholder)`
 
@@ -242,11 +243,11 @@ Sets the placeholder to be shown in the input field when the keyboard is active
 
 **Type**
 
-TelegramSendKeyboardOptions
+TelegramReplyKeyboardMarkupOptions
 
 **Description**
 
-The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOptions.md) instance
+The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
 
 ### `asSelective()`
 
@@ -258,7 +259,8 @@ The current [TelegramSendKeyboardOptions](/types/Classes/TelegramSendKeyboardOpt
 
 ### Button
 
-The builder-like class representing a button in the `Telegram` reply keyboard. The source: https://core.telegram.org/bots/api#keyboardbutton
+The builder-like class representing a button in the `Telegram` reply keyboard.
+Source: https://core.telegram.org/bots/api#keyboardbutton
 
 **Inheritance**
 
@@ -292,7 +294,7 @@ Button
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.Button](TelegramSendKeyboardOptions.Button) instance
+The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
 
 ##### `asLocationRequest()`
 
@@ -306,7 +308,7 @@ Button
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.Button](TelegramSendKeyboardOptions.Button) instance
+The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
 
 ##### `asUserRequest()`
 
@@ -320,7 +322,7 @@ Button
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.Button](TelegramSendKeyboardOptions.Button) instance
+The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
 
 ##### `asUserRequest(Boolean botsOnly, Boolean premiumOnly)`
 
@@ -341,7 +343,7 @@ Button
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.Button](TelegramSendKeyboardOptions.Button) instance
+The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
 
 ##### `asChatRequest()`
 
@@ -355,7 +357,7 @@ Button
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.Button](TelegramSendKeyboardOptions.Button) instance
+The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
 
 ##### `asChatRequest(ButtonRequestChatConfigs chatRequestConfigs)`
 
@@ -363,9 +365,9 @@ Determines if the clicking on the button will request to share specific chats wi
 
 ###### Parameters
 
-| Param                | Description                                          |
-| -------------------- | ---------------------------------------------------- |
-| `chatRequestConfigs` | The object with requirenments for the chat to choose |
+| Param                | Description                                         |
+| -------------------- | --------------------------------------------------- |
+| `chatRequestConfigs` | The object with requirements for the chat to choose |
 
 ###### Return
 
@@ -375,7 +377,7 @@ Button
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.Button](TelegramSendKeyboardOptions.Button) instance
+The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
 
 ##### `asPollRequest()`
 
@@ -389,7 +391,7 @@ Button
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.Button](TelegramSendKeyboardOptions.Button) instance
+The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
 
 ##### `asPollRequest(String pollType)`
 
@@ -409,7 +411,7 @@ Button
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.Button](TelegramSendKeyboardOptions.Button) instance
+The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
 
 ##### `asWebAppLauncher(String webAppUrl)`
 
@@ -429,13 +431,14 @@ Button
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.Button](TelegramSendKeyboardOptions.Button) instance
+The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
 
 ---
 
 ### ButtonRequestChatConfigs
 
-The builder-like class for requesting to share a specific list of chats. The source: https://core.telegram.org/bots/api#keyboardbuttonrequestchat
+The builder-like class for requesting to share a specific list of chats.
+Source: https://core.telegram.org/bots/api#keyboardbuttonrequestchat
 
 **Inheritance**
 
@@ -445,7 +448,7 @@ ButtonRequestChatConfigs
 
 ##### `ButtonRequestChatConfigs()`
 
-Creates an instance of the request chat configs without any requirenments
+Creates an instance of the request chat configs without any requirements
 
 ---
 
@@ -469,7 +472,7 @@ ButtonRequestChatConfigs
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.ButtonRequestChatConfigs](TelegramSendKeyboardOptions.ButtonRequestChatConfigs) instance
+The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
 
 ##### `withForums(Boolean isForum)`
 
@@ -489,7 +492,7 @@ ButtonRequestChatConfigs
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.ButtonRequestChatConfigs](TelegramSendKeyboardOptions.ButtonRequestChatConfigs) instance
+The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
 
 ##### `withUsername(Boolean hasUsername)`
 
@@ -509,7 +512,7 @@ ButtonRequestChatConfigs
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.ButtonRequestChatConfigs](TelegramSendKeyboardOptions.ButtonRequestChatConfigs) instance
+The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
 
 ##### `withCreated(Boolean isCreated)`
 
@@ -529,7 +532,7 @@ ButtonRequestChatConfigs
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.ButtonRequestChatConfigs](TelegramSendKeyboardOptions.ButtonRequestChatConfigs) instance
+The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
 
 ##### `withBot(Boolean hasBot)`
 
@@ -549,7 +552,7 @@ ButtonRequestChatConfigs
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.ButtonRequestChatConfigs](TelegramSendKeyboardOptions.ButtonRequestChatConfigs) instance
+The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
 
 ##### `withUserAdminRights(List&lt;String&gt; rights)`
 
@@ -569,7 +572,7 @@ ButtonRequestChatConfigs
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.ButtonRequestChatConfigs](TelegramSendKeyboardOptions.ButtonRequestChatConfigs) instance
+The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
 
 ##### `withBotAdminRights(List&lt;String&gt; rights)`
 
@@ -589,7 +592,7 @@ ButtonRequestChatConfigs
 
 **Description**
 
-The current [TelegramSendKeyboardOptions.ButtonRequestChatConfigs](TelegramSendKeyboardOptions.ButtonRequestChatConfigs) instance
+The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
 
 ---
 

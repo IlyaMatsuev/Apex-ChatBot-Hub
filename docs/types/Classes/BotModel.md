@@ -48,26 +48,6 @@ String
 
 JSON serialized current instance
 
-### `equals(Object other)`
-
-Checks if the passed object equals to the current instance
-
-#### Parameters
-
-| Param   | Description                               |
-| ------- | ----------------------------------------- |
-| `other` | Any object this instance is compared with |
-
-#### Return
-
-**Type**
-
-Boolean
-
-**Description**
-
-`true` if the passed object equals to the current instance by a reference or Id value
-
 ### `static fromJson(String jsonStr)`
 
 Converts the JSON string back to the [BotModel](/types/Classes/BotModel.md) instance

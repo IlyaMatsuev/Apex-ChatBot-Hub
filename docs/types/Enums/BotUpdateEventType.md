@@ -4,6 +4,8 @@ Custom enum base class that is extended by `Telegram` and `Viber` enums which co
 
 **Inheritance**
 
+[BotEnumType](/types/Enums/BotEnumType.md)
+&gt;
 BotUpdateEventType
 
 **Group** Enums

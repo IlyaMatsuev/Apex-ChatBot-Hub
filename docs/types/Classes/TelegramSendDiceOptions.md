@@ -1,6 +1,7 @@
 # TelegramSendDiceOptions
 
-The builder-like class that describes all optional parameters of the `Telegram` `sendDice` method. The source: https://core.telegram.org/bots/api#senddice
+The builder-like class that describes all optional parameters of the `Telegram` `sendDice` method.
+Source: https://core.telegram.org/bots/api#senddice
 
 **Inheritance**
 
@@ -10,7 +11,7 @@ TelegramSendDiceOptions
 
 ## Properties
 
-### `entities` → `List<MessageEntity>`
+### `entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -26,9 +27,9 @@ Sets a specific emoji on which the dice throw animation is based
 
 #### Parameters
 
-| Param   | Description                                                                                                                                                                                  |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `emoji` | One of the supported emojies: `🎲`, `🎯` and `🎳` - generate values in range: `1..6` `🏀` and `⚽` - generate values in range `1..5` `🎰` - generate values in range `1..64` Default is `🎲` |
+| Param   | Description                                                                                                                                                                                 |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `emoji` | One of the supported emojis: `🎲`, `🎯` and `🎳` - generate values in range: `1..6` `🏀` and `⚽` - generate values in range `1..5` `🎰` - generate values in range `1..64` Default is `🎲` |
 
 #### Return
 

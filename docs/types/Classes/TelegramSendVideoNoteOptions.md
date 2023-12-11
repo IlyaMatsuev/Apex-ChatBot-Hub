@@ -1,6 +1,7 @@
 # TelegramSendVideoNoteOptions
 
-The builder-like class that describes all optional parameters of the `Telegram` `sendVideoNote` method. The source: https://core.telegram.org/bots/api#sendvideonote
+The builder-like class that describes all optional parameters of the `Telegram` `sendVideoNote` method.
+Source: https://core.telegram.org/bots/api#sendvideonote
 
 **Inheritance**
 
@@ -10,7 +11,7 @@ TelegramSendVideoNoteOptions
 
 ## Properties
 
-### `entities` → `List<MessageEntity>`
+### `entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 

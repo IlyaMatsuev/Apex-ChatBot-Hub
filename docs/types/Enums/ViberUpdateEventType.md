@@ -1,24 +1,47 @@
-# ViberBotUpdateEventType
+# ViberUpdateEventType
 
-Custom enum class that contains all available event types for `Viber` bots. Docs: https://developers.viber.com/docs/api/rest-bot-api/#setting-a-webhook.
+Custom enum class that contains all available event types for `Viber` bots.
+Source: https://developers.viber.com/docs/api/rest-bot-api/#setting-a-webhook
 
 **Inheritance**
 
+[BotEnumType](/types/Enums/BotEnumType.md)
+&gt;
 [BotUpdateEventType](/types/Enums/BotUpdateEventType.md)
 &gt;
-ViberBotUpdateEventType
+ViberUpdateEventType
 
 **Group** Enums
 
 ## Fields
 
-### `Delivered` → `ViberBotUpdateEventType`
+### `Delivered` → `ViberUpdateEventType`
 
-### `Message` → `ViberBotUpdateEventType`
+The `Viber` message event. Received when a message sent by the bot is delivered
 
-### `Seen` → `ViberBotUpdateEventType`
+### `Failed` → `ViberUpdateEventType`
 
-### `WebhookCallback` → `ViberBotUpdateEventType`
+The `Viber` fail event. Received when a sent message is failed because of some client's validations
+
+### `Message` → `ViberUpdateEventType`
+
+The `Viber` message event. Received when a user sends a message to the bot
+
+### `Seen` → `ViberUpdateEventType`
+
+The `Viber` message event. Received when a message sent by the bot is seen by the user
+
+### `Subscribed` → `ViberUpdateEventType`
+
+The `Viber` subscribe event. Received when a new user allows messages from the bot
+
+### `Unsubscribed` → `ViberUpdateEventType`
+
+The `Viber` unsubscribe event. Received when a new user forbids messages from the bot
+
+### `WebhookCallback` → `ViberUpdateEventType`
+
+The `Viber` webhook callback event. Received when the webhook is set
 
 ---
 

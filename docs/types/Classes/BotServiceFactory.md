@@ -24,4 +24,22 @@ IBotService
 
 The instance of [IBotService](/types/Interfaces/IBotService.md)
 
+#### Throws
+
+| Exception                           | Description                                                                       |
+| ----------------------------------- | --------------------------------------------------------------------------------- |
+| `BotMissingRequiredFieldsException` | If the bot model is missing some fields that is required for bot service creation |
+
+---
+
+## Classes
+
+### BotMissingRequiredFieldsException
+
+Exception that is thrown when there are missing required fields in the provided bot model
+
+**Inheritance**
+
+BotMissingRequiredFieldsException
+
 ---
