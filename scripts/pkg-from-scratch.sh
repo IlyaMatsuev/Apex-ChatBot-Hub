@@ -20,7 +20,7 @@ info() {
 
 error() {
     echo "${red}$1${reset}"
-	exit 1
+	  exit 1
 }
 
 if [[ -z "$devhub_alias" ]]
@@ -34,10 +34,10 @@ then
 fi
 
 info "Creating scratch..."
-sfdx org:create:scratch -f ./config/project-scratch-def.json -v "$devhub_alias" -a "$scratch_alias" -y "$days" \
+sf org:create:scratch -f ./config/project-scratch-def.json -v "$devhub_alias" -a "$scratch_alias" -y "$days" \
     || (\
-        sfdx org:login:web -a "$devhub_alias" \
-        && sfdx org:create:scratch -f ./config/project-scratch-def.json -v "$devhub_alias" -a "$scratch_alias" -y "$days"\
+        sf org:login:web -a "$devhub_alias" \
+        && sf org:create:scratch -f ./config/project-scratch-def.json -v "$devhub_alias" -a "$scratch_alias" -y "$days"\
     ) || { exit 1; }
 
 sh ./scripts/pkg-deploy.sh "$scratch_alias"

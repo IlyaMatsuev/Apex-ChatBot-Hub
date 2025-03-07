@@ -19,7 +19,7 @@ info() {
 
 error() {
     echo "${red}$1${reset}"
-	exit 1
+	  exit 1
 }
 
 if [[ -z "$org_alias" ]]
@@ -28,24 +28,24 @@ then
 fi
 
 info "Installing dependencies..."
-sfdx package:install -p 04t5Y000001wNArQAM -w 10 -b 10 -o "$org_alias" \
+sf package:install -p 04t5Y000001wNArQAM -w 10 -b 10 -o "$org_alias" \
     || (\
         info "Please login to the org" \
-        && sfdx org:login:web -a "$org_alias" \
-        && sfdx package:install -p 04t5Y000001wNArQAM -w 10 -b 10 -o "$org_alias" \
+        && sf org:login:web -a "$org_alias" \
+        && sf package:install -p 04t5Y000001wNArQAM -w 10 -b 10 -o "$org_alias" \
     ) || { exit 1; }
 
 info "Deploying to ${org_alias}..."
 # SObjects, App, Apex and permissions
-sfdx project:deploy:start -o "$org_alias" -d ./src/main || { exit 1; }
+sf project:deploy:start -o "$org_alias" -d ./src/main || { exit 1; }
 # Apex Tests
-sfdx project:deploy:start -o "$org_alias" -d ./src/test || { exit 1; }
+sf project:deploy:start -o "$org_alias" -d ./src/test || { exit 1; }
 # Public site
-sfdx project:deploy:start -o "$org_alias" -d ./src/site || { exit 1; }
+sf project:deploy:start -o "$org_alias" -d ./src/site || { exit 1; }
 # Public site profile
-sfdx project:deploy:start -o "$org_alias" -d ./src/site-permissions || { exit 1; }
+sf project:deploy:start -o "$org_alias" -d ./src/site-permissions || { exit 1; }
 
 info "Assigning permissions..."
-sfdx user:permset:assign -n BotAdmin -u "$org_alias"
+sf org:assign:permset -n BotAdmin -o "$org_alias"
 
-info "Deployment has been finished.\\nOpen the org with 'sfdx org:open -u ${org_alias}'"
+info "Deployment has been finished.\\nOpen the org with 'sf org:open -o ${org_alias}'"

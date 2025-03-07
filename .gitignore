@@ -21,3 +21,11 @@ IlluminatedCloud/
 
 # Logs
 *.log
+
+# Added by Illuminated Cloud
+.localdev/
+/out/
+target/
+/.illuminatedCloud/
+**/tsconfig*.json
+**/*.tsbuildinfo
