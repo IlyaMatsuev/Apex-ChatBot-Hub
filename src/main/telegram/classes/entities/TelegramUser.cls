@@ -91,6 +91,6 @@ global class TelegramUser extends BotPayload implements IBotUser {
      * @return The `Telegram` user username
      */
     global String getUsername() {
-        return username;
+        return username ?? getId();
     }
 }

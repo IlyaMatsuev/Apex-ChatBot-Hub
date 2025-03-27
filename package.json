@@ -12,12 +12,12 @@
     },
     "devDependencies": {
         "@cparra/apexdocs": "^2.15.0",
-        "@ilyamatsuev/prettier-plugin-apex": "^3.0.0",
+        "@ilyamatsuev/prettier-plugin-apex": "^3.1.2",
         "@prettier/plugin-xml": "^3.2.0",
         "docsify-cli": "^4.4.4",
         "husky": "^4.2.1",
         "lint-staged": "^10.0.7",
-        "prettier": "^3.0.3",
+        "prettier": "^3.5.3",
         "shx": "^0.3.4"
     },
     "husky": {

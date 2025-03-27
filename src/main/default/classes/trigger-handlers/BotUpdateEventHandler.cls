@@ -11,7 +11,7 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
     }
 
     public void handle(Triggers.Context context) {
-        List<IBotContext> contexts = createBotContexts((List<BotUpdateEvent__e>) context.props.newList);
+        List<IBotContext> contexts = createBotContexts(context.props.newList);
 
         saveChatDetails(contexts);
 
