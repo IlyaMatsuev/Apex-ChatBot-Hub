@@ -9,11 +9,11 @@ TelegramAnswerInlineQueryOptions
 
 ## Constructors
 
-### `TelegramAnswerInlineQueryOptions()`
+### `global TelegramAnswerInlineQueryOptions()`
 
 Creates an instance of the answer inline query options without any results, so that they can be added separately
 
-### `TelegramAnswerInlineQueryOptions(TelegramInlineQueryResult results)`
+### `global TelegramAnswerInlineQueryOptions(TelegramInlineQueryResult results)`
 
 Creates an instance of the answer inline query options with the provided results
 
@@ -27,7 +27,7 @@ Creates an instance of the answer inline query options with the provided results
 
 ## Properties
 
-### `results` → `List<TelegramInlineQueryResult>`
+### `global results` → `List<TelegramInlineQueryResult>`
 
 The list of results to be shown to the user for the inline query
 
@@ -35,7 +35,7 @@ The list of results to be shown to the user for the inline query
 
 ## Methods
 
-### `addResult(TelegramInlineQueryResult result)`
+### `global TelegramAnswerInlineQueryOptions addResult(TelegramInlineQueryResult result)`
 
 Adds a result to the inline query answer
 
@@ -45,17 +45,13 @@ Adds a result to the inline query answer
 | -------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | `result` | The inline query result entry, instance of the [TelegramInlineQueryResult](/types/Classes/TelegramInlineQueryResult.md) class |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramAnswerInlineQueryOptions` | The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class |
 
-TelegramAnswerInlineQueryOptions
-
-**Description**
-
-The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class
-
-### `addResults(TelegramInlineQueryResult results)`
+### `global TelegramAnswerInlineQueryOptions addResults(TelegramInlineQueryResult results)`
 
 Adds multiple results to the inline query answer
 
@@ -65,17 +61,13 @@ Adds multiple results to the inline query answer
 | --------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `results` | The list of inline query results, instances of the [TelegramInlineQueryResult](/types/Classes/TelegramInlineQueryResult.md) class |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramAnswerInlineQueryOptions` | The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class |
 
-TelegramAnswerInlineQueryOptions
-
-**Description**
-
-The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class
-
-### `withCacheTime(Integer seconds)`
+### `global TelegramAnswerInlineQueryOptions withCacheTime(Integer seconds)`
 
 Sets the maximum amount of time in seconds that the result of the inline query may be cached on the server. Defaults to `300`
 
@@ -85,31 +77,23 @@ Sets the maximum amount of time in seconds that the result of the inline query m
 | --------- | ----------------------------------------------------------------------------------------------------- |
 | `seconds` | The maximum amount of time in seconds that the result of the inline query may be cached on the server |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramAnswerInlineQueryOptions` | The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class |
 
-TelegramAnswerInlineQueryOptions
-
-**Description**
-
-The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class
-
-### `asPersonal()`
+### `global TelegramAnswerInlineQueryOptions asPersonal()`
 
 Sets if results may be cached on the server side only for the user that sent the query. By default, results may be returned to any user who sends the same query
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramAnswerInlineQueryOptions` | The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class |
 
-TelegramAnswerInlineQueryOptions
-
-**Description**
-
-The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class
-
-### `withNextOffset(String offset)`
+### `global TelegramAnswerInlineQueryOptions withNextOffset(String offset)`
 
 Sets the offset that a client should send in the next query with the same text to receive more results. Pass an empty string if there are no more results or if you don't support pagination
 
@@ -119,17 +103,13 @@ Sets the offset that a client should send in the next query with the same text t
 | -------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `offset` | the offset that a client should send in the next query with the same text to receive more results. Offset length can't exceed `64 bytes` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramAnswerInlineQueryOptions` | The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class |
 
-TelegramAnswerInlineQueryOptions
-
-**Description**
-
-The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class
-
-### `withButton(TelegramAnswerInlineQueryOptions button)`
+### `global TelegramAnswerInlineQueryOptions withButton(TelegramAnswerInlineQueryOptions.Button button)`
 
 Sets the button to be shown above inline query results
 
@@ -139,15 +119,11 @@ Sets the button to be shown above inline query results
 | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `button` | The button to be shown above inline query results. The instance of the [TelegramAnswerInlineQueryOptions.Button](TelegramAnswerInlineQueryOptions.Button) class |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramAnswerInlineQueryOptions
-
-**Description**
-
-The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramAnswerInlineQueryOptions` | The current instance of the [TelegramAnswerInlineQueryOptions](/types/Classes/TelegramAnswerInlineQueryOptions.md) class |
 
 ---
 
@@ -164,7 +140,7 @@ Button
 
 #### Constructors
 
-##### `Button(String text)`
+##### `global Button(String text)`
 
 Creates a new instance of the inline mode results button with the provided label
 
@@ -178,7 +154,7 @@ Creates a new instance of the inline mode results button with the provided label
 
 #### Methods
 
-##### `withStartParameter(String parameter)`
+##### `global Button withStartParameter(String parameter)`
 
 ###### Parameters
 
@@ -186,15 +162,11 @@ Creates a new instance of the inline mode results button with the provided label
 | ----------- | ----------- |
 | `parameter` | wqd         |
 
-###### Return
+###### Returns
 
-**Type**
-
-Button
-
-**Description**
-
-The current instance of the [TelegramAnswerInlineQueryOptions.Button](TelegramAnswerInlineQueryOptions.Button) class
+| Type     | Description                                                                                                          |
+| -------- | -------------------------------------------------------------------------------------------------------------------- |
+| `Button` | The current instance of the [TelegramAnswerInlineQueryOptions.Button](TelegramAnswerInlineQueryOptions.Button) class |
 
 ---
 

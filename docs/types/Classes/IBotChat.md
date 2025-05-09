@@ -4,46 +4,34 @@ Describes the chat payload received as an update from a bot
 
 ## Methods
 
-### `getId()`
+### `global String getId()`
 
 Returns the chat external id
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description          |
+| -------- | -------------------- |
+| `String` | The chat external id |
 
-String
-
-**Description**
-
-The chat external id
-
-### `getTitle()`
+### `global String getTitle()`
 
 Returns the chat title
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description    |
+| -------- | -------------- |
+| `String` | The chat title |
 
-String
-
-**Description**
-
-The chat title
-
-### `getSender()`
+### `global IBotUser getSender()`
 
 Returns the payload of the user who wrote the message received in the update
 
-#### Return
+#### Returns
 
-**Type**
-
-IBotUser
-
-**Description**
-
-The instance of the [IBotUser](/types/Classes/IBotUser.md) interface
+| Type       | Description                                                          |
+| ---------- | -------------------------------------------------------------------- |
+| `IBotUser` | The instance of the [IBotUser](/types/Classes/IBotUser.md) interface |
 
 ---

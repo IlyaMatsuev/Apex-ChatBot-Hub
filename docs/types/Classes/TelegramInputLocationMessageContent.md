@@ -11,7 +11,7 @@ TelegramInputLocationMessageContent
 
 ## Constructors
 
-### `TelegramInputLocationMessageContent(Decimal latitude, Decimal longitude)`
+### `global TelegramInputLocationMessageContent(Decimal latitude, Decimal longitude)`
 
 Creates a new instance of the input message with the provided latitude and longitude
 
@@ -26,7 +26,7 @@ Creates a new instance of the input message with the provided latitude and longi
 
 ## Methods
 
-### `withHorizontalAccuracy(Decimal accuracy)`
+### `global TelegramInputLocationMessageContent withHorizontalAccuracy(Decimal accuracy)`
 
 Sets the radius of uncertainty for the location, measured in meters
 
@@ -36,17 +36,13 @@ Sets the radius of uncertainty for the location, measured in meters
 | ---------- | ---------------------------------------------------------------------------------------- |
 | `accuracy` | The radius of uncertainty for the location in meters. Accepts values in range: `0..1500` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                  | Description                                                                                                                    |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputLocationMessageContent` | The current instance of the [TelegramInputLocationMessageContent](/types/Classes/TelegramInputLocationMessageContent.md) class |
 
-TelegramInputLocationMessageContent
-
-**Description**
-
-The current instance of the [TelegramInputLocationMessageContent](/types/Classes/TelegramInputLocationMessageContent.md) class
-
-### `withLivePeriod(Integer period)`
+### `global TelegramInputLocationMessageContent withLivePeriod(Integer period)`
 
 Sets the period in seconds for which the location will be updated
 
@@ -56,17 +52,13 @@ Sets the period in seconds for which the location will be updated
 | -------- | -------------------------------------------------------------------------------------------------- |
 | `period` | The period in seconds for which the location will be updated. Accepts values in range: `60..86400` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                  | Description                                                                                                                    |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputLocationMessageContent` | The current instance of the [TelegramInputLocationMessageContent](/types/Classes/TelegramInputLocationMessageContent.md) class |
 
-TelegramInputLocationMessageContent
-
-**Description**
-
-The current instance of the [TelegramInputLocationMessageContent](/types/Classes/TelegramInputLocationMessageContent.md) class
-
-### `withProximityAlertRadius(Integer alertRadius)`
+### `global TelegramInputLocationMessageContent withProximityAlertRadius(Integer alertRadius)`
 
 Sets the maximum distance in meters for proximity alerts about approaching another chat member
 
@@ -76,17 +68,13 @@ Sets the maximum distance in meters for proximity alerts about approaching anoth
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `alertRadius` | The maximum distance in meters for proximity alerts about approaching another chat member. Accepts values in range: `1..100000` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                  | Description                                                                                                                    |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputLocationMessageContent` | The current instance of the [TelegramInputLocationMessageContent](/types/Classes/TelegramInputLocationMessageContent.md) class |
 
-TelegramInputLocationMessageContent
-
-**Description**
-
-The current instance of the [TelegramInputLocationMessageContent](/types/Classes/TelegramInputLocationMessageContent.md) class
-
-### `withHeading(Integer heading)`
+### `global TelegramInputLocationMessageContent withHeading(Integer heading)`
 
 Sets the direction in degrees in which the user is moving
 
@@ -96,14 +84,10 @@ Sets the direction in degrees in which the user is moving
 | --------- | --------------------------------------------------------------------------------------- |
 | `heading` | The direction in degrees in which the user is moving. Accepts values in range: `1..360` |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInputLocationMessageContent
-
-**Description**
-
-The current instance of the [TelegramInputLocationMessageContent](/types/Classes/TelegramInputLocationMessageContent.md) class
+| Type                                  | Description                                                                                                                    |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputLocationMessageContent` | The current instance of the [TelegramInputLocationMessageContent](/types/Classes/TelegramInputLocationMessageContent.md) class |
 
 ---

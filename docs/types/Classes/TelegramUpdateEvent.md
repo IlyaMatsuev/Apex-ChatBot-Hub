@@ -12,60 +12,54 @@ TelegramUpdateEvent
 
 ## Methods
 
-### `getType()`
+### `global TelegramUpdateEventType getType()`
 
 Returns the type of the received `Telegram` update
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                 |
+| ------------------------- | ------------------------------------------------------------------------------------------- |
+| `TelegramUpdateEventType` | The instance of the [TelegramUpdateEventType](/types/Enums/TelegramUpdateEventType.md) enum |
 
-TelegramUpdateEventType
-
-**Description**
-
-The instance of the [TelegramUpdateEventType](/types/Enums/TelegramUpdateEventType.md) enum
-
-### `getMessage()`
+### `global TelegramMessage getMessage()`
 
 Returns the `Telegram` message payload received in the update. Can be `null` in case of another update type
 
-#### Return
+#### Returns
 
-**Type**
+| Type              | Description                                                                    |
+| ----------------- | ------------------------------------------------------------------------------ |
+| `TelegramMessage` | The instance of the [TelegramMessage](/types/Classes/TelegramMessage.md) class |
 
-TelegramMessage
-
-**Description**
-
-The instance of the [TelegramMessage](/types/Classes/TelegramMessage.md) class
-
-### `getChat()`
+### `global TelegramChat getChat()`
 
 Returns the `Telegram` chat payload received in the update. Can be `null` if the update is not chat-related
 
-#### Return
+#### Returns
 
-**Type**
+| Type           | Description                                                              |
+| -------------- | ------------------------------------------------------------------------ |
+| `TelegramChat` | The instance of the [TelegramChat](/types/Classes/TelegramChat.md) class |
 
-TelegramChat
+### `global BotJsonPayload getEventPayload()`
 
-**Description**
+Returns the instance of an event JSON payload used for creating instances of event models like [TelegramMessageEvent](/types/Classes/TelegramMessageEvent.md), [TelegramInlineQueryEvent](/types/Classes/TelegramInlineQueryEvent.md), etc.
 
-The instance of the [TelegramChat](/types/Classes/TelegramChat.md) class
+#### Returns
 
-### `getPayload()`
+| Type             | Description                                                            |
+| ---------------- | ---------------------------------------------------------------------- |
+| `BotJsonPayload` | The instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) |
+
+### `global BotJsonPayload getPayload()`
 
 Returns the source JSON payload of the update event
 
-#### Return
+#### Returns
 
-**Type**
-
-BotJsonPayload
-
-**Description**
-
-The instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md)
+| Type             | Description                                                            |
+| ---------------- | ---------------------------------------------------------------------- |
+| `BotJsonPayload` | The instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) |
 
 ---

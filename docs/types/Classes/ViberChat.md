@@ -12,46 +12,34 @@ ViberChat
 
 ## Methods
 
-### `getId()`
+### `global String getId()`
 
 Returns the `Viber` chat id
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description         |
+| -------- | ------------------- |
+| `String` | The `Viber` chat id |
 
-String
-
-**Description**
-
-The `Viber` chat id
-
-### `getTitle()`
+### `global String getTitle()`
 
 Returns the chat title
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description    |
+| -------- | -------------- |
+| `String` | The chat title |
 
-String
-
-**Description**
-
-The chat title
-
-### `getSender()`
+### `global ViberUser getSender()`
 
 Returns the payload of the `Viber` user who wrote the message received in the update
 
-#### Return
+#### Returns
 
-**Type**
-
-ViberUser
-
-**Description**
-
-The instance of the [ViberUser](/types/Classes/ViberUser.md) class
+| Type        | Description                                                        |
+| ----------- | ------------------------------------------------------------------ |
+| `ViberUser` | The instance of the [ViberUser](/types/Classes/ViberUser.md) class |
 
 ---

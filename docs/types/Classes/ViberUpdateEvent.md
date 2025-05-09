@@ -12,60 +12,44 @@ ViberUpdateEvent
 
 ## Methods
 
-### `getType()`
+### `global ViberUpdateEventType getType()`
 
 Returns the type of the received `Viber` update
 
-#### Return
+#### Returns
 
-**Type**
+| Type                   | Description                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------- |
+| `ViberUpdateEventType` | The instance of the [ViberUpdateEventType](/types/Enums/ViberUpdateEventType.md) enum |
 
-ViberUpdateEventType
-
-**Description**
-
-The instance of the [ViberUpdateEventType](/types/Enums/ViberUpdateEventType.md) enum
-
-### `getMessage()`
+### `global ViberMessage getMessage()`
 
 Returns the `Viber` message payload received in the update. Can be `null` in case of another update type
 
-#### Return
+#### Returns
 
-**Type**
+| Type           | Description                                                              |
+| -------------- | ------------------------------------------------------------------------ |
+| `ViberMessage` | The instance of the [ViberMessage](/types/Classes/ViberMessage.md) class |
 
-ViberMessage
-
-**Description**
-
-The instance of the [ViberMessage](/types/Classes/ViberMessage.md) class
-
-### `getChat()`
+### `global ViberChat getChat()`
 
 Returns the `Viber` chat payload received in the update. Can be null if the received update does not contain chat information
 
-#### Return
+#### Returns
 
-**Type**
+| Type        | Description                                                        |
+| ----------- | ------------------------------------------------------------------ |
+| `ViberChat` | The instance of the [ViberChat](/types/Classes/ViberChat.md) class |
 
-ViberChat
-
-**Description**
-
-The instance of the [ViberChat](/types/Classes/ViberChat.md) class
-
-### `getPayload()`
+### `global BotJsonPayload getPayload()`
 
 Returns the source JSON payload of the update event
 
-#### Return
+#### Returns
 
-**Type**
-
-BotJsonPayload
-
-**Description**
-
-The instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md)
+| Type             | Description                                                            |
+| ---------------- | ---------------------------------------------------------------------- |
+| `BotJsonPayload` | The instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) |
 
 ---

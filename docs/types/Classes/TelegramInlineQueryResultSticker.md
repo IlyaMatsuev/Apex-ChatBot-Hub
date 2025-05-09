@@ -11,7 +11,7 @@ TelegramInlineQueryResultSticker
 
 ## Constructors
 
-### `TelegramInlineQueryResultSticker(String id, String stickerId)`
+### `global TelegramInlineQueryResultSticker(String id, String stickerId)`
 
 Creates a new instance of the sticker inline query result with the provided result and sticker ids
 
@@ -26,7 +26,7 @@ Creates a new instance of the sticker inline query result with the provided resu
 
 ## Methods
 
-### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+### `global TelegramInlineQueryResultSticker withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
 
 Sets the inline keyboard to the message
 
@@ -36,17 +36,13 @@ Sets the inline keyboard to the message
 | ---------- | ------------------------------------------- |
 | `keyboard` | The inline keyboard attached to the message |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultSticker` | The current instance of the [TelegramInlineQueryResultSticker](/types/Classes/TelegramInlineQueryResultSticker.md) class |
 
-TelegramInlineQueryResultSticker
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultSticker](/types/Classes/TelegramInlineQueryResultSticker.md) class
-
-### `withInputMessage(TelegramInputMessageContent messageContent)`
+### `global TelegramInlineQueryResultSticker withInputMessage(TelegramInputMessageContent messageContent)`
 
 Sets the content of the message to be sent instead of the sticker
 
@@ -56,14 +52,10 @@ Sets the content of the message to be sent instead of the sticker
 | ---------------- | ------------------------------------- |
 | `messageContent` | The content of the message to be sent |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInlineQueryResultSticker
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultSticker](/types/Classes/TelegramInlineQueryResultSticker.md) class
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultSticker` | The current instance of the [TelegramInlineQueryResultSticker](/types/Classes/TelegramInlineQueryResultSticker.md) class |
 
 ---

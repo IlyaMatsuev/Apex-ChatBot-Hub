@@ -4,7 +4,7 @@ Service class that provides access to all `Telegram` `inline` mode methods
 
 ## Methods
 
-### `answer(TelegramInlineQueryResult results)`
+### `global void answer(TelegramInlineQueryResult results)`
 
 Sends answers to the inline query
 
@@ -14,7 +14,7 @@ Sends answers to the inline query
 | --------- | ----------------------------------- |
 | `results` | The results to be shown to the user |
 
-### `answer(TelegramAnswerInlineQueryOptions options)`
+### `global void answer(TelegramAnswerInlineQueryOptions options)`
 
 Sends answers to the inline query
 

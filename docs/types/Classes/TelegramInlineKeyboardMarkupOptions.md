@@ -9,11 +9,11 @@ TelegramInlineKeyboardMarkupOptions
 
 ## Constructors
 
-### `TelegramInlineKeyboardMarkupOptions()`
+### `global TelegramInlineKeyboardMarkupOptions()`
 
 Creates an instance of the inline keyboard without any buttons, so that they can be added separately
 
-### `TelegramInlineKeyboardMarkupOptions(Button buttons)`
+### `global TelegramInlineKeyboardMarkupOptions(Button buttons)`
 
 Creates an instance of the inline keyboard with the provided buttons row
 
@@ -23,7 +23,7 @@ Creates an instance of the inline keyboard with the provided buttons row
 | --------- | ----------------------------------------------------------- |
 | `buttons` | The list of buttons as a single row to be shown to the user |
 
-### `TelegramInlineKeyboardMarkupOptions(List<List<Button>> buttons)`
+### `global TelegramInlineKeyboardMarkupOptions(List<List<Button>> buttons)`
 
 Creates an instance of the inline keyboard with the provided buttons matrix
 
@@ -37,7 +37,7 @@ Creates an instance of the inline keyboard with the provided buttons matrix
 
 ## Properties
 
-### `buttons` → `List<List<Button>>`
+### `global buttons` → `List<List<Button>>`
 
 The matrix of inline keyboard buttons to be shown next to the message. Represents the list of button rows
 
@@ -45,7 +45,7 @@ The matrix of inline keyboard buttons to be shown next to the message. Represent
 
 ## Methods
 
-### `addButton(Button button)`
+### `global TelegramInlineKeyboardMarkupOptions addButton(Button button)`
 
 Adds a button to the keyboard's first row
 
@@ -55,17 +55,13 @@ Adds a button to the keyboard's first row
 | -------- | ------------------------------------------------------- |
 | `button` | The button to be added to the first row on the keyboard |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                  | Description                                                                                                       |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineKeyboardMarkupOptions` | The current [TelegramInlineKeyboardMarkupOptions](/types/Classes/TelegramInlineKeyboardMarkupOptions.md) instance |
 
-TelegramInlineKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions](/types/Classes/TelegramInlineKeyboardMarkupOptions.md) instance
-
-### `addButton(Integer row, Button button)`
+### `global TelegramInlineKeyboardMarkupOptions addButton(Integer row, Button button)`
 
 Adds a button to the specific keyboard's row
 
@@ -76,17 +72,13 @@ Adds a button to the specific keyboard's row
 | `row`    | The row number to add the button to. Counting starts from `0` |
 | `button` | The button to be added to the specified row on the keyboard   |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                  | Description                                                                                                       |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineKeyboardMarkupOptions` | The current [TelegramInlineKeyboardMarkupOptions](/types/Classes/TelegramInlineKeyboardMarkupOptions.md) instance |
 
-TelegramInlineKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions](/types/Classes/TelegramInlineKeyboardMarkupOptions.md) instance
-
-### `addButtons(Button buttons)`
+### `global TelegramInlineKeyboardMarkupOptions addButtons(Button buttons)`
 
 Adds multiple buttons to the keyboard's first row
 
@@ -96,17 +88,13 @@ Adds multiple buttons to the keyboard's first row
 | --------- | -------------------------------------------------------- |
 | `buttons` | The buttons to be added to the first row on the keyboard |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                  | Description                                                                                                       |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineKeyboardMarkupOptions` | The current [TelegramInlineKeyboardMarkupOptions](/types/Classes/TelegramInlineKeyboardMarkupOptions.md) instance |
 
-TelegramInlineKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions](/types/Classes/TelegramInlineKeyboardMarkupOptions.md) instance
-
-### `addButtons(Integer row, Button buttons)`
+### `global TelegramInlineKeyboardMarkupOptions addButtons(Integer row, Button buttons)`
 
 Adds multiple buttons to the specific keyboard's row
 
@@ -117,15 +105,11 @@ Adds multiple buttons to the specific keyboard's row
 | `row`     | The row number to add the buttons to. Counting starts from `0` |
 | `buttons` | The buttons to be added to the specified row on the keyboard   |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInlineKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions](/types/Classes/TelegramInlineKeyboardMarkupOptions.md) instance
+| Type                                  | Description                                                                                                       |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineKeyboardMarkupOptions` | The current [TelegramInlineKeyboardMarkupOptions](/types/Classes/TelegramInlineKeyboardMarkupOptions.md) instance |
 
 ---
 
@@ -142,7 +126,7 @@ Button
 
 #### Constructors
 
-##### `Button(String text)`
+##### `global Button(String text)`
 
 Creates an instance of the button with the provided text
 
@@ -156,43 +140,43 @@ Creates an instance of the button with the provided text
 
 #### Properties
 
-##### `callbackData` → `String`
-
-The data to be sent in a callback query to the bot when the button is pressed. `1-64` bytes
-
-##### `loginUrl` → `LoginConfigs`
-
-An HTTPS URL used to automatically authorize the user
-
-##### `switchInlineQuery` → `String`
-
-If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted
-
-##### `switchInlineQueryChosenChat` → `SwitchInlineQueryChatConfigs`
-
-If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field
-
-##### `switchInlineQueryCurrentChat` → `String`
-
-If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted
-
-##### `text` → `String`
+##### `global text` → `String`
 
 The label text on the button
 
-##### `url` → `String`
+##### `global url` → `String`
 
 The URL to be opened when the button is pressed
 
-##### `webApp` → `TelegramWebAppInfo`
+##### `global callbackData` → `String`
+
+The data to be sent in a callback query to the bot when the button is pressed. `1-64` bytes
+
+##### `global webApp` → `TelegramWebAppInfo`
 
 The description of the Web App that will be launched when the user presses the button
+
+##### `global loginUrl` → `LoginConfigs`
+
+An HTTPS URL used to automatically authorize the user
+
+##### `global switchInlineQuery` → `String`
+
+If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted
+
+##### `global switchInlineQueryCurrentChat` → `String`
+
+If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted
+
+##### `global switchInlineQueryChosenChat` → `SwitchInlineQueryChatConfigs`
+
+If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field
 
 ---
 
 #### Methods
 
-##### `withCallbackData(String data)`
+##### `global Button withCallbackData(String data)`
 
 Sets the data to be sent in a callback query to the bot when the button is pressed. `1-64` bytes
 
@@ -202,17 +186,13 @@ Sets the data to be sent in a callback query to the bot when the button is press
 | ------ | --------------------------------------- |
 | `data` | The data to be sent in a callback query |
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                   |
+| -------- | ------------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance
-
-##### `asUrl(String url)`
+##### `global Button asUrl(String url)`
 
 Sets the URL to be opened when the button is pressed
 
@@ -222,17 +202,13 @@ Sets the URL to be opened when the button is pressed
 | ----- | -------------------- |
 | `url` | The URL to be opened |
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                   |
+| -------- | ------------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance
-
-##### `asLoginUrl(LoginConfigs loginConfigs)`
+##### `global Button asLoginUrl(LoginConfigs loginConfigs)`
 
 Sets the login configs for when the button is pressed
 
@@ -242,17 +218,13 @@ Sets the login configs for when the button is pressed
 | -------------- | --------------------------------------- |
 | `loginConfigs` | The data to be sent in a callback query |
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                   |
+| -------- | ------------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance
-
-##### `asWebAppLauncher(String webAppUrl)`
+##### `global Button asWebAppLauncher(String webAppUrl)`
 
 Determines if the clicking on the button will launch a specified web app
 
@@ -262,17 +234,13 @@ Determines if the clicking on the button will launch a specified web app
 | ----------- | ------------------------------------- |
 | `webAppUrl` | The URL of the web app to be launched |
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                   |
+| -------- | ------------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance
-
-##### `asSwitchInlineQuery(String query)`
+##### `global Button asSwitchInlineQuery(String query)`
 
 If set, pressing the button will prompt the user to select one of their chats, open that chat and insert the bot's username and the specified inline query in the input field. May be empty, in which case just the bot's username will be inserted
 
@@ -282,17 +250,13 @@ If set, pressing the button will prompt the user to select one of their chats, o
 | ------- | -------------------------------------- |
 | `query` | The query to be pasted in another chat |
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                   |
+| -------- | ------------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance
-
-##### `asSwitchInlineQueryCurrentChat(String query)`
+##### `global Button asSwitchInlineQueryCurrentChat(String query)`
 
 If set, pressing the button will insert the bot's username and the specified inline query in the current chat's input field. May be empty, in which case only the bot's username will be inserted
 
@@ -302,17 +266,13 @@ If set, pressing the button will insert the bot's username and the specified inl
 | ------- | -------------------------------------- |
 | `query` | The query to be pasted in another chat |
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                   |
+| -------- | ------------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance
-
-##### `asSwitchInlineQueryChosenChat(SwitchInlineQueryChatConfigs chatConfigs)`
+##### `global Button asSwitchInlineQueryChosenChat(SwitchInlineQueryChatConfigs chatConfigs)`
 
 If set, pressing the button will prompt the user to select one of their chats of the specified type, open that chat and insert the bot's username and the specified inline query in the input field
 
@@ -322,15 +282,11 @@ If set, pressing the button will prompt the user to select one of their chats of
 | ------------- | ---------------------------------- |
 | `chatConfigs` | The configs for the chat selection |
 
-###### Return
+###### Returns
 
-**Type**
-
-Button
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance
+| Type     | Description                                                                                                   |
+| -------- | ------------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramInlineKeyboardMarkupOptions.Button](TelegramInlineKeyboardMarkupOptions.Button) instance |
 
 ---
 
@@ -345,7 +301,7 @@ LoginConfigs
 
 #### Constructors
 
-##### `LoginConfigs(String url)`
+##### `global LoginConfigs(String url)`
 
 Creates an instance of the login configs with the provided service url
 
@@ -359,27 +315,27 @@ Creates an instance of the login configs with the provided service url
 
 #### Properties
 
-##### `botUsername` → `String`
+##### `global url` → `String`
 
-The username of a bot that will be used for the user authorization
+An HTTPS URL to be opened with user authorization data added to the query string when the button is pressed
 
-##### `forwardText` → `String`
+##### `global forwardText` → `String`
 
 The new text of the button in forwarded messages
 
-##### `requestWriteAccess` → `Boolean`
+##### `global botUsername` → `String`
+
+The username of a bot that will be used for the user authorization
+
+##### `global requestWriteAccess` → `Boolean`
 
 `True` to request the permission for your bot to send messages to the user
-
-##### `url` → `String`
-
-An HTTPS URL to be opened with user authorization data added to the query string when the button is pressed
 
 ---
 
 #### Methods
 
-##### `withForwardText(String text)`
+##### `global LoginConfigs withForwardText(String text)`
 
 Sets the new text of the button in forwarded messages
 
@@ -389,17 +345,13 @@ Sets the new text of the button in forwarded messages
 | ------ | ---------------------------- |
 | `text` | The text to be replaced with |
 
-###### Return
+###### Returns
 
-**Type**
+| Type           | Description                                                                                                               |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `LoginConfigs` | The current [TelegramInlineKeyboardMarkupOptions.LoginConfigs](TelegramInlineKeyboardMarkupOptions.LoginConfigs) instance |
 
-LoginConfigs
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.LoginConfigs](TelegramInlineKeyboardMarkupOptions.LoginConfigs) instance
-
-##### `withAuthorizationBot(String botUsername)`
+##### `global LoginConfigs withAuthorizationBot(String botUsername)`
 
 Sets the username of a bot that will be used for the user authorization
 
@@ -409,29 +361,21 @@ Sets the username of a bot that will be used for the user authorization
 | ------------- | ------------------------------------------------------------------ |
 | `botUsername` | The username of a bot that will be used for the user authorization |
 
-###### Return
+###### Returns
 
-**Type**
+| Type           | Description                                                                                                               |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `LoginConfigs` | The current [TelegramInlineKeyboardMarkupOptions.LoginConfigs](TelegramInlineKeyboardMarkupOptions.LoginConfigs) instance |
 
-LoginConfigs
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.LoginConfigs](TelegramInlineKeyboardMarkupOptions.LoginConfigs) instance
-
-##### `withWriteAccess()`
+##### `global LoginConfigs withWriteAccess()`
 
 Requests permissions for the bot to send messages to the user
 
-###### Return
+###### Returns
 
-**Type**
-
-LoginConfigs
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.LoginConfigs](TelegramInlineKeyboardMarkupOptions.LoginConfigs) instance
+| Type           | Description                                                                                                               |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `LoginConfigs` | The current [TelegramInlineKeyboardMarkupOptions.LoginConfigs](TelegramInlineKeyboardMarkupOptions.LoginConfigs) instance |
 
 ---
 
@@ -446,7 +390,7 @@ SwitchInlineQueryChatConfigs
 
 #### Constructors
 
-##### `SwitchInlineQueryChatConfigs(String query)`
+##### `global SwitchInlineQueryChatConfigs(String query)`
 
 Creates an instance of the switch inline query configs with the provided query
 
@@ -460,85 +404,69 @@ Creates an instance of the switch inline query configs with the provided query
 
 #### Properties
 
-##### `allowBotChats` → `Boolean`
+##### `global query` → `String`
 
-`True` if private chats with bots can be chosen
+The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted
 
-##### `allowChannelChats` → `Boolean`
-
-`True` if channel chats can be chosen
-
-##### `allowGroupChats` → `Boolean`
-
-`True` if group and supergroup chats can be chosen
-
-##### `allowUserChats` → `Boolean`
+##### `global allowUserChats` → `Boolean`
 
 `True` if private chats with users can be chosen
 
-##### `query` → `String`
+##### `global allowBotChats` → `Boolean`
 
-The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted
+`True` if private chats with bots can be chosen
+
+##### `global allowGroupChats` → `Boolean`
+
+`True` if group and supergroup chats can be chosen
+
+##### `global allowChannelChats` → `Boolean`
+
+`True` if channel chats can be chosen
 
 ---
 
 #### Methods
 
-##### `withUserChats()`
+##### `global SwitchInlineQueryChatConfigs withUserChats()`
 
 Defines if private chats with users can be chosen
 
-###### Return
+###### Returns
 
-**Type**
+| Type                           | Description                                                                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SwitchInlineQueryChatConfigs` | The current [TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs](TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs) instance |
 
-SwitchInlineQueryChatConfigs
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs](TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs) instance
-
-##### `withBotChats()`
+##### `global SwitchInlineQueryChatConfigs withBotChats()`
 
 Defines if private chats with bots can be chosen
 
-###### Return
+###### Returns
 
-**Type**
+| Type                           | Description                                                                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SwitchInlineQueryChatConfigs` | The current [TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs](TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs) instance |
 
-SwitchInlineQueryChatConfigs
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs](TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs) instance
-
-##### `withGroupChats()`
+##### `global SwitchInlineQueryChatConfigs withGroupChats()`
 
 Defines if group and supergroup chats can be chosen
 
-###### Return
+###### Returns
 
-**Type**
+| Type                           | Description                                                                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SwitchInlineQueryChatConfigs` | The current [TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs](TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs) instance |
 
-SwitchInlineQueryChatConfigs
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs](TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs) instance
-
-##### `withChannelChats()`
+##### `global SwitchInlineQueryChatConfigs withChannelChats()`
 
 Defines if channel chats can be chosen
 
-###### Return
+###### Returns
 
-**Type**
-
-SwitchInlineQueryChatConfigs
-
-**Description**
-
-The current [TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs](TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs) instance
+| Type                           | Description                                                                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SwitchInlineQueryChatConfigs` | The current [TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs](TelegramInlineKeyboardMarkupOptions.SwitchInlineQueryChatConfigs) instance |
 
 ---
 

@@ -11,7 +11,7 @@ TelegramInlineQueryResultDocument
 
 ## Constructors
 
-### `TelegramInlineQueryResultDocument(String id, String documentUrlOrFileId)`
+### `global TelegramInlineQueryResultDocument(String id, String documentUrlOrFileId)`
 
 Creates a new instance of the document inline query result with the provided result id and document URL/file id
 
@@ -26,7 +26,7 @@ Creates a new instance of the document inline query result with the provided res
 
 ## Properties
 
-### `captionEntities` → `List<TelegramMessageEntity>`
+### `global captionEntities` → `List<TelegramMessageEntity>`
 
 The list of special entities that appear in the caption text. E.g. hashtag, username, URL, etc.
 
@@ -34,7 +34,7 @@ The list of special entities that appear in the caption text. E.g. hashtag, user
 
 ## Methods
 
-### `withCaption(String caption)`
+### `global TelegramInlineQueryResultDocument withCaption(String caption)`
 
 Sets the caption for the document to be sent
 
@@ -44,17 +44,13 @@ Sets the caption for the document to be sent
 | --------- | ----------------------------------------- |
 | `caption` | The document caption, `0-1024 characters` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultDocument` | The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class |
 
-TelegramInlineQueryResultDocument
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class
-
-### `withTitle(String title)`
+### `global TelegramInlineQueryResultDocument withTitle(String title)`
 
 Sets the title for the inline result
 
@@ -64,17 +60,13 @@ Sets the title for the inline result
 | ------- | ----------------------- |
 | `title` | The title of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultDocument` | The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class |
 
-TelegramInlineQueryResultDocument
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class
-
-### `withDescription(String description)`
+### `global TelegramInlineQueryResultDocument withDescription(String description)`
 
 Sets the short description for the inline result
 
@@ -84,17 +76,13 @@ Sets the short description for the inline result
 | ------------- | ----------------------------- |
 | `description` | The description of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultDocument` | The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class |
 
-TelegramInlineQueryResultDocument
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class
-
-### `withMimeType(String mimeType)`
+### `global TelegramInlineQueryResultDocument withMimeType(String mimeType)`
 
 Sets the MIME type of the content of the file, either `application/pdf` or `application/zip`
 
@@ -104,17 +92,13 @@ Sets the MIME type of the content of the file, either `application/pdf` or `appl
 | ---------- | --------------------------------------------------------------------------------------- |
 | `mimeType` | The MIME type of the content of the file, either `application/pdf` or `application/zip` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultDocument` | The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class |
 
-TelegramInlineQueryResultDocument
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class
-
-### `withThumbnail(String url, Integer width, Integer height)`
+### `global TelegramInlineQueryResultDocument withThumbnail(String url, Integer width, Integer height)`
 
 Sets the thumbnail for the inline result
 
@@ -126,17 +110,13 @@ Sets the thumbnail for the inline result
 | `width`  | The thumbnail width  |
 | `height` | The thumbnail height |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultDocument` | The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class |
 
-TelegramInlineQueryResultDocument
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramInlineQueryResultDocument withParseMode(String mode)`
 
 Sets the caption text parse mode. Needed when the message text is formatted with `HTML` or `Markdown` markup
 
@@ -146,17 +126,13 @@ Sets the caption text parse mode. Needed when the message text is formatted with
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultDocument` | The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class |
 
-TelegramInlineQueryResultDocument
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramInlineQueryResultDocument withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the caption text. For example username tags
 
@@ -166,17 +142,13 @@ Adds a special entity that appear in the caption text. For example username tags
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultDocument` | The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class |
 
-TelegramInlineQueryResultDocument
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramInlineQueryResultDocument withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the caption text. For example username tags
 
@@ -186,17 +158,13 @@ Adds special entities that appear in the caption text. For example username tags
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultDocument` | The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class |
 
-TelegramInlineQueryResultDocument
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class
-
-### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+### `global TelegramInlineQueryResultDocument withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
 
 Sets the inline keyboard to the message
 
@@ -206,17 +174,13 @@ Sets the inline keyboard to the message
 | ---------- | ------------------------------------------- |
 | `keyboard` | The inline keyboard attached to the message |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultDocument` | The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class |
 
-TelegramInlineQueryResultDocument
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class
-
-### `withInputMessage(TelegramInputMessageContent messageContent)`
+### `global TelegramInlineQueryResultDocument withInputMessage(TelegramInputMessageContent messageContent)`
 
 Sets the content of the message to be sent instead of the document
 
@@ -226,14 +190,10 @@ Sets the content of the message to be sent instead of the document
 | ---------------- | ------------------------------------- |
 | `messageContent` | The content of the message to be sent |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInlineQueryResultDocument
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultDocument` | The current instance of the [TelegramInlineQueryResultDocument](/types/Classes/TelegramInlineQueryResultDocument.md) class |
 
 ---

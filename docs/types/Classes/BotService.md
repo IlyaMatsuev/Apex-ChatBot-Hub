@@ -1,4 +1,4 @@
-# BotService
+# abstract BotService
 
 The base class that contains features common for all bots
 

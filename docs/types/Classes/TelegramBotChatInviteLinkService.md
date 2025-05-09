@@ -4,35 +4,27 @@ Service class that provides access to all `Telegram` `chatInviteLink` methods
 
 ## Methods
 
-### `export()`
+### `global String export()`
 
 Generates a new primary invite link for the chat. Any previously generated primary link is revoked. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description              |
+| -------- | ------------------------ |
+| `String` | The new chat invite link |
 
-String
-
-**Description**
-
-The new chat invite link
-
-### `create()`
+### `global TelegramChatInviteLink create()`
 
 Creates an additional invite link for the chat. The link can be revoked. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights
 
-#### Return
+#### Returns
 
-**Type**
+| Type                     | Description                                                                                  |
+| ------------------------ | -------------------------------------------------------------------------------------------- |
+| `TelegramChatInviteLink` | The instance of the [TelegramChatInviteLink](/types/Classes/TelegramChatInviteLink.md) class |
 
-TelegramChatInviteLink
-
-**Description**
-
-The instance of the [TelegramChatInviteLink](/types/Classes/TelegramChatInviteLink.md) class
-
-### `create(LinkOptions options)`
+### `global TelegramChatInviteLink create(LinkOptions options)`
 
 Creates an additional invite link for the chat. The link can be revoked. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights
 
@@ -42,17 +34,13 @@ Creates an additional invite link for the chat. The link can be revoked. The bot
 | --------- | ---------------------------------- |
 | `options` | The additional invite link options |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                     | Description                                                                                  |
+| ------------------------ | -------------------------------------------------------------------------------------------- |
+| `TelegramChatInviteLink` | The instance of the [TelegramChatInviteLink](/types/Classes/TelegramChatInviteLink.md) class |
 
-TelegramChatInviteLink
-
-**Description**
-
-The instance of the [TelegramChatInviteLink](/types/Classes/TelegramChatInviteLink.md) class
-
-### `edit(String inviteLink)`
+### `global TelegramChatInviteLink edit(String inviteLink)`
 
 Edits a non-primary invite link for the chat created by bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights
 
@@ -62,17 +50,13 @@ Edits a non-primary invite link for the chat created by bot. The bot must be an 
 | ------------ | ----------------------- |
 | `inviteLink` | The invite link to edit |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                     | Description                                                                                  |
+| ------------------------ | -------------------------------------------------------------------------------------------- |
+| `TelegramChatInviteLink` | The instance of the [TelegramChatInviteLink](/types/Classes/TelegramChatInviteLink.md) class |
 
-TelegramChatInviteLink
-
-**Description**
-
-The instance of the [TelegramChatInviteLink](/types/Classes/TelegramChatInviteLink.md) class
-
-### `edit(String inviteLink, LinkOptions options)`
+### `global TelegramChatInviteLink edit(String inviteLink, LinkOptions options)`
 
 Edits a non-primary invite link for the chat created by bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights
 
@@ -83,17 +67,13 @@ Edits a non-primary invite link for the chat created by bot. The bot must be an 
 | `inviteLink` | The invite link to edit            |
 | `options`    | The additional invite link options |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                     | Description                                                                                  |
+| ------------------------ | -------------------------------------------------------------------------------------------- |
+| `TelegramChatInviteLink` | The instance of the [TelegramChatInviteLink](/types/Classes/TelegramChatInviteLink.md) class |
 
-TelegramChatInviteLink
-
-**Description**
-
-The instance of the [TelegramChatInviteLink](/types/Classes/TelegramChatInviteLink.md) class
-
-### `revoke(String inviteLink)`
+### `global void revoke(String inviteLink)`
 
 Revokes the invite link created by the bot. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights
 
@@ -118,11 +98,11 @@ LinkOptions
 
 #### Constructors
 
-##### `LinkOptions()`
+##### `global LinkOptions()`
 
 Creates a new instance of the invite link options without the link name
 
-##### `LinkOptions(String name)`
+##### `global LinkOptions(String name)`
 
 Creates a new instance of the invite link options with the provided link name
 
@@ -136,7 +116,7 @@ Creates a new instance of the invite link options with the provided link name
 
 #### Methods
 
-##### `withExpireDate(DateTime expireDate)`
+##### `global LinkOptions withExpireDate(DateTime expireDate)`
 
 Sets the point in time when the link will expire
 
@@ -146,17 +126,13 @@ Sets the point in time when the link will expire
 | ------------ | ------------------------------------------- |
 | `expireDate` | The point in time when the link will expire |
 
-###### Return
+###### Returns
 
-**Type**
+| Type          | Description                                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `LinkOptions` | The current instance of the [TelegramBotChatInviteLinkService.LinkOptions](TelegramBotChatInviteLinkService.LinkOptions) class |
 
-LinkOptions
-
-**Description**
-
-The current instance of the [TelegramBotChatInviteLinkService.LinkOptions](TelegramBotChatInviteLinkService.LinkOptions) class
-
-##### `withMemberLimit(Integer memberLimit)`
+##### `global LinkOptions withMemberLimit(Integer memberLimit)`
 
 Sets the maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link
 
@@ -166,29 +142,21 @@ Sets the maximum number of users that can be members of the chat simultaneously 
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `memberLimit` | The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link, `1-99999` |
 
-###### Return
+###### Returns
 
-**Type**
+| Type          | Description                                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `LinkOptions` | The current instance of the [TelegramBotChatInviteLinkService.LinkOptions](TelegramBotChatInviteLinkService.LinkOptions) class |
 
-LinkOptions
-
-**Description**
-
-The current instance of the [TelegramBotChatInviteLinkService.LinkOptions](TelegramBotChatInviteLinkService.LinkOptions) class
-
-##### `withRequestApproval()`
+##### `global LinkOptions withRequestApproval()`
 
 Sets if users joining the chat via the link need to be approved by chat administrators. If `True` member limit can't be specified
 
-###### Return
+###### Returns
 
-**Type**
-
-LinkOptions
-
-**Description**
-
-The current instance of the [TelegramBotChatInviteLinkService.LinkOptions](TelegramBotChatInviteLinkService.LinkOptions) class
+| Type          | Description                                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `LinkOptions` | The current instance of the [TelegramBotChatInviteLinkService.LinkOptions](TelegramBotChatInviteLinkService.LinkOptions) class |
 
 ---
 

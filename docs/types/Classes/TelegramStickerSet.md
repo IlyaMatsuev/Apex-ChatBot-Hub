@@ -9,32 +9,32 @@ TelegramStickerSet
 
 ## Properties
 
-### `isAnimated` → `Boolean`
-
-`True`, if the sticker set contains animated stickers
-
-### `isVideo` → `Boolean`
-
-`True`, if the sticker set contains video stickers
-
-### `name` → `String`
+### `global name` → `String`
 
 The sticker set name
 
-### `stickerType` → `String`
+### `global title` → `String`
+
+The sticker set title
+
+### `global stickerType` → `String`
 
 The type of the stickers in the set, one of `regular`, `mask`, `custom_emoji`
 
-### `stickers` → `List<TelegramSticker>`
+### `global isAnimated` → `Boolean`
+
+`True`, if the sticker set contains animated stickers
+
+### `global isVideo` → `Boolean`
+
+`True`, if the sticker set contains video stickers
+
+### `global stickers` → `List<TelegramSticker>`
 
 The list of all set sticker
 
-### `thumbnail` → `TelegramPhotoSize`
+### `global thumbnail` → `TelegramPhotoSize`
 
 The sticker set thumbnail
-
-### `title` → `String`
-
-The sticker set title
 
 ---

@@ -1,4 +1,4 @@
-# BotEnumType
+# abstract BotEnumType
 
 Custom enum type that provides more flexibility comparing to the native Apex enums
 
@@ -6,35 +6,27 @@ Custom enum type that provides more flexibility comparing to the native Apex enu
 
 ## Methods
 
-### `name()`
+### `global String name()`
 
 Returns the string representation of the enum. Works the same way as the native Apex enums
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                                    |
+| -------- | ---------------------------------------------- |
+| `String` | The string value the enum was initialized with |
 
-String
-
-**Description**
-
-The string value the enum was initialized with
-
-### `override toString()`
+### `global override String toString()`
 
 Returns the string representation of the enum. Works the same way as the native Apex enums
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                                    |
+| -------- | ---------------------------------------------- |
+| `String` | The String value the enum was initialized with |
 
-String
-
-**Description**
-
-The String value the enum was initialized with
-
-### `equals(Object other)`
+### `global virtual Boolean equals(Object other)`
 
 Checks if the passed object equals to the enum value
 
@@ -44,28 +36,20 @@ Checks if the passed object equals to the enum value
 | ------- | ---------------------------------------------- |
 | `other` | Any object this enum instance is compared with |
 
-#### Return
+#### Returns
 
-**Type**
+| Type      | Description                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------- |
+| `Boolean` | `true` if the passed object equals to the current instance by a reference or a String value |
 
-Boolean
-
-**Description**
-
-`true` if the passed object equals to the current instance by a reference or a String value
-
-### `hashCode()`
+### `global Integer hashCode()`
 
 Generates a hashcode based on the string value this enum is initialized with
 
-#### Return
+#### Returns
 
-**Type**
-
-Integer
-
-**Description**
-
-The enum's string value hashcode or `0` if the value is `null`
+| Type      | Description                                                    |
+| --------- | -------------------------------------------------------------- |
+| `Integer` | The enum's string value hashcode or `0` if the value is `null` |
 
 ---

@@ -9,7 +9,7 @@ TelegramInputSticker
 
 ## Constructors
 
-### `TelegramInputSticker(String fileIdOrUrl)`
+### `global TelegramInputSticker(String fileIdOrUrl)`
 
 Creates a new input sticker instance with the provided sticker URL or file id
 
@@ -23,7 +23,7 @@ Creates a new input sticker instance with the provided sticker URL or file id
 
 ## Methods
 
-### `withEmojis(List<String> emojis)`
+### `global TelegramInputSticker withEmojis(List<String> emojis)`
 
 Associates the provided emojis with the sticker
 
@@ -33,17 +33,13 @@ Associates the provided emojis with the sticker
 | -------- | ----------------------------------------------------- |
 | `emojis` | The list of `1-20` emojis associated with the sticker |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                   | Description                                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| `TelegramInputSticker` | The current instance of the [TelegramInputSticker](/types/Classes/TelegramInputSticker.md) class |
 
-TelegramInputSticker
-
-**Description**
-
-The current instance of the [TelegramInputSticker](/types/Classes/TelegramInputSticker.md) class
-
-### `withKeywords(List<String> keywords)`
+### `global TelegramInputSticker withKeywords(List<String> keywords)`
 
 Associates the provided keywords with the sticker
 
@@ -53,14 +49,10 @@ Associates the provided keywords with the sticker
 | ---------- | ------------------------------------------------------- |
 | `keywords` | The list of `0-20` keywords associated with the sticker |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInputSticker
-
-**Description**
-
-The current instance of the [TelegramInputSticker](/types/Classes/TelegramInputSticker.md) class
+| Type                   | Description                                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------------ |
+| `TelegramInputSticker` | The current instance of the [TelegramInputSticker](/types/Classes/TelegramInputSticker.md) class |
 
 ---

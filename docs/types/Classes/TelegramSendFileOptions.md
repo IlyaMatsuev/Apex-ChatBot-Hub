@@ -11,7 +11,7 @@ TelegramSendFileOptions
 
 ## Constructors
 
-### `TelegramSendFileOptions()`
+### `global TelegramSendFileOptions()`
 
 Creates an instance of the file message options
 
@@ -19,7 +19,7 @@ Creates an instance of the file message options
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -29,7 +29,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withCaption(String caption)`
+### `global TelegramSendFileOptions withCaption(String caption)`
 
 Sets the text caption for the file
 
@@ -39,17 +39,13 @@ Sets the text caption for the file
 | --------- | ------------------------------ |
 | `caption` | The text to attach to the file |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendFileOptions` | The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class |
 
-TelegramSendFileOptions
-
-**Description**
-
-The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class
-
-### `withThumbnail(String thumbnailUrl)`
+### `global TelegramSendFileOptions withThumbnail(String thumbnailUrl)`
 
 Sets the thumbnail for the file
 
@@ -59,31 +55,23 @@ Sets the thumbnail for the file
 | -------------- | ------------------------- |
 | `thumbnailUrl` | The URL to the JPEG image |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendFileOptions` | The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class |
 
-TelegramSendFileOptions
-
-**Description**
-
-The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class
-
-### `withoutContentTypeDetection()`
+### `global TelegramSendFileOptions withoutContentTypeDetection()`
 
 Disables automatic server-side content type detection
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendFileOptions` | The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class |
 
-TelegramSendFileOptions
-
-**Description**
-
-The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class
-
-### `withThreadId(String threadId)`
+### `global TelegramSendFileOptions withThreadId(String threadId)`
 
 Sets the forum channel thread id where the message has to be sent
 
@@ -93,17 +81,13 @@ Sets the forum channel thread id where the message has to be sent
 | ---------- | -------------------------------------------------------------- |
 | `threadId` | The `Telegram` unique id for the target message thread (topic) |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendFileOptions` | The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class |
 
-TelegramSendFileOptions
-
-**Description**
-
-The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramSendFileOptions withParseMode(String mode)`
 
 Sets the message text parse mode. Needed when the message text is formatted with HTML or Markdown markup
 
@@ -113,17 +97,13 @@ Sets the message text parse mode. Needed when the message text is formatted with
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendFileOptions` | The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class |
 
-TelegramSendFileOptions
-
-**Description**
-
-The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramSendFileOptions withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the message text. For example username tags
 
@@ -133,17 +113,13 @@ Adds a special entity that appear in the message text. For example username tags
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendFileOptions` | The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class |
 
-TelegramSendFileOptions
-
-**Description**
-
-The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramSendFileOptions withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the message text. For example username tags
 
@@ -153,45 +129,33 @@ Adds special entities that appear in the message text. For example username tags
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendFileOptions` | The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class |
 
-TelegramSendFileOptions
-
-**Description**
-
-The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class
-
-### `withoutNotification()`
+### `global TelegramSendFileOptions withoutNotification()`
 
 Sends the message silently. The receiver will get a notification with no sound
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendFileOptions` | The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class |
 
-TelegramSendFileOptions
-
-**Description**
-
-The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class
-
-### `withProtectedContent()`
+### `global TelegramSendFileOptions withProtectedContent()`
 
 Protects the contents of the sent message from forwarding and saving
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendFileOptions` | The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class |
 
-TelegramSendFileOptions
-
-**Description**
-
-The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class
-
-### `asReplyToMessage(String messageId)`
+### `global TelegramSendFileOptions asReplyToMessage(String messageId)`
 
 Sends the message as a reply to another message. If the target message was not found, will just send a message
 
@@ -201,14 +165,10 @@ Sends the message as a reply to another message. If the target message was not f
 | ----------- | ------------------------------------------------- |
 | `messageId` | The `Telegram` message id to which bot will reply |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramSendFileOptions
-
-**Description**
-
-The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendFileOptions` | The current instance of the [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) class |
 
 ---

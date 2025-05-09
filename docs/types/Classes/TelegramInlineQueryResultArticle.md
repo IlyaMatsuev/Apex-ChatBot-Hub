@@ -11,7 +11,7 @@ TelegramInlineQueryResultArticle
 
 ## Constructors
 
-### `TelegramInlineQueryResultArticle(String id)`
+### `global TelegramInlineQueryResultArticle(String id)`
 
 Creates a new instance of the article inline query result with the provided result id
 
@@ -25,7 +25,7 @@ Creates a new instance of the article inline query result with the provided resu
 
 ## Methods
 
-### `withTitle(String title)`
+### `global TelegramInlineQueryResultArticle withTitle(String title)`
 
 Sets the title for the inline result
 
@@ -35,17 +35,13 @@ Sets the title for the inline result
 | ------- | ----------------------- |
 | `title` | The title of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultArticle` | The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class |
 
-TelegramInlineQueryResultArticle
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class
-
-### `withUrl(String url)`
+### `global TelegramInlineQueryResultArticle withUrl(String url)`
 
 Sets the URL for the inline result
 
@@ -55,17 +51,13 @@ Sets the URL for the inline result
 | ----- | --------------------- |
 | `url` | The URL of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultArticle` | The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class |
 
-TelegramInlineQueryResultArticle
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class
-
-### `withInputMessage(TelegramInputMessageContent messageContent)`
+### `global TelegramInlineQueryResultArticle withInputMessage(TelegramInputMessageContent messageContent)`
 
 Sets the content of the message to be sent
 
@@ -75,17 +67,13 @@ Sets the content of the message to be sent
 | ---------------- | ------------------------------------- |
 | `messageContent` | The content of the message to be sent |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultArticle` | The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class |
 
-TelegramInlineQueryResultArticle
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class
-
-### `withUrl(String url, Boolean hidden)`
+### `global TelegramInlineQueryResultArticle withUrl(String url, Boolean hidden)`
 
 Sets the URL for the inline result
 
@@ -96,17 +84,13 @@ Sets the URL for the inline result
 | `url`    | The URL of the result                                       |
 | `hidden` | `True` if you don't want the URL to be shown in the message |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultArticle` | The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class |
 
-TelegramInlineQueryResultArticle
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class
-
-### `withDescription(String description)`
+### `global TelegramInlineQueryResultArticle withDescription(String description)`
 
 Sets the short description for the inline result
 
@@ -116,17 +100,13 @@ Sets the short description for the inline result
 | ------------- | ----------------------------- |
 | `description` | The description of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultArticle` | The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class |
 
-TelegramInlineQueryResultArticle
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class
-
-### `withThumbnail(String url)`
+### `global TelegramInlineQueryResultArticle withThumbnail(String url)`
 
 Sets the thumbnail for the inline result
 
@@ -136,17 +116,13 @@ Sets the thumbnail for the inline result
 | ----- | ----------------- |
 | `url` | The thumbnail URL |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultArticle` | The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class |
 
-TelegramInlineQueryResultArticle
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class
-
-### `withThumbnail(String url, Integer width, Integer height)`
+### `global TelegramInlineQueryResultArticle withThumbnail(String url, Integer width, Integer height)`
 
 Sets the thumbnail for the inline result
 
@@ -158,17 +134,13 @@ Sets the thumbnail for the inline result
 | `width`  | The thumbnail width  |
 | `height` | The thumbnail height |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultArticle` | The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class |
 
-TelegramInlineQueryResultArticle
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class
-
-### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+### `global TelegramInlineQueryResultArticle withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
 
 Sets the inline keyboard to the message
 
@@ -178,14 +150,10 @@ Sets the inline keyboard to the message
 | ---------- | ------------------------------------------- |
 | `keyboard` | The inline keyboard attached to the message |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInlineQueryResultArticle
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultArticle` | The current instance of the [TelegramInlineQueryResultArticle](/types/Classes/TelegramInlineQueryResultArticle.md) class |
 
 ---

@@ -10,7 +10,7 @@ TelegramBotService
 
 ## Methods
 
-### `send(String chatId)`
+### `global TelegramBotSenderService send(String chatId)`
 
 Creates an instance of the `Telegram` sender service
 
@@ -20,17 +20,13 @@ Creates an instance of the `Telegram` sender service
 | -------- | ------------------------------------------------------- |
 | `chatId` | The id of the chat where the information has to be sent |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                                                                                |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `TelegramBotSenderService` | The `Telegram` implementation of the [IBotSenderService](/types/Interfaces/IBotSenderService.md) interface |
 
-TelegramBotSenderService
-
-**Description**
-
-The `Telegram` implementation of the [IBotSenderService](/types/Interfaces/IBotSenderService.md) interface
-
-### `edit(String chatId, String messageId)`
+### `global TelegramBotEditorService edit(String chatId, String messageId)`
 
 Creates an instance of the `Telegram` edit service
 
@@ -41,17 +37,13 @@ Creates an instance of the `Telegram` edit service
 | `chatId`    | The id of the chat where a message needs to be edited |
 | `messageId` | The id of the message to edit                         |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                                                                      |
+| -------------------------- | ------------------------------------------------------------------------------------------------ |
+| `TelegramBotEditorService` | The instance of the [TelegramBotEditorService](/types/Classes/TelegramBotEditorService.md) class |
 
-TelegramBotEditorService
-
-**Description**
-
-The instance of the [TelegramBotEditorService](/types/Classes/TelegramBotEditorService.md) class
-
-### `edit(String chatId, String messageId, Boolean isInlineMessage)`
+### `global TelegramBotEditorService edit(String chatId, String messageId, Boolean isInlineMessage)`
 
 Creates an instance of the `Telegram` edit service
 
@@ -63,17 +55,13 @@ Creates an instance of the `Telegram` edit service
 | `messageId`       | The id of the message to edit                          |
 | `isInlineMessage` | Determines if the message to edit is an inline message |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                                                                      |
+| -------------------------- | ------------------------------------------------------------------------------------------------ |
+| `TelegramBotEditorService` | The instance of the [TelegramBotEditorService](/types/Classes/TelegramBotEditorService.md) class |
 
-TelegramBotEditorService
-
-**Description**
-
-The instance of the [TelegramBotEditorService](/types/Classes/TelegramBotEditorService.md) class
-
-### `chat(String chatId)`
+### `global TelegramBotChatService chat(String chatId)`
 
 Creates an instance of the `Telegram` chat service
 
@@ -83,17 +71,13 @@ Creates an instance of the `Telegram` chat service
 | -------- | -------------------------------------------------------- |
 | `chatId` | The id of the chat which information needs to be updated |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                     | Description                                                                                  |
+| ------------------------ | -------------------------------------------------------------------------------------------- |
+| `TelegramBotChatService` | The instance of the [TelegramBotChatService](/types/Classes/TelegramBotChatService.md) class |
 
-TelegramBotChatService
-
-**Description**
-
-The instance of the [TelegramBotChatService](/types/Classes/TelegramBotChatService.md) class
-
-### `inlineQuery(String inlineQueryId)`
+### `global TelegramBotInlineQueryService inlineQuery(String inlineQueryId)`
 
 Creates an instance of the `Telegram` inline query service
 
@@ -103,42 +87,30 @@ Creates an instance of the `Telegram` inline query service
 | --------------- | -------------------------------------------- |
 | `inlineQueryId` | The unique identifier for the answered query |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                            | Description                                                                                                |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `TelegramBotInlineQueryService` | The instance of the [TelegramBotInlineQueryService](/types/Classes/TelegramBotInlineQueryService.md) class |
 
-TelegramBotInlineQueryService
-
-**Description**
-
-The instance of the [TelegramBotInlineQueryService](/types/Classes/TelegramBotInlineQueryService.md) class
-
-### `me()`
+### `global TelegramBotMeService me()`
 
 Creates an instance of the `Telegram` `me` service
 
-#### Return
+#### Returns
 
-**Type**
+| Type                   | Description                                                                              |
+| ---------------------- | ---------------------------------------------------------------------------------------- |
+| `TelegramBotMeService` | The instance of the [TelegramBotMeService](/types/Classes/TelegramBotMeService.md) class |
 
-TelegramBotMeService
-
-**Description**
-
-The instance of the [TelegramBotMeService](/types/Classes/TelegramBotMeService.md) class
-
-### `stickers()`
+### `global TelegramBotStickerService stickers()`
 
 Creates an instance of the `Telegram` `sticker` service
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramBotStickerService
-
-**Description**
-
-The instance of the [TelegramBotStickerService](/types/Classes/TelegramBotStickerService.md) class
+| Type                        | Description                                                                                        |
+| --------------------------- | -------------------------------------------------------------------------------------------------- |
+| `TelegramBotStickerService` | The instance of the [TelegramBotStickerService](/types/Classes/TelegramBotStickerService.md) class |
 
 ---

@@ -8,48 +8,48 @@ ViberAccount
 
 ## Properties
 
-### `background` → `String`
-
-The conversation background URL
-
-### `category` → `String`
-
-The account category
-
-### `country` → `String`
-
-The account country
-
-### `eventTypes` → `List<String>`
-
-The account registered webhook event types
-
-### `id` → `String`
+### `global id` → `String`
 
 The unique numeric id of the account
 
-### `location` → `ViberLocation`
-
-The account location
-
-### `name` → `String`
+### `global name` → `String`
 
 The account name
 
-### `subcategory` → `String`
-
-The account sub-category
-
-### `subscribersCount` → `Integer`
-
-The number of subscribers
-
-### `uri` → `String`
+### `global uri` → `String`
 
 The unique URL of the account
 
-### `webhook` → `String`
+### `global background` → `String`
+
+The conversation background URL
+
+### `global category` → `String`
+
+The account category
+
+### `global subcategory` → `String`
+
+The account sub-category
+
+### `global location` → `ViberLocation`
+
+The account location
+
+### `global country` → `String`
+
+The account country
+
+### `global webhook` → `String`
 
 The account registered webhook
+
+### `global eventTypes` → `List<String>`
+
+The account registered webhook event types
+
+### `global subscribersCount` → `Integer`
+
+The number of subscribers
 
 ---

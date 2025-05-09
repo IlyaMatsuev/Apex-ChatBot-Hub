@@ -11,13 +11,13 @@ TelegramChatMemberLeft
 
 ## Properties
 
-### `status` → `String`
+### `global status` → `String`
 
 _Inherited_
 
 The member's status in the chat. One of `member`, `creator`, `administrator`, `restricted`, `left` or `kicked`
 
-### `user` → `TelegramUser`
+### `global user` → `TelegramUser`
 
 _Inherited_
 

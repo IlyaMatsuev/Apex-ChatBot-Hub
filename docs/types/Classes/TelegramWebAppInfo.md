@@ -9,7 +9,7 @@ TelegramWebAppInfo
 
 ## Properties
 
-### `url` → `String`
+### `global url` → `String`
 
 An HTTPS URL of a Web App to be opened with additional data
 

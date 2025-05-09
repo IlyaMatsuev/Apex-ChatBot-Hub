@@ -9,7 +9,7 @@ TelegramSendContactOptions
 
 ## Methods
 
-### `withThreadId(String threadId)`
+### `global TelegramSendContactOptions withThreadId(String threadId)`
 
 Sets the forum channel thread id where the message has to be sent
 
@@ -19,17 +19,13 @@ Sets the forum channel thread id where the message has to be sent
 | ---------- | -------------------------------------------------------------- |
 | `threadId` | The `Telegram` unique id for the target message thread (topic) |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramSendContactOptions` | The current instance of the [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) class |
 
-TelegramSendContactOptions
-
-**Description**
-
-The current instance of the [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) class
-
-### `withVCard(String vcard)`
+### `global TelegramSendContactOptions withVCard(String vcard)`
 
 Sets the additional data for the contact message of a vCard format
 
@@ -39,45 +35,33 @@ Sets the additional data for the contact message of a vCard format
 | ------- | ------------------------- |
 | `vcard` | The `vCard` format string |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramSendContactOptions` | The current instance of the [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) class |
 
-TelegramSendContactOptions
-
-**Description**
-
-The current instance of the [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) class
-
-### `withoutNotification()`
+### `global TelegramSendContactOptions withoutNotification()`
 
 Sends the message silently. The receiver will get a notification with no sound
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramSendContactOptions` | The current instance of the [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) class |
 
-TelegramSendContactOptions
-
-**Description**
-
-The current instance of the [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) class
-
-### `withProtectedContent()`
+### `global TelegramSendContactOptions withProtectedContent()`
 
 Protects the contents of the sent message from forwarding and saving
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramSendContactOptions` | The current instance of the [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) class |
 
-TelegramSendContactOptions
-
-**Description**
-
-The current instance of the [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) class
-
-### `asReplyToMessage(String messageId)`
+### `global TelegramSendContactOptions asReplyToMessage(String messageId)`
 
 Sends the message as a reply to another message. If the target message was not found, will just send a message
 
@@ -87,14 +71,10 @@ Sends the message as a reply to another message. If the target message was not f
 | ----------- | ------------------------------------------------- |
 | `messageId` | The `Telegram` message id to which bot will reply |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramSendContactOptions
-
-**Description**
-
-The current instance of the [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) class
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramSendContactOptions` | The current instance of the [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) class |
 
 ---

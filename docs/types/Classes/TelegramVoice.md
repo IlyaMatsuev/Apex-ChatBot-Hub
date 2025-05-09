@@ -9,24 +9,24 @@ TelegramVoice
 
 ## Properties
 
-### `duration` → `Integer`
-
-The duration of the audio in seconds as defined by sender or by audio tags
-
-### `fileId` → `String`
+### `global fileId` → `String`
 
 The identifier for this file, which can be used to download or reuse the file
 
-### `fileSize` → `Integer`
-
-The file size in bytes
-
-### `fileUniqueId` → `String`
+### `global fileUniqueId` → `String`
 
 The unique identifier for this file, which is supposed to be the same over time and for different bots
 
-### `mimeType` → `String`
+### `global duration` → `Integer`
+
+The duration of the audio in seconds as defined by sender or by audio tags
+
+### `global mimeType` → `String`
 
 The MIME type of the file as defined by sender
+
+### `global fileSize` → `Integer`
+
+The file size in bytes
 
 ---

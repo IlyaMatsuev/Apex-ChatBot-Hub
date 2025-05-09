@@ -4,7 +4,7 @@ The `Bot__c` sObject model
 
 ## Constructors
 
-### `BotModel(Bot__c entity)`
+### `global BotModel(Bot__c entity)`
 
 Create an instance of the model by the provided `Bot__c` record
 
@@ -18,15 +18,15 @@ Create an instance of the model by the provided `Bot__c` record
 
 ## Properties
 
-### `id` → `Id`
+### `global id` → `Id`
 
 The `Bot__c` sObject `Id` field value
 
-### `name` → `String`
+### `global name` → `String`
 
 The `Bot__c` sObject `Name` field value
 
-### `type` → `BotType`
+### `global type` → `BotType`
 
 The instance of the [BotType](/types/Enums/BotType.md) enum based on `Bot__c.Type__c` field value
 
@@ -34,21 +34,17 @@ The instance of the [BotType](/types/Enums/BotType.md) enum based on `Bot__c.Typ
 
 ## Methods
 
-### `toJson()`
+### `global String toJson()`
 
 Converts the `BotModel` instance to JSON string
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                      |
+| -------- | -------------------------------- |
+| `String` | JSON serialized current instance |
 
-String
-
-**Description**
-
-JSON serialized current instance
-
-### `static fromJson(String jsonStr)`
+### `global static BotModel fromJson(String jsonStr)`
 
 Converts the JSON string back to the [BotModel](/types/Classes/BotModel.md) instance
 
@@ -58,14 +54,10 @@ Converts the JSON string back to the [BotModel](/types/Classes/BotModel.md) inst
 | --------- | ---------------------------------------------------------------------- |
 | `jsonStr` | The JSON string with serialized [BotModel](/types/Classes/BotModel.md) |
 
-#### Return
+#### Returns
 
-**Type**
-
-BotModel
-
-**Description**
-
-The new [BotModel](/types/Classes/BotModel.md) instance
+| Type       | Description                                             |
+| ---------- | ------------------------------------------------------- |
+| `BotModel` | The new [BotModel](/types/Classes/BotModel.md) instance |
 
 ---

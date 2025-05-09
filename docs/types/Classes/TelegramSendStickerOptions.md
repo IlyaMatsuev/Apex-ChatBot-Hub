@@ -9,7 +9,7 @@ TelegramSendStickerOptions
 
 ## Methods
 
-### `withThreadId(String threadId)`
+### `global TelegramSendStickerOptions withThreadId(String threadId)`
 
 Sets the forum channel thread id where the sticker has to be sent
 
@@ -19,17 +19,13 @@ Sets the forum channel thread id where the sticker has to be sent
 | ---------- | -------------------------------------------------------------- |
 | `threadId` | The `Telegram` unique id for the target message thread (topic) |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramSendStickerOptions` | The current instance of the [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md) class |
 
-TelegramSendStickerOptions
-
-**Description**
-
-The current instance of the [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md) class
-
-### `asEmoji(String emoji)`
+### `global TelegramSendStickerOptions asEmoji(String emoji)`
 
 Sets the emoji associated with the sticker. Works for just uploaded stickers only
 
@@ -39,45 +35,33 @@ Sets the emoji associated with the sticker. Works for just uploaded stickers onl
 | ------- | ------------------------------------- |
 | `emoji` | The emoji associated with the sticker |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramSendStickerOptions` | The current instance of the [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md) class |
 
-TelegramSendStickerOptions
-
-**Description**
-
-The current instance of the [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md) class
-
-### `withoutNotification()`
+### `global TelegramSendStickerOptions withoutNotification()`
 
 Sends the sticker silently. The receiver will get a notification with no sound
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramSendStickerOptions` | The current instance of the [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md) class |
 
-TelegramSendStickerOptions
-
-**Description**
-
-The current instance of the [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md) class
-
-### `withProtectedContent()`
+### `global TelegramSendStickerOptions withProtectedContent()`
 
 Protects the contents of the sent sticker from forwarding and saving
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramSendStickerOptions` | The current instance of the [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md) class |
 
-TelegramSendStickerOptions
-
-**Description**
-
-The current instance of the [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md) class
-
-### `asReplyToMessage(String messageId)`
+### `global TelegramSendStickerOptions asReplyToMessage(String messageId)`
 
 Sends the sticker as a reply to another message. If the target message was not found, will just send a sticker
 
@@ -87,14 +71,10 @@ Sends the sticker as a reply to another message. If the target message was not f
 | ----------- | ------------------------------------------------- |
 | `messageId` | The `Telegram` message id to which bot will reply |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramSendStickerOptions
-
-**Description**
-
-The current instance of the [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md) class
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramSendStickerOptions` | The current instance of the [TelegramSendStickerOptions](/types/Classes/TelegramSendStickerOptions.md) class |
 
 ---

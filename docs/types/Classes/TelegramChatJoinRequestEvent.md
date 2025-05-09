@@ -9,28 +9,28 @@ TelegramChatJoinRequestEvent
 
 ## Properties
 
-### `bio` → `String`
-
-The bio of the user
-
-### `chat` → `TelegramChat`
+### `global chat` → `TelegramChat`
 
 The chat to which the request was sent
 
-### `inviteLink` → `TelegramChatInviteLink`
-
-The chat invite link that was used by the user to send the join request
-
-### `requestDate` → `DateTime`
-
-The date the request was sent
-
-### `sender` → `TelegramUser`
+### `global sender` → `TelegramUser`
 
 The user that sent the join request
 
-### `userChatId` → `Long`
+### `global userChatId` → `Long`
 
 The identifier of a private chat with the user who sent the join request
+
+### `global requestDate` → `DateTime`
+
+The date the request was sent
+
+### `global bio` → `String`
+
+The bio of the user
+
+### `global inviteLink` → `TelegramChatInviteLink`
+
+The chat invite link that was used by the user to send the join request
 
 ---

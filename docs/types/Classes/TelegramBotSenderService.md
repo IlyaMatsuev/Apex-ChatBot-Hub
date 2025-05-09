@@ -8,7 +8,7 @@ Service class that provides access to all `Telegram` `send` methods
 
 ## Methods
 
-### `text(String text)`
+### `global void text(String text)`
 
 Sends a text message
 
@@ -18,7 +18,7 @@ Sends a text message
 | ------ | ------------------------ |
 | `text` | The message text to send |
 
-### `text(String text, TelegramSendTextOptions options)`
+### `global void text(String text, TelegramSendTextOptions options)`
 
 Sends a text message with the provided optional parameters
 
@@ -29,7 +29,7 @@ Sends a text message with the provided optional parameters
 | `text`    | The message text to send                                                                                            |
 | `options` | The instance of [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) with other optional parameters |
 
-### `image(String imageUrl)`
+### `global void image(String imageUrl)`
 
 Sends an image
 
@@ -39,7 +39,7 @@ Sends an image
 | ---------- | ------------- |
 | `imageUrl` | The image URL |
 
-### `image(String imageUrl, String caption)`
+### `global void image(String imageUrl, String caption)`
 
 Sends an image with a caption
 
@@ -50,7 +50,7 @@ Sends an image with a caption
 | `imageUrl` | The image URL                   |
 | `caption`  | The text to attach to the image |
 
-### `image(String imageUrl, TelegramSendImageOptions options)`
+### `global void image(String imageUrl, TelegramSendImageOptions options)`
 
 Sends an image with the provided optional parameters
 
@@ -61,7 +61,7 @@ Sends an image with the provided optional parameters
 | `imageUrl` | The image URL                                                                                                         |
 | `options`  | The instance of [TelegramSendImageOptions](/types/Classes/TelegramSendImageOptions.md) with other optional parameters |
 
-### `video(String videoUrl)`
+### `global void video(String videoUrl)`
 
 Sends a video
 
@@ -71,7 +71,7 @@ Sends a video
 | ---------- | ------------- |
 | `videoUrl` | The video URL |
 
-### `video(String videoUrl, String caption)`
+### `global void video(String videoUrl, String caption)`
 
 Sends a video with a caption
 
@@ -82,7 +82,7 @@ Sends a video with a caption
 | `videoUrl` | The video URL                   |
 | `caption`  | The text to attach to the video |
 
-### `video(String videoUrl, TelegramSendVideoOptions options)`
+### `global void video(String videoUrl, TelegramSendVideoOptions options)`
 
 Sends a video with the provided optional parameters
 
@@ -93,7 +93,7 @@ Sends a video with the provided optional parameters
 | `videoUrl` | The video URL                                                                                                         |
 | `options`  | The instance of [TelegramSendVideoOptions](/types/Classes/TelegramSendVideoOptions.md) with other optional parameters |
 
-### `videoNote(String videoNoteId)`
+### `global void videoNote(String videoNoteId)`
 
 Sends a video note
 
@@ -103,7 +103,7 @@ Sends a video note
 | ------------- | ------------------------------------------------------------------------- |
 | `videoNoteId` | The video file id that was uploaded to `Telegram`. URLs are not supported |
 
-### `videoNote(String videoNoteId, TelegramSendVideoNoteOptions options)`
+### `global void videoNote(String videoNoteId, TelegramSendVideoNoteOptions options)`
 
 Sends a video note with the provided optional parameters
 
@@ -114,7 +114,7 @@ Sends a video note with the provided optional parameters
 | `videoNoteId` | The video file id that was uploaded to `Telegram`. URLs are not supported                                                     |
 | `options`     | The instance of [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) with other optional parameters |
 
-### `animation(String animationUrl)`
+### `global void animation(String animationUrl)`
 
 Sends an animation, e.g. `gif` or a video without sound
 
@@ -124,7 +124,7 @@ Sends an animation, e.g. `gif` or a video without sound
 | -------------- | ----------------- |
 | `animationUrl` | The animation URL |
 
-### `animation(String animationUrl, String caption)`
+### `global void animation(String animationUrl, String caption)`
 
 Sends an animation, e.g. `gif` or a video without sound with a caption
 
@@ -135,7 +135,7 @@ Sends an animation, e.g. `gif` or a video without sound with a caption
 | `animationUrl` | The animation URL                   |
 | `caption`      | The text to attach to the animation |
 
-### `animation(String animationUrl, TelegramSendVideoOptions options)`
+### `global void animation(String animationUrl, TelegramSendVideoOptions options)`
 
 Sends an animation, e.g. `gif` or a video without sound with the provided optional parameters
 
@@ -146,7 +146,7 @@ Sends an animation, e.g. `gif` or a video without sound with the provided option
 | `animationUrl` | The video URL                                                                                                         |
 | `options`      | The instance of [TelegramSendVideoOptions](/types/Classes/TelegramSendVideoOptions.md) with other optional parameters |
 
-### `audio(String audioUrl)`
+### `global void audio(String audioUrl)`
 
 Sends an audio
 
@@ -156,7 +156,7 @@ Sends an audio
 | ---------- | ------------- |
 | `audioUrl` | The audio URL |
 
-### `audio(String audioUrl, String caption)`
+### `global void audio(String audioUrl, String caption)`
 
 Sends an audio with a caption
 
@@ -167,7 +167,7 @@ Sends an audio with a caption
 | `audioUrl` | The audio URL                   |
 | `caption`  | The text to attach to the audio |
 
-### `audio(String audioUrl, TelegramSendAudioOptions options)`
+### `global void audio(String audioUrl, TelegramSendAudioOptions options)`
 
 Sends an audio with the provided optional parameters
 
@@ -178,7 +178,7 @@ Sends an audio with the provided optional parameters
 | `audioUrl` | The audio URL                                                                                                         |
 | `options`  | The instance of [TelegramSendAudioOptions](/types/Classes/TelegramSendAudioOptions.md) with other optional parameters |
 
-### `voice(String voiceUrl)`
+### `global void voice(String voiceUrl)`
 
 Sends an audio as a voice message
 
@@ -188,7 +188,7 @@ Sends an audio as a voice message
 | ---------- | ------------------------------------------------------------------------------------------------------- |
 | `voiceUrl` | The voice URL. Accepts only `.OGG` files encoded with `OPUS`, otherwise will be sent as `audio` message |
 
-### `voice(String voiceUrl, String caption)`
+### `global void voice(String voiceUrl, String caption)`
 
 Sends an audio as a voice message with a caption
 
@@ -199,7 +199,7 @@ Sends an audio as a voice message with a caption
 | `voiceUrl` | The voice URL. Accepts only `.OGG` files encoded with `OPUS`, otherwise will be sent as `audio` message |
 | `caption`  | The text to attach to the audio                                                                         |
 
-### `voice(String voiceUrl, TelegramSendAudioOptions options)`
+### `global void voice(String voiceUrl, TelegramSendAudioOptions options)`
 
 Sends an audio as a voice message with the provided optional parameters
 
@@ -210,7 +210,7 @@ Sends an audio as a voice message with the provided optional parameters
 | `voiceUrl` | The voice URL. Accepts only `.OGG` files encoded with `OPUS`, otherwise will be sent as `audio` message               |
 | `options`  | The instance of [TelegramSendAudioOptions](/types/Classes/TelegramSendAudioOptions.md) with other optional parameters |
 
-### `file(String fileUrl)`
+### `global void file(String fileUrl)`
 
 Sends a file
 
@@ -220,7 +220,7 @@ Sends a file
 | --------- | ---------------------------------------------------------------- |
 | `fileUrl` | The file URL. Should include file name with extension in the end |
 
-### `file(String fileUrl, String caption)`
+### `global void file(String fileUrl, String caption)`
 
 Sends a file with a caption
 
@@ -231,7 +231,7 @@ Sends a file with a caption
 | `fileUrl` | The file URL                   |
 | `caption` | The text to attach to the file |
 
-### `file(String fileUrl, TelegramSendFileOptions options)`
+### `global void file(String fileUrl, TelegramSendFileOptions options)`
 
 Sends a file with the provided optional parameters
 
@@ -242,7 +242,7 @@ Sends a file with the provided optional parameters
 | `fileUrl` | The file URL                                                                                                        |
 | `options` | The instance of [TelegramSendFileOptions](/types/Classes/TelegramSendFileOptions.md) with other optional parameters |
 
-### `contact(String name, String phone)`
+### `global void contact(String name, String phone)`
 
 Sends a contact reference
 
@@ -253,7 +253,7 @@ Sends a contact reference
 | `name`  | The contact first name or full name (via spaces) |
 | `phone` | The contact phone number                         |
 
-### `contact(String name, String phone, TelegramSendContactOptions options)`
+### `global void contact(String name, String phone, TelegramSendContactOptions options)`
 
 Sends a contact reference with the provided optional parameters
 
@@ -265,7 +265,7 @@ Sends a contact reference with the provided optional parameters
 | `phone`   | The contact phone number                                                                                                  |
 | `options` | The instance of [TelegramSendContactOptions](/types/Classes/TelegramSendContactOptions.md) with other optional parameters |
 
-### `location(Decimal latitude, Decimal longitude)`
+### `global void location(Decimal latitude, Decimal longitude)`
 
 Sends a location
 
@@ -276,7 +276,7 @@ Sends a location
 | `latitude`  | The location latitude  |
 | `longitude` | The location longitude |
 
-### `location(Decimal latitude, Decimal longitude, TelegramSendLocationOptions options)`
+### `global void location(Decimal latitude, Decimal longitude, TelegramSendLocationOptions options)`
 
 Sends a location with the provided optional parameters
 
@@ -288,7 +288,7 @@ Sends a location with the provided optional parameters
 | `longitude` | The location longitude                                                                                                      |
 | `options`   | The instance of [TelegramSendLocationOptions](/types/Classes/TelegramSendLocationOptions.md) with other optional parameters |
 
-### `venue(String title, String address, Decimal latitude, Decimal longitude)`
+### `global void venue(String title, String address, Decimal latitude, Decimal longitude)`
 
 Sends a venue
 
@@ -301,7 +301,7 @@ Sends a venue
 | `latitude`  | The venue latitude  |
 | `longitude` | The venue longitude |
 
-### `venue(String title, String address, Decimal latitude, Decimal longitude, TelegramSendVenueOptions options)`
+### `global void venue(String title, String address, Decimal latitude, Decimal longitude, TelegramSendVenueOptions options)`
 
 Sends a venue with the provided optional parameters
 
@@ -315,7 +315,7 @@ Sends a venue with the provided optional parameters
 | `longitude` | The venue longitude                                                                                                   |
 | `options`   | The instance of [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) with other optional parameters |
 
-### `sticker(String stickerIdOrUrl)`
+### `global void sticker(String stickerIdOrUrl)`
 
 Sends a sticker
 
@@ -325,7 +325,7 @@ Sends a sticker
 | ---------------- | --------------------------------------------------------------- |
 | `stickerIdOrUrl` | The unique identifier of the sticker or the URL to `.WEBP` file |
 
-### `sticker(String stickerIdOrUrl, TelegramSendStickerOptions options)`
+### `global void sticker(String stickerIdOrUrl, TelegramSendStickerOptions options)`
 
 Sends a sticker with the provided optional parameters
 
@@ -336,7 +336,7 @@ Sends a sticker with the provided optional parameters
 | `stickerIdOrUrl` | The unique identifier of the sticker or the URL to `.WEBP` file                                                             |
 | `options`        | The instance of [TelegramSendLocationOptions](/types/Classes/TelegramSendLocationOptions.md) with other optional parameters |
 
-### `poll(String question, String answers)`
+### `global void poll(String question, String answers)`
 
 Sends a poll
 
@@ -347,7 +347,7 @@ Sends a poll
 | `question` | The poll question. Up to `300` characters                                                                      |
 | `answers`  | The list of answers to the poll question. Should have at from `2` to `10` answers, up to `100` characters each |
 
-### `poll(String question, TelegramSendPollOptions options)`
+### `global void poll(String question, TelegramSendPollOptions options)`
 
 Sends a poll
 
@@ -358,11 +358,11 @@ Sends a poll
 | `question` | The poll question. Up to `300` characters                                                                           |
 | `options`  | The instance of [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) with other optional parameters |
 
-### `dice()`
+### `global void dice()`
 
 Sends an animated emoji displaying a random value
 
-### `dice(TelegramSendDiceOptions options)`
+### `global void dice(TelegramSendDiceOptions options)`
 
 Sends an animated emoji displaying a random value with the provided options
 
@@ -372,7 +372,7 @@ Sends an animated emoji displaying a random value with the provided options
 | --------- | ------------------------------------------------------------------------------------------------------------------- |
 | `options` | The instance of [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) with other optional parameters |
 
-### `chatAction(String action)`
+### `global void chatAction(String action)`
 
 Sends the bot's status for 5 seconds or until the next message. E.g. `typing...`
 
@@ -382,7 +382,7 @@ Sends the bot's status for 5 seconds or until the next message. E.g. `typing...`
 | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `action` | The action to show to the user. Possible values: `typing`, `upload_photo`, `record_video`, `upload_video`, `record_voice`, `upload_voice`, `upload_document`, `choose_sticker`, `find_location`, `record_video_note`, `upload_video_note` |
 
-### `chatAction(String action, String threadId)`
+### `global void chatAction(String action, String threadId)`
 
 Sends the bot's status for 5 seconds or until the next message. E.g. `typing...`
 
@@ -393,7 +393,7 @@ Sends the bot's status for 5 seconds or until the next message. E.g. `typing...`
 | `action`   | The action to show to the user. Possible values: `typing`, `upload_photo`, `record_video`, `upload_video`, `record_voice`, `upload_voice`, `upload_document`, `choose_sticker`, `find_location`, `record_video_note`, `upload_video_note` |
 | `threadId` | The id of the channel thread (topic) to where the message should be sent                                                                                                                                                                  |
 
-### `forward(String fromChatId, String messageId)`
+### `global void forward(String fromChatId, String messageId)`
 
 Forwards a message
 
@@ -404,7 +404,7 @@ Forwards a message
 | `fromChatId` | The unique identifier for the chat where the original message was sent |
 | `messageId`  | The message identifier in the chat specified in `fromChatId`           |
 
-### `forward(String fromChatId, String messageId, TelegramForwardOptions options)`
+### `global void forward(String fromChatId, String messageId, TelegramForwardOptions options)`
 
 Forwards a message
 
@@ -416,7 +416,7 @@ Forwards a message
 | `messageId`  | The message identifier in the chat specified in `fromChatId`                                                      |
 | `options`    | The instance of [TelegramForwardOptions](/types/Classes/TelegramForwardOptions.md) with other optional parameters |
 
-### `copy(String fromChatId, String messageId)`
+### `global void copy(String fromChatId, String messageId)`
 
 Sends a copy of the specified message without referencing the original message
 
@@ -427,7 +427,7 @@ Sends a copy of the specified message without referencing the original message
 | `fromChatId` | The unique identifier for the chat where the original message was sent |
 | `messageId`  | The message identifier in the chat specified in `fromChatId`           |
 
-### `copy(String fromChatId, String messageId, TelegramCopyOptions options)`
+### `global void copy(String fromChatId, String messageId, TelegramCopyOptions options)`
 
 Sends a copy of the specified message without referencing the original message
 
@@ -439,7 +439,7 @@ Sends a copy of the specified message without referencing the original message
 | `messageId`  | The message identifier in the chat specified in `fromChatId`                                                |
 | `options`    | The instance of [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) with other optional parameters |
 
-### `withReplyKeyboard(BotReplyKeyboardButton buttons)`
+### `global TelegramBotSenderService withReplyKeyboard(BotReplyKeyboardButton buttons)`
 
 Sets a simple custom keyboard for the message that the receiver will have instead of the standard input keyboard
 
@@ -449,17 +449,13 @@ Sets a simple custom keyboard for the message that the receiver will have instea
 | --------- | ----------------------------------------------- |
 | `buttons` | The list of buttons to be shown to the receiver |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                       |
+| -------------------------- | ------------------------------------------------- |
+| `TelegramBotSenderService` | The current instance of `Telegram` sender service |
 
-TelegramBotSenderService
-
-**Description**
-
-The current instance of `Telegram` sender service
-
-### `withReplyKeyboard(TelegramReplyKeyboardMarkupOptions keyboard)`
+### `global TelegramBotSenderService withReplyKeyboard(TelegramReplyKeyboardMarkupOptions keyboard)`
 
 Sets a reply keyboard for the message that the receiver will have instead of the standard input keyboard
 
@@ -469,31 +465,23 @@ Sets a reply keyboard for the message that the receiver will have instead of the
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `keyboard` | The instance of [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) class, custom reply keyboard to be shown |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                       |
+| -------------------------- | ------------------------------------------------- |
+| `TelegramBotSenderService` | The current instance of `Telegram` sender service |
 
-TelegramBotSenderService
-
-**Description**
-
-The current instance of `Telegram` sender service
-
-### `withReplyKeyboardRemoved()`
+### `global TelegramBotSenderService withReplyKeyboardRemoved()`
 
 Sets a signal that the reply keyboard has to be deleted for the receiver
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                       |
+| -------------------------- | ------------------------------------------------- |
+| `TelegramBotSenderService` | The current instance of `Telegram` sender service |
 
-TelegramBotSenderService
-
-**Description**
-
-The current instance of `Telegram` sender service
-
-### `withReplyKeyboardRemoved(TelegramReplyKeyboardRemoveOptions removeOptions)`
+### `global TelegramBotSenderService withReplyKeyboardRemoved(TelegramReplyKeyboardRemoveOptions removeOptions)`
 
 Sets a signal that the reply keyboard has to be deleted for the receiver
 
@@ -503,17 +491,13 @@ Sets a signal that the reply keyboard has to be deleted for the receiver
 | --------------- | -------------------------------------------------- |
 | `removeOptions` | Additional options for removing the reply keyboard |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                       |
+| -------------------------- | ------------------------------------------------- |
+| `TelegramBotSenderService` | The current instance of `Telegram` sender service |
 
-TelegramBotSenderService
-
-**Description**
-
-The current instance of `Telegram` sender service
-
-### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+### `global TelegramBotSenderService withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
 
 Sets an inline keyboard for the message that will be shown next to the message
 
@@ -523,31 +507,23 @@ Sets an inline keyboard for the message that will be shown next to the message
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `keyboard` | The instance of [TelegramInlineKeyboardMarkupOptions](/types/Classes/TelegramInlineKeyboardMarkupOptions.md) class, custom inline keyboard to be shown |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                       |
+| -------------------------- | ------------------------------------------------- |
+| `TelegramBotSenderService` | The current instance of `Telegram` sender service |
 
-TelegramBotSenderService
-
-**Description**
-
-The current instance of `Telegram` sender service
-
-### `withForceReply()`
+### `global TelegramBotSenderService withForceReply()`
 
 Will force `Telegram` client to display a reply interface to the user to the current bot's message
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                       |
+| -------------------------- | ------------------------------------------------- |
+| `TelegramBotSenderService` | The current instance of `Telegram` sender service |
 
-TelegramBotSenderService
-
-**Description**
-
-The current instance of `Telegram` sender service
-
-### `withForceReply(TelegramForceReplyOptions forceReplyOptions)`
+### `global TelegramBotSenderService withForceReply(TelegramForceReplyOptions forceReplyOptions)`
 
 Will force `Telegram` client to display a reply interface to the user to the current bot's message
 
@@ -557,14 +533,10 @@ Will force `Telegram` client to display a reply interface to the user to the cur
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `forceReplyOptions` | The instance of [TelegramForceReplyOptions](/types/Classes/TelegramForceReplyOptions.md) class with additional reply options |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramBotSenderService
-
-**Description**
-
-The current instance of `Telegram` sender service
+| Type                       | Description                                       |
+| -------------------------- | ------------------------------------------------- |
+| `TelegramBotSenderService` | The current instance of `Telegram` sender service |
 
 ---

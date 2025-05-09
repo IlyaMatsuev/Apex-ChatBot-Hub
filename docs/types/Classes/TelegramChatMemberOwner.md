@@ -1,4 +1,4 @@
-# TelegramChatMemberOwner
+# virtual TelegramChatMemberOwner
 
 Describes the information about an owner `Telegram` chat member.
 Source: https://core.telegram.org/bots/api#chatmemberowner
@@ -11,21 +11,21 @@ TelegramChatMemberOwner
 
 ## Properties
 
-### `customTitle` → `String`
-
-The custom title for this user
-
-### `isAnonymous` → `Boolean`
+### `global isAnonymous` → `Boolean`
 
 `True` if the user's presence in the chat is hidden
 
-### `status` → `String`
+### `global customTitle` → `String`
+
+The custom title for this user
+
+### `global status` → `String`
 
 _Inherited_
 
 The member's status in the chat. One of `member`, `creator`, `administrator`, `restricted`, `left` or `kicked`
 
-### `user` → `TelegramUser`
+### `global user` → `TelegramUser`
 
 _Inherited_
 

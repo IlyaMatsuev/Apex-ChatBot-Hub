@@ -6,7 +6,7 @@ The interface that is required to implement to handle chat bot updates
 
 ## Methods
 
-### `handle(IBotContext context)`
+### `global void handle(IBotContext context)`
 
 Handles the incoming events for a bot. For example new message from a user
 

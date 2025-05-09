@@ -10,7 +10,7 @@ ViberBotService
 
 ## Methods
 
-### `send(String chatId)`
+### `global ViberBotSenderService send(String chatId)`
 
 Creates an instance of the `Viber` sender service
 
@@ -20,17 +20,13 @@ Creates an instance of the `Viber` sender service
 | -------- | ------------------------------------------------------- |
 | `chatId` | The id of the chat where the information has to be sent |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                    | Description                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------------------- |
+| `ViberBotSenderService` | The `Viber` implementation of the [IBotSenderService](/types/Interfaces/IBotSenderService.md) |
 
-ViberBotSenderService
-
-**Description**
-
-The `Viber` implementation of the [IBotSenderService](/types/Interfaces/IBotSenderService.md)
-
-### `sendBroadcast(List<String> chatIds)`
+### `global ViberBotSenderService sendBroadcast(List<String> chatIds)`
 
 Creates an instance of the `Viber` sender service that will send the message to multiple users at once. The method doesn't throw any errors if it failed to send a message to some of the receivers
 
@@ -40,31 +36,23 @@ Creates an instance of the `Viber` sender service that will send the message to 
 | --------- | --------------------------------------------------------- |
 | `chatIds` | The list of chat ids where the information has to be sent |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                    | Description                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------------------- |
+| `ViberBotSenderService` | The `Viber` implementation of the [IBotSenderService](/types/Interfaces/IBotSenderService.md) |
 
-ViberBotSenderService
-
-**Description**
-
-The `Viber` implementation of the [IBotSenderService](/types/Interfaces/IBotSenderService.md)
-
-### `getAccount()`
+### `global ViberAccount getAccount()`
 
 Gets the details about the bot account
 
-#### Return
+#### Returns
 
-**Type**
+| Type           | Description                                                              |
+| -------------- | ------------------------------------------------------------------------ |
+| `ViberAccount` | The instance of the [ViberAccount](/types/Classes/ViberAccount.md) class |
 
-ViberAccount
-
-**Description**
-
-The instance of the [ViberAccount](/types/Classes/ViberAccount.md) class
-
-### `getUser(String userId)`
+### `global ViberUser getUser(String userId)`
 
 Gets the details about the a `Viber` user account
 
@@ -74,17 +62,13 @@ Gets the details about the a `Viber` user account
 | -------- | -------------------------- |
 | `userId` | The unique `Viber` user id |
 
-#### Return
+#### Returns
 
-**Type**
+| Type        | Description                                                        |
+| ----------- | ------------------------------------------------------------------ |
+| `ViberUser` | The instance of the [ViberUser](/types/Classes/ViberUser.md) class |
 
-ViberUser
-
-**Description**
-
-The instance of the [ViberUser](/types/Classes/ViberUser.md) class
-
-### `getOnline(String userId)`
+### `global ViberOnlineStatus getOnline(String userId)`
 
 Gets the online status of the provided user account
 
@@ -94,17 +78,13 @@ Gets the online status of the provided user account
 | -------- | -------------------------- |
 | `userId` | The unique `Viber` user id |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                | Description                                                        |
+| ------------------- | ------------------------------------------------------------------ |
+| `ViberOnlineStatus` | The instance of the [ViberUser](/types/Classes/ViberUser.md) class |
 
-ViberOnlineStatus
-
-**Description**
-
-The instance of the [ViberUser](/types/Classes/ViberUser.md) class
-
-### `getOnline(List<String> userIds)`
+### `global List<ViberOnlineStatus> getOnline(List<String> userIds)`
 
 Gets the online status of the provided user accounts
 
@@ -114,14 +94,10 @@ Gets the online status of the provided user accounts
 | --------- | --------------------------- |
 | `userIds` | The unique `Viber` user ids |
 
-#### Return
+#### Returns
 
-**Type**
-
-List&lt;ViberOnlineStatus&gt;
-
-**Description**
-
-The list of the [ViberUser](/types/Classes/ViberUser.md) class
+| Type                      | Description                                                    |
+| ------------------------- | -------------------------------------------------------------- |
+| `List<ViberOnlineStatus>` | The list of the [ViberUser](/types/Classes/ViberUser.md) class |
 
 ---

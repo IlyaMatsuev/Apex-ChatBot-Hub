@@ -571,8 +571,8 @@ Describes the message payload received as an update from a `Viber` bot
 Describes the common payload properties for the `Viber` bot update events.
 Sources:
 
--   https://developers.viber.com/docs/api/rest-bot-api/#message-receipts-callbacks
--   https://developers.viber.com/docs/api/rest-bot-api/#unsubscribed
+- https://developers.viber.com/docs/api/rest-bot-api/#message-receipts-callbacks
+- https://developers.viber.com/docs/api/rest-bot-api/#unsubscribed
 
 ### [ViberMessageFailedEvent](/types/Classes/ViberMessageFailedEvent.md)
 

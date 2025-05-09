@@ -11,7 +11,7 @@ TelegramSendTextOptions
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -21,7 +21,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withThreadId(String threadId)`
+### `global TelegramSendTextOptions withThreadId(String threadId)`
 
 Sets the forum channel thread id where the message has to be sent
 
@@ -31,17 +31,13 @@ Sets the forum channel thread id where the message has to be sent
 | ---------- | -------------------------------------------------------------- |
 | `threadId` | The `Telegram` unique id for the target message thread (topic) |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendTextOptions` | The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class |
 
-TelegramSendTextOptions
-
-**Description**
-
-The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramSendTextOptions withParseMode(String mode)`
 
 Sets the message text parse mode. Needed when the message text is formatted with HTML or Markdown markup
 
@@ -51,17 +47,13 @@ Sets the message text parse mode. Needed when the message text is formatted with
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendTextOptions` | The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class |
 
-TelegramSendTextOptions
-
-**Description**
-
-The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramSendTextOptions withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the message text. For example username tags
 
@@ -71,17 +63,13 @@ Adds a special entity that appear in the message text. For example username tags
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendTextOptions` | The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class |
 
-TelegramSendTextOptions
-
-**Description**
-
-The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramSendTextOptions withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the message text. For example username tags
 
@@ -91,45 +79,33 @@ Adds special entities that appear in the message text. For example username tags
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendTextOptions` | The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class |
 
-TelegramSendTextOptions
-
-**Description**
-
-The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class
-
-### `withoutNotification()`
+### `global TelegramSendTextOptions withoutNotification()`
 
 Sends the message silently. The receiver will get a notification with no sound
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendTextOptions` | The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class |
 
-TelegramSendTextOptions
-
-**Description**
-
-The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class
-
-### `withProtectedContent()`
+### `global TelegramSendTextOptions withProtectedContent()`
 
 Protects the contents of the sent message from forwarding and saving
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendTextOptions` | The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class |
 
-TelegramSendTextOptions
-
-**Description**
-
-The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class
-
-### `asReplyToMessage(String messageId)`
+### `global TelegramSendTextOptions asReplyToMessage(String messageId)`
 
 Sends the message as a reply to another message. If the target message was not found, will just send a message
 
@@ -139,28 +115,20 @@ Sends the message as a reply to another message. If the target message was not f
 | ----------- | ------------------------------------------------- |
 | `messageId` | The `Telegram` message id to which bot will reply |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendTextOptions` | The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class |
 
-TelegramSendTextOptions
-
-**Description**
-
-The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class
-
-### `withoutLinksPreview()`
+### `global TelegramSendTextOptions withoutLinksPreview()`
 
 Disables link previews for links in this message
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramSendTextOptions
-
-**Description**
-
-The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendTextOptions` | The current instance of the [TelegramSendTextOptions](/types/Classes/TelegramSendTextOptions.md) class |
 
 ---

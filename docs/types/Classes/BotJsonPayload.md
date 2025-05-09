@@ -1,14 +1,14 @@
-# BotJsonPayload
+# virtual BotJsonPayload
 
 Provides a convenient interface on top of the JSON payload via such methods as `getString()`, `getInteger()`, `toJson()`, etc.
 
 ## Constructors
 
-### `BotJsonPayload()`
+### `global BotJsonPayload()`
 
 Creates a new instance of JSON payload without any values
 
-### `BotJsonPayload(BotJsonPayload payload)`
+### `global BotJsonPayload(BotJsonPayload payload)`
 
 Creates a new instance of JSON payload by the provided values from another instance
 
@@ -18,7 +18,7 @@ Creates a new instance of JSON payload by the provided values from another insta
 | --------- | ------------------------------------------------------------------------------------------ |
 | `payload` | Another instance of [BotJsonPayload](/types/Classes/BotJsonPayload.md) to copy values from |
 
-### `BotJsonPayload(Map<String,Object> values)`
+### `global BotJsonPayload(Map<String,Object> values)`
 
 Creates a new instance of JSON payload by the provided values from a `Map` instance
 
@@ -32,7 +32,7 @@ Creates a new instance of JSON payload by the provided values from a `Map` insta
 
 ## Methods
 
-### `static fromJson(String jsonValues)`
+### `global static BotJsonPayload fromJson(String jsonValues)`
 
 Creates a new instance of JSON payload by the provided JSON string
 
@@ -42,17 +42,13 @@ Creates a new instance of JSON payload by the provided JSON string
 | ------------ | -------------------------- |
 | `jsonValues` | The JSON string to convert |
 
-#### Return
+#### Returns
 
-**Type**
+| Type             | Description                                                                      |
+| ---------------- | -------------------------------------------------------------------------------- |
+| `BotJsonPayload` | The new instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class |
 
-BotJsonPayload
-
-**Description**
-
-The new instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class
-
-### `static fromJson(String jsonValues, Type payloadType)`
+### `global static BotJsonPayload fromJson(String jsonValues, Type payloadType)`
 
 Creates a new specific instance of JSON payload by the provided JSON string and instance type
 
@@ -63,31 +59,23 @@ Creates a new specific instance of JSON payload by the provided JSON string and 
 | `jsonValues`  | The JSON string to convert          |
 | `payloadType` | The type to convert the instance to |
 
-#### Return
+#### Returns
 
-**Type**
+| Type             | Description                                                                      |
+| ---------------- | -------------------------------------------------------------------------------- |
+| `BotJsonPayload` | The new instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class |
 
-BotJsonPayload
-
-**Description**
-
-The new instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class
-
-### `toJson()`
+### `global String toJson()`
 
 Serializes the instance to a JSON string
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description     |
+| -------- | --------------- |
+| `String` | The JSON string |
 
-String
-
-**Description**
-
-The JSON string
-
-### `toJson(Boolean pretty)`
+### `global String toJson(Boolean pretty)`
 
 Serializes the instance to a (non-)prettified JSON string
 
@@ -97,31 +85,23 @@ Serializes the instance to a (non-)prettified JSON string
 | -------- | --------------------------------------------------------- |
 | `pretty` | Determines if the output JSON should be prettified or not |
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description     |
+| -------- | --------------- |
+| `String` | The JSON string |
 
-String
-
-**Description**
-
-The JSON string
-
-### `getValues()`
+### `global Map<String,Object> getValues()`
 
 Returns all values from the JSON as a `Map` instance
 
-#### Return
+#### Returns
 
-**Type**
+| Type                 | Description                        |
+| -------------------- | ---------------------------------- |
+| `Map<String,Object>` | The `Map<String, Object>` instance |
 
-Map&lt;String,Object&gt;
-
-**Description**
-
-The `Map&lt;String, Object&gt;` instance
-
-### `has(String key)`
+### `global Boolean has(String key)`
 
 Checks if the current JSON payload has a value by the provided key
 
@@ -131,17 +111,13 @@ Checks if the current JSON payload has a value by the provided key
 | ----- | -------------------- |
 | `key` | The key of the value |
 
-#### Return
+#### Returns
 
-**Type**
+| Type      | Description                                                      |
+| --------- | ---------------------------------------------------------------- |
+| `Boolean` | `true` if the provided key exists in the JSON. Otherwise `false` |
 
-Boolean
-
-**Description**
-
-`true` if the provided key exists in the JSON. Otherwise `false`
-
-### `hasValue(String key)`
+### `global Boolean hasValue(String key)`
 
 Checks if the current JSON payload has a non-null value by the provided key
 
@@ -151,17 +127,13 @@ Checks if the current JSON payload has a non-null value by the provided key
 | ----- | -------------------- |
 | `key` | The key of the value |
 
-#### Return
+#### Returns
 
-**Type**
+| Type      | Description                                                                           |
+| --------- | ------------------------------------------------------------------------------------- |
+| `Boolean` | `true` if the provided key exists in the JSON and it is not `null`. Otherwise `false` |
 
-Boolean
-
-**Description**
-
-`true` if the provided key exists in the JSON and it is not `null`. Otherwise `false`
-
-### `getString(String key)`
+### `global String getString(String key)`
 
 Returns a value from the JSON by the provided key, converting it to `String`
 
@@ -171,17 +143,13 @@ Returns a value from the JSON by the provided key, converting it to `String`
 | ----- | ------------------ |
 | `key` | The JSON value key |
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                      |
+| -------- | -------------------------------- |
+| `String` | The `String` value from the JSON |
 
-String
-
-**Description**
-
-The `String` value from the JSON
-
-### `getString(String key, String defaultValue)`
+### `global String getString(String key, String defaultValue)`
 
 Returns a value from the JSON by the provided key, converting it to `String`. Returns default if the JSON value is `null` or does not exist
 
@@ -192,17 +160,13 @@ Returns a value from the JSON by the provided key, converting it to `String`. Re
 | `key`          | The JSON value key                                                        |
 | `defaultValue` | The default value to return if the JSON value is `null` or does not exist |
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                                       |
+| -------- | ------------------------------------------------- |
+| `String` | The `String` value from the JSON or default value |
 
-String
-
-**Description**
-
-The `String` value from the JSON or default value
-
-### `getStringList(String key)`
+### `global List<String> getStringList(String key)`
 
 Returns a value from the JSON by the provided key, converting it to `List&lt;String&gt;`
 
@@ -212,17 +176,13 @@ Returns a value from the JSON by the provided key, converting it to `List&lt;Str
 | ----- | ------------------ |
 | `key` | The JSON value key |
 
-#### Return
+#### Returns
 
-**Type**
+| Type           | Description                            |
+| -------------- | -------------------------------------- |
+| `List<String>` | The `List<String>` value from the JSON |
 
-List&lt;String&gt;
-
-**Description**
-
-The `List&lt;String&gt;` value from the JSON
-
-### `getInteger(String key)`
+### `global Integer getInteger(String key)`
 
 Returns a value from the JSON by the provided key, converting it to `Integer`
 
@@ -232,17 +192,13 @@ Returns a value from the JSON by the provided key, converting it to `Integer`
 | ----- | ------------------ |
 | `key` | The JSON value key |
 
-#### Return
+#### Returns
 
-**Type**
+| Type      | Description                       |
+| --------- | --------------------------------- |
+| `Integer` | The `Integer` value from the JSON |
 
-Integer
-
-**Description**
-
-The `Integer` value from the JSON
-
-### `getIntegerList(String key)`
+### `global List<Integer> getIntegerList(String key)`
 
 Returns a value from the JSON by the provided key, converting it to `List&lt;Integer&gt;`
 
@@ -252,17 +208,13 @@ Returns a value from the JSON by the provided key, converting it to `List&lt;Int
 | ----- | ------------------ |
 | `key` | The JSON value key |
 
-#### Return
+#### Returns
 
-**Type**
+| Type            | Description                             |
+| --------------- | --------------------------------------- |
+| `List<Integer>` | The `List<Integer>` value from the JSON |
 
-List&lt;Integer&gt;
-
-**Description**
-
-The `List&lt;Integer&gt;` value from the JSON
-
-### `getLong(String key)`
+### `global Long getLong(String key)`
 
 Returns a value from the JSON by the provided key, converting it to `Long`
 
@@ -272,17 +224,13 @@ Returns a value from the JSON by the provided key, converting it to `Long`
 | ----- | ------------------ |
 | `key` | The JSON value key |
 
-#### Return
+#### Returns
 
-**Type**
+| Type   | Description                    |
+| ------ | ------------------------------ |
+| `Long` | The `Long` value from the JSON |
 
-Long
-
-**Description**
-
-The `Long` value from the JSON
-
-### `getDecimal(String key)`
+### `global Decimal getDecimal(String key)`
 
 Returns a value from the JSON by the provided key, converting it to `Decimal`
 
@@ -292,17 +240,13 @@ Returns a value from the JSON by the provided key, converting it to `Decimal`
 | ----- | ------------------ |
 | `key` | The JSON value key |
 
-#### Return
+#### Returns
 
-**Type**
+| Type      | Description                       |
+| --------- | --------------------------------- |
+| `Decimal` | The `Decimal` value from the JSON |
 
-Decimal
-
-**Description**
-
-The `Decimal` value from the JSON
-
-### `getBoolean(String key)`
+### `global Boolean getBoolean(String key)`
 
 Returns a value from the JSON by the provided key, converting it to `Boolean`
 
@@ -312,17 +256,13 @@ Returns a value from the JSON by the provided key, converting it to `Boolean`
 | ----- | ------------------ |
 | `key` | The JSON value key |
 
-#### Return
+#### Returns
 
-**Type**
+| Type      | Description                       |
+| --------- | --------------------------------- |
+| `Boolean` | The `Boolean` value from the JSON |
 
-Boolean
-
-**Description**
-
-The `Boolean` value from the JSON
-
-### `getDateTime(String key)`
+### `global DateTime getDateTime(String key)`
 
 Returns a value from the JSON by the provided key, converting it to `DateTime`. Will automatically convert the value to `DateTime` if the target value is timestamp
 
@@ -332,17 +272,13 @@ Returns a value from the JSON by the provided key, converting it to `DateTime`. 
 | ----- | ------------------ |
 | `key` | The JSON value key |
 
-#### Return
+#### Returns
 
-**Type**
+| Type       | Description                        |
+| ---------- | ---------------------------------- |
+| `DateTime` | The `DateTime` value from the JSON |
 
-DateTime
-
-**Description**
-
-The `DateTime` value from the JSON
-
-### `getJsonPayload(String key)`
+### `global BotJsonPayload getJsonPayload(String key)`
 
 Returns a value from the JSON by the provided key, converting it to an instance of [BotJsonPayload](/types/Classes/BotJsonPayload.md)
 
@@ -352,17 +288,13 @@ Returns a value from the JSON by the provided key, converting it to an instance 
 | ----- | ------------------ |
 | `key` | The JSON value key |
 
-#### Return
+#### Returns
 
-**Type**
+| Type             | Description                                                     |
+| ---------------- | --------------------------------------------------------------- |
+| `BotJsonPayload` | The [BotJsonPayload](/types/Classes/BotJsonPayload.md) instance |
 
-BotJsonPayload
-
-**Description**
-
-The [BotJsonPayload](/types/Classes/BotJsonPayload.md) instance
-
-### `getJsonPayload(String key, Type payloadType)`
+### `global BotJsonPayload getJsonPayload(String key, Type payloadType)`
 
 Returns a value from the JSON by the provided key, converting it to a specific instance of [BotJsonPayload](/types/Classes/BotJsonPayload.md)
 
@@ -373,17 +305,13 @@ Returns a value from the JSON by the provided key, converting it to a specific i
 | `key`         | The JSON value key                   |
 | `payloadType` | The Apex type of the result instance |
 
-#### Return
+#### Returns
 
-**Type**
+| Type             | Description                                                     |
+| ---------------- | --------------------------------------------------------------- |
+| `BotJsonPayload` | The [BotJsonPayload](/types/Classes/BotJsonPayload.md) instance |
 
-BotJsonPayload
-
-**Description**
-
-The [BotJsonPayload](/types/Classes/BotJsonPayload.md) instance
-
-### `getJsonPayloadList(String key)`
+### `global List<BotJsonPayload> getJsonPayloadList(String key)`
 
 Returns a value from the JSON by the provided key, converting it to a `List` of [BotJsonPayload](/types/Classes/BotJsonPayload.md)
 
@@ -393,17 +321,13 @@ Returns a value from the JSON by the provided key, converting it to a `List` of 
 | ----- | ------------------ |
 | `key` | The JSON value key |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                   | Description                                                            |
+| ---------------------- | ---------------------------------------------------------------------- |
+| `List<BotJsonPayload>` | The [BotJsonPayload](/types/Classes/BotJsonPayload.md) `List` instance |
 
-List&lt;BotJsonPayload&gt;
-
-**Description**
-
-The [BotJsonPayload](/types/Classes/BotJsonPayload.md) `List` instance
-
-### `get(String key)`
+### `global Object get(String key)`
 
 Returns a value from the JSON by the provided key
 
@@ -413,17 +337,13 @@ Returns a value from the JSON by the provided key
 | ----- | ------------------ |
 | `key` | The JSON value key |
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description             |
+| -------- | ----------------------- |
+| `Object` | The value from the JSON |
 
-Object
-
-**Description**
-
-The value from the JSON
-
-### `set(String key, Object value)`
+### `global BotJsonPayload set(String key, Object value)`
 
 Sets a new value to the JSON payload
 
@@ -434,17 +354,13 @@ Sets a new value to the JSON payload
 | `key`   | The key of the new value |
 | `value` | The value                |
 
-#### Return
+#### Returns
 
-**Type**
+| Type             | Description                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------ |
+| `BotJsonPayload` | The current instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class |
 
-BotJsonPayload
-
-**Description**
-
-The current instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class
-
-### `set(String key, Object value, Boolean skipNull)`
+### `global BotJsonPayload set(String key, Object value, Boolean skipNull)`
 
 Sets a new value to the JSON payload, if the provided value not `null`
 
@@ -456,14 +372,10 @@ Sets a new value to the JSON payload, if the provided value not `null`
 | `value`    | The value                                                           |
 | `skipNull` | Determines if the setting value should be skipped in case of `null` |
 
-#### Return
+#### Returns
 
-**Type**
-
-BotJsonPayload
-
-**Description**
-
-The current instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class
+| Type             | Description                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------ |
+| `BotJsonPayload` | The current instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class |
 
 ---

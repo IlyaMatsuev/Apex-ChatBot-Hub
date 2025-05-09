@@ -15,71 +15,63 @@ ViberUpdateEventType
 
 ## Fields
 
-### `Delivered` → `ViberUpdateEventType`
+### `global WebhookCallback` → `ViberUpdateEventType`
 
-The `Viber` message event. Received when a message sent by the bot is delivered
+The `Viber` webhook callback event. Received when the webhook is set
 
-### `Failed` → `ViberUpdateEventType`
-
-The `Viber` fail event. Received when a sent message is failed because of some client's validations
-
-### `Message` → `ViberUpdateEventType`
-
-The `Viber` message event. Received when a user sends a message to the bot
-
-### `Seen` → `ViberUpdateEventType`
-
-The `Viber` message event. Received when a message sent by the bot is seen by the user
-
-### `Subscribed` → `ViberUpdateEventType`
+### `global Subscribed` → `ViberUpdateEventType`
 
 The `Viber` subscribe event. Received when a new user allows messages from the bot
 
-### `Unsubscribed` → `ViberUpdateEventType`
+### `global Unsubscribed` → `ViberUpdateEventType`
 
 The `Viber` unsubscribe event. Received when a new user forbids messages from the bot
 
-### `WebhookCallback` → `ViberUpdateEventType`
+### `global Message` → `ViberUpdateEventType`
 
-The `Viber` webhook callback event. Received when the webhook is set
+The `Viber` message event. Received when a user sends a message to the bot
+
+### `global Delivered` → `ViberUpdateEventType`
+
+The `Viber` message event. Received when a message sent by the bot is delivered
+
+### `global Seen` → `ViberUpdateEventType`
+
+The `Viber` message event. Received when a message sent by the bot is seen by the user
+
+### `global Failed` → `ViberUpdateEventType`
+
+The `Viber` fail event. Received when a sent message is failed because of some client's validations
 
 ---
 
 ## Methods
 
-### `name()`
+### `global String name()`
 
 _Inherited_
 
 Returns the string representation of the enum. Works the same way as the native Apex enums
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                                    |
+| -------- | ---------------------------------------------- |
+| `String` | The string value the enum was initialized with |
 
-String
-
-**Description**
-
-The string value the enum was initialized with
-
-### `override toString()`
+### `global override String toString()`
 
 _Inherited_
 
 Returns the string representation of the enum. Works the same way as the native Apex enums
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                                    |
+| -------- | ---------------------------------------------- |
+| `String` | The String value the enum was initialized with |
 
-String
-
-**Description**
-
-The String value the enum was initialized with
-
-### `equals(Object other)`
+### `global virtual Boolean equals(Object other)`
 
 _Inherited_
 
@@ -91,30 +83,22 @@ Checks if the passed object equals to the enum value
 | ------- | ---------------------------------------------- |
 | `other` | Any object this enum instance is compared with |
 
-#### Return
+#### Returns
 
-**Type**
+| Type      | Description                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------- |
+| `Boolean` | `true` if the passed object equals to the current instance by a reference or a String value |
 
-Boolean
-
-**Description**
-
-`true` if the passed object equals to the current instance by a reference or a String value
-
-### `hashCode()`
+### `global Integer hashCode()`
 
 _Inherited_
 
 Generates a hashcode based on the string value this enum is initialized with
 
-#### Return
+#### Returns
 
-**Type**
-
-Integer
-
-**Description**
-
-The enum's string value hashcode or `0` if the value is `null`
+| Type      | Description                                                    |
+| --------- | -------------------------------------------------------------- |
+| `Integer` | The enum's string value hashcode or `0` if the value is `null` |
 
 ---

@@ -4,11 +4,11 @@ The wrapper class that represents optional parameters for sending a video via th
 
 ## Constructors
 
-### `ViberSendVideoOptions()`
+### `global ViberSendVideoOptions()`
 
 Creates an instance of [ViberSendVideoOptions](/types/Classes/ViberSendVideoOptions.md) without initializing options
 
-### `ViberSendVideoOptions(String caption, Integer size, Integer duration, String thumbnail)`
+### `global ViberSendVideoOptions(String caption, Integer size, Integer duration, String thumbnail)`
 
 Creates an instance of [ViberSendVideoOptions](/types/Classes/ViberSendVideoOptions.md) with the provided options
 
@@ -25,19 +25,19 @@ Creates an instance of [ViberSendVideoOptions](/types/Classes/ViberSendVideoOpti
 
 ## Fields
 
-### `caption` → `String`
+### `global caption` → `String`
 
 The text to attach to the video
 
-### `duration` → `Integer`
-
-The video duration in seconds, which will be displayed to the receiver
-
-### `size` → `Integer`
+### `global size` → `Integer`
 
 The size of the video in bytes. Default is 10000
 
-### `thumbnail` → `String`
+### `global duration` → `Integer`
+
+The video duration in seconds, which will be displayed to the receiver
+
+### `global thumbnail` → `String`
 
 The URL of a reduced size image (JPEG)
 

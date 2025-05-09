@@ -4,7 +4,7 @@ The builder-like class for building custom keyboard buttons, used as reply by th
 
 ## Constructors
 
-### `BotReplyKeyboardButton(String text)`
+### `global BotReplyKeyboardButton(String text)`
 
 Creates an instance of the button with the provided text
 
@@ -18,48 +18,40 @@ Creates an instance of the button with the provided text
 
 ## Fields
 
-### `sharesContact` → `Boolean`
+### `global text` → `String`
+
+The button text. Will be sent to the bot as a message if the button is clicked
+
+### `global sharesContact` → `Boolean`
 
 Determines whether the button is meant for sharing a user's phone number. Sends the user phone number to the bot instead of the `text` value
 
-### `sharesLocation` → `Boolean`
+### `global sharesLocation` → `Boolean`
 
 Determines whether the button is meant for sharing a user's location. Sends the user location to the bot instead of the `text` value
-
-### `text` → `String`
-
-The button text. Will be sent to the bot as a message if the button is clicked
 
 ---
 
 ## Methods
 
-### `shareContact()`
+### `global BotReplyKeyboardButton shareContact()`
 
 Makes the current button to share the user's phone number when clicked
 
-#### Return
+#### Returns
 
-**Type**
+| Type                     | Description                                                                             |
+| ------------------------ | --------------------------------------------------------------------------------------- |
+| `BotReplyKeyboardButton` | The current [BotReplyKeyboardButton](/types/Classes/BotReplyKeyboardButton.md) instance |
 
-BotReplyKeyboardButton
-
-**Description**
-
-The current [BotReplyKeyboardButton](/types/Classes/BotReplyKeyboardButton.md) instance
-
-### `shareLocation()`
+### `global BotReplyKeyboardButton shareLocation()`
 
 Makes the current button to share the user's location when clicked
 
-#### Return
+#### Returns
 
-**Type**
-
-BotReplyKeyboardButton
-
-**Description**
-
-The current [BotReplyKeyboardButton](/types/Classes/BotReplyKeyboardButton.md) instance
+| Type                     | Description                                                                             |
+| ------------------------ | --------------------------------------------------------------------------------------- |
+| `BotReplyKeyboardButton` | The current [BotReplyKeyboardButton](/types/Classes/BotReplyKeyboardButton.md) instance |
 
 ---

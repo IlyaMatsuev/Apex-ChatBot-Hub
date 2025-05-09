@@ -4,88 +4,64 @@ Describes the message payload received as an update from a bot
 
 ## Methods
 
-### `getId()`
+### `global String getId()`
 
 Returns the message external id
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description             |
+| -------- | ----------------------- |
+| `String` | The message external id |
 
-String
-
-**Description**
-
-The message external id
-
-### `getType()`
+### `global BotMessageType getType()`
 
 Returns the message type
 
-#### Return
+#### Returns
 
-**Type**
+| Type             | Description                                                               |
+| ---------------- | ------------------------------------------------------------------------- |
+| `BotMessageType` | The instance of the [BotMessageType](/types/Enums/BotMessageType.md) enum |
 
-BotMessageType
-
-**Description**
-
-The instance of the [BotMessageType](/types/Enums/BotMessageType.md) enum
-
-### `getText()`
+### `global String getText()`
 
 Returns the message text
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description      |
+| -------- | ---------------- |
+| `String` | The message text |
 
-String
-
-**Description**
-
-The message text
-
-### `getMediaUrl()`
+### `global String getMediaUrl()`
 
 Returns the media URL if it was attached to the message
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description           |
+| -------- | --------------------- |
+| `String` | The message media URL |
 
-String
-
-**Description**
-
-The message media URL
-
-### `getSendDate()`
+### `global DateTime getSendDate()`
 
 Returns the message send date
 
-#### Return
+#### Returns
 
-**Type**
+| Type       | Description           |
+| ---------- | --------------------- |
+| `DateTime` | The message send date |
 
-DateTime
-
-**Description**
-
-The message send date
-
-### `getParameters()`
+### `global BotJsonPayload getParameters()`
 
 Returns the additional message parameters
 
-#### Return
+#### Returns
 
-**Type**
-
-BotJsonPayload
-
-**Description**
-
-The instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class
+| Type             | Description                                                                  |
+| ---------------- | ---------------------------------------------------------------------------- |
+| `BotJsonPayload` | The instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class |
 
 ---

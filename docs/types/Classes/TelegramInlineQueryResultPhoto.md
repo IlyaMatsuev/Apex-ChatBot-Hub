@@ -11,7 +11,7 @@ TelegramInlineQueryResultPhoto
 
 ## Constructors
 
-### `TelegramInlineQueryResultPhoto(String id, String photoUrlOrFileId)`
+### `global TelegramInlineQueryResultPhoto(String id, String photoUrlOrFileId)`
 
 Creates a new instance of the photo inline query result with the provided result id and photo URL/file id
 
@@ -26,7 +26,7 @@ Creates a new instance of the photo inline query result with the provided result
 
 ## Properties
 
-### `captionEntities` → `List<TelegramMessageEntity>`
+### `global captionEntities` → `List<TelegramMessageEntity>`
 
 The list of special entities that appear in the caption text. E.g. hashtag, username, URL, etc.
 
@@ -34,7 +34,7 @@ The list of special entities that appear in the caption text. E.g. hashtag, user
 
 ## Methods
 
-### `withThumbnail(String url)`
+### `global TelegramInlineQueryResultPhoto withThumbnail(String url)`
 
 Sets the photo thumbnail
 
@@ -44,17 +44,13 @@ Sets the photo thumbnail
 | ----- | ----------------- |
 | `url` | The thumbnail URL |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultPhoto` | The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class |
 
-TelegramInlineQueryResultPhoto
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class
-
-### `withSizes(Integer width, Integer height)`
+### `global TelegramInlineQueryResultPhoto withSizes(Integer width, Integer height)`
 
 Sets width and height for the photo
 
@@ -65,17 +61,13 @@ Sets width and height for the photo
 | `width`  | The photo width  |
 | `height` | The photo height |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultPhoto` | The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class |
 
-TelegramInlineQueryResultPhoto
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class
-
-### `withDescription(String description)`
+### `global TelegramInlineQueryResultPhoto withDescription(String description)`
 
 Sets the short description for the inline result
 
@@ -85,17 +77,13 @@ Sets the short description for the inline result
 | ------------- | ----------------------------- |
 | `description` | The description of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultPhoto` | The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class |
 
-TelegramInlineQueryResultPhoto
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class
-
-### `withCaption(String caption)`
+### `global TelegramInlineQueryResultPhoto withCaption(String caption)`
 
 Sets the caption for the photo to be sent
 
@@ -105,17 +93,13 @@ Sets the caption for the photo to be sent
 | --------- | -------------------------------------- |
 | `caption` | The photo caption, `0-1024 characters` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultPhoto` | The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class |
 
-TelegramInlineQueryResultPhoto
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class
-
-### `withTitle(String title)`
+### `global TelegramInlineQueryResultPhoto withTitle(String title)`
 
 Sets the title for the inline result
 
@@ -125,17 +109,13 @@ Sets the title for the inline result
 | ------- | ----------------------- |
 | `title` | The title of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultPhoto` | The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class |
 
-TelegramInlineQueryResultPhoto
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramInlineQueryResultPhoto withParseMode(String mode)`
 
 Sets the caption text parse mode. Needed when the message text is formatted with `HTML` or `Markdown` markup
 
@@ -145,17 +125,13 @@ Sets the caption text parse mode. Needed when the message text is formatted with
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultPhoto` | The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class |
 
-TelegramInlineQueryResultPhoto
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramInlineQueryResultPhoto withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the caption text. For example username tags
 
@@ -165,17 +141,13 @@ Adds a special entity that appear in the caption text. For example username tags
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultPhoto` | The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class |
 
-TelegramInlineQueryResultPhoto
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramInlineQueryResultPhoto withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the caption text. For example username tags
 
@@ -185,17 +157,13 @@ Adds special entities that appear in the caption text. For example username tags
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultPhoto` | The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class |
 
-TelegramInlineQueryResultPhoto
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class
-
-### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+### `global TelegramInlineQueryResultPhoto withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
 
 Sets the inline keyboard to the message
 
@@ -205,17 +173,13 @@ Sets the inline keyboard to the message
 | ---------- | ------------------------------------------- |
 | `keyboard` | The inline keyboard attached to the message |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultPhoto` | The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class |
 
-TelegramInlineQueryResultPhoto
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class
-
-### `withInputMessage(TelegramInputMessageContent messageContent)`
+### `global TelegramInlineQueryResultPhoto withInputMessage(TelegramInputMessageContent messageContent)`
 
 Sets the content of the message to be sent instead of the photo
 
@@ -225,14 +189,10 @@ Sets the content of the message to be sent instead of the photo
 | ---------------- | ------------------------------------- |
 | `messageContent` | The content of the message to be sent |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInlineQueryResultPhoto
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultPhoto` | The current instance of the [TelegramInlineQueryResultPhoto](/types/Classes/TelegramInlineQueryResultPhoto.md) class |
 
 ---

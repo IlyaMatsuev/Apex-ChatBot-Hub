@@ -11,7 +11,7 @@ TelegramInlineQueryResultGif
 
 ## Constructors
 
-### `TelegramInlineQueryResultGif(String id, String gifUrlOrFileId)`
+### `global TelegramInlineQueryResultGif(String id, String gifUrlOrFileId)`
 
 Creates a new instance of the gif inline query result with the provided result id and gif URL/file id
 
@@ -22,7 +22,7 @@ Creates a new instance of the gif inline query result with the provided result i
 | `id`             | The unique identifier for the result, `1-64 bytes` |
 | `gifUrlOrFileId` | The valid gif URL or `Telegram` file id            |
 
-### `TelegramInlineQueryResultGif(String id, String gifUrlOrFileId, Boolean isMpeg4Gif)`
+### `global TelegramInlineQueryResultGif(String id, String gifUrlOrFileId, Boolean isMpeg4Gif)`
 
 Creates a new instance of the gif inline query result with the provided result id and gif URL/file id
 
@@ -38,7 +38,7 @@ Creates a new instance of the gif inline query result with the provided result i
 
 ## Properties
 
-### `captionEntities` → `List<TelegramMessageEntity>`
+### `global captionEntities` → `List<TelegramMessageEntity>`
 
 The list of special entities that appear in the caption text. E.g. hashtag, username, URL, etc.
 
@@ -46,7 +46,7 @@ The list of special entities that appear in the caption text. E.g. hashtag, user
 
 ## Methods
 
-### `withThumbnail(String url, String mimeType)`
+### `global TelegramInlineQueryResultGif withThumbnail(String url, String mimeType)`
 
 Sets the gif thumbnail
 
@@ -57,17 +57,13 @@ Sets the gif thumbnail
 | `url`      | The thumbnail URL                                                                                                  |
 | `mimeType` | The MIME type of the thumbnail, must be one of `image/jpeg`, `image/gif`, or `video/mp4`. Defaults to `image/jpeg` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultGif` | The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class |
 
-TelegramInlineQueryResultGif
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class
-
-### `withSizes(Integer width, Integer height)`
+### `global TelegramInlineQueryResultGif withSizes(Integer width, Integer height)`
 
 Sets width and height for the gif
 
@@ -78,17 +74,13 @@ Sets width and height for the gif
 | `width`  | The gif width  |
 | `height` | The gif height |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultGif` | The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class |
 
-TelegramInlineQueryResultGif
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class
-
-### `withDuration(Integer duration)`
+### `global TelegramInlineQueryResultGif withDuration(Integer duration)`
 
 Sets the gif duration
 
@@ -98,17 +90,13 @@ Sets the gif duration
 | ---------- | ---------------- |
 | `duration` | The gif duration |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultGif` | The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class |
 
-TelegramInlineQueryResultGif
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class
-
-### `withCaption(String caption)`
+### `global TelegramInlineQueryResultGif withCaption(String caption)`
 
 Sets the caption for the gif to be sent
 
@@ -118,17 +106,13 @@ Sets the caption for the gif to be sent
 | --------- | ------------------------------------ |
 | `caption` | The gif caption, `0-1024 characters` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultGif` | The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class |
 
-TelegramInlineQueryResultGif
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class
-
-### `withTitle(String title)`
+### `global TelegramInlineQueryResultGif withTitle(String title)`
 
 Sets the title for the inline result
 
@@ -138,17 +122,13 @@ Sets the title for the inline result
 | ------- | ----------------------- |
 | `title` | The title of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultGif` | The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class |
 
-TelegramInlineQueryResultGif
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramInlineQueryResultGif withParseMode(String mode)`
 
 Sets the caption text parse mode. Needed when the message text is formatted with `HTML` or `Markdown` markup
 
@@ -158,17 +138,13 @@ Sets the caption text parse mode. Needed when the message text is formatted with
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultGif` | The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class |
 
-TelegramInlineQueryResultGif
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramInlineQueryResultGif withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the caption text. For example username tags
 
@@ -178,17 +154,13 @@ Adds a special entity that appear in the caption text. For example username tags
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultGif` | The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class |
 
-TelegramInlineQueryResultGif
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramInlineQueryResultGif withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the caption text. For example username tags
 
@@ -198,17 +170,13 @@ Adds special entities that appear in the caption text. For example username tags
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultGif` | The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class |
 
-TelegramInlineQueryResultGif
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class
-
-### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+### `global TelegramInlineQueryResultGif withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
 
 Sets the inline keyboard to the message
 
@@ -218,17 +186,13 @@ Sets the inline keyboard to the message
 | ---------- | ------------------------------------------- |
 | `keyboard` | The inline keyboard attached to the message |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultGif` | The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class |
 
-TelegramInlineQueryResultGif
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class
-
-### `withInputMessage(TelegramInputMessageContent messageContent)`
+### `global TelegramInlineQueryResultGif withInputMessage(TelegramInputMessageContent messageContent)`
 
 Sets the content of the message to be sent instead of the gif
 
@@ -238,14 +202,10 @@ Sets the content of the message to be sent instead of the gif
 | ---------------- | ------------------------------------- |
 | `messageContent` | The content of the message to be sent |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInlineQueryResultGif
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultGif` | The current instance of the [TelegramInlineQueryResultGif](/types/Classes/TelegramInlineQueryResultGif.md) class |
 
 ---

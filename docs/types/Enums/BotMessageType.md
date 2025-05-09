@@ -12,103 +12,95 @@ BotMessageType
 
 ## Fields
 
-### `Animation` → `BotMessageType`
-
-The animation message (a video without sound, e.g. `gif`)
-
-### `Audio` → `BotMessageType`
-
-The audio message
-
-### `Contact` → `BotMessageType`
-
-The message sharing contact details
-
-### `Custom` → `BotMessageType`
-
-The message with custom layout
-
-### `File` → `BotMessageType`
-
-The document message
-
-### `GroupMedia` → `BotMessageType`
-
-The message with multiple images/video/files
-
-### `Image` → `BotMessageType`
-
-The image message
-
-### `Location` → `BotMessageType`
-
-The message sharing location details
-
-### `Other` → `BotMessageType`
-
-Any other message types
-
-### `Poll` → `BotMessageType`
-
-The poll message
-
-### `Sticker` → `BotMessageType`
-
-The chat sticker message
-
-### `Text` → `BotMessageType`
+### `global Text` → `BotMessageType`
 
 The plain text message
 
-### `Url` → `BotMessageType`
+### `global Image` → `BotMessageType`
 
-The URL message
+The image message
 
-### `Venue` → `BotMessageType`
+### `global Video` → `BotMessageType`
+
+The video message
+
+### `global Animation` → `BotMessageType`
+
+The animation message (a video without sound, e.g. `gif`)
+
+### `global Audio` → `BotMessageType`
+
+The audio message
+
+### `global File` → `BotMessageType`
+
+The document message
+
+### `global GroupMedia` → `BotMessageType`
+
+The message with multiple images/video/files
+
+### `global Contact` → `BotMessageType`
+
+The message sharing contact details
+
+### `global Location` → `BotMessageType`
+
+The message sharing location details
+
+### `global Venue` → `BotMessageType`
 
 The message sharing a venue details
 
-### `Video` → `BotMessageType`
+### `global Sticker` → `BotMessageType`
 
-The video message
+The chat sticker message
+
+### `global Url` → `BotMessageType`
+
+The URL message
+
+### `global Poll` → `BotMessageType`
+
+The poll message
+
+### `global Custom` → `BotMessageType`
+
+The message with custom layout
+
+### `global Other` → `BotMessageType`
+
+Any other message types
 
 ---
 
 ## Methods
 
-### `name()`
+### `global String name()`
 
 _Inherited_
 
 Returns the string representation of the enum. Works the same way as the native Apex enums
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                                    |
+| -------- | ---------------------------------------------- |
+| `String` | The string value the enum was initialized with |
 
-String
-
-**Description**
-
-The string value the enum was initialized with
-
-### `override toString()`
+### `global override String toString()`
 
 _Inherited_
 
 Returns the string representation of the enum. Works the same way as the native Apex enums
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                                    |
+| -------- | ---------------------------------------------- |
+| `String` | The String value the enum was initialized with |
 
-String
-
-**Description**
-
-The String value the enum was initialized with
-
-### `equals(Object other)`
+### `global virtual Boolean equals(Object other)`
 
 _Inherited_
 
@@ -120,30 +112,22 @@ Checks if the passed object equals to the enum value
 | ------- | ---------------------------------------------- |
 | `other` | Any object this enum instance is compared with |
 
-#### Return
+#### Returns
 
-**Type**
+| Type      | Description                                                                                 |
+| --------- | ------------------------------------------------------------------------------------------- |
+| `Boolean` | `true` if the passed object equals to the current instance by a reference or a String value |
 
-Boolean
-
-**Description**
-
-`true` if the passed object equals to the current instance by a reference or a String value
-
-### `hashCode()`
+### `global Integer hashCode()`
 
 _Inherited_
 
 Generates a hashcode based on the string value this enum is initialized with
 
-#### Return
+#### Returns
 
-**Type**
-
-Integer
-
-**Description**
-
-The enum's string value hashcode or `0` if the value is `null`
+| Type      | Description                                                    |
+| --------- | -------------------------------------------------------------- |
+| `Integer` | The enum's string value hashcode or `0` if the value is `null` |
 
 ---

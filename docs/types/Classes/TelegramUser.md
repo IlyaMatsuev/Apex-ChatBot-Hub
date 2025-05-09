@@ -13,108 +13,92 @@ TelegramUser
 
 ## Properties
 
-### `canJoinGroups` → `Boolean`
-
-`True` if the bot can be invited to groups. Returned only in `getMe`
-
-### `canReadAllGroupMessages` → `Boolean`
-
-`True` if privacy mode is disabled for the bot. Returned only in `getMe`
-
-### `firstName` → `String`
-
-The user's or bot's first name
-
-### `id` → `Long`
+### `global id` → `Long`
 
 The unique identifier for this user or bot
 
-### `isAddedToAttachmentMenu` → `Boolean`
-
-`True` if this user added the bot to the attachment menu
-
-### `isBot` → `Boolean`
+### `global isBot` → `Boolean`
 
 `True` if this user is a bot
 
-### `isPremium` → `Boolean`
+### `global firstName` → `String`
 
-`True` if this user is a Telegram Premium user
+The user's or bot's first name
 
-### `languageCode` → `String`
-
-The IETF language tag of the user's language
-
-### `lastName` → `String`
+### `global lastName` → `String`
 
 The user's or bot's last name
 
-### `supportsInlineQueries` → `Boolean`
+### `global languageCode` → `String`
 
-`True` if the bot supports inline queries. Returned only in `getMe`
+The IETF language tag of the user's language
 
-### `username` → `String`
+### `global username` → `String`
 
 The user's or bot's username
+
+### `global isPremium` → `Boolean`
+
+`True` if this user is a Telegram Premium user
+
+### `global isAddedToAttachmentMenu` → `Boolean`
+
+`True` if this user added the bot to the attachment menu
+
+### `global canJoinGroups` → `Boolean`
+
+`True` if the bot can be invited to groups. Returned only in `getMe`
+
+### `global canReadAllGroupMessages` → `Boolean`
+
+`True` if privacy mode is disabled for the bot. Returned only in `getMe`
+
+### `global supportsInlineQueries` → `Boolean`
+
+`True` if the bot supports inline queries. Returned only in `getMe`
 
 ---
 
 ## Methods
 
-### `getId()`
+### `global String getId()`
 
 Returns the `Telegram` user id as `String`
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description            |
+| -------- | ---------------------- |
+| `String` | The `Telegram` user id |
 
-String
-
-**Description**
-
-The `Telegram` user id
-
-### `getFirstName()`
+### `global String getFirstName()`
 
 Returns the `Telegram` user first name
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                    |
+| -------- | ------------------------------ |
+| `String` | The `Telegram` user first name |
 
-String
-
-**Description**
-
-The `Telegram` user first name
-
-### `getLastName()`
+### `global String getLastName()`
 
 Returns the `Telegram` user last name
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                   |
+| -------- | ----------------------------- |
+| `String` | The `Telegram` user last name |
 
-String
-
-**Description**
-
-The `Telegram` user last name
-
-### `getUsername()`
+### `global String getUsername()`
 
 Returns the `Telegram` user username
 
-#### Return
+#### Returns
 
-**Type**
-
-String
-
-**Description**
-
-The `Telegram` user username
+| Type     | Description                  |
+| -------- | ---------------------------- |
+| `String` | The `Telegram` user username |
 
 ---

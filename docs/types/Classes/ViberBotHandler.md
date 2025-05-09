@@ -1,4 +1,4 @@
-# ViberBotHandler
+# abstract ViberBotHandler
 
 The class designed for handling webhook events specifically for `Viber` bots
 
@@ -8,7 +8,7 @@ The class designed for handling webhook events specifically for `Viber` bots
 
 ## Methods
 
-### `onSubscribe(ViberBotContext context, ViberSubscribedEvent event)`
+### `global virtual void onSubscribe(ViberBotContext context, ViberSubscribedEvent event)`
 
 The method that is called when a user subscribed to the bot in `Viber`
 
@@ -19,7 +19,7 @@ The method that is called when a user subscribed to the bot in `Viber`
 | `context` | The `Viber` bot context                                                                                                    |
 | `event`   | The instance of [ViberSubscribedEvent](/types/Classes/ViberSubscribedEvent.md) class, describing the subscribed user event |
 
-### `onUnsubscribe(ViberBotContext context, ViberMessageEvent event)`
+### `global virtual void onUnsubscribe(ViberBotContext context, ViberMessageEvent event)`
 
 The method that is called when a user unsubscribed from the bot in `Viber`
 
@@ -30,7 +30,7 @@ The method that is called when a user unsubscribed from the bot in `Viber`
 | `context` | The `Viber` bot context                                                                                                |
 | `event`   | The instance of [ViberMessageEvent](/types/Classes/ViberMessageEvent.md) class, describing the unsubscribed user event |
 
-### `onMessageDelivered(ViberBotContext context, ViberMessageEvent event)`
+### `global virtual void onMessageDelivered(ViberBotContext context, ViberMessageEvent event)`
 
 The method that is called when a message sent to a user has been successfully delivered
 
@@ -41,7 +41,7 @@ The method that is called when a message sent to a user has been successfully de
 | `context` | The `Viber` bot context                                                                                                |
 | `event`   | The instance of [ViberMessageEvent](/types/Classes/ViberMessageEvent.md) class, describing the delivered message event |
 
-### `onMessageSeen(ViberBotContext context, ViberMessageEvent event)`
+### `global virtual void onMessageSeen(ViberBotContext context, ViberMessageEvent event)`
 
 The method that is called when a message sent to a user has been seen by the user. Received only once even for multiple messages or devices
 
@@ -52,7 +52,7 @@ The method that is called when a message sent to a user has been seen by the use
 | `context` | The `Viber` bot context                                                                                   |
 | `event`   | The instance of [ViberMessageEvent](/types/Classes/ViberMessageEvent.md) class, describing the seen event |
 
-### `onMessageFailed(ViberBotContext context, ViberMessageFailedEvent event)`
+### `global virtual void onMessageFailed(ViberBotContext context, ViberMessageFailedEvent event)`
 
 The method that is called when a message sent to a user has failed to be delivered
 
@@ -63,7 +63,7 @@ The method that is called when a message sent to a user has failed to be deliver
 | `context` | The `Viber` bot context                                                                                                         |
 | `event`   | The instance of [ViberMessageFailedEvent](/types/Classes/ViberMessageFailedEvent.md) class, describing the failed message event |
 
-### `onMessageReceived(ViberBotContext context, ViberMessageReceivedEvent event)`
+### `global abstract void onMessageReceived(ViberBotContext context, ViberMessageReceivedEvent event)`
 
 The method that is called when a new message is received from a user
 
@@ -74,7 +74,7 @@ The method that is called when a new message is received from a user
 | `context` | The `Viber` bot context                                                                                                               |
 | `event`   | The instance of [ViberMessageReceivedEvent](/types/Classes/ViberMessageReceivedEvent.md) class, describing the received message event |
 
-### `handle(IBotContext context)`
+### `global void handle(IBotContext context)`
 
 The common handler for all webhook event types
 

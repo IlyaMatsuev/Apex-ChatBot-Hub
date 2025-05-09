@@ -9,7 +9,7 @@ TelegramForceReplyOptions
 
 ## Constructors
 
-### `TelegramForceReplyOptions()`
+### `global TelegramForceReplyOptions()`
 
 Creates an instance of the force reply options without any additional parameters
 
@@ -17,7 +17,7 @@ Creates an instance of the force reply options without any additional parameters
 
 ## Methods
 
-### `setInputPlaceholder(String placeholder)`
+### `global TelegramForceReplyOptions setInputPlaceholder(String placeholder)`
 
 Sets the placeholder to be shown in the input field when the force reply applied
 
@@ -27,18 +27,42 @@ Sets the placeholder to be shown in the input field when the force reply applied
 | ------------- | -------------------- |
 | `placeholder` | The placeholder text |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                        | Description                                                                                   |
+| --------------------------- | --------------------------------------------------------------------------------------------- |
+| `TelegramForceReplyOptions` | The current [TelegramForceReplyOptions](/types/Classes/TelegramForceReplyOptions.md) instance |
 
-TelegramForceReplyOptions
+### `global TelegramForceReplyOptions asSelective()`
 
-**Description**
+Makes the force reply available for the specific users only
 
-The current [TelegramForceReplyOptions](/types/Classes/TelegramForceReplyOptions.md) instance
+1. Users that are mentioned `@` in the sent message
+2. If the current message is a reply, use the target user
 
-### `asSelective()`
+#### Returns
 
-### `asSelective(Boolean isSelective)`
+| Type                        | Description                                                                                   |
+| --------------------------- | --------------------------------------------------------------------------------------------- |
+| `TelegramForceReplyOptions` | The current [TelegramForceReplyOptions](/types/Classes/TelegramForceReplyOptions.md) instance |
+
+### `global TelegramForceReplyOptions asSelective(Boolean isSelective)`
+
+Makes the force reply available for the specific users only
+
+1. Users that are mentioned `@` in the sent message
+2. If the current message is a reply, use the target user
+
+#### Parameters
+
+| Param         | Description                                                                                                 |
+| ------------- | ----------------------------------------------------------------------------------------------------------- |
+| `isSelective` | Determines whether the force reply will be available for the specific users only or not. Default is `false` |
+
+#### Returns
+
+| Type                        | Description                                                                                   |
+| --------------------------- | --------------------------------------------------------------------------------------------- |
+| `TelegramForceReplyOptions` | The current [TelegramForceReplyOptions](/types/Classes/TelegramForceReplyOptions.md) instance |
 
 ---

@@ -9,7 +9,7 @@ TelegramStickerSetCreateOptions
 
 ## Methods
 
-### `withStickerType(String stickerType)`
+### `global TelegramStickerSetCreateOptions withStickerType(String stickerType)`
 
 Sets the type of stickers in the set
 
@@ -19,17 +19,13 @@ Sets the type of stickers in the set
 | ------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `stickerType` | The type of stickers in the set, pass `regular`, `mask`, or `custom_emoji`. By default, a regular sticker set is created |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramStickerSetCreateOptions` | The current instance of the [TelegramStickerSetCreateOptions](/types/Classes/TelegramStickerSetCreateOptions.md) class |
 
-TelegramStickerSetCreateOptions
-
-**Description**
-
-The current instance of the [TelegramStickerSetCreateOptions](/types/Classes/TelegramStickerSetCreateOptions.md) class
-
-### `withRepainting(Boolean repaintingNeeded)`
+### `global TelegramStickerSetCreateOptions withRepainting(Boolean repaintingNeeded)`
 
 Determines if stickers in the sticker set must be repainted to the color of text when used in messages, the accent color if used as emoji status, white on chat photos, or another appropriate color based on context
 
@@ -39,14 +35,10 @@ Determines if stickers in the sticker set must be repainted to the color of text
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `repaintingNeeded` | `True` if stickers in the sticker set must be repainted to the color of text when used in messages, the accent color if used as emoji status, white on chat photos, or another appropriate color based on context |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramStickerSetCreateOptions
-
-**Description**
-
-The current instance of the [TelegramStickerSetCreateOptions](/types/Classes/TelegramStickerSetCreateOptions.md) class
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramStickerSetCreateOptions` | The current instance of the [TelegramStickerSetCreateOptions](/types/Classes/TelegramStickerSetCreateOptions.md) class |
 
 ---

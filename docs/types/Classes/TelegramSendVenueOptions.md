@@ -11,7 +11,7 @@ TelegramSendVenueOptions
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -21,7 +21,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withThreadId(String threadId)`
+### `global TelegramSendVenueOptions withThreadId(String threadId)`
 
 Sets the forum channel thread id where the message has to be sent
 
@@ -31,45 +31,33 @@ Sets the forum channel thread id where the message has to be sent
 | ---------- | -------------------------------------------------------------- |
 | `threadId` | The `Telegram` unique id for the target message thread (topic) |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                                                                              |
+| -------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVenueOptions` | The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class |
 
-TelegramSendVenueOptions
-
-**Description**
-
-The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class
-
-### `withoutNotification()`
+### `global TelegramSendVenueOptions withoutNotification()`
 
 Sends the message silently. The receiver will get a notification with no sound
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                                                                              |
+| -------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVenueOptions` | The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class |
 
-TelegramSendVenueOptions
-
-**Description**
-
-The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class
-
-### `withProtectedContent()`
+### `global TelegramSendVenueOptions withProtectedContent()`
 
 Protects the contents of the sent message from forwarding and saving
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                                                                              |
+| -------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVenueOptions` | The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class |
 
-TelegramSendVenueOptions
-
-**Description**
-
-The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class
-
-### `asReplyToMessage(String messageId)`
+### `global TelegramSendVenueOptions asReplyToMessage(String messageId)`
 
 Sends the message as a reply to another message. If the target message was not found, will just send a message
 
@@ -79,17 +67,13 @@ Sends the message as a reply to another message. If the target message was not f
 | ----------- | ------------------------------------------------- |
 | `messageId` | The `Telegram` message id to which bot will reply |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                                                                              |
+| -------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVenueOptions` | The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class |
 
-TelegramSendVenueOptions
-
-**Description**
-
-The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class
-
-### `asFoursquarePlace(String id, String type)`
+### `global TelegramSendVenueOptions asFoursquarePlace(String id, String type)`
 
 Attaches a Foursquare place to the venue
 
@@ -100,17 +84,13 @@ Attaches a Foursquare place to the venue
 | `id`   | The Foursquare identifier of the venue                                         |
 | `type` | The Foursquare type of the venue, if known. E.g. `arts_entertainment/aquarium` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                       | Description                                                                                              |
+| -------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVenueOptions` | The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class |
 
-TelegramSendVenueOptions
-
-**Description**
-
-The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class
-
-### `asGooglePlace(String id, String type)`
+### `global TelegramSendVenueOptions asGooglePlace(String id, String type)`
 
 Attaches a Google place to the venue
 
@@ -121,14 +101,10 @@ Attaches a Google place to the venue
 | `id`   | The Google identifier of the venue  |
 | `type` | The Google Places type of the venue |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramSendVenueOptions
-
-**Description**
-
-The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class
+| Type                       | Description                                                                                              |
+| -------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVenueOptions` | The current instance of the [TelegramSendVenueOptions](/types/Classes/TelegramSendVenueOptions.md) class |
 
 ---

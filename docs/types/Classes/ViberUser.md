@@ -12,88 +12,72 @@ ViberUser
 
 ## Properties
 
-### `apiVersion` → `Integer`
-
-The max API version, matching the most updated user’s device
-
-### `avatar` → `String`
-
-The URL of user’s avatar
-
-### `country` → `String`
-
-The user’s 2 letter country code
-
-### `id` → `String`
+### `global id` → `String`
 
 The unique `Viber` user id
 
-### `language` → `String`
+### `global name` → `String`
+
+The user’s `Viber` name
+
+### `global avatar` → `String`
+
+The URL of user’s avatar
+
+### `global country` → `String`
+
+The user’s 2 letter country code
+
+### `global language` → `String`
 
 The user’s phone language
 
-### `name` → `String`
+### `global apiVersion` → `Integer`
 
-The user’s `Viber` name
+The max API version, matching the most updated user’s device
 
 ---
 
 ## Methods
 
-### `getId()`
+### `global String getId()`
 
 Returns the `Viber` user id
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description         |
+| -------- | ------------------- |
+| `String` | The `Viber` user id |
 
-String
-
-**Description**
-
-The `Viber` user id
-
-### `getFirstName()`
+### `global String getFirstName()`
 
 Returns the `Viber` user first name
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                 |
+| -------- | --------------------------- |
+| `String` | The `Viber` user first name |
 
-String
-
-**Description**
-
-The `Viber` user first name
-
-### `getLastName()`
+### `global String getLastName()`
 
 Returns the `Viber` user last name
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                |
+| -------- | -------------------------- |
+| `String` | The `Viber` user last name |
 
-String
-
-**Description**
-
-The `Viber` user last name
-
-### `getUsername()`
+### `global String getUsername()`
 
 Returns the `Viber` user id since there are no usernames
 
-#### Return
+#### Returns
 
-**Type**
-
-String
-
-**Description**
-
-The `Viber` user id
+| Type     | Description         |
+| -------- | ------------------- |
+| `String` | The `Viber` user id |
 
 ---

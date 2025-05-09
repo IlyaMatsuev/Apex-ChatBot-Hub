@@ -9,12 +9,15 @@ TelegramDice
 
 ## Properties
 
-### `emoji` → `String`
+### `global emoji` → `String`
 
 The emoji on which the dice throw animation is based
 
-### `value` → `Integer`
+### `global value` → `Integer`
 
-The value of the dice `🎲`, `🎯` and `🎳` - generate values in range: `1..6` `🏀` and `⚽` - generate values in range `1..5` `🎰` - generate values in range `1..64`
+The value of the dice
+`🎲`, `🎯` and `🎳` - generate values in range: `1..6`
+`🏀` and `⚽` - generate values in range `1..5`
+`🎰` - generate values in range `1..64`
 
 ---

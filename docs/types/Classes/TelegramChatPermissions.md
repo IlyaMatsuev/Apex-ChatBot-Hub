@@ -9,7 +9,7 @@ TelegramChatPermissions
 
 ## Constructors
 
-### `TelegramChatPermissions()`
+### `global TelegramChatPermissions()`
 
 Creates a new instance of chat permissions
 
@@ -17,67 +17,67 @@ Creates a new instance of chat permissions
 
 ## Properties
 
-### `canAddWebPagePreviews` → `Boolean`
-
-`True` if the user is allowed to add web page previews to their messages
-
-### `canChangeInfo` → `Boolean`
-
-`True` if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
-
-### `canInviteUsers` → `Boolean`
-
-`True` if the user is allowed to invite new users to the chat
-
-### `canManageTopics` → `Boolean`
-
-`True` if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages
-
-### `canPinMessages` → `Boolean`
-
-`True` if the user is allowed to pin messages. Ignored in public supergroups
-
-### `canSendAudios` → `Boolean`
-
-`True` if the user is allowed to send audios
-
-### `canSendDocuments` → `Boolean`
-
-`True` if the user is allowed to send documents
-
-### `canSendMessages` → `Boolean`
+### `global canSendMessages` → `Boolean`
 
 `True` if the user is allowed to send text messages, contacts, invoices, locations and venues
 
-### `canSendOtherMessages` → `Boolean`
+### `global canSendAudios` → `Boolean`
 
-`True` if the user is allowed to send animations, games, stickers and use inline bots
+`True` if the user is allowed to send audios
 
-### `canSendPhotos` → `Boolean`
+### `global canSendDocuments` → `Boolean`
+
+`True` if the user is allowed to send documents
+
+### `global canSendPhotos` → `Boolean`
 
 `True` if the user is allowed to send photos
 
-### `canSendPolls` → `Boolean`
-
-`True` if the user is allowed to send polls
-
-### `canSendVideoNotes` → `Boolean`
-
-`True` if the user is allowed to send video notes
-
-### `canSendVideos` → `Boolean`
+### `global canSendVideos` → `Boolean`
 
 `True` if the user is allowed to send videos
 
-### `canSendVoiceNotes` → `Boolean`
+### `global canSendVideoNotes` → `Boolean`
+
+`True` if the user is allowed to send video notes
+
+### `global canSendVoiceNotes` → `Boolean`
 
 `True` if the user is allowed to send voice notes
+
+### `global canSendPolls` → `Boolean`
+
+`True` if the user is allowed to send polls
+
+### `global canSendOtherMessages` → `Boolean`
+
+`True` if the user is allowed to send animations, games, stickers and use inline bots
+
+### `global canAddWebPagePreviews` → `Boolean`
+
+`True` if the user is allowed to add web page previews to their messages
+
+### `global canChangeInfo` → `Boolean`
+
+`True` if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
+
+### `global canInviteUsers` → `Boolean`
+
+`True` if the user is allowed to invite new users to the chat
+
+### `global canPinMessages` → `Boolean`
+
+`True` if the user is allowed to pin messages. Ignored in public supergroups
+
+### `global canManageTopics` → `Boolean`
+
+`True` if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages
 
 ---
 
 ## Methods
 
-### `allowSendMessages(Boolean allow)`
+### `global TelegramChatPermissions allowSendMessages(Boolean allow)`
 
 Determines if the user is allowed to send text messages, contacts, invoices, locations and venues
 
@@ -87,17 +87,13 @@ Determines if the user is allowed to send text messages, contacts, invoices, loc
 | ------- | --------------------------------------------------------------------------------------------- |
 | `allow` | `True` if the user is allowed to send text messages, contacts, invoices, locations and venues |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowSendAudios(Boolean allow)`
+### `global TelegramChatPermissions allowSendAudios(Boolean allow)`
 
 Determines if the user is allowed to send audios
 
@@ -107,17 +103,13 @@ Determines if the user is allowed to send audios
 | ------- | -------------------------------------------- |
 | `allow` | `True` if the user is allowed to send audios |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowSendDocuments(Boolean allow)`
+### `global TelegramChatPermissions allowSendDocuments(Boolean allow)`
 
 Determines if the user is allowed to send documents
 
@@ -127,17 +119,13 @@ Determines if the user is allowed to send documents
 | ------- | ----------------------------------------------- |
 | `allow` | `True` if the user is allowed to send documents |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowSendPhotos(Boolean allow)`
+### `global TelegramChatPermissions allowSendPhotos(Boolean allow)`
 
 Determines if the user is allowed to send photos
 
@@ -147,17 +135,13 @@ Determines if the user is allowed to send photos
 | ------- | -------------------------------------------- |
 | `allow` | `True` if the user is allowed to send photos |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowSendVideos(Boolean allow)`
+### `global TelegramChatPermissions allowSendVideos(Boolean allow)`
 
 Determines if the user is allowed to send videos
 
@@ -167,17 +151,13 @@ Determines if the user is allowed to send videos
 | ------- | -------------------------------------------- |
 | `allow` | `True` if the user is allowed to send videos |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowSendVideoNotes(Boolean allow)`
+### `global TelegramChatPermissions allowSendVideoNotes(Boolean allow)`
 
 Determines if the user is allowed to send video notes
 
@@ -187,17 +167,13 @@ Determines if the user is allowed to send video notes
 | ------- | ------------------------------------------------- |
 | `allow` | `True` if the user is allowed to send video notes |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowSendVoiceNotes(Boolean allow)`
+### `global TelegramChatPermissions allowSendVoiceNotes(Boolean allow)`
 
 Determines if the user is allowed to send voice notes
 
@@ -207,17 +183,13 @@ Determines if the user is allowed to send voice notes
 | ------- | ------------------------------------------------- |
 | `allow` | `True` if the user is allowed to send voice notes |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowSendPolls(Boolean allow)`
+### `global TelegramChatPermissions allowSendPolls(Boolean allow)`
 
 Determines if the user is allowed to send polls
 
@@ -227,17 +199,13 @@ Determines if the user is allowed to send polls
 | ------- | ------------------------------------------- |
 | `allow` | `True` if the user is allowed to send polls |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowSendOtherMessages(Boolean allow)`
+### `global TelegramChatPermissions allowSendOtherMessages(Boolean allow)`
 
 Determines if the user is allowed to send other messages
 
@@ -247,17 +215,13 @@ Determines if the user is allowed to send other messages
 | ------- | ---------------------------------------------------- |
 | `allow` | `True` if the user is allowed to send other messages |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowAddWebPagePreviews(Boolean allow)`
+### `global TelegramChatPermissions allowAddWebPagePreviews(Boolean allow)`
 
 Determines if the user is allowed to add web page previews to their messages
 
@@ -267,17 +231,13 @@ Determines if the user is allowed to add web page previews to their messages
 | ------- | ------------------------------------------------------------------------ |
 | `allow` | `True` if the user is allowed to add web page previews to their messages |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowChangeInfo(Boolean allow)`
+### `global TelegramChatPermissions allowChangeInfo(Boolean allow)`
 
 Determines if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
 
@@ -287,17 +247,13 @@ Determines if the user is allowed to change the chat title, photo and other sett
 | ------- | --------------------------------------------------------------------------------------------------------------- |
 | `allow` | `True` if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowInviteUsers(Boolean allow)`
+### `global TelegramChatPermissions allowInviteUsers(Boolean allow)`
 
 Determines if the user is allowed to invite new users to the chat
 
@@ -307,17 +263,13 @@ Determines if the user is allowed to invite new users to the chat
 | ------- | ------------------------------------------------------------- |
 | `allow` | `True` if the user is allowed to invite new users to the chat |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowPinMessages(Boolean allow)`
+### `global TelegramChatPermissions allowPinMessages(Boolean allow)`
 
 Determines if the user is allowed to pin messages. Ignored in public supergroups
 
@@ -327,17 +279,13 @@ Determines if the user is allowed to pin messages. Ignored in public supergroups
 | ------- | ---------------------------------------------------------------------------- |
 | `allow` | `True` if the user is allowed to pin messages. Ignored in public supergroups |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
-
-### `allowManageTopics(Boolean allow)`
+### `global TelegramChatPermissions allowManageTopics(Boolean allow)`
 
 Determines if the user is allowed to create forum topics
 
@@ -347,14 +295,10 @@ Determines if the user is allowed to create forum topics
 | ------- | ---------------------------------------------------- |
 | `allow` | `True` if the user is allowed to create forum topics |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramChatPermissions
-
-**Description**
-
-The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramChatPermissions` | The current instance of the [TelegramChatPermissions](/types/Classes/TelegramChatPermissions.md) class |
 
 ---

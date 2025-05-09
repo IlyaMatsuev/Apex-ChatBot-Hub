@@ -11,23 +11,23 @@ ViberMessageFailedEvent
 
 ## Properties
 
-### `description` → `String`
+### `global description` → `String`
 
 The error description
 
-### `messageToken` → `String`
+### `global messageToken` → `String`
 
 _Inherited_
 
 The unique identifier of the related message
 
-### `timestamp` → `DateTime`
+### `global timestamp` → `DateTime`
 
 _Inherited_
 
 The event date and time
 
-### `userId` → `String`
+### `global userId` → `String`
 
 _Inherited_
 

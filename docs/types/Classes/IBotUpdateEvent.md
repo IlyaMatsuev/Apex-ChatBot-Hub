@@ -4,60 +4,44 @@ Describes the payload received as an update from a bot
 
 ## Methods
 
-### `getType()`
+### `global BotUpdateEventType getType()`
 
 Returns the type of the received update
 
-#### Return
+#### Returns
 
-**Type**
+| Type                 | Description                                                                       |
+| -------------------- | --------------------------------------------------------------------------------- |
+| `BotUpdateEventType` | The instance of the [BotUpdateEventType](/types/Enums/BotUpdateEventType.md) enum |
 
-BotUpdateEventType
-
-**Description**
-
-The instance of the [BotUpdateEventType](/types/Enums/BotUpdateEventType.md) enum
-
-### `getMessage()`
+### `global IBotMessage getMessage()`
 
 Returns the message payload received in the update. Can be null
 
-#### Return
+#### Returns
 
-**Type**
+| Type          | Description                                                                |
+| ------------- | -------------------------------------------------------------------------- |
+| `IBotMessage` | The instance of the [IBotMessage](/types/Classes/IBotMessage.md) interface |
 
-IBotMessage
-
-**Description**
-
-The instance of the [IBotMessage](/types/Classes/IBotMessage.md) interface
-
-### `getChat()`
+### `global IBotChat getChat()`
 
 Returns the sender payload received in the update
 
-#### Return
+#### Returns
 
-**Type**
+| Type       | Description                                                          |
+| ---------- | -------------------------------------------------------------------- |
+| `IBotChat` | The instance of the [IBotChat](/types/Classes/IBotChat.md) interface |
 
-IBotChat
-
-**Description**
-
-The instance of the [IBotChat](/types/Classes/IBotChat.md) interface
-
-### `getPayload()`
+### `global BotJsonPayload getPayload()`
 
 Returns the source JSON payload of the update event
 
-#### Return
+#### Returns
 
-**Type**
-
-BotJsonPayload
-
-**Description**
-
-The instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md)
+| Type             | Description                                                            |
+| ---------------- | ---------------------------------------------------------------------- |
+| `BotJsonPayload` | The instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) |
 
 ---

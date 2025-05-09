@@ -11,7 +11,7 @@ TelegramSendPollOptions
 
 ## Constructors
 
-### `TelegramSendPollOptions()`
+### `global TelegramSendPollOptions()`
 
 Creates a new instance of the poll options
 
@@ -19,11 +19,11 @@ Creates a new instance of the poll options
 
 ## Properties
 
-### `answers` → `List<String>`
+### `global answers` → `List<String>`
 
 The list of poll answers (options)
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -33,7 +33,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withThreadId(String threadId)`
+### `global TelegramSendPollOptions withThreadId(String threadId)`
 
 Sets the forum channel thread id where the message has to be sent
 
@@ -43,17 +43,13 @@ Sets the forum channel thread id where the message has to be sent
 | ---------- | -------------------------------------------------------------- |
 | `threadId` | The `Telegram` unique id for the target message thread (topic) |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `withAnswer(String answer)`
+### `global TelegramSendPollOptions withAnswer(String answer)`
 
 Adds an answer to the poll
 
@@ -63,17 +59,13 @@ Adds an answer to the poll
 | -------- | ---------------------- |
 | `answer` | The poll answer to add |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `withAnswers(String answers)`
+### `global TelegramSendPollOptions withAnswers(String answers)`
 
 Adds the list of answers to the poll
 
@@ -83,31 +75,23 @@ Adds the list of answers to the poll
 | --------- | -------------------------------- |
 | `answers` | The list of answers for the poll |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `asAnonymous()`
+### `global TelegramSendPollOptions asAnonymous()`
 
 Makes the poll anonymous
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `asAnonymous(Boolean isAnonymous)`
+### `global TelegramSendPollOptions asAnonymous(Boolean isAnonymous)`
 
 Determines whether the poll should be anonymous or not
 
@@ -117,31 +101,23 @@ Determines whether the poll should be anonymous or not
 | ------------- | ------------------------------------------------------------------------- |
 | `isAnonymous` | Determines whether the poll should be anonymous or not. Default is `true` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `allowMultipleAnswers()`
+### `global TelegramSendPollOptions allowMultipleAnswers()`
 
 Allows selecting multiple answers or not. Ignored for `quiz` polls
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `allowMultipleAnswers(Boolean allowMultiAnswers)`
+### `global TelegramSendPollOptions allowMultipleAnswers(Boolean allowMultiAnswers)`
 
 Determines whether the poll should allow selecting multiple answers or not. Ignored for `quiz` polls
 
@@ -151,45 +127,33 @@ Determines whether the poll should allow selecting multiple answers or not. Igno
 | ------------------- | ---------------------------------------------------------------------------------------------- |
 | `allowMultiAnswers` | Determines whether the poll should allow selecting multiple answers or not. Default is `false` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `withoutNotification()`
+### `global TelegramSendPollOptions withoutNotification()`
 
 Sends the message silently. The receiver will get a notification with no sound
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `withProtectedContent()`
+### `global TelegramSendPollOptions withProtectedContent()`
 
 Protects the contents of the sent message from forwarding and saving
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `asReplyToMessage(String messageId)`
+### `global TelegramSendPollOptions asReplyToMessage(String messageId)`
 
 Sends the message as a reply to another message. If the target message was not found, will just send a message
 
@@ -199,17 +163,13 @@ Sends the message as a reply to another message. If the target message was not f
 | ----------- | ------------------------------------------------- |
 | `messageId` | The `Telegram` message id to which bot will reply |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `asQuiz(Integer correctOptionId, String explanation)`
+### `global TelegramSendPollOptions asQuiz(Integer correctOptionId, String explanation)`
 
 Makes the poll to be a `quiz`
 
@@ -220,17 +180,13 @@ Makes the poll to be a `quiz`
 | `correctOptionId` | The id of the correct answer, starting from `0`                                         |
 | `explanation`     | The text that is shown when a user chooses an incorrect answer or taps on the lamp icon |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `withExplanationParseMode(String mode)`
+### `global TelegramSendPollOptions withExplanationParseMode(String mode)`
 
 Sets the explanation text parse mode. Needed when the text is formatted with HTML or Markdown markup
 
@@ -240,17 +196,13 @@ Sets the explanation text parse mode. Needed when the text is formatted with HTM
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `withExplanationMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramSendPollOptions withExplanationMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the explanation text. For example username tags
 
@@ -260,17 +212,13 @@ Adds a special entity that appear in the explanation text. For example username 
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `withExplanationMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramSendPollOptions withExplanationMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the explanation text. For example username tags
 
@@ -280,17 +228,13 @@ Adds special entities that appear in the explanation text. For example username 
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `withOpenPeriod(Integer period)`
+### `global TelegramSendPollOptions withOpenPeriod(Integer period)`
 
 Specifies the amount of time the poll will be active after creation. Does not work when the `close date` is set
 
@@ -300,17 +244,13 @@ Specifies the amount of time the poll will be active after creation. Does not wo
 | -------- | ---------------------------------------------------------------- |
 | `period` | The amount of time in seconds. Accepts values in range: `5..600` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `withCloseDate(DateTime closeDate)`
+### `global TelegramSendPollOptions withCloseDate(DateTime closeDate)`
 
 Specifies the date after creation when poll should be closed. Does not work when the `open period` is set
 
@@ -320,28 +260,20 @@ Specifies the date after creation when poll should be closed. Does not work when
 | ----------- | ------------------------------------------------------------------------------------------------------------------ |
 | `closeDate` | The date in future when the poll should be closed. Should be at least `5` and no more than `600` seconds in future |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
-
-### `asClosed()`
+### `global TelegramSendPollOptions asClosed()`
 
 Marks the poll immediately closed
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramSendPollOptions
-
-**Description**
-
-The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendPollOptions` | The current instance of the [TelegramSendPollOptions](/types/Classes/TelegramSendPollOptions.md) class |
 
 ---

@@ -4,11 +4,11 @@ The wrapper class that represents optional parameters for sending an image via t
 
 ## Constructors
 
-### `ViberSendImageOptions()`
+### `global ViberSendImageOptions()`
 
 Creates an instance of [ViberSendImageOptions](/types/Classes/ViberSendImageOptions.md) without initializing options
 
-### `ViberSendImageOptions(String caption, String thumbnail)`
+### `global ViberSendImageOptions(String caption, String thumbnail)`
 
 Creates an instance of [ViberSendImageOptions](/types/Classes/ViberSendImageOptions.md) with the provided caption and thumbnail
 
@@ -23,11 +23,11 @@ Creates an instance of [ViberSendImageOptions](/types/Classes/ViberSendImageOpti
 
 ## Fields
 
-### `caption` → `String`
+### `global caption` → `String`
 
 The text to attach to the image
 
-### `thumbnail` → `String`
+### `global thumbnail` → `String`
 
 The URL of a reduced size image (JPEG, PNG, GIF)
 

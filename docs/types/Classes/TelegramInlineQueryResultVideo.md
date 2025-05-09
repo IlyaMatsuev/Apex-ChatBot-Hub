@@ -11,7 +11,7 @@ TelegramInlineQueryResultVideo
 
 ## Constructors
 
-### `TelegramInlineQueryResultVideo(String id, String videoUrlOrFileId)`
+### `global TelegramInlineQueryResultVideo(String id, String videoUrlOrFileId)`
 
 Creates a new instance of the video inline query result with the provided result id and video URL/file id
 
@@ -26,7 +26,7 @@ Creates a new instance of the video inline query result with the provided result
 
 ## Properties
 
-### `captionEntities` → `List<TelegramMessageEntity>`
+### `global captionEntities` → `List<TelegramMessageEntity>`
 
 The list of special entities that appear in the caption text. E.g. hashtag, username, URL, etc.
 
@@ -34,7 +34,7 @@ The list of special entities that appear in the caption text. E.g. hashtag, user
 
 ## Methods
 
-### `withMimeType(String mimeType)`
+### `global TelegramInlineQueryResultVideo withMimeType(String mimeType)`
 
 Sets the MIME type of the content of the video URL, `text/html` or `video/mp4`
 
@@ -44,17 +44,13 @@ Sets the MIME type of the content of the video URL, `text/html` or `video/mp4`
 | ---------- | ------------------------------------------------------------------------- |
 | `mimeType` | The MIME type of the content of the video URL, `text/html` or `video/mp4` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
-
-### `withThumbnail(String url)`
+### `global TelegramInlineQueryResultVideo withThumbnail(String url)`
 
 Sets the video thumbnail
 
@@ -64,17 +60,13 @@ Sets the video thumbnail
 | ----- | ----------------- |
 | `url` | The thumbnail URL |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
-
-### `withSizes(Integer width, Integer height)`
+### `global TelegramInlineQueryResultVideo withSizes(Integer width, Integer height)`
 
 Sets width and height for the video
 
@@ -85,17 +77,13 @@ Sets width and height for the video
 | `width`  | The video width  |
 | `height` | The video height |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
-
-### `withDuration(Integer duration)`
+### `global TelegramInlineQueryResultVideo withDuration(Integer duration)`
 
 Sets the video duration
 
@@ -105,17 +93,13 @@ Sets the video duration
 | ---------- | ------------------ |
 | `duration` | The video duration |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
-
-### `withDescription(String description)`
+### `global TelegramInlineQueryResultVideo withDescription(String description)`
 
 Sets the short description for the inline result
 
@@ -125,17 +109,13 @@ Sets the short description for the inline result
 | ------------- | ----------------------------- |
 | `description` | The description of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
-
-### `withCaption(String caption)`
+### `global TelegramInlineQueryResultVideo withCaption(String caption)`
 
 Sets the caption for the video to be sent
 
@@ -145,17 +125,13 @@ Sets the caption for the video to be sent
 | --------- | -------------------------------------- |
 | `caption` | The video caption, `0-1024 characters` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
-
-### `withTitle(String title)`
+### `global TelegramInlineQueryResultVideo withTitle(String title)`
 
 Sets the title for the inline result
 
@@ -165,17 +141,13 @@ Sets the title for the inline result
 | ------- | ----------------------- |
 | `title` | The title of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramInlineQueryResultVideo withParseMode(String mode)`
 
 Sets the caption text parse mode. Needed when the message text is formatted with `HTML` or `Markdown` markup
 
@@ -185,17 +157,13 @@ Sets the caption text parse mode. Needed when the message text is formatted with
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramInlineQueryResultVideo withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the caption text. For example username tags
 
@@ -205,17 +173,13 @@ Adds a special entity that appear in the caption text. For example username tags
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramInlineQueryResultVideo withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the caption text. For example username tags
 
@@ -225,17 +189,13 @@ Adds special entities that appear in the caption text. For example username tags
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
-
-### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+### `global TelegramInlineQueryResultVideo withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
 
 Sets the inline keyboard to the message
 
@@ -245,17 +205,13 @@ Sets the inline keyboard to the message
 | ---------- | ------------------------------------------- |
 | `keyboard` | The inline keyboard attached to the message |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
-
-### `withInputMessage(TelegramInputMessageContent messageContent)`
+### `global TelegramInlineQueryResultVideo withInputMessage(TelegramInputMessageContent messageContent)`
 
 Sets the content of the message to be sent instead of the video
 
@@ -265,14 +221,10 @@ Sets the content of the message to be sent instead of the video
 | ---------------- | ------------------------------------- |
 | `messageContent` | The content of the message to be sent |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInlineQueryResultVideo
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVideo` | The current instance of the [TelegramInlineQueryResultVideo](/types/Classes/TelegramInlineQueryResultVideo.md) class |
 
 ---

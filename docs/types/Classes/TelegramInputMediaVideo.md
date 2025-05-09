@@ -13,7 +13,7 @@ TelegramInputMediaVideo
 
 ## Constructors
 
-### `TelegramInputMediaVideo(String media)`
+### `global TelegramInputMediaVideo(String media)`
 
 Creates a new instance of input video media with the provided URL or file id
 
@@ -27,7 +27,7 @@ Creates a new instance of input video media with the provided URL or file id
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -37,7 +37,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withThumbnail(String thumbnail)`
+### `global TelegramInputMediaVideo withThumbnail(String thumbnail)`
 
 Sets the thumbnail for the video
 
@@ -47,17 +47,13 @@ Sets the thumbnail for the video
 | ----------- | ------------------------- |
 | `thumbnail` | The URL to the JPEG image |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaVideo` | The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class |
 
-TelegramInputMediaVideo
-
-**Description**
-
-The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class
-
-### `withCaption(String caption)`
+### `global TelegramInputMediaVideo withCaption(String caption)`
 
 Sets the caption for the video
 
@@ -67,17 +63,13 @@ Sets the caption for the video
 | --------- | ------------------------------- |
 | `caption` | The text to attach to the video |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaVideo` | The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class |
 
-TelegramInputMediaVideo
-
-**Description**
-
-The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramInputMediaVideo withParseMode(String mode)`
 
 Sets the message caption parse mode. Needed when the message text is formatted with `HTML` or `Markdown` markup
 
@@ -87,17 +79,13 @@ Sets the message caption parse mode. Needed when the message text is formatted w
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaVideo` | The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class |
 
-TelegramInputMediaVideo
-
-**Description**
-
-The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramInputMediaVideo withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the message text. For example username tags
 
@@ -107,17 +95,13 @@ Adds a special entity that appear in the message text. For example username tags
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaVideo` | The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class |
 
-TelegramInputMediaVideo
-
-**Description**
-
-The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramInputMediaVideo withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the message text. For example username tags
 
@@ -127,17 +111,13 @@ Adds special entities that appear in the message text. For example username tags
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaVideo` | The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class |
 
-TelegramInputMediaVideo
-
-**Description**
-
-The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class
-
-### `withDuration(Integer duration)`
+### `global TelegramInputMediaVideo withDuration(Integer duration)`
 
 Sets the duration of the video
 
@@ -147,17 +127,13 @@ Sets the duration of the video
 | ---------- | ------------------------------------ |
 | `duration` | The duration of the video in seconds |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaVideo` | The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class |
 
-TelegramInputMediaVideo
-
-**Description**
-
-The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class
-
-### `withLayout(Integer width, Integer height)`
+### `global TelegramInputMediaVideo withLayout(Integer width, Integer height)`
 
 Sets the layout of the video by the provided width and height
 
@@ -168,42 +144,30 @@ Sets the layout of the video by the provided width and height
 | `width`  | The width of the video  |
 | `height` | The height of the video |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaVideo` | The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class |
 
-TelegramInputMediaVideo
-
-**Description**
-
-The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class
-
-### `withStreamingSupport()`
+### `global TelegramInputMediaVideo withStreamingSupport()`
 
 Marks the video as suitable for streaming. Does not work for the `animation` message
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaVideo` | The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class |
 
-TelegramInputMediaVideo
-
-**Description**
-
-The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class
-
-### `withSpoiler()`
+### `global TelegramInputMediaVideo withSpoiler()`
 
 Marks the media that it has a spoiler
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInputMediaVideo
-
-**Description**
-
-The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaVideo` | The current instance of the [TelegramInputMediaVideo](/types/Classes/TelegramInputMediaVideo.md) class |
 
 ---

@@ -9,28 +9,28 @@ TelegramCallbackQueryEvent
 
 ## Properties
 
-### `chatInstance` → `String`
-
-The global identifier, uniquely corresponding to the chat to which the message with the callback button was sent
-
-### `data` → `String`
-
-The data associated with the callback button
-
-### `id` → `String`
+### `global id` → `String`
 
 The unique identifier for this query
 
-### `inlineMessageId` → `String`
+### `global sender` → `TelegramUser`
 
-The identifier of the message sent via the bot in inline mode, that originated the query
+The sender
 
-### `message` → `TelegramMessage`
+### `global message` → `TelegramMessage`
 
 The message with the callback button that originated the query
 
-### `sender` → `TelegramUser`
+### `global inlineMessageId` → `String`
 
-The sender
+The identifier of the message sent via the bot in inline mode, that originated the query
+
+### `global chatInstance` → `String`
+
+The global identifier, uniquely corresponding to the chat to which the message with the callback button was sent
+
+### `global data` → `String`
+
+The data associated with the callback button
 
 ---

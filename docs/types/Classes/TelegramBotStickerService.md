@@ -4,7 +4,7 @@ Service class that provides access to all `Telegram` `sticker` methods
 
 ## Methods
 
-### `get(List<String> ids)`
+### `global List<TelegramSticker> get(List<String> ids)`
 
 Gets information about custom emoji stickers by their identifiers
 
@@ -14,17 +14,13 @@ Gets information about custom emoji stickers by their identifiers
 | ----- | --------------------------------------------------------------- |
 | `ids` | The list of custom emoji identifiers. At most `200` identifiers |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                    | Description                                                                      |
+| ----------------------- | -------------------------------------------------------------------------------- |
+| `List<TelegramSticker>` | The list of [TelegramSticker](/types/Classes/TelegramSticker.md) class instances |
 
-List&lt;TelegramSticker&gt;
-
-**Description**
-
-The list of [TelegramSticker](/types/Classes/TelegramSticker.md) class instances
-
-### `upload(String userId, String fileUrl, String stickerFormat)`
+### `global TelegramFile upload(String userId, String fileUrl, String stickerFormat)`
 
 Uploads a file with a sticker for later use in a sticker set
 
@@ -36,17 +32,13 @@ Uploads a file with a sticker for later use in a sticker set
 | `fileUrl`       | A file with the sticker in `.WEBP`, `.PNG`, `.TGS`, or `.WEBM` format   |
 | `stickerFormat` | The format of the sticker, must be one of `static`, `animated`, `video` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type           | Description                                                              |
+| -------------- | ------------------------------------------------------------------------ |
+| `TelegramFile` | The instance of the [TelegramFile](/types/Classes/TelegramFile.md) class |
 
-TelegramFile
-
-**Description**
-
-The instance of the [TelegramFile](/types/Classes/TelegramFile.md) class
-
-### `setEmojiList(String stickerId, List<String> emojis)`
+### `global void setEmojiList(String stickerId, List<String> emojis)`
 
 Changes the list of emojis assigned to a regular or custom emoji sticker. The sticker must belong to a sticker set
 
@@ -57,7 +49,7 @@ Changes the list of emojis assigned to a regular or custom emoji sticker. The st
 | `stickerId` | The sticker file identifier                           |
 | `emojis`    | The list of `1-20` emojis associated with the sticker |
 
-### `setKeywords(String stickerId, List<String> keywords)`
+### `global void setKeywords(String stickerId, List<String> keywords)`
 
 Changes the list of search keywords assigned to a regular or custom emoji sticker. The sticker must belong to a sticker set
 
@@ -68,7 +60,7 @@ Changes the list of search keywords assigned to a regular or custom emoji sticke
 | `stickerId` | The sticker file identifier                                                                        |
 | `keywords`  | The list of `0-20` keywords associated with the sticker with total length of up to `64 characters` |
 
-### `set(String name)`
+### `global TelegramBotStickerSetService set(String name)`
 
 Creates an instance of the `Telegram` sticker set service
 
@@ -78,14 +70,10 @@ Creates an instance of the `Telegram` sticker set service
 | ------ | -------------------- |
 | `name` | The sticker set name |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramBotStickerSetService
-
-**Description**
-
-The instance of the [TelegramBotStickerSetService](/types/Classes/TelegramBotStickerSetService.md) class
+| Type                           | Description                                                                                              |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------- |
+| `TelegramBotStickerSetService` | The instance of the [TelegramBotStickerSetService](/types/Classes/TelegramBotStickerSetService.md) class |
 
 ---

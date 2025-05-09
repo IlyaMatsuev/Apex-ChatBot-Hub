@@ -9,40 +9,40 @@ TelegramAnimation
 
 ## Properties
 
-### `duration` → `Integer`
-
-The duration of the video in seconds as defined by sender
-
-### `fileId` → `String`
+### `global fileId` → `String`
 
 The identifier for this file, which can be used to download or reuse the file
 
-### `fileName` → `String`
-
-The original animation filename as defined by sender
-
-### `fileSize` → `Integer`
-
-The file size in bytes
-
-### `fileUniqueId` → `String`
+### `global fileUniqueId` → `String`
 
 The unique identifier for this file, which is supposed to be the same over time and for different bots
 
-### `height` → `Integer`
+### `global width` → `Integer`
+
+The animation width
+
+### `global height` → `Integer`
 
 The animation height
 
-### `mimeType` → `String`
+### `global duration` → `Integer`
 
-The MIME type of the file as defined by sender
+The duration of the video in seconds as defined by sender
 
-### `thumbnail` → `TelegramPhotoSize`
+### `global thumbnail` → `TelegramPhotoSize`
 
 The animation thumbnail as defined by sender
 
-### `width` → `Integer`
+### `global fileName` → `String`
 
-The animation width
+The original animation filename as defined by sender
+
+### `global mimeType` → `String`
+
+The MIME type of the file as defined by sender
+
+### `global fileSize` → `Integer`
+
+The file size in bytes
 
 ---

@@ -11,7 +11,7 @@ TelegramSendVideoNoteOptions
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -21,7 +21,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withDuration(Integer duration)`
+### `global TelegramSendVideoNoteOptions withDuration(Integer duration)`
 
 Sets the duration of the video
 
@@ -31,17 +31,13 @@ Sets the duration of the video
 | ---------- | ------------------------------------ |
 | `duration` | The duration of the video in seconds |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVideoNoteOptions` | The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class |
 
-TelegramSendVideoNoteOptions
-
-**Description**
-
-The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class
-
-### `withSize(Integer length)`
+### `global TelegramSendVideoNoteOptions withSize(Integer length)`
 
 Sets the size of the video note, e.g. diameter of the video circle
 
@@ -51,17 +47,13 @@ Sets the size of the video note, e.g. diameter of the video circle
 | -------- | ------------------------- |
 | `length` | The diameter of the video |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVideoNoteOptions` | The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class |
 
-TelegramSendVideoNoteOptions
-
-**Description**
-
-The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class
-
-### `withThreadId(String threadId)`
+### `global TelegramSendVideoNoteOptions withThreadId(String threadId)`
 
 Sets the forum channel thread id where the message has to be sent
 
@@ -71,17 +63,13 @@ Sets the forum channel thread id where the message has to be sent
 | ---------- | -------------------------------------------------------------- |
 | `threadId` | The `Telegram` unique id for the target message thread (topic) |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVideoNoteOptions` | The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class |
 
-TelegramSendVideoNoteOptions
-
-**Description**
-
-The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class
-
-### `withThumbnail(String thumbnailUrl)`
+### `global TelegramSendVideoNoteOptions withThumbnail(String thumbnailUrl)`
 
 Sets the thumbnail for the video
 
@@ -91,45 +79,33 @@ Sets the thumbnail for the video
 | -------------- | ------------------------- |
 | `thumbnailUrl` | The URL to the JPEG image |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVideoNoteOptions` | The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class |
 
-TelegramSendVideoNoteOptions
-
-**Description**
-
-The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class
-
-### `withoutNotification()`
+### `global TelegramSendVideoNoteOptions withoutNotification()`
 
 Sends the message silently. The receiver will get a notification with no sound
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVideoNoteOptions` | The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class |
 
-TelegramSendVideoNoteOptions
-
-**Description**
-
-The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class
-
-### `withProtectedContent()`
+### `global TelegramSendVideoNoteOptions withProtectedContent()`
 
 Protects the contents of the sent message from forwarding and saving
 
-#### Return
+#### Returns
 
-**Type**
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVideoNoteOptions` | The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class |
 
-TelegramSendVideoNoteOptions
-
-**Description**
-
-The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class
-
-### `asReplyToMessage(String messageId)`
+### `global TelegramSendVideoNoteOptions asReplyToMessage(String messageId)`
 
 Sends the message as a reply to another message. If the target message was not found, will just send a message
 
@@ -139,14 +115,10 @@ Sends the message as a reply to another message. If the target message was not f
 | ----------- | ------------------------------------------------- |
 | `messageId` | The `Telegram` message id to which bot will reply |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramSendVideoNoteOptions
-
-**Description**
-
-The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class
+| Type                           | Description                                                                                                      |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `TelegramSendVideoNoteOptions` | The current instance of the [TelegramSendVideoNoteOptions](/types/Classes/TelegramSendVideoNoteOptions.md) class |
 
 ---

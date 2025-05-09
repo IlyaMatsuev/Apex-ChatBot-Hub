@@ -12,133 +12,109 @@ ViberMessage
 
 ## Properties
 
-### `contact` → `Contact`
+### `global type` → `String`
 
-The shared contact details
+The message type. Possible values are `text`, `picture`, `video`, `file`, `sticker`, `contact`, `url` and `location`
 
-### `duration` → `Integer`
-
-The attached video duration in seconds. Relevant for `video` type messages
-
-### `fileName` → `String`
-
-The attached file name. Relevant for `file` type messages
-
-### `fileSize` → `Integer`
-
-The attached file size in bytes. Relevant for `file` type messages
-
-### `location` → `ViberLocation`
-
-The shared location details
-
-### `media` → `String`
-
-The URL of the message media - can be `image`, `video`, `file` and `url`. Image/Video/File URLs will have a TTL of 1 hour
-
-### `stickerId` → `Integer`
-
-The sticker id. Relevant for `sticker` type messages
-
-### `text` → `String`
+### `global text` → `String`
 
 The message text
 
-### `trackingData` → `String`
+### `global media` → `String`
+
+The URL of the message media - can be `image`, `video`, `file` and `url`. Image/Video/File URLs will have a TTL of 1 hour
+
+### `global location` → `ViberLocation`
+
+The shared location details
+
+### `global contact` → `Contact`
+
+The shared contact details
+
+### `global trackingData` → `String`
 
 The tracking data sent with the last message to the user
 
-### `type` → `String`
+### `global fileName` → `String`
 
-The message type. Possible values are `text`, `picture`, `video`, `file`, `sticker`, `contact`, `url` and `location`
+The attached file name. Relevant for `file` type messages
+
+### `global fileSize` → `Integer`
+
+The attached file size in bytes. Relevant for `file` type messages
+
+### `global duration` → `Integer`
+
+The attached video duration in seconds. Relevant for `video` type messages
+
+### `global stickerId` → `Integer`
+
+The sticker id. Relevant for `sticker` type messages
 
 ---
 
 ## Methods
 
-### `getId()`
+### `global String getId()`
 
 Returns the `Viber` message id
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description            |
+| -------- | ---------------------- |
+| `String` | The `Viber` message id |
 
-String
-
-**Description**
-
-The `Viber` message id
-
-### `getType()`
+### `global BotMessageType getType()`
 
 Returns the message type
 
-#### Return
+#### Returns
 
-**Type**
+| Type             | Description                                                               |
+| ---------------- | ------------------------------------------------------------------------- |
+| `BotMessageType` | The instance of the [BotMessageType](/types/Enums/BotMessageType.md) enum |
 
-BotMessageType
-
-**Description**
-
-The instance of the [BotMessageType](/types/Enums/BotMessageType.md) enum
-
-### `getText()`
+### `global String getText()`
 
 Returns the message text
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description      |
+| -------- | ---------------- |
+| `String` | The message text |
 
-String
-
-**Description**
-
-The message text
-
-### `getMediaUrl()`
+### `global String getMediaUrl()`
 
 Returns the media URL if it was attached to the message
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description           |
+| -------- | --------------------- |
+| `String` | The message media URL |
 
-String
-
-**Description**
-
-The message media URL
-
-### `getSendDate()`
+### `global DateTime getSendDate()`
 
 Returns the message send date
 
-#### Return
+#### Returns
 
-**Type**
+| Type       | Description           |
+| ---------- | --------------------- |
+| `DateTime` | The message send date |
 
-DateTime
-
-**Description**
-
-The message send date
-
-### `getParameters()`
+### `global BotJsonPayload getParameters()`
 
 Returns the additional message parameters
 
-#### Return
+#### Returns
 
-**Type**
-
-BotJsonPayload
-
-**Description**
-
-The instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class
+| Type             | Description                                                                  |
+| ---------------- | ---------------------------------------------------------------------------- |
+| `BotJsonPayload` | The instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class |
 
 ---
 
@@ -154,17 +130,17 @@ Contact
 
 #### Properties
 
-##### `avatar` → `String`
-
-The avatar URL
-
-##### `name` → `String`
+##### `global name` → `String`
 
 The contact’s username
 
-##### `phoneNumber` → `String`
+##### `global phoneNumber` → `String`
 
 The contact’s phone number
+
+##### `global avatar` → `String`
+
+The avatar URL
 
 ---
 

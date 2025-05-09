@@ -9,28 +9,28 @@ TelegramDocument
 
 ## Properties
 
-### `fileId` → `String`
+### `global fileId` → `String`
 
 The identifier for this file, which can be used to download or reuse the file
 
-### `fileName` → `String`
-
-The filename as defined by sender
-
-### `fileSize` → `Integer`
-
-The file size in bytes
-
-### `fileUniqueId` → `String`
+### `global fileUniqueId` → `String`
 
 The unique identifier for this file, which is supposed to be the same over time and for different bots
 
-### `mimeType` → `String`
+### `global thumbnail` → `TelegramPhotoSize`
+
+The document thumbnail as defined by sender
+
+### `global fileName` → `String`
+
+The filename as defined by sender
+
+### `global mimeType` → `String`
 
 The MIME type of the file as defined by sender
 
-### `thumbnail` → `TelegramPhotoSize`
+### `global fileSize` → `Integer`
 
-The document thumbnail as defined by sender
+The file size in bytes
 
 ---

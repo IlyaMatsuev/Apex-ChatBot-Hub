@@ -9,7 +9,7 @@ TelegramPromoteChatMemberOptions
 
 ## Methods
 
-### `asAnonymous(Boolean isAnonymous)`
+### `global TelegramPromoteChatMemberOptions asAnonymous(Boolean isAnonymous)`
 
 Determines the administrator's presence in the chat is hidden
 
@@ -19,17 +19,13 @@ Determines the administrator's presence in the chat is hidden
 | ------------- | ------------------------------------------------------------------- |
 | `isAnonymous` | `True` if the administrator's presence in the chat should be hidden |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
-
-### `allowManageChat(Boolean allow)`
+### `global TelegramPromoteChatMemberOptions allowManageChat(Boolean allow)`
 
 Determines if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode
 
@@ -39,17 +35,13 @@ Determines if the administrator can access the chat event log, chat statistics, 
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `allow` | `True` if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
-
-### `allowPostMessages(Boolean allow)`
+### `global TelegramPromoteChatMemberOptions allowPostMessages(Boolean allow)`
 
 Determines if the administrator can create channel posts, channels only
 
@@ -59,17 +51,13 @@ Determines if the administrator can create channel posts, channels only
 | ------- | ------------------------------------------------------------------- |
 | `allow` | `True` if the administrator can create channel posts, channels only |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
-
-### `allowEditMessages(Boolean allow)`
+### `global TelegramPromoteChatMemberOptions allowEditMessages(Boolean allow)`
 
 Determines if the administrator can edit messages of other users and can pin messages, channels only
 
@@ -79,17 +67,13 @@ Determines if the administrator can edit messages of other users and can pin mes
 | ------- | ------------------------------------------------------------------------------------------------ |
 | `allow` | `True` if the administrator can edit messages of other users and can pin messages, channels only |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
-
-### `allowDeleteMessages(Boolean allow)`
+### `global TelegramPromoteChatMemberOptions allowDeleteMessages(Boolean allow)`
 
 Determines if the administrator can delete messages of other users
 
@@ -99,17 +83,13 @@ Determines if the administrator can delete messages of other users
 | ------- | -------------------------------------------------------------- |
 | `allow` | `True` if the administrator can delete messages of other users |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
-
-### `allowManageVideoChats(Boolean allow)`
+### `global TelegramPromoteChatMemberOptions allowManageVideoChats(Boolean allow)`
 
 Determines if the administrator can manage video chats
 
@@ -119,17 +99,13 @@ Determines if the administrator can manage video chats
 | ------- | -------------------------------------------------- |
 | `allow` | `True` if the administrator can manage video chats |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
-
-### `allowRestrictMembers(Boolean allow)`
+### `global TelegramPromoteChatMemberOptions allowRestrictMembers(Boolean allow)`
 
 Determines if the administrator can restrict, ban or unban chat members
 
@@ -139,17 +115,13 @@ Determines if the administrator can restrict, ban or unban chat members
 | ------- | ------------------------------------------------------------------- |
 | `allow` | `True` if the administrator can restrict, ban or unban chat members |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
-
-### `allowPromoteMembers(Boolean allow)`
+### `global TelegramPromoteChatMemberOptions allowPromoteMembers(Boolean allow)`
 
 Determines if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly
 
@@ -159,17 +131,13 @@ Determines if the administrator can add new administrators with a subset of thei
 | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `allow` | `True` if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
-
-### `allowChangeInfo(Boolean allow)`
+### `global TelegramPromoteChatMemberOptions allowChangeInfo(Boolean allow)`
 
 Determines if the administrator can change chat title, photo and other settings
 
@@ -179,17 +147,13 @@ Determines if the administrator can change chat title, photo and other settings
 | ------- | --------------------------------------------------------------------------- |
 | `allow` | `True` if the administrator can change chat title, photo and other settings |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
-
-### `allowInviteUsers(Boolean allow)`
+### `global TelegramPromoteChatMemberOptions allowInviteUsers(Boolean allow)`
 
 Determines if the administrator can invite new users to the chat
 
@@ -199,17 +163,13 @@ Determines if the administrator can invite new users to the chat
 | ------- | ------------------------------------------------------------ |
 | `allow` | `True` if the administrator can invite new users to the chat |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
-
-### `allowPinMessages(Boolean allow)`
+### `global TelegramPromoteChatMemberOptions allowPinMessages(Boolean allow)`
 
 Determines if the administrator can pin messages, supergroups only
 
@@ -219,17 +179,13 @@ Determines if the administrator can pin messages, supergroups only
 | ------- | -------------------------------------------------------------- |
 | `allow` | `True` if the administrator can pin messages, supergroups only |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
-
-### `allowManageTopics(Boolean allow)`
+### `global TelegramPromoteChatMemberOptions allowManageTopics(Boolean allow)`
 
 Determines if the user is allowed to create, rename, close, and reopen forum topics, supergroups only
 
@@ -239,14 +195,10 @@ Determines if the user is allowed to create, rename, close, and reopen forum top
 | ------- | ------------------------------------------------------------------------------------------------- |
 | `allow` | `True` if the user is allowed to create, rename, close, and reopen forum topics, supergroups only |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramPromoteChatMemberOptions
-
-**Description**
-
-The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramPromoteChatMemberOptions` | The current instance of the [TelegramPromoteChatMemberOptions](/types/Classes/TelegramPromoteChatMemberOptions.md) class |
 
 ---

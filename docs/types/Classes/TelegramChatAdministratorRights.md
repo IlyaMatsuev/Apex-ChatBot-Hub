@@ -9,7 +9,7 @@ TelegramChatAdministratorRights
 
 ## Constructors
 
-### `TelegramChatAdministratorRights()`
+### `global TelegramChatAdministratorRights()`
 
 Creates a new instance of the chat admin rights
 
@@ -17,59 +17,59 @@ Creates a new instance of the chat admin rights
 
 ## Properties
 
-### `canChangeInfo` → `Boolean`
+### `global isAnonymous` → `Boolean`
 
-`True` if the user is allowed to change the chat title, photo and other settings
+`True` if the administrator's presence in the chat should be hidden
 
-### `canDeleteMessages` → `Boolean`
-
-`True` if the administrator can delete messages of other users
-
-### `canEditMessages` → `Boolean`
-
-`True` if the administrator can edit messages of other users and can pin messages; channels only
-
-### `canInviteUsers` → `Boolean`
-
-`True` if the user is allowed to invite new users to the chat
-
-### `canManageChat` → `Boolean`
+### `global canManageChat` → `Boolean`
 
 `True` if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode
 
-### `canManageTopics` → `Boolean`
+### `global canDeleteMessages` → `Boolean`
 
-`True` if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
+`True` if the administrator can delete messages of other users
 
-### `canManageVideoChats` → `Boolean`
+### `global canManageVideoChats` → `Boolean`
 
 `True` if the administrator can manage video chats
 
-### `canPinMessages` → `Boolean`
-
-`True` if the user is allowed to pin messages; groups and supergroups only
-
-### `canPostMessages` → `Boolean`
-
-`True` if the administrator can post in the channel; channels only
-
-### `canPromoteMembers` → `Boolean`
-
-`True` if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly
-
-### `canRestrictMembers` → `Boolean`
+### `global canRestrictMembers` → `Boolean`
 
 `True` if the administrator can restrict, ban or unban chat members
 
-### `isAnonymous` → `Boolean`
+### `global canPromoteMembers` → `Boolean`
 
-`True` if the administrator's presence in the chat should be hidden
+`True` if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly
+
+### `global canChangeInfo` → `Boolean`
+
+`True` if the user is allowed to change the chat title, photo and other settings
+
+### `global canInviteUsers` → `Boolean`
+
+`True` if the user is allowed to invite new users to the chat
+
+### `global canPostMessages` → `Boolean`
+
+`True` if the administrator can post in the channel; channels only
+
+### `global canEditMessages` → `Boolean`
+
+`True` if the administrator can edit messages of other users and can pin messages; channels only
+
+### `global canPinMessages` → `Boolean`
+
+`True` if the user is allowed to pin messages; groups and supergroups only
+
+### `global canManageTopics` → `Boolean`
+
+`True` if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
 
 ---
 
 ## Methods
 
-### `asAnonymous(Boolean isAnonymous)`
+### `global TelegramChatAdministratorRights asAnonymous(Boolean isAnonymous)`
 
 Determines the administrator's presence in the chat is hidden
 
@@ -79,17 +79,13 @@ Determines the administrator's presence in the chat is hidden
 | ------------- | ------------------------------------------------------------------- |
 | `isAnonymous` | `True` if the administrator's presence in the chat should be hidden |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `allowManageChat(Boolean allow)`
+### `global TelegramChatAdministratorRights allowManageChat(Boolean allow)`
 
 Determines if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode
 
@@ -99,17 +95,13 @@ Determines if the administrator can access the chat event log, chat statistics, 
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `allow` | `True` if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `allowPostMessages(Boolean allow)`
+### `global TelegramChatAdministratorRights allowPostMessages(Boolean allow)`
 
 Determines if the administrator can create channel posts, channels only
 
@@ -119,17 +111,13 @@ Determines if the administrator can create channel posts, channels only
 | ------- | ------------------------------------------------------------------- |
 | `allow` | `True` if the administrator can create channel posts, channels only |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `allowEditMessages(Boolean allow)`
+### `global TelegramChatAdministratorRights allowEditMessages(Boolean allow)`
 
 Determines if the administrator can edit messages of other users and can pin messages, channels only
 
@@ -139,17 +127,13 @@ Determines if the administrator can edit messages of other users and can pin mes
 | ------- | ------------------------------------------------------------------------------------------------ |
 | `allow` | `True` if the administrator can edit messages of other users and can pin messages, channels only |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `allowDeleteMessages(Boolean allow)`
+### `global TelegramChatAdministratorRights allowDeleteMessages(Boolean allow)`
 
 Determines if the administrator can delete messages of other users
 
@@ -159,17 +143,13 @@ Determines if the administrator can delete messages of other users
 | ------- | -------------------------------------------------------------- |
 | `allow` | `True` if the administrator can delete messages of other users |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `allowManageVideoChats(Boolean allow)`
+### `global TelegramChatAdministratorRights allowManageVideoChats(Boolean allow)`
 
 Determines if the administrator can manage video chats
 
@@ -179,17 +159,13 @@ Determines if the administrator can manage video chats
 | ------- | -------------------------------------------------- |
 | `allow` | `True` if the administrator can manage video chats |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `allowRestrictMembers(Boolean allow)`
+### `global TelegramChatAdministratorRights allowRestrictMembers(Boolean allow)`
 
 Determines if the administrator can restrict, ban or unban chat members
 
@@ -199,17 +175,13 @@ Determines if the administrator can restrict, ban or unban chat members
 | ------- | ------------------------------------------------------------------- |
 | `allow` | `True` if the administrator can restrict, ban or unban chat members |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `allowPromoteMembers(Boolean allow)`
+### `global TelegramChatAdministratorRights allowPromoteMembers(Boolean allow)`
 
 Determines if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly
 
@@ -219,17 +191,13 @@ Determines if the administrator can add new administrators with a subset of thei
 | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `allow` | `True` if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `allowChangeInfo(Boolean allow)`
+### `global TelegramChatAdministratorRights allowChangeInfo(Boolean allow)`
 
 Determines if the administrator can change chat title, photo and other settings
 
@@ -239,17 +207,13 @@ Determines if the administrator can change chat title, photo and other settings
 | ------- | --------------------------------------------------------------------------- |
 | `allow` | `True` if the administrator can change chat title, photo and other settings |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `allowInviteUsers(Boolean allow)`
+### `global TelegramChatAdministratorRights allowInviteUsers(Boolean allow)`
 
 Determines if the administrator can invite new users to the chat
 
@@ -259,17 +223,13 @@ Determines if the administrator can invite new users to the chat
 | ------- | ------------------------------------------------------------ |
 | `allow` | `True` if the administrator can invite new users to the chat |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `allowPinMessages(Boolean allow)`
+### `global TelegramChatAdministratorRights allowPinMessages(Boolean allow)`
 
 Determines if the administrator can pin messages, supergroups only
 
@@ -279,17 +239,13 @@ Determines if the administrator can pin messages, supergroups only
 | ------- | -------------------------------------------------------------- |
 | `allow` | `True` if the administrator can pin messages, supergroups only |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `allowManageTopics(Boolean allow)`
+### `global TelegramChatAdministratorRights allowManageTopics(Boolean allow)`
 
 Determines if the user is allowed to create, rename, close, and reopen forum topics, supergroups only
 
@@ -299,14 +255,10 @@ Determines if the user is allowed to create, rename, close, and reopen forum top
 | ------- | ------------------------------------------------------------------------------------------------- |
 | `allow` | `True` if the user is allowed to create, rename, close, and reopen forum topics, supergroups only |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramChatAdministratorRights
-
-**Description**
-
-The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The current instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
 ---

@@ -11,7 +11,7 @@ TelegramInputContactMessageContent
 
 ## Constructors
 
-### `TelegramInputContactMessageContent(String firstName, String phoneNumber)`
+### `global TelegramInputContactMessageContent(String firstName, String phoneNumber)`
 
 Creates a new instance of the input message with the provided contact details
 
@@ -26,7 +26,7 @@ Creates a new instance of the input message with the provided contact details
 
 ## Methods
 
-### `withLastName(String lastName)`
+### `global TelegramInputContactMessageContent withLastName(String lastName)`
 
 Sets the contact's last name
 
@@ -36,17 +36,13 @@ Sets the contact's last name
 | ---------- | ----------------------- |
 | `lastName` | The contact's last name |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                                  |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInputContactMessageContent` | The current instance of the [TelegramInputContactMessageContent](/types/Classes/TelegramInputContactMessageContent.md) class |
 
-TelegramInputContactMessageContent
-
-**Description**
-
-The current instance of the [TelegramInputContactMessageContent](/types/Classes/TelegramInputContactMessageContent.md) class
-
-### `withVCard(String vCard)`
+### `global TelegramInputContactMessageContent withVCard(String vCard)`
 
 Sets the contact's vCard
 
@@ -56,14 +52,10 @@ Sets the contact's vCard
 | ------- | ------------------- |
 | `vCard` | The contact's vCard |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInputContactMessageContent
-
-**Description**
-
-The current instance of the [TelegramInputContactMessageContent](/types/Classes/TelegramInputContactMessageContent.md) class
+| Type                                 | Description                                                                                                                  |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInputContactMessageContent` | The current instance of the [TelegramInputContactMessageContent](/types/Classes/TelegramInputContactMessageContent.md) class |
 
 ---

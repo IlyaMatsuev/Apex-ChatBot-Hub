@@ -11,17 +11,17 @@ TelegramChatMemberBanned
 
 ## Properties
 
-### `status` → `String`
+### `global untilDate` → `DateTime`
+
+The date when restrictions will be lifted for this user. If `0` then the user is restricted forever
+
+### `global status` → `String`
 
 _Inherited_
 
 The member's status in the chat. One of `member`, `creator`, `administrator`, `restricted`, `left` or `kicked`
 
-### `untilDate` → `DateTime`
-
-The date when restrictions will be lifted for this user. If `0` then the user is restricted forever
-
-### `user` → `TelegramUser`
+### `global user` → `TelegramUser`
 
 _Inherited_
 

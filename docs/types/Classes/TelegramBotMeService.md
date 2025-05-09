@@ -4,35 +4,27 @@ Service class that provides access to all `Telegram` `me` and `my` methods
 
 ## Methods
 
-### `get()`
+### `global TelegramUser get()`
 
 Returns the basic information about the bot
 
-#### Return
+#### Returns
 
-**Type**
+| Type           | Description                                                              |
+| -------------- | ------------------------------------------------------------------------ |
+| `TelegramUser` | The instance of the [TelegramUser](/types/Classes/TelegramUser.md) class |
 
-TelegramUser
-
-**Description**
-
-The instance of the [TelegramUser](/types/Classes/TelegramUser.md) class
-
-### `getName()`
+### `global String getName()`
 
 Returns the bot's name
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description    |
+| -------- | -------------- |
+| `String` | The bot's name |
 
-String
-
-**Description**
-
-The bot's name
-
-### `getName(String languageCode)`
+### `global String getName(String languageCode)`
 
 Returns the bot's name
 
@@ -42,31 +34,23 @@ Returns the bot's name
 | -------------- | ---------------------------- |
 | `languageCode` | The two-letter language code |
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description    |
+| -------- | -------------- |
+| `String` | The bot's name |
 
-String
-
-**Description**
-
-The bot's name
-
-### `getDescription()`
+### `global String getDescription()`
 
 Returns the bot's description
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description           |
+| -------- | --------------------- |
+| `String` | The bot's description |
 
-String
-
-**Description**
-
-The bot's description
-
-### `getDescription(String languageCode)`
+### `global String getDescription(String languageCode)`
 
 Returns the bot's description
 
@@ -76,31 +60,23 @@ Returns the bot's description
 | -------------- | ---------------------------- |
 | `languageCode` | The two-letter language code |
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description           |
+| -------- | --------------------- |
+| `String` | The bot's description |
 
-String
-
-**Description**
-
-The bot's description
-
-### `getShortDescription()`
+### `global String getShortDescription()`
 
 Returns the bot's short description
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                 |
+| -------- | --------------------------- |
+| `String` | The bot's short description |
 
-String
-
-**Description**
-
-The bot's short description
-
-### `getShortDescription(String languageCode)`
+### `global String getShortDescription(String languageCode)`
 
 Returns the bot's short description
 
@@ -110,31 +86,23 @@ Returns the bot's short description
 | -------------- | ---------------------------- |
 | `languageCode` | The two-letter language code |
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description                 |
+| -------- | --------------------------- |
+| `String` | The bot's short description |
 
-String
-
-**Description**
-
-The bot's short description
-
-### `getDefaultAdminRights()`
+### `global TelegramChatAdministratorRights getDefaultAdminRights()`
 
 Returns the bot's default administrator rights
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                    |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `getDefaultAdminRights(Boolean forChannels)`
+### `global TelegramChatAdministratorRights getDefaultAdminRights(Boolean forChannels)`
 
 Returns the bot's default administrator rights
 
@@ -144,17 +112,13 @@ Returns the bot's default administrator rights
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `forChannels` | `True` to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                    |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `TelegramChatAdministratorRights` | The instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class |
 
-TelegramChatAdministratorRights
-
-**Description**
-
-The instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class
-
-### `setName(String name)`
+### `global void setName(String name)`
 
 Sets the new bot's name
 
@@ -164,7 +128,7 @@ Sets the new bot's name
 | ------ | ------------------ |
 | `name` | The new bot's name |
 
-### `setName(String name, String languageCode)`
+### `global void setName(String name, String languageCode)`
 
 Sets the new bot's name for a specific language
 
@@ -175,7 +139,7 @@ Sets the new bot's name for a specific language
 | `name`         | The new bot's name           |
 | `languageCode` | The two-letter language code |
 
-### `setDescription(String description)`
+### `global void setDescription(String description)`
 
 Sets the new bot's description
 
@@ -185,7 +149,7 @@ Sets the new bot's description
 | ------------- | ------------------------- |
 | `description` | The new bot's description |
 
-### `setDescription(String description, String languageCode)`
+### `global void setDescription(String description, String languageCode)`
 
 Sets the new bot's description for a specific language
 
@@ -196,7 +160,7 @@ Sets the new bot's description for a specific language
 | `description`  | The new bot's description    |
 | `languageCode` | The two-letter language code |
 
-### `setShortDescription(String description)`
+### `global void setShortDescription(String description)`
 
 Sets the new bot's short description
 
@@ -206,7 +170,7 @@ Sets the new bot's short description
 | ------------- | ------------------------------- |
 | `description` | The new bot's short description |
 
-### `setShortDescription(String description, String languageCode)`
+### `global void setShortDescription(String description, String languageCode)`
 
 Sets the new bot's short description for a specific language
 
@@ -217,7 +181,7 @@ Sets the new bot's short description for a specific language
 | `description`  | The new bot's short description |
 | `languageCode` | The two-letter language code    |
 
-### `setDefaultAdminRights(TelegramChatAdministratorRights rights)`
+### `global void setDefaultAdminRights(TelegramChatAdministratorRights rights)`
 
 Sets the bot's default administrator rights
 
@@ -227,7 +191,7 @@ Sets the bot's default administrator rights
 | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `rights` | The instance of the [TelegramChatAdministratorRights](/types/Classes/TelegramChatAdministratorRights.md) class, describing the bot's default chat admin rights |
 
-### `setDefaultAdminRights(TelegramChatAdministratorRights rights, Boolean forChannels)`
+### `global void setDefaultAdminRights(TelegramChatAdministratorRights rights, Boolean forChannels)`
 
 Sets the bot's default administrator rights
 

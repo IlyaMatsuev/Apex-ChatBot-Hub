@@ -11,23 +11,23 @@ ViberSubscribedEvent
 
 ## Properties
 
-### `messageToken` → `String`
+### `global user` → `ViberUser`
+
+The subscriber's user information
+
+### `global messageToken` → `String`
 
 _Inherited_
 
 The unique identifier of the related message
 
-### `timestamp` → `DateTime`
+### `global timestamp` → `DateTime`
 
 _Inherited_
 
 The event date and time
 
-### `user` → `ViberUser`
-
-The subscriber's user information
-
-### `userId` → `String`
+### `global userId` → `String`
 
 _Inherited_
 

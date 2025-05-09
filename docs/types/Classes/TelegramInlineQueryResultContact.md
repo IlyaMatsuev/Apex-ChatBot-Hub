@@ -11,7 +11,7 @@ TelegramInlineQueryResultContact
 
 ## Constructors
 
-### `TelegramInlineQueryResultContact(String id, String firstName, String phoneNumber)`
+### `global TelegramInlineQueryResultContact(String id, String firstName, String phoneNumber)`
 
 Creates a new instance of the contact inline query result with the provided result id, first name and phone number
 
@@ -27,7 +27,7 @@ Creates a new instance of the contact inline query result with the provided resu
 
 ## Methods
 
-### `withLastName(String lastName)`
+### `global TelegramInlineQueryResultContact withLastName(String lastName)`
 
 Sets the contact's last name
 
@@ -37,17 +37,13 @@ Sets the contact's last name
 | ---------- | ----------------------- |
 | `lastName` | The contact's last name |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultContact` | The current instance of the [TelegramInlineQueryResultContact](/types/Classes/TelegramInlineQueryResultContact.md) class |
 
-TelegramInlineQueryResultContact
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultContact](/types/Classes/TelegramInlineQueryResultContact.md) class
-
-### `withVCard(String vCard)`
+### `global TelegramInlineQueryResultContact withVCard(String vCard)`
 
 Sets the contact's vCard
 
@@ -57,17 +53,13 @@ Sets the contact's vCard
 | ------- | ------------------- |
 | `vCard` | The contact's vCard |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultContact` | The current instance of the [TelegramInlineQueryResultContact](/types/Classes/TelegramInlineQueryResultContact.md) class |
 
-TelegramInlineQueryResultContact
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultContact](/types/Classes/TelegramInlineQueryResultContact.md) class
-
-### `withThumbnail(String url, Integer width, Integer height)`
+### `global TelegramInlineQueryResultContact withThumbnail(String url, Integer width, Integer height)`
 
 Sets the thumbnail for the inline result
 
@@ -79,17 +71,13 @@ Sets the thumbnail for the inline result
 | `width`  | The thumbnail width  |
 | `height` | The thumbnail height |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultContact` | The current instance of the [TelegramInlineQueryResultContact](/types/Classes/TelegramInlineQueryResultContact.md) class |
 
-TelegramInlineQueryResultContact
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultContact](/types/Classes/TelegramInlineQueryResultContact.md) class
-
-### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+### `global TelegramInlineQueryResultContact withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
 
 Sets the inline keyboard to the message
 
@@ -99,17 +87,13 @@ Sets the inline keyboard to the message
 | ---------- | ------------------------------------------- |
 | `keyboard` | The inline keyboard attached to the message |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultContact` | The current instance of the [TelegramInlineQueryResultContact](/types/Classes/TelegramInlineQueryResultContact.md) class |
 
-TelegramInlineQueryResultContact
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultContact](/types/Classes/TelegramInlineQueryResultContact.md) class
-
-### `withInputMessage(TelegramInputMessageContent messageContent)`
+### `global TelegramInlineQueryResultContact withInputMessage(TelegramInputMessageContent messageContent)`
 
 Sets the content of the message to be sent instead of the contact
 
@@ -119,14 +103,10 @@ Sets the content of the message to be sent instead of the contact
 | ---------------- | ------------------------------------- |
 | `messageContent` | The content of the message to be sent |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInlineQueryResultContact
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultContact](/types/Classes/TelegramInlineQueryResultContact.md) class
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInlineQueryResultContact` | The current instance of the [TelegramInlineQueryResultContact](/types/Classes/TelegramInlineQueryResultContact.md) class |
 
 ---

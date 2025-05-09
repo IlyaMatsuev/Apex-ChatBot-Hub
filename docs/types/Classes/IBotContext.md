@@ -4,63 +4,47 @@ Describes the context methods that are common for all bot types
 
 ## Methods
 
-### `getBot()`
+### `global BotModel getBot()`
 
 Returns the bot model related to the received update
 
-#### Return
+#### Returns
 
-**Type**
+| Type       | Description                                                      |
+| ---------- | ---------------------------------------------------------------- |
+| `BotModel` | The instance of the [BotModel](/types/Classes/BotModel.md) class |
 
-BotModel
-
-**Description**
-
-The instance of the [BotModel](/types/Classes/BotModel.md) class
-
-### `reply()`
+### `global IBotSenderService reply()`
 
 Provides methods for replying on the received update. E.g. send a message back
 
-#### Return
+#### Returns
 
-**Type**
+| Type                | Description                                                                               |
+| ------------------- | ----------------------------------------------------------------------------------------- |
+| `IBotSenderService` | The instance of the [IBotSenderService](/types/Interfaces/IBotSenderService.md) interface |
 
-IBotSenderService
-
-**Description**
-
-The instance of the [IBotSenderService](/types/Interfaces/IBotSenderService.md) interface
-
-### `getUpdateEvent()`
+### `global IBotUpdateEvent getUpdateEvent()`
 
 Returns a received update event
 
-#### Return
+#### Returns
 
-**Type**
+| Type              | Description                                                                        |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| `IBotUpdateEvent` | The instance of the [IBotUpdateEvent](/types/Classes/IBotUpdateEvent.md) interface |
 
-IBotUpdateEvent
-
-**Description**
-
-The instance of the [IBotUpdateEvent](/types/Classes/IBotUpdateEvent.md) interface
-
-### `getService()`
+### `global IBotService getService()`
 
 Returns an instance of the [IBotService](/types/Interfaces/IBotService.md) for the current bot type
 
-#### Return
+#### Returns
 
-**Type**
+| Type          | Description                                                                   |
+| ------------- | ----------------------------------------------------------------------------- |
+| `IBotService` | The instance of the [IBotService](/types/Interfaces/IBotService.md) interface |
 
-IBotService
-
-**Description**
-
-The instance of the [IBotService](/types/Interfaces/IBotService.md) interface
-
-### `getService(BotModel bot)`
+### `global IBotService getService(BotModel bot)`
 
 Creates a bot service instance not related to the current context
 
@@ -70,17 +54,13 @@ Creates a bot service instance not related to the current context
 | ----- | ----------------------------------------------------------------------------------------------------- |
 | `bot` | The [BotModel](/types/Classes/BotModel.md) instance related to the bot you need to create service for |
 
-#### Return
+#### Returns
 
-**Type**
+| Type          | Description                                                                   |
+| ------------- | ----------------------------------------------------------------------------- |
+| `IBotService` | The instance of the [IBotService](/types/Interfaces/IBotService.md) interface |
 
-IBotService
-
-**Description**
-
-The instance of the [IBotService](/types/Interfaces/IBotService.md) interface
-
-### `save(SObject record)`
+### `global void save(SObject record)`
 
 Upserts a record asynchronously. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
 
@@ -90,7 +70,7 @@ Upserts a record asynchronously. This method is needed to avoid the "Uncommited 
 | -------- | ----------------------------- |
 | `record` | SObject record to be upserted |
 
-### `save(List<SObject> records)`
+### `global void save(List<SObject> records)`
 
 Upserts multiple records asynchronously. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
 
@@ -100,7 +80,7 @@ Upserts multiple records asynchronously. This method is needed to avoid the "Unc
 | --------- | ------------------------------ |
 | `records` | List of records to be upserted |
 
-### `save(List<SObject> records, String externalIdField)`
+### `global void save(List<SObject> records, String externalIdField)`
 
 Upserts multiple records asynchronously by the provided external id field. This method is needed to avoid the "Uncommited work pending" exception during the bot handler execution
 

@@ -9,20 +9,20 @@ TelegramPollAnswerEvent
 
 ## Properties
 
-### `optionIds` → `List<Integer>`
-
-The 0-based identifiers of chosen answer options. May be empty if the vote was retracted
-
-### `pollId` → `String`
+### `global pollId` → `String`
 
 The unique poll identifier
 
-### `user` → `TelegramUser`
+### `global voterChat` → `TelegramChat`
+
+The chat that changed the answer to the poll, if the voter is anonymous
+
+### `global user` → `TelegramUser`
 
 The user that changed the answer to the poll, if the voter isn't anonymous
 
-### `voterChat` → `TelegramChat`
+### `global optionIds` → `List<Integer>`
 
-The chat that changed the answer to the poll, if the voter is anonymous
+The 0-based identifiers of chosen answer options. May be empty if the vote was retracted
 
 ---

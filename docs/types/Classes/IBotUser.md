@@ -4,60 +4,44 @@ Describes the sender payload received as an update from a bot
 
 ## Methods
 
-### `getId()`
+### `global String getId()`
 
 Returns the sender external id
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description            |
+| -------- | ---------------------- |
+| `String` | The sender external id |
 
-String
-
-**Description**
-
-The sender external id
-
-### `getFirstName()`
+### `global String getFirstName()`
 
 Returns the sender first name
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description           |
+| -------- | --------------------- |
+| `String` | The sender first name |
 
-String
-
-**Description**
-
-The sender first name
-
-### `getLastName()`
+### `global String getLastName()`
 
 Returns the sender last name
 
-#### Return
+#### Returns
 
-**Type**
+| Type     | Description          |
+| -------- | -------------------- |
+| `String` | The sender last name |
 
-String
-
-**Description**
-
-The sender last name
-
-### `getUsername()`
+### `global String getUsername()`
 
 Returns the sender username. Returns the sender external id if not applicable
 
-#### Return
+#### Returns
 
-**Type**
-
-String
-
-**Description**
-
-The sender username of external id
+| Type     | Description                        |
+| -------- | ---------------------------------- |
+| `String` | The sender username of external id |
 
 ---

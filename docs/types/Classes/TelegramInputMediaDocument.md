@@ -13,7 +13,7 @@ TelegramInputMediaDocument
 
 ## Constructors
 
-### `TelegramInputMediaDocument(String media)`
+### `global TelegramInputMediaDocument(String media)`
 
 Creates a new instance of input document media with the provided URL or file id
 
@@ -27,7 +27,7 @@ Creates a new instance of input document media with the provided URL or file id
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -37,7 +37,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withThumbnail(String thumbnail)`
+### `global TelegramInputMediaDocument withThumbnail(String thumbnail)`
 
 Sets the thumbnail for the file
 
@@ -47,17 +47,13 @@ Sets the thumbnail for the file
 | ----------- | ------------------------- |
 | `thumbnail` | The URL to the JPEG image |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaDocument` | The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class |
 
-TelegramInputMediaDocument
-
-**Description**
-
-The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class
-
-### `withCaption(String caption)`
+### `global TelegramInputMediaDocument withCaption(String caption)`
 
 Sets the caption for the file
 
@@ -67,17 +63,13 @@ Sets the caption for the file
 | --------- | ------------------------------ |
 | `caption` | The text to attach to the file |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaDocument` | The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class |
 
-TelegramInputMediaDocument
-
-**Description**
-
-The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramInputMediaDocument withParseMode(String mode)`
 
 Sets the message caption parse mode. Needed when the message text is formatted with `HTML` or `Markdown` markup
 
@@ -87,17 +79,13 @@ Sets the message caption parse mode. Needed when the message text is formatted w
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaDocument` | The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class |
 
-TelegramInputMediaDocument
-
-**Description**
-
-The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramInputMediaDocument withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the message caption. For example username tags
 
@@ -107,17 +95,13 @@ Adds a special entity that appear in the message caption. For example username t
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaDocument` | The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class |
 
-TelegramInputMediaDocument
-
-**Description**
-
-The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramInputMediaDocument withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the message text. For example username tags
 
@@ -127,28 +111,20 @@ Adds special entities that appear in the message text. For example username tags
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaDocument` | The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class |
 
-TelegramInputMediaDocument
-
-**Description**
-
-The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class
-
-### `withoutContentTypeDetection()`
+### `global TelegramInputMediaDocument withoutContentTypeDetection()`
 
 Disables the automatic server-side content type detection
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInputMediaDocument
-
-**Description**
-
-The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class
+| Type                         | Description                                                                                                  |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaDocument` | The current instance of the [TelegramInputMediaDocument](/types/Classes/TelegramInputMediaDocument.md) class |
 
 ---

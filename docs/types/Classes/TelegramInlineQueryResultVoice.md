@@ -11,7 +11,7 @@ TelegramInlineQueryResultVoice
 
 ## Constructors
 
-### `TelegramInlineQueryResultVoice(String id, String voiceUrlOrFileId)`
+### `global TelegramInlineQueryResultVoice(String id, String voiceUrlOrFileId)`
 
 Creates a new instance of the voice inline query result with the provided result id and voice URL/file id
 
@@ -26,7 +26,7 @@ Creates a new instance of the voice inline query result with the provided result
 
 ## Properties
 
-### `captionEntities` → `List<TelegramMessageEntity>`
+### `global captionEntities` → `List<TelegramMessageEntity>`
 
 The list of special entities that appear in the caption text. E.g. hashtag, username, URL, etc.
 
@@ -34,7 +34,7 @@ The list of special entities that appear in the caption text. E.g. hashtag, user
 
 ## Methods
 
-### `withCaption(String caption)`
+### `global TelegramInlineQueryResultVoice withCaption(String caption)`
 
 Sets the caption for the voice to be sent
 
@@ -44,17 +44,13 @@ Sets the caption for the voice to be sent
 | --------- | -------------------------------------- |
 | `caption` | The voice caption, `0-1024 characters` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVoice` | The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class |
 
-TelegramInlineQueryResultVoice
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class
-
-### `withTitle(String title)`
+### `global TelegramInlineQueryResultVoice withTitle(String title)`
 
 Sets the title for the inline result
 
@@ -64,17 +60,13 @@ Sets the title for the inline result
 | ------- | ----------------------- |
 | `title` | The title of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVoice` | The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class |
 
-TelegramInlineQueryResultVoice
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class
-
-### `withDuration(Integer duration)`
+### `global TelegramInlineQueryResultVoice withDuration(Integer duration)`
 
 Sets the voice duration
 
@@ -84,17 +76,13 @@ Sets the voice duration
 | ---------- | ------------------ |
 | `duration` | The voice duration |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVoice` | The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class |
 
-TelegramInlineQueryResultVoice
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramInlineQueryResultVoice withParseMode(String mode)`
 
 Sets the caption text parse mode. Needed when the message text is formatted with `HTML` or `Markdown` markup
 
@@ -104,17 +92,13 @@ Sets the caption text parse mode. Needed when the message text is formatted with
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVoice` | The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class |
 
-TelegramInlineQueryResultVoice
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramInlineQueryResultVoice withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the caption text. For example username tags
 
@@ -124,17 +108,13 @@ Adds a special entity that appear in the caption text. For example username tags
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVoice` | The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class |
 
-TelegramInlineQueryResultVoice
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramInlineQueryResultVoice withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the caption text. For example username tags
 
@@ -144,17 +124,13 @@ Adds special entities that appear in the caption text. For example username tags
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVoice` | The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class |
 
-TelegramInlineQueryResultVoice
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class
-
-### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+### `global TelegramInlineQueryResultVoice withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
 
 Sets the inline keyboard to the message
 
@@ -164,17 +140,13 @@ Sets the inline keyboard to the message
 | ---------- | ------------------------------------------- |
 | `keyboard` | The inline keyboard attached to the message |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVoice` | The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class |
 
-TelegramInlineQueryResultVoice
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class
-
-### `withInputMessage(TelegramInputMessageContent messageContent)`
+### `global TelegramInlineQueryResultVoice withInputMessage(TelegramInputMessageContent messageContent)`
 
 Sets the content of the message to be sent instead of the voice
 
@@ -184,14 +156,10 @@ Sets the content of the message to be sent instead of the voice
 | ---------------- | ------------------------------------- |
 | `messageContent` | The content of the message to be sent |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInlineQueryResultVoice
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultVoice` | The current instance of the [TelegramInlineQueryResultVoice](/types/Classes/TelegramInlineQueryResultVoice.md) class |
 
 ---

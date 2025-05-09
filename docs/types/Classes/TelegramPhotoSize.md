@@ -9,24 +9,24 @@ TelegramPhotoSize
 
 ## Properties
 
-### `fileId` → `String`
+### `global fileId` → `String`
 
 The identifier for this file, which can be used to download or reuse the file
 
-### `fileSize` → `Integer`
-
-The file size in bytes
-
-### `fileUniqueId` → `String`
+### `global fileUniqueId` → `String`
 
 The unique identifier for this file, which is supposed to be the same over time and for different bots
 
-### `height` → `Integer`
+### `global width` → `Integer`
+
+The photo width
+
+### `global height` → `Integer`
 
 The photo height
 
-### `width` → `Integer`
+### `global fileSize` → `Integer`
 
-The photo width
+The file size in bytes
 
 ---

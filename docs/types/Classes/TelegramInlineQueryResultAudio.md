@@ -11,7 +11,7 @@ TelegramInlineQueryResultAudio
 
 ## Constructors
 
-### `TelegramInlineQueryResultAudio(String id, String audioUrlOrFileId)`
+### `global TelegramInlineQueryResultAudio(String id, String audioUrlOrFileId)`
 
 Creates a new instance of the audio inline query result with the provided result id and audio URL/file id
 
@@ -26,7 +26,7 @@ Creates a new instance of the audio inline query result with the provided result
 
 ## Properties
 
-### `captionEntities` → `List<TelegramMessageEntity>`
+### `global captionEntities` → `List<TelegramMessageEntity>`
 
 The list of special entities that appear in the caption text. E.g. hashtag, username, URL, etc.
 
@@ -34,7 +34,7 @@ The list of special entities that appear in the caption text. E.g. hashtag, user
 
 ## Methods
 
-### `withCaption(String caption)`
+### `global TelegramInlineQueryResultAudio withCaption(String caption)`
 
 Sets the caption for the audio to be sent
 
@@ -44,17 +44,13 @@ Sets the caption for the audio to be sent
 | --------- | -------------------------------------- |
 | `caption` | The audio caption, `0-1024 characters` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultAudio` | The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class |
 
-TelegramInlineQueryResultAudio
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class
-
-### `withTitle(String title)`
+### `global TelegramInlineQueryResultAudio withTitle(String title)`
 
 Sets the title for the inline result
 
@@ -64,17 +60,13 @@ Sets the title for the inline result
 | ------- | ----------------------- |
 | `title` | The title of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultAudio` | The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class |
 
-TelegramInlineQueryResultAudio
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class
-
-### `withDuration(Integer duration)`
+### `global TelegramInlineQueryResultAudio withDuration(Integer duration)`
 
 Sets the audio duration
 
@@ -84,17 +76,13 @@ Sets the audio duration
 | ---------- | ------------------ |
 | `duration` | The audio duration |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultAudio` | The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class |
 
-TelegramInlineQueryResultAudio
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class
-
-### `withPerformer(String performer)`
+### `global TelegramInlineQueryResultAudio withPerformer(String performer)`
 
 Sets the performer
 
@@ -104,17 +92,13 @@ Sets the performer
 | ----------- | ------------------- |
 | `performer` | The track performer |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultAudio` | The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class |
 
-TelegramInlineQueryResultAudio
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramInlineQueryResultAudio withParseMode(String mode)`
 
 Sets the caption text parse mode. Needed when the message text is formatted with `HTML` or `Markdown` markup
 
@@ -124,17 +108,13 @@ Sets the caption text parse mode. Needed when the message text is formatted with
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultAudio` | The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class |
 
-TelegramInlineQueryResultAudio
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramInlineQueryResultAudio withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the caption text. For example username tags
 
@@ -144,17 +124,13 @@ Adds a special entity that appear in the caption text. For example username tags
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultAudio` | The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class |
 
-TelegramInlineQueryResultAudio
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramInlineQueryResultAudio withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the caption text. For example username tags
 
@@ -164,17 +140,13 @@ Adds special entities that appear in the caption text. For example username tags
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultAudio` | The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class |
 
-TelegramInlineQueryResultAudio
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class
-
-### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+### `global TelegramInlineQueryResultAudio withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
 
 Sets the inline keyboard to the message
 
@@ -184,17 +156,13 @@ Sets the inline keyboard to the message
 | ---------- | ------------------------------------------- |
 | `keyboard` | The inline keyboard attached to the message |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultAudio` | The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class |
 
-TelegramInlineQueryResultAudio
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class
-
-### `withInputMessage(TelegramInputMessageContent messageContent)`
+### `global TelegramInlineQueryResultAudio withInputMessage(TelegramInputMessageContent messageContent)`
 
 Sets the content of the message to be sent instead of the audio
 
@@ -204,14 +172,10 @@ Sets the content of the message to be sent instead of the audio
 | ---------------- | ------------------------------------- |
 | `messageContent` | The content of the message to be sent |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInlineQueryResultAudio
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class
+| Type                             | Description                                                                                                          |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultAudio` | The current instance of the [TelegramInlineQueryResultAudio](/types/Classes/TelegramInlineQueryResultAudio.md) class |
 
 ---

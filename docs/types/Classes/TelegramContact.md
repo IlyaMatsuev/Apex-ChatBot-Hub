@@ -9,23 +9,23 @@ TelegramContact
 
 ## Properties
 
-### `firstName` → `String`
-
-The contact's first name
-
-### `lastName` → `String`
-
-The contact's last name
-
-### `phoneNumber` → `String`
+### `global phoneNumber` → `String`
 
 The contact's phone number
 
-### `userId` → `Long`
+### `global firstName` → `String`
+
+The contact's first name
+
+### `global lastName` → `String`
+
+The contact's last name
+
+### `global userId` → `Long`
 
 The contact's user identifier in `Telegram`
 
-### `vCard` → `String`
+### `global vCard` → `String`
 
 The additional data about the contact in the form of a vCard
 

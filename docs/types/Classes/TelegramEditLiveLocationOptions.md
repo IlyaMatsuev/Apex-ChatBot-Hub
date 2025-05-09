@@ -9,7 +9,7 @@ TelegramEditLiveLocationOptions
 
 ## Methods
 
-### `withHorizontalAccuracy(Decimal accuracy)`
+### `global TelegramEditLiveLocationOptions withHorizontalAccuracy(Decimal accuracy)`
 
 Sets the radius of uncertainty for the new location, measured in meters
 
@@ -19,17 +19,13 @@ Sets the radius of uncertainty for the new location, measured in meters
 | ---------- | ---------------------------------------------------------------------------------------- |
 | `accuracy` | The radius of uncertainty for the location in meters. Accepts values in range: `0..1500` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramEditLiveLocationOptions` | The current instance of the [TelegramEditLiveLocationOptions](/types/Classes/TelegramEditLiveLocationOptions.md) class |
 
-TelegramEditLiveLocationOptions
-
-**Description**
-
-The current instance of the [TelegramEditLiveLocationOptions](/types/Classes/TelegramEditLiveLocationOptions.md) class
-
-### `withProximityAlertRadius(Integer alertRadius)`
+### `global TelegramEditLiveLocationOptions withProximityAlertRadius(Integer alertRadius)`
 
 Sets the maximum distance in meters for proximity alerts about approaching another chat member
 
@@ -39,17 +35,13 @@ Sets the maximum distance in meters for proximity alerts about approaching anoth
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `alertRadius` | The maximum distance in meters for proximity alerts about approaching another chat member. Accepts values in range: `1..100000` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramEditLiveLocationOptions` | The current instance of the [TelegramEditLiveLocationOptions](/types/Classes/TelegramEditLiveLocationOptions.md) class |
 
-TelegramEditLiveLocationOptions
-
-**Description**
-
-The current instance of the [TelegramEditLiveLocationOptions](/types/Classes/TelegramEditLiveLocationOptions.md) class
-
-### `withHeading(Integer heading)`
+### `global TelegramEditLiveLocationOptions withHeading(Integer heading)`
 
 Sets the direction in degrees in which the user is moving
 
@@ -59,14 +51,10 @@ Sets the direction in degrees in which the user is moving
 | --------- | --------------------------------------------------------------------------------------- |
 | `heading` | The direction in degrees in which the user is moving. Accepts values in range: `1..360` |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramEditLiveLocationOptions
-
-**Description**
-
-The current instance of the [TelegramEditLiveLocationOptions](/types/Classes/TelegramEditLiveLocationOptions.md) class
+| Type                              | Description                                                                                                            |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `TelegramEditLiveLocationOptions` | The current instance of the [TelegramEditLiveLocationOptions](/types/Classes/TelegramEditLiveLocationOptions.md) class |
 
 ---

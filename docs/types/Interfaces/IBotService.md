@@ -6,7 +6,7 @@ The BotService interface containing all main methods for every bot service
 
 ## Methods
 
-### `send(String chatId)`
+### `global IBotSenderService send(String chatId)`
 
 Creates an instance of the sender service, giving access to all bot methods for sending information
 
@@ -16,14 +16,10 @@ Creates an instance of the sender service, giving access to all bot methods for 
 | -------- | ------------------------------------------------------- |
 | `chatId` | The id of the chat where the information has to be sent |
 
-#### Return
+#### Returns
 
-**Type**
-
-IBotSenderService
-
-**Description**
-
-The implementation of the [IBotSenderService](/types/Interfaces/IBotSenderService.md)
+| Type                | Description                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| `IBotSenderService` | The implementation of the [IBotSenderService](/types/Interfaces/IBotSenderService.md) |
 
 ---

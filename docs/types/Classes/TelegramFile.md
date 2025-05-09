@@ -9,20 +9,20 @@ TelegramFile
 
 ## Properties
 
-### `fileId` → `String`
+### `global fileId` → `String`
 
 The identifier for this file, which can be used to download or reuse the file
 
-### `filePath` → `String`
+### `global fileUniqueId` → `String`
 
-The file path
+The unique identifier for this file, which is supposed to be the same over time and for different bots
 
-### `fileSize` → `Integer`
+### `global fileSize` → `Integer`
 
 The file size in bytes
 
-### `fileUniqueId` → `String`
+### `global filePath` → `String`
 
-The unique identifier for this file, which is supposed to be the same over time and for different bots
+The file path
 
 ---

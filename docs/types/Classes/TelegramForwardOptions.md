@@ -11,7 +11,7 @@ TelegramForwardOptions
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -21,7 +21,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withThreadId(String threadId)`
+### `global TelegramForwardOptions withThreadId(String threadId)`
 
 Sets the unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
@@ -31,42 +31,30 @@ Sets the unique identifier for the target message thread (topic) of the forum; f
 | ---------- | -------------------------------------------------------------- |
 | `threadId` | The `Telegram` unique id for the target message thread (topic) |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                     | Description                                                                                          |
+| ------------------------ | ---------------------------------------------------------------------------------------------------- |
+| `TelegramForwardOptions` | The current instance of the [TelegramForwardOptions](/types/Classes/TelegramForwardOptions.md) class |
 
-TelegramForwardOptions
-
-**Description**
-
-The current instance of the [TelegramForwardOptions](/types/Classes/TelegramForwardOptions.md) class
-
-### `withoutNotification()`
+### `global TelegramForwardOptions withoutNotification()`
 
 Forwards the message silently. The receiver will get a notification with no sound
 
-#### Return
+#### Returns
 
-**Type**
+| Type                     | Description                                                                                          |
+| ------------------------ | ---------------------------------------------------------------------------------------------------- |
+| `TelegramForwardOptions` | The current instance of the [TelegramForwardOptions](/types/Classes/TelegramForwardOptions.md) class |
 
-TelegramForwardOptions
-
-**Description**
-
-The current instance of the [TelegramForwardOptions](/types/Classes/TelegramForwardOptions.md) class
-
-### `withProtectedContent()`
+### `global TelegramForwardOptions withProtectedContent()`
 
 Protects the contents of the forwarded message from forwarding and saving
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramForwardOptions
-
-**Description**
-
-The current instance of the [TelegramForwardOptions](/types/Classes/TelegramForwardOptions.md) class
+| Type                     | Description                                                                                          |
+| ------------------------ | ---------------------------------------------------------------------------------------------------- |
+| `TelegramForwardOptions` | The current instance of the [TelegramForwardOptions](/types/Classes/TelegramForwardOptions.md) class |
 
 ---

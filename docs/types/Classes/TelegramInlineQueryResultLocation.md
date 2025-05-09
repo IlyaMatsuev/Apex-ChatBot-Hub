@@ -11,7 +11,7 @@ TelegramInlineQueryResultLocation
 
 ## Constructors
 
-### `TelegramInlineQueryResultLocation(String id, Decimal latitude, Decimal longitude)`
+### `global TelegramInlineQueryResultLocation(String id, Decimal latitude, Decimal longitude)`
 
 Creates a new instance of the location inline query result with the provided result id and coords
 
@@ -27,7 +27,7 @@ Creates a new instance of the location inline query result with the provided res
 
 ## Methods
 
-### `withTitle(String title)`
+### `global TelegramInlineQueryResultLocation withTitle(String title)`
 
 Sets the title for the inline result
 
@@ -37,17 +37,13 @@ Sets the title for the inline result
 | ------- | ----------------------- |
 | `title` | The title of the result |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultLocation` | The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class |
 
-TelegramInlineQueryResultLocation
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class
-
-### `withHorizontalAccuracy(Decimal accuracy)`
+### `global TelegramInlineQueryResultLocation withHorizontalAccuracy(Decimal accuracy)`
 
 Sets the radius of uncertainty for the location, measured in meters
 
@@ -57,17 +53,13 @@ Sets the radius of uncertainty for the location, measured in meters
 | ---------- | ---------------------------------------------------------------------------------------- |
 | `accuracy` | The radius of uncertainty for the location in meters. Accepts values in range: `0..1500` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultLocation` | The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class |
 
-TelegramInlineQueryResultLocation
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class
-
-### `withLivePeriod(Integer period)`
+### `global TelegramInlineQueryResultLocation withLivePeriod(Integer period)`
 
 Sets the period in seconds for which the location will be updated
 
@@ -77,17 +69,13 @@ Sets the period in seconds for which the location will be updated
 | -------- | -------------------------------------------------------------------------------------------------- |
 | `period` | The period in seconds for which the location will be updated. Accepts values in range: `60..86400` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultLocation` | The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class |
 
-TelegramInlineQueryResultLocation
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class
-
-### `withProximityAlertRadius(Integer alertRadius)`
+### `global TelegramInlineQueryResultLocation withProximityAlertRadius(Integer alertRadius)`
 
 Sets the maximum distance in meters for proximity alerts about approaching another chat member
 
@@ -97,17 +85,13 @@ Sets the maximum distance in meters for proximity alerts about approaching anoth
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `alertRadius` | The maximum distance in meters for proximity alerts about approaching another chat member. Accepts values in range: `1..100000` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultLocation` | The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class |
 
-TelegramInlineQueryResultLocation
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class
-
-### `withHeading(Integer heading)`
+### `global TelegramInlineQueryResultLocation withHeading(Integer heading)`
 
 Sets the direction in degrees in which the user is moving
 
@@ -117,17 +101,13 @@ Sets the direction in degrees in which the user is moving
 | --------- | --------------------------------------------------------------------------------------- |
 | `heading` | The direction in degrees in which the user is moving. Accepts values in range: `1..360` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultLocation` | The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class |
 
-TelegramInlineQueryResultLocation
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class
-
-### `withThumbnail(String url, Integer width, Integer height)`
+### `global TelegramInlineQueryResultLocation withThumbnail(String url, Integer width, Integer height)`
 
 Sets the thumbnail for the inline result
 
@@ -139,17 +119,13 @@ Sets the thumbnail for the inline result
 | `width`  | The thumbnail width  |
 | `height` | The thumbnail height |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultLocation` | The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class |
 
-TelegramInlineQueryResultLocation
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class
-
-### `withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
+### `global TelegramInlineQueryResultLocation withInlineKeyboard(TelegramInlineKeyboardMarkupOptions keyboard)`
 
 Sets the inline keyboard to the message
 
@@ -159,17 +135,13 @@ Sets the inline keyboard to the message
 | ---------- | ------------------------------------------- |
 | `keyboard` | The inline keyboard attached to the message |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultLocation` | The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class |
 
-TelegramInlineQueryResultLocation
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class
-
-### `withInputMessage(TelegramInputMessageContent messageContent)`
+### `global TelegramInlineQueryResultLocation withInputMessage(TelegramInputMessageContent messageContent)`
 
 Sets the content of the message to be sent instead of the location
 
@@ -179,14 +151,10 @@ Sets the content of the message to be sent instead of the location
 | ---------------- | ------------------------------------- |
 | `messageContent` | The content of the message to be sent |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInlineQueryResultLocation
-
-**Description**
-
-The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class
+| Type                                | Description                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `TelegramInlineQueryResultLocation` | The current instance of the [TelegramInlineQueryResultLocation](/types/Classes/TelegramInlineQueryResultLocation.md) class |
 
 ---

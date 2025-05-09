@@ -13,7 +13,7 @@ TelegramInputMediaAnimation
 
 ## Constructors
 
-### `TelegramInputMediaAnimation(String media)`
+### `global TelegramInputMediaAnimation(String media)`
 
 Creates a new instance of input animation media with the provided URL or file id
 
@@ -27,7 +27,7 @@ Creates a new instance of input animation media with the provided URL or file id
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -37,7 +37,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withThumbnail(String thumbnail)`
+### `global TelegramInputMediaAnimation withThumbnail(String thumbnail)`
 
 Sets the thumbnail for the animation
 
@@ -47,17 +47,13 @@ Sets the thumbnail for the animation
 | ----------- | ------------------------- |
 | `thumbnail` | The URL to the JPEG image |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                          | Description                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `TelegramInputMediaAnimation` | The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class |
 
-TelegramInputMediaAnimation
-
-**Description**
-
-The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class
-
-### `withCaption(String caption)`
+### `global TelegramInputMediaAnimation withCaption(String caption)`
 
 Sets the caption for the animation
 
@@ -67,17 +63,13 @@ Sets the caption for the animation
 | --------- | ----------------------------------- |
 | `caption` | The text to attach to the animation |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                          | Description                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `TelegramInputMediaAnimation` | The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class |
 
-TelegramInputMediaAnimation
-
-**Description**
-
-The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramInputMediaAnimation withParseMode(String mode)`
 
 Sets the message caption parse mode. Needed when the message text is formatted with `HTML` or `Markdown` markup
 
@@ -87,17 +79,13 @@ Sets the message caption parse mode. Needed when the message text is formatted w
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                          | Description                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `TelegramInputMediaAnimation` | The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class |
 
-TelegramInputMediaAnimation
-
-**Description**
-
-The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramInputMediaAnimation withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the message caption. For example username tags
 
@@ -107,17 +95,13 @@ Adds a special entity that appear in the message caption. For example username t
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                          | Description                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `TelegramInputMediaAnimation` | The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class |
 
-TelegramInputMediaAnimation
-
-**Description**
-
-The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramInputMediaAnimation withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the message caption. For example username tags
 
@@ -127,17 +111,13 @@ Adds special entities that appear in the message caption. For example username t
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                          | Description                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `TelegramInputMediaAnimation` | The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class |
 
-TelegramInputMediaAnimation
-
-**Description**
-
-The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class
-
-### `withDuration(Integer duration)`
+### `global TelegramInputMediaAnimation withDuration(Integer duration)`
 
 Sets the duration of the animation
 
@@ -147,17 +127,13 @@ Sets the duration of the animation
 | ---------- | ---------------------------------------- |
 | `duration` | The duration of the animation in seconds |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                          | Description                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `TelegramInputMediaAnimation` | The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class |
 
-TelegramInputMediaAnimation
-
-**Description**
-
-The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class
-
-### `withLayout(Integer width, Integer height)`
+### `global TelegramInputMediaAnimation withLayout(Integer width, Integer height)`
 
 Sets the layout of the animation by the provided width and height
 
@@ -168,28 +144,20 @@ Sets the layout of the animation by the provided width and height
 | `width`  | The width of the animation  |
 | `height` | The height of the animation |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                          | Description                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `TelegramInputMediaAnimation` | The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class |
 
-TelegramInputMediaAnimation
-
-**Description**
-
-The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class
-
-### `withSpoiler()`
+### `global TelegramInputMediaAnimation withSpoiler()`
 
 Marks the media that it has a spoiler
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInputMediaAnimation
-
-**Description**
-
-The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class
+| Type                          | Description                                                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `TelegramInputMediaAnimation` | The current instance of the [TelegramInputMediaAnimation](/types/Classes/TelegramInputMediaAnimation.md) class |
 
 ---

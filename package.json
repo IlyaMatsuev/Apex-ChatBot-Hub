@@ -11,7 +11,7 @@
         "docs:types:generate": "apexdocs-generate -s ./src/main -t ./docs/types --documentationRootDir '/types' -p global -g docsify --defaultGroupName Classes --title 'Type Definitions'"
     },
     "devDependencies": {
-        "@cparra/apexdocs": "^2.15.0",
+        "@cparra/apexdocs": "^2.25.0",
         "@ilyamatsuev/prettier-plugin-apex": "^3.1.2",
         "@prettier/plugin-xml": "^3.2.0",
         "docsify-cli": "^4.4.4",

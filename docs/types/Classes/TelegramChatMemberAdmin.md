@@ -13,73 +13,73 @@ TelegramChatMemberAdmin
 
 ## Properties
 
-### `canBeEdited` → `Boolean`
+### `global canBeEdited` → `Boolean`
 
 `True` if the bot is allowed to edit administrator privileges of that user
 
-### `canChangeInfo` → `Boolean`
-
-`True` if the user is allowed to change the chat title, photo and other settings
-
-### `canDeleteMessages` → `Boolean`
-
-`True` if the administrator can delete messages of other users
-
-### `canEditMessages` → `Boolean`
-
-`True` if the administrator can edit messages of other users and can pin messages; channels only
-
-### `canInviteUsers` → `Boolean`
-
-`True` if the user is allowed to invite new users to the chat
-
-### `canManageChat` → `Boolean`
+### `global canManageChat` → `Boolean`
 
 `True` if the administrator can access the chat event log, chat statistics, message statistics in channels, see channel members, see anonymous administrators in supergroups and ignore slow mode
 
-### `canManageTopics` → `Boolean`
+### `global canDeleteMessages` → `Boolean`
 
-`True` if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
+`True` if the administrator can delete messages of other users
 
-### `canManageVideoChats` → `Boolean`
+### `global canManageVideoChats` → `Boolean`
 
 `True` if the administrator can manage video chats
 
-### `canPinMessages` → `Boolean`
-
-`True` if the user is allowed to pin messages; groups and supergroups only
-
-### `canPostMessages` → `Boolean`
-
-`True` if the administrator can post in the channel; channels only
-
-### `canPromoteMembers` → `Boolean`
-
-`True` if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly
-
-### `canRestrictMembers` → `Boolean`
+### `global canRestrictMembers` → `Boolean`
 
 `True` if the administrator can restrict, ban or unban chat members
 
-### `customTitle` → `String`
+### `global canPromoteMembers` → `Boolean`
 
-_Inherited_
+`True` if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly
 
-The custom title for this user
+### `global canChangeInfo` → `Boolean`
 
-### `isAnonymous` → `Boolean`
+`True` if the user is allowed to change the chat title, photo and other settings
+
+### `global canInviteUsers` → `Boolean`
+
+`True` if the user is allowed to invite new users to the chat
+
+### `global canPostMessages` → `Boolean`
+
+`True` if the administrator can post in the channel; channels only
+
+### `global canEditMessages` → `Boolean`
+
+`True` if the administrator can edit messages of other users and can pin messages; channels only
+
+### `global canPinMessages` → `Boolean`
+
+`True` if the user is allowed to pin messages; groups and supergroups only
+
+### `global canManageTopics` → `Boolean`
+
+`True` if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
+
+### `global isAnonymous` → `Boolean`
 
 _Inherited_
 
 `True` if the user's presence in the chat is hidden
 
-### `status` → `String`
+### `global customTitle` → `String`
+
+_Inherited_
+
+The custom title for this user
+
+### `global status` → `String`
 
 _Inherited_
 
 The member's status in the chat. One of `member`, `creator`, `administrator`, `restricted`, `left` or `kicked`
 
-### `user` → `TelegramUser`
+### `global user` → `TelegramUser`
 
 _Inherited_
 

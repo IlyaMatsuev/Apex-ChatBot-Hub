@@ -1,10 +1,10 @@
-# BotServiceFactory
+# virtual BotServiceFactory
 
 Factory for creating bot services
 
 ## Methods
 
-### `createBotService(BotModel bot)`
+### `global virtual IBotService createBotService(BotModel bot)`
 
 Creates an instance of the [IBotService](/types/Interfaces/IBotService.md) implementation for the passed [BotModel](/types/Classes/BotModel.md) instance. For example a bot with the type `Telegram` should be related to [TelegramBotService](/types/Classes/TelegramBotService.md)
 
@@ -14,15 +14,11 @@ Creates an instance of the [IBotService](/types/Interfaces/IBotService.md) imple
 | ----- | ------------------------------------------------------------------------- |
 | `bot` | The [BotModel](/types/Classes/BotModel.md) instance to create service for |
 
-#### Return
+#### Returns
 
-**Type**
-
-IBotService
-
-**Description**
-
-The instance of [IBotService](/types/Interfaces/IBotService.md)
+| Type          | Description                                                     |
+| ------------- | --------------------------------------------------------------- |
+| `IBotService` | The instance of [IBotService](/types/Interfaces/IBotService.md) |
 
 #### Throws
 

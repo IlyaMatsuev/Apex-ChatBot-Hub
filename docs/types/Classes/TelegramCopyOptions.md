@@ -11,7 +11,7 @@ TelegramCopyOptions
 
 ## Constructors
 
-### `TelegramCopyOptions()`
+### `global TelegramCopyOptions()`
 
 Creates an instance of the copy message options
 
@@ -19,7 +19,7 @@ Creates an instance of the copy message options
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -29,7 +29,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withCaption(String caption)`
+### `global TelegramCopyOptions withCaption(String caption)`
 
 Sets the new caption for the media
 
@@ -39,17 +39,13 @@ Sets the new caption for the media
 | --------- | ----------------------------- |
 | `caption` | The new caption for the media |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                  | Description                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| `TelegramCopyOptions` | The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class |
 
-TelegramCopyOptions
-
-**Description**
-
-The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramCopyOptions withParseMode(String mode)`
 
 Sets the caption text parse mode. Needed when the caption text is formatted with HTML or Markdown markup
 
@@ -59,17 +55,13 @@ Sets the caption text parse mode. Needed when the caption text is formatted with
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                  | Description                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| `TelegramCopyOptions` | The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class |
 
-TelegramCopyOptions
-
-**Description**
-
-The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramCopyOptions withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the caption text. For example username tags
 
@@ -79,17 +71,13 @@ Adds a special entity that appear in the caption text. For example username tags
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                  | Description                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| `TelegramCopyOptions` | The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class |
 
-TelegramCopyOptions
-
-**Description**
-
-The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramCopyOptions withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the caption text. For example username tags
 
@@ -99,17 +87,13 @@ Adds special entities that appear in the caption text. For example username tags
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                  | Description                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| `TelegramCopyOptions` | The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class |
 
-TelegramCopyOptions
-
-**Description**
-
-The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class
-
-### `asReplyToMessage(String messageId)`
+### `global TelegramCopyOptions asReplyToMessage(String messageId)`
 
 Copies the message as a reply to another message. If the target message was not found, will just send a message
 
@@ -119,17 +103,13 @@ Copies the message as a reply to another message. If the target message was not 
 | ----------- | ------------------------------------------------- |
 | `messageId` | The `Telegram` message id to which bot will reply |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                  | Description                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| `TelegramCopyOptions` | The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class |
 
-TelegramCopyOptions
-
-**Description**
-
-The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class
-
-### `withThreadId(String threadId)`
+### `global TelegramCopyOptions withThreadId(String threadId)`
 
 Sets the unique identifier for the target message thread (topic) of the forum; for forum supergroups only
 
@@ -139,42 +119,30 @@ Sets the unique identifier for the target message thread (topic) of the forum; f
 | ---------- | -------------------------------------------------------------- |
 | `threadId` | The `Telegram` unique id for the target message thread (topic) |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                  | Description                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| `TelegramCopyOptions` | The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class |
 
-TelegramCopyOptions
-
-**Description**
-
-The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class
-
-### `withoutNotification()`
+### `global TelegramCopyOptions withoutNotification()`
 
 Copies the message silently. The receiver will get a notification with no sound
 
-#### Return
+#### Returns
 
-**Type**
+| Type                  | Description                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| `TelegramCopyOptions` | The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class |
 
-TelegramCopyOptions
-
-**Description**
-
-The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class
-
-### `withProtectedContent()`
+### `global TelegramCopyOptions withProtectedContent()`
 
 Protects the contents of the copied message from forwarding and saving
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramCopyOptions
-
-**Description**
-
-The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class
+| Type                  | Description                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| `TelegramCopyOptions` | The current instance of the [TelegramCopyOptions](/types/Classes/TelegramCopyOptions.md) class |
 
 ---

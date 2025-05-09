@@ -11,27 +11,27 @@ ViberMessageReceivedEvent
 
 ## Properties
 
-### `message` → `ViberMessage`
+### `global sender` → `ViberUser`
+
+The sender's user information
+
+### `global message` → `ViberMessage`
 
 The message details
 
-### `messageToken` → `String`
+### `global messageToken` → `String`
 
 _Inherited_
 
 The unique identifier of the related message
 
-### `sender` → `ViberUser`
-
-The sender's user information
-
-### `timestamp` → `DateTime`
+### `global timestamp` → `DateTime`
 
 _Inherited_
 
 The event date and time
 
-### `userId` → `String`
+### `global userId` → `String`
 
 _Inherited_
 

@@ -1,4 +1,4 @@
-# TelegramInputMedia
+# abstract TelegramInputMedia
 
 Describes the input media payload that can be attached as part of `send` or `edit` `Telegram` bot methods.
 Source: https://core.telegram.org/bots/api#inputmedia
@@ -11,7 +11,7 @@ TelegramInputMedia
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 

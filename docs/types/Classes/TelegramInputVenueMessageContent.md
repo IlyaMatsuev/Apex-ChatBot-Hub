@@ -11,7 +11,7 @@ TelegramInputVenueMessageContent
 
 ## Constructors
 
-### `TelegramInputVenueMessageContent(Decimal latitude, Decimal longitude)`
+### `global TelegramInputVenueMessageContent(Decimal latitude, Decimal longitude)`
 
 Creates a new instance of the input message with the provided latitude and longitude
 
@@ -26,7 +26,7 @@ Creates a new instance of the input message with the provided latitude and longi
 
 ## Methods
 
-### `withTitle(String title)`
+### `global TelegramInputVenueMessageContent withTitle(String title)`
 
 Sets the name of the venue
 
@@ -36,17 +36,13 @@ Sets the name of the venue
 | ------- | --------------------- |
 | `title` | The name of the venue |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputVenueMessageContent` | The current instance of the [TelegramInputVenueMessageContent](/types/Classes/TelegramInputVenueMessageContent.md) class |
 
-TelegramInputVenueMessageContent
-
-**Description**
-
-The current instance of the [TelegramInputVenueMessageContent](/types/Classes/TelegramInputVenueMessageContent.md) class
-
-### `withAddress(String address)`
+### `global TelegramInputVenueMessageContent withAddress(String address)`
 
 Sets the address of the venue
 
@@ -56,17 +52,13 @@ Sets the address of the venue
 | --------- | ------------------------ |
 | `address` | The address of the venue |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputVenueMessageContent` | The current instance of the [TelegramInputVenueMessageContent](/types/Classes/TelegramInputVenueMessageContent.md) class |
 
-TelegramInputVenueMessageContent
-
-**Description**
-
-The current instance of the [TelegramInputVenueMessageContent](/types/Classes/TelegramInputVenueMessageContent.md) class
-
-### `withFoursquare(String id, String type)`
+### `global TelegramInputVenueMessageContent withFoursquare(String id, String type)`
 
 Sets the Foursquare information of the venue
 
@@ -77,17 +69,13 @@ Sets the Foursquare information of the venue
 | `id`   | The Foursquare identifier of the venue, if known                                                                                          |
 | `type` | The Foursquare type of the venue, if known. (For example, `arts_entertainment/default`, `arts_entertainment/aquarium` or `food/icecream`) |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputVenueMessageContent` | The current instance of the [TelegramInputVenueMessageContent](/types/Classes/TelegramInputVenueMessageContent.md) class |
 
-TelegramInputVenueMessageContent
-
-**Description**
-
-The current instance of the [TelegramInputVenueMessageContent](/types/Classes/TelegramInputVenueMessageContent.md) class
-
-### `withGooglePlaces(String id, String type)`
+### `global TelegramInputVenueMessageContent withGooglePlaces(String id, String type)`
 
 Sets the Google Places information of the venue
 
@@ -98,14 +86,10 @@ Sets the Google Places information of the venue
 | `id`   | The Google Places identifier of the venue |
 | `type` | The Google Places type of the venue       |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInputVenueMessageContent
-
-**Description**
-
-The current instance of the [TelegramInputVenueMessageContent](/types/Classes/TelegramInputVenueMessageContent.md) class
+| Type                               | Description                                                                                                              |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `TelegramInputVenueMessageContent` | The current instance of the [TelegramInputVenueMessageContent](/types/Classes/TelegramInputVenueMessageContent.md) class |
 
 ---

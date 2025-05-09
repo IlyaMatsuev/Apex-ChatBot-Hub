@@ -9,11 +9,11 @@ TelegramReplyKeyboardMarkupOptions
 
 ## Constructors
 
-### `TelegramReplyKeyboardMarkupOptions()`
+### `global TelegramReplyKeyboardMarkupOptions()`
 
 Creates an instance of the reply keyboard without any buttons, so that they can be added separately
 
-### `TelegramReplyKeyboardMarkupOptions(Button buttons)`
+### `global TelegramReplyKeyboardMarkupOptions(Button buttons)`
 
 Creates an instance of the reply keyboard with the provided buttons row
 
@@ -23,7 +23,7 @@ Creates an instance of the reply keyboard with the provided buttons row
 | --------- | ----------------------------------------------------------- |
 | `buttons` | The list of buttons as a single row to be shown to the user |
 
-### `TelegramReplyKeyboardMarkupOptions(List<List<Button>> buttons)`
+### `global TelegramReplyKeyboardMarkupOptions(List<List<Button>> buttons)`
 
 Creates an instance of the reply keyboard with the provided buttons matrix
 
@@ -37,7 +37,7 @@ Creates an instance of the reply keyboard with the provided buttons matrix
 
 ## Properties
 
-### `buttons` → `List<List<Button>>`
+### `global buttons` → `List<List<Button>>`
 
 The matrix of keyboard buttons to be shown to the receiver. Represents the list of button rows
 
@@ -45,7 +45,7 @@ The matrix of keyboard buttons to be shown to the receiver. Represents the list 
 
 ## Methods
 
-### `addButton(Button button)`
+### `global TelegramReplyKeyboardMarkupOptions addButton(Button button)`
 
 Adds a button to the keyboard's first row
 
@@ -55,17 +55,13 @@ Adds a button to the keyboard's first row
 | -------- | ------------------------------------------------------- |
 | `button` | The button to be added to the first row on the keyboard |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
-TelegramReplyKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
-
-### `addButton(Integer row, Button button)`
+### `global TelegramReplyKeyboardMarkupOptions addButton(Integer row, Button button)`
 
 Adds a button to the specific keyboard's row
 
@@ -76,17 +72,13 @@ Adds a button to the specific keyboard's row
 | `row`    | The row number to add the button to. Counting starts from `0` |
 | `button` | The button to be added to the specified row on the keyboard   |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
-TelegramReplyKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
-
-### `addButtons(Button buttons)`
+### `global TelegramReplyKeyboardMarkupOptions addButtons(Button buttons)`
 
 Adds multiple buttons to the keyboard's first row
 
@@ -96,17 +88,13 @@ Adds multiple buttons to the keyboard's first row
 | --------- | -------------------------------------------------------- |
 | `buttons` | The buttons to be added to the first row on the keyboard |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
-TelegramReplyKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
-
-### `addButtons(Integer row, Button buttons)`
+### `global TelegramReplyKeyboardMarkupOptions addButtons(Integer row, Button buttons)`
 
 Adds multiple buttons to the specific keyboard's row
 
@@ -117,31 +105,23 @@ Adds multiple buttons to the specific keyboard's row
 | `row`     | The row number to add the buttons to. Counting starts from `0` |
 | `buttons` | The buttons to be added to the specified row on the keyboard   |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
-TelegramReplyKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
-
-### `allowResizeKeyboard()`
+### `global TelegramReplyKeyboardMarkupOptions allowResizeKeyboard()`
 
 Allows to resize the keyboard vertically depending on the buttons height. By default the keyboard is always of the same size
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
-TelegramReplyKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
-
-### `allowResizeKeyboard(Boolean allowResize)`
+### `global TelegramReplyKeyboardMarkupOptions allowResizeKeyboard(Boolean allowResize)`
 
 Allows to resize the keyboard vertically depending on the buttons height. By default the keyboard is always of the same size
 
@@ -151,31 +131,23 @@ Allows to resize the keyboard vertically depending on the buttons height. By def
 | ------------- | -------------------------------------------------------------------------------------------- |
 | `allowResize` | Allows to resize the keyboard vertically depending on the buttons height. Default is `false` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
-TelegramReplyKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
-
-### `asPersistent()`
+### `global TelegramReplyKeyboardMarkupOptions asPersistent()`
 
 Makes the keyboard always shown to the client when the regular keyboard is hidden. By default the custom keyboard can be hidden and opened with an icon
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
-TelegramReplyKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
-
-### `asPersistent(Boolean isPersistent)`
+### `global TelegramReplyKeyboardMarkupOptions asPersistent(Boolean isPersistent)`
 
 Makes the keyboard always shown to the client when the regular keyboard is hidden. By default the custom keyboard can be hidden and opened with an icon
 
@@ -185,31 +157,23 @@ Makes the keyboard always shown to the client when the regular keyboard is hidde
 | -------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `isPersistent` | Determines whether the keyboard always shown to the client when the regular keyboard is hidden. Default is `false` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
-TelegramReplyKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
-
-### `asOneTimeKeyboard()`
+### `global TelegramReplyKeyboardMarkupOptions asOneTimeKeyboard()`
 
 Makes the keyboard hidden as soon as it's used. User will have to open a custom keyboard manually after that, if needed
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
-TelegramReplyKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
-
-### `asOneTimeKeyboard(Boolean isOneTime)`
+### `global TelegramReplyKeyboardMarkupOptions asOneTimeKeyboard(Boolean isOneTime)`
 
 Makes the keyboard hidden as soon as it's used. User will have to open a custom keyboard manually after that, if needed
 
@@ -219,17 +183,13 @@ Makes the keyboard hidden as soon as it's used. User will have to open a custom 
 | ----------- | ----------------------------------------------------------------------------------------- |
 | `isOneTime` | Determines whether the keyboard should be hidden as soon as it's used. Default is `false` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
-TelegramReplyKeyboardMarkupOptions
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
-
-### `setInputPlaceholder(String placeholder)`
+### `global TelegramReplyKeyboardMarkupOptions setInputPlaceholder(String placeholder)`
 
 Sets the placeholder to be shown in the input field when the keyboard is active
 
@@ -239,19 +199,43 @@ Sets the placeholder to be shown in the input field when the keyboard is active
 | ------------- | -------------------- |
 | `placeholder` | The placeholder text |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
-TelegramReplyKeyboardMarkupOptions
+### `global TelegramReplyKeyboardMarkupOptions asSelective()`
 
-**Description**
+Makes the keyboard available for the specific users only
 
-The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance
+1. Users that are mentioned `@` in the sent message
+2. If the current message is a reply, use the target user
 
-### `asSelective()`
+#### Returns
 
-### `asSelective(Boolean isSelective)`
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
+
+### `global TelegramReplyKeyboardMarkupOptions asSelective(Boolean isSelective)`
+
+Makes the keyboard available for the specific users only
+
+1. Users that are mentioned `@` in the sent message
+2. If the current message is a reply, use the target user
+
+#### Parameters
+
+| Param         | Description                                                                                      |
+| ------------- | ------------------------------------------------------------------------------------------------ |
+| `isSelective` | Determines whether the keyboard available for the specific users only or not. Default is `false` |
+
+#### Returns
+
+| Type                                 | Description                                                                                                     |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `TelegramReplyKeyboardMarkupOptions` | The current [TelegramReplyKeyboardMarkupOptions](/types/Classes/TelegramReplyKeyboardMarkupOptions.md) instance |
 
 ---
 
@@ -268,7 +252,7 @@ Button
 
 #### Constructors
 
-##### `Button(String text)`
+##### `global Button(String text)`
 
 Creates an instance of the button with the provided text
 
@@ -282,49 +266,37 @@ Creates an instance of the button with the provided text
 
 #### Methods
 
-##### `asContactRequest()`
+##### `global Button asContactRequest()`
 
 Determines if the clicking on the button will request to share user's contact details with the bot
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
-
-##### `asLocationRequest()`
+##### `global Button asLocationRequest()`
 
 Determines if the clicking on the button will request to share user's location with the bot
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
-
-##### `asUserRequest()`
+##### `global Button asUserRequest()`
 
 Determines if the clicking on the button will request to share specific users with the bot (user will get a prompt with the list of available users)
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
-
-##### `asUserRequest(Boolean botsOnly, Boolean premiumOnly)`
+##### `global Button asUserRequest(Boolean botsOnly, Boolean premiumOnly)`
 
 Determines if the clicking on the button will request to share specific users with the bot (user will get a prompt with the list of available users)
 
@@ -335,31 +307,23 @@ Determines if the clicking on the button will request to share specific users wi
 | `botsOnly`    | Determines if the user should be able to choose from their bots                          |
 | `premiumOnly` | Determines if the user should be able to choose from their contacts with premium account |
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
-
-##### `asChatRequest()`
+##### `global Button asChatRequest()`
 
 Determines if the clicking on the button will request to share specific chats with the bot (user will get a prompt with the list of available chats)
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
-
-##### `asChatRequest(ButtonRequestChatConfigs chatRequestConfigs)`
+##### `global Button asChatRequest(ButtonRequestChatConfigs chatRequestConfigs)`
 
 Determines if the clicking on the button will request to share specific chats with the bot (user will get a prompt with the list of available chats)
 
@@ -369,31 +333,23 @@ Determines if the clicking on the button will request to share specific chats wi
 | -------------------- | --------------------------------------------------- |
 | `chatRequestConfigs` | The object with requirements for the chat to choose |
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
-
-##### `asPollRequest()`
+##### `global Button asPollRequest()`
 
 Determines if the clicking on the button will request a user to create a poll and send it to the bot
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
-
-##### `asPollRequest(String pollType)`
+##### `global Button asPollRequest(String pollType)`
 
 Determines if the clicking on the button will request a user to create a poll of a specific type and send it to the bot
 
@@ -403,17 +359,13 @@ Determines if the clicking on the button will request a user to create a poll of
 | ---------- | ------------------------------------------------------------------ |
 | `pollType` | The type of the poll to create. Possible values: `quiz`, `regular` |
 
-###### Return
+###### Returns
 
-**Type**
+| Type     | Description                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance |
 
-Button
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
-
-##### `asWebAppLauncher(String webAppUrl)`
+##### `global Button asWebAppLauncher(String webAppUrl)`
 
 Determines if the clicking on the button will launch a specified web app
 
@@ -423,15 +375,11 @@ Determines if the clicking on the button will launch a specified web app
 | ----------- | ------------------------------------- |
 | `webAppUrl` | The URL of the web app to be launched |
 
-###### Return
+###### Returns
 
-**Type**
-
-Button
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance
+| Type     | Description                                                                                                 |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| `Button` | The current [TelegramReplyKeyboardMarkupOptions.Button](TelegramReplyKeyboardMarkupOptions.Button) instance |
 
 ---
 
@@ -446,7 +394,7 @@ ButtonRequestChatConfigs
 
 #### Constructors
 
-##### `ButtonRequestChatConfigs()`
+##### `global ButtonRequestChatConfigs()`
 
 Creates an instance of the request chat configs without any requirements
 
@@ -454,7 +402,7 @@ Creates an instance of the request chat configs without any requirements
 
 #### Methods
 
-##### `withChannels(Boolean isChannel)`
+##### `global ButtonRequestChatConfigs withChannels(Boolean isChannel)`
 
 Requests only channel chats
 
@@ -464,17 +412,13 @@ Requests only channel chats
 | ----------- | ------------------------------------------------------------------------------------------------------- |
 | `isChannel` | Determines if channel chats should be only requested. Pass `false` to request group or supergroup chats |
 
-###### Return
+###### Returns
 
-**Type**
+| Type                       | Description                                                                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ButtonRequestChatConfigs` | The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance |
 
-ButtonRequestChatConfigs
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
-
-##### `withForums(Boolean isForum)`
+##### `global ButtonRequestChatConfigs withForums(Boolean isForum)`
 
 Requests only forum supergroup chats
 
@@ -484,17 +428,13 @@ Requests only forum supergroup chats
 | --------- | ------------------------------------------------------------------------------------------- |
 | `isForum` | Determines if forum chats should be only requested. Pass `false` to request non-forum chats |
 
-###### Return
+###### Returns
 
-**Type**
+| Type                       | Description                                                                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ButtonRequestChatConfigs` | The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance |
 
-ButtonRequestChatConfigs
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
-
-##### `withUsername(Boolean hasUsername)`
+##### `global ButtonRequestChatConfigs withUsername(Boolean hasUsername)`
 
 Requests only chats that have username
 
@@ -504,17 +444,13 @@ Requests only chats that have username
 | ------------- | ------------------------------------------------------------------------------------------------------------ |
 | `hasUsername` | Determines if chats with usernames should be only requested. Pass `false` to request chats without usernames |
 
-###### Return
+###### Returns
 
-**Type**
+| Type                       | Description                                                                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ButtonRequestChatConfigs` | The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance |
 
-ButtonRequestChatConfigs
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
-
-##### `withCreated(Boolean isCreated)`
+##### `global ButtonRequestChatConfigs withCreated(Boolean isCreated)`
 
 Requests only chats that were created by the user
 
@@ -524,17 +460,13 @@ Requests only chats that were created by the user
 | ----------- | -------------------------------------------------------------------------- |
 | `isCreated` | Determines if chats that were created by the user should be only requested |
 
-###### Return
+###### Returns
 
-**Type**
+| Type                       | Description                                                                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ButtonRequestChatConfigs` | The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance |
 
-ButtonRequestChatConfigs
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
-
-##### `withBot(Boolean hasBot)`
+##### `global ButtonRequestChatConfigs withBot(Boolean hasBot)`
 
 Requests only chats were the bot is presented
 
@@ -544,17 +476,13 @@ Requests only chats were the bot is presented
 | -------- | ---------------------------------------------------------------------- |
 | `hasBot` | Determines if chats were the bot is presented should be only requested |
 
-###### Return
+###### Returns
 
-**Type**
+| Type                       | Description                                                                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ButtonRequestChatConfigs` | The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance |
 
-ButtonRequestChatConfigs
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
-
-##### `withUserAdminRights(List&lt;String&gt; rights)`
+##### `global ButtonRequestChatConfigs withUserAdminRights(List&lt;String&gt; rights)`
 
 Requests only chats were the user has all provided rights list
 
@@ -564,17 +492,13 @@ Requests only chats were the user has all provided rights list
 | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `rights` | The list of available rights for the user in a chat. All values can be checked here: https://core.telegram.org/bots/api#chatadministratorrights |
 
-###### Return
+###### Returns
 
-**Type**
+| Type                       | Description                                                                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ButtonRequestChatConfigs` | The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance |
 
-ButtonRequestChatConfigs
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
-
-##### `withBotAdminRights(List&lt;String&gt; rights)`
+##### `global ButtonRequestChatConfigs withBotAdminRights(List&lt;String&gt; rights)`
 
 Requests only chats were the bot has all provided rights list
 
@@ -584,15 +508,11 @@ Requests only chats were the bot has all provided rights list
 | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `rights` | The list of available rights for the user in a chat. All values can be checked here: https://core.telegram.org/bots/api#chatadministratorrights |
 
-###### Return
+###### Returns
 
-**Type**
-
-ButtonRequestChatConfigs
-
-**Description**
-
-The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance
+| Type                       | Description                                                                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ButtonRequestChatConfigs` | The current [TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs](TelegramReplyKeyboardMarkupOptions.ButtonRequestChatConfigs) instance |
 
 ---
 

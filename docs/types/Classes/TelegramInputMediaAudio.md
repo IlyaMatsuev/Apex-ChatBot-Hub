@@ -13,7 +13,7 @@ TelegramInputMediaAudio
 
 ## Constructors
 
-### `TelegramInputMediaAudio(String media)`
+### `global TelegramInputMediaAudio(String media)`
 
 Creates a new instance of input audio media with the provided URL or file id
 
@@ -27,7 +27,7 @@ Creates a new instance of input audio media with the provided URL or file id
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -37,7 +37,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withThumbnail(String thumbnail)`
+### `global TelegramInputMediaAudio withThumbnail(String thumbnail)`
 
 Sets the thumbnail for the audio
 
@@ -47,17 +47,13 @@ Sets the thumbnail for the audio
 | ----------- | ------------------------- |
 | `thumbnail` | The URL to the JPEG image |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaAudio` | The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class |
 
-TelegramInputMediaAudio
-
-**Description**
-
-The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class
-
-### `withCaption(String caption)`
+### `global TelegramInputMediaAudio withCaption(String caption)`
 
 Sets the caption for the audio
 
@@ -67,17 +63,13 @@ Sets the caption for the audio
 | --------- | ------------------------------- |
 | `caption` | The text to attach to the audio |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaAudio` | The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class |
 
-TelegramInputMediaAudio
-
-**Description**
-
-The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class
-
-### `withParseMode(String mode)`
+### `global TelegramInputMediaAudio withParseMode(String mode)`
 
 Sets the message caption parse mode. Needed when the message text is formatted with `HTML` or `Markdown` markup
 
@@ -87,17 +79,13 @@ Sets the message caption parse mode. Needed when the message text is formatted w
 | ------ | ------------------------------------------------------------------------------------ |
 | `mode` | The type of the formatting to use. Possible values: `HTML`, `Markdown`, `MarkdownV2` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaAudio` | The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class |
 
-TelegramInputMediaAudio
-
-**Description**
-
-The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class
-
-### `withMessageEntity(TelegramMessageEntity entity)`
+### `global TelegramInputMediaAudio withMessageEntity(TelegramMessageEntity entity)`
 
 Adds a special entity that appear in the message caption. For example username tags
 
@@ -107,17 +95,13 @@ Adds a special entity that appear in the message caption. For example username t
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entity` | The instance of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md), special message entity. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaAudio` | The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class |
 
-TelegramInputMediaAudio
-
-**Description**
-
-The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class
-
-### `withMessageEntities(TelegramMessageEntity entities)`
+### `global TelegramInputMediaAudio withMessageEntities(TelegramMessageEntity entities)`
 
 Adds special entities that appear in the message caption. For example username tags
 
@@ -127,17 +111,13 @@ Adds special entities that appear in the message caption. For example username t
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `entities` | The list of [TelegramMessageEntity](/types/Classes/TelegramMessageEntity.md) instances, special message entities. E.g. hashtag, username, URL, etc. |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaAudio` | The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class |
 
-TelegramInputMediaAudio
-
-**Description**
-
-The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class
-
-### `withDuration(Integer duration)`
+### `global TelegramInputMediaAudio withDuration(Integer duration)`
 
 Sets the duration of the audio
 
@@ -147,17 +127,13 @@ Sets the duration of the audio
 | ---------- | ------------------------------------ |
 | `duration` | The duration of the audio in seconds |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaAudio` | The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class |
 
-TelegramInputMediaAudio
-
-**Description**
-
-The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class
-
-### `withTitle(String title)`
+### `global TelegramInputMediaAudio withTitle(String title)`
 
 Sets the title of the audio
 
@@ -167,17 +143,13 @@ Sets the title of the audio
 | ------- | ---------------------- |
 | `title` | The title of the audio |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaAudio` | The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class |
 
-TelegramInputMediaAudio
-
-**Description**
-
-The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class
-
-### `withPerformer(String performer)`
+### `global TelegramInputMediaAudio withPerformer(String performer)`
 
 Sets the performer of the audio
 
@@ -187,14 +159,10 @@ Sets the performer of the audio
 | ----------- | -------------------------- |
 | `performer` | The performer of the audio |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramInputMediaAudio
-
-**Description**
-
-The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramInputMediaAudio` | The current instance of the [TelegramInputMediaAudio](/types/Classes/TelegramInputMediaAudio.md) class |
 
 ---

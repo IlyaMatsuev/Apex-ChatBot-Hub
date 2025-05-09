@@ -11,7 +11,7 @@ TelegramSendDiceOptions
 
 ## Properties
 
-### `entities` → `List<TelegramMessageEntity>`
+### `global entities` → `List<TelegramMessageEntity>`
 
 _Inherited_
 
@@ -21,7 +21,7 @@ The list of special entities that appear in a message text. E.g. hashtag, userna
 
 ## Methods
 
-### `withEmoji(String emoji)`
+### `global TelegramSendDiceOptions withEmoji(String emoji)`
 
 Sets a specific emoji on which the dice throw animation is based
 
@@ -31,17 +31,13 @@ Sets a specific emoji on which the dice throw animation is based
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `emoji` | One of the supported emojis: `🎲`, `🎯` and `🎳` - generate values in range: `1..6` `🏀` and `⚽` - generate values in range `1..5` `🎰` - generate values in range `1..64` Default is `🎲` |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendDiceOptions` | The current instance of the [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) class |
 
-TelegramSendDiceOptions
-
-**Description**
-
-The current instance of the [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) class
-
-### `withThreadId(String threadId)`
+### `global TelegramSendDiceOptions withThreadId(String threadId)`
 
 Sets the forum channel thread id where the message has to be sent
 
@@ -51,45 +47,33 @@ Sets the forum channel thread id where the message has to be sent
 | ---------- | -------------------------------------------------------------- |
 | `threadId` | The `Telegram` unique id for the target message thread (topic) |
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendDiceOptions` | The current instance of the [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) class |
 
-TelegramSendDiceOptions
-
-**Description**
-
-The current instance of the [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) class
-
-### `withoutNotification()`
+### `global TelegramSendDiceOptions withoutNotification()`
 
 Sends the message silently. The receiver will get a notification with no sound
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendDiceOptions` | The current instance of the [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) class |
 
-TelegramSendDiceOptions
-
-**Description**
-
-The current instance of the [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) class
-
-### `withProtectedContent()`
+### `global TelegramSendDiceOptions withProtectedContent()`
 
 Protects the contents of the sent message from forwarding and saving
 
-#### Return
+#### Returns
 
-**Type**
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendDiceOptions` | The current instance of the [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) class |
 
-TelegramSendDiceOptions
-
-**Description**
-
-The current instance of the [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) class
-
-### `asReplyToMessage(String messageId)`
+### `global TelegramSendDiceOptions asReplyToMessage(String messageId)`
 
 Sends the message as a reply to another message. If the target message was not found, will just send a message
 
@@ -99,14 +83,10 @@ Sends the message as a reply to another message. If the target message was not f
 | ----------- | ------------------------------------------------- |
 | `messageId` | The `Telegram` message id to which bot will reply |
 
-#### Return
+#### Returns
 
-**Type**
-
-TelegramSendDiceOptions
-
-**Description**
-
-The current instance of the [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) class
+| Type                      | Description                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `TelegramSendDiceOptions` | The current instance of the [TelegramSendDiceOptions](/types/Classes/TelegramSendDiceOptions.md) class |
 
 ---

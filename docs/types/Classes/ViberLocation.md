@@ -8,11 +8,11 @@ ViberLocation
 
 ## Properties
 
-### `latitude` → `Decimal`
+### `global latitude` → `Decimal`
 
 The location latitude
 
-### `longitude` → `Decimal`
+### `global longitude` → `Decimal`
 
 The location longitude
 
