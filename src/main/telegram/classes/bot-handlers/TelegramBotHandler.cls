@@ -94,7 +94,7 @@ global abstract class TelegramBotHandler implements IBotHandler {
         TelegramBotContext tgContext = (TelegramBotContext) context;
         TelegramUpdateEvent tgEvent = tgContext.getUpdateEvent();
         TelegramUpdateEventType eventType = tgEvent.getType();
-        BotJsonPayload eventPayload = tgEvent.getPayload().getJsonPayload(eventType.name());
+        BotJsonPayload eventPayload = tgEvent.getEventPayload();
 
         if (eventType == TelegramUpdateEventType.Message) {
             onMessageReceived(tgContext, new TelegramMessageEvent(eventPayload));

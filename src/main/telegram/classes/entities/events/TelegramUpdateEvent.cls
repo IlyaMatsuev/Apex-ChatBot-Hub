@@ -57,6 +57,14 @@ global class TelegramUpdateEvent extends BotPayload implements IBotUpdateEvent {
     }
 
     /**
+     * @description Returns the instance of an event JSON payload used for creating instances of event models like <<TelegramMessageEvent>>, <<TelegramInlineQueryEvent>>, etc.
+     * @return The instance of the <<BotJsonPayload>>
+     */
+    global BotJsonPayload getEventPayload() {
+        return getPayload().getJsonPayload(eventType.name());
+    }
+
+    /**
      * @description Returns the source JSON payload of the update event
      * @return The instance of the <<BotJsonPayload>>
      */
