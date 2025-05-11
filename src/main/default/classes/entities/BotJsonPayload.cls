@@ -261,6 +261,29 @@ global virtual class BotJsonPayload {
     }
 
     /**
+     * @description Returns a value from the JSON by the provided key, converting it to a `List` of <<BotJsonPayload>>
+     * @param key The JSON value key
+     * @param listEntryType The type of an entry of the result payload list
+     * @return The <<BotJsonPayload>> `List` instance
+     */
+    global List<BotJsonPayload> getJsonPayloadList(String key, Type listEntryType) {
+        Object value = get(key);
+        if (value == null || !(value instanceof List<Object>)) {
+            return null;
+        }
+        List<BotJsonPayload> payloadList = (List<BotJsonPayload>) JSON.deserialize(
+            '[]',
+            Type.forName('List<' + listEntryType.getName() + '>')
+        );
+        for (Object val : (List<Object>) value) {
+            BotJsonPayload payload = (BotJsonPayload) listEntryType.newInstance();
+            payload.set(new BotJsonPayload((Map<String, Object>) val));
+            payloadList.add(payload);
+        }
+        return payloadList;
+    }
+
+    /**
      * @description Returns a value from the JSON by the provided key
      * @param key The JSON value key
      * @return The value from the JSON
@@ -277,6 +300,16 @@ global virtual class BotJsonPayload {
      */
     global BotJsonPayload set(String key, Object value) {
         return set(key, value, false);
+    }
+
+    /**
+     * @description Sets all values from another instance of <<BotJsonPayload>>
+     * @param payload Another payload to copy values from
+     * @return The current instance of the <<BotJsonPayload>> class
+     */
+    global BotJsonPayload set(BotJsonPayload payload) {
+        values.putAll(payload.getValues());
+        return this;
     }
 
     /**
