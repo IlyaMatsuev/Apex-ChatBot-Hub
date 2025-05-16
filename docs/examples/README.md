@@ -8,13 +8,13 @@ The _"specific"_ way means that you create a bot handler that is meant to be use
 
 > I highly recommend checking [the types documentation](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types) to see what other methods and fields are available in classes that are shown in the examples below.
 
--   [Generic: Handle New Message](#generic-handle-new-message)
--   [Telegram: Handle New Message](#telegram-handle-new-message)
--   [Telegram: Handle Edited Message](#telegram-handle-edited-message)
--   [Telegram: Send New Message](#telegram-send-new-message)
--   [Viber: Handle New Message](#viber-handle-new-message)
--   [Viber: Handle Subscribe](#viber-handle-subscribe)
--   [Viber: Send New Message](#viber-send-new-message)
+- [Generic: Handle New Message](#generic-handle-new-message)
+- [Telegram: Handle New Message](#telegram-handle-new-message)
+- [Telegram: Handle Edited Message](#telegram-handle-edited-message)
+- [Telegram: Send New Message](#telegram-send-new-message)
+- [Viber: Handle New Message](#viber-handle-new-message)
+- [Viber: Handle Subscribe](#viber-handle-subscribe)
+- [Viber: Send New Message](#viber-send-new-message)
 
 ## Generic: Handle New Message
 

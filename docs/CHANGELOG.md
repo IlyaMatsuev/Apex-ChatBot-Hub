@@ -30,12 +30,12 @@ For users, who only need to work with the data captured by bots, there's now a `
 
 It used to be possible to send the text messages only. Now, these message types are supported:
 
--   text
--   image
--   video
--   file
--   contact
--   location
+- text
+- image
+- video
+- file
+- contact
+- location
 
 These are common message types that supported when using a `IBotService` interface. If you know exactly which service you want to use, you'll have access to more methods, like sending a sticker, venue, or audio (for `Telegram`).
 
@@ -92,7 +92,7 @@ Due to the format the telegram message ids are generated there was a possibility
 
 ## Bugfixes
 
--   When using `Viber` service to send a message, the callout would never fail and throw an exception even if the parameters was incorrect. This is fixed, now the invalid callout will cause the exception, same as for the `Telegram` bot service.
+- When using `Viber` service to send a message, the callout would never fail and throw an exception even if the parameters was incorrect. This is fixed, now the invalid callout will cause the exception, same as for the `Telegram` bot service.
 
 ---
 

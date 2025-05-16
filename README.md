@@ -42,11 +42,11 @@ public class TestMessageHandler implements IBotHandler {
 
 Next, you can go to the `Bot Hub` application (which should be installed with the package) and click the `Bots` tab. There you can click `New` and fill in all required details:
 
--   Name: Any name you want for your bot to be displayed in Salesforce
--   Type: Bot messenger type (e.g. `Telegram` or `Viber`).
--   Webhook Events: The list of the event types that should be handled by the bot webhook, e.g. on Message or on Edit Message (different for every bot type)
--   Token: The authentication token that you should have received before, when created a bot
--   Handler: The name of the handler class that you created before. In this example it is `TestMessageHandler`
+- Name: Any name you want for your bot to be displayed in Salesforce
+- Type: Bot messenger type (e.g. `Telegram` or `Viber`).
+- Webhook Events: The list of the event types that should be handled by the bot webhook, e.g. on Message or on Edit Message (different for every bot type)
+- Token: The authentication token that you should have received before, when created a bot
+- Handler: The name of the handler class that you created before. In this example it is `TestMessageHandler`
 
 Create a bot, wait a few seconds and make sure that the webhook configuration component is green. If it isn't it means that the webhook was not set and there is some problem. Usualy this happens because the bot token was not correct.
 
