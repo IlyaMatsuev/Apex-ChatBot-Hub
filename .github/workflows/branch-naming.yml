@@ -13,6 +13,5 @@ jobs:
       - name: 'Validate Branch Name'
         uses: deepakputhraya/action-branch-name@master
         with:
-          regex: '([a-z])+\/([a-z])+'
-          allowed_prefixes: 'feature,bugfix'
+          allowed_prefixes: 'feature,bugfix,release'
           min_length: 6

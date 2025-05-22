@@ -22,3 +22,7 @@
 
 # Logs
 *.log
+
+# Invalid formatting in <flow> element
+src/site-permissions/profiles/BotPublic Profile.profile-meta.xml
+src/main/default/permissionsets/BotAdmin.permissionset-meta.xml

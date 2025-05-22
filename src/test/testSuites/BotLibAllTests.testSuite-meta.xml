@@ -4,6 +4,7 @@
     <testClassName>BotTriggerTest</testClassName>
     <testClassName>BotUpdateApiTest</testClassName>
     <testClassName>BotUpdateEventTriggerTest</testClassName>
+    <testClassName>BotUpdateFlowControllerTest</testClassName>
     <testClassName>BotUpsertDataEventTriggerTest</testClassName>
     <testClassName>BotWebhookStatusControllerTest</testClassName>
     <testClassName>TelegramBotHandlerTest</testClassName>

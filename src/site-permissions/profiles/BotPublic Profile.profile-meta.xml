@@ -47,5 +47,19 @@
         <object>Bot__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <objectPermissions>
+        <allowCreate>false</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>false</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>UserExternalCredential</object>
+        <viewAllFields>true</viewAllFields>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <flowAccesses>
+        <enabled>true</enabled>
+        <flow>HandleBotUpdate</flow>
+    </flowAccesses>
     <userLicense>Guest User License</userLicense>
 </Profile>

@@ -7,6 +7,10 @@
         <value xsi:type="xsd:string">https://chatapi.viber.com/pa</value>
     </values>
     <values>
+        <field>BaseBotHandler__c</field>
+        <value xsi:type="xsd:string">ViberBotHandler</value>
+    </values>
+    <values>
         <field>BotCalloutService__c</field>
         <value xsi:type="xsd:string">ViberBotCalloutService</value>
     </values>
@@ -31,7 +35,7 @@
         <value xsi:type="xsd:string">ViberBotWebhookService</value>
     </values>
     <values>
-        <field>BaseBotHandler__c</field>
-        <value xsi:type="xsd:string">ViberBotHandler</value>
+        <field>HandleWebhooksInSeparateTransaction__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
 </CustomMetadata>

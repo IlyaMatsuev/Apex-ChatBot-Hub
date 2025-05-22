@@ -6,7 +6,7 @@ public class BotUtils {
 
     public static void saveAsync(List<SObject> records, String externalIdField) {
         if (!records.isEmpty()) {
-            Eventbus.publish(
+            EventBus.publish(
                 new BotUpsertDataEvent__e(Data__c = JSON.serialize(records), ExternalIdField__c = externalIdField)
             );
         }

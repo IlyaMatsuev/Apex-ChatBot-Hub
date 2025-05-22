@@ -7,6 +7,10 @@
         <value xsi:type="xsd:string">https://api.telegram.org/bot</value>
     </values>
     <values>
+        <field>BaseBotHandler__c</field>
+        <value xsi:type="xsd:string">TelegramBotHandler</value>
+    </values>
+    <values>
         <field>BotCalloutService__c</field>
         <value xsi:type="xsd:string">BotCalloutService</value>
     </values>
@@ -31,7 +35,7 @@
         <value xsi:type="xsd:string">TelegramBotWebhookService</value>
     </values>
     <values>
-        <field>BaseBotHandler__c</field>
-        <value xsi:type="xsd:string">TelegramBotHandler</value>
+        <field>HandleWebhooksInSeparateTransaction__c</field>
+        <value xsi:type="xsd:boolean">false</value>
     </values>
 </CustomMetadata>

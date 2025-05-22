@@ -1,4 +1,4 @@
-public class BotUpdateEventHandler implements Triggers.IHandler {
+public class BotUpdateEventHandler implements Triggers.IHandler, IBotUpdateEventHandler {
     private final BotServiceFactory serviceFactory;
 
     public BotUpdateEventHandler() {
@@ -13,9 +13,20 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
     public void handle(Triggers.Context context) {
         List<IBotContext> contexts = createBotContexts(context.props.newList);
 
-        saveChatDetails(contexts);
+        saveChatDetails(contexts, false);
 
         System.enqueueJob(new UpdateEventExecutor(contexts));
+    }
+
+    public void handleSync(String botJson, String botUpdatePayloadJson) {
+        List<BotUpdateEvent__e> updateWrappers = new List<BotUpdateEvent__e> {
+            new BotUpdateEvent__e(Bot__c = botJson, Payload__c = botUpdatePayloadJson)
+        };
+        List<IBotContext> contexts = createBotContexts(updateWrappers);
+
+        saveChatDetails(contexts, true);
+
+        handleUpdateEvents(contexts);
     }
 
     private List<IBotContext> createBotContexts(List<BotUpdateEvent__e> events) {
@@ -28,7 +39,7 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         return contexts;
     }
 
-    private void saveChatDetails(List<IBotContext> contexts) {
+    private void saveChatDetails(List<IBotContext> contexts, Boolean async) {
         List<Chat__c> chats = new List<Chat__c>();
         List<ChatUser__c> chatUsers = new List<ChatUser__c>();
         List<ChatMessage__c> chatMessages = new List<ChatMessage__c>();
@@ -53,9 +64,17 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
             }
         }
 
-        Database.upsert(chats, Chat__c.ExternalId__c);
-        Database.upsert(chatUsers, ChatUser__c.ExternalId__c);
-        Database.upsert(chatMessages, ChatMessage__c.ExternalId__c);
+        if (async) {
+            List<SObject> recordsToUpdate = new List<SObject>();
+            recordsToUpdate.addAll(chats);
+            recordsToUpdate.addAll(chatUsers);
+            recordsToUpdate.addAll(chatMessages);
+            BotUtils.saveAsync(recordsToUpdate, 'ExternalId__c');
+        } else {
+            Database.upsert(chats, Chat__c.ExternalId__c);
+            Database.upsert(chatUsers, ChatUser__c.ExternalId__c);
+            Database.upsert(chatMessages, ChatMessage__c.ExternalId__c);
+        }
     }
 
     private Chat__c getChat(BotModel bot, IBotChat chat) {
@@ -105,18 +124,20 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         );
     }
 
-    private String getValueOrEmptyString(String value) {
-        return String.isBlank(value) ? '' : value;
+    private static void handleUpdateEvents(List<IBotContext> contexts) {
+        for (IBotContext context : contexts) {
+            BotModel bot;
+            try {
+                bot = context.getBot();
+                bot.handler.handle(context);
+            } catch (Exception error) {
+                BotErrorLogger.log(bot?.id, error);
+            }
+        }
     }
 
-    private class UpdateEventWrapper {
-        public final IBotContext context;
-        public final IBotUpdateEvent updateEvent;
-
-        private UpdateEventWrapper(IBotContext context, IBotUpdateEvent updateEvent) {
-            this.context = context;
-            this.updateEvent = updateEvent;
-        }
+    private String getValueOrEmptyString(String value) {
+        return String.isBlank(value) ? '' : value;
     }
 
     private class UpdateEventExecutor implements Queueable, Database.AllowsCallouts {
@@ -127,19 +148,7 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         }
 
         public void execute(QueueableContext ctx) {
-            for (IBotContext context : contexts) {
-                handleUpdateEvent(context);
-            }
-        }
-
-        private void handleUpdateEvent(IBotContext context) {
-            BotModel bot;
-            try {
-                bot = context.getBot();
-                bot.handler.handle(context);
-            } catch (Exception error) {
-                BotErrorLogger.log(bot?.id, error);
-            }
+            handleUpdateEvents(contexts);
         }
     }
 }
