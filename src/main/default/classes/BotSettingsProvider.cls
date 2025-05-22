@@ -57,7 +57,8 @@ public class BotSettingsProvider {
                 BaseBotHandler__c = 'TelegramBotHandler',
                 BotUpdateResolver__c = 'TelegramBotUpdateResolver',
                 BotWebhookService__c = 'TelegramBotWebhookService',
-                BotCalloutService__c = 'BotCalloutService'
+                BotCalloutService__c = 'BotCalloutService',
+                HandleWebhooksInSeparateTransaction__c = false
             )
         );
         settings.put(
@@ -71,7 +72,8 @@ public class BotSettingsProvider {
                 BaseBotHandler__c = 'ViberBotHandler',
                 BotUpdateResolver__c = 'ViberBotUpdateResolver',
                 BotWebhookService__c = 'ViberBotWebhookService',
-                BotCalloutService__c = 'ViberBotCalloutService'
+                BotCalloutService__c = 'ViberBotCalloutService',
+                HandleWebhooksInSeparateTransaction__c = false
             )
         );
     }

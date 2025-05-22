@@ -71,6 +71,73 @@ private class BotUpdateEventTriggerTest {
     }
 
     @IsTest
+    private static void handleSync_telegramBotMessage_shouldHandleMessageAndInsertChatDetails() {
+        Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
+
+        BotModel bot = createBot(BotType.Telegram);
+
+        Test.startTest();
+        new BotUpdateEventHandler().handleSync(bot.toJson(), createTelegramPayload().toJson());
+        Test.getEventBus().deliver();
+        Test.stopTest();
+
+        List<Chat__c> chats = [SELECT Name, Bot__c, ExternalId__c FROM Chat__c];
+        List<ChatUser__c> users = [SELECT Name, FirstName__c, LastName__c, Username__c, ExternalId__c FROM ChatUser__c];
+        List<ChatMessage__c> messages = [
+            SELECT Name, Text__c, User__c, Bot__c, Chat__c, ExternalId__c, SendDate__c
+            FROM ChatMessage__c
+        ];
+        // Chat
+        Assert.areEqual(1, chats.size());
+        Assert.areEqual('Awesome chat', chats.get(0).Name);
+        Assert.areEqual(bot.id, chats.get(0).Bot__c);
+        Assert.areEqual('876541222:'.rightPad(40, bot.tokenHash), chats.get(0).ExternalId__c);
+        // User
+        Assert.areEqual(1, users.size());
+        Assert.areEqual('matsuev', users.get(0).Name);
+        Assert.isNull(users.get(0).FirstName__c);
+        Assert.areEqual('matsuev', users.get(0).LastName__c);
+        Assert.areEqual('ilyamatsuev', users.get(0).Username__c);
+        Assert.areEqual('876541222', users.get(0).ExternalId__c);
+        // Message
+        Assert.areEqual(1, messages.size());
+        Assert.areEqual('Hello world!', messages.get(0).Text__c);
+        Assert.areEqual(users.get(0).Id, messages.get(0).User__c);
+        Assert.areEqual(chats.get(0).Id, messages.get(0).Chat__c);
+        Assert.isNull(messages.get(0).Bot__c);
+        Assert.areEqual('223123123:876541222', messages.get(0).ExternalId__c);
+        Assert.areEqual(Date.newInstance(2022, 1, 1), messages.get(0).SendDate__c.date());
+
+        List<IBotContext> contexts = BotHandlerMock.executedContexts;
+        Assert.areEqual(1, contexts.size());
+        Assert.isInstanceOfType(contexts.get(0).getUpdateEvent(), TelegramUpdateEvent.class);
+
+        IBotUpdateEvent updateEvent = contexts.get(0).getUpdateEvent();
+        Assert.areEqual(TelegramUpdateEventType.Message, updateEvent.getType());
+
+        IBotMessage messageUpdate = updateEvent.getMessage();
+
+        Assert.areEqual('223123123', messageUpdate.getId());
+        Assert.areEqual('Hello world!', messageUpdate.getText());
+        Assert.isNull(messageUpdate.getMediaUrl());
+        Assert.areEqual(BotMessageType.Text, messageUpdate.getType());
+        Assert.isNotNull(messageUpdate.getParameters());
+        Assert.areEqual(Date.newInstance(2022, 1, 1), messageUpdate.getSendDate().date());
+
+        IBotChat chatUpdate = updateEvent.getChat();
+
+        Assert.areEqual('876541222', chatUpdate.getId());
+        Assert.areEqual('Awesome chat', chatUpdate.getTitle());
+
+        IBotUser userUpdate = chatUpdate.getSender();
+
+        Assert.areEqual('876541222', userUpdate.getId());
+        Assert.isNull(userUpdate.getFirstName());
+        Assert.areEqual('matsuev', userUpdate.getLastName());
+        Assert.areEqual('ilyamatsuev', userUpdate.getUsername());
+    }
+
+    @IsTest
     private static void handle_telegramBotInlineQuery_shouldHandleInlineQueryAndInsertChatDetails() {
         Test.setMock(HttpCalloutMock.class, new TelegramBotCalloutMock());
 

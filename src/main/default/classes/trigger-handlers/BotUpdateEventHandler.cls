@@ -1,4 +1,4 @@
-public class BotUpdateEventHandler implements Triggers.IHandler {
+public class BotUpdateEventHandler implements Triggers.IHandler, IBotUpdateEventHandler {
     private final BotServiceFactory serviceFactory;
 
     public BotUpdateEventHandler() {
