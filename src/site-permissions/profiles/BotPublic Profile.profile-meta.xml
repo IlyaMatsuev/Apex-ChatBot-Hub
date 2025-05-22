@@ -59,9 +59,7 @@
     </objectPermissions>
     <flowAccesses>
         <enabled>true</enabled>
-        <flow>
-HandleBotUpdate;
-        </flow>
+        <flow>HandleBotUpdate</flow>
     </flowAccesses>
     <userLicense>Guest User License</userLicense>
 </Profile>

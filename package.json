@@ -13,7 +13,7 @@
     "devDependencies": {
         "@cparra/apexdocs": "^2.25.0",
         "@ilyamatsuev/prettier-plugin-apex": "^3.1.2",
-        "@prettier/plugin-xml": "^3.2.0",
+        "@prettier/plugin-xml": "^3.4.1",
         "docsify-cli": "^4.4.4",
         "husky": "^4.2.1",
         "lint-staged": "^10.0.7",

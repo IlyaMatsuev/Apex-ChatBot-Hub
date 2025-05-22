@@ -19,8 +19,7 @@
         {
             "files": "*.xml",
             "options": {
-                "printWidth": 240,
-                "bracketSameLine": true
+                "printWidth": 240
             }
         },
         {

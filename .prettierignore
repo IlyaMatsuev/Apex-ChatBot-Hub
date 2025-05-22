@@ -22,3 +22,6 @@
 
 # Logs
 *.log
+
+# Invalid formatting
+src/site-permissions/profiles/BotPublic Profile.profile-meta.xml
