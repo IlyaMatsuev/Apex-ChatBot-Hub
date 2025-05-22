@@ -27,7 +27,13 @@ global class BotUpdateApi {
                 );
             }
 
-            handleUpdate(bot.toJson(), request.requestBody.toString());
+            if (BotSettingsProvider.get(bot.type).HandleWebhooksInSeparateTransaction__c) {
+                EventBus.publish(
+                    new BotUpdateEvent__e(Bot__c = bot.toJson(), Payload__c = request.requestBody.toString())
+                );
+            } else {
+                handleUpdateSync(bot.toJson(), request.requestBody.toString());
+            }
 
             response.responseBody = Blob.valueOf(RESPONSE_OK);
         } catch (Exception error) {
@@ -43,7 +49,7 @@ global class BotUpdateApi {
         return (IBotUpdateResolver) BotUtils.createInstance(BotSettingsProvider.get(type).BotUpdateResolver__c);
     }
 
-    private static void handleUpdate(String botJson, String updatePayloadJson) {
+    private static void handleUpdateSync(String botJson, String updatePayloadJson) {
         Flow.Interview.HandleBotUpdate updatesHandler = new Flow.Interview.HandleBotUpdate(
             new Map<String, Object> { 'botJson' => botJson, 'botUpdatePayload' => updatePayloadJson }
         );

@@ -31,7 +31,8 @@ public class BotSettingsProvider {
                 BotUpdateResolver__c,
                 BotUpdateEvent__c,
                 BotHandlerContext__c,
-                BaseBotHandler__c
+                BaseBotHandler__c,
+                HandleWebhooksInSeparateTransaction__c
             FROM BotSetting__mdt
             LIMIT :SETTING_QUERY_LIMIT
         ];
