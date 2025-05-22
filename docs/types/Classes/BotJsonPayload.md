@@ -327,6 +327,23 @@ Returns a value from the JSON by the provided key, converting it to a `List` of 
 | ---------------------- | ---------------------------------------------------------------------- |
 | `List<BotJsonPayload>` | The [BotJsonPayload](/types/Classes/BotJsonPayload.md) `List` instance |
 
+### `global List<BotJsonPayload> getJsonPayloadList(String key, Type listEntryType)`
+
+Returns a value from the JSON by the provided key, converting it to a `List` of [BotJsonPayload](/types/Classes/BotJsonPayload.md)
+
+#### Parameters
+
+| Param           | Description                                     |
+| --------------- | ----------------------------------------------- |
+| `key`           | The JSON value key                              |
+| `listEntryType` | The type of an entry of the result payload list |
+
+#### Returns
+
+| Type                   | Description                                                            |
+| ---------------------- | ---------------------------------------------------------------------- |
+| `List<BotJsonPayload>` | The [BotJsonPayload](/types/Classes/BotJsonPayload.md) `List` instance |
+
 ### `global Object get(String key)`
 
 Returns a value from the JSON by the provided key
@@ -353,6 +370,22 @@ Sets a new value to the JSON payload
 | ------- | ------------------------ |
 | `key`   | The key of the new value |
 | `value` | The value                |
+
+#### Returns
+
+| Type             | Description                                                                          |
+| ---------------- | ------------------------------------------------------------------------------------ |
+| `BotJsonPayload` | The current instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class |
+
+### `global BotJsonPayload set(BotJsonPayload payload)`
+
+Sets all values from another instance of [BotJsonPayload](/types/Classes/BotJsonPayload.md)
+
+#### Parameters
+
+| Param     | Description                         |
+| --------- | ----------------------------------- |
+| `payload` | Another payload to copy values from |
 
 #### Returns
 

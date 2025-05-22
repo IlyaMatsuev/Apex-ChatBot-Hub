@@ -1,4 +1,4 @@
-# Unreleased
+# 3.0
 
 ## Breaking changes
 
@@ -15,6 +15,32 @@ Currently, `IBotService` has only one method `send(String chatId)` with all meth
 To be aligned with the OOP style that is being used across the project, I created a new [BotModel](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types/Classes/BotModel) class which is just a wrapper around the `Bot__c` sObject record. All references of `Bot__c` where replaced with that model.
 
 ## What's New
+
+### Decreased Bot Webhook Updates Handling Time
+
+Due to the change in the core of the framework I was able to significantly increase the speed of handling webhook updates.
+
+#### How it works now:
+
+- The updates are received via the Force.com Site as a guest user
+- The platform event is fired, to allow handling the update as an Automated Process instead
+- The user, chat, and messages are upserted **synchronously** accordingly based on the incoming update
+- The queueable job is scheduled after that, to handle the update with an Apex handler from the `Bot__c` record
+
+#### How it will work:
+
+- The updates are received via the Force.com Site as a guest user (no changes)
+- The new background flow is launched under the guest user in the System Context mode (Access All Data)
+- The user, chat, and messages are upserted **asynchronously** using the platform event
+- The `Bot__c` handler implementation is executed in the same transaction
+- This change will **_greatly_** speed up the processing of the Webhook updates since we avoid two asynchronous executions (one for the platform event, and the second for the queueable job).
+
+#### Cons:
+
+- Even when running in System Context via the flow, if an Apex class used for handling the updates has the with sharing option, the guest user won't be able to perform CRUD operations on sObjects (read only).
+- The `Bot__c` handler implementation is running in the same transaction, so all the transaction limits are also shared with this framework's implementation.
+
+> The new way of handling the webhooks will be enabled by ticking the `Handle Webhooks In Separate Transaction` setting under the `Bot Setting` custom metadata type, which is **enabled** by default.
 
 ### Better documentation
 

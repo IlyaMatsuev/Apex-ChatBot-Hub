@@ -9,7 +9,7 @@ Right now this package contains implementations for `Telegram` and `Viber` messe
 
 > NOTE: This package deploys the new Force.com site to have a public REST API for chatbots' webhooks.
 
-## Prerequisites
+## 🤔 Prerequisites
 
 Before taking any steps on this library you first need to create the bot in the messenger itself (this is out of the scope of this package).
 
@@ -18,7 +18,7 @@ All you need to get is the bot `authentication token`.
 
 If you got your token then you can proceed with installation and bot configuration.
 
-## Overview
+## 🔍 Overview
 
 If you want to create a new bot then after installing the package (_which is described one topic below_) you first need to create a simple bot handler. This is a class that implements `IBotHandler`, it will be called when your bot receives a new update from users. For example a new message.
 
@@ -56,7 +56,7 @@ You can also check out [the demos page](https://ilyamatsuev.github.io/Apex-ChatB
 
 Apart from `IBotHandler` interface you can also use [`TelegramBotHandler`](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types?id=telegrambothandler) or [`ViberBotHandler`](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/types?id=viberbothandler) abstract classes to create a bot handler for a specific messanger. This way you will benefit from using `Telegram` or `Viber` API more intuitively with predefined types.
 
-## Installation
+## 🚀 Installation
 
 Unfortunately, it's not possible to install this library as a Salesforce package because of the complicated deployment steps.
 
@@ -86,23 +86,23 @@ Setup -> Type "Sites" in the left search box -> Sites -> Choose a name for your 
 sh <path to the shell script>
 ```
 
-## Documentation
+## 📝 Documentation
 
 For more detailed information about the content of the repository and the package, please visit the [documentation page](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/).
 
 Changelog is also located [here](https://ilyamatsuev.github.io/Apex-ChatBot-Hub/#/changelog).
 
-## Questions
+## ❓ Questions
 
 If you have any questions you can start a discussion.  
 If you think something works not as expected, or you want to request a new feature, you can create an issue with the appropriate template selected.
 
-## Contributing
+## 🤝 Contributing
 
 Pull requests are welcome.  
 For major changes, please open an issue first to discuss what you would like to change.  
 Please make sure to update tests as appropriate.
 
-## License
+## 🪪 License
 
 [MIT](LICENSE)
