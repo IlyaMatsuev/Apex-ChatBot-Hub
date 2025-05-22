@@ -27,7 +27,7 @@ global class BotUpdateApi {
                 );
             }
 
-            EventBus.publish(new BotUpdateEvent__e(Bot__c = bot.toJson(), Payload__c = request.requestBody.toString()));
+            handleUpdate(bot.toJson(), request.requestBody.toString());
 
             response.responseBody = Blob.valueOf(RESPONSE_OK);
         } catch (Exception error) {
@@ -41,6 +41,13 @@ global class BotUpdateApi {
 
     private static IBotUpdateResolver getBotResolver(BotType type) {
         return (IBotUpdateResolver) BotUtils.createInstance(BotSettingsProvider.get(type).BotUpdateResolver__c);
+    }
+
+    private static void handleUpdate(String botJson, String updatePayloadJson) {
+        Flow.Interview.HandleBotUpdate updatesHandler = new Flow.Interview.HandleBotUpdate(
+            new Map<String, Object> { 'botJson' => botJson, 'botUpdatePayload' => updatePayloadJson }
+        );
+        updatesHandler.start();
     }
 
     public class BotUpdateApiException extends BotCustomException {

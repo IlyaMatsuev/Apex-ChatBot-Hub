@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Handles bot updates coming from the Webhooks</description>
+        <name>HandleBotUpdateAction</name>
+        <label>Handle Bot Update Action</label>
+        <locationX>176</locationX>
+        <locationY>134</locationY>
+        <actionName>BotUpdateFlowController</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>botJson</name>
+            <value>
+                <elementReference>botJson</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>updatePayloadJson</name>
+            <value>
+                <elementReference>botUpdatePayload</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>63.0</apiVersion>
+    <description>The flow that handles the updates from Bot Webhooks and runs in a system context</description>
+    <interviewLabel>Handle Bot Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
+    <label>Handle Bot Update</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <runInMode>SystemModeWithoutSharing</runInMode>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>HandleBotUpdateAction</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>The JSON serialized Bot__c record</description>
+        <name>botJson</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>{ &quot;Id&quot;: &quot;a01gK000002WRvDQAW&quot; }</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <description>The JSON serialized update coming from the Webhook</description>
+        <name>botUpdatePayload</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>{ &quot;update&quot;: &quot;helloooo&quot; }</stringValue>
+        </value>
+    </variables>
+</Flow>

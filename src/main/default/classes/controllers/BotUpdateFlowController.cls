@@ -1,34 +1,27 @@
-public class BotUpdateEventHandler implements Triggers.IHandler {
-    private final BotServiceFactory serviceFactory;
+public without sharing class BotUpdateFlowController {
+    @InvocableMethod(label = 'Handle Bot Update')
+    public static void handleBotUpdate(List<BotUpdateInput> params) {
+        try {
+            BotUpdateInput input = params.get(0);
 
-    public BotUpdateEventHandler() {
-        this(new BotServiceFactory());
-    }
+            List<IBotContext> contexts = createBotContexts(input.botJson, input.updatePayloadJson);
 
-    @TestVisible
-    private BotUpdateEventHandler(BotServiceFactory serviceFactory) {
-        this.serviceFactory = serviceFactory;
-    }
+            saveChatDetails(contexts);
 
-    public void handle(Triggers.Context context) {
-        List<IBotContext> contexts = createBotContexts(context.props.newList);
-
-        saveChatDetails(contexts);
-
-        System.enqueueJob(new UpdateEventExecutor(contexts));
-    }
-
-    private List<IBotContext> createBotContexts(List<BotUpdateEvent__e> events) {
-        // The loop is needed when a user sends several messages at the same time
-        List<IBotContext> contexts = new List<IBotContext>();
-        for (BotUpdateEvent__e event : events) {
-            BotModel bot = BotModel.fromJson(event.Bot__c);
-            contexts.add(serviceFactory.createBotContext(bot, event.Payload__c));
+            for (IBotContext context : contexts) {
+                handleUpdateEvent(context);
+            }
+        } catch (Exception ex) {
+            System.debug(LoggingLevel.ERROR, ex.getMessage() + '\n' + ex.getStackTraceString());
         }
-        return contexts;
     }
 
-    private void saveChatDetails(List<IBotContext> contexts) {
+    private static List<IBotContext> createBotContexts(String botJson, String botJsonPayload) {
+        BotModel bot = BotModel.fromJson(botJson);
+        return new List<IBotContext> { new BotServiceFactory().createBotContext(bot, botJsonPayload) };
+    }
+
+    private static void saveChatDetails(List<IBotContext> contexts) {
         List<Chat__c> chats = new List<Chat__c>();
         List<ChatUser__c> chatUsers = new List<ChatUser__c>();
         List<ChatMessage__c> chatMessages = new List<ChatMessage__c>();
@@ -53,12 +46,14 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
             }
         }
 
-        Database.upsert(chats, Chat__c.ExternalId__c);
-        Database.upsert(chatUsers, ChatUser__c.ExternalId__c);
-        Database.upsert(chatMessages, ChatMessage__c.ExternalId__c);
+        List<SObject> recordsToUpdate = new List<SObject>();
+        recordsToUpdate.addAll(chats);
+        recordsToUpdate.addAll(chatUsers);
+        recordsToUpdate.addAll(chatMessages);
+        BotUtils.saveAsync(recordsToUpdate, 'ExternalId__c');
     }
 
-    private Chat__c getChat(BotModel bot, IBotChat chat) {
+    private static Chat__c getChat(BotModel bot, IBotChat chat) {
         if (chat == null) {
             return null;
         }
@@ -70,7 +65,7 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         );
     }
 
-    private ChatUser__c getChatUser(IBotUser user) {
+    private static ChatUser__c getChatUser(IBotUser user) {
         if (user == null) {
             return null;
         }
@@ -88,7 +83,7 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         );
     }
 
-    private ChatMessage__c getChatMessage(String chatId, String userId, IBotMessage message) {
+    private static ChatMessage__c getChatMessage(String chatId, String userId, IBotMessage message) {
         if (message == null) {
             return null;
         }
@@ -105,31 +100,24 @@ public class BotUpdateEventHandler implements Triggers.IHandler {
         );
     }
 
-    private String getValueOrEmptyString(String value) {
+    private static String getValueOrEmptyString(String value) {
         return String.isBlank(value) ? '' : value;
     }
 
-    private class UpdateEventExecutor implements Queueable, Database.AllowsCallouts {
-        private final List<IBotContext> contexts;
-
-        public UpdateEventExecutor(List<IBotContext> contexts) {
-            this.contexts = contexts;
+    private static void handleUpdateEvent(IBotContext context) {
+        BotModel bot;
+        try {
+            bot = context.getBot();
+            bot.handler.handle(context);
+        } catch (Exception error) {
+            BotErrorLogger.log(bot?.id, error);
         }
+    }
 
-        public void execute(QueueableContext ctx) {
-            for (IBotContext context : contexts) {
-                handleUpdateEvent(context);
-            }
-        }
-
-        private void handleUpdateEvent(IBotContext context) {
-            BotModel bot;
-            try {
-                bot = context.getBot();
-                bot.handler.handle(context);
-            } catch (Exception error) {
-                BotErrorLogger.log(bot?.id, error);
-            }
-        }
+    public class BotUpdateInput {
+        @InvocableVariable(label = 'Bot JSON' required = true)
+        public String botJson;
+        @InvocableVariable(label = 'Bot Update Payload JSON' required = true)
+        public String updatePayloadJson;
     }
 }
