@@ -2,9 +2,7 @@ public class BotUpsertDataHandler implements Triggers.IHandler {
     private static final Map<SObjectType, Map<String, SObjectField>> SOBJECT_FIELDS_BY_TYPE = new Map<SObjectType, Map<String, SObjectField>>();
 
     public void handle(Triggers.Context context) {
-        Map<String, List<SObject>> dataByExternalId = sortDataByExternalIdFields(
-            (List<BotUpsertDataEvent__e>) context.props.newList
-        );
+        Map<String, List<SObject>> dataByExternalId = sortDataByExternalIdFields(context.props.newList);
 
         // There is no other way to correctly upsert records by external id. This is NECESSARY to have DML inside the loop
         for (String externalIdFieldFullName : dataByExternalId.keySet()) {
