@@ -14,10 +14,13 @@ global abstract class BotEnumType {
     }
 
     public static BotEnumType valueOf(String value, Type enumType) {
-        if (!cachedEnumValues.containsKey(enumType) || !cachedEnumValues.get(enumType).containsKey(value)) {
+        if (
+            value != null &&
+            (!cachedEnumValues.containsKey(enumType) || !cachedEnumValues.get(enumType).containsKey(value))
+        ) {
             throw new NoSuchElementException('No such value "' + value + '" in enum ' + String.valueOf(enumType));
         }
-        return cachedEnumValues.get(enumType).get(value);
+        return value == null ? null : cachedEnumValues.get(enumType).get(value);
     }
 
     /**
