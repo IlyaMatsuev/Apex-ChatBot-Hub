@@ -49,22 +49,26 @@ global abstract class ViberBotHandler implements IBotHandler {
      * @param context The context variable that contains all necessary methods for handling the incoming update. The instance of the <<ViberBotContext>> class
      */
     global void handle(IBotContext context) {
-        ViberBotContext viberContext = (ViberBotContext) context;
-        ViberUpdateEvent viberEvent = viberContext.getUpdateEvent();
-        ViberUpdateEventType eventType = viberEvent.getType();
+        try {
+            ViberBotContext viberContext = (ViberBotContext) context;
+            ViberUpdateEvent viberEvent = viberContext.getUpdateEvent();
+            ViberUpdateEventType eventType = viberEvent.getType();
 
-        if (eventType == ViberUpdateEventType.Subscribed) {
-            onSubscribe(viberContext, new ViberSubscribedEvent(viberEvent));
-        } else if (eventType == ViberUpdateEventType.Unsubscribed) {
-            onUnsubscribe(viberContext, new ViberMessageEvent(viberEvent));
-        } else if (eventType == ViberUpdateEventType.Message) {
-            onMessageReceived(viberContext, new ViberMessageReceivedEvent(viberEvent));
-        } else if (eventType == ViberUpdateEventType.Delivered) {
-            onMessageDelivered(viberContext, new ViberMessageEvent(viberEvent));
-        } else if (eventType == ViberUpdateEventType.Seen) {
-            onMessageSeen(viberContext, new ViberMessageEvent(viberEvent));
-        } else if (eventType == ViberUpdateEventType.Failed) {
-            onMessageFailed(viberContext, new ViberMessageFailedEvent(viberEvent));
+            if (eventType == ViberUpdateEventType.Subscribed) {
+                onSubscribe(viberContext, new ViberSubscribedEvent(viberEvent));
+            } else if (eventType == ViberUpdateEventType.Unsubscribed) {
+                onUnsubscribe(viberContext, new ViberMessageEvent(viberEvent));
+            } else if (eventType == ViberUpdateEventType.Message) {
+                onMessageReceived(viberContext, new ViberMessageReceivedEvent(viberEvent));
+            } else if (eventType == ViberUpdateEventType.Delivered) {
+                onMessageDelivered(viberContext, new ViberMessageEvent(viberEvent));
+            } else if (eventType == ViberUpdateEventType.Seen) {
+                onMessageSeen(viberContext, new ViberMessageEvent(viberEvent));
+            } else if (eventType == ViberUpdateEventType.Failed) {
+                onMessageFailed(viberContext, new ViberMessageFailedEvent(viberEvent));
+            }
+        } catch (Exception ex) {
+            BotErrorLogger.log(context?.getBot()?.id, ex);
         }
     }
 }

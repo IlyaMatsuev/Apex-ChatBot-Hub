@@ -91,35 +91,39 @@ global abstract class TelegramBotHandler implements IBotHandler {
      * @param context The context variable that contains all necessary methods for handling the incoming update. The instance of the <<TelegramBotContext>> class
      */
     global void handle(IBotContext context) {
-        TelegramBotContext tgContext = (TelegramBotContext) context;
-        TelegramUpdateEvent tgEvent = tgContext.getUpdateEvent();
-        TelegramUpdateEventType eventType = tgEvent.getType();
-        BotJsonPayload eventPayload = tgEvent.getEventPayload();
+        try {
+            TelegramBotContext tgContext = (TelegramBotContext) context;
+            TelegramUpdateEvent tgEvent = tgContext.getUpdateEvent();
+            TelegramUpdateEventType eventType = tgEvent.getType();
+            BotJsonPayload eventPayload = tgEvent.getEventPayload();
 
-        if (eventType == TelegramUpdateEventType.Message) {
-            onMessageReceived(tgContext, new TelegramMessageEvent(eventPayload));
-        } else if (eventType == TelegramUpdateEventType.EditedMessage) {
-            onMessageEdited(tgContext, new TelegramMessageEvent(eventPayload));
-        } else if (eventType == TelegramUpdateEventType.ChannelPost) {
-            onChannelPostReceived(tgContext, new TelegramMessageEvent(eventPayload));
-        } else if (eventType == TelegramUpdateEventType.EditedChannelPost) {
-            onChannelPostEdited(tgContext, new TelegramMessageEvent(eventPayload));
-        } else if (eventType == TelegramUpdateEventType.InlineQuery) {
-            onInlineQuery(tgContext, new TelegramInlineQueryEvent(eventPayload));
-        } else if (eventType == TelegramUpdateEventType.ChosenInlineResult) {
-            onChosenInlineResult(tgContext, new TelegramChosenInlineResultEvent(eventPayload));
-        } else if (eventType == TelegramUpdateEventType.CallbackQuery) {
-            onCallbackQuery(tgContext, new TelegramCallbackQueryEvent(eventPayload));
-        } else if (eventType == TelegramUpdateEventType.Poll) {
-            onPollUpdated(tgContext, new TelegramPollEvent(eventPayload));
-        } else if (eventType == TelegramUpdateEventType.PollAnswer) {
-            onPollAnswer(tgContext, new TelegramPollAnswerEvent(eventPayload));
-        } else if (eventType == TelegramUpdateEventType.MyChatMember) {
-            onMyChatMemberUpdated(tgContext, new TelegramChatMemberUpdatedEvent(eventPayload));
-        } else if (eventType == TelegramUpdateEventType.ChatMember) {
-            onChatMemberUpdated(tgContext, new TelegramChatMemberUpdatedEvent(eventPayload));
-        } else if (eventType == TelegramUpdateEventType.ChatJoinRequest) {
-            onChatJoinRequest(tgContext, new TelegramChatJoinRequestEvent(eventPayload));
+            if (eventType == TelegramUpdateEventType.Message) {
+                onMessageReceived(tgContext, new TelegramMessageEvent(eventPayload));
+            } else if (eventType == TelegramUpdateEventType.EditedMessage) {
+                onMessageEdited(tgContext, new TelegramMessageEvent(eventPayload));
+            } else if (eventType == TelegramUpdateEventType.ChannelPost) {
+                onChannelPostReceived(tgContext, new TelegramMessageEvent(eventPayload));
+            } else if (eventType == TelegramUpdateEventType.EditedChannelPost) {
+                onChannelPostEdited(tgContext, new TelegramMessageEvent(eventPayload));
+            } else if (eventType == TelegramUpdateEventType.InlineQuery) {
+                onInlineQuery(tgContext, new TelegramInlineQueryEvent(eventPayload));
+            } else if (eventType == TelegramUpdateEventType.ChosenInlineResult) {
+                onChosenInlineResult(tgContext, new TelegramChosenInlineResultEvent(eventPayload));
+            } else if (eventType == TelegramUpdateEventType.CallbackQuery) {
+                onCallbackQuery(tgContext, new TelegramCallbackQueryEvent(eventPayload));
+            } else if (eventType == TelegramUpdateEventType.Poll) {
+                onPollUpdated(tgContext, new TelegramPollEvent(eventPayload));
+            } else if (eventType == TelegramUpdateEventType.PollAnswer) {
+                onPollAnswer(tgContext, new TelegramPollAnswerEvent(eventPayload));
+            } else if (eventType == TelegramUpdateEventType.MyChatMember) {
+                onMyChatMemberUpdated(tgContext, new TelegramChatMemberUpdatedEvent(eventPayload));
+            } else if (eventType == TelegramUpdateEventType.ChatMember) {
+                onChatMemberUpdated(tgContext, new TelegramChatMemberUpdatedEvent(eventPayload));
+            } else if (eventType == TelegramUpdateEventType.ChatJoinRequest) {
+                onChatJoinRequest(tgContext, new TelegramChatJoinRequestEvent(eventPayload));
+            }
+        } catch (Exception ex) {
+            BotErrorLogger.log(context?.getBot()?.id, ex);
         }
     }
 }
