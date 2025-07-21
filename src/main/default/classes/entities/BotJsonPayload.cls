@@ -209,7 +209,12 @@ global virtual class BotJsonPayload {
             return dateTimeValue;
         }
         if (value instanceof String) {
-            DateTime dateTimeValue = (DateTime) JSON.deserialize((String) value, DateTime.class);
+            DateTime dateTimeValue;
+            try {
+                dateTimeValue = DateTime.valueOf(((String) value).replace('T', ' '));
+            } catch (Exception ex) {
+                dateTimeValue = (DateTime) JSON.deserialize((String) value, DateTime.class);
+            }
             values.put(key, dateTimeValue);
             return dateTimeValue;
         }
