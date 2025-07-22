@@ -287,7 +287,11 @@ global virtual class BotJsonPayload {
         );
         for (Object val : (List<Object>) value) {
             BotJsonPayload payload = (BotJsonPayload) listEntryType.newInstance();
-            payload.set(new BotJsonPayload((Map<String, Object>) val));
+            if (val instanceof BotJsonPayload) {
+                payload.set((BotJsonPayload) val);
+            } else {
+                payload.set(new BotJsonPayload((Map<String, Object>) val));
+            }
             payloadList.add(payload);
         }
         return payloadList;
