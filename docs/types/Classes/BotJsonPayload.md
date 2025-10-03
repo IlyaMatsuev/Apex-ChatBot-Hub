@@ -65,6 +65,23 @@ Creates a new specific instance of JSON payload by the provided JSON string and 
 | ---------------- | -------------------------------------------------------------------------------- |
 | `BotJsonPayload` | The new instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class |
 
+### `global static BotJsonPayload fromPayload(BotJsonPayload payload, Type payloadType)`
+
+Creates a new specific instance of payload from another payload and instance type
+
+#### Parameters
+
+| Param         | Description                         |
+| ------------- | ----------------------------------- |
+| `payload`     | The JSON payload to copy            |
+| `payloadType` | The type to convert the instance to |
+
+#### Returns
+
+| Type             | Description                                                                      |
+| ---------------- | -------------------------------------------------------------------------------- |
+| `BotJsonPayload` | The new instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class |
+
 ### `global String toJson()`
 
 Serializes the instance to a JSON string

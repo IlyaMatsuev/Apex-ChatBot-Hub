@@ -59,7 +59,21 @@ global virtual class BotJsonPayload {
             // In case the input is not JSON
             values.getValues().put('raw', jsonValues);
         }
+        values.init();
         return values;
+    }
+
+    /**
+     * @description Creates a new specific instance of payload from another payload and instance type
+     * @param payload The JSON payload to copy
+     * @param payloadType The type to convert the instance to
+     * @return The new instance of the <<BotJsonPayload>> class
+     */
+    global static BotJsonPayload fromPayload(BotJsonPayload payload, Type payloadType) {
+        BotJsonPayload newPayload = (BotJsonPayload) payloadType.newInstance();
+        newPayload.set(payload);
+        newPayload.init();
+        return newPayload;
     }
 
     /**
@@ -247,8 +261,7 @@ global virtual class BotJsonPayload {
         if (value instanceof BotPayload) {
             return ((BotPayload) value).getJsonPayload();
         }
-        BotJsonPayload newPayload = (BotJsonPayload) payloadType.newInstance();
-        newPayload.values.putAll((Map<String, Object>) value);
+        BotJsonPayload newPayload = fromPayload(new BotJsonPayload((Map<String, Object>) value), payloadType);
         values.put(key, newPayload);
         return newPayload;
     }
@@ -286,13 +299,14 @@ global virtual class BotJsonPayload {
             Type.forName('List<' + listEntryType.getName() + '>')
         );
         for (Object val : (List<Object>) value) {
-            BotJsonPayload payload = (BotJsonPayload) listEntryType.newInstance();
+            BotJsonPayload payload = new BotJsonPayload();
             if (val instanceof BotJsonPayload) {
                 payload.set((BotJsonPayload) val);
             } else {
                 payload.set(new BotJsonPayload((Map<String, Object>) val));
             }
-            payloadList.add(payload);
+            BotJsonPayload newPayload = fromPayload(payload, listEntryType);
+            payloadList.add(newPayload);
         }
         return payloadList;
     }
@@ -343,6 +357,11 @@ global virtual class BotJsonPayload {
     public override String toString() {
         return toJson();
     }
+
+    /**
+     * @description Override to set initial values for a new <<BotJsonPayload>> instance when created using `fromPayload()` or `fromJson()` methods
+     */
+    protected virtual void init() {}
 
     private Map<String, Object> escapeExtraValuesProperty(Map<String, Object> values) {
         Map<String, Object> output = new Map<String, Object>();
