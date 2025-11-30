@@ -65,6 +65,23 @@ Creates a new specific instance of JSON payload by the provided JSON string and 
 | ---------------- | -------------------------------------------------------------------------------- |
 | `BotJsonPayload` | The new instance of the [BotJsonPayload](/types/Classes/BotJsonPayload.md) class |
 
+### `global static List<BotJsonPayload> fromJsonList(String jsonValues, Type payloadElementType)`
+
+Creates a new list that consists of specific instances of JSON payload by the provided JSON string and list element type
+
+#### Parameters
+
+| Param                | Description                          |
+| -------------------- | ------------------------------------ |
+| `jsonValues`         | The JSON string to convert           |
+| `payloadElementType` | The type of the elements in the list |
+
+#### Returns
+
+| Type                   | Description                                                        |
+| ---------------------- | ------------------------------------------------------------------ |
+| `List<BotJsonPayload>` | The new list of [BotJsonPayload](/types/Classes/BotJsonPayload.md) |
+
 ### `global static BotJsonPayload fromPayload(BotJsonPayload payload, Type payloadType)`
 
 Creates a new specific instance of payload from another payload and instance type

@@ -64,6 +64,29 @@ global virtual class BotJsonPayload {
     }
 
     /**
+     * @description Creates a new list that consists of specific instances of JSON payload by the provided JSON string and list element type
+     * @param jsonValues The JSON string to convert
+     * @param payloadElementType The type of the elements in the list
+     * @return The new list of <<BotJsonPayload>>
+     */
+    global static List<BotJsonPayload> fromJsonList(String jsonValues, Type payloadElementType) {
+        List<BotJsonPayload> payloadList = (List<BotJsonPayload>) JSON.deserialize(
+            '[]',
+            Type.forName('List<' + payloadElementType.getName() + '>')
+        );
+        if (String.isNotBlank(jsonValues)) {
+            List<Object> deserialized = (List<Object>) JSON.deserializeUntyped(jsonValues);
+            for (Object rawElementPayload : deserialized) {
+                BotJsonPayload newPayload = (BotJsonPayload) payloadElementType.newInstance();
+                newPayload.getValues().putAll((Map<String, Object>) rawElementPayload);
+                newPayload.init();
+                payloadList.add(newPayload);
+            }
+        }
+        return payloadList;
+    }
+
+    /**
      * @description Creates a new specific instance of payload from another payload and instance type
      * @param payload The JSON payload to copy
      * @param payloadType The type to convert the instance to
