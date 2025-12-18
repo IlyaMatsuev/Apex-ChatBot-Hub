@@ -455,10 +455,9 @@ global class TelegramBotSenderService implements IBotSenderService {
      * @param threadId The id of the channel thread (topic) to where the message should be sent
      */
     global void chatAction(String action, String threadId) {
-        send(
+        calloutService.call(
             TelegramBotMethod.SendChatAction,
-            new BotJsonPayload().set('action', action).set('message_thread_id', threadId, true),
-            null
+            new BotJsonPayload().set('chat_id', chatId).set('action', action).set('message_thread_id', threadId, true)
         );
     }
 
