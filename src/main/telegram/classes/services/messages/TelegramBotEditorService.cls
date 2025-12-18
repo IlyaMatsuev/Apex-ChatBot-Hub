@@ -60,7 +60,7 @@ global class TelegramBotEditorService {
      * @param media The input for a new media content of the message
      */
     global void media(TelegramInputMedia media) {
-        send(TelegramBotMethod.EditMessageMedia, new BotJsonPayload(media));
+        send(TelegramBotMethod.EditMessageMedia, new BotJsonPayload().set('media', media));
     }
 
     /**

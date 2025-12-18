@@ -6,3 +6,4 @@ src/main/default/settings
 **/tsconfig*.json
 **/*.tsbuildinfo
 **/eslint.config.mjs
+**/graphql.config.yml
